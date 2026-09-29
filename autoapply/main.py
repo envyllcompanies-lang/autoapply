@@ -101,12 +101,21 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
         browser = p.chromium.launch(headless=cfg.get("headless", True))
         ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 1800}, locale="en-US")
         done = 0
+        dead = set()          # (company, title) already skipped/blocked this run
         for row in queue:
             if done >= cap:
                 break
             job = by_key.get(row["key"])
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
+                continue
+            ck = (job.company.lower(), job.title.strip().lower())
+            if ck in dead:
+                db.update(job.key, status="skipped", reason="same role at same company already skipped this run")
+                continue
+            if db.conn.execute("SELECT 1 FROM jobs WHERE key != ? AND status='applied' AND lower(company)=? AND lower(title)=?",
+                               (job.key, ck[0], ck[1])).fetchone():
+                db.update(job.key, status="skipped", reason="already applied to this role at this company")
                 continue
             log(f"→ {job.title} @ {job.company} (score {row['score']})")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
@@ -130,22 +139,23 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
                     sub.guard_ai_policy(page, job)   # skip employers that say no AI-assisted applications
                 resume_md, letter = brain.tailor(job)
                 (d / "resume.md").write_text(resume_md)
-                (d / "cover_letter.txt").write_text(letter)
                 name = slug(cfg.get("facts", {}).get("full_name", "resume")).replace("-", "_") or "resume"
                 files = {"RESUME": render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf"),
-                         "COVER_LETTER": render.letter_pdf(browser, letter, d / f"{name}_cover_letter.pdf")}
+                         "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf"))}
                 result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log)
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
-                          cover_path=str(files["COVER_LETTER"]), screenshot=str(d / "form.png"),
+                          cover_path=str(files.get("COVER_LETTER", "")), screenshot=str(d / "form.png"),
                           attempts=row["attempts"] + (0 if dry_run else 1))
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
+                dead.add(ck)
                 log(f"    ✗ blocked: {e}")
             except sub.Unanswerable as e:
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
+                dead.add(ck)
                 log(f"    ✗ skipped: {e}")
             except Exception as e:
                 db.update(job.key, status="failed", reason=str(e).splitlines()[0][:300],

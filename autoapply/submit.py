@@ -232,6 +232,26 @@ def open_form(page, url: str):
         raise Blocked("no application form found on page")
 
 
+_OPT_SELECTORS = ('[role="listbox"] [role="option"]', '[class*="select__menu"] [role="option"]',
+                  '[class*="menu"] [role="option"]', '[role="option"]', 'ul[role="listbox"] li')
+
+
+def _visible_options(page, el=None) -> list[str]:
+    """Texts of the options of the dropdown that is open right now (never a hidden phone-country list)."""
+    ids = []
+    if el is not None:
+        ids = (el.get_attribute("aria-controls") or el.get_attribute("aria-owns") or "").split()
+    for i in ids:
+        got = [t.strip() for t in page.locator(f'[id="{i}"] [role="option"]').locator("visible=true").all_inner_texts() if t.strip()]
+        if got:
+            return got[:80]
+    for sel in _OPT_SELECTORS:
+        got = [t.strip() for t in page.locator(sel).locator("visible=true").all_inner_texts() if t.strip()]
+        if got:
+            return got[:80]
+    return []
+
+
 def extract(page) -> list[dict]:
     fields = page.evaluate(EXTRACT_JS)
     for f in fields:  # comboboxes only reveal options when opened
@@ -239,9 +259,10 @@ def extract(page) -> list[dict]:
             try:
                 el = page.locator(f'[data-aa="{f["id"]}"]')
                 el.click()
-                page.wait_for_timeout(400)
-                f["options"] = [t.strip() for t in page.locator('[role="option"]').all_inner_texts() if t.strip()][:80]
+                page.wait_for_timeout(500)
+                f["options"] = _visible_options(page, el)
                 page.keyboard.press("Escape")
+                page.wait_for_timeout(200)
             except Exception:
                 f["options"] = []
     return fields
@@ -279,7 +300,18 @@ def _fill_location(page, el, val: str, log):
         page.wait_for_timeout(500)
         if el.input_value().strip():
             return
-    log("      ! location box stayed empty (site wants a suggestion picked)")
+    try:        # last resort: set the text directly and fill Lever's hidden 'selectedLocation'
+        el.evaluate("""(e, v) => {
+            const set = (n, x) => { const d = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+                d.set.call(n, x); n.dispatchEvent(new Event('input', {bubbles: true})); n.dispatchEvent(new Event('change', {bubbles: true})); };
+            set(e, v);
+            const h = e.form && e.form.querySelector('input[name="selectedLocation"]');
+            if (h) set(h, JSON.stringify({name: v}));
+        }""", val)
+    except Exception:
+        pass
+    if not el.input_value().strip():
+        log("      ! location box stayed empty (site wants a suggestion picked)")
 
 
 def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=print):
@@ -305,13 +337,29 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                         el.select_option(index=i)
             elif kind == "combobox":
                 el.click()
-                el.fill(str(val))
-                page.wait_for_timeout(600)
-                opt = page.locator('[role="option"]').filter(has_text=re.compile(re.escape(str(val)), re.I)).first
-                if opt.count():
-                    opt.click()
-                else:
-                    page.keyboard.press("Enter")
+                page.wait_for_timeout(400)
+                want = _norm(val)
+                if f.get("options"):                       # a fixed list: click the option that matches
+                    opts = page.locator('[role="option"]').locator("visible=true")
+                    texts = opts.all_inner_texts()
+                    i = next((k for k, t in enumerate(texts) if _norm(t) == want), None)
+                    if i is None:
+                        i = next((k for k, t in enumerate(texts) if want and (want in _norm(t) or _norm(t) in want)), None)
+                    if i is None:
+                        el.fill(str(val))
+                        page.wait_for_timeout(500)
+                        page.keyboard.press("Enter")
+                    else:
+                        opts.nth(i).click()
+                else:                                      # search-as-you-type (places): type, take the first suggestion
+                    el.fill("")
+                    el.press_sequentially(str(val), delay=50)
+                    page.wait_for_timeout(1300)
+                    opts = page.locator('[role="option"]').locator("visible=true")
+                    if opts.count():
+                        opts.first.click()
+                    else:
+                        page.keyboard.press("Enter")
             elif kind == "radio":
                 i = _pick(f["options"], val)
                 if i is None:
@@ -380,6 +428,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
     """Expects open_form(page, job.apply_url) to have been called already."""
     fields = extract(page)
     log(f"      form has {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
+    if len(fields) < 4 or not any(f["kind"] == "file" for f in fields):
+        raise Blocked(f"not a real application form ({len(fields)} fields, no résumé upload)")
     plan = brain.map_fields(job, fields, cover_letter)
     missing = [by["label"][:60] for by in fields if by["id"] in set(plan["unanswerable_required"])]
     if missing:
@@ -387,6 +437,10 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if f["id"] in set(plan["unanswerable_required"]):
                 log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
         raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
+    if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
+        letter_txt = brain.lazy_letter(job)              # only written when the form REQUIRES a cover letter
+        (shot.parent / "cover_letter.txt").write_text(letter_txt)
+        files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
     fill(page, fields, plan["answers"], files, log)
     verify(page, fields, plan["answers"], log)
     page.screenshot(path=str(shot), full_page=True)

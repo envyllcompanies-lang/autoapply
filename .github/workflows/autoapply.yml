@@ -2,7 +2,7 @@ name: autoapply
 
 on:
   schedule:
-    - cron: "7 */2 * * *"   # every 2 hours, around the clock. Free private-repo minutes are 2,000/mo, so this is the budget-safe rhythm
+    - cron: "7 1,9,17 * * *"   # every 2 hours, around the clock. Free private-repo minutes are 2,000/mo, so this is the budget-safe rhythm
   workflow_dispatch:
     inputs:
       dry_run:

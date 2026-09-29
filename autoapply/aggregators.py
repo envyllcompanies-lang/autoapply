@@ -197,13 +197,19 @@ def linkedin(cfg, base="https://www.linkedin.com"):
     a = cfg.get("aggregators", {}) or {}
     qs = (a.get("linkedin_queries") or a.get("queries") or [])[:8]
     locs = a.get("locations", []) + ["United States"]
-    out, seen, details = [], set(), 0
+    out, seen, details, fails = [], set(), 0, 0
     for q in qs:
         for loc in locs:
+            if fails >= 3:            # LinkedIn is refusing this network: give up fast
+                return out
             try:
-                frag = _get(base + "/jobs-guest/jobs/api/seeMoreJobPostings/search",
-                            params={"keywords": q, "location": loc, "f_TPR": "r172800", "start": 0}).text
+                r = requests.get(base + "/jobs-guest/jobs/api/seeMoreJobPostings/search", headers=UA, timeout=10,
+                                 params={"keywords": q, "location": loc, "f_TPR": "r172800", "start": 0})
+                r.raise_for_status()
+                frag = r.text
+                fails = 0
             except Exception:
+                fails += 1
                 continue
             time.sleep(1.0)
             for jid, title, company, jloc in _linkedin_cards(frag):

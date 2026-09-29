@@ -341,6 +341,14 @@ class Brain:
                 L.append(f"**{g['group']}:** {', '.join(ordered)}  ")
             L.append("")
 
+        self._lazy = (top_bullets, matched_skills)     # kept so a letter can be written later IF a form requires one
+        self._letters = getattr(self, "_letters", {})
+        return "\n".join(L).strip() + "\n", ""
+
+    def lazy_letter(self, job) -> str:
+        """Cover letters are only written for forms that require one (free-LLM letters are the riskiest thing we write)."""
+        if job.key in self._letters:
+            return self._letters[job.key]
         letter = None
         wcfg = self.cfg.get("writer", {}) or {}
         if self.writer and self.writer.ready() and wcfg.get("cover_letter", True):
@@ -349,8 +357,9 @@ class Brain:
             except WriterUnavailable as e:
                 self._log(f"      writer unavailable for cover letter, using template ({str(e)[:80]})")
         if not letter:
-            letter = self._letter(job, top_bullets, matched_skills)
-        return "\n".join(L).strip() + "\n", letter.strip() + "\n"
+            letter = self._letter(job, *self._lazy)
+        self._letters[job.key] = letter.strip() + "\n"
+        return self._letters[job.key]
 
     def _company_name(self, job) -> str:
         names = self.cfg.get("company_names", {}) or {}
@@ -442,12 +451,12 @@ class Brain:
 
         if kind == "file":
             if re.search(r"cover", low):
-                return "COVER_LETTER"
+                return "COVER_LETTER" if f.get("required") else None
             if re.search(r"resume|résumé|cv\b|curriculum", low):
                 return "RESUME"
             return None
         if kind == "textarea" and re.search(r"cover letter", low):
-            return letter
+            return (letter or self.lazy_letter(self._job)) if f.get("required") else None
 
         # 1) user's own canned answers win
         for rx, ans in self.answers:

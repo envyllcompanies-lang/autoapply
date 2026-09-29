@@ -62,7 +62,7 @@ def page(tag, essay="Why do you want to work at Acme? (max 400 characters) *", t
 <div><label for="email">Email *</label><input id="email" type="email" name="email" required></div>
 <div><label for="phone">Phone</label><input id="phone" type="tel" name="phone"></div>
 <div><label>Resume/CV *</label><button type="button">Attach</button><input type="file" id="resume" name="resume" style="display:none" required></div>
-<div><label>Cover Letter</label><input type="file" id="cover" name="cover" style="opacity:0;width:1px"></div>
+<div><label>Cover Letter *</label><input type="file" required id="cover" name="cover" style="opacity:0;width:1px"></div>
 {sel("auth", "Are you legally authorized to work in the United States? *", ["Yes", "No"])}
 {radio("spons", "Will you now or in the future require visa sponsorship? *")}
 <div><label id="loc-l">Location (City) *</label><input role="combobox" aria-labelledby="loc-l" aria-autocomplete="list" id="loc" name="loc" required
@@ -181,6 +181,6 @@ if "--dry" not in sys.argv:
     print("ESSAY (main):", main.get("why")); print("ESSAY (fab, after revision):", fab.get("why"))
     d = next((work / "applications").glob("*/acme-operations-associate"))
     print("\n--- resume.md (first 30 lines) ---\n" + "\n".join((d / "resume.md").read_text().splitlines()[:30]))
-    print("\n--- cover_letter.txt ---\n" + (d / "cover_letter.txt").read_text())
+    print("\n--- cover_letter.txt ---\n" + ((d / "cover_letter.txt").read_text() if (d / "cover_letter.txt").exists() else "(none written: form did not require one)"))
 print("\nRESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

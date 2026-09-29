@@ -47,7 +47,8 @@ def greenhouse(token: str) -> list[Job]:
         out.append(Job(
             source="greenhouse", company=token, job_id=str(j["id"]),
             title=j.get("title", ""), location=(j.get("location") or {}).get("name", ""),
-            url=url, apply_url=url, description=_strip_html(j.get("content", ""))))
+            url=url, apply_url=f"https://job-boards.greenhouse.io/{token}/jobs/{j['id']}",
+            description=_strip_html(j.get("content", ""))))
     return out
 
 
