@@ -169,3 +169,44 @@
 [01:56:04]       form has 13 fields (8 required)
 [01:56:24]     ✓ dry_run
 [01:56:24] Summary: 6 dry_run, 17 queued, 109 low_score, 2928 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-09-29.md
+[02:13:23] === autoapply run (DRY RUN) ===
+[02:13:23] Writer: essay questions will be answered by gemini-pro, gemini-flash, gemini-lite, groq, groq-20b, ollama (free tiers, in that order)
+[02:13:23] Discovering jobs…
+[02:13:23]   greenhouse/airbnb: 157 open roles
+[02:13:23]   greenhouse/figma: 165 open roles
+[02:13:23]   greenhouse/discord: 48 open roles
+[02:13:23]   greenhouse/robinhood: 159 open roles
+[02:13:24]   greenhouse/databricks: 884 open roles
+[02:13:25]   lever/palantir: 321 open roles
+[02:13:26]   lever/spotify: 81 open roles
+[02:13:26]   ashby/ramp: 156 open roles
+[02:13:26]   ashby/notion: 130 open roles
+[02:13:26]   ashby/linear: 30 open roles
+[02:13:27]   ashby/openai: 840 open roles
+[02:13:27]   ashby/vanta: 88 open roles
+[02:13:27] 3059 open roles, 0 new
+[02:13:27] 23 jobs queued; applying to up to 6 today
+[02:13:28] → Product Operations Specialist | Procurement @ ramp (score 85)
+[02:14:32]       writer: gemini-pro: HTTP 403 no free quota for this model
+[02:15:16]       form has 12 fields (7 required)
+[02:16:03]     ✓ dry_run
+[02:16:03] → Product Operations Specialist | Travel @ ramp (score 84)
+[02:18:12]       writer: gemini-flash: still rate limited after retries
+[02:18:17]       form has 12 fields (7 required)
+[02:20:35]     ✓ dry_run
+[02:20:35] → Marketing Strategy & Operations Manager @ notion (score 81)
+[02:21:42]       form has 18 fields (5 required)
+[02:21:43]     ✓ dry_run
+[02:21:43] → Site Reliability Operations Analyst - Commercial @ palantir (score 80)
+[02:23:27]       form has 22 fields (9 required)
+[02:23:36]       ! location box stayed empty (site wants a suggestion picked)
+[02:23:37]     ✓ dry_run
+[02:23:37] → Product Operations Specialist | Generalist @ ramp (score 80)
+[02:25:34]       writer: gemini-flash: still rate limited after retries
+[02:25:45]       form has 12 fields (7 required)
+[02:26:22]     ✓ dry_run
+[02:26:22] → Product Operations Specialist | Juno @ ramp (score 78)
+[02:27:46]       writer: gemini-flash: still rate limited after retries
+[02:27:51]       form has 13 fields (8 required)
+[02:29:06]     ✓ dry_run
+[02:29:07] Summary: 6 dry_run. Report: /home/runner/work/autoapply/autoapply/reports/2026-09-29.md
