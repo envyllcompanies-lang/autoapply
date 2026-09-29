@@ -50,6 +50,9 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
     log(f"=== autoapply run ({'DRY RUN' if dry_run else 'LIVE'}) ===")
 
     db = DB(str(base / cfg.get("db", "applications.db")))
+    n_req = db.requeue_if_new_version("2026-09-29-b")
+    if n_req:
+        log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
     profile = yaml.safe_load((base / cfg.get("profile_file", "profile.yaml")).read_text())
     brain = Brain(cfg, profile, base, log)
 
@@ -157,6 +160,10 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 log(f"    ✗ blocked: {e}")
+            except sub.Unconfirmed as e:
+                db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
+                dead.add(ck)
+                log(f"    ? submitted but NOT confirmed (check your inbox; will not retry): {str(e)[:260]}")
             except sub.Unanswerable as e:
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)

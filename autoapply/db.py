@@ -27,6 +27,23 @@ class DB:
         self.conn = sqlite3.connect(path)
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
+        self.conn.execute("CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)")
+        # a submit that showed no confirmation may still have gone through: never retry it automatically
+        self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='failed' AND reason LIKE 'no confirmation after submit%'")
+        self.conn.commit()
+
+    def requeue_if_new_version(self, version: str) -> int:
+        """Jobs skipped/blocked only because of a bug that a newer version fixed get another chance (once per version)."""
+        row = self.conn.execute("SELECT v FROM meta WHERE k='requeue'").fetchone()
+        if row and row[0] == version:
+            return 0
+        cur = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','blocked') AND ("
+            " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
+            " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%')")
+        self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
+        self.conn.commit()
+        return cur.rowcount
 
     def seen(self, key: str) -> bool:
         return self.conn.execute("SELECT 1 FROM jobs WHERE key=?", (key,)).fetchone() is not None

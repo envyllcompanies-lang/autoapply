@@ -13,7 +13,9 @@ on:
 permissions:
   contents: write
 
-concurrency: autoapply   # never two runs at once
+concurrency:
+  group: autoapply         # never two runs at once
+  cancel-in-progress: false
 
 jobs:
   apply:

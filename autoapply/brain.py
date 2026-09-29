@@ -39,6 +39,7 @@ PROMPT_RX = re.compile(
 _AI_Q = (r"\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b.{0,60}\b(use[ds]?|using|assist\w*|generat\w*|tools?|help\w*)\b|"
          r"\b(use[ds]?|using|assist\w*|help\w*)\b.{0,60}\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b")
 FIELD_RULES = [
+    (r"first.?generation", ("first_generation",), "choice"),
     (_AI_Q, ("ai_use_disclosure",), "choice"),
     (r"preferred (first )?name|nickname", ("preferred_name", "first_name"), None),
     (r"middle (name|initial)", ("middle_name",), None),

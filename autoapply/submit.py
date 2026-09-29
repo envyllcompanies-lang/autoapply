@@ -209,6 +209,10 @@ class Unanswerable(Exception):
     pass
 
 
+class Unconfirmed(Exception):
+    """Submit was clicked but no confirmation appeared: it may or may not have gone through, so it is never retried."""
+
+
 def guard_ai_policy(page, job):
     """Never submit AI-written answers to an employer that says it doesn't want them."""
     text = (job.description or "") + "\n" + page.inner_text("body")
@@ -491,7 +495,8 @@ def submit(page, timeout_ms: int = 20000, btn=None) -> str:
         if (b := _blocker(page)):
             raise Blocked(f"{b} after submit")
     errs = _page_errors(page)
-    raise RuntimeError("no confirmation after submit" + (f"; page errors: {errs}" if errs else ""))
+    tail = " ".join(page.inner_text("body").split())[-220:]
+    raise Unconfirmed("no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}")
 
 
 def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None) -> str:
@@ -554,7 +559,11 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             page.screenshot(path=str(shot), full_page=True)
             if dry_run:
                 return "dry_run"
-            result = submit(page, btn=btn)
+            try:
+                result = submit(page, btn=btn)
+            except Unconfirmed:
+                page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
+                raise
             page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)
             return result
         btn.click(force=True)                                 # Next / Save and Continue
