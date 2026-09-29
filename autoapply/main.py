@@ -16,7 +16,7 @@ from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter
 from .aggregators import discover_aggregators, load_boards, remember_board, canon_key
-from . import render, submit as sub
+from . import render, submit as sub, auth, sources
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
@@ -59,6 +59,7 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
     for ats, toks in load_boards(base).items():          # boards found earlier by following aggregator links
         companies.setdefault(ats, [])
         companies[ats] += [t for t in toks if t not in companies[ats]]
+    sources.SEARCH = cfg.get("search", {}) or {}
     jobs = discover(companies, log)
     jobs += discover_aggregators(cfg, base, log)
     by_key = {j.key: j for j in jobs}
@@ -100,6 +101,9 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=cfg.get("headless", True))
         ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 1800}, locale="en-US")
+        acc = auth.Accounts(cfg, base)
+        sub.ACCOUNTS_ENABLED = acc.enabled
+        log(f"Accounts: {'ON (' + acc.email + ')' if acc.enabled else 'off (no ACCOUNT_PASSWORD secret), login sites are skipped'}")
         done = 0
         dead = set()          # (company, title) already skipped/blocked this run
         for row in queue:
@@ -142,7 +146,7 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
                 name = slug(cfg.get("facts", {}).get("full_name", "resume")).replace("-", "_") or "resume"
                 files = {"RESUME": render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf"),
                          "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf"))}
-                result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log)
+                result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc)
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
                           cover_path=str(files.get("COVER_LETTER", "")), screenshot=str(d / "form.png"),

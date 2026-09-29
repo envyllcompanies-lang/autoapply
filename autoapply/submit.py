@@ -41,7 +41,7 @@ EXTRACT_JS = r"""
     return '';
   };
 
-  let n = 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); return el.dataset.aa; };
+  let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = document.querySelectorAll('input, textarea, select');
   for (const el of els) {
@@ -76,6 +76,12 @@ EXTRACT_JS = r"""
       fields.push({ id: 'g_' + opts[0].id, kind: g.type === 'radio' ? 'radio' : 'checkbox_group',
                     label: q || name, required: g.required || /\*/.test(q),
                     options: opts.map(o => o.label), option_ids: opts.map(o => o.id) });
+  }
+  // custom dropdowns drawn as buttons (Workday)
+  for (const b of document.querySelectorAll('button[aria-haspopup="listbox"]')) {
+    if (b.disabled || b.closest('[aria-hidden="true"]') || !visible(b)) continue;
+    const lab = labelOf(b);
+    fields.push({ id: tag(b), kind: 'combobox', label: lab, required: /\*/.test(lab) || b.getAttribute('aria-required') === 'true', maxlength: null });
   }
   // Ashby-style Yes/No answered with two plain <button>s instead of radio inputs
   const btnGroups = new Map();
@@ -113,13 +119,26 @@ BLOCKERS = [
 ]
 
 
+def _blockers():
+    return [b for b in BLOCKERS if not (ACCOUNTS_ENABLED and b[1] == "login required")]
+
+
 class Blocked(Exception):
     pass
 
 
-UNSUPPORTED = re.compile(r"myworkdayjobs|\.workday\.com|icims\.com|taleo\.net|linkedin\.com|indeed\.com|glassdoor\.com|"
-                         r"ziprecruiter\.com|successfactors|oraclecloud\.com|ultipro\.com|ukg\.com|paylocity|paycomonline|"
-                         r"brassring|smartrecruiters\.com/oneclick|adp\.com", re.I)
+UNSUPPORTED_ALWAYS = re.compile(r"linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|smartrecruiters\.com/oneclick", re.I)
+UNSUPPORTED_NEEDS_ACCOUNT = re.compile(r"myworkdayjobs|\.workday\.com|icims\.com|taleo\.net|successfactors|oraclecloud\.com|"
+                                       r"ultipro\.com|ukg\.com|paylocity|paycomonline|brassring|adp\.com", re.I)
+ACCOUNTS_ENABLED = False          # set by main when the ACCOUNT_PASSWORD secret exists
+
+
+class _Unsup:
+    def search(self, url):
+        return UNSUPPORTED_ALWAYS.search(url) or (None if ACCOUNTS_ENABLED else UNSUPPORTED_NEEDS_ACCOUNT.search(url))
+
+
+UNSUPPORTED = _Unsup()
 APPLY_BTN = re.compile(r"^\s*(apply( now| here| today| online| for this (job|position|role)| to this job)?|"
                        r"apply (on|at|via) (the )?(company|employer)('s)? (site|website|page)|i'?m interested|apply externally)\s*[>\u2192]?\s*$", re.I)
 
@@ -200,7 +219,7 @@ def guard_ai_policy(page, job):
 
 
 def _blocker(page) -> str | None:
-    for sel, name in BLOCKERS:
+    for sel, name in _blockers():
         for el in page.locator(sel).all():
             try:
                 if el.is_visible():
@@ -213,7 +232,9 @@ def _blocker(page) -> str | None:
 
 
 def _has_form(page) -> bool:
-    return page.locator("input[type=email], input[type=text], textarea, input[type=file]").count() >= 2
+    if page.locator("input[type=email], input[type=text], textarea, input[type=file], input[type=password]").count() >= 2:
+        return True
+    return ACCOUNTS_ENABLED and page.get_by_role("button", name=re.compile(r"apply manually", re.I)).count() > 0
 
 
 def open_form(page, url: str):
@@ -402,12 +423,62 @@ def verify(page, fields: list[dict], answers: dict, log=print):
             log(f"      ! NOT FILLED: '{f.get('label','')[:60]}' (wanted {str(val)[:40]!r})")
 
 
-def submit(page, timeout_ms: int = 20000) -> str:
+NEXT_RX = re.compile(r"^\s*(next|continue|save\s*(and|&)\s*(continue|next)|next step|review( (and|&) submit| application)?|proceed|"
+                     r"continue to .{2,40}|go to (next|review).{0,20})\s*[>\u2192]?\s*$", re.I)
+FINAL_RX = re.compile(r"^\s*(submit( (your )?application)?|send( my)? application|finish|complete( application)?|apply( now)?)\s*[>\u2192]?\s*$", re.I)
+LANDING_RX = re.compile(r"^\s*(apply manually|start (your )?application|apply( now)?|continue application)\s*$", re.I)
+MAX_STEPS = 16
+
+
+def _find_advance(page):
+    """(button, 'submit'|'next') for the visible primary action of the current step, or (None, None)."""
+    loc = page.locator("button, input[type=submit], input[type=button], [role=button]").locator("visible=true")
+    nxt = final = None
+    for i in range(min(loc.count(), 60)):
+        el = loc.nth(i)
+        try:
+            txt = (el.inner_text() or el.get_attribute("value") or el.get_attribute("aria-label") or "").strip()
+        except Exception:
+            continue
+        if not txt or len(txt) > 45:
+            continue
+        if FINAL_RX.match(txt):
+            final = el
+        elif NEXT_RX.match(txt):
+            nxt = el
+    if final is not None:
+        return final, "submit"
+    if nxt is not None:
+        return nxt, "next"
+    return None, None
+
+
+def _page_errors(page) -> list[str]:
+    try:
+        errs = page.locator('[aria-invalid="true"], [role="alert"], .error, .field-error, [class*="error"]').locator("visible=true").all_inner_texts()
+    except Exception:
+        return []
+    return [e.strip()[:80] for e in errs if e.strip()][:4]
+
+
+def _landing(page) -> bool:
+    """Click 'Apply Manually' / 'Apply' style buttons on a page that has no form yet."""
+    for role in ("button", "link"):
+        loc = page.get_by_role(role, name=LANDING_RX).locator("visible=true")
+        if loc.count():
+            loc.first.click(force=True)
+            page.wait_for_timeout(2000)
+            return True
+    return False
+
+
+def submit(page, timeout_ms: int = 20000, btn=None) -> str:
     before_url = page.url
     before_hits = len(SUCCESS_RE.findall(page.inner_text("body")))
-    btn = page.locator("button[type=submit], input[type=submit]").filter(visible=True).last
-    if not btn.count():
-        btn = page.get_by_role("button", name=re.compile(r"submit|send application|apply", re.I)).last
+    if btn is None:
+        btn = page.locator("button[type=submit], input[type=submit]").filter(visible=True).last
+        if not btn.count():
+            btn = page.get_by_role("button", name=re.compile(r"submit|send application|apply", re.I)).last
     btn.click()
     waited = 0
     while waited < timeout_ms:
@@ -419,33 +490,77 @@ def submit(page, timeout_ms: int = 20000) -> str:
             return "confirmed"
         if (b := _blocker(page)):
             raise Blocked(f"{b} after submit")
-    errs = page.locator('[aria-invalid="true"], .error, .field-error, [class*="error"]').all_inner_texts()
-    errs = [e.strip() for e in errs if e.strip()][:3]
+    errs = _page_errors(page)
     raise RuntimeError("no confirmation after submit" + (f"; page errors: {errs}" if errs else ""))
 
 
-def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print) -> str:
-    """Expects open_form(page, job.apply_url) to have been called already."""
-    fields = extract(page)
-    log(f"      form has {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
-    if len(fields) < 4 or not any(f["kind"] == "file" for f in fields):
-        raise Blocked(f"not a real application form ({len(fields)} fields, no résumé upload)")
-    plan = brain.map_fields(job, fields, cover_letter)
-    missing = [by["label"][:60] for by in fields if by["id"] in set(plan["unanswerable_required"])]
-    if missing:
-        for f in fields:
-            if f["id"] in set(plan["unanswerable_required"]):
-                log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
-        raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
-    if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
-        letter_txt = brain.lazy_letter(job)              # only written when the form REQUIRES a cover letter
-        (shot.parent / "cover_letter.txt").write_text(letter_txt)
-        files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
-    fill(page, fields, plan["answers"], files, log)
-    verify(page, fields, plan["answers"], log)
-    page.screenshot(path=str(shot), full_page=True)
-    if dry_run:
-        return "dry_run"
-    result = submit(page)
-    page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)
-    return result
+def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None) -> str:
+    """Expects open_form(page, job.apply_url) to have been called already. Handles one-page forms and multi-step wizards
+    (with account creation / sign-in when the site needs it)."""
+    from . import auth
+    start_url = page.url
+    total, uploaded, prev_sig, stuck, answered = 0, False, None, 0, {}
+    for step in range(1, MAX_STEPS + 1):
+        page.wait_for_timeout(600)
+        if SUCCESS_RE.search(page.inner_text("body")) and step > 1:
+            return "confirmed"
+        if (b := _blocker(page)):
+            raise Blocked(b)
+        if accounts and accounts.enabled and auth.is_auth_page(page):
+            if dry_run and not accounts.create_in_dry_run:
+                page.screenshot(path=str(shot), full_page=True)
+                log("      (dry run stops at the account screen; a live run creates/signs in here)")
+                return "dry_run"
+            try:
+                auth.handle(page, accounts, log, url_after=start_url)
+            except auth.AuthBlocked as e:
+                raise Blocked(f"account: {e}")
+            page.wait_for_timeout(1200)
+            if (b := _blocker(page)):
+                raise Blocked(b)
+        fields = extract(page)
+        if len(fields) < 2 and _landing(page):            # description / "Apply Manually" page: get to the form
+            fields = extract(page)
+        sig = tuple(sorted(f.get("label", "") for f in fields))
+        stuck = stuck + 1 if sig == prev_sig else 0
+        if stuck >= 2:
+            raise Unanswerable(f"stuck on step {step}; page says: {_page_errors(page) or 'nothing'}")
+        prev_sig = sig
+        log(f"      step {step}: {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
+        total += len(fields)
+        plan = brain.map_fields(job, fields, cover_letter)
+        missing = [by["label"][:60] for by in fields if by["id"] in set(plan["unanswerable_required"])]
+        if missing:
+            for f in fields:
+                if f["id"] in set(plan["unanswerable_required"]):
+                    log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
+            raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
+        if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
+            letter_txt = brain.lazy_letter(job)              # only written when the form REQUIRES a cover letter
+            (shot.parent / "cover_letter.txt").write_text(letter_txt)
+            files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
+        fill(page, fields, plan["answers"], files, log)
+        verify(page, fields, plan["answers"], log)
+        uploaded = uploaded or any(f["kind"] == "file" for f in fields)
+        btn, kind = _find_advance(page)
+        page.screenshot(path=str(shot if step == 1 else shot.with_name(f"step{step}.png")), full_page=True)
+        if kind is None:
+            if total < 4 or not uploaded:
+                raise Blocked(f"not a real application form ({total} fields, no résumé upload)")
+            raise Blocked("no Next or Submit button found on this step")
+        if kind == "submit":
+            if total < 4 or not uploaded:
+                raise Blocked(f"not a real application form ({total} fields, no résumé upload)")
+            page.screenshot(path=str(shot), full_page=True)
+            if dry_run:
+                return "dry_run"
+            result = submit(page, btn=btn)
+            page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)
+            return result
+        btn.click(force=True)                                 # Next / Save and Continue
+        page.wait_for_timeout(1500)
+        try:
+            page.wait_for_load_state("networkidle", timeout=8000)
+        except Exception:
+            pass
+    raise Blocked(f"more than {MAX_STEPS} steps; giving up")

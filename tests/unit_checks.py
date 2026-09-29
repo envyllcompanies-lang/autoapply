@@ -97,5 +97,23 @@ except ImportError:
 except AssertionError as e:
     problems.append("button group: " + str(e)[:200])
 
+# ---- verification-email parsing ----
+def _mail_test():
+    from autoapply import mailbox
+    raw = (b"From: no-reply@myworkday.com\r\nTo: delgado@alumni.usc.edu\r\nSubject: Verify your email address\r\n"
+           b"Date: Mon, 28 Sep 2026 21:00:00 -0600\r\nContent-Type: text/html; charset=utf-8\r\n\r\n"
+           b"<p>Welcome!</p><a href=\"https://wd5.myworkday.com/acme/verify?token=abc123&amp;x=1\">Verify</a>"
+           b"<a href=\"https://acme.com/unsubscribe\">unsubscribe</a>")
+    m = mailbox.parse_message(raw)
+    assert m["link"] == "https://wd5.myworkday.com/acme/verify?token=abc123&x=1", m
+    code = mailbox.parse_message(b"Subject: Your verification code\r\n\r\nYour code is 482913. It expires soon.")
+    assert code["code"] == "482913", code
+    print("ok  verification email parsing")
+
+try:
+    _mail_test()
+except AssertionError as e:
+    problems.append("mail parse: " + str(e)[:200])
+
 print("RESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

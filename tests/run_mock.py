@@ -107,6 +107,57 @@ page("aggform")
 page("fail", essay="Tell me about a time you failed or had a conflict at work. *")
 page("noai", top="<p>Please do not use AI tools to write your application.</p>")
 page("captcha", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
+
+(work / "site" / "wizard.html").write_text("""<!doctype html><html><body><h1>Program Coordinator — Acme</h1>
+<div id="auth-create" style="display:none"><h2>Create Account</h2>
+ <div><label for="ce">Email Address *</label><input id="ce" type="email"></div>
+ <div><label for="cp">Password *</label><input id="cp" type="password"></div>
+ <div><label for="cv">Verify New Password *</label><input id="cv" type="password"></div>
+ <label><input type="checkbox" id="agree"> I agree to the terms and privacy notice</label>
+ <button id="create" type="button">Create Account</button></div>
+<div id="auth-wait" style="display:none"><p>Please check your email to verify your account.</p></div>
+<div id="auth-signin" style="display:none"><h2>Sign In</h2>
+ <div><label for="se">Email Address *</label><input id="se" type="email"></div>
+ <div><label for="sp">Password *</label><input id="sp" type="password"></div>
+ <button id="signin" type="button">Sign In</button><p id="autherr"></p></div>
+<div id="s1" style="display:none"><h2>My Information</h2>
+ <div><label for="first_name">First Name *</label><input id="first_name" required></div>
+ <div><label for="last_name">Last Name *</label><input id="last_name" required></div>
+ <div><label for="email">Email *</label><input id="email" type="email" required></div>
+ <div><label for="phone">Phone *</label><input id="phone" type="tel" required></div>
+ <div><label>Resume/CV *</label><input type="file" id="resume" style="display:none" required></div>
+ <div><label id="hear-l">How did you hear about us? *</label>
+  <button type="button" id="hear" aria-haspopup="listbox" aria-labelledby="hear-l">Select One</button>
+  <ul role="listbox" id="hearlist" style="display:none"><li role="option">LinkedIn</li><li role="option">Job board</li><li role="option">Referral</li></ul></div>
+ <button type="button" id="n1">Save and Continue</button></div>
+<div id="s2" style="display:none"><h2>Application Questions</h2>
+ <div><label for="auth">Are you legally authorized to work in the United States? *</label><select id="auth"><option>Select...</option><option>Yes</option><option>No</option></select></div>
+ <fieldset><legend>Will you now or in the future require visa sponsorship? *</legend><label><input type="radio" name="spons" value="Yes"> Yes</label><label><input type="radio" name="spons" value="No"> No</label></fieldset>
+ <div><label for="why">Why do you want to work at Acme? (max 400 characters) *</label><textarea id="why" maxlength="400" required></textarea></div>
+ <button type="button" id="n2">Save and Continue</button></div>
+<div id="s3" style="display:none"><h2>Voluntary Disclosures</h2>
+ <div><label for="gender">Gender</label><select id="gender"><option>Select...</option><option>Male</option><option>Female</option><option>Decline to self-identify</option></select></div>
+ <div><label for="vet">Veteran Status</label><select id="vet"><option>Select...</option><option>I am a protected veteran</option><option>I am not a protected veteran</option><option>I decline to self-identify</option></select></div>
+ <button type="button" id="n3">Save and Continue</button></div>
+<div id="s4" style="display:none"><h2>Review</h2><p>Please review your application.</p><button type="button" id="submitbtn">Submit</button></div>
+<script>
+const S=(k,v)=>v===undefined?localStorage.getItem(k):localStorage.setItem(k,v), $=id=>document.getElementById(id);
+const ALL=['auth-create','auth-wait','auth-signin','s1','s2','s3','s4'];
+function show(id){ALL.forEach(x=>$(x).style.display=x===id?'block':'none');}
+if(location.search.includes('verify=1')){S('verified','1');document.body.innerHTML='<p>Email verified.</p>';}
+else{ if(S('signed'))show('s1'); else if(S('verified'))show('auth-signin'); else if(S('acct'))show('auth-wait'); else show('auth-create'); }
+$('create').onclick=()=>{if(!$('ce').value||$('cp').value!==$('cv').value||!$('agree').checked)return;S('acct',$('ce').value);S('pw',$('cp').value);show('auth-wait');};
+$('signin').onclick=()=>{if($('sp').value===S('pw')&&$('se').value===S('acct')){S('signed','1');show('s1');}else $('autherr').innerText='Incorrect email or password';};
+$('hear').onclick=()=>{$('hearlist').style.display='block';};
+document.querySelectorAll('#hearlist li').forEach(li=>li.onclick=()=>{$('hear').innerText=li.innerText;$('hearlist').style.display='none';});
+const need=(ids)=>ids.every(i=>$(i).value&&!/^Select/.test($(i).value));
+$('n1').onclick=()=>{if(need(['first_name','last_name','email','phone'])&&$('hear').innerText!=='Select One')show('s2');};
+$('n2').onclick=()=>{if(need(['auth','why'])&&document.querySelector('input[name=spons]:checked'))show('s3');};
+$('n3').onclick=()=>show('s4');
+$('submitbtn').onclick=()=>{const p=new URLSearchParams({tag:'wizard',first_name:$('first_name').value,email:$('email').value,phone:$('phone').value,
+ hear:$('hear').innerText,auth:$('auth').value,spons:document.querySelector('input[name=spons]:checked').value,why:$('why').value,gender:$('gender').value,vet:$('vet').value});
+ location.href='thanks.html?'+p.toString();};
+</script></body></html>""")
 (work / "site" / "thanks.html").write_text("<!doctype html><html><body><h1>Thank you for applying!</h1><p>We've received your application.</p></body></html>")
 
 import autoapply.writer as _W; _W._USAGE_FILE = work / "usage.json"
@@ -126,6 +177,7 @@ M.discover = lambda companies, log=print: [
     J(9, "Operations Coordinator", "reloc_no.html", loc="Chicago, United States"),
     J(10, "Project Coordinator", "reloc_yes.html", loc="New York, NY"),
     J(11, "Operations Associate", "main.html", GOOD + " Pay range: $45,000 - $55,000 per year."),
+    J(12, "Program Coordinator", "wizard.html"),
 ]
 
 cfg = yaml.safe_load((ROOT.parent / "config.yaml").read_text())
@@ -137,7 +189,11 @@ cfg["writer"]["providers"] = [
     {"name": "empty", "base_url": B + "empty", "model": "m", "api_key_env": "TESTKEY", "rpm": 1000},
     {"name": "capped", "base_url": B + "capped", "model": "m", "api_key_env": "TESTKEY", "rpm": 1000, "rpd": 2},
     {"name": "good", "base_url": B + "good", "model": "m", "api_key_env": "TESTKEY", "rpm": 1000}]
-os.environ["TESTKEY"] = "x"
+os.environ["TESTKEY"] = "x"; os.environ["ACCOUNT_PASSWORD"] = "Test-Pass-123!"
+import autoapply.mailbox as _MB
+_MB.configured = lambda: True
+_MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": None}
+cfg["accounts"] = {"enabled": True, "email": "delgado@alumni.usc.edu", "create_in_dry_run": False}
 for f in ("profile.yaml", "about_me.md"): shutil.copy(ROOT.parent / f, work / f)
 
 # 1) a leftover template placeholder must stop the run
@@ -154,13 +210,19 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped"}
-if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run"})
+exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied"}
+if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
 
 if "--dry" not in sys.argv:
     by = {s["tag"]: s for s in SUBS}
     main, fab = by.get("main", {}), by.get("fab", {})
+    wz = by.get("wizard", {})
+    for k, v in {"first_name": "Brian", "email": "delgado@alumni.usc.edu", "hear": "Job board", "auth": "Yes", "spons": "No",
+                 "gender": "Male", "vet": "I am not a protected veteran"}.items():
+        if wz.get(k) != v: problems.append(f"multi-page wizard {k}={wz.get(k)!r} (want {v!r})")
+    if not wz.get("why"): problems.append("wizard essay empty")
+    if "127.0.0.1" not in json.loads((work / "accounts.json").read_text()): problems.append("account was not remembered")
     if by.get("reloc_yes", {}).get("reloc") != "Yes": problems.append(f"NYC relocation answer: {by.get('reloc_yes')}")
     if "reloc_no" in by: problems.append("answered a relocation question for a city you didn't approve")
     want = {"first_name": "Brian", "last_name": "Delgado-Ortega", "email": "delgado@alumni.usc.edu", "phone": "(970) 366-8832",

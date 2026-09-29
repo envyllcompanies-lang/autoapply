@@ -92,7 +92,48 @@ def ashby(org: str) -> list[Job]:
     return out
 
 
-FETCHERS = {"greenhouse": greenhouse, "lever": lever, "ashby": ashby}
+SEARCH: dict = {}          # set by main: lets the Workday fetcher skip descriptions for jobs that fail the title/location gate
+
+
+def workday(spec: str) -> list[Job]:
+    """spec = 'tenant/wd5/SiteName' (optionally '/Display Name'). Uses Workday's public career-site JSON."""
+    parts = spec.split("/")
+    tenant, wd, site = parts[0], parts[1], parts[2]
+    base = f"https://{tenant}.{wd}.myworkdayjobs.com"
+    api = f"{base}/wday/cxs/{tenant}/{site}"
+    out, offset, details = [], 0, 0
+    for _ in range(12):
+        r = requests.post(f"{api}/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": ""},
+                          headers={**UA, "Content-Type": "application/json"}, timeout=TIMEOUT)
+        r.raise_for_status()
+        data = r.json()
+        posts = data.get("jobPostings") or []
+        if not posts:
+            break
+        for p in posts:
+            path = p.get("externalPath", "")
+            if not path:
+                continue
+            job = Job(source="workday", company=tenant, job_id=path.rsplit("_", 1)[-1] or path, title=p.get("title", ""),
+                      location=p.get("locationsText", ""), url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
+                      description=p.get("title", ""))
+            if details < 60 and not (SEARCH and prefilter(job, SEARCH)):
+                try:
+                    d = requests.get(f"{api}{path}", headers=UA, timeout=TIMEOUT).json().get("jobPostingInfo", {})
+                    job.description = _strip_html(d.get("jobDescription", "")) or job.description
+                    if d.get("location") and "location" not in job.location.lower():
+                        job.location = d["location"] if job.location.lower().startswith(("2 loc", "3 loc", "multiple")) else job.location
+                    details += 1
+                except Exception:
+                    pass
+            out.append(job)
+        offset += 20
+        if offset >= int(data.get("total", 0) or 0):
+            break
+    return out
+
+
+FETCHERS = {"greenhouse": greenhouse, "lever": lever, "ashby": ashby, "workday": workday}
 
 
 def discover(companies: dict[str, list[str]], log=print) -> list[Job]:
