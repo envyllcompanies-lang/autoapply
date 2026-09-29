@@ -1,0 +1,80 @@
+name: autoapply
+
+on:
+  schedule:
+    - cron: "7 */2 * * *"   # every 2 hours, around the clock. Free private-repo minutes are 2,000/mo, so this is the budget-safe rhythm
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Fill forms but don't submit"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency: autoapply   # never two runs at once
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Cache browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Write private config from secrets
+        env:
+          CONFIG_YAML: ${{ secrets.CONFIG_YAML }}
+          PROFILE_YAML: ${{ secrets.PROFILE_YAML }}
+          ABOUT_ME_MD: ${{ secrets.ABOUT_ME_MD }}
+          VOICE_MD: ${{ secrets.VOICE_MD }}
+        run: |
+          printf '%s' "$CONFIG_YAML" > config.yaml
+          printf '%s' "$PROFILE_YAML" > profile.yaml
+          printf '%s' "$ABOUT_ME_MD" > about_me.md
+          if [ -n "$VOICE_MD" ]; then printf '%s' "$VOICE_MD" > voice.md; fi
+
+      - name: Run
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m autoapply ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Save history (so nothing is ever applied to twice)
+        if: always()
+        run: |
+          git config user.name "autoapply-bot"
+          git config user.email "autoapply-bot@users.noreply.github.com"
+          git add -f applications.db reports/ logs/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "autoapply run $(date -u +%F)"
+          for i in 1 2 3 4; do
+            git pull --rebase -X theirs origin main || git rebase --abort || true
+            git push && exit 0
+            sleep $((i * 5))
+          done
+          echo "::error::could not save applications.db (history)"; exit 1
+
+      - name: Upload résumés, cover letters and form screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applications-${{ github.run_id }}
+          path: applications/
+          retention-days: 30
+          if-no-files-found: ignore
