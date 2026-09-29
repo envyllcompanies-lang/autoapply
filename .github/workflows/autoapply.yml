@@ -54,6 +54,9 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
         run: python -m autoapply ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Save history (so nothing is ever applied to twice)
@@ -61,7 +64,7 @@ jobs:
         run: |
           git config user.name "autoapply-bot"
           git config user.email "autoapply-bot@users.noreply.github.com"
-          git add -f applications.db reports/ logs/ 2>/dev/null || true
+          git add -f applications.db discovered_boards.json reports/ logs/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "autoapply run $(date -u +%F)"
           for i in 1 2 3 4; do
             git pull --rebase -X theirs origin main || git rebase --abort || true

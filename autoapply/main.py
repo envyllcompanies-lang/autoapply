@@ -15,6 +15,7 @@ import yaml
 from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter
+from .aggregators import discover_aggregators, load_boards, remember_board, canon_key
 from . import render, submit as sub
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -54,7 +55,12 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
 
     # 1. discover
     log("Discovering jobs…")
-    jobs = discover(cfg.get("companies", {}), log)
+    companies = {k: list(v or []) for k, v in (cfg.get("companies", {}) or {}).items()}
+    for ats, toks in load_boards(base).items():          # boards found earlier by following aggregator links
+        companies.setdefault(ats, [])
+        companies[ats] += [t for t in toks if t not in companies[ats]]
+    jobs = discover(companies, log)
+    jobs += discover_aggregators(cfg, base, log)
     by_key = {j.key: j for j in jobs}
 
     # 2. filter + score only what we've never seen
@@ -108,6 +114,17 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
             page = None
             try:
                 page = ctx.new_page()
+                if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
+                    job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
+                    remember_board(base, job.apply_url)
+                    dup = db.conn.execute(
+                        "SELECT 1 FROM jobs WHERE key != ? AND status IN ('applied','dry_run') AND (apply_url=? OR key=?)",
+                        (job.key, job.apply_url, canon_key(job.apply_url) or "")).fetchone()
+                    if dup:
+                        db.update(job.key, status="skipped", reason="same posting already handled", attempts=row["attempts"] + 1)
+                        log("    ✗ skipped: already applied to this posting via another listing")
+                        continue
+                    db.update(job.key, apply_url=job.apply_url)
                 sub.open_form(page, job.apply_url)   # check for blockers before spending tokens on tailoring
                 if brain.writer and cfg.get("respect_ai_policies", True):
                     sub.guard_ai_policy(page, job)   # skip employers that say no AI-assisted applications

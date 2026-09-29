@@ -77,6 +77,26 @@ EXTRACT_JS = r"""
                     label: q || name, required: g.required || /\*/.test(q),
                     options: opts.map(o => o.label), option_ids: opts.map(o => o.id) });
   }
+  // Ashby-style Yes/No answered with two plain <button>s instead of radio inputs
+  const btnGroups = new Map();
+  for (const b of document.querySelectorAll('button')) {
+    if ((b.getAttribute('type') || '') === 'submit' || b.disabled || b.closest('[aria-hidden="true"]') || !visible(b)) continue;
+    if (!/^(yes|no)$/i.test((b.innerText || '').trim())) continue;
+    const par = b.parentElement;
+    if (!btnGroups.has(par)) btnGroups.set(par, []);
+    btnGroups.get(par).push(b);
+  }
+  for (const [par, bs] of btnGroups) {
+    if (bs.length !== 2) continue;
+    let q = '', c = par;
+    for (let i = 0; i < 4 && c && !q; i++, c = c.parentElement) {
+      const txt = clean(c.innerText).replace(/\s*Yes\s*No\s*$/i, '').trim();
+      if (txt.length > 3) q = txt;
+    }
+    const ord = bs.map(b => ({ id: tag(b), label: clean(b.innerText) }));
+    fields.push({ id: 'g_' + ord[0].id, kind: 'radio', label: q, required: /\*/.test(q),
+                  options: ord.map(o => o.label), option_ids: ord.map(o => o.id) });
+  }
   return fields;
 }
 """
@@ -95,6 +115,62 @@ BLOCKERS = [
 
 class Blocked(Exception):
     pass
+
+
+UNSUPPORTED = re.compile(r"myworkdayjobs|\.workday\.com|icims\.com|taleo\.net|linkedin\.com|indeed\.com|glassdoor\.com|"
+                         r"ziprecruiter\.com|successfactors|oraclecloud\.com|ultipro\.com|ukg\.com|paylocity|paycomonline|"
+                         r"brassring|smartrecruiters\.com/oneclick|adp\.com", re.I)
+APPLY_BTN = re.compile(r"^\s*(apply( now| here| today| online| for this (job|position|role)| to this job)?|"
+                       r"apply (on|at|via) (the )?(company|employer)('s)? (site|website|page)|i'?m interested|apply externally)\s*[>\u2192]?\s*$", re.I)
+
+
+def _looks_like_form(page) -> bool:
+    try:
+        return page.locator('form input[type=file]:visible, form input[type=email]:visible, input[type=file]').count() > 0 \
+            and page.locator("form input:visible, form textarea:visible").count() >= 3
+    except Exception:
+        return False
+
+
+def resolve_apply_url(page, url: str, log=print) -> str:
+    """Follow a job-board / aggregator link to the employer's real application page (max 3 hops)."""
+    from .aggregators import board_of
+    page.goto(url, wait_until="domcontentloaded", timeout=30000)
+    for _ in range(3):
+        page.wait_for_timeout(1500)
+        cur = page.url
+        if UNSUPPORTED.search(cur):
+            raise Blocked(f"unsupported application site ({re.search(r'//([^/]+)', cur).group(1)})")
+        if board_of(cur) or _looks_like_form(page):
+            return cur
+        btn = page.locator("a:visible, button:visible").filter(has_text=APPLY_BTN).first
+        if not btn.count():
+            break
+        href = btn.get_attribute("href") if btn.evaluate("e => e.tagName") == "A" else None
+        if href and href.startswith(("http://", "https://")):
+            page.goto(href, wait_until="domcontentloaded", timeout=30000)
+            continue
+        try:
+            with page.context.expect_page(timeout=4000) as pi:
+                btn.click()
+            newp = pi.value
+            newp.wait_for_load_state("domcontentloaded")
+            newp.wait_for_timeout(1500)
+            final = newp.url
+            newp.close()
+            if UNSUPPORTED.search(final):
+                raise Blocked(f"unsupported application site ({re.search(r'//([^/]+)', final).group(1)})")
+            return final
+        except Blocked:
+            raise
+        except Exception:
+            page.wait_for_timeout(2000)      # no popup: the click navigated this page
+    cur = page.url
+    if UNSUPPORTED.search(cur):
+        raise Blocked(f"unsupported application site ({re.search(r'//([^/]+)', cur).group(1)})")
+    if board_of(cur) or _looks_like_form(page):
+        return cur
+    raise Blocked("could not find the employer's application page")
 
 
 AI_BAN = [re.compile(p, re.I) for p in (
@@ -238,12 +314,20 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     page.keyboard.press("Enter")
             elif kind == "radio":
                 i = _pick(f["options"], val)
-                if i is not None:
-                    page.locator(f'[data-aa="{f["option_ids"][i]}"]').check(force=True)
+                if i is None:
+                    log(f"      ! no option matched {str(val)[:40]!r} for '{f.get('label','')[:50]}'")
+                else:
+                    loc = page.locator(f'[data-aa="{f["option_ids"][i]}"]')
+                    if loc.evaluate("e => e.tagName") == "BUTTON":
+                        loc.click()
+                    else:
+                        loc.check(force=True)
             elif kind == "checkbox_group":
                 for v in (val if isinstance(val, list) else [val]):
                     i = _pick(f["options"], v)
-                    if i is not None:
+                    if i is None:
+                        log(f"      ! no option matched {str(v)[:40]!r} for '{f.get('label','')[:50]}'")
+                    else:
                         page.locator(f'[data-aa="{f["option_ids"][i]}"]').check(force=True)
             elif kind == "checkbox_single":
                 if val is True or str(val).lower() in ("true", "yes"):
@@ -254,6 +338,20 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     el.set_input_files(str(path))
         except Exception as e:
             log(f"      ! could not fill '{f.get('label','')[:50]}': {str(e).splitlines()[0]}")
+
+
+def verify(page, fields: list[dict], answers: dict, log=print):
+    """After filling, re-read the page and say which answered fields didn't actually take."""
+    for f in fields:
+        val = answers.get(f["id"])
+        if val in (None, "") or f["kind"] not in ("text", "textarea", "email", "tel", "url", "number", "select"):
+            continue
+        try:
+            got = page.locator(f'[data-aa="{f["id"]}"]').input_value()
+        except Exception:
+            continue
+        if not str(got).strip():
+            log(f"      ! NOT FILLED: '{f.get('label','')[:60]}' (wanted {str(val)[:40]!r})")
 
 
 def submit(page, timeout_ms: int = 20000) -> str:
@@ -290,6 +388,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
         raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
     fill(page, fields, plan["answers"], files, log)
+    verify(page, fields, plan["answers"], log)
     page.screenshot(path=str(shot), full_page=True)
     if dry_run:
         return "dry_run"

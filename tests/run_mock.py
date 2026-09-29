@@ -95,6 +95,15 @@ def page(tag, essay="Why do you want to work at Acme? (max 400 characters) *", t
 
 RELOC = sel("reloc", "Are you willing to relocate for this role? *", ["Yes", "No"])
 page("main"); page("fab"); page("reloc_no", extra=RELOC); page("reloc_yes", extra=RELOC); page("unknown", extra='<div><label for="fc">Favorite color? *</label><input id="fc" name="fc" required></div>')
+page("aggform")
+(work / "site" / "listing.html").write_text('<!doctype html><html><body><h1>Operations Coordinator at Zeta Corp</h1><p>Great job.</p><a href="aggform.html">Apply Now</a></body></html>')
+(work / "site" / "remoteok").mkdir(exist_ok=True)
+(work / "site" / "remoteok" / "api").write_text(json.dumps([
+    {"legal": "remoteok terms"},
+    {"id": "agg1", "position": "Operations Coordinator", "company": "Zeta Corp", "location": "Remote US", "apply_url": "http://127.0.0.1:8765/listing.html",
+     "description": "<p>Remote. You will drive process improvement using Excel and SQL, coordinate vendor work. 2 years of experience.</p>"},
+    {"id": "agg2", "position": "Operations Coordinator II", "company": "Zeta Corp", "location": "Remote US", "apply_url": "http://127.0.0.1:8765/listing.html",
+     "description": "<p>Remote. Same posting listed twice. Excel, SQL, vendor coordination, process improvement.</p>"}]))
 page("fail", essay="Tell me about a time you failed or had a conflict at work. *")
 page("noai", top="<p>Please do not use AI tools to write your application.</p>")
 page("captcha", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
@@ -120,6 +129,7 @@ M.discover = lambda companies, log=print: [
 ]
 
 cfg = yaml.safe_load((ROOT.parent / "config.yaml").read_text())
+cfg["aggregators"] = {"enabled": True, "sources": ["remoteok"], "base_urls": {"remoteok": B + "remoteok"}, "queries": [], "locations": []}
 cfg["facts"]["city"] = "Glenwood Springs"; cfg["search"]["delay_seconds"] = [0, 0]
 cfg["writer"]["providers"] = [
     {"name": "modelfix", "base_url": B + "modelfix", "model": ["old", "new"], "api_key_env": "TESTKEY", "rpm": 1000, "rpd": 1},
@@ -144,8 +154,8 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score"}
-if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run"})
+exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped"}
+if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
 
 if "--dry" not in sys.argv:
@@ -160,6 +170,7 @@ if "--dry" not in sys.argv:
             "trans": "No", "orient": "Heterosexual/Straight", "vet": "I am not a protected veteran", "consent": "on"}
     problems += [f"main.{k}={main.get(k)!r} expected {v!r}" for k, v in want.items() if main.get(k) != v]
     if not main.get("disab", "").startswith("No, I do not have"): problems.append(f"disab={main.get('disab')!r}")
+    if "aggform" not in by or by["aggform"].get("first_name") != "Brian": problems.append("aggregator job was not followed to its form and applied")
     if "aicert" in main: problems.append("ticked the 'I did not use AI' checkbox (must never)")
     if not main.get("why") or len(main["why"]) > 400 or "6,000" not in main["why"]: problems.append(f"why={main.get('why')!r}")
     if "45" in fab.get("why", "45") or "Rippling" in fab.get("why", "Rippling"): problems.append(f"fabricated number/tool survived: {fab.get('why')!r}")

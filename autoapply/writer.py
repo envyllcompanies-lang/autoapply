@@ -257,7 +257,7 @@ class Writer:
                 return re.sub(r"<think>.*?</think>", "", out, flags=re.S).strip()
             except (WriterUnavailable, requests.RequestException) as e:
                 errors.append(str(e))
-                if "not set" in str(e) or "HTTP 40" in str(e) or isinstance(e, requests.ConnectionError):
+                if "not set" in str(e) or "HTTP 40" in str(e) or ("rate limited" in str(e) and p["name"].startswith("gemini")) or isinstance(e, requests.ConnectionError):
                     self.dead.add(p["name"])          # bad key / not running: don't retry this run
                 elif "empty reply" in str(e):
                     self.strikes[p["name"]] = self.strikes.get(p["name"], 0) + 1

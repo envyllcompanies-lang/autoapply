@@ -71,9 +71,10 @@ FIELD_RULES = [
     (r"authori[sz]ed to work|legally (authorized|eligible|permitted)|eligible to work|right to work|work authori|"
      r"unrestricted|work in the (u\.?s|united states)", ("authorized_to_work_in_us",), None),
     (r"note-?taker|(record|transcri)\w* (of )?(the |our )?(interview|call|meeting)", ("ai_notetaker_consent",), "choice"),
+    (r"plan on working from|payroll tax|state (do you|will you) (work|reside|live)", ("state",), None),
     (r"relocat", ("willing_to_relocate",), "loc"),
     (r"\btravel", ("willing_to_travel",), "travel"),
-    (r"hybrid|on-?site|in-?office|in the office|days (a|per) week (in|on)|commut", ("open_to_onsite",), "loc"),
+    (r"hybrid|on-?site|in-?office|in the office|in-?person|our offices?|anchor days?|days? ?(a|per|/) ?week|commut", ("open_to_onsite",), "loc"),
     (r"remote", ("open_to_remote",), "choice"),
     (r"start date|earliest.*start|available to start|notice period|when (can|could) you start|availability", ("earliest_start_date",), None),
     (r"salary|compensation|pay expectation|desired pay|expected pay|pay range", ("salary_expectation",), "salary"),
@@ -353,6 +354,8 @@ class Brain:
 
     def _company_name(self, job) -> str:
         names = self.cfg.get("company_names", {}) or {}
+        if getattr(job, "extra", None) and job.extra.get("company_name"):
+            return job.extra["company_name"]
         return names.get(job.company) or re.sub(r"[-_]+", " ", job.company).title()
 
     def _letter(self, job, top_bullets, matched_skills) -> str:
@@ -506,6 +509,10 @@ class Brain:
             got = self._by_options(opts)
             if got:
                 return got
+        if kind in ("radio", "checkbox_group") and opts and re.search(r"hear|find out|learn about|source|how did you", low):
+            got = self._by_options(opts)
+            if got:
+                return [got] if kind == "checkbox_group" else got
 
         # 2b) things that simply don't apply to you -> "N/A" (short text fields only, never essays)
         if kind in ("text", "textarea") and len(low) < 160 and NA_RX.search(low) and not re.search(r"\bwhy\b|describe|explain|tell us", low):
