@@ -1364,3 +1364,126 @@
 [02:59:02]       form has 2 fields (0 required)
 [02:59:03]     ✓ dry_run
 [02:59:03] Summary: 20 dry_run, 12 blocked, 24 skipped, 1 failed, 140 queued, 477 low_score, 9892 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-09-29.md
+[03:16:08] === autoapply run (LIVE) ===
+[03:16:08] Writer: essay questions will be answered by gemini-pro, gemini-flash, gemini-lite, groq, groq-20b, ollama (free tiers, in that order)
+[03:16:08] Discovering jobs…
+[03:16:08]   greenhouse/airbnb: 157 open roles
+[03:16:09]   greenhouse/figma: 165 open roles
+[03:16:09]   greenhouse/discord: 48 open roles
+[03:16:09]   greenhouse/robinhood: 159 open roles
+[03:16:10]   greenhouse/databricks: 884 open roles
+[03:16:10]   greenhouse/anthropic: 629 open roles
+[03:16:11]   greenhouse/coinbase: 212 open roles
+[03:16:11]   greenhouse/dropbox: 37 open roles
+[03:16:11]   greenhouse/lyft: 182 open roles
+[03:16:11]   greenhouse/pinterest: 149 open roles
+[03:16:11]   greenhouse/reddit: 145 open roles
+[03:16:12]   greenhouse/twilio: 135 open roles
+[03:16:12]   greenhouse/cloudflare: 399 open roles
+[03:16:13]   greenhouse/datadog: 438 open roles
+[03:16:13]   greenhouse/mongodb: 398 open roles
+[03:16:14]   greenhouse/elastic: 386 open roles
+[03:16:14]   greenhouse/gitlab: 199 open roles
+[03:16:14]   greenhouse/asana: 97 open roles
+[03:16:15]   greenhouse/okta: 340 open roles
+[03:16:15]   greenhouse/samsara: 233 open roles
+[03:16:15]   greenhouse/instacart: 125 open roles
+[03:16:15]   ! greenhouse/doordash: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/doordash/jobs?content=true
+[03:16:15]   greenhouse/affirm: 174 open roles
+[03:16:16]   greenhouse/brex: 263 open roles
+[03:16:16]   greenhouse/gusto: 97 open roles
+[03:16:16]   greenhouse/carta: 75 open roles
+[03:16:16]   greenhouse/chime: 61 open roles
+[03:16:16]   greenhouse/squarespace: 33 open roles
+[03:16:16]   greenhouse/mixpanel: 70 open roles
+[03:16:17]   ! greenhouse/amplitude: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/amplitude/jobs?content=true
+[03:16:17]   greenhouse/webflow: 27 open roles
+[03:16:17]   ! greenhouse/anduril: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/anduril/jobs?content=true
+[03:16:17]   ! greenhouse/rivian: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/rivian/jobs?content=true
+[03:16:22]   greenhouse/flexport: 203 open roles
+[03:16:22]   greenhouse/faire: 74 open roles
+[03:16:22]   greenhouse/duolingo: 83 open roles
+[03:16:22]   greenhouse/peloton: 53 open roles
+[03:16:22]   ! greenhouse/warbyparker: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/warbyparker/jobs?content=true
+[03:16:22]   greenhouse/zocdoc: 55 open roles
+[03:16:22]   greenhouse/oscar: 260 open roles
+[03:16:23]   ! greenhouse/remitly: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/remitly/jobs?content=true
+[03:16:23]   ! greenhouse/wealthfront: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/wealthfront/jobs?content=true
+[03:16:23]   greenhouse/betterment: 27 open roles
+[03:16:23]   greenhouse/vercel: 90 open roles
+[03:16:23]   ! greenhouse/procore: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/procore/jobs?content=true
+[03:16:23]   ! greenhouse/opendoor: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/opendoor/jobs?content=true
+[03:16:23]   ! greenhouse/compass: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/compass/jobs?content=true
+[03:16:23]   ! greenhouse/sonder: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/sonder/jobs?content=true
+[03:16:23]   greenhouse/vacasa: 0 open roles
+[03:16:24]   greenhouse/project44: 34 open roles
+[03:16:24]   ! greenhouse/ibotta: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/ibotta/jobs?content=true
+[03:16:24]   ! greenhouse/guildeducation: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/guildeducation/jobs?content=true
+[03:16:44]   ! greenhouse/spacex: HTTPSConnectionPool(host='boards-api.greenhouse.io', port=443): Read timed out. (read timeout=20)
+[03:16:44]   greenhouse/ziprecruiter: 44 open roles
+[03:16:44]   ! greenhouse/thumbtack: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/thumbtack/jobs?content=true
+[03:16:45]   greenhouse/sofi: 55 open roles
+[03:16:46]   greenhouse/toast: 340 open roles
+[03:17:00]   greenhouse/hubspot: 0 open roles
+[03:17:00]   ! greenhouse/nerdwallet: 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/nerdwallet/jobs?content=true
+[03:17:00]   greenhouse/stitchfix: 15 open roles
+[03:17:00]   greenhouse/verkada: 304 open roles
+[03:17:01]   greenhouse/nuro: 107 open roles
+[03:17:01]   greenhouse/scaleai: 200 open roles
+[03:17:01]   greenhouse/attentive: 31 open roles
+[03:17:01]   greenhouse/nextdoor: 22 open roles
+[03:17:02]   greenhouse/lucidmotors: 434 open roles
+[03:17:02]   greenhouse/mentalhealthcenterofdenver: 45 open roles
+[03:17:02]   lever/palantir: 321 open roles
+[03:17:03]   lever/spotify: 81 open roles
+[03:17:03]   ! lever/plaid: 404 Client Error: Not Found for url: https://api.lever.co/v0/postings/plaid?mode=json
+[03:17:03]   ! lever/kraken1: 404 Client Error: Not Found for url: https://api.lever.co/v0/postings/kraken1?mode=json
+[03:17:03]   lever/highspot: 0 open roles
+[03:17:03]   ashby/ramp: 156 open roles
+[03:17:03]   ashby/notion: 130 open roles
+[03:17:04]   ashby/linear: 30 open roles
+[03:17:04]   ashby/openai: 841 open roles
+[03:17:04]   ashby/vanta: 88 open roles
+[03:17:04]   ashby/deel: 0 open roles
+[03:17:04]   ashby/mercury: 0 open roles
+[03:17:04]   ashby/supabase: 55 open roles
+[03:17:04]   ashby/replit: 74 open roles
+[03:17:05]   ashby/perplexity: 123 open roles
+[03:17:05]   ashby/anyscale: 21 open roles
+[03:17:05]   ashby/watershed: 39 open roles
+[03:17:05]   ! ashby/retool: 404 Client Error: Not Found for url: https://api.ashbyhq.com/posting-api/job-board/retool?includeCompensation=true
+[03:17:05]   ashby/zapier: 10 open roles
+[03:17:05]   ashby/1password: 62 open roles
+[03:17:05]   ashby/posthog: 8 open roles
+[03:17:05]   ashby/temporal: 63 open roles
+[03:17:05]   agg/linkedin: 0 roles (cached)
+[03:17:05]   agg/remoteok: 16 roles (cached)
+[03:17:05]   agg/remotive: 0 roles (cached)
+[03:17:05]   agg/jicy: 13 roles (cached)
+[03:17:05]   agg/himalayas: 1 roles (cached)
+[03:17:05]   agg/wwr: 16 roles (cached)
+[03:17:05]   agg/themuse: 203 roles (cached)
+[03:17:05]   agg/adzuna: 0 roles (cached)
+[03:17:05]   agg/jooble: 0 roles (cached)
+[03:17:05] 11144 open roles, 50 new
+[03:17:05]   ✓  94  APEX Risk Operations Analyst @ gusto — title 'operations analyst' +50; keywords [sop, workflow, cross-functional, data analysis] +29; location 'denver' +10; pay up to $119,478 +5
+[03:17:05]   ·  25  Credentialing Coordinator @ mentalhealthcenterofdenver — title 'coordinator' +22; keywords [documentation] +3; location 'denver' +10; 'healthcare' -15; pay up to $80,995 +5
+[03:17:05]   ·  35  Program Manager - Competency Diversion Team 300/882 @ mentalhealthcenterofdenver — title 'program' +22; keywords [workflow, scheduling, documentation] +10; location 'denver' +10; pay up to $113,006 +5; asks 4+ yrs -12
+[03:17:05]   ✓  67  Vocational Employment Project Coordinator - Next Chapter @ mentalhealthcenterofdenver — title 'project coordinator' +50; keywords [workflow, documentation] +7; location 'denver' +10
+[03:17:05]   ·  10  Vocational Employment Specialist - Next Chapter @ mentalhealthcenterofdenver — location 'denver' +10
+[03:17:05]   ✓  79  Vocational Project Coordinator - Resource Center Shopette @ mentalhealthcenterofdenver — title 'project coordinator' +50; keywords [sop, workflow, vendor, scheduling] +19; location 'denver' +10
+[03:17:05] 172 jobs queued; applying to up to 5 today
+[03:17:06] → APEX Risk Operations Analyst @ gusto (score 94)
+[03:17:19]       form has 22 fields (18 required)
+[03:17:19]       ? unanswered: 'I identify as a first-generation professional (please select one):*' kind=combobox options=['Yes', 'No', "I don't wish to answer"]
+[03:17:19]     ✗ skipped: can't truthfully answer required: I identify as a first-generation professional (please select
+[03:17:22] → Product Operations Specialist | Procurement @ ramp (score 85)
+[03:17:26]       form has 13 fields (7 required)
+[03:18:27]       writer: gemini-pro: HTTP 403 no free quota for this model
+[03:18:52]       writer: gemini-flash: still rate limited after retries
+[03:19:25]     ✗ failed: no confirmation after submit
+[03:19:31] → Product Operations Specialist | Travel @ ramp (score 84)
+[03:19:35]       form has 13 fields (7 required)
+[03:20:08]     ✗ failed: no confirmation after submit
+[03:20:18] → Marketing Strategy & Operations Manager @ notion (score 81)
+[03:20:22]       form has 20 fields (5 required)
