@@ -186,6 +186,26 @@ def _pick(options: list[str], want) -> int | None:
     return None
 
 
+def _fill_location(page, el, val: str, log):
+    """Autocomplete location boxes (Lever etc.) clear themselves unless a suggestion is picked, so pick one."""
+    city = val.split(",")[0].strip()
+    for attempt in dict.fromkeys([val, city, "Colorado"]):
+        el.click()
+        el.fill("")
+        el.press_sequentially(attempt, delay=60)
+        page.wait_for_timeout(1500)
+        opt = page.locator('[role="option"], .dropdown-results li, .pac-item, ul[role="listbox"] li, '
+                           '[class*="autocomplete"] li, [class*="suggestion"]').filter(visible=True).first
+        if opt.count():
+            opt.click()
+        else:
+            el.press("Tab")
+        page.wait_for_timeout(500)
+        if el.input_value().strip():
+            return
+    log("      ! location box stayed empty (site wants a suggestion picked)")
+
+
 def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=print):
     by_id = {f["id"]: f for f in fields}
     for fid, val in answers.items():
@@ -195,7 +215,9 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
         try:
             kind = f["kind"]
             el = page.locator(f'[data-aa="{fid}"]') if not fid.startswith("g_") else None
-            if kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
+            if kind == "text" and re.search(r"location|city|where are you (based|located)|currently (live|located)", f.get("label", ""), re.I):
+                _fill_location(page, el, str(val), log)
+            elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
                 el.fill(str(val))
             elif kind == "select":
                 try:

@@ -37,6 +37,10 @@ TRUTH_RULES = """RULES (non-negotiable):
   (first-generation, upbringing) or Spanish ONLY if the question itself asks about it.
 - Describe past work as "project" or "operation", never as a business that was founded or scaled. Use verbs like led,
   owned, coordinated, developed, recommended, organized, improved. Never inflate titles, seniority or team size.
+- At Roaring Fork Property Group the applicant was a crew member (Property Management Crew): he performed maintenance,
+  inspections and readiness checks and helped write SOPs across 70+ estates. Never say he managed, led, ran or oversaw
+  operations, properties, estates or people there.
+- Never claim to use a tool because the job description mentions it. Tools come only from FACTS.
 - Do not restate the question. No greeting, no sign-off, no headings, no bullet lists unless the question asks for a list.
 - Output only the answer text."""
 
@@ -211,7 +215,13 @@ class Writer:
                 raise WriterUnavailable(f"{p['name']}: HTTP 403 no free quota for this model")
             attempt += 1
             if r.status_code == 200:
-                text = (r.json()["choices"][0]["message"].get("content") or "").strip()
+                choice = r.json()["choices"][0]
+                text = (choice["message"].get("content") or "").strip()
+                if choice.get("finish_reason") == "length" and max_tokens < 4000:
+                    max_tokens = min(max_tokens * 2, 4000)   # reasoning ate the budget / answer was cut off: retry bigger
+                    est = sum(len(m["content"]) for m in messages) // 4 + max_tokens
+                    attempt += 1
+                    continue
                 if not text:                       # e.g. a reasoning model spent its whole token budget thinking
                     raise WriterUnavailable(f"{p['name']}: empty reply")
                 return text
@@ -285,15 +295,33 @@ class Writer:
         bad = self._ungrounded(text, extra)
         if bad:
             issues.append("these numbers are not in my facts, so remove them: " + ", ".join(bad))
-        tools = self._unknown_tools(text)
+        if not re.search(r"[.!?\"”)]$", text.strip()) and not text.strip().endswith(self.first):
+            issues.append("the text is cut off mid-sentence; write the complete answer")
+        if re.search(r"\b(managed|led|oversaw|ran|directed|supervised)\b[^.]{0,45}\b(estates?|propert(y|ies)|portfolio)\b", text, re.I):
+            issues.append("at Roaring Fork Property Group I was a crew member who did maintenance, inspections and SOP work; "
+                          "do not say I managed, led or oversaw estates, properties or operations there")
+        tools = self._unknown_tools(text, extra)
         if tools:
             issues.append("these tools are not in my facts, so do not mention them: " + ", ".join(tools))
         return issues
 
-    def _unknown_tools(self, text: str) -> list[str]:
+    _NOT_TOOLS = {"new", "san", "los", "las", "united", "north", "south", "east", "west", "the", "our", "this", "that", "their",
+                  "colorado", "california", "denver", "boulder", "aspen", "america", "york", "english", "spanish", "usc", "us"}
+
+    def _unknown_tools(self, text: str, extra: str = "") -> list[str]:
         low = text.lower()
-        return [t for t in TOOLS if re.search(r"(?<![\w])" + re.escape(t) + r"(?![\w])", low)
-                and not re.search(r"(?<![\w])" + re.escape(t) + r"(?![\w])", self.sources)]
+        found = [t for t in TOOLS if re.search(r"(?<![\w])" + re.escape(t) + r"(?![\w])", low)
+                 and not re.search(r"(?<![\w])" + re.escape(t) + r"(?![\w])", self.sources)]
+        # "in Linear", "using Retool": a capitalised name that comes from the job description, not from my facts
+        skip = {w.lower() for w in re.findall(r"\w+", getattr(self, "_ctx", ""))}
+        for m in re.finditer(r"\b(?:in|using|with|via|through|on)\s+([A-Z][A-Za-z0-9+#.]{2,})", text):
+            w = m.group(1).rstrip(".")
+            if w.lower() in self._NOT_TOOLS or w.lower() in skip:
+                continue
+            if re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", extra) and \
+                    not re.search(r"(?<![\w])" + re.escape(w.lower()) + r"(?![\w])", self.sources):
+                found.append(w)
+        return found
 
     @staticmethod
     def _clean(text: str) -> str:
@@ -315,7 +343,7 @@ class Writer:
             text = self._clean(self._complete(msgs, max_tokens, log))
             if text.upper().startswith("CANNOT_ANSWER"):
                 return None
-        if self._ungrounded(text, extra) or self._unknown_tools(text):
+        if self._ungrounded(text, extra) or self._unknown_tools(text, extra):
             log("      writer: answer kept claiming numbers or tools not in your facts, discarded")
             return None
         text = text.replace(" — ", ", ").replace("—", ", ")
@@ -335,8 +363,9 @@ class Writer:
                 f"Application question:\n{question}\n\n{limit}\nWrite my answer.")
         extra = job.description[:2200] + " " + question
         msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user}]
-        first = self._complete(msgs, 700, log)
-        return self._finish(first, user, max_chars, extra, 700, log)
+        self._ctx = f"{company} {job.title}"
+        first = self._complete(msgs, 1000, log)
+        return self._finish(first, user, max_chars, extra, 1000, log)
 
     def cover_letter(self, job, company: str, log=print) -> str | None:
         user = (f"Role: {job.title} at {company}\nJob description (excerpt):\n{job.description[:2500]}\n\n"
@@ -346,8 +375,9 @@ class Writer:
                 "the posting. No bullet points, no headings.")
         extra = job.description[:2500]
         msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user}]
-        first = self._complete(msgs, 900, log)
-        return self._finish(first, user, 2200, extra, 900, log)
+        self._ctx = f"{company} {job.title}"
+        first = self._complete(msgs, 1600, log)
+        return self._finish(first, user, 2200, extra, 1600, log)
 
 
 def limits_from_question(label: str, maxlength: int | None) -> int | None:

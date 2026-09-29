@@ -81,6 +81,9 @@ def page(tag, essay="Why do you want to work at Acme? (max 400 characters) *", t
 {sel("orient", "Sexual Orientation", ["Heterosexual/Straight", "Gay/Lesbian", "Bisexual", "I prefer not to say"])}
 {sel("vet", "Veteran Status", ["I am not a protected veteran", "I identify as one or more of the classifications of protected veteran", "I don't wish to answer"])}
 {sel("disab", "Disability Status", ["Yes, I have a disability, or have had one in the past", "No, I do not have a disability and have not had one in the past", "I do not want to answer"])}
+<div><label for="cl">Current location *</label><input id="cl" name="cl" type="text" required autocomplete="off"
+  oninput="document.getElementById('cll').style.display='block'" onblur="setTimeout(function(){{if(!cl.dataset.ok)cl.value=''}},400)">
+  <ul id="cll" class="dropdown-results" style="display:none"><li onclick="cl.value=this.innerText;cl.dataset.ok=1;cll.style.display='none'">Glenwood Springs, CO, USA</li></ul></div>
 <div><label for="addr">Street Address *</label><input id="addr" name="addr" required></div>
 <div><label for="zip">Zip / Postal Code *</label><input id="zip" name="zip" required></div>
 <div><label for="cob">Country of Birth</label><input id="cob" name="cob"></div>
@@ -153,7 +156,7 @@ if "--dry" not in sys.argv:
     want = {"first_name": "Brian", "last_name": "Delgado-Ortega", "email": "delgado@alumni.usc.edu", "phone": "(970) 366-8832",
             "auth": "Yes", "spons": "No", "loc": "Glenwood Springs, Colorado, United States", "sql": "2", "uspers": "Yes",
             "citstat": "Permanent Resident (Green Card)", "aiuse": "Yes", "gender": "Male", "hisp": "Yes",
-            "addr": "63 Cherry Ct", "zip": "81647", "cob": "Mexico", "trav": "25-50%", "sal": "75000",
+            "addr": "63 Cherry Ct", "cl": "Glenwood Springs, CO, USA", "zip": "81647", "cob": "Mexico", "trav": "25-50%", "sal": "75000",
             "trans": "No", "orient": "Heterosexual/Straight", "vet": "I am not a protected veteran", "consent": "on"}
     problems += [f"main.{k}={main.get(k)!r} expected {v!r}" for k, v in want.items() if main.get(k) != v]
     if not main.get("disab", "").startswith("No, I do not have"): problems.append(f"disab={main.get('disab')!r}")
