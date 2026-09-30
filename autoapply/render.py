@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import html
+import re
 from pathlib import Path
 
 import markdown
@@ -17,7 +18,10 @@ h3 { font-size: 10.5pt; margin: 7px 0 1px; }
 p { margin: 2px 0 5px; }
 ul { margin: 2px 0 5px 16px; padding: 0; }
 li { margin: 1px 0; }
-.letter { font-size: 11pt; line-height: 1.5; white-space: pre-wrap; }
+.letter { font-size: 11.5pt; line-height: 1.45; }
+.letter .head { margin-bottom: 22px; } .letter .head b { font-size: 15pt; letter-spacing: .3px; }
+.letter .head div { color: #444; font-size: 10pt; } .letter .date { margin-bottom: 16px; }
+.letter p { margin: 0 0 12px; white-space: pre-line; }
 """
 
 
@@ -33,5 +37,12 @@ def resume_pdf(browser, md_text: str, out: Path) -> Path:
     return _pdf(browser, markdown.markdown(md_text, extensions=["sane_lists"]), out)
 
 
-def letter_pdf(browser, text: str, out: Path) -> Path:
-    return _pdf(browser, f"<div class='letter'>{html.escape(text)}</div>", out)
+def letter_pdf(browser, text: str, out: Path, name: str = "", contact: str = "", today: str = "") -> Path:
+    """Full business-letter layout: letterhead, date, paragraphs with space between them."""
+    import datetime
+    today = today or datetime.date.today().strftime("%B %-d, %Y")
+    paras = [p for p in re.split(r"\n\s*\n", text.strip()) if p.strip()]
+    head = f"<div class='head'><b>{html.escape(name)}</b><div>{html.escape(contact)}</div></div>" if name else ""
+    body = "".join(f"<p>{html.escape(p.strip())}</p>" for p in paras)
+    css_page = "<style>@page { margin: 0.75in 0.9in; }</style>"
+    return _pdf(browser, css_page + f"<div class='letter'>{head}<div class='date'>{today}</div>{body}</div>", out)

@@ -387,16 +387,38 @@ class Writer:
         return self._finish(first, user, max_chars, extra, 1000, log)
 
     def cover_letter(self, job, company: str, log=print) -> str | None:
+        """A full one-page letter (about 300-380 words, four paragraphs), signed with the full name."""
+        min_w = int(self.cfg.get("cover_letter_min_words", 270))
+        parts = self.name.split()
+        signed = f"{parts[0]} {parts[-1]}" if len(parts) > 1 else self.name
         user = (f"Role: {job.title} at {company}\nJob description (excerpt):\n{job.description[:2500]}\n\n"
-                f"Write my cover letter: 150-220 words, plain text. Start with 'Dear {company} team,' "
-                f"and sign off with just '{self.first}'. Open with something specific about why this role fits what I "
-                "have actually done, not with 'I am writing'. Use two concrete things from my background that map to "
-                "the posting. No bullet points, no headings.")
+                f"Write my cover letter as a full one-page business letter: 320 to 380 words, plain text, exactly four paragraphs "
+                f"separated by blank lines. Start with 'Dear {company} hiring team,' then:\n"
+                "1) Opening: why this specific role and company interest me and what I bring, in two or three sentences. Not 'I am writing'.\n"
+                "2) One concrete example from my background (real numbers only from my facts) that maps to the biggest need in the posting, and what it shows.\n"
+                "3) A second, different example (school project, coursework or other work) that maps to another requirement, "
+                "plus the tools I actually use. Where I lack direct experience, say so plainly and name the transferable foundation.\n"
+                f"4) Close: what I would want to do in the first months, that I would welcome a conversation, and thanks. "
+                f"End with 'Sincerely,' on its own line and then '{self.first}' on the next line.\n"
+                "No bullet points, no headings. Only facts from my background; do not name tools or numbers that are not in it.")
         extra = job.description[:2500]
         msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user}]
         self._ctx = f"{company} {job.title}"
-        first = self._complete(msgs, 1600, log)
-        return self._finish(first, user, 2200, extra, 1600, log)
+        text = self._finish(self._complete(msgs, 1800, log), user, 3300, extra, 1800, log)
+        for _ in range(2):
+            if not text or len(text.split()) >= min_w:
+                break
+            log(f"      writer: cover letter only {len(text.split())} words, asking for a full page")
+            msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user},
+                    {"role": "assistant", "content": text},
+                    {"role": "user", "content": f"Too short. Expand to 320-380 words and four full paragraphs using only my real background. Output only the letter."}]
+            text = self._finish(self._complete(msgs, 1800, log), user, 3300, extra, 1800, log)
+        if not text or len(text.split()) < min_w:
+            return None
+        text = text.rstrip()
+        if text.endswith(self.first):
+            text = text[: -len(self.first)] + signed
+        return text
 
 
 def limits_from_question(label: str, maxlength: int | None) -> int | None:

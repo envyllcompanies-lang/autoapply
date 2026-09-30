@@ -115,5 +115,12 @@ try:
 except AssertionError as e:
     problems.append("mail parse: " + str(e)[:200])
 
+# ---- everything else that needs no browser (questions, feeds, budget, notifications, workflow): its own process
+import subprocess
+r = subprocess.run([sys.executable, str(ROOT / "tests" / "more_checks.py")], capture_output=True, text=True)
+print(r.stdout.rstrip())
+if r.returncode != 0:
+    problems.append("more_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
+
 print("RESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

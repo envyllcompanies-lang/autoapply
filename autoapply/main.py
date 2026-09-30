@@ -2,24 +2,167 @@
 from __future__ import annotations
 
 import argparse
+import calendar
+import json
+import os
 import random
 import re
 import sys
 import time
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
+from types import SimpleNamespace
+from urllib.parse import urlparse
 from pathlib import Path
 
-import requests
 import yaml
 
 from .db import DB
 from .brain import Brain
-from .sources import discover, prefilter
-from .aggregators import discover_aggregators, load_boards, remember_board, canon_key
-from . import render, submit as sub, auth, sources
+from .sources import discover, prefilter, Job
+from .aggregators import discover_aggregators, load_boards, remember_board, canon_key, board_of
+from . import render, submit as sub, auth, sources, mailbox, notify, __version__
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
+REQUEUE_VERSION = "2026-09-29-e"
+ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
+
+
+def merge_board_file(cfg: dict, base: Path) -> int:
+    """Fold boards.yaml (the public company lists and display names) into the config. Returns how many boards it added."""
+    p = base / "boards.yaml"
+    if not p.exists():
+        return 0
+    try:
+        data = yaml.safe_load(p.read_text()) or {}
+    except Exception as e:
+        print(f"! boards.yaml could not be read: {e}", flush=True)
+        return 0
+    names = data.pop("names", None) or {}
+    if not isinstance(cfg.get("companies"), dict):
+        cfg["companies"] = {}
+    added = 0
+    for ats, toks in data.items():
+        if not isinstance(toks, list):
+            continue
+        cur = cfg["companies"].get(ats) or []
+        cfg["companies"][ats] = cur
+        have = {str(t).lower() for t in cur}
+        for t in toks:
+            if str(t).lower() not in have:
+                cur.append(str(t))
+                have.add(str(t).lower())
+                added += 1
+    cfg["company_names"] = {**{str(k): v for k, v in names.items()}, **(cfg.get("company_names") or {})}
+    return added
+
+
+def norm_co(name: str) -> str:
+    n = re.sub(r"[^a-z0-9 ]", " ", (name or "").lower())
+    n = re.sub(r"\b(inc|llc|ltd|corp|corporation|co|company|the|group|holdings)\b", " ", n)
+    return "".join(n.split())
+
+
+def stub_job(row):
+    """A queued posting that this run's search did not return. Big Workday sites and the aggregators only show the newest
+    results of each search, so 'not returned' does not mean 'closed': the employer's own page decides."""
+    src = row["source"] or ""
+    if not (src == "workday" or src.startswith("agg-")) or not (row["apply_url"] or row["url"]):
+        return None
+    return Job(source=src, company=row["company"], job_id=str(row["key"]).split(":")[-1], title=row["title"] or "",
+               location=row["location"] or "", url=row["url"] or row["apply_url"], apply_url=row["apply_url"] or row["url"], description="")
+
+
+# ----------------------------------------------------------------------------------------- sites that keep showing a human check
+HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|security code|human check|are you a robot", re.I)
+GATE_AFTER_BLOCKS = 3       # this many human-check stops in a row (from two or more employers) pause a site for a day
+
+
+def ats_of(job) -> str:
+    """Which application system a posting lives on: greenhouse, lever, workday ... or the site's own host."""
+    if not job.source.startswith("agg-"):
+        return job.source.lower()
+    url = job.apply_url or job.url or ""
+    found = board_of(url)
+    if found:
+        return found[0]
+    if "myworkdayjobs.com" in url:
+        return "workday"
+    return (urlparse(url).netloc or "web").lower()
+
+
+def _site_state(db: DB, ats: str) -> dict:
+    try:
+        return json.loads(db.meta_get(f"hc:{ats}") or "{}")
+    except Exception:
+        return {}
+
+
+def note_block(db: DB, ats: str, company: str, why: str, today: str):
+    """A human check (CAPTCHA, emailed code ...) stopped an application. The bot never gets past those, so a site that does
+    this again and again is paused instead of spending the run's free minutes on it."""
+    if not HUMAN_CHECK.search(why or ""):
+        return
+    st = _site_state(db, ats)
+    cos = [c for c in st.get("cos", []) if c != company][-4:] + [company]
+    st.update(n=int(st.get("n", 0)) + 1, cos=cos, last=today)
+    if st["n"] >= GATE_AFTER_BLOCKS and len(set(cos)) >= 2 and not st.get("probe_after"):
+        st["probe_after"] = (date.fromisoformat(today) + timedelta(days=1)).isoformat()
+    db.meta_set(f"hc:{ats}", json.dumps(st))
+
+
+def note_success(db: DB, ats: str):
+    if _site_state(db, ats):
+        db.meta_set(f"hc:{ats}", "")
+
+
+def site_paused(db: DB, ats: str, today: str) -> str | None:
+    """Why this site is paused today (None = go ahead). Once a day one application is let through to see if the check went away."""
+    st = _site_state(db, ats)
+    after = st.get("probe_after")
+    if not after:
+        return None
+    if today >= after:
+        st["probe_after"] = (date.fromisoformat(today) + timedelta(days=1)).isoformat()
+        db.meta_set(f"hc:{ats}", json.dumps(st))
+        return None
+    return (f"apply by hand: {ats} stopped the bot at a human check (CAPTCHA or emailed code) on its last {st.get('n', '?')} tries, "
+            f"so that site is paused until {after}")
+
+
+def employer_blocked(db: DB, company: str) -> str | None:
+    """The same employer's application already stopped at a human check this week: its other postings will too."""
+    since = (datetime.now() - timedelta(days=7)).isoformat(timespec="seconds")
+    for r in db.conn.execute("SELECT reason FROM jobs WHERE lower(company)=? AND status='blocked' AND updated >= ?", (company.lower(), since)):
+        if HUMAN_CHECK.search(r["reason"] or ""):
+            return r["reason"]
+    return None
+
+
+def paused_sites(db: DB, today: str) -> list[str]:
+    out = []
+    for r in db.conn.execute("SELECT k, v FROM meta WHERE k LIKE 'hc:%'"):
+        try:
+            st = json.loads(r["v"] or "{}")
+        except Exception:
+            continue
+        if st.get("probe_after") and st["probe_after"] > today:
+            out.append(f"{r['k'][3:]}: human check on its last {st.get('n', '?')} tries, paused until {st['probe_after']}")
+    return out
+
+
+def site_summary(rows) -> list[str]:
+    """Per application system, how this run's attempts ended: 'greenhouse: 4 blocked, 1 skipped'. Shows at a glance which
+    kinds of site the bot can finish and which stop it."""
+    tally: dict[str, dict[str, int]] = {}
+    for r in rows:
+        if r["status"] in ("queued", "low_score", "filtered"):
+            continue
+        job = SimpleNamespace(source=r["source"] or "", apply_url=r["apply_url"] or "", url=r["url"] or "")
+        site = tally.setdefault(ats_of(job), {})
+        site[r["status"]] = site.get(r["status"], 0) + 1
+    ranked = sorted(tally.items(), key=lambda kv: -sum(kv[1].values()))[:10]
+    return [f"  {name}: " + ", ".join(f"{n} {st}" for st, n in sorted(c.items(), key=lambda kv: -kv[1])) for name, c in ranked]
 
 
 def slug(s: str) -> str:
@@ -38,43 +181,175 @@ class Logger:
         self.f.flush()
 
 
+# ----------------------------------------------------------------------------------------- Actions-minutes budget
+def _usage_file(base: Path) -> Path:
+    return base / "logs" / "usage_minutes.json"
+
+
+def _read_usage(base: Path) -> dict:
+    try:
+        data = json.loads(_usage_file(base).read_text())
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _write_usage(base: Path, data: dict):
+    p = _usage_file(base)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(data, indent=1, sort_keys=True))
+
+
+def _bill(data: dict, minutes: float, when: date | None = None):
+    key = (when or date.today()).strftime("%Y-%m")
+    cur = data.get(key) or {"minutes": 0.0, "runs": 0}
+    cur["minutes"] = round(float(cur.get("minutes", 0)) + minutes, 1)
+    cur["runs"] = int(cur.get("runs", 0)) + 1
+    data[key] = cur
+
+
+def month_used(base: Path) -> float:
+    try:
+        return float((_read_usage(base).get(date.today().strftime("%Y-%m")) or {}).get("minutes", 0))
+    except Exception:
+        return 0.0
+
+
+def add_usage(base: Path, minutes: float):
+    """Bill this run's minutes to the month and close its 'open run' note."""
+    data = _read_usage(base)
+    data.pop("open", None)
+    _bill(data, minutes)
+    _write_usage(base, data)
+
+
+def open_run(base: Path):
+    """Note that a run has started. A run that is cancelled or killed never reaches add_usage, so the next run bills what
+    the dead one used (up to its last heartbeat) and starts fresh. Only on Actions: your own machine has no minutes to count."""
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return
+    data = _read_usage(base)
+    dead = data.pop("open", None)
+    if isinstance(dead, dict) and dead.get("start"):
+        try:
+            start = float(dead["start"])
+            _bill(data, max(0.0, (float(dead.get("beat") or start) - start) / 60) + ACTIONS_OVERHEAD_MIN, datetime.fromtimestamp(start).date())
+        except Exception:
+            pass
+    now = time.time()
+    data["open"] = {"start": now, "beat": now}
+    _write_usage(base, data)
+
+
+def heartbeat(base: Path):
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return
+    data = _read_usage(base)
+    if isinstance(data.get("open"), dict):
+        data["open"]["beat"] = time.time()
+        _write_usage(base, data)
+
+
+def budget_ok(cfg: dict, base: Path, log) -> bool:
+    """Free private repos get 2,000 Actions minutes a month. Past the budget the run stops early instead of failing later."""
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return True
+    budget = float((cfg.get("search") or {}).get("actions_minutes_budget", 1850))
+    used = month_used(base)
+    if used >= budget:
+        log(f"Actions-minutes budget reached ({used:.0f} of {budget:.0f} this month): skipping this run to stay in the free tier")
+        return False
+    return True
+
+
+def run_time_allowance(cfg: dict, base: Path, today: date | None = None) -> float:
+    """Minutes of Python time this run may spend, so what is left of the month's free minutes lasts until the month
+    ends. Spread evenly over the runs still to come (search.runs_per_day mirrors the workflow's cron); unused time
+    from quiet runs flows to later ones. Off Actions (your own machine) the only limit is search.max_run_minutes."""
+    s = cfg.get("search") or {}
+    cap = float(s.get("max_run_minutes", 30))
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return cap
+    today = today or date.today()
+    budget = float(s.get("actions_minutes_budget", 1850))
+    per_day = max(1, int(s.get("runs_per_day", 4)))
+    days_left = calendar.monthrange(today.year, today.month)[1] - today.day + 1
+    share = max(0.0, budget - month_used(base)) / max(1, days_left * per_day)
+    return max(6.0, min(cap, share - ACTIONS_OVERHEAD_MIN))
+
+
+def apply_deadline(t_start: float, now: float, allow_min: float, s: dict) -> float:
+    """When the apply loop must stop. Finding jobs counts against the run's time, but a run whose search overran still
+    gets a short window (search.min_apply_minutes) to apply, so it never finds jobs and then applies to none of them.
+    No run goes past max_run_minutes + 6 in total."""
+    hard = t_start + 60 * (float(s.get("max_run_minutes", 30)) + 6)
+    return min(hard, max(t_start + allow_min * 60, now + 60 * float(s.get("min_apply_minutes", 6))))
+
+
+# ----------------------------------------------------------------------------------------- the run
 def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
+    t_start = time.time()
+    base = Path(cfg_path).resolve().parent
+    try:
+        return _run(cfg_path, dry_run, limit, t_start)
+    finally:            # a run that ends in an error or is cancelled still bills the minutes it used
+        if os.environ.get("GITHUB_ACTIONS") and isinstance(_read_usage(base).get("open"), dict):
+            add_usage(base, (time.time() - t_start) / 60 + ACTIONS_OVERHEAD_MIN)
+
+
+def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     cfg_file = Path(cfg_path).resolve()
     base = cfg_file.parent
     cfg = yaml.safe_load(cfg_file.read_text())
+    merge_board_file(cfg, base)
     s = cfg.get("search", {})
     dry_run = dry_run or cfg.get("dry_run", False)
     today = date.today().isoformat()
     log = Logger(base / "logs" / f"{today}.log")
     run_start = datetime.now().isoformat(timespec="seconds")
-    log(f"=== autoapply run ({'DRY RUN' if dry_run else 'LIVE'}) ===")
+    log(f"=== autoapply run ({'DRY RUN' if dry_run else 'LIVE'}) build {__version__} ===")
+    if not budget_ok(cfg, base, log):
+        if os.environ.get("GITHUB_ACTIONS"):
+            add_usage(base, ACTIONS_OVERHEAD_MIN)          # even a skipped run spends its set-up minutes
+        return {}
+    open_run(base)
 
     db = DB(str(base / cfg.get("db", "applications.db")))
-    n_req = db.requeue_if_new_version("2026-09-29-b")
+    n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
     profile = yaml.safe_load((base / cfg.get("profile_file", "profile.yaml")).read_text())
     brain = Brain(cfg, profile, base, log)
+    brain.applied_before = {r[0] for r in db.conn.execute(
+        "SELECT DISTINCT company FROM jobs WHERE status IN ('applied','unconfirmed')")}
+    _resolve_old_unconfirmed(db, brain, log)
 
     # 1. discover
     log("Discovering jobs…")
+    skip_src = {x.lower() for x in (s.get("skip_sources") or ["ashby"])}
+    manual_src = {x.lower() for x in (s.get("manual_sources") or [])}
     companies = {k: list(v or []) for k, v in (cfg.get("companies", {}) or {}).items()}
     for ats, toks in load_boards(base).items():          # boards found earlier by following aggregator links
         companies.setdefault(ats, [])
         companies[ats] += [t for t in toks if t not in companies[ats]]
-    sources.SEARCH = cfg.get("search", {}) or {}
-    jobs = discover(companies, log)
+    companies = {k: v for k, v in companies.items() if k.lower() not in skip_src or k.lower() in manual_src}
+    sources.SEARCH = {**(cfg.get("search", {}) or {}),
+                      "_title_keys": [str(k).lower() for k in ((cfg.get("scoring") or {}).get("title_keywords") or {})]}
+    sources.KNOWN = {r["key"]: r["status"] for r in db.conn.execute("SELECT key, status FROM jobs")}
+    jobs = discover(companies, log, base=base)
     jobs += discover_aggregators(cfg, base, log)
     by_key = {j.key: j for j in jobs}
 
     # 2. filter + score only what we've never seen
-    fresh = [j for j in jobs if not db.seen(j.key)]
-    log(f"{len(jobs)} open roles, {len(fresh)} new")
-    scored = 0
+    fresh = [j for j in by_key.values() if not db.seen(j.key)]
+    log(f"{len(by_key)} open roles, {len(fresh)} new")
+    scored = n_ok = n_low = n_filt = 0
     max_score = s.get("max_scored_per_run", 100000)
+    min_score = s.get("min_score", 70)
     for j in fresh:
         if (why := prefilter(j, s)):
             db.add(j, "filtered", reason=why)
+            n_filt += 1
             continue
         if scored >= max_score:
             break  # leave the rest unseen; they'll be scored next run
@@ -84,9 +359,17 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
             log(f"  ! scoring failed for {j.title} @ {j.company}: {e}")
             continue
         scored += 1
-        ok = score >= s.get("min_score", 70)
-        db.add(j, "queued" if ok else "low_score", score=score, reason=reason)
-        log(f"  {'✓' if ok else '·'} {score:3d}  {j.title} @ {j.company} — {reason}")
+        ok = score >= min_score
+        by_hand = j.source.lower() in manual_src
+        db.add(j, ("manual" if by_hand else "queued") if ok else "low_score", score=score,
+               reason=("apply by hand: this site blocks automated submissions. " if by_hand and ok else "") + reason)
+        if ok:
+            n_ok += 1
+            log(f"  ✓ {score:3d}  {j.title} @ {j.company} ({j.location[:30]}) — {reason[:150]}")
+        else:
+            n_low += 1
+    log(f"Scored {scored} new roles: {n_ok} good fits, {n_low} below the bar, {n_filt} filtered out by title/location "
+        f"(finding and scoring took {(time.time() - t_start) / 60:.1f} min)")
 
     # 3. apply, best matches first, within today's cap
     cap = s.get("daily_cap", 25) - db.applied_today()
@@ -95,15 +378,24 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
     if limit is not None:
         cap = min(cap, limit)
     queue = db.retryable(s.get("max_attempts", 2))
-    log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} today")
+    log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
-        return finish(cfg, db, run_start, log, base, today)
+        return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
     from playwright.sync_api import sync_playwright
     out_root = base / "applications" / today
+    allow_min = run_time_allowance(cfg, base)
+    deadline = apply_deadline(t_start, time.time(), allow_min, s)
+    if os.environ.get("GITHUB_ACTIONS"):
+        log(f"Time for this run: {(deadline - t_start) / 60:.0f} min in all ({month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month)")
+    per_company = int(s.get("max_per_company", 3))
+    sub.MAX_APPLY_SECONDS = int(float(s.get("max_minutes_per_job", 8)) * 60)
+    heartbeat(base)
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=cfg.get("headless", True))
         ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 1800}, locale="en-US")
+        ctx.set_default_timeout(10000)
+        ctx.set_default_navigation_timeout(30000)
         acc = auth.Accounts(cfg, base)
         sub.ACCOUNTS_ENABLED = acc.enabled
         log(f"Accounts: {'ON (' + acc.email + ')' if acc.enabled else 'off (no ACCOUNT_PASSWORD secret), login sites are skipped'}")
@@ -112,7 +404,10 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
         for row in queue:
             if done >= cap:
                 break
-            job = by_key.get(row["key"])
+            if time.time() > deadline:
+                log(f"Run time limit reached ({(deadline - t_start) / 60:.0f} min): the rest waits for the next run")
+                break
+            job = by_key.get(row["key"]) or stub_job(row)
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
                 continue
@@ -120,58 +415,107 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
             if ck in dead:
                 db.update(job.key, status="skipped", reason="same role at same company already skipped this run")
                 continue
-            if db.conn.execute("SELECT 1 FROM jobs WHERE key != ? AND status='applied' AND lower(company)=? AND lower(title)=?",
-                               (job.key, ck[0], ck[1])).fetchone():
+            co_n = norm_co(job.company)
+            hist = [r for r in db.conn.execute("SELECT key, company, title FROM jobs WHERE status IN ('applied','unconfirmed') AND key != ?",
+                                               (job.key,)) if norm_co(r["company"]) == co_n]
+            if any(r["title"].strip().lower() == ck[1] for r in hist):
                 db.update(job.key, status="skipped", reason="already applied to this role at this company")
+                continue
+            n_co = len(hist)
+            if per_company and n_co >= per_company:
+                db.update(job.key, status="skipped", reason=f"already applied to {n_co} roles at this company")
                 continue
             log(f"→ {job.title} @ {job.company} (score {row['score']})")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
             d.mkdir(parents=True, exist_ok=True)
             page = None
+            clicked: list = []
             try:
                 page = ctx.new_page()
                 if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
                     job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
                     remember_board(base, job.apply_url)
                     dup = db.conn.execute(
-                        "SELECT 1 FROM jobs WHERE key != ? AND status IN ('applied','dry_run') AND (apply_url=? OR key=?)",
+                        "SELECT 1 FROM jobs WHERE key != ? AND status IN ('applied','unconfirmed','dry_run') AND (apply_url=? OR key=?)",
                         (job.key, job.apply_url, canon_key(job.apply_url) or "")).fetchone()
                     if dup:
                         db.update(job.key, status="skipped", reason="same posting already handled", attempts=row["attempts"] + 1)
                         log("    ✗ skipped: already applied to this posting via another listing")
                         continue
                     db.update(job.key, apply_url=job.apply_url)
+                ats = ats_of(job)
+                why = employer_blocked(db, job.company)
+                if why:
+                    db.update(job.key, status="manual", reason=f"apply by hand: {job.company}'s application already stopped at a human check this week ({why[:60]})")
+                    log("    ⏸ this employer's form already stopped the bot at a human check: listed for you instead")
+                    continue
+                why = site_paused(db, ats, today)
+                if why:
+                    db.update(job.key, status="manual", reason=why)
+                    log(f"    ⏸ {ats} is paused (human checks): listed for you instead")
+                    continue
                 sub.open_form(page, job.apply_url)   # check for blockers before spending tokens on tailoring
+                if len(job.description or "") < 300:  # only the title is known (big Workday sites, stubs): read the posting itself
+                    try:
+                        job.description = (job.description + "\n" + page.inner_text("body"))[:8000]
+                    except Exception:
+                        pass
                 if brain.writer and cfg.get("respect_ai_policies", True):
                     sub.guard_ai_policy(page, job)   # skip employers that say no AI-assisted applications
                 resume_md, letter = brain.tailor(job)
                 (d / "resume.md").write_text(resume_md)
                 name = slug(cfg.get("facts", {}).get("full_name", "resume")).replace("-", "_") or "resume"
-                files = {"RESUME": render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf"),
-                         "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf"))}
-                result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc)
+                fixed = base / str(cfg.get("resume_file", "") or "")
+                use_fixed = bool(cfg.get("resume_file")) and fixed.is_file()
+                if cfg.get("resume_file") and not use_fixed:
+                    raise RuntimeError(f"resume_file {cfg.get('resume_file')} is missing: not applying with a made-up résumé")
+                files = {"RESUME": (fixed if use_fixed else render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf")),
+                         "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf", name=profile.get("name", ""), contact=profile.get("contact_line", "")))}
+                result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc,
+                                   on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.update(
+                                       _k, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=_a + 1)))))
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
                           cover_path=str(files.get("COVER_LETTER", "")), screenshot=str(d / "form.png"),
                           attempts=row["attempts"] + (0 if dry_run else 1))
+                if status == "applied":
+                    brain.applied_before.add(job.company)
+                    note_success(db, ats)
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
+                note_block(db, ats_of(job), job.company, str(e), today)
                 log(f"    ✗ blocked: {e}")
             except sub.Unconfirmed as e:
-                db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
-                dead.add(ck)
-                log(f"    ? submitted but NOT confirmed (check your inbox; will not retry): {str(e)[:260]}")
+                got = None
+                if mailbox.configured():
+                    got = mailbox.find_confirmation(brain._company_name(job), getattr(e, "t0", 0) or time.time() - 120, 75, log)
+                if got:
+                    db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}", attempts=row["attempts"] + 1)
+                    brain.applied_before.add(job.company)
+                    note_success(db, ats)
+                    log(f"    ✓ applied (the company's confirmation email arrived: {got[:70]!r})")
+                    done += 1
+                else:
+                    db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log(f"    ? submitted but NOT confirmed (will not retry; checked the inbox too): {str(e)[:260]}")
             except sub.Unanswerable as e:
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 log(f"    ✗ skipped: {e}")
             except Exception as e:
-                db.update(job.key, status="failed", reason=str(e).splitlines()[0][:300],
-                          attempts=row["attempts"] + 1)
-                log(f"    ✗ failed: {str(e).splitlines()[0][:200]}")
+                if clicked:          # submit was already clicked: it may have gone through, so never retry it
+                    db.update(job.key, status="unconfirmed", reason=("error after submit click: " + str(e).splitlines()[0])[:300],
+                              attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log(f"    ? submit clicked, then an error: not retrying ({str(e).splitlines()[0][:150]})")
+                else:
+                    db.update(job.key, status="failed", reason=str(e).splitlines()[0][:300],
+                              attempts=row["attempts"] + 1)
+                    log(f"    ✗ failed: {str(e).splitlines()[0][:200]}")
                 if page:
                     try:
                         page.screenshot(path=str(d / "error.png"), full_page=True)
@@ -179,22 +523,48 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
                         pass
             finally:
                 if page:
-                    page.close()
+                    try:
+                        page.close()
+                    except Exception:
+                        pass
+            heartbeat(base)
             if not dry_run:
-                time.sleep(random.uniform(*s.get("delay_seconds", [20, 60])))
+                time.sleep(random.uniform(*s.get("delay_seconds", [3, 10])))
         browser.close()
-    return finish(cfg, db, run_start, log, base, today)
+    return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
 
-def finish(cfg, db, run_start, log, base, today):
+def _resolve_old_unconfirmed(db: DB, brain: Brain, log):
+    """Submits from earlier runs that showed no confirmation: if the company has since emailed 'we received your
+    application', they count as applied."""
+    if not mailbox.configured():
+        return
+    cutoff = datetime.fromtimestamp(time.time() - 5 * 86400).isoformat(timespec="seconds")
+    rows = db.conn.execute("SELECT key, company, title, updated FROM jobs WHERE status='unconfirmed' AND updated >= ?", (cutoff,)).fetchall()
+    if not rows:
+        return
+    names = {r["key"]: brain._company_name(type("J", (), {"company": r["company"], "extra": {}})()) for r in rows}
+    found = mailbox.scan_confirmations(names, time.time() - 5 * 86400)
+    for key, subj in found.items():
+        db.update(key, status="applied", reason=f"confirmed by email: {subj[:100]}")
+        log(f"  ✓ earlier unconfirmed submit is confirmed by the company's email: {subj[:70]!r}")
+
+
+def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     rows = db.since(run_start)
     groups: dict[str, list] = {}
     for r in rows:
         groups.setdefault(r["status"], []).append(r)
-    order = ["applied", "dry_run", "blocked", "skipped", "failed", "queued", "low_score", "filtered"]
+    order = ["applied", "unconfirmed", "manual", "dry_run", "blocked", "skipped", "failed", "queued", "low_score", "filtered"]
     counts = ", ".join(f"{len(groups[k])} {k}" for k in order if k in groups) or "nothing new"
+    manual = notify.manual_rows(rows)
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
-    for k in order[:6]:
+    if manual:
+        lines += [f"## Finish by hand ({len(manual)})", "", "| Score | Role | Company | Why |", "|---:|---|---|---|"]
+        for r in manual:
+            lines.append(f"| {r['score'] or ''} | [{r['title']}]({r['apply_url'] or r['url']}) | {r['company']} | {(r['reason'] or '').replace('|', '/')[:140]} |")
+        lines.append("")
+    for k in order[:7]:
         if k not in groups:
             continue
         lines += [f"## {k.replace('_', ' ').title()} ({len(groups[k])})", "",
@@ -205,25 +575,39 @@ def finish(cfg, db, run_start, log, base, today):
         lines.append("")
     rp = base / "reports" / f"{today}.md"
     rp.parent.mkdir(exist_ok=True)
-    rp.write_text("\n".join(lines))
+    prior = rp.read_text() + "\n\n---\n\n" if rp.exists() else ""
+    rp.write_text(prior + "\n".join(lines))
     log(f"Summary: {counts}. Report: {rp}")
+    for line in site_summary(rows):
+        log(f"  by site{line}")
 
-    hook = (cfg.get("notify") or {}).get("webhook_url")
-    if hook:
-        applied = groups.get("applied", [])
-        text = f"autoapply {today}: {counts}" + "".join(
-            f"\n• {r['title']} @ {r['company']}" for r in applied[:15])
-        try:
-            requests.post(hook, json={"text": text, "content": text}, timeout=10)
-        except Exception as e:
-            log(f"  ! notify failed: {e}")
+    run_url = ""
+    if os.environ.get("GITHUB_RUN_ID") and os.environ.get("GITHUB_REPOSITORY"):
+        run_url = f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+    s = cfg.get("search") or {}
+    footer = f"build {__version__} · {len(db.retryable(s.get('max_attempts', 2)))} good fits still waiting for a later run"
+    if os.environ.get("GITHUB_ACTIONS"):
+        footer += f" · {month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month (before this run)"
+    by_site = site_summary(rows)
+    text = notify.build_text(today, counts, groups, manual, run_url, footer, paused_sites(db, today), by_site)
+    applied_n = len(groups.get("applied", []))
+    n = cfg.get("notify") or {}
+    # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
+    daily_check_in = db.meta_get("last_email_day") != today
+    if not dry_run and (applied_n or manual or groups.get("unconfirmed") or daily_check_in or not n.get("only_if_activity", True)):
+        subject = f"autoapply: {applied_n} applied" + (f", {len(manual)} to finish by hand" if manual else "") + ("" if applied_n or manual else " (running, nothing new to send)")
+        if notify.send_email(cfg, subject, text, log):
+            db.meta_set("last_email_day", today)
+    notify.send_webhook(cfg, text, log)
+    if t_start is not None and os.environ.get("GITHUB_ACTIONS"):
+        add_usage(base, (time.time() - t_start) / 60 + ACTIONS_OVERHEAD_MIN)
     return groups
 
 
 def main():
     ap = argparse.ArgumentParser(prog="autoapply", description="Hands-off job applier")
     ap.add_argument("--config", default="config.yaml")
-    ap.add_argument("--dry-run", action="store_true", help="fill forms and screenshot them, but never submit")
+    ap.add_argument("--dry-run", action="store_true", help="fill forms and screenshot them, but never click submit")
     ap.add_argument("--limit", type=int, help="max applications this run (overrides daily cap if lower)")
     ap.add_argument("--loop", action="store_true", help="run forever: check for new postings every search.loop_minutes")
     a = ap.parse_args()

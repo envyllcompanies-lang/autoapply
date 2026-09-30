@@ -13,26 +13,56 @@ from pathlib import Path
 
 import requests
 
-from .sources import Job, _strip_html, prefilter
+from .sources import Job, _strip_html, prefilter, discover as discover_boards
 
 UA = {"User-Agent": "Mozilla/5.0 (compatible; autoapply/1.0; personal job search)"}
 TIMEOUT = 25
-TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3}
+TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3,
+             "workablejobs": 3}
 
 ATS_RX = {
-    "greenhouse": re.compile(r"(?:boards|job-boards)\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
+    "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
     "lever": re.compile(r"jobs\.lever\.co/([A-Za-z0-9_-]+)"),
     "ashby": re.compile(r"jobs\.ashbyhq\.com/([A-Za-z0-9_.%-]+)"),
+    "workable": re.compile(r"apply\.workable\.com/([A-Za-z0-9_-]+)/(?:j|jobs)/"),
+    "bamboohr": re.compile(r"([A-Za-z0-9-]+)\.bamboohr\.com/(?:careers|jobs)"),
+    "recruitee": re.compile(r"([A-Za-z0-9-]+)\.recruitee\.com/(?:o|l)/"),
+    "breezy": re.compile(r"([A-Za-z0-9-]+)\.breezy\.hr/p/"),
 }
+_NOT_A_BOARD = ("embed", "jobs", "www", "careers", "apply", "app", "api", "j", "static", "assets")
+
+# a link to ONE job on a supported application system (used to skip the browser when an aggregator page already contains it)
+JOB_LINK_RX = re.compile(
+    r"https?://(?:(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=[\w-]+&(?:amp;)?token=\d+|[\w-]+/jobs/\d+)"
+    r"|jobs\.lever\.co/[\w-]+/[0-9a-f-]{36}"
+    r"|apply\.workable\.com/(?:[\w-]+/)?j/\w+"
+    r"|[\w-]+\.bamboohr\.com/careers/\d+"
+    r"|[\w-]+\.recruitee\.com/o/[\w-]+"
+    r"|[\w-]+\.breezy\.hr/p/[\w-]+"
+    r"|[\w-]+\.wd\d+\.myworkdayjobs\.com/[^\s\"'<>\\]+)", re.I)
 
 
 def board_of(url: str):
     """('greenhouse', 'airbnb') when the URL is a job on a supported ATS board, else None."""
     for ats, rx in ATS_RX.items():
         m = rx.search(url or "")
-        if m and m.group(1).lower() not in ("embed", "jobs"):
+        if m and m.group(1).lower() not in _NOT_A_BOARD:
             return ats, m.group(1)
     return None
+
+
+def find_job_link(text: str, final_url: str = "") -> str | None:
+    """First link to a single job on a supported application system found in a page's HTML (or the URL it landed on)."""
+    for src in (final_url, text or ""):
+        m = JOB_LINK_RX.search(src or "")
+        if m:
+            return html_unescape(m.group(0)).rstrip("\\.,;)")
+    return None
+
+
+def html_unescape(u: str) -> str:
+    import html as _h
+    return _h.unescape(u)
 
 
 def _slug(s: str) -> str:
@@ -251,8 +281,37 @@ def jooble(cfg, base="https://jooble.org"):
     return out
 
 
+def workablejobs(cfg, base="https://jobs.workable.com"):
+    """Workable's own public job search (thousands of small and mid-size employers; no key)."""
+    a = cfg.get("aggregators", {}) or {}
+    out, seen = [], set()
+    for q in (a.get("queries") or [])[:12]:
+        for where in (a.get("locations") or []) + [""]:
+            params = {"query": q}
+            if where:
+                params["location"] = where
+            else:
+                params["workplace"] = "remote"
+            try:
+                data = _get(base + "/api/v1/jobs", params=params).json()
+            except Exception:
+                continue
+            for j in data.get("jobs", []) or []:
+                if j.get("id") in seen or j.get("state", "published") != "published":
+                    continue
+                seen.add(j.get("id"))
+                loc = j.get("locations")
+                loc = ", ".join(loc) if isinstance(loc, list) else (loc or "")
+                if str(j.get("workplace", "")).lower() == "remote" and "remote" not in loc.lower():
+                    loc = f"{loc} (Remote)".strip()
+                comp = j.get("company") or {}
+                out.append(_job("workablejobs", comp.get("title"), j.get("id"), j.get("title"), loc, j.get("url", ""),
+                                j.get("description", "") + "\n" + (j.get("requirementsSection") or ""), j.get("url", "")))
+    return out
+
+
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
-            "themuse": themuse, "adzuna": adzuna}
+            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs}
 
 
 # ---------------------------------------------------------------------------------------------- cache + entry point
@@ -292,7 +351,106 @@ def discover_aggregators(cfg: dict, base: Path, log=print) -> list[Job]:
             log(f"  ! agg/{name}: {str(e)[:120]}")
             continue
         jobs.extend(found)
+    try:
+        jobs += _grow_boards(cfg, base, jobs, log)
+    except Exception as e:
+        log(f"  ! board discovery from aggregator listings failed: {str(e)[:100]}")
     return jobs
+
+
+# ---------------------------------------------------------------------------------------------- growing the company list
+_SUFFIX = {"inc", "llc", "corp", "corporation", "co", "company", "group", "holdings", "technologies", "technology", "labs", "ltd",
+           "the", "and", "usa", "us", "services", "solutions", "systems", "international", "global"}
+_PROBE_ATS = ("greenhouse", "lever", "workable")
+_PROBE_URL = {"greenhouse": "https://boards-api.greenhouse.io/v1/boards/{}/jobs",
+              "lever": "https://api.lever.co/v0/postings/{}?mode=json&limit=1",
+              "workable": "https://apply.workable.com/api/v1/widget/accounts/{}"}
+
+
+def slug_variants(name: str) -> list[str]:
+    words = [w for w in re.split(r"[^a-z0-9]+", (name or "").lower()) if w]
+    core = [w for w in words if w not in _SUFFIX] or words
+    out = []
+    for cand in ("".join(words), "".join(core), "-".join(core), "-".join(words), core[0] if core and len(core) <= 2 else ""):
+        if 2 < len(cand) <= 40 and cand not in out:
+            out.append(cand)
+    return out[:4]
+
+
+def _probe(ats: str, token: str) -> bool:
+    try:
+        r = requests.get(_PROBE_URL[ats].format(token), headers=UA, timeout=10)
+        if r.status_code != 200:
+            return False
+        d = r.json()
+        return bool(d.get("jobs") if ats in ("greenhouse", "workable") and isinstance(d, dict) else d)
+    except Exception:
+        return False
+
+
+def _grow_boards(cfg, base, jobs, log) -> list[Job]:
+    """Boards found two ways: (1) an aggregator listing that already links to a supported application system, and (2) the company
+    names on aggregator listings, tried against the Greenhouse / Lever / Workable feeds. New boards are fetched right away and
+    remembered for the next run, so the company list keeps growing by itself."""
+    from concurrent.futures import ThreadPoolExecutor
+    a = cfg.get("aggregators", {}) or {}
+    data = load_boards(base)
+    known = {ats: set(map(str.lower, toks)) for ats, toks in data.items()}
+    for ats, toks in (cfg.get("companies") or {}).items():
+        known.setdefault(ats, set()).update(str(t).split("/")[0].lower() for t in toks or [])
+    new: dict[str, list[str]] = {}
+    for j in jobs:
+        b = board_of(j.apply_url)
+        if b and b[1].lower() not in known.get(b[0], set()):
+            known.setdefault(b[0], set()).add(b[1].lower())
+            new.setdefault(b[0], []).append(b[1])
+    st_path = Path(base) / "boards_state.json"
+    try:
+        state = json.loads(st_path.read_text())
+    except Exception:
+        state = {}
+    probed = state.setdefault("_probed", {})
+    now = time.time()
+    names = {}
+    for j in jobs:
+        nm = (j.extra or {}).get("company_name") or ""
+        if nm and now - probed.get(nm.lower(), 0) > 30 * 86400:
+            names.setdefault(nm.lower(), nm)
+    todo = list(names.values())[: int(a.get("probe_companies_per_run", 80))]
+
+    def try_company(nm):
+        got = {}
+        for ats in _PROBE_ATS:
+            for tok in slug_variants(nm):
+                if tok.lower() in known.get(ats, set()):
+                    got = {}
+                    break
+                if _probe(ats, tok):
+                    got[ats] = tok
+                    break
+        return nm, got
+
+    with ThreadPoolExecutor(max_workers=12) as ex:
+        for nm, got in ex.map(try_company, todo):
+            probed[nm.lower()] = now
+            for ats, tok in got.items():
+                if tok.lower() not in known.get(ats, set()):
+                    known.setdefault(ats, set()).add(tok.lower())
+                    new.setdefault(ats, []).append(tok)
+    try:
+        st_path.write_text(json.dumps(state, indent=0, sort_keys=True))
+    except Exception:
+        pass
+    if not new:
+        return []
+    for ats, toks in new.items():
+        lst = data.setdefault(ats, [])
+        lst += [t for t in toks if t not in lst]
+    (Path(base) / "discovered_boards.json").write_text(json.dumps(data, indent=1))
+    log(f"  found {sum(len(v) for v in new.values())} new company boards from aggregator listings: "
+        + ", ".join(f"{a_}/{t}" for a_, ts in new.items() for t in ts[:8]))
+    skip = {x.lower() for x in ((cfg.get("search") or {}).get("skip_sources") or ["ashby"])}
+    return discover_boards({k: v for k, v in new.items() if k.lower() not in skip}, log, base=base)
 
 
 # ---------------------------------------------------------------------------------------------- discovered boards
@@ -318,7 +476,10 @@ def canon_key(url: str):
     """The DB key an ATS-hosted posting would have (so the same job found twice is applied to once)."""
     for pat, ats in ((r"greenhouse\.io/(?:embed/job_app\?for=)?([\w-]+)(?:/jobs/|&token=)(\d+)", "greenhouse"),
                      (r"jobs\.lever\.co/([\w-]+)/([0-9a-f-]{36})", "lever"),
-                     (r"jobs\.ashbyhq\.com/([\w.%-]+)/([0-9a-f-]{36})", "ashby")):
+                     (r"jobs\.ashbyhq\.com/([\w.%-]+)/([0-9a-f-]{36})", "ashby"),
+                     (r"apply\.workable\.com/([\w-]+)/j/(\w+)", "workable"),
+                     (r"([\w-]+)\.bamboohr\.com/careers/(\d+)", "bamboohr"),
+                     (r"([\w-]+)\.wd\d+\.myworkdayjobs\.com/[^?#]*/job/[^?#]*_([^/?#_]+)(?:[?#]|$)", "workday")):
         m = re.search(pat, url or "")
         if m:
             return f"{ats}:{m.group(1)}:{m.group(2)}"

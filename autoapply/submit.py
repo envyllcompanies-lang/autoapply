@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+import time
 from pathlib import Path
 
 EXTRACT_JS = r"""
@@ -108,8 +109,9 @@ EXTRACT_JS = r"""
 """
 
 SUCCESS_RE = re.compile(
-    r"(thank(s| you) for (applying|your application|submitting)|application (has been |was )?(submitted|received)"
-    r"|we('ve| have) received your application|successfully submitted|your application is in)", re.I)
+    r"(thank(s| you) for (applying|your application|submitting)|application (has been |was )?(submitted|received|sent|complete)"
+    r"|we('ve| have) (successfully )?received your (application|resume|r\u00e9sum\u00e9)|successfully (submitted|applied)|your application is in"
+    r"|you('ve| have) (successfully )?applied|we got your application|your application has been (sent|filed|recorded))", re.I)
 BLOCKERS = [
     ('iframe[src*="recaptcha/api2/bframe"]', "reCAPTCHA challenge"),
     ('iframe[src*="recaptcha/api2/anchor"]', "reCAPTCHA checkbox"),
@@ -127,10 +129,11 @@ class Blocked(Exception):
     pass
 
 
-UNSUPPORTED_ALWAYS = re.compile(r"linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|smartrecruiters\.com/oneclick", re.I)
+UNSUPPORTED_ALWAYS = re.compile(r"linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|ashbyhq\.com|smartrecruiters\.com/oneclick", re.I)
 UNSUPPORTED_NEEDS_ACCOUNT = re.compile(r"myworkdayjobs|\.workday\.com|icims\.com|taleo\.net|successfactors|oraclecloud\.com|"
                                        r"ultipro\.com|ukg\.com|paylocity|paycomonline|brassring|adp\.com", re.I)
 ACCOUNTS_ENABLED = False          # set by main when the ACCOUNT_PASSWORD secret exists
+MAX_APPLY_SECONDS = 480           # main sets this from search.max_minutes_per_job: no single site may eat the run's free minutes
 
 
 class _Unsup:
@@ -151,9 +154,28 @@ def _looks_like_form(page) -> bool:
         return False
 
 
+def resolve_fast(url: str) -> str | None:
+    """Plain HTTP fetch (no browser): many job-board pages already contain the link to the employer's application system."""
+    import requests
+    from .aggregators import find_job_link
+    try:
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                                                     "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"}, timeout=15, allow_redirects=True)
+        if UNSUPPORTED.search(r.url):
+            raise Blocked(f"unsupported application site ({re.search(r'//([^/]+)', r.url).group(1)})")
+        return find_job_link(r.text[:600000], r.url)
+    except Blocked:
+        raise
+    except Exception:
+        return None
+
+
 def resolve_apply_url(page, url: str, log=print) -> str:
     """Follow a job-board / aggregator link to the employer's real application page (max 3 hops)."""
     from .aggregators import board_of
+    fast = resolve_fast(url)
+    if fast:
+        return fast
     page.goto(url, wait_until="domcontentloaded", timeout=30000)
     for _ in range(3):
         page.wait_for_timeout(1500)
@@ -211,6 +233,7 @@ class Unanswerable(Exception):
 
 class Unconfirmed(Exception):
     """Submit was clicked but no confirmation appeared: it may or may not have gone through, so it is never retried."""
+    t0: float = 0.0
 
 
 def guard_ai_policy(page, job):
@@ -235,6 +258,14 @@ def _blocker(page) -> str | None:
     return None
 
 
+def _few_inputs(page) -> bool:
+    """A real confirmation page has (almost) no fields left; a mid-form 'thank you' heading does not count."""
+    try:
+        return page.locator("input[type=text], input[type=email], input[type=file], textarea, select").locator("visible=true").count() < 2
+    except Exception:
+        return True
+
+
 def _has_form(page) -> bool:
     if page.locator("input[type=email], input[type=text], textarea, input[type=file], input[type=password]").count() >= 2:
         return True
@@ -250,6 +281,21 @@ def open_form(page, url: str):
             page.get_by_role("link", name=re.compile(r"^\s*apply", re.I))).first
         if btn.count():
             btn.click()
+            page.wait_for_timeout(2500)
+    if not _has_form(page):
+        # Company-hosted Greenhouse boards embed the form: open the embedded form directly.
+        src = None
+        try:
+            fr = page.locator('iframe[src*="greenhouse.io"]').first
+            if fr.count():
+                src = fr.get_attribute("src")
+        except Exception:
+            pass
+        m = re.search(r"job-boards\.greenhouse\.io/(?:embed/)?([^/?#]+)/jobs/(\d+)", url)
+        if not src and m and "greenhouse.io" not in page.url:
+            src = f"https://job-boards.greenhouse.io/embed/job_app?for={m.group(1)}&token={m.group(2)}"
+        if src:
+            page.goto(src, wait_until="domcontentloaded", timeout=45000)
             page.wait_for_timeout(2500)
     if (b := _blocker(page)):
         raise Blocked(b)
@@ -339,12 +385,14 @@ def _fill_location(page, el, val: str, log):
         log("      ! location box stayed empty (site wants a suggestion picked)")
 
 
-def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=print):
+def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=print, deadline: float | None = None):
     by_id = {f["id"]: f for f in fields}
     for fid, val in answers.items():
         f = by_id.get(fid)
         if f is None or val is None or val == "":
             continue
+        if deadline and time.time() > deadline:
+            raise RuntimeError(f"took longer than {MAX_APPLY_SECONDS // 60} minutes on this site")
         try:
             kind = f["kind"]
             el = page.locator(f'[data-aa="{fid}"]') if not fid.startswith("g_") else None
@@ -476,38 +524,68 @@ def _landing(page) -> bool:
     return False
 
 
-def submit(page, timeout_ms: int = 20000, btn=None) -> str:
+SECURITY_TEXT = re.compile(r"security code|verification code|enter the (\d|six|eight|8|6)[- ]?(character|digit)? ?code", re.I)
+
+
+def _security_prompt(page) -> bool:
+    """A site that answers a submit with 'enter the code we emailed you' is running its own human check."""
+    try:
+        if page.locator('input[id^="security-input"]').locator("visible=true").count() >= 4:
+            return True
+        one = page.locator('input[autocomplete="one-time-code"], input[name*="security" i], input[id*="security" i]')
+        return one.locator("visible=true").count() > 0 and bool(SECURITY_TEXT.search(page.inner_text("body")))
+    except Exception:
+        return False
+
+
+def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     before_url = page.url
     before_hits = len(SUCCESS_RE.findall(page.inner_text("body")))
     if btn is None:
         btn = page.locator("button[type=submit], input[type=submit]").filter(visible=True).last
         if not btn.count():
             btn = page.get_by_role("button", name=re.compile(r"submit|send application|apply", re.I)).last
+    t_click = time.time()
+    if on_click:
+        on_click()                       # write-ahead: from here on, a crash or timeout must never lead to a second submit
     btn.click()
     waited = 0
-    while waited < timeout_ms:
-        page.wait_for_timeout(1000)
-        waited += 1000
-        body = page.inner_text("body")
-        url_says_done = page.url != before_url and re.search(r"thank|confirm|success", page.url, re.I)
-        if len(SUCCESS_RE.findall(body)) > before_hits or url_says_done:
-            return "confirmed"
-        if (b := _blocker(page)):
-            raise Blocked(f"{b} after submit")
-    errs = _page_errors(page)
-    tail = " ".join(page.inner_text("body").split())[-220:]
-    raise Unconfirmed("no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}")
+    try:
+        while waited < timeout_ms:
+            page.wait_for_timeout(1000)
+            waited += 1000
+            body = page.inner_text("body")
+            url_says_done = page.url != before_url and re.search(r"thank|success|submitted|confirmation", page.url, re.I)
+            if len(SUCCESS_RE.findall(body)) > before_hits or url_says_done:
+                return "confirmed"
+            if _security_prompt(page):
+                raise Blocked("the site asked for an emailed security code (its own human check): left for you to finish by hand")
+            if (b := _blocker(page)):
+                raise Blocked(f"{b} after submit")
+        errs = _page_errors(page)
+        tail = " ".join(page.inner_text("body").split())[-220:]
+        msg = "no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}"
+    except (Blocked, Unconfirmed):
+        raise
+    except Exception as ex:              # page closed / navigated away after the click: the submit may have gone through
+        msg = f"no confirmation after submit (page error after click: {str(ex).splitlines()[0][:120]})"
+    e = Unconfirmed(msg)
+    e.t0 = t_click
+    raise e
 
 
-def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None) -> str:
+def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None, on_click=None) -> str:
     """Expects open_form(page, job.apply_url) to have been called already. Handles one-page forms and multi-step wizards
     (with account creation / sign-in when the site needs it)."""
     from . import auth
     start_url = page.url
     total, uploaded, prev_sig, stuck, answered = 0, False, None, 0, {}
+    limit_at = time.time() + MAX_APPLY_SECONDS
     for step in range(1, MAX_STEPS + 1):
+        if time.time() > limit_at:
+            raise RuntimeError(f"took longer than {MAX_APPLY_SECONDS // 60} minutes on this site")
         page.wait_for_timeout(600)
-        if SUCCESS_RE.search(page.inner_text("body")) and step > 1:
+        if step > 1 and SUCCESS_RE.search(page.inner_text("body")) and _few_inputs(page):
             return "confirmed"
         if (b := _blocker(page)):
             raise Blocked(b)
@@ -541,10 +619,17 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                     log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
             raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
         if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
-            letter_txt = brain.lazy_letter(job)              # only written when the form REQUIRES a cover letter
-            (shot.parent / "cover_letter.txt").write_text(letter_txt)
-            files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
-        fill(page, fields, plan["answers"], files, log)
+            letter_txt = brain.lazy_letter(job)              # a full one-page letter, written only when a form has a cover-letter upload
+            if letter_txt:
+                (shot.parent / "cover_letter.txt").write_text(letter_txt)
+                files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
+            else:
+                need = [f for f in fields if plan["answers"].get(f["id"]) == "COVER_LETTER" and f.get("required")]
+                if need:
+                    raise Unanswerable("form requires a cover letter and a full, truthful one could not be written")
+                plan["answers"] = {k: v for k, v in plan["answers"].items() if v != "COVER_LETTER"}   # optional: apply without one
+                log("      (no full cover letter could be written; it is optional, applying with the résumé only)")
+        fill(page, fields, plan["answers"], files, log, deadline=limit_at)
         verify(page, fields, plan["answers"], log)
         uploaded = uploaded or any(f["kind"] == "file" for f in fields)
         btn, kind = _find_advance(page)
@@ -560,7 +645,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if dry_run:
                 return "dry_run"
             try:
-                result = submit(page, btn=btn)
+                result = submit(page, btn=btn, on_click=on_click)
             except Unconfirmed:
                 page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
                 raise

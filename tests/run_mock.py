@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT.parent))
 work = ROOT / "work"; shutil.rmtree(work, ignore_errors=True); (work / "site").mkdir(parents=True)
 
-SUBS, CALLS = [], {}
+SUBS, CALLS, HITS = [], {}, {}
 CLEAN = ("Capitol Edge is the clearest example: I built it alone, about 6,000 lines of production code, and I keep it "
          "running. I like ops work where the process is the product, and this role looks like that.")
 FAB = "I raised revenue 45% at Otto's and ran it all in Rippling. This role is the same kind of work."
@@ -28,6 +28,7 @@ class H(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *a, **k): super().__init__(*a, directory=str(work / "site"), **k)
     def log_message(self, *a): pass
     def do_GET(self):
+        HITS[self.path.split("?")[0]] = HITS.get(self.path.split("?")[0], 0) + 1
         if self.path.startswith("/thanks.html"):
             SUBS.append({k: v[0] for k, v in urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).items()})
         super().do_GET()
@@ -54,9 +55,9 @@ def radio(name, legend, opts=("Yes", "No")):
     r = "".join(f'<label><input type="radio" name="{name}" value="{x}"{" required" if i == 0 else ""}> {x}</label>' for i, x in enumerate(opts))
     return f"<fieldset><legend>{legend}</legend>{r}</fieldset>"
 
-def page(tag, essay="Why do you want to work at Acme? (max 400 characters) *", top="", extra=""):
+def page(tag, essay="Why do you want to work at Acme? (max 400 characters) *", top="", extra="", action="thanks.html"):
     (work / "site" / f"{tag}.html").write_text(f"""<!doctype html><html><body><h1>Operations Associate — Acme</h1>{top}
-<form id="application-form" action="thanks.html" method="get"><input type="hidden" name="tag" value="{tag}">
+<form id="application-form" action="{action}" method="get"><input type="hidden" name="tag" value="{tag}">
 <div><label for="first_name">First Name *</label><input id="first_name" name="first_name" required></div>
 <div><label for="last_name">Last Name *</label><input id="last_name" name="last_name" required></div>
 <div><label for="email">Email *</label><input id="email" type="email" name="email" required></div>
@@ -107,6 +108,15 @@ page("aggform")
 page("fail", essay="Tell me about a time you failed or had a conflict at work. *")
 page("noai", top="<p>Please do not use AI tools to write your application.</p>")
 page("captcha", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
+page("sec", action="secure.html")                      # answers the submit with an emailed-security-code prompt
+(work / "site" / "secure.html").write_text("<!doctype html><html><body><h2>Security code</h2><p>Enter the 8-character code that was sent to your email.</p>"
+    + "".join(f'<input id="security-input-{i}" maxlength="1" style="width:30px">' for i in range(8)) + "</body></html>")
+page("unclearA", action="unclear_done.html"); page("unclearB", action="unclear_done.html")   # submit shows no confirmation
+(work / "site" / "unclear_done.html").write_text("<!doctype html><html><body><p>Working on it...</p></body></html>")
+for i in range(1, 5): page(f"cap{i}")
+page("stub")
+for i in range(1, 6): page(f"gate{i}", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
+page("gateok")
 
 (work / "site" / "wizard.html").write_text("""<!doctype html><html><body><h1>Program Coordinator — Acme</h1>
 <div id="auth-create" style="display:none"><h2>Create Account</h2>
@@ -164,11 +174,11 @@ import autoapply.writer as _W; _W._USAGE_FILE = work / "usage.json"
 from autoapply import main as M
 from autoapply.sources import Job
 B = "http://127.0.0.1:8765/"; GOOD = "Remote. You will drive process improvement using Excel and SQL, coordinate vendor work and build dashboards. 2 years of experience."
-def J(i, title, page_, desc=GOOD, loc="Remote"): return Job("greenhouse", "acme", str(i), title, loc, B + page_, B + page_, desc)
-M.discover = lambda companies, log=print: [
+def J(i, title, page_, desc=GOOD, loc="Remote", co="acme", src="greenhouse"): return Job(src, co, str(i), title, loc, B + page_, B + page_, desc)
+M.discover = lambda companies, log=print, base=None: [
     J(1, "Operations Associate", "main.html"),
     J(2, "Operations Manager", "main.html", "Requires 8+ years of experience in operations. Security clearance required."),
-    J(3, "Operations Analyst", "captcha.html", loc="Denver, CO"),
+    J(3, "Operations Analyst", "captcha.html", loc="Denver, CO", co="captchaco"),
     J(4, "Business Analyst", "unknown.html"),
     J(5, "Business Analyst", "fail.html"),
     J(6, "Supply Chain Analyst", "noai.html", GOOD + " Please do not use AI tools to write your application."),
@@ -177,12 +187,21 @@ M.discover = lambda companies, log=print: [
     J(9, "Operations Coordinator", "reloc_no.html", loc="Chicago, United States"),
     J(10, "Project Coordinator", "reloc_yes.html", loc="New York, NY"),
     J(11, "Operations Associate", "main.html", GOOD + " Pay range: $45,000 - $55,000 per year."),
-    J(12, "Program Coordinator", "wizard.html"),
+    J(12, "Program Coordinator", "wizard.html", co="wizco"),
+    J(13, "Operations Associate", "sec.html", co="secco"),                 # emailed security code -> left for the user
+    J(14, "Operations Analyst", "unclearA.html", co="confirmco"),          # no confirmation page, but the company emails one
+    J(15, "Operations Analyst", "unclearB.html", co="unconfco"),           # no confirmation anywhere
+    J(16, "Operations Associate", "cap1.html", co="capco"),
+    J(17, "Operations Coordinator", "cap2.html", co="capco"),
+    J(18, "Project Coordinator", "cap3.html", co="capco"),
+    J(19, "Program Coordinator", "cap4.html", co="capco"),                 # 4th at one employer: over the cap of 3
+    J(20, "Operations Associate", "main.html", co="ashco", src="ashby"),   # Ashby: listed for the user, never submitted
 ]
 
 cfg = yaml.safe_load((ROOT.parent / "config.yaml").read_text())
 cfg["aggregators"] = {"enabled": True, "sources": ["remoteok"], "base_urls": {"remoteok": B + "remoteok"}, "queries": [], "locations": []}
 cfg["facts"]["city"] = "Glenwood Springs"; cfg["search"]["delay_seconds"] = [0, 0]
+cfg["search"]["per_run_cap"] = 50; cfg["search"]["max_per_company"] = 3; cfg["search"]["manual_sources"] = ["ashby"]
 cfg["writer"]["providers"] = [
     {"name": "modelfix", "base_url": B + "modelfix", "model": ["old", "new"], "api_key_env": "TESTKEY", "rpm": 1000, "rpd": 1},
     {"name": "bad", "base_url": B + "bad", "model": "m", "api_key_env": "TESTKEY", "rpm": 1000},
@@ -193,8 +212,14 @@ os.environ["TESTKEY"] = "x"; os.environ["ACCOUNT_PASSWORD"] = "Test-Pass-123!"
 import autoapply.mailbox as _MB
 _MB.configured = lambda: True
 _MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": None}
+_MB.find_confirmation = lambda name, since, timeout=90, log=print: "Thanks for applying to Acme!" if name.lower().startswith("confirmco") else None
+_MB.scan_confirmations = lambda companies, since_ts, n=60: {}
+MAILS = []
+M.notify.send_email = lambda cfg, subject, text, log=print: MAILS.append((subject, text)) or True
 cfg["accounts"] = {"enabled": True, "email": "delgado@alumni.usc.edu", "create_in_dry_run": False}
-for f in ("profile.yaml", "about_me.md"): shutil.copy(ROOT.parent / f, work / f)
+for f in ("profile.yaml", "about_me.md", "briandelgado_resume.pdf"): shutil.copy(ROOT.parent / f, work / f)
+cfg["cover_letters"] = True          # the cover-letter scenarios need them on; a separate check below covers "off"
+cfg["writer"]["cover_letter_min_words"] = 0
 
 # 1) a leftover template placeholder must stop the run
 prof = (work / "profile.yaml").read_text(); (work / "profile.yaml").write_text(prof + "\n# <TODO fill me>\nnote: '<TODO fill me>'\n")
@@ -205,14 +230,32 @@ except SystemExit as e:
     print("PLACEHOLDER GUARD OK ->", str(e).splitlines()[1].strip())
 (work / "profile.yaml").write_text(prof)
 
-# 2) real run
+# 2) real run. A queued Workday posting that this run's search does not return must still be tried (big sites only show the newest hits)
+from autoapply.db import DB as _DB
+_d = _DB(str(work / "applications.db"))
+_d.add(Job("workday", "stubco", "R-77", "Operations Associate", "Remote", B + "stub.html", B + "stub.html", ""), "queued", score=80, reason="earlier run")
+_d.conn.close()
 M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied"}
-if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run"})
+exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied",
+       "13": "blocked", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "20": "manual", "R-77": "applied"}
+if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
+                                    "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-77": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
+if "--dry" not in sys.argv:
+    if "security code" not in (rows["13"][2] or ""): problems.append(f"security-code job reason: {rows['13'][2]!r}")
+    if not (rows["14"][2] or "").startswith("confirmed by email"): problems.append(f"emailed confirmation not used: {rows['14'][2]!r}")
+    if "over" not in (rows["19"][2] or "") and "already applied to 3 roles" not in (rows["19"][2] or ""): problems.append(f"per-company cap reason: {rows['19'][2]!r}")
+    if "apply by hand" not in (rows["20"][2] or ""): problems.append(f"manual source reason: {rows['20'][2]!r}")
+    if not MAILS: problems.append("no summary email was sent")
+    else:
+        subj, body = MAILS[-1]
+        for want in ("APPLIED", "FINISH BY HAND", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "security code", "Ashco"):
+            if want.lower() not in body.lower(): problems.append(f"summary email lacks {want!r}")
+        if "applied" not in subj: problems.append(f"summary subject: {subj!r}")
+        print("\nSUMMARY EMAIL SUBJECT:", subj)
 
 if "--dry" not in sys.argv:
     by = {s["tag"]: s for s in SUBS}
@@ -232,6 +275,7 @@ if "--dry" not in sys.argv:
             "trans": "No", "orient": "Heterosexual/Straight", "vet": "I am not a protected veteran", "consent": "on"}
     problems += [f"main.{k}={main.get(k)!r} expected {v!r}" for k, v in want.items() if main.get(k) != v]
     if not main.get("disab", "").startswith("No, I do not have"): problems.append(f"disab={main.get('disab')!r}")
+    if "stub" not in by: problems.append("a queued posting missing from this run's search was not attempted")
     if "aggform" not in by or by["aggform"].get("first_name") != "Brian": problems.append("aggregator job was not followed to its form and applied")
     if "aicert" in main: problems.append("ticked the 'I did not use AI' checkbox (must never)")
     if not main.get("why") or len(main["why"]) > 400 or "6,000" not in main["why"]: problems.append(f"why={main.get('why')!r}")
@@ -244,5 +288,47 @@ if "--dry" not in sys.argv:
     d = next((work / "applications").glob("*/acme-operations-associate"))
     print("\n--- resume.md (first 30 lines) ---\n" + "\n".join((d / "resume.md").read_text().splitlines()[:30]))
     print("\n--- cover_letter.txt ---\n" + ((d / "cover_letter.txt").read_text() if (d / "cover_letter.txt").exists() else "(none written: form did not require one)"))
+# 4) a site whose human check keeps stopping the bot is paused: its remaining jobs are listed for you, not attempted
+cfg2 = copy.deepcopy(cfg); cfg2["db"] = "gate.db"; cfg2["aggregators"] = {"enabled": False}
+(work / "config2.yaml").write_text(yaml.safe_dump(cfg2))
+M.discover = lambda companies, log=print, base=None: [J(f"g{i}", "Operations Associate", f"gate{i}.html", co=f"gateco{i}", src="lever") for i in range(1, 6)] + \
+    [J("ok", "Operations Associate", "gateok.html", co="okco", src="workable")]
+n_mail = len(MAILS)
+M.run(str(work / "config2.yaml"), dry_run="--dry" in sys.argv)
+g = {r[0].split(":")[-1]: r[1:] for r in sqlite3.connect(work / "gate.db").execute("select key,status,score,reason from jobs")}
+blocked = [k for k in g if k.startswith("g") and k != "ok" and g[k][0] == "blocked"]
+paused = [k for k in g if k.startswith("g") and k != "ok" and g[k][0] == "manual"]
+if len(blocked) != 3 or len(paused) != 2: problems.append(f"human-check pause: {len(blocked)} blocked and {len(paused)} listed instead (want 3 and 2): {g}")
+for k in paused:
+    if HITS.get(f"/gate{k[1:]}.html"): problems.append(f"paused site's form {k} was still opened")
+    if "paused" not in (g[k][2] or ""): problems.append(f"paused reason for {k}: {g[k][2]!r}")
+for k in blocked:
+    if not HITS.get(f"/gate{k[1:]}.html"): problems.append(f"blocked job {k} was never tried")
+if g.get("ok", ("",))[0] != ("dry_run" if "--dry" in sys.argv else "applied"): problems.append(f"another site was held back by the pause: {g.get('ok')}")
+if "--dry" not in sys.argv:
+    if len(MAILS) <= n_mail or "PAUSED SITES" not in MAILS[-1][1] or "lever" not in MAILS[-1][1]: problems.append("summary email does not mention the paused site")
+
+# 3) one stuck site cannot use up the run: the per-application time cap stops both the wizard loop and the field filler
+import time as _t
+from playwright.sync_api import sync_playwright as _sp
+import autoapply.submit as _S
+with _sp() as _p:
+    _b = _p.chromium.launch(headless=True); _pg = _b.new_page(); _pg.goto(B + "main.html")
+    _old = _S.MAX_APPLY_SECONDS; _S.MAX_APPLY_SECONDS = -1
+    try:
+        _S.apply(_pg, None, None, "", {}, work / "x.png", True)
+        problems.append("apply() ignored the per-application time cap")
+    except RuntimeError as e:
+        if "took longer" not in str(e): problems.append(f"time cap message: {e}")
+    finally:
+        _S.MAX_APPLY_SECONDS = _old
+    _f = _S.extract(_pg)
+    try:
+        _S.fill(_pg, _f, {_f[0]["id"]: "x"}, {}, print, deadline=_t.time() - 1)
+        problems.append("fill() ignored its deadline")
+    except RuntimeError:
+        pass
+    _b.close()
+
 print("\nRESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

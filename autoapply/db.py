@@ -45,6 +45,14 @@ class DB:
         self.conn.commit()
         return cur.rowcount
 
+    def meta_get(self, k: str, default: str = "") -> str:
+        row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
+        return row[0] if row else default
+
+    def meta_set(self, k: str, v: str):
+        self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES (?, ?)", (k, v))
+        self.conn.commit()
+
     def seen(self, key: str) -> bool:
         return self.conn.execute("SELECT 1 FROM jobs WHERE key=?", (key,)).fetchone() is not None
 
@@ -67,7 +75,7 @@ class DB:
 
     def applied_today(self) -> int:
         return self.conn.execute(
-            "SELECT COUNT(*) FROM jobs WHERE status='applied' AND updated LIKE ?",
+            "SELECT COUNT(*) FROM jobs WHERE status IN ('applied','unconfirmed') AND updated LIKE ?",
             (date.today().isoformat() + "%",)).fetchone()[0]
 
     def retryable(self, max_attempts: int):
