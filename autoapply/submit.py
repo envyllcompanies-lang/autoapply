@@ -272,31 +272,142 @@ def _has_form(page) -> bool:
     return ACCOUNTS_ENABLED and page.get_by_role("button", name=re.compile(r"apply manually", re.I)).count() > 0
 
 
+COOKIE_BTN = re.compile(r"^\s*(accept( all)?( cookies)?|allow all( cookies)?|i accept|agree|got it|ok(ay)?|close|dismiss)\s*$", re.I)
+OPEN_BTN = re.compile(r"^\s*(apply( now| here| today| online| for (this|the) (job|position|role)| to (this|the) (job|position|role))?"
+                      r"|start( your)? application|begin application|i'?m interested|apply manually|continue to application)\s*[>\u2192]?\s*$", re.I)
+KNOWN_FRAMES = re.compile(r"greenhouse\.io|lever\.co|workable\.com|bamboohr\.com|recruitee\.com|breezy\.hr|smartrecruiters|icims|jobvite|applytojob|"
+                          r"paylocity|ultipro|myworkdayjobs|teamtailor|personio|rippling|gusto|comeet|jazzhr|zohorecruit|freshteam", re.I)
+
+
+def _dismiss_cookies(page):
+    try:
+        for role in ("button", "link"):
+            b = page.get_by_role(role, name=COOKIE_BTN).locator("visible=true")
+            if b.count():
+                b.first.click(timeout=2000)
+                page.wait_for_timeout(400)
+                return
+    except Exception:
+        pass
+
+
+def _rewrite_ats_url(url: str) -> str | None:
+    """Listing URLs that show the description first, where the form lives at a known sub-path."""
+    if re.search(r"jobs\.lever\.co/[\w-]+/[0-9a-f-]{36}/?(\?.*)?$", url, re.I):
+        return re.sub(r"/?(\?.*)?$", "/apply", url, count=1)
+    if re.search(r"apply\.workable\.com/(?:[\w-]+/)?j/\w+/?$", url, re.I):
+        return url.rstrip("/") + "/apply/"
+    if re.search(r"\.bamboohr\.com/careers/\d+/?$", url, re.I):
+        return url  # the page itself carries an Apply button handled below
+    return None
+
+
+def _open_by_button(page) -> bool:
+    """Click an Apply-style button/link. A link with a real address is followed in this tab; a popup's address is loaded here too."""
+    for role in ("link", "button"):
+        loc = page.get_by_role(role, name=OPEN_BTN).locator("visible=true")
+        for i in range(min(loc.count(), 3)):
+            el = loc.nth(i)
+            try:
+                href = el.get_attribute("href") if role == "link" else None
+                if href and href.startswith(("http://", "https://")):
+                    page.goto(href, wait_until="domcontentloaded", timeout=45000)
+                    page.wait_for_timeout(2500)
+                    return True
+                if href and href.startswith(("mailto:", "tel:")):
+                    continue
+                before = page.url
+                try:
+                    with page.context.expect_page(timeout=3500) as pi:
+                        el.click(timeout=5000)
+                    newp = pi.value
+                    newp.wait_for_load_state("domcontentloaded")
+                    target = newp.url
+                    newp.close()
+                    if target and target not in ("about:blank", before):
+                        page.goto(target, wait_until="domcontentloaded", timeout=45000)
+                except Exception:
+                    page.wait_for_timeout(1200)          # no popup: the click changed this page
+                page.wait_for_timeout(2500)
+                return True
+            except Exception:
+                continue
+    return False
+
+
+def _open_embedded(page, url: str) -> bool:
+    """A form embedded in an iframe (company career pages embedding Greenhouse, Lever, Workable ...): load the iframe itself."""
+    try:
+        for fr in page.locator("iframe[src]").all():
+            src = fr.get_attribute("src") or ""
+            if not src.startswith(("http://", "https://")) or re.search(r"recaptcha|hcaptcha|challenges\.cloudflare|doubleclick|youtube|vimeo|google", src, re.I):
+                continue
+            if KNOWN_FRAMES.search(src):
+                page.goto(src, wait_until="domcontentloaded", timeout=45000)
+                page.wait_for_timeout(2500)
+                return True
+        for f in page.frames[1:]:               # any other frame that itself holds a form
+            try:
+                if f.url.startswith("http") and f.locator("input[type=file], input[type=email]").count() and \
+                        f.locator("input:visible, textarea:visible").count() >= 3 and not re.search(r"recaptcha|hcaptcha|challenges", f.url, re.I):
+                    page.goto(f.url, wait_until="domcontentloaded", timeout=45000)
+                    page.wait_for_timeout(2500)
+                    return True
+            except Exception:
+                continue
+    except Exception:
+        pass
+    m = re.search(r"job-boards\.greenhouse\.io/(?:embed/)?([^/?#]+)/jobs/(\d+)", url)
+    gh = re.search(r"[?&]gh_jid=(\d+)", page.url)
+    board = re.search(r"greenhouse\.io/(?:embed/job_app\?for=)?([\w-]+)", page.content()[:400000])
+    if m and "greenhouse.io" not in page.url:
+        page.goto(f"https://job-boards.greenhouse.io/embed/job_app?for={m.group(1)}&token={m.group(2)}", wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(2500)
+        return True
+    if gh and board and "greenhouse.io" not in page.url:
+        page.goto(f"https://job-boards.greenhouse.io/embed/job_app?for={board.group(1)}&token={gh.group(1)}", wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(2500)
+        return True
+    return False
+
+
 def open_form(page, url: str):
+    """Open the page and get to the actual application form, whichever way the link is built: the form itself, a description page
+    with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added."""
     page.goto(url, wait_until="domcontentloaded", timeout=45000)
     page.wait_for_timeout(2500)
-    if not _has_form(page):
-        # Some boards show the description first with an "Apply" button.
-        btn = page.get_by_role("button", name=re.compile(r"^\s*apply", re.I)).or_(
-            page.get_by_role("link", name=re.compile(r"^\s*apply", re.I))).first
-        if btn.count():
-            btn.click()
-            page.wait_for_timeout(2500)
-    if not _has_form(page):
-        # Company-hosted Greenhouse boards embed the form: open the embedded form directly.
-        src = None
-        try:
-            fr = page.locator('iframe[src*="greenhouse.io"]').first
-            if fr.count():
-                src = fr.get_attribute("src")
-        except Exception:
-            pass
-        m = re.search(r"job-boards\.greenhouse\.io/(?:embed/)?([^/?#]+)/jobs/(\d+)", url)
-        if not src and m and "greenhouse.io" not in page.url:
-            src = f"https://job-boards.greenhouse.io/embed/job_app?for={m.group(1)}&token={m.group(2)}"
-        if src:
-            page.goto(src, wait_until="domcontentloaded", timeout=45000)
-            page.wait_for_timeout(2500)
+    _dismiss_cookies(page)
+    tried = set()
+    for _ in range(4):
+        if _has_form(page):
+            break
+        if (b := _blocker(page)):
+            raise Blocked(b)
+        moved = False
+        for name, step in (("rewrite", None), ("button", _open_by_button), ("frame", None)):
+            if name in tried:
+                continue
+            tried.add(name) if name != "button" else None
+            try:
+                if name == "rewrite":
+                    alt = _rewrite_ats_url(page.url)
+                    if alt and alt != page.url:
+                        page.goto(alt, wait_until="domcontentloaded", timeout=45000)
+                        page.wait_for_timeout(2500)
+                        moved = True
+                elif name == "button":
+                    moved = _open_by_button(page)
+                else:
+                    moved = _open_embedded(page, url)
+            except Blocked:
+                raise
+            except Exception:
+                moved = False
+            if moved:
+                _dismiss_cookies(page)
+                break
+        if not moved:
+            break
     if (b := _blocker(page)):
         raise Blocked(b)
     if not _has_form(page):

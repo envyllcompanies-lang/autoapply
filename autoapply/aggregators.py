@@ -377,6 +377,35 @@ def slug_variants(name: str) -> list[str]:
     return out[:4]
 
 
+def _tnorm(t: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", (t or "").lower()).strip()
+
+
+def direct_apply_url(job, log=print) -> str | None:
+    """When an aggregator listing has no usable link (JS-only pages), look the company up on the Workable / Greenhouse / Lever
+    feeds by name and take the application link of the posting with the same title."""
+    from . import sources
+    name = (job.extra or {}).get("company_name") or job.company
+    want = _tnorm(job.title)
+    tried = set()
+    for slug in slug_variants(name) + [job.company]:
+        for ats in ("workable", "greenhouse", "lever"):
+            if (ats, slug) in tried or not slug:
+                continue
+            tried.add((ats, slug))
+            try:
+                found = sources.FETCHERS[ats](slug)
+            except Exception:
+                continue
+            same = [j for j in found if _tnorm(j.title) == want]
+            if same:
+                loc = (job.location or "").lower()
+                same.sort(key=lambda j: 0 if loc and loc.split(",")[0] in (j.location or "").lower() else 1)
+                log(f"    found the employer's own posting on {ats}/{slug}")
+                return same[0].apply_url
+    return None
+
+
 def _probe(ats: str, token: str) -> bool:
     try:
         r = requests.get(_PROBE_URL[ats].format(token), headers=UA, timeout=10)

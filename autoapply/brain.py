@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 from .sources import norm_location, level_title
@@ -27,7 +28,7 @@ NA_RX = re.compile(
     r"professional licen[sc]e|certification number|license number", re.I)
 DECLINE = re.compile(r"decline|prefer not|prefer to not|do not wish|don'?t wish|do not want|don'?t want|"
                      r"not to (say|answer|disclose|self)|choose not|rather not", re.I)
-CONSENT = re.compile(r"agree|acknowledge|consent|certify|confirm|accept|privacy|terms|policy|true and (correct|accurate)", re.I)
+CONSENT = re.compile(r"agree|acknowledge|consent|certify|confirm|accept|privacy|terms|policy|true and (correct|accurate)|\bunderstand\b|\battest\b|\baffirm\b|\bdeclare\b", re.I)
 OPTIONAL_CHECK = re.compile(r"marketing|newsletter|updates|receive|sms|text message|future (roles|opportunities)|talent (pool|community)", re.I)
 AI_WORDS = re.compile(r"\b(ai|a\.i\.|chatgpt|generative|llm|artificial intelligence)\b", re.I)
 PROMPT_RX = re.compile(
@@ -41,9 +42,10 @@ LEGAL_RX = re.compile(r"arbitrat|waive|jury|non-?compete|non-?solicit|indemnif|r
 AI_POLICY_RX = re.compile(r"\bai\b.{0,25}\b(policy|guidelines?|statement)\b|\b(policy|guidelines?)\b.{0,40}\b(use of |using )?(ai|artificial intelligence)\b|"
                           r"use of (ai|artificial intelligence) (in|during) (the )?(application|hiring|interview)", re.I)
 QUALIFY_CERT_RX = re.compile(r"minimum (basic )?qualifications|meet (all )?the (basic|minimum|required)|possess (all )?(of )?the required", re.I)
-ACK_RX = re.compile(r"acknowledg|i agree|certif|privacy (policy|notice|statement)|terms (of|and)|true and (correct|accurate|complete)|"
+ACK_RX = re.compile(r"acknowledg|i agree|\b(i|we|hereby) certify\b|certify (that|the|this)|privacy (policy|notice|statement)|terms (of|and)|true and (correct|accurate|complete)|"
                     r"read and (understand|agree)|have read", re.I)
-ACK_OPT_RX = re.compile(r"^\W*(i )?(acknowledge|agree|accept|confirm|understand|consent|certify|have read)|acknowledge", re.I)
+ACK_OPT_RX = re.compile(r"^\W*(i )?(acknowledge|agree|accept|confirm|understand|consent|certify|have read)|acknowledge|\b(agree|consent|accept|understand|have read|certify)\b", re.I)
+ACK_NEG_RX = re.compile(r"\b(do not|don't|dont|decline|disagree|withhold|refuse|opt[- ]out|no,)\b|\bnot\b", re.I)
 RESIDE_RX = re.compile(r"\b(reside|resident|residing|live in|living in|located in|located within|based in|currently (live|located|based)|"
                        r"are you (a )?local|commuting distance|do you live|metro area)\b", re.I)
 HOME_TERMS = ("new castle", "garfield county", "glenwood", "carbondale", "rifle", "silt", "aspen", "roaring fork", "western slope")
@@ -81,6 +83,7 @@ FIELD_RULES = [
     (r"zip|postal", ("zip",), None),
     (r"country of birth|birth country|place of birth|where (were you|are you) born", ("country_of_birth",), None),
     (r"country of (citizenship|origin)|nationality|citizen of which", ("country_of_citizenship",), None),
+    (r"^\W*(city|town|city ?/ ?town|city or town)\W*$", ("city",), None),
     (r"\bcity\b|where are you (located|based)|current location|\blocation\b|where do you (live|reside)", ("location_text", "city"), None),
     (r"\bstate\b|province|region", ("state",), None),
     (r"\bcountry\b", ("country",), None),
@@ -127,7 +130,7 @@ FIELD_RULES = [
     (r"speak spanish|spanish.{0,40}(fluen|proficien|speak|skills|language)|bilingual|language skills", ("speaks_spanish",), None),
     (r"languages? (do you )?(speak|spoken|proficien)|fluent in", ("languages",), None),
     (r"\bgpa\b|grade point", ("gpa",), None),
-    (r"highest (level of )?(education|degree)|level of education|education level", ("education_level",), None),
+    (r"highest (level of )?(\w+ )?(education|degree)|level of (\w+ )?education|education level", ("education_level",), None),
     (r"\b(school|university|college|institution)\b", ("school",), None),
     (r"degree|diploma", ("degree",), None),
     (r"\bmajor\b|field of study|discipline", ("major",), None),
@@ -189,6 +192,7 @@ def pick_option(options: list[str], want) -> str | None:
     return None
 
 
+HUMAN_CHECK_RX = re.compile(r"not a robot|i'?m (a )?human|are you (a )?human|prove you|captcha|verify (that )?you are (a )?(human|person)|human verification", re.I)
 NEG_Q_RX = re.compile(r"\b(not|unable|cannot|can't|cant|won't|no longer|never)\b|n't\b", re.I)
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
 
@@ -208,7 +212,8 @@ class Brain:
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))
                         for a in cfg.get("answers", []) or []]
-        self.skills = [s.lower() for g in profile.get("skills", []) or [] for s in g["items"]]
+        self.skills_raw = [s.lower() for g in profile.get("skills", []) or [] for s in g["items"]]
+        self.skills = [re.sub(r"\s*\(.*?\)", "", s.lower()).strip() for g in profile.get("skills", []) or [] for s in g["items"]]
         self.applied_before: set[str] = set()      # company slugs this bot already applied to (set by main from the database)
         self._refuse_unfinished_setup(base)
         w = cfg.get("writer", {}) or {}
@@ -442,7 +447,7 @@ class Brain:
     def map_fields(self, job, fields: list[dict], cover_letter: str) -> dict:
         self._job = job
         answers, missing = {}, []
-        ctx = dict(company=self._company_name(job), role=job.title)
+        ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
         for fld in fields:
             val = self._answer(fld, cover_letter, ctx)
             if val is None:
@@ -452,13 +457,14 @@ class Brain:
                 answers[fld["id"]] = val
         return {"answers": answers, "unanswerable_required": missing}
 
-    def _location_ok(self) -> bool:
+    def _location_ok(self, label: str = "") -> bool:
         """True when the job is remote or in a place listed in facts.relocation_ok_locations."""
         loc = norm_location(self._job.location if self._job else "")
-        if not loc or "remote" in loc:
+        if not loc or "remote" in loc or re.fullmatch(r"(united states|usa|us|u\.s\.a?\.?|united states of america|anywhere|nationwide)( \(.*\))?", loc.strip()):
             return True
         ok = [str(x).lower() for x in self.facts.get("relocation_ok_locations", []) or []]
-        return "*" in ok or any(x in loc for x in ok)
+        lab = norm_location(label)
+        return "*" in ok or any(x in loc for x in ok) or bool(lab and any(re.search(r"(?<![\w-])" + re.escape(x) + r"(?![\w-])", lab) for x in ok))
 
     @staticmethod
     def _nums(text: str) -> list[float]:
@@ -505,6 +511,8 @@ class Brain:
         kind = f["kind"]
         text = f"{f.get('label', '')} {f.get('question', '')}".strip()
         low = text.lower()
+        if HUMAN_CHECK_RX.search(low):
+            return None          # "I'm not a robot" style boxes are the site's human check: never ticked by the bot
         has_opts = kind in ("select", "radio", "combobox", "checkbox_group")
         opts = f.get("options") or []
 
@@ -523,6 +531,8 @@ class Brain:
         for rx, ans, only_opts in self.answers:
             if rx.search(low) and (has_opts or not only_opts):
                 ans = ans.format_map(_Safe(ctx))
+                if re.fullmatch(r"\d+(?:\.\d+)?", ans.strip()) and self._names_unlisted_tool(text):
+                    ans = "0"          # 'years of experience with <a tool that is not on the résumé>': the truthful number is zero
                 if has_opts and re.fullmatch(r"\d+(?:\.\d+)?", ans.strip()):
                     got = self._years_option(low, opts, float(ans), kind)     # '3+ years?' Yes/No, or a '3-5 years' bucket
                 else:
@@ -564,7 +574,7 @@ class Brain:
                     continue
                 if mode == "choice" and not has_opts:
                     continue
-                if mode == "loc" and not self._location_ok():
+                if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
                 val = self._fact(keys)
                 if mode == "travel" and has_opts:
@@ -600,7 +610,7 @@ class Brain:
 
         # acknowledgements / certifications that the information given is true (never legal waivers, AI or qualification claims)
         if has_opts and ACK_RX.search(low) and not (OPTIONAL_CHECK.search(low) or AI_WORDS.search(low)):
-            got = next((o for o in opts if ACK_OPT_RX.search(o)), None) or pick_option(opts, "Yes")
+            got = next((o for o in opts if ACK_OPT_RX.search(o) and not ACK_NEG_RX.search(o)), None) or pick_option(opts, "Yes")
             if got:
                 return [got] if kind == "checkbox_group" else got
 
@@ -612,6 +622,19 @@ class Brain:
             if got:
                 return [got] if kind == "checkbox_group" else got
 
+        # 2c) last resorts so an ordinary question never ends the application
+        yn = has_opts and {_norm(o) for o in opts} <= {"yes", "no", "yes i do", "no i do not"} and len(opts) == 2
+        if yn and not (LEGAL_RX.search(low) or AI_WORDS.search(low) or QUALIFY_CERT_RX.search(low) or HUMAN_CHECK_RX.search(low)):
+            if re.search(r"(experience|proficien|familiar|knowledge|skilled|worked|used|trained|certified|certification|licen[sc]e[ds]?)\b", low) \
+                    and not re.search(r"driver|drivers", low):
+                return pick_option(opts, "No")       # a tool / skill / credential that is not in the résumé: the truthful answer is No
+            if re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you|are you)\b", low):
+                return pick_option(opts, "Yes")      # ordinary willingness / ability questions
+        if has_opts and kind in ("select", "radio", "combobox") and f.get("required"):
+            got = next((o for o in opts if re.search(r"decline|prefer not|choose not|do not wish|don'?t wish|not (to )?(say|answer|disclose|specify)|n/?a\b|not applicable", o, re.I)), None)
+            if got:
+                return got                            # unknown but demographic-style question: the 'prefer not to say' option
+
         # 3) open-ended prompt -> free LLM writer (required questions only, unless answer_optional)
         return self._write(f, low, kind)
 
@@ -619,7 +642,7 @@ class Brain:
     def _special(self, f, low, kind, opts, has_opts):
         """Rules that need more than a fact lookup. Returns _UNSET when none applies, None when the job must be skipped."""
         optionish = has_opts or kind == "checkbox_single"
-        if has_opts and NEG_Q_RX.search(low) and NEG_TOPIC_RX.search(low):
+        if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
         if optionish and LEGAL_RX.search(low):
             return None                      # arbitration / waiver / non-compete: never agreed to automatically
@@ -633,12 +656,35 @@ class Brain:
             company = getattr(self._job, "company", "") if self._job else ""
             yes = company in self.applied_before
             return pick_option(opts, "Yes" if yes else "No") if has_opts else ("Yes" if yes else "No")
+        if has_opts and re.search(r"camera|webcam|on video|video (interview|call)|video on", low) and re.search(r"\b(on|enabled?|able|can you|will you|confirm|comfortable)\b", low):
+            return pick_option(opts, "Yes")          # ordinary interview logistics
         if has_opts and (m := re.search(r"lift\w*\W+(?:up to |at least |over |up to a? ?)?(\d+)\s*(?:lbs?|pounds)", low)):
             cap = float(self.facts.get("can_lift_lbs") or 0)
             yes = pick_option(opts, "Yes")
             return yes if (cap and float(m.group(1)) <= cap and yes) else None
         if has_opts and RESIDE_RX.search(low) and not re.search(r"relocat|willing|open to|hybrid|on-?site", low):
             return self._reside(low, opts, kind)
+        if kind == "checkbox_group" and opts and re.search(r"availab|which (days|shifts)|days? (can|are|do) you|shifts? (can|are|do) you|when (can|are) you", low):
+            return list(opts)                # open availability: every day / shift offered
+        if has_opts and kind in ("select", "radio", "combobox") and re.search(
+                r"\brate\b|rating|proficien(cy|t) (level|in|with)|(level|degree) of (proficiency|expertise|experience|knowledge|skill|familiarity)|how (proficient|skilled|experienced|comfortable|familiar)|skill level|experience level|familiarity (with|level)|self.?assess|expertise", low) \
+                and not re.search(r"years?|language|spanish|english|fluen|verbal|written|speaking|reading|writing", low):
+            got = self._rate(low, opts)
+            if got:
+                return got
+        if has_opts and re.search(r"age (range|group|bracket)|how old|your age\b", low):
+            for o in opts:
+                m = re.match(r"\D*(\d{2})\s*(?:-|to|–|and)\s*(\d{2})", o)
+                if m and int(m.group(1)) <= 22 <= int(m.group(2)):
+                    return o
+                m = re.match(r"\D*(\d{2})\s*\+", o)
+                if m and int(m.group(1)) <= 22:
+                    return o
+        if has_opts and re.search(r"which (office|location|city|hub|site)\b|(office|location|city) (are you|you are|you.re) (applying|interested)", low) \
+                and not re.search(r"prefer|first choice|top", low):
+            jl = norm_location(self._job.location if self._job else "")
+            got = next((o for o in opts if len(o) > 2 and jl and (o.lower().split(",")[0].strip() in jl)), None)
+            return ([got] if kind == "checkbox_group" else got) if got else None
         if has_opts and re.search(r"(top|first|preferred?|preference)\W+(\w+\W+)?(office|location|city)|which (office|location|city)\W.{0,30}(prefer|interest)", low):
             pref = ["denver", "boulder", "colorado", "los angeles", "new york", "remote"]
             for p in pref:
@@ -647,6 +693,66 @@ class Brain:
                     return [got] if kind == "checkbox_group" else got
             return None
         return _UNSET
+
+    _GENERIC_DOMAIN = re.compile(
+        r"operations?|project|program|management|supply|procure|logistic|propert|facilit|maintenance|data|analy|excel|sql|python|quickbooks|"
+        r"customer|professional|relevant|related|work|this (field|role|position|industry)|the (field|role|industry)|similar|business|process|"
+        r"administrative|office|coordinat|vendor|inventory|planning|finance|accounting|bookkeeping|hospitality|construction|real estate", re.I)
+
+    def _names_unlisted_tool(self, text: str) -> bool:
+        """True for 'years of experience with Salesforce / SAP / Tableau ...' when that named tool is not in the profile skills."""
+        m = re.search(r"\b(?:with|using|in|on)\s+([A-Za-z0-9][A-Za-z0-9+#./&\- ]{1,40})", text)
+        if not m:
+            return False
+        cand = re.split(r"[?,;:()]| and | or ", m.group(1))[0].strip()
+        if not cand or self._GENERIC_DOMAIN.search(cand):
+            return False
+        c = cand.lower()
+        if any(c in s or s in c for s in self.skills if len(s) > 2):
+            return False
+        return bool(re.search(r"[A-Z]", cand)) or len(cand.split()) == 1
+
+    _COURSE_TERMS = ("supply chain", "optimization", "simulation", "probability", "statistic", "regression", "data analysis", "project management",
+                     "accounting", "economics", "systems engineering", "requirements", "workflow", "process improvement", "sop", "scheduling", "budget",
+                     "microsoft project", "quickbooks", "google workspace", "powerpoint", "word", "sql", "python", "excel")
+
+    def _skill_level(self, low: str) -> int:
+        """0 none, 1 beginner, 2 intermediate, 3 advanced: from the skills and coursework in the profile only."""
+        best = 0
+        for raw, plain in zip(self.skills_raw, self.skills):
+            if len(plain) > 1 and re.search(r"(?<![\w+#])" + re.escape(plain) + r"(?![\w+#])", low):
+                best = max(best, 3 if "advanced" in raw else 2)
+        if best == 0 and any(t in low for t in self._COURSE_TERMS):
+            best = 2
+        return best
+
+    _RANK = ((0, r"\b(none|no experience|not familiar|never|no knowledge)\b"), (1, r"\b(beginner|basic|novice|entry|limited|fundamental|elementary|some)\b"),
+             (2, r"\b(intermediate|moderate|working|competent|proficient|average|good|solid)\b"), (3, r"\b(advanced|strong|high|very good|skilled)\b"),
+             (4, r"\b(expert|master|exceptional|highest|guru)\b"))
+
+    def _rate(self, low: str, opts: list[str]):
+        lvl = self._skill_level(low)
+        ranked = []
+        for o in opts:
+            r = next((k for k, rx in self._RANK if re.search(rx, o, re.I)), None)
+            ranked.append(r)
+        if opts and all(r is not None for r in ranked):
+            want = [o for o, r in zip(opts, ranked) if r == lvl]
+            if want:
+                return want[0]
+            below = [(r, o) for o, r in zip(opts, ranked) if r < lvl]
+            return max(below)[1] if below else opts[0]
+        nums = []
+        for o in opts:
+            m = re.match(r"\s*(\d+)", o)
+            nums.append(int(m.group(1)) if m else None)
+        if opts and all(n is not None for n in nums):
+            order = sorted(range(len(opts)), key=lambda i: nums[i])
+            pos = {0: 0.0, 1: 0.25, 2: 0.5, 3: 0.75}[lvl]
+            return opts[order[round(pos * (len(opts) - 1))]]
+        if len(opts) >= 3:      # unlabeled ordered scale (Entry / Mid / Senior, Somewhat / Very ...): the same position, lowest first
+            return opts[round({0: 0.0, 1: 0.25, 2: 0.5, 3: 0.75}[lvl] * (len(opts) - 1))]
+        return None
 
     def _statement_box(self, low):
         """A tick-box that states something about the applicant. True only when the statement is true for them."""

@@ -19,12 +19,12 @@ import yaml
 from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter, Job
-from .aggregators import discover_aggregators, load_boards, remember_board, canon_key, board_of
+from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, __version__
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-09-29-e"
+REQUEUE_VERSION = "2026-09-29-m"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -401,6 +401,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         log(f"Accounts: {'ON (' + acc.email + ')' if acc.enabled else 'off (no ACCOUNT_PASSWORD secret), login sites are skipped'}")
         done = 0
         dead = set()          # (company, title) already skipped/blocked this run
+        nofind: dict = {}     # job source -> listings whose real application page could not be found this run
         for row in queue:
             if done >= cap:
                 break
@@ -412,6 +413,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
                 continue
             ck = (job.company.lower(), job.title.strip().lower())
+            if nofind.get(job.source, 0) >= 2:
+                continue          # this board keeps handing out listings with no real form: don't burn minutes on more of them now
             if ck in dead:
                 db.update(job.key, status="skipped", reason="same role at same company already skipped this run")
                 continue
@@ -433,7 +436,15 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             try:
                 page = ctx.new_page()
                 if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
-                    job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
+                    try:
+                        job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
+                    except sub.Blocked as e:
+                        if "could not find the employer" not in str(e):
+                            raise
+                        direct = direct_apply_url(job, log)     # the listing page gave no link: find the company's own posting by name
+                        if not direct:
+                            raise
+                        job.apply_url = direct
                     remember_board(base, job.apply_url)
                     dup = db.conn.execute(
                         "SELECT 1 FROM jobs WHERE key != ? AND status IN ('applied','unconfirmed','dry_run') AND (apply_url=? OR key=?)",
@@ -486,6 +497,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             except sub.Blocked as e:
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
+                if "could not find the employer" in str(e):
+                    nofind[job.source] = nofind.get(job.source, 0) + 1
                 note_block(db, ats_of(job), job.company, str(e), today)
                 log(f"    ✗ blocked: {e}")
             except sub.Unconfirmed as e:

@@ -62,6 +62,50 @@ def question_checks():
     b._letters = {}; check(b.lazy_letter(b._job) is None, "no letter must mean None, never a thin template")
     check(ask("Cover letter", "textarea", []) is None, "cover-letter box filled without a full letter")
     b.writer = None
+    EDU2 = ["Associate’s Degree", "Bachelor’s Degree", "Master’s Degree", "Doctoral Degree", "In Progress - degree not yet completed", "High school diploma or equivalent"]
+    check(ask("What is your highest level of completed education?*", "combobox", EDU2) == "Bachelor’s Degree", "highest level of COMPLETED education not answered")
+    check(ask("Will you now or in the future require sponsorship to work in the US? (incl. but not limited to H-1B, TN)", "combobox", YN) == "No", "'not limited to' wrongly treated as a negated question")
+    check(ask("This role is required to be based near our New York City, NY hub. Are you open to relocation?", "combobox", YN, loc="United States") == "Yes", "relocation to a named approved city not answered")
+    check(ask("Are you open to relocation to Chicago?", "combobox", YN, loc="United States") == "Yes", "relocation question for a country-level posting")
+    check(ask("Our interviews require you to be on video. Can you confirm that you can keep your camera on?", "combobox", YN) == "Yes", "camera-on question not answered")
+    check(ask("Applicant Privacy Statement", "checkbox_group", ["By clicking this box and submitting my application, I do not consent", "By clicking this box and submitting, I consent to the Applicant Privacy Statement"]) == ["By clicking this box and submitting, I consent to the Applicant Privacy Statement"], "privacy consent picked the wrong option")
+    check(ask("Which office are you applying to?", "select", ["Denver", "New York", "San Francisco"], loc="New York, NY") == "New York", "office matching job location")
+    check(ask("Please confirm you are not a robot", "checkbox_single", []) is None, "the bot must never tick an 'I am not a robot' box")
+    check(ask("City", "text", []) == "New Castle", "plain City field should be just the city")
+    check(ask("Do you have experience with Excel?", "radio", YN) == "Yes", "Excel experience (skill listed as 'Excel (advanced)')")
+    check(ask("Do you require accommodation to complete the application process?", "radio", YN) == "No", "application accommodation")
+    check(ask("Phone type", "select", ["Mobile", "Home", "Work"]) == "Mobile", "phone type")
+    for q, want in (("Are you a government official or public official?", "No"), ("Are you related to a government official or politically exposed person (PEP)?", "No"),
+                    ("Is any member of your immediate family a public official?", "No"), ("Are you subject to a non-compete agreement with a current or former employer?", "No"),
+                    ("Are you bound by any restrictive covenants?", "No"), ("Do you currently have any other employment?", "No"), ("Do you have any conflicts of interest?", "No"),
+                    ("Are you willing to sign a non-compete agreement?", "Yes"), ("Do you engage in any outside business activities?", "No"),
+                    ("Are you currently debarred, suspended or excluded from participating in federal programs?", "No"), ("Are you a registered lobbyist?", "No"),
+                    ("Have you ever been terminated or asked to resign from a job?", "No"),
+                    ("Are you available to work weekends?", "Yes"), ("Are you willing to work overtime?", "Yes"), ("Are you comfortable working nights or holidays?", "Yes"),
+                    ("Do you have experience with Salesforce?", "No"), ("Are you willing to wear a uniform?", "Yes"), ("Are you able to stand for long periods?", "Yes"),
+                    ("Do you hold a PMP certification?", "No"), ("Are you willing to be on call?", "Yes")):
+        check(ask(q, "radio", YN) == want, f"government/non-compete/conflict question wrong: {q} -> {ask(q, 'radio', YN)!r}")
+    for q, kind, opts, want in (
+            ("How many years of experience do you have with Salesforce?", "text", [], "0"), ("How many years of experience do you have with SAP?", "number", [], "0"),
+            ("How many years of experience do you have with Excel?", "text", [], "4"), ("How many years of experience do you have in supply chain?", "text", [], "2"),
+            ("Are you a member of a union?", "radio", YN, "No"), ("Are you currently on an F-1 visa?", "radio", YN, "No"), ("Do you need a visa to work here?", "radio", YN, "No"),
+            ("Are you married?", "radio", YN, "No"), ("What is your marital status?", "select", ["Single", "Married", "Divorced"], "Single"),
+            ("Do you have any dependents?", "radio", YN, "No"), ("Have you ever been arrested?", "radio", YN, "No"), ("Do you have any pending criminal charges?", "radio", YN, "No"),
+            ("Have you ever filed for bankruptcy?", "radio", YN, "No"), ("Do you have any wage garnishments?", "radio", YN, "No"),
+            ("Do you have a clean driving record?", "radio", YN, "Yes"), ("Have you had any DUI or moving violations in the past 3 years?", "radio", YN, "No"),
+            ("Do you have a valid passport?", "radio", YN, "Yes"), ("Do you own a vehicle?", "radio", YN, "Yes"),
+            ("Do you have access to a computer and reliable internet?", "radio", YN, "Yes"), ("Do you agree that all information is accurate?", "radio", YN, "Yes"),
+            ("Please select your availability", "checkbox_group", ["Weekdays", "Weekends", "Evenings"], ["Weekdays", "Weekends", "Evenings"]),
+            ("Age range", "select", ["18-24", "25-34", "35-44", "45+"], "18-24"), ("Do you have any scheduling restrictions?", "radio", YN, "No"),
+            ("Do you identify as LGBTQ+?", "radio", YN, "No"), ("Do you speak any other languages?", "radio", YN, "Yes")):
+        got = ask(q, kind, opts)
+        check(got == want, f"confirmed-fact question wrong: {q} -> {got!r}, want {want!r}")
+    L4 = ["Beginner", "Intermediate", "Advanced", "Expert"]
+    for q, opts, want in (("Rate your proficiency in Excel", L4, "Advanced"), ("Rate your proficiency in SQL", L4, "Intermediate"), ("Rate your proficiency in Salesforce", L4, "Beginner"),
+                          ("How would you rate your Python skills?", ["1", "2", "3", "4", "5"], "3"), ("How would you rate your Excel skills?", ["1", "2", "3", "4", "5"], "4"),
+                          ("Proficiency in supply chain planning", ["No experience", "Basic", "Proficient", "Expert"], "Proficient")):
+        check(ask(q, "select", opts) == want, f"proficiency rating wrong: {q} -> {ask(q, 'select', opts)!r}, want {want!r}")
+    check(ask("Why are you leaving your current role?", "textarea", []).startswith("My most recent role"), "reason for leaving not answered")
     edu = ["High School", "Associate's", "Bachelor's", "Master's", "PhD"]
     table = [
         # work authorization and sponsorship
@@ -114,8 +158,8 @@ def question_checks():
         ("How many years of operations experience do you have?", "select", ["Less than 1 year", "1-2 years", "3-5 years", "6+ years"], "3-5 years"),
         ("Do you have experience in project management?", "radio", YN, "Yes"),
         ("Do you have experience using Python or SQL?", "radio", YN, "Yes"),
-        ("Do you have experience with Salesforce?", "radio", YN, None),                    # not on his résumé: never guessed
-        ("Have you ever been terminated or asked to resign from a job?", "radio", YN, None),
+        ("Do you have experience with Salesforce?", "radio", YN, "No"),                    # not on his résumé: truthful answer is No
+        ("Have you ever been terminated or asked to resign from a job?", "radio", YN, "No"),
         # education
         ("Highest level of education completed", "select", edu, "Bachelor's"),
         ("Do you have a bachelor's degree?", "radio", YN, "Yes"),
@@ -133,7 +177,7 @@ def question_checks():
         ("Are you comfortable working in a fast-paced environment?", "radio", YN, "Yes"),
         ("Are you able to lift up to 50 pounds?", "radio", YN, "Yes"),
         ("Are you able to lift 75 pounds?", "radio", YN, None),
-        ("Can you work weekends and holidays?", "radio", YN, None),
+        ("Can you work weekends and holidays?", "radio", YN, "Yes"),
         ("Do you speak Spanish?", "radio", YN, "Yes"),
         ("Please rate your Spanish proficiency", "select", ["None", "Basic", "Conversational", "Fluent", "Native"], "Native"),
         # contact / links
@@ -154,7 +198,7 @@ def question_checks():
         ("Do you consent to receive text messages (SMS) about your application?", "checkbox_single", [], True),
         ("Please acknowledge that you've read and understand Mixpanel's Recruitment Privacy Policy*", "combobox", ["Acknowledge/Confirm"], "Acknowledge/Confirm"),
         ("Do you agree to Acme's arbitration agreement?", "checkbox_single", [], None),
-        ("Are you subject to a non-compete or non-solicitation agreement?", "radio", YN, None),
+        ("Are you subject to a non-compete or non-solicitation agreement?", "radio", YN, "No"),   # confirmed by Brian: none
         ("AI Policy for Application*", "combobox", YN, None),
         ("Do you certify that you did not use AI to complete this application?", "checkbox_single", [], None),
         ("Did you use AI to help with this application?", "radio", YN, "Yes"),
@@ -751,6 +795,73 @@ def gate_checks():
     print("ok  sites that keep showing a human check are paused, probed daily, reopened on success")
 
 
+def open_form_checks():
+    """Every common way a job link can be built must end on the real form."""
+    import tempfile
+    from pathlib import Path as P
+    from playwright.sync_api import sync_playwright
+    from autoapply import submit as S
+    d = P(tempfile.mkdtemp())
+    FORM = ('<form><input type=text name=a><input type=email name=b><input type=text name=c><textarea name=d></textarea>'
+            '<input type=file name=f><button type=submit>Submit application</button></form>')
+    (d / "form.html").write_text(f"<html><body><h1>Apply</h1>{FORM}</body></html>")
+    (d / "direct.html").write_text(f"<html><body>{FORM}</body></html>")
+    (d / "link.html").write_text('<html><body><h1>Ops Coordinator</h1><p>Great job</p><a href="form.html">Apply now</a></body></html>')
+    (d / "popup.html").write_text('<html><body><h1>Job</h1><button onclick="window.open(\'form.html\')">Apply for this job</button></body></html>')
+    (d / "reveal.html").write_text(f'<html><body><h1>Job</h1><button onclick="document.getElementById(\'f\').style.display=\'block\'">Apply</button>'
+                                   f'<div id=f style="display:none">{FORM}</div></body></html>')
+    (d / "iframe.html").write_text('<html><body><h1>Careers</h1><p>Join us</p><iframe src="form.html" width=800 height=900></iframe></body></html>')
+    (d / "cookie.html").write_text('<html><body><div><button onclick="this.parentNode.remove()">Accept all</button></div>'
+                                   '<h1>Job</h1><a href="form.html">Apply</a></body></html>')
+    (d / "captcha.html").write_text('<html><body><h1>Job</h1><p>No form here and no apply button</p></body></html>')
+    import functools, http.server, threading
+    class _Quiet(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, *a): pass
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(_Quiet, directory=str(d)))
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{srv.server_address[1]}"
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        ctx = b.new_context()
+        for name in ("direct", "link", "popup", "reveal", "iframe", "cookie"):
+            page = ctx.new_page()
+            try:
+                S.open_form(page, f"{base}/{name}.html")
+                check(S._has_form(page), f"open_form: {name} did not end on the form")
+            except Exception as e:
+                check(False, f"open_form: {name} raised {type(e).__name__}: {str(e)[:80]}")
+            page.close()
+        page = ctx.new_page()
+        try:
+            S.open_form(page, f"{base}/captcha.html")
+            check(False, "open_form: a page with no form must raise Blocked")
+        except S.Blocked:
+            pass
+        page.close()
+        b.close()
+    srv.shutdown()
+    check(S._rewrite_ats_url("https://jobs.lever.co/acme/123e4567-e89b-12d3-a456-426614174000") == "https://jobs.lever.co/acme/123e4567-e89b-12d3-a456-426614174000/apply", "lever /apply rewrite")
+    check(S._rewrite_ats_url("https://apply.workable.com/acme/j/ABC123/") == "https://apply.workable.com/acme/j/ABC123/apply/", "workable /apply rewrite")
+
+
+def direct_link_checks():
+    from autoapply import aggregators as A, sources
+    from autoapply.sources import Job
+    old = dict(sources.FETCHERS)
+    try:
+        sources.FETCHERS["workable"] = lambda slug: ([Job("workable", slug, "c1", "Project Coordinator", "United States (Remote)", "u",
+                                                        "https://apply.workable.com/smb-team/j/ABC/apply", "")] if slug == "smb-team" else [])
+        sources.FETCHERS["greenhouse"] = lambda slug: []
+        sources.FETCHERS["lever"] = lambda slug: []
+        j = Job("agg-workablejobs", "smb-team", "x", "Project Coordinator ", "United States (Telecommute)", "u", "https://jobs.workable.com/view/abc", "",
+                extra={"company_name": "SMB Team"})
+        check(A.direct_apply_url(j, lambda *a: None) == "https://apply.workable.com/smb-team/j/ABC/apply", "employer posting not found by company name")
+        j2 = Job("agg-workablejobs", "other-co", "y", "Project Coordinator", "x", "u", "https://jobs.workable.com/view/abd", "", extra={"company_name": "Other Co"})
+        check(A.direct_apply_url(j2, lambda *a: None) is None, "found a posting for the wrong company")
+    finally:
+        sources.FETCHERS.clear(); sources.FETCHERS.update(old)
+
+
 def safety_checks():
     """Never double-submit, never a false 'applied'."""
     import re as _re
@@ -792,7 +903,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, safety_checks):
+    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, safety_checks, direct_link_checks, open_form_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others
