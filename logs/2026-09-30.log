@@ -1227,329 +1227,297 @@
 [02:35:07]       mail: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
 [02:35:17]       mail: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
 [02:35:17]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ['Resume/CV*', 'Resume/CV is required.']; page ends: 'service, participated in a United States military operation for which an Armed Forces service medal was awarded pursuant to Executive Order 12985. Veteran Status I
-[02:54:42] === autoapply run (LIVE) build 2026-09-29-n ===
-[02:54:42] Re-checking 5 jobs that were skipped by earlier bugs
-[02:54:42] Writer: essay questions will be answered by gemini-pro, gemini-flash, gemini-lite, groq, groq-20b, ollama (free tiers, in that order)
-[02:54:43] mail: logged in to delgado@alumni.usc.edu OK
-[02:54:53] Discovering jobs…
-[02:58:34]   greenhouse/airbnb: 158 open roles
-[02:58:34]   greenhouse/figma: 162 open roles
-[02:58:34]   greenhouse/robinhood: 162 open roles
-[02:58:34]   greenhouse/databricks: 882 open roles
-[02:58:34]   greenhouse/anthropic: 635 open roles
-[02:58:34]   greenhouse/coinbase: 209 open roles
-[02:58:34]   greenhouse/lyft: 186 open roles
-[02:58:34]   greenhouse/pinterest: 150 open roles
-[02:58:34]   greenhouse/reddit: 146 open roles
-[02:58:34]   greenhouse/twilio: 134 open roles
-[02:58:34]   greenhouse/cloudflare: 400 open roles
-[02:58:34]   greenhouse/datadog: 438 open roles
-[02:58:34]   greenhouse/mongodb: 397 open roles
-[02:58:34]   greenhouse/elastic: 390 open roles
-[02:58:34]   greenhouse/gitlab: 200 open roles
-[02:58:34]   greenhouse/okta: 348 open roles
-[02:58:34]   greenhouse/samsara: 241 open roles
-[02:58:34]   greenhouse/instacart: 125 open roles
-[02:58:34]   greenhouse/affirm: 175 open roles
-[02:58:34]   greenhouse/brex: 268 open roles
-[02:58:34]   greenhouse/flexport: 209 open roles
-[02:58:34]   greenhouse/oscar: 265 open roles
-[02:58:34]   greenhouse/spacex: 2610 open roles
-[02:58:34]   greenhouse/toast: 341 open roles
-[02:58:34]   greenhouse/verkada: 301 open roles
-[02:58:34]   greenhouse/nuro: 109 open roles
-[02:58:34]   greenhouse/scaleai: 191 open roles
-[02:58:34]   greenhouse/lucidmotors: 435 open roles
-[02:58:34]   greenhouse/stripe: 710 open roles
-[02:58:34]   greenhouse/doordashusa: 463 open roles
-[02:58:34]   greenhouse/aloyoga: 901 open roles
-[02:58:34]   greenhouse/thenewyorktimes: 140 open roles
-[02:58:34]   greenhouse/janestreet: 230 open roles
-[02:58:34]   greenhouse/onemedical: 408 open roles
-[02:58:34]   greenhouse/gomotive: 161 open roles
-[02:58:34]   greenhouse/reformation: 137 open roles
-[02:58:34]   greenhouse/riotgames: 167 open roles
-[02:58:34]   greenhouse/scopely: 173 open roles
-[02:58:34]   greenhouse/judihealth: 116 open roles
-[02:58:34]   greenhouse/voyagertechnologiesinc: 192 open roles
-[02:58:34]   greenhouse/trueanomalyinc: 187 open roles
-[02:58:34]   greenhouse/charliehealth: 268 open roles
-[02:58:34]   greenhouse/roku: 241 open roles
-[02:58:34]   greenhouse/grafanalabs: 119 open roles
-[02:58:34]   greenhouse/vailclinicincdbavailhealthhospital: 142 open roles
-[02:58:34]   greenhouse/fivetran: 189 open roles
-[02:58:34]   greenhouse/olsson: 420 open roles
-[02:58:34]   greenhouse/remotecom: 141 open roles
-[02:58:34]   greenhouse/relativity: 333 open roles
-[02:58:34]   greenhouse/icapitalnetwork: 210 open roles
-[02:58:34]   greenhouse/lpc: 117 open roles
-[02:58:34]   greenhouse/braze: 342 open roles
-[02:58:34]   greenhouse/addepar1: 102 open roles
-[02:58:34]   greenhouse/divergent: 112 open roles
-[02:58:34]   greenhouse/vast: 204 open roles
-[02:58:34]   greenhouse/cookunity: 161 open roles
-[02:58:34]   greenhouse/fanaticscollectibles: 175 open roles
-[02:58:34]   greenhouse/sonymusicentertainment: 139 open roles
-[02:58:34]   greenhouse/canonical: 306 open roles
-[02:58:34]   greenhouse/betterhelp: 164 open roles
-[02:58:34]   greenhouse/adyen: 210 open roles
-[02:58:34]   lever/palantir: 318 open roles
-[02:58:34]   lever/jobgether: 3854 open roles
-[02:58:34]   lever/flynncompanies: 170 open roles
-[02:58:34]   lever/gopuff: 788 open roles
-[02:58:34]   lever/buckmason: 247 open roles
-[02:58:34]   lever/arcteryx.com: 281 open roles
-[02:58:34]   lever/thinkahead: 145 open roles
-[02:58:34]   lever/solidcore: 268 open roles
-[02:58:34]   lever/zoox: 241 open roles
-[02:58:34]   lever/insomniacookies: 1231 open roles
-[02:58:34]   lever/shieldai: 589 open roles
-[02:58:34]   lever/dnb: 121 open roles
-[02:58:34]   lever/Aprio: 206 open roles
-[02:58:34]   lever/amityfdn: 120 open roles
-[02:58:34]   lever/boxlunch: 3688 open roles
-[02:58:34]   workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 163 open roles
-[02:58:34]   workday/salesforce/wd12/External_Career_Site/Salesforce: 161 open roles
-[02:58:34]   workday/workday/wd5/Workday/Workday: 138 open roles
-[02:58:34]   workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 110 open roles
-[02:58:34]   workday/autodesk/wd1/Ext/Autodesk: 116 open roles
-[02:58:34]   workday/target/wd5/targetcareers/Target: 159 open roles
-[02:58:34]   workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 109 open roles
-[02:58:34]   workday/pnc/wd5/External/PNC: 200 open roles
-[02:58:34]   workday/usc/wd5/ExternalUSCCareers/University of Southern California: 140 open roles
-[02:58:34]   workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 118 open roles
-[02:58:34]   workday/lmu/wd1/Careers/Loyola Marymount University: 113 open roles
-[02:58:34]   workday/disney/wd5/disneycareer/The Walt Disney Company: 106 open roles
-[02:58:34]   workday/fox/wd1/Domestic/Fox Corporation: 171 open roles
-[02:58:34]   workday/livenation/wd503/LNExternalSite/Live Nation: 280 open roles
-[02:58:34]   workday/iheartmedia/wd5/External_iHM/iHeartMedia: 108 open roles
-[02:58:34]   workday/skechers/wd5/One-career-site/Skechers: 101 open roles
-[02:58:34]   workday/amgen/wd1/Careers/Amgen: 192 open roles
-[02:58:34]   workday/huntsman/wd1/Huntsman/Huntsman: 149 open roles
-[02:58:34]   workday/cumminggroup/wd1/CGC/Cumming Group: 144 open roles
-[02:58:34]   workday/jll/wd1/jllcareers/JLL: 237 open roles
-[02:58:34]   workday/cw/wd1/External/Cushman & Wakefield: 172 open roles
-[02:58:34]   workday/msudenver/wd1/MSUDenver/Metropolitan State University of Denver: 118 open roles
-[02:58:34]   workday/davita/wd1/DKC_External/DaVita: 167 open roles
-[02:58:34]   workday/apog/wd1/Apogee/Apogee Enterprises: 128 open roles
-[02:58:34]   workday/wilsonco/wd5/Careers/Wilson & Company: 143 open roles
-[02:58:34]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 104 open roles
-[02:58:34]   workday/citi/wd5/2/Citi: 155 open roles
-[02:58:34]   workday/spgi/wd5/SPGI_Careers/S&P Global: 102 open roles
-[02:58:34]   workday/tapestry/wd108/Tapestry_Careers/Tapestry: 129 open roles
-[02:58:34]   workday/pru/wd5/Careers/Prudential Financial: 167 open roles
-[02:58:34]   workday/mmc/wd1/MMC/Marsh McLennan: 313 open roles
-[02:58:34]   workday/dentsuaegis/wd3/DAN_GLOBAL/dentsu: 121 open roles
-[02:58:34]   workday/wf/wd1/WellsFargoJobs/Wells Fargo: 151 open roles
-[02:58:34]   workday/capitalone/wd12/Capital_One/Capital One: 181 open roles
-[02:58:34]   workday/accenture/wd103/AccentureCareers/Accenture: 490 open roles
-[02:58:34]   workday/allstate/wd5/allstate_careers/Allstate: 111 open roles
-[02:58:34]   workday/thermofisher/wd5/ThermoFisherCareers/Thermo Fisher Scientific: 101 open roles
-[02:58:34]   workable/nogigiddy: 1822 open roles
-[02:58:34]   workable/suppliedtalent: 172 open roles
-[02:58:34]   workable/serenity-mental-health-centers: 343 open roles
-[02:58:34]   workable/pacific-health-group: 191 open roles
-[02:58:34]   workable/pm2cm: 125 open roles
-[02:58:34]   workable/behavior-frontiers: 127 open roles
-[02:58:34]   workable/pavago: 2217 open roles
-[02:58:34]   bamboohr/apaveinc: 103 open roles
-[02:58:34]   breezy/american-logistics-authority: 2760 open roles
-[02:58:34]   greenhouse: 280 of 288 boards have openings (24762 roles)
-[02:58:34]   lever: 91 of 93 boards have openings (14520 roles)
-[02:58:34]   workday: 110 of 110 boards have openings (9654 roles)
-[02:58:34]   workable: 60 of 61 boards have openings (6258 roles)
-[02:58:34]   bamboohr: 4 of 4 boards have openings (207 roles)
-[02:58:34]   breezy: 6 of 6 boards have openings (2829 roles)
-[02:58:34]   agg/linkedin: 0 roles (cached)
-[02:58:34]   agg/remoteok: 16 roles (cached)
-[02:58:34]   agg/remotive: 0 roles (cached)
-[02:58:34]   agg/jicy: 13 roles (cached)
-[02:58:34]   agg/himalayas: 1 roles (cached)
-[02:58:34]   agg/wwr: 16 roles (cached)
-[02:58:34]   agg/themuse: 203 roles (cached)
-[02:58:46]   agg/workablejobs: 259 fetched, 139 pass the title/location filter
-[02:58:46]   agg/adzuna: 0 roles (cached)
-[02:58:46]   agg/jooble: 0 roles (cached)
-[02:58:55]   found 9 new company boards from aggregator listings: workable/techfirefly, workable/vestahome, workable/clean-power-alliance, workable/botrista, workable/aretum, workable/actionstep, workable/raveaerospace, workable/pierce
-[02:58:55]   workable: 9 of 9 boards have openings (179 roles)
-[02:58:56] 55144 open roles, 2511 new
-[02:58:56]   ✓  46  Analyst – IT Infrastructure Audit @ nasdaq (USA - New York City - New York) — title 'analyst' +22; keywords [project management, excel] +7; location 'new york' +10; title level +2; pay up to $121,000 +5
-[02:58:56]   ✓  53  Coordinator, DTC Marketing - Tommy Hilfiger @ pvh (New York, NY Tommy Hilfiger Of) — title 'coordinator' +22; keywords [cross-functional, stakeholder, excel] +10; location 'new york' +10; title level +6; pay up to $87,800 +5
-[02:58:56]   ✓  54  Revenue and Sales Operations Project Manager @ mmc (White Plains - Hamilton; Hartf) — title 'project manager' +35; keywords [cross-functional, project management, stakeholder, excel] +14; location 'denver' +10; title level -10; pay up t
-[02:58:56]   ✓  66  Office Services and Operations Coordinator @ mmc (Van Nuys - Sepulveda) — title 'operations coordinator' +50; location 'van nuys' +10; title level +6
-[02:58:56]   ✓  56  Workforce and Rewards Summer Associate (MBA or Master's Track) - Los Angeles - MBA Program 2027 @ mmc (Los Angeles - West 5th) — title 'program' +22; keywords [sop, project management, data analysis, excel] +16; location 'los angeles' +10; title level +8
-[02:58:56]   ✓  49  Claims Analyst - Complex Claims @ mmc (Van Nuys - Sepulveda) — title 'analyst' +22; keywords [vendor, excel, documentation] +10; location 'van nuys' +10; title level +2; pay up to $80,000 +5
-[02:58:56]   ✓  66  Branch Operations Coordinator Denver District @ wf (DENVER, CO) — title 'operations coordinator' +50; location 'denver' +10; title level +6
-[02:58:56]   ✓  66  Branch Operations Coordinator Armonk @ wf (ARMONK, NY) — title 'operations coordinator' +50; location 'new york' +10; title level +6
-[02:58:56]   ✓  66  Branch Operations Coordinator Borough Park DeNovo @ wf (BROOKLYN, NY) — title 'operations coordinator' +50; location 'new york' +10; title level +6
-[02:58:56]   ✓  75  Operations | Trading Operations Analyst | New-York @ flowdesk (New York, New York, United Sta) — title 'operations analyst' +50; keywords [workflow, excel, sql, ownership] +13; location 'new york' +10; title level +2
-[02:58:56]   ✓  91  Executive Operations Analyst @ simpleciti (Garden City, New York, United ) — title 'operations analyst' +50; keywords [process improvement, recent graduate, project management, vendor] +29; location 'new york' +10; title level 
-[02:58:57]   ✓ 100  Product Costing & Operations Analyst - Apparel @ garan-incorporated (New York, New York, United Sta) — title 'operations analyst' +50; keywords [process improvement, entry level, workflow, cross-functional] +35; location 'new york' +10; title level +2; 
-[02:58:57]   ✓  55  Production Coordinator @ garan-incorporated (New York, New York, United Sta) — title 'coordinator' +22; keywords [cross-functional, supply chain, excel, procurement] +17; location 'new york' +10; title level +6
-[02:58:57]   ✓  56  Client Operations & Finance Analyst @ theroninsociety (United States (Remote)) — title 'operations' +30; keywords [workflow, quickbooks, excel, documentation] +14; location 'remote' +10; title level +2
-[02:58:57]   ✓  84  Whiteshield Operations Analyst @ whiteshield (United Arab Emirates (Remote)) — title 'operations analyst' +50; keywords [process improvement, workflow, stakeholder, excel] +22; location 'remote' +10; title level +2
-[02:58:57]   ✓  50  Microsoft Dynamics 365 System Administrator @ mclane-global (Henderson, Colorado, United St) — keywords [process improvement, standard operating, workflow, cross-functional] +35; location 'colorado' +10; pay up to $95,000 +5
-[02:58:57]   ✓  62  Order Planner @ mclane-global (Henderson, Colorado, United St) — title 'planner' +30; keywords [process improvement, standard operating, cross-functional, supply chain] +22; location 'colorado' +10
-[02:58:57]   ✓  47  Infrastructure & Operations Engineer @ cloudshare (Denver, Colorado, United State) — title 'operations' +25; keywords [workflow, ownership] +7; location 'denver' +10; pay up to $125,000 +5
-[02:58:57]   ✓  47  Facilities Assessment Field Supervisor @ pm2cm (Los Angeles, California, Unite) — title 'facilities' +38; keywords [construction, excel, inspection, documentation] +14; location 'los angeles' +10; 'healthcare' -15
-[02:58:57]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (Pomona, California, United Sta) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (San Bernardino, California, Un) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (Riverside, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  56  Field Engagement Project Manager-Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
-[02:58:57]   ✓  56  Field Engagement Project Manager-Hybrid @ pm2cm (Santa Ana, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'santa ana' +10; title level -10
-[02:58:57]   ✓  82  Junior Project Controls Estimator @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
-[02:58:57]   ✓  92  Junior Project Controls Estimator @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; location 'los angeles' +10; title level 
-[02:58:57]   ✓  82  Junior Project Controls Estimator @ pm2cm (San Bernardino, California, Un) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
-[02:58:57]   ✓  82  Junior Project Controls Estimator @ pm2cm (Riverside, California, United ) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
-[02:58:57]   ✓ 100  Junior Project Controls Specialist - Scheduler @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +50; keywords [recent graduate, construction, project management, stakeholder] +27; location 'los angeles' +10; title level +
-[02:58:57]   ✓  64  Junior Scheduler @ pm2cm (Los Angeles, California, Unite) — title 'scheduler' +28; keywords [construction, draw, excel, scheduling] +14; location 'los angeles' +10; title level +12
-[02:58:57]   ✓  53  Program Coordinator @ pm2cm (Monterey Park, California, Uni) — title 'program' +27; keywords [project management, project coordination, stakeholder, excel] +20; title level +6
-[02:58:57]   ✓  66  Project Controls Analyst - Scheduler @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [construction, stakeholder, excel, scheduling] +14; title level +2
-[02:58:57]   ✓  67  Project Controls Engineer @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, project management, data analysis, stakeholder] +22
-[02:58:57]   ✓  80  Project Controls Estimator I @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; location 'los angeles' +10
-[02:58:57]   ✓  79  Project Controls Estimator I Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10
-[02:58:57]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (Davis, California, United Stat) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
-[02:58:57]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (San Diego, California, United ) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
-[02:58:57]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
-[02:58:57]   ✓  67  Project Controls Estimator II Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10; asks 4+ yrs -12
-[02:58:57]   ✓  65  Project Controls Scheduler @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [construction, project management, stakeholder, scheduling] +15
-[02:58:57]   ✓  56  Project Controls Specialist @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +22; location 'los angeles' +10; title level 
-[02:58:57]   ✓  61  Project Controls Specialist - Cost @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +45; keywords [standard operating, construction, excel] +13; title level +3
-[02:58:57]   ✓  68  Project Controls Specialist - Cost Analyst @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [standard operating, construction, excel] +13; title level +5
-[02:58:57]   ✓  61  Project Controls Specialist - Cost Engineer @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [standard operating, construction, excel] +13; title level +3
-[02:58:57]   ✓  59  Project Controls Specialist - Cost Estimating @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, vendor, stakeholder] +25; location 'los angeles' +10; title level +3; asks 5
-[02:58:57]   ✓  77  Project Coordinator @ pm2cm (Monterey Park, California, Uni) — title 'project coordinator' +50; keywords [construction, project management, stakeholder, excel] +21; title level +6
-[02:58:57]   ✓  83  Project Coordinator -Labor Compliance Analyst @ pm2cm (Monterey Park, California, Uni) — title 'project coordinator' +50; keywords [construction, project management, project coordination, stakeholder] +25; title level +8
-[02:58:57]   ✓  53  Project Engineer @ pm2cm (Monterey Park, California, Uni) — title 'project engineer' +32; keywords [construction, project management, stakeholder, excel] +21
-[02:58:57]   ✓  59  Project Manager @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10; title level -10; pay up t
-[02:58:57]   ✓  46  Project Manager @ pm2cm (Pomona, California, United Sta) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  46  Project Manager @ pm2cm (San Bernardino, California, Un) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  46  Project Manager @ pm2cm (Riverside, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  46  Project Manager @ pm2cm (San Diego, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
-[02:58:57]   ✓  56  Project Manager @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
-[02:58:57]   ✓  56  Project Manager II @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
-[02:58:57]   ✓  53  Project Manager II Hybrid @ pm2cm (Santa Ana, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, scheduling] +23; location 'santa ana' +10; title level -10
-[02:58:57]   ✓  52  Scheduling & Project Controls Specialist @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, excel] +18; location 'los angeles' +10; title level +3; asks 5+
-[02:58:57]   ✓  45  Final Mile Site Operations Analyst (EM7200) @ samsung-sds-america (Coppell, Texas, United States) — title 'operations analyst' +50; keywords [sop, standard operating, workflow, cross-functional] +32; 'healthcare' -15; title level +2; asks 5+ yrs -24
-[02:58:57]   ✓  57  Logistics Innovation Project Specialist (EM7174) @ samsung-sds-america (Duluth, Georgia, United States) — title 'logistics' +34; keywords [sop, industrial engineering, workflow, cross-functional] +35; 'healthcare' -15; title level +3
-[02:58:57]   ✓  46  Logistics Pricing Analyst (EM7196) @ samsung-sds-america (Plano, Texas, United States) — title 'logistics' +39; keywords [process improvement, cross-functional, data analysis, vendor] +35; 'quota' -15; 'healthcare' -15; title level +2
-[02:58:57]   ✓  71  Legal Operations Specialist @ the-lemon-pros (Beverly Hills, California, Uni) — title 'operations' +25; keywords [process improvement, standard operating, workflow, project management] +33; location 'beverly hills' +10; title leve
-[02:58:57]   ✓  55  Pricing Analyst @ resource-innovations (United States (Remote)) — title 'analyst' +22; keywords [process improvement, cross-functional, excel, documentation] +16; location 'remote' +10; title level +2; pay up to $80,
-[02:58:57]   ✓  70  Business Operations Manager, Partnerships @ fluent (New York, New York, United Sta) — title 'business operations' +50; keywords [workflow, cross-functional, project management, documentation] +15; location 'new york' +10; title level -1
-[02:58:57]   ✓  45  Partnerships Operations Manager @ fluent (New York, New York, United Sta) — title 'operations' +25; keywords [workflow, cross-functional, project management, documentation] +15; location 'new york' +10; title level -10; pay up
-[02:58:57]   ✓  51  Construction Project Manager - Community College Bond Program ($5M-$100M) @ maas-companies (Los Angeles, California, Unite) — title 'project manager' +35; keywords [sop, construction, draw, ownership] +16; location 'los angeles' +10; title level -10
-[02:58:57]   ✓  62  Project Engineer / Assistant Project Manager - K-12 School Modernization @ maas-companies (Murrieta, California, United S) — title 'project engineer' +37; keywords [sop, construction, draw, excel] +22; title level -2; pay up to $145,000 +5
-[02:58:57]   ✓  57  Structural Engineer (PE) - QA/QC Plan Reviewer, K-12 School Facilities @ maas-companies (Monterey Park, California, Uni) — title 'facilities' +38; keywords [sop, construction, draw, ownership] +19
-[02:58:57]   ✓  56  Product Development Coordinator @ shameless-foods (Santa Ana, California, United ) — title 'coordinator' +22; keywords [workflow, cross-functional, project management, vendor] +25; location 'santa ana' +10; title level +6; pay up to $7
-[02:58:57]   ✓  52  Financial Analyst @ ejam (United States (Remote)) — title 'analyst' +22; keywords [quickbooks, vendor, excel, sql] +23; location 'remote' +10; 'hris' -10; title level +2; pay up to $100,000 +5
-[02:58:57]   ✓  59  Product Development Coordinator @ ejam (Santa Ana, California, United ) — title 'coordinator' +22; keywords [workflow, cross-functional, project management, vendor] +28; location 'santa ana' +10; title level +6; pay up to $7
-[02:58:57]   ✓  80  Retail Operations Coordinator @ ejam (Santa Ana, California, United ) — title 'operations coordinator' +50; keywords [vendor, supply chain, excel, documentation] +14; location 'santa ana' +10; title level +6
-[02:58:57]   ✓  66  Logistics Coordinator @ punchstudio (Culver City, California, Unite) — title 'logistics' +39; keywords [vendor, supply chain, excel] +11; location 'culver city' +10; title level +6
-[02:58:57]   ✓  66  Logistics Coordinator @ punchstudio (Culver City, California, Unite) — title 'logistics' +39; keywords [vendor, supply chain, excel] +11; location 'culver city' +10; title level +6
-[02:58:57]   ✓  80  Product Operations Assistant @ punchstudio (Culver City, California, Unite) — title 'product operations' +45; keywords [project management, vendor, stakeholder, excel] +17; location 'culver city' +10; title level +8
-[02:58:57]   ✓  58  Exenta ERP Analyst @ bci-brands (New York, New York, United Sta) — title 'analyst' +22; keywords [sop, workflow, project management, excel] +19; location 'new york' +10; title level +2; pay up to $125,000 +5
-[02:58:57]   ✓  53  Product Development Coordinator - Fashion/Apparel @ bci-brands (New York, New York, United Sta) — title 'coordinator' +22; keywords [vendor, stakeholder, excel] +10; location 'new york' +10; title level +6; pay up to $80,000 +5
-[02:58:57]   ✓  45  Production Coordinator @ bci-brands (New York, New York, United Sta) — title 'coordinator' +22; keywords [vendor, excel] +7; location 'new york' +10; title level +6
-[02:58:57]   ✓  53  Wholesale Chargeback Analyst @ bci-brands (New York, New York, United Sta) — title 'analyst' +22; keywords [cross-functional, vendor, excel, ownership] +14; location 'new york' +10; title level +2; pay up to $85,000 +5
-[02:58:57]   ✓  57  Facilities Superintendent @ earthcam (Upper Saddle River, New Jersey) — title 'facilities' +38; keywords [construction, project management, vendor, excel] +19
-[02:58:57]   ✓  47  Product Support Coordinator @ earthcam (Upper Saddle River, New Jersey) — title 'coordinator' +22; keywords [construction, data analysis, vendor, ownership] +19; title level +6
-[02:58:57]   ✓  46  Project Coordinator @ softheon (United States (Remote)) — title 'project coordinator' +50; keywords [early career, sop, cross-functional, project management] +35; location 'remote' +10; 'healthcare' -15; titl
-[02:58:57]   ✓  99  Business Operations Coordinator @ pavago (Belize (Remote)) — title 'operations coordinator' +50; keywords [sop, construction, workflow, vendor] +33; location 'remote' +10; title level +6
-[02:58:57]   ✓  63  Customer Operations Specialist @ pavago (Oman (Remote)) — title 'customer operations' +43; keywords [process improvement, workflow, excel, ownership] +19; location 'remote' +10; title level +3; asks 4+ yrs -1
-[02:58:57]   ✓  51  Customer Service & Dispatch Coordinator - (HVAC & Trades) @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, scheduling, ownership, documentation] +13; location 'remote' +10; title level +6
-[02:58:57]   ✓  70  Executive Marketing Coordinator - Operations Support @ pavago (United States (Remote)) — title 'operations' +30; keywords [workflow, project management, project coordination, excel] +24; location 'remote' +10; title level +6
-[02:58:57]   ✓  47  Financial Planning Analyst @ pavago (United States (Remote)) — title 'analyst' +22; keywords [process improvement, workflow, excel] +13; location 'remote' +10; title level +2
-[02:58:58]   ✓  48  Marketing Coordinator @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, excel, ownership] +10; location 'remote' +10; title level +6
-[02:58:58]   ✓ 100  Operations Coordinator @ pavago (United States (Remote)) — title 'operations coordinator' +50; keywords [process improvement, sop, workflow, cross-functional] +35; location 'remote' +10; title level +6
-[02:58:58]   ✓  94  Project Coordinator @ pavago (United States (Remote)) — title 'project coordinator' +50; keywords [workflow, cross-functional, project management, project coordination] +28; location 'remote' +10; title lev
-[02:58:58]   ✓ 100  Project Coordinator @ pavago (Belize (Remote)) — title 'project coordinator' +50; keywords [construction, workflow, cross-functional, project management] +35; location 'remote' +10; title level +6
-[02:58:58]   ✓  58  Property Maintenance Coordinator @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, vendor, scheduling, inspection] +20; location 'remote' +10; title level +6
-[02:58:58]   ✓  83  Real Estate Operations Coordinator @ pavago (Oman (Remote)) — title 'operations coordinator' +50; keywords [workflow, vendor, inspection, ownership] +17; location 'remote' +10; title level +6
-[02:58:58]   ✓  51  Recruiting Coordinator @ pavago (United Arab Emirates (Remote)) — title 'coordinator' +22; keywords [workflow, scheduling, ownership, documentation] +13; location 'remote' +10; title level +6
-[02:58:58]   ✓  52  Risk Analyst @ pavago (United States (Remote)) — title 'analyst' +22; keywords [process improvement, cross-functional, data analysis, vendor] +33; location 'remote' +10; 'healthcare' -15; title level
-[02:58:58]   ✓  55  Travel Concierge & Operations Specialist @ pavago (United States (Remote)) — title 'operations' +25; keywords [workflow, vendor, stakeholder, excel] +17; location 'remote' +10; title level +3
-[02:58:58]   ✓  48  Project Manager (Lab Systems Optimization) @ techfirefly (San Francisco, California, Uni) — title 'project manager' +30; keywords [process improvement, workflow, cross-functional, project management] +28; title level -10
-[02:58:58]   ✓  67  Logistics Coordinator @ vestahome (Pico Rivera, California, Unite) — title 'logistics' +39; keywords [sop, workflow, cross-functional, stakeholder] +22; title level +6
-[02:58:58]   ✓  45  Logistics Trainer @ vestahome (Pico Rivera, California, Unite) — title 'logistics' +34; keywords [sop, excel, documentation] +11
-[02:58:58]   ✓  51  Operations Trainer @ vestahome (Hayward, California, United St) — title 'operations' +25; keywords [process improvement, sop, standard operating, workflow] +26
-[02:58:58]   ✓  45  Sales Enablement Coordinator @ vestahome (Los Angeles, California, Unite) — title 'coordinator' +22; keywords [workflow, excel] +7; location 'remote' +10; title level +6
-[02:58:58]   ✓  59  Project Manager, Load Flexibility @ clean-power-alliance (Los Angeles, California, Unite) — title 'project manager' +30; keywords [cross-functional, project management, vendor, stakeholder] +24; location 'remote' +10; title level -10; pay up 
-[02:58:58]   ✓  51  Project Manager, Settlements @ clean-power-alliance (United States (Remote)) — title 'project manager' +30; keywords [data analysis, stakeholder, excel, sql] +16; location 'remote' +10; title level -10; pay up to $156,532 +5
-[02:58:58]   ✓  48  Global Sourcing Procurement Manager @ botrista (San Francisco, California, Uni) — title 'procurement' +34; keywords [process improvement, cross-functional, vendor, supply chain] +24; title level -10
-[02:58:58]   ✓  56  Communications Analyst @ aretum (McLean, Virginia, United State) — title 'analyst' +22; keywords [workflow, cross-functional, stakeholder, excel] +17; location 'remote' +10; title level +2; pay up to $100,000 +5
-[02:58:58]   ✓  47  Facilities Asset Manager @ aretum (Arlington, Virginia, United St) — title 'facilities' +43; keywords [stakeholder, excel, procurement] +9; title level -10; pay up to $120,000 +5
-[02:58:58]   ✓  52  Human Resource Analyst @ aretum (McLean, Virginia, United State) — title 'analyst' +22; keywords [sop, standard operating, workflow, stakeholder] +23; title level +2; pay up to $135,000 +5
-[02:58:58]   ✓  84  Procurement Specialist @ aretum (Arlington, Virginia, United St) — title 'procurement' +34; keywords [process improvement, sop, standard operating, workflow] +32; location 'remote' +10; title level +3; pay up to $125,
-[02:58:58]   ✓  74  Procurement Specialist @ aretum (Arlington, Virginia, United St) — title 'procurement' +34; keywords [process improvement, sop, standard operating, workflow] +32; title level +3; pay up to $125,000 +5
-[02:58:58]   ✓  48  Customer Support Analyst (Legal Accounting) @ actionstep (Denver, Colorado, United State) — title 'analyst' +22; keywords [workflow, cross-functional, stakeholder, excel] +14; location 'remote' +10; title level +2
-[02:58:58]   ✓  47  AI Engineer - SDLC Process Improvement @ pierce (United States (Remote)) — title 'process improvement' +45; keywords [process improvement, workflow, cross-functional, excel] +17; location 'remote' +10; 'software engineer' -25
-[02:58:58]   ✓  59  Workday Business Analyst @ pierce (Jersey City, New Jersey, Unite) — title 'business analyst' +47; keywords [workflow, stakeholder, excel] +10; title level +2
-[02:58:58] Scored 348 new roles: 111 good fits, 237 below the bar, 2163 filtered out by title/location (finding and scoring took 4.3 min)
-[02:58:58] 1128 jobs queued; applying to up to 12 now
-[02:58:58] Time for this run: 25 min in all (28 of 1850 free Actions minutes used this month)
-[02:58:59] Accounts: ON (delgado@alumni.usc.edu)
-[02:58:59] → Product Costing & Operations Analyst - Apparel @ garan-incorporated (score 100)
-[02:59:04]       step 1: 11 fields (9 required)
-[02:59:04]       writer: gemini-pro: HTTP 400 [{
+[03:14:00] === autoapply run (LIVE) build 2026-09-29-n ===
+[03:14:00] Re-checking 5 jobs that were skipped by earlier bugs
+[03:14:01] Writer: essay questions will be answered by gemini-pro, gemini-flash, gemini-lite, groq, groq-20b, ollama (free tiers, in that order)
+[03:14:02] mail: logged in to delgado@alumni.usc.edu OK
+[03:15:21] Discovering jobs…
+[03:18:39]   greenhouse/airbnb: 158 open roles
+[03:18:39]   greenhouse/figma: 162 open roles
+[03:18:39]   greenhouse/robinhood: 162 open roles
+[03:18:39]   greenhouse/databricks: 882 open roles
+[03:18:39]   greenhouse/anthropic: 636 open roles
+[03:18:39]   greenhouse/coinbase: 209 open roles
+[03:18:39]   greenhouse/lyft: 186 open roles
+[03:18:39]   greenhouse/pinterest: 151 open roles
+[03:18:39]   greenhouse/reddit: 146 open roles
+[03:18:39]   greenhouse/twilio: 134 open roles
+[03:18:39]   greenhouse/cloudflare: 399 open roles
+[03:18:39]   greenhouse/datadog: 438 open roles
+[03:18:39]   greenhouse/mongodb: 397 open roles
+[03:18:39]   greenhouse/elastic: 390 open roles
+[03:18:39]   greenhouse/gitlab: 201 open roles
+[03:18:39]   greenhouse/okta: 348 open roles
+[03:18:39]   greenhouse/samsara: 241 open roles
+[03:18:39]   greenhouse/instacart: 125 open roles
+[03:18:39]   greenhouse/affirm: 175 open roles
+[03:18:39]   greenhouse/brex: 268 open roles
+[03:18:39]   greenhouse/flexport: 209 open roles
+[03:18:39]   greenhouse/oscar: 265 open roles
+[03:18:39]   greenhouse/spacex: 2610 open roles
+[03:18:39]   greenhouse/toast: 340 open roles
+[03:18:39]   greenhouse/verkada: 301 open roles
+[03:18:39]   greenhouse/nuro: 109 open roles
+[03:18:39]   greenhouse/scaleai: 191 open roles
+[03:18:39]   greenhouse/lucidmotors: 435 open roles
+[03:18:39]   greenhouse/stripe: 710 open roles
+[03:18:39]   greenhouse/doordashusa: 463 open roles
+[03:18:39]   greenhouse/aloyoga: 900 open roles
+[03:18:39]   greenhouse/thenewyorktimes: 140 open roles
+[03:18:39]   greenhouse/janestreet: 230 open roles
+[03:18:39]   greenhouse/onemedical: 408 open roles
+[03:18:39]   greenhouse/gomotive: 161 open roles
+[03:18:39]   greenhouse/reformation: 137 open roles
+[03:18:39]   greenhouse/riotgames: 167 open roles
+[03:18:39]   greenhouse/scopely: 173 open roles
+[03:18:39]   greenhouse/judihealth: 116 open roles
+[03:18:39]   greenhouse/voyagertechnologiesinc: 192 open roles
+[03:18:39]   greenhouse/trueanomalyinc: 187 open roles
+[03:18:39]   greenhouse/charliehealth: 268 open roles
+[03:18:39]   greenhouse/roku: 241 open roles
+[03:18:39]   greenhouse/grafanalabs: 119 open roles
+[03:18:39]   greenhouse/vailclinicincdbavailhealthhospital: 142 open roles
+[03:18:39]   greenhouse/fivetran: 189 open roles
+[03:18:39]   greenhouse/olsson: 420 open roles
+[03:18:39]   greenhouse/remotecom: 141 open roles
+[03:18:39]   greenhouse/relativity: 333 open roles
+[03:18:39]   greenhouse/icapitalnetwork: 210 open roles
+[03:18:39]   greenhouse/lpc: 117 open roles
+[03:18:39]   greenhouse/braze: 342 open roles
+[03:18:39]   greenhouse/addepar1: 102 open roles
+[03:18:39]   greenhouse/divergent: 112 open roles
+[03:18:39]   greenhouse/vast: 204 open roles
+[03:18:39]   greenhouse/cookunity: 161 open roles
+[03:18:39]   greenhouse/fanaticscollectibles: 175 open roles
+[03:18:39]   greenhouse/sonymusicentertainment: 139 open roles
+[03:18:39]   greenhouse/canonical: 306 open roles
+[03:18:39]   greenhouse/betterhelp: 164 open roles
+[03:18:39]   greenhouse/adyen: 210 open roles
+[03:18:39]   lever/palantir: 318 open roles
+[03:18:39]   lever/jobgether: 3862 open roles
+[03:18:39]   lever/flynncompanies: 170 open roles
+[03:18:39]   lever/gopuff: 788 open roles
+[03:18:39]   lever/buckmason: 247 open roles
+[03:18:39]   lever/arcteryx.com: 281 open roles
+[03:18:39]   lever/thinkahead: 145 open roles
+[03:18:39]   lever/solidcore: 268 open roles
+[03:18:39]   lever/zoox: 241 open roles
+[03:18:39]   lever/insomniacookies: 1231 open roles
+[03:18:39]   lever/shieldai: 589 open roles
+[03:18:39]   lever/dnb: 121 open roles
+[03:18:39]   lever/Aprio: 206 open roles
+[03:18:39]   lever/amityfdn: 120 open roles
+[03:18:39]   lever/boxlunch: 3688 open roles
+[03:18:39]   workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 163 open roles
+[03:18:39]   workday/salesforce/wd12/External_Career_Site/Salesforce: 161 open roles
+[03:18:39]   workday/workday/wd5/Workday/Workday: 137 open roles
+[03:18:39]   workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 110 open roles
+[03:18:39]   workday/autodesk/wd1/Ext/Autodesk: 116 open roles
+[03:18:39]   workday/target/wd5/targetcareers/Target: 159 open roles
+[03:18:39]   workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 109 open roles
+[03:18:39]   workday/pnc/wd5/External/PNC: 200 open roles
+[03:18:39]   workday/usc/wd5/ExternalUSCCareers/University of Southern California: 140 open roles
+[03:18:39]   workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 118 open roles
+[03:18:39]   workday/lmu/wd1/Careers/Loyola Marymount University: 113 open roles
+[03:18:39]   workday/disney/wd5/disneycareer/The Walt Disney Company: 106 open roles
+[03:18:39]   workday/fox/wd1/Domestic/Fox Corporation: 171 open roles
+[03:18:39]   workday/livenation/wd503/LNExternalSite/Live Nation: 280 open roles
+[03:18:39]   workday/iheartmedia/wd5/External_iHM/iHeartMedia: 108 open roles
+[03:18:39]   workday/skechers/wd5/One-career-site/Skechers: 101 open roles
+[03:18:39]   workday/amgen/wd1/Careers/Amgen: 192 open roles
+[03:18:39]   workday/huntsman/wd1/Huntsman/Huntsman: 149 open roles
+[03:18:39]   workday/cumminggroup/wd1/CGC/Cumming Group: 144 open roles
+[03:18:39]   workday/jll/wd1/jllcareers/JLL: 245 open roles
+[03:18:39]   workday/cw/wd1/External/Cushman & Wakefield: 204 open roles
+[03:18:39]   workday/msudenver/wd1/MSUDenver/Metropolitan State University of Denver: 118 open roles
+[03:18:39]   workday/davita/wd1/DKC_External/DaVita: 167 open roles
+[03:18:39]   workday/apog/wd1/Apogee/Apogee Enterprises: 128 open roles
+[03:18:39]   workday/wilsonco/wd5/Careers/Wilson & Company: 143 open roles
+[03:18:39]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 104 open roles
+[03:18:39]   workday/brookfield/wd5/brookfield/Brookfield: 129 open roles
+[03:18:39]   workday/avalonbay/wd5/AVBExternal/AvalonBay Communities: 126 open roles
+[03:18:39]   workday/citi/wd5/2/Citi: 105 open roles
+[03:18:39]   workday/tapestry/wd108/Tapestry_Careers/Tapestry: 129 open roles
+[03:18:39]   workday/pru/wd5/Careers/Prudential Financial: 167 open roles
+[03:18:39]   workday/dentsuaegis/wd3/DAN_GLOBAL/dentsu: 121 open roles
+[03:18:39]   workday/capitalone/wd12/Capital_One/Capital One: 181 open roles
+[03:18:39]   workday/accenture/wd103/AccentureCareers/Accenture: 469 open roles
+[03:18:39]   workable/nogigiddy: 1822 open roles
+[03:18:39]   workable/suppliedtalent: 172 open roles
+[03:18:39]   workable/serenity-mental-health-centers: 343 open roles
+[03:18:39]   workable/pacific-health-group: 191 open roles
+[03:18:39]   workable/pm2cm: 125 open roles
+[03:18:39]   workable/behavior-frontiers: 127 open roles
+[03:18:39]   workable/pavago: 2217 open roles
+[03:18:39]   bamboohr/apaveinc: 103 open roles
+[03:18:39]   breezy/american-logistics-authority: 2760 open roles
+[03:18:39]   greenhouse: 280 of 288 boards have openings (24761 roles)
+[03:18:39]   lever: 91 of 93 boards have openings (14528 roles)
+[03:18:39]   workday: 99 of 99 boards have openings (8733 roles)
+[03:18:39]   workable: 60 of 61 boards have openings (6258 roles)
+[03:18:39]   bamboohr: 4 of 4 boards have openings (207 roles)
+[03:18:39]   breezy: 6 of 6 boards have openings (2829 roles)
+[03:18:39]   ! workday/blackrock/wd1/BlackRock_Professional/BlackRock: 429 Client Error: Too Many Requests for url: https://blackrock.wd1.myworkdayjobs.com/wday/
+[03:18:39]   ! workday/mastercard/wd1/CorporateCareers/Mastercard: 429 Client Error: Too Many Requests for url: https://mastercard.wd1.myworkdayjobs.com/wday
+[03:18:39]   ! workday/nasdaq/wd1/Global_External_Site/Nasdaq: 429 Client Error: Too Many Requests for url: https://nasdaq.wd1.myworkdayjobs.com/wday/cxs
+[03:18:39]   ! workday/dowjones/wd1/Dow_Jones_Career/Dow Jones: 429 Client Error: Too Many Requests for url: https://dowjones.wd1.myworkdayjobs.com/wday/c
+[03:18:39]   ! workday/pvh/wd1/PVH_Careers/PVH: 429 Client Error: Too Many Requests for url: https://pvh.wd1.myworkdayjobs.com/wday/cxs/pv
+[03:18:39]   ! workday/pfizer/wd1/PfizerCareers/Pfizer: 429 Client Error: Too Many Requests for url: https://pfizer.wd1.myworkdayjobs.com/wday/cxs
+[03:18:39]   ! workday/tiaa/wd1/Search/TIAA: 429 Client Error: Too Many Requests for url: https://tiaa.wd1.myworkdayjobs.com/wday/cxs/t
+[03:18:39]   ! workday/mmc/wd1/MMC/Marsh McLennan: 429 Client Error: Too Many Requests for url: https://mmc.wd1.myworkdayjobs.com/wday/cxs/mm
+[03:18:39]   ! workday/medtronic/wd1/MedtronicCareers/Medtronic: 429 Client Error: Too Many Requests for url: https://medtronic.wd1.myworkdayjobs.com/wday/
+[03:18:39]   ! workday/danaher/wd1/DanaherJobs/Danaher: 429 Client Error: Too Many Requests for url: https://danaher.wd1.myworkdayjobs.com/wday/cx
+[03:18:39]   ! workday/edwards/wd5/edwardscareers/Edwards Lifesciences: 429 Client Error: Too Many Requests for url: https://edwards.wd5.myworkdayjobs.com/wday/cx
+[03:18:39]   agg/linkedin: 0 roles (cached)
+[03:18:39]   agg/remoteok: 16 roles (cached)
+[03:18:39]   agg/remotive: 0 roles (cached)
+[03:18:39]   agg/jicy: 13 roles (cached)
+[03:18:39]   agg/himalayas: 1 roles (cached)
+[03:18:39]   agg/wwr: 16 roles (cached)
+[03:18:39]   agg/themuse: 203 roles (cached)
+[03:18:45]   agg/workablejobs: 259 fetched, 139 pass the title/location filter
+[03:18:45]   agg/adzuna: 0 roles (cached)
+[03:18:45]   agg/jooble: 0 roles (cached)
+[03:18:49]   found 9 new company boards from aggregator listings: workable/techfirefly, workable/vestahome, workable/clean-power-alliance, workable/botrista, workable/aretum, workable/actionstep, workable/raveaerospace, workable/pierce
+[03:18:49]   workable: 9 of 9 boards have openings (179 roles)
+[03:18:49] 54230 open roles, 1853 new
+[03:18:50]   ✓  66  Branch Operations Coordinator Denver District @ wf (DENVER, CO) — title 'operations coordinator' +50; location 'denver' +10; title level +6
+[03:18:50]   ✓  75  Operations | Trading Operations Analyst | New-York @ flowdesk (New York, New York, United Sta) — title 'operations analyst' +50; keywords [workflow, excel, sql, ownership] +13; location 'new york' +10; title level +2
+[03:18:50]   ✓  91  Executive Operations Analyst @ simpleciti (Garden City, New York, United ) — title 'operations analyst' +50; keywords [process improvement, recent graduate, project management, vendor] +29; location 'new york' +10; title level 
+[03:18:50]   ✓ 100  Product Costing & Operations Analyst - Apparel @ garan-incorporated (New York, New York, United Sta) — title 'operations analyst' +50; keywords [process improvement, entry level, workflow, cross-functional] +35; location 'new york' +10; title level +2; 
+[03:18:50]   ✓  55  Production Coordinator @ garan-incorporated (New York, New York, United Sta) — title 'coordinator' +22; keywords [cross-functional, supply chain, excel, procurement] +17; location 'new york' +10; title level +6
+[03:18:50]   ✓  56  Client Operations & Finance Analyst @ theroninsociety (United States (Remote)) — title 'operations' +30; keywords [workflow, quickbooks, excel, documentation] +14; location 'remote' +10; title level +2
+[03:18:50]   ✓  84  Whiteshield Operations Analyst @ whiteshield (United Arab Emirates (Remote)) — title 'operations analyst' +50; keywords [process improvement, workflow, stakeholder, excel] +22; location 'remote' +10; title level +2
+[03:18:50]   ✓  50  Microsoft Dynamics 365 System Administrator @ mclane-global (Henderson, Colorado, United St) — keywords [process improvement, standard operating, workflow, cross-functional] +35; location 'colorado' +10; pay up to $95,000 +5
+[03:18:50]   ✓  62  Order Planner @ mclane-global (Henderson, Colorado, United St) — title 'planner' +30; keywords [process improvement, standard operating, cross-functional, supply chain] +22; location 'colorado' +10
+[03:18:50]   ✓  47  Infrastructure & Operations Engineer @ cloudshare (Denver, Colorado, United State) — title 'operations' +25; keywords [workflow, ownership] +7; location 'denver' +10; pay up to $125,000 +5
+[03:18:50]   ✓  47  Facilities Assessment Field Supervisor @ pm2cm (Los Angeles, California, Unite) — title 'facilities' +38; keywords [construction, excel, inspection, documentation] +14; location 'los angeles' +10; 'healthcare' -15
+[03:18:50]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (Pomona, California, United Sta) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (San Bernardino, California, Un) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  46  Field Engagement Project Manager - Hybrid @ pm2cm (Riverside, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  56  Field Engagement Project Manager-Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
+[03:18:50]   ✓  56  Field Engagement Project Manager-Hybrid @ pm2cm (Santa Ana, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'santa ana' +10; title level -10
+[03:18:50]   ✓  82  Junior Project Controls Estimator @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
+[03:18:50]   ✓  92  Junior Project Controls Estimator @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; location 'los angeles' +10; title level 
+[03:18:50]   ✓  82  Junior Project Controls Estimator @ pm2cm (San Bernardino, California, Un) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
+[03:18:50]   ✓  82  Junior Project Controls Estimator @ pm2cm (Riverside, California, United ) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; title level +12
+[03:18:50]   ✓ 100  Junior Project Controls Specialist - Scheduler @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +50; keywords [recent graduate, construction, project management, stakeholder] +27; location 'los angeles' +10; title level +
+[03:18:50]   ✓  64  Junior Scheduler @ pm2cm (Los Angeles, California, Unite) — title 'scheduler' +28; keywords [construction, draw, excel, scheduling] +14; location 'los angeles' +10; title level +12
+[03:18:50]   ✓  53  Program Coordinator @ pm2cm (Monterey Park, California, Uni) — title 'program' +27; keywords [project management, project coordination, stakeholder, excel] +20; title level +6
+[03:18:50]   ✓  66  Project Controls Analyst - Scheduler @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [construction, stakeholder, excel, scheduling] +14; title level +2
+[03:18:50]   ✓  67  Project Controls Engineer @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, project management, data analysis, stakeholder] +22
+[03:18:50]   ✓  80  Project Controls Estimator I @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +25; location 'los angeles' +10
+[03:18:50]   ✓  79  Project Controls Estimator I Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10
+[03:18:50]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (Davis, California, United Stat) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
+[03:18:50]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (San Diego, California, United ) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
+[03:18:50]   ✓  69  Project Controls Estimator I Hybrid @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24
+[03:18:50]   ✓  67  Project Controls Estimator II Hybrid @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10; asks 4+ yrs -12
+[03:18:50]   ✓  65  Project Controls Scheduler @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [construction, project management, stakeholder, scheduling] +15
+[03:18:50]   ✓  56  Project Controls Specialist @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, cross-functional, project management, stakeholder] +22; location 'los angeles' +10; title level 
+[03:18:50]   ✓  61  Project Controls Specialist - Cost @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +45; keywords [standard operating, construction, excel] +13; title level +3
+[03:18:50]   ✓  68  Project Controls Specialist - Cost Analyst @ pm2cm (Monterey Park, California, Uni) — title 'project controls' +50; keywords [standard operating, construction, excel] +13; title level +5
+[03:18:50]   ✓  61  Project Controls Specialist - Cost Engineer @ pm2cm (Pomona, California, United Sta) — title 'project controls' +45; keywords [standard operating, construction, excel] +13; title level +3
+[03:18:50]   ✓  59  Project Controls Specialist - Cost Estimating @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, vendor, stakeholder] +25; location 'los angeles' +10; title level +3; asks 5
+[03:18:50]   ✓  77  Project Coordinator @ pm2cm (Monterey Park, California, Uni) — title 'project coordinator' +50; keywords [construction, project management, stakeholder, excel] +21; title level +6
+[03:18:50]   ✓  83  Project Coordinator -Labor Compliance Analyst @ pm2cm (Monterey Park, California, Uni) — title 'project coordinator' +50; keywords [construction, project management, project coordination, stakeholder] +25; title level +8
+[03:18:50]   ✓  53  Project Engineer @ pm2cm (Monterey Park, California, Uni) — title 'project engineer' +32; keywords [construction, project management, stakeholder, excel] +21
+[03:18:50]   ✓  59  Project Manager @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [construction, project management, stakeholder, draw] +24; location 'los angeles' +10; title level -10; pay up t
+[03:18:50]   ✓  46  Project Manager @ pm2cm (Pomona, California, United Sta) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  46  Project Manager @ pm2cm (San Bernardino, California, Un) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  46  Project Manager @ pm2cm (Riverside, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  46  Project Manager @ pm2cm (San Diego, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; title level -10
+[03:18:50]   ✓  56  Project Manager @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
+[03:18:50]   ✓  56  Project Manager II @ pm2cm (Los Angeles, California, Unite) — title 'project manager' +30; keywords [sop, construction, project management, draw] +26; location 'los angeles' +10; title level -10
+[03:18:50]   ✓  53  Project Manager II Hybrid @ pm2cm (Santa Ana, California, United ) — title 'project manager' +30; keywords [sop, construction, project management, scheduling] +23; location 'santa ana' +10; title level -10
+[03:18:50]   ✓  52  Scheduling & Project Controls Specialist @ pm2cm (Los Angeles, California, Unite) — title 'project controls' +45; keywords [construction, project management, stakeholder, excel] +18; location 'los angeles' +10; title level +3; asks 5+
+[03:18:50]   ✓  45  Final Mile Site Operations Analyst (EM7200) @ samsung-sds-america (Coppell, Texas, United States) — title 'operations analyst' +50; keywords [sop, standard operating, workflow, cross-functional] +32; 'healthcare' -15; title level +2; asks 5+ yrs -24
+[03:18:50]   ✓  57  Logistics Innovation Project Specialist (EM7174) @ samsung-sds-america (Duluth, Georgia, United States) — title 'logistics' +34; keywords [sop, industrial engineering, workflow, cross-functional] +35; 'healthcare' -15; title level +3
+[03:18:50]   ✓  46  Logistics Pricing Analyst (EM7196) @ samsung-sds-america (Plano, Texas, United States) — title 'logistics' +39; keywords [process improvement, cross-functional, data analysis, vendor] +35; 'quota' -15; 'healthcare' -15; title level +2
+[03:18:50]   ✓  71  Legal Operations Specialist @ the-lemon-pros (Beverly Hills, California, Uni) — title 'operations' +25; keywords [process improvement, standard operating, workflow, project management] +33; location 'beverly hills' +10; title leve
+[03:18:50]   ✓  55  Pricing Analyst @ resource-innovations (United States (Remote)) — title 'analyst' +22; keywords [process improvement, cross-functional, excel, documentation] +16; location 'remote' +10; title level +2; pay up to $80,
+[03:18:50]   ✓  70  Business Operations Manager, Partnerships @ fluent (New York, New York, United Sta) — title 'business operations' +50; keywords [workflow, cross-functional, project management, documentation] +15; location 'new york' +10; title level -1
+[03:18:50]   ✓  45  Partnerships Operations Manager @ fluent (New York, New York, United Sta) — title 'operations' +25; keywords [workflow, cross-functional, project management, documentation] +15; location 'new york' +10; title level -10; pay up
+[03:18:50]   ✓  51  Construction Project Manager - Community College Bond Program ($5M-$100M) @ maas-companies (Los Angeles, California, Unite) — title 'project manager' +35; keywords [sop, construction, draw, ownership] +16; location 'los angeles' +10; title level -10
+[03:18:50]   ✓  62  Project Engineer / Assistant Project Manager - K-12 School Modernization @ maas-companies (Murrieta, California, United S) — title 'project engineer' +37; keywords [sop, construction, draw, excel] +22; title level -2; pay up to $145,000 +5
+[03:18:50]   ✓  57  Structural Engineer (PE) - QA/QC Plan Reviewer, K-12 School Facilities @ maas-companies (Monterey Park, California, Uni) — title 'facilities' +38; keywords [sop, construction, draw, ownership] +19
+[03:18:50]   ✓  56  Product Development Coordinator @ shameless-foods (Santa Ana, California, United ) — title 'coordinator' +22; keywords [workflow, cross-functional, project management, vendor] +25; location 'santa ana' +10; title level +6; pay up to $7
+[03:18:50]   ✓  52  Financial Analyst @ ejam (United States (Remote)) — title 'analyst' +22; keywords [quickbooks, vendor, excel, sql] +23; location 'remote' +10; 'hris' -10; title level +2; pay up to $100,000 +5
+[03:18:50]   ✓  59  Product Development Coordinator @ ejam (Santa Ana, California, United ) — title 'coordinator' +22; keywords [workflow, cross-functional, project management, vendor] +28; location 'santa ana' +10; title level +6; pay up to $7
+[03:18:50]   ✓  80  Retail Operations Coordinator @ ejam (Santa Ana, California, United ) — title 'operations coordinator' +50; keywords [vendor, supply chain, excel, documentation] +14; location 'santa ana' +10; title level +6
+[03:18:50]   ✓  66  Logistics Coordinator @ punchstudio (Culver City, California, Unite) — title 'logistics' +39; keywords [vendor, supply chain, excel] +11; location 'culver city' +10; title level +6
+[03:18:50]   ✓  66  Logistics Coordinator @ punchstudio (Culver City, California, Unite) — title 'logistics' +39; keywords [vendor, supply chain, excel] +11; location 'culver city' +10; title level +6
+[03:18:50]   ✓  80  Product Operations Assistant @ punchstudio (Culver City, California, Unite) — title 'product operations' +45; keywords [project management, vendor, stakeholder, excel] +17; location 'culver city' +10; title level +8
+[03:18:50]   ✓  58  Exenta ERP Analyst @ bci-brands (New York, New York, United Sta) — title 'analyst' +22; keywords [sop, workflow, project management, excel] +19; location 'new york' +10; title level +2; pay up to $125,000 +5
+[03:18:50]   ✓  53  Product Development Coordinator - Fashion/Apparel @ bci-brands (New York, New York, United Sta) — title 'coordinator' +22; keywords [vendor, stakeholder, excel] +10; location 'new york' +10; title level +6; pay up to $80,000 +5
+[03:18:50]   ✓  45  Production Coordinator @ bci-brands (New York, New York, United Sta) — title 'coordinator' +22; keywords [vendor, excel] +7; location 'new york' +10; title level +6
+[03:18:50]   ✓  53  Wholesale Chargeback Analyst @ bci-brands (New York, New York, United Sta) — title 'analyst' +22; keywords [cross-functional, vendor, excel, ownership] +14; location 'new york' +10; title level +2; pay up to $85,000 +5
+[03:18:50]   ✓  57  Facilities Superintendent @ earthcam (Upper Saddle River, New Jersey) — title 'facilities' +38; keywords [construction, project management, vendor, excel] +19
+[03:18:50]   ✓  47  Product Support Coordinator @ earthcam (Upper Saddle River, New Jersey) — title 'coordinator' +22; keywords [construction, data analysis, vendor, ownership] +19; title level +6
+[03:18:50]   ✓  46  Project Coordinator @ softheon (United States (Remote)) — title 'project coordinator' +50; keywords [early career, sop, cross-functional, project management] +35; location 'remote' +10; 'healthcare' -15; titl
+[03:18:50]   ✓  99  Business Operations Coordinator @ pavago (Belize (Remote)) — title 'operations coordinator' +50; keywords [sop, construction, workflow, vendor] +33; location 'remote' +10; title level +6
+[03:18:50]   ✓  63  Customer Operations Specialist @ pavago (Oman (Remote)) — title 'customer operations' +43; keywords [process improvement, workflow, excel, ownership] +19; location 'remote' +10; title level +3; asks 4+ yrs -1
+[03:18:50]   ✓  51  Customer Service & Dispatch Coordinator - (HVAC & Trades) @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, scheduling, ownership, documentation] +13; location 'remote' +10; title level +6
+[03:18:51]   ✓  70  Executive Marketing Coordinator - Operations Support @ pavago (United States (Remote)) — title 'operations' +30; keywords [workflow, project management, project coordination, excel] +24; location 'remote' +10; title level +6
+[03:18:51]   ✓  47  Financial Planning Analyst @ pavago (United States (Remote)) — title 'analyst' +22; keywords [process improvement, workflow, excel] +13; location 'remote' +10; title level +2
+[03:18:51]   ✓  48  Marketing Coordinator @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, excel, ownership] +10; location 'remote' +10; title level +6
+[03:18:51]   ✓ 100  Operations Coordinator @ pavago (United States (Remote)) — title 'operations coordinator' +50; keywords [process improvement, sop, workflow, cross-functional] +35; location 'remote' +10; title level +6
+[03:18:51]   ✓  94  Project Coordinator @ pavago (United States (Remote)) — title 'project coordinator' +50; keywords [workflow, cross-functional, project management, project coordination] +28; location 'remote' +10; title lev
+[03:18:51]   ✓ 100  Project Coordinator @ pavago (Belize (Remote)) — title 'project coordinator' +50; keywords [construction, workflow, cross-functional, project management] +35; location 'remote' +10; title level +6
+[03:18:51]   ✓  58  Property Maintenance Coordinator @ pavago (United States (Remote)) — title 'coordinator' +22; keywords [workflow, vendor, scheduling, inspection] +20; location 'remote' +10; title level +6
+[03:18:51]   ✓  83  Real Estate Operations Coordinator @ pavago (Oman (Remote)) — title 'operations coordinator' +50; keywords [workflow, vendor, inspection, ownership] +17; location 'remote' +10; title level +6
+[03:18:51]   ✓  51  Recruiting Coordinator @ pavago (United Arab Emirates (Remote)) — title 'coordinator' +22; keywords [workflow, scheduling, ownership, documentation] +13; location 'remote' +10; title level +6
+[03:18:51]   ✓  52  Risk Analyst @ pavago (United States (Remote)) — title 'analyst' +22; keywords [process improvement, cross-functional, data analysis, vendor] +33; location 'remote' +10; 'healthcare' -15; title level
+[03:18:51]   ✓  55  Travel Concierge & Operations Specialist @ pavago (United States (Remote)) — title 'operations' +25; keywords [workflow, vendor, stakeholder, excel] +17; location 'remote' +10; title level +3
+[03:18:51]   ✓  48  Project Manager (Lab Systems Optimization) @ techfirefly (San Francisco, California, Uni) — title 'project manager' +30; keywords [process improvement, workflow, cross-functional, project management] +28; title level -10
+[03:18:51]   ✓  67  Logistics Coordinator @ vestahome (Pico Rivera, California, Unite) — title 'logistics' +39; keywords [sop, workflow, cross-functional, stakeholder] +22; title level +6
+[03:18:51]   ✓  45  Logistics Trainer @ vestahome (Pico Rivera, California, Unite) — title 'logistics' +34; keywords [sop, excel, documentation] +11
+[03:18:51]   ✓  51  Operations Trainer @ vestahome (Hayward, California, United St) — title 'operations' +25; keywords [process improvement, sop, standard operating, workflow] +26
+[03:18:51]   ✓  45  Sales Enablement Coordinator @ vestahome (Los Angeles, California, Unite) — title 'coordinator' +22; keywords [workflow, excel] +7; location 'remote' +10; title level +6
+[03:18:51]   ✓  59  Project Manager, Load Flexibility @ clean-power-alliance (Los Angeles, California, Unite) — title 'project manager' +30; keywords [cross-functional, project management, vendor, stakeholder] +24; location 'remote' +10; title level -10; pay up 
+[03:18:51]   ✓  51  Project Manager, Settlements @ clean-power-alliance (United States (Remote)) — title 'project manager' +30; keywords [data analysis, stakeholder, excel, sql] +16; location 'remote' +10; title level -10; pay up to $156,532 +5
+[03:18:51]   ✓  48  Global Sourcing Procurement Manager @ botrista (San Francisco, California, Uni) — title 'procurement' +34; keywords [process improvement, cross-functional, vendor, supply chain] +24; title level -10
+[03:18:51]   ✓  56  Communications Analyst @ aretum (McLean, Virginia, United State) — title 'analyst' +22; keywords [workflow, cross-functional, stakeholder, excel] +17; location 'remote' +10; title level +2; pay up to $100,000 +5
+[03:18:51]   ✓  47  Facilities Asset Manager @ aretum (Arlington, Virginia, United St) — title 'facilities' +43; keywords [stakeholder, excel, procurement] +9; title level -10; pay up to $120,000 +5
+[03:18:51]   ✓  52  Human Resource Analyst @ aretum (McLean, Virginia, United State) — title 'analyst' +22; keywords [sop, standard operating, workflow, stakeholder] +23; title level +2; pay up to $135,000 +5
+[03:18:51]   ✓  84  Procurement Specialist @ aretum (Arlington, Virginia, United St) — title 'procurement' +34; keywords [process improvement, sop, standard operating, workflow] +32; location 'remote' +10; title level +3; pay up to $125,
+[03:18:51]   ✓  74  Procurement Specialist @ aretum (Arlington, Virginia, United St) — title 'procurement' +34; keywords [process improvement, sop, standard operating, workflow] +32; title level +3; pay up to $125,000 +5
+[03:18:51]   ✓  48  Customer Support Analyst (Legal Accounting) @ actionstep (Denver, Colorado, United State) — title 'analyst' +22; keywords [workflow, cross-functional, stakeholder, excel] +14; location 'remote' +10; title level +2
+[03:18:51]   ✓  47  AI Engineer - SDLC Process Improvement @ pierce (United States (Remote)) — title 'process improvement' +45; keywords [process improvement, workflow, cross-functional, excel] +17; location 'remote' +10; 'software engineer' -25
+[03:18:51]   ✓  59  Workday Business Analyst @ pierce (Jersey City, New Jersey, Unite) — title 'business analyst' +47; keywords [workflow, stakeholder, excel] +10; title level +2
+[03:18:51] Scored 298 new roles: 103 good fits, 195 below the bar, 1555 filtered out by title/location (finding and scoring took 4.8 min)
+[03:18:51] 1120 jobs queued; applying to up to 12 now
+[03:18:51] Time for this run: 25 min in all (28 of 1850 free Actions minutes used this month)
+[03:18:53] Accounts: ON (delgado@alumni.usc.edu)
+[03:18:53] → Product Costing & Operations Analyst - Apparel @ garan-incorporated (score 100)
+[03:18:58]       step 1: 11 fields (9 required)
+[03:18:58]       writer: gemini-pro: HTTP 400 [{
   "error": {
     "code": 400,
     "message": "Please pass a valid API key",
     "statu
-[02:59:04]       writer: gemini-flash: HTTP 400 [{
+[03:18:58]       writer: gemini-flash: HTTP 400 [{
   "error": {
     "code": 400,
     "message": "Please pass a valid API key",
     "sta
-[02:59:04]       writer: gemini-lite: HTTP 400 [{
+[03:18:58]       writer: gemini-lite: HTTP 400 [{
   "error": {
     "code": 400,
     "message": "Please pass a valid API key",
     "stat
-[02:59:04]       writer: groq: HTTP 401 {"error":{"message":"Invalid API Key","type":"invalid_request_error","code":"invalid_api_key"}}
-[02:59:05]       writer: groq-20b: HTTP 401 {"error":{"message":"Invalid API Key","type":"invalid_request_error","code":"invalid_api_ke
-[02:59:05]       writer: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /v1/chat/completions (Caused 
-[02:59:05]       writer unavailable for cover letter (gemini-pro: HTTP 400 [{
-  "error": {
-    "code": 400,
-    "message": "Please pas)
-[02:59:05]       (writer gave nothing: used the standard background answer)
-[02:59:05]       (writer gave nothing: used the standard background answer)
-[02:59:05]       (writer gave nothing: used the standard background answer)
-[03:00:47]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'ble to begin employment? Within two weeks Within three to four weeks More than four weeks I would need to discuss timing Submit application View website View all jobs Help Accessibility Cookie settings Powered byWorkab
-[03:00:50] → Junior Project Controls Specialist - Scheduler @ pm2cm (score 100)
-[03:00:54]       step 1: 10 fields (3 required)
-[03:02:34]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: ' (Optional) Resume (Optional) briandelgado_ resume.pdf Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
-[03:02:40] → Operations Coordinator @ pavago (score 100)
-[03:02:44]       step 1: 13 fields (13 required)
-[03:02:44]       (writer gave nothing: used the standard background answer)
-[03:02:44]       (writer gave nothing: used the standard background answer)
-[03:02:44]       (writer gave nothing: used the standard background answer)
-[03:02:44]       (writer gave nothing: used the standard background answer)
-[03:02:44]       (writer gave nothing: used the standard background answer)
-[03:04:33]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'ips and tracking SLAs? * Please share your LinkedIn profile. * What is your salary expectations per month in USD for this role? Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
-[03:04:37] → Project Coordinator @ pavago (score 100)
-[03:04:41]       step 1: 13 fields (13 required)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:04:41]       (writer gave nothing: used the standard background answer)
-[03:06:29]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'd and audit-ready? * What is your salary expectations per month in USD for this role? * Please share your LinkedIn Profile URL. Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
-[03:06:38] → Business Operations Coordinator @ pavago (score 99)
-[03:06:42]       step 1: 11 fields (11 required)
-[03:06:42]       (writer gave nothing: used the standard background answer)
-[03:06:42]       (writer gave nothing: used the standard background answer)
-[03:06:42]       (writer gave nothing: used the standard background answer)
-[03:08:50]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'riefly describe your experience. * Have you managed invoicing and payment follow-ups? If yes, briefly describe your experience. Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
-[03:08:55] → People Operations Associate @ gemini (score 98)
-[03:09:04]       step 1: 17 fields (12 required)
-[03:09:32]     ✗ not sent (the form rejected it): the form was rejected, not sent; page errors: ['Resume/CV*', 'Resume/CV is required.']
-[03:09:37] → Artist Management & Operations Associate @ livenation (score 94)
-[03:10:10]     ✗ blocked: no application form found on page
-[03:10:18] → Project Coordinator @ smb-team (score 94)
-[03:10:39]       step 1: 12 fields (4 required)
-[03:10:39]       (writer gave nothing: used the standard background answer)
-[03:12:40]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'ect management tools (HubSpot, Asana, or similar)? YES NO * Do you have experience in client-facing roles at digital marketing/agency enviroments? YES NO * Do you have basic WordPress knowledge? YES NO Submit applicati
-[03:12:48] → Project Coordinator @ weekday-ai (score 94)
-[03:13:09]       step 1: 5 fields (5 required)
+[03:19:02]       writer: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /v1/chat/completions (Caused 
+[03:22:53]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'ble to begin employment? Within two weeks Within three to four weeks More than four weeks I would need to discuss timing Submit application View website View all jobs Help Accessibility Cookie settings Powered byWorkab
+[03:23:01] → Junior Project Controls Specialist - Scheduler @ pm2cm (score 100)
+[03:23:04]       step 1: 10 fields (3 required)
+[03:24:06]       writer: cover letter only 253 words, asking for a full page
+[03:27:20]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: ' (Optional) Resume (Optional) briandelgado_ resume.pdf Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
+[03:27:26] → Operations Coordinator @ pavago (score 100)
+[03:27:30]       step 1: 13 fields (13 required)
+[03:35:17]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page ends: 'ips and tracking SLAs? * Please share your LinkedIn profile. * What is your salary expectations per month in USD for this role? Submitting… View website View all jobs Help Accessibility Cookie settings Powered byWorkab
+[03:35:22] → Project Coordinator @ pavago (score 100)
+[03:35:26]       step 1: 13 fields (13 required)
+[03:43:28]     ✗ failed: took longer than 8 minutes on this site
+[03:43:36] Run time limit reached (25 min): the rest waits for the next run
+[03:43:37] Summary: 3 unconfirmed, 1 failed, 99 queued, 195 low_score, 1557 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-09-30.md
+[03:43:37]   by site  workable: 3 unconfirmed, 1 failed
+[03:43:38] Summary emailed to delgado@alumni.usc.edu
