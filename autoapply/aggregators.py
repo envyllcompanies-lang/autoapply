@@ -302,6 +302,12 @@ def workablejobs(cfg, base="https://jobs.workable.com"):
                 seen.add(j.get("id"))
                 loc = j.get("locations")
                 loc = ", ".join(loc) if isinstance(loc, list) else (loc or "")
+                where = j.get("location") if isinstance(j.get("location"), dict) else {}
+                country = (where.get("countryName") or "").strip()
+                if country and not re.search(r"united states|^usa?$|^u\.s", country, re.I):
+                    continue                    # a remote job open only to people in another country
+                if country and country.lower() not in loc.lower():
+                    loc = ", ".join(x for x in (where.get("city"), where.get("subregion"), country) if x) or loc
                 if str(j.get("workplace", "")).lower() == "remote" and "remote" not in loc.lower():
                     loc = f"{loc} (Remote)".strip()
                 comp = j.get("company") or {}

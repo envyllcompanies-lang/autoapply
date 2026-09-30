@@ -114,7 +114,8 @@ def _settle(page, ms=2500):
 
 def _verify_email(page, acc: Accounts, since: float, log):
     if not mailbox.configured():
-        raise AuthBlocked("account needs email verification but no mailbox is configured (IMAP_USER / IMAP_PASS)")
+        why = mailbox.disabled_reason() or "IMAP_USER / IMAP_PASS not set"
+        raise AuthBlocked(f"account needs email verification but the inbox can't be read ({why}): fix the app password and it will work")
     log("      account: waiting for the verification email…")
     res = mailbox.wait_for_verification(since_ts=since, host_hint=acc.host(page.url).split(".")[0], log=log)
     if not res:

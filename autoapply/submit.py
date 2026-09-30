@@ -231,6 +231,10 @@ class Unanswerable(Exception):
     pass
 
 
+class NotSubmitted(Exception):
+    """The site rejected the form (validation errors still showing): nothing was sent, safe to retry later."""
+
+
 class Unconfirmed(Exception):
     """Submit was clicked but no confirmation appeared: it may or may not have gone through, so it is never retried."""
     t0: float = 0.0
@@ -567,9 +571,35 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
             elif kind == "file":
                 path = files.get(str(val).upper())
                 if path:
-                    el.set_input_files(str(path))
+                    _upload(page, el, path, f, log)
         except Exception as e:
             log(f"      ! could not fill '{f.get('label','')[:50]}': {str(e).splitlines()[0]}")
+
+
+def _upload(page, el, path, f, log):
+    """Attach a file and make sure the page really registered it (React forms sometimes ignore a bare set_input_files)."""
+    def has_file():
+        try:
+            return bool(el.evaluate("e => e.files && e.files.length"))
+        except Exception:
+            return False
+    el.set_input_files(str(path))
+    page.wait_for_timeout(1200)
+    if has_file():
+        return
+    log(f"      ! upload for '{f.get('label','')[:40]}' did not register, retrying with the file chooser")
+    try:
+        with page.expect_file_chooser(timeout=6000) as fc:
+            el.evaluate("e => { e.value=''; e.click(); }")
+        fc.value.set_files(str(path))
+    except Exception:
+        try:
+            with page.expect_file_chooser(timeout=6000) as fc:
+                page.get_by_role("button", name=re.compile(r"attach|upload|browse|choose|select file", re.I)).locator("visible=true").first.click()
+            fc.value.set_files(str(path))
+        except Exception as e:
+            log(f"      ! file chooser retry failed: {str(e).splitlines()[0][:100]}")
+    page.wait_for_timeout(1200)
 
 
 def verify(page, fields: list[dict], answers: dict, log=print):
@@ -674,9 +704,11 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
             if (b := _blocker(page)):
                 raise Blocked(f"{b} after submit")
         errs = _page_errors(page)
+        if errs and page.url == before_url and re.search(r"required|invalid|please (enter|select|provide|upload|choose)|must |missing", " ".join(errs), re.I):
+            raise NotSubmitted(f"the form was rejected, not sent; page errors: {errs}")
         tail = " ".join(page.inner_text("body").split())[-220:]
         msg = "no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}"
-    except (Blocked, Unconfirmed):
+    except (Blocked, Unconfirmed, NotSubmitted):
         raise
     except Exception as ex:              # page closed / navigated away after the click: the submit may have gone through
         msg = f"no confirmation after submit (page error after click: {str(ex).splitlines()[0][:120]})"
@@ -757,7 +789,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 return "dry_run"
             try:
                 result = submit(page, btn=btn, on_click=on_click)
-            except Unconfirmed:
+            except (Unconfirmed, NotSubmitted):
                 page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
                 raise
             page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)

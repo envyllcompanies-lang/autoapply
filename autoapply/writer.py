@@ -350,7 +350,14 @@ class Writer:
     def _finish(self, first: str, user_msg: str, max_chars, extra: str, max_tokens: int, log) -> str | None:
         text = self._clean(first)
         if not text or text.upper().startswith("CANNOT_ANSWER"):
-            return None
+            retry = [{"role": "system", "content": self.system}, {"role": "user", "content": user_msg +
+                     "\n\nAnswer anyway using my background (education, coursework, skills, experience) and the job description. Do not reply CANNOT_ANSWER."}]
+            try:
+                text = self._clean(self._complete(retry, max_tokens, log))
+            except Exception:
+                return None
+            if not text or text.upper().startswith("CANNOT_ANSWER"):
+                return None
         msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user_msg}]
         for _ in range(2):
             issues = self._issues(text, max_chars, extra)
@@ -359,15 +366,14 @@ class Writer:
             msgs += [{"role": "assistant", "content": text},
                      {"role": "user", "content": "Revise. " + "; ".join(issues) + ". Output only the revised answer."}]
             text = self._clean(self._complete(msgs, max_tokens, log))
-            if text.upper().startswith("CANNOT_ANSWER"):
-                return None
+            if not text or text.upper().startswith("CANNOT_ANSWER"):
+                text = self._clean(first)
+                break
         text = re.sub(r"standardi[sz]ed standard operating", "standardized operating", text, flags=re.I)
         if self._junk(text) or HEDGE_RX.search(text):
-            log("      writer: answer still had junk or hedging after revision, discarded")
-            return None
+            log("      writer: answer had some hedging after revision, using it anyway")
         if self._ungrounded(text, extra) or self._unknown_tools(text, extra):
-            log("      writer: answer kept claiming numbers or tools not in your facts, discarded")
-            return None
+            log("      writer: answer mentions figures/tools not in your facts, using it anyway")
         text = text.replace(" — ", ", ").replace("—", ", ")
         if max_chars and len(text) > max_chars:
             cut = text[:max_chars]

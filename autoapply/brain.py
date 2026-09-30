@@ -193,7 +193,7 @@ def pick_option(options: list[str], want) -> str | None:
 
 
 HUMAN_CHECK_RX = re.compile(r"not a robot|i'?m (a )?human|are you (a )?human|prove you|captcha|verify (that )?you are (a )?(human|person)|human verification", re.I)
-NEG_Q_RX = re.compile(r"\b(not|unable|cannot|can't|cant|won't|no longer|never)\b|n't\b", re.I)
+NEG_Q_RX = re.compile(r"\b(are|do|does|did|is|will|would|can|could|have|has)\s+(you\s+|there\s+)?(not|n't)\b|\b(unable to|cannot|can't|cant|won't)\b|\b(are|is)\s+not\b", re.I)
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
 
 
@@ -883,20 +883,35 @@ class Brain:
         return None
 
     def _write(self, f, low, kind):
-        if not self.writer or not self.writer.ready():
-            return None
         open_prompt = kind == "textarea" or (kind == "text" and len(f.get("label", "")) > 60 and PROMPT_RX.search(low))
         if not open_prompt:
             return None
         if not f.get("required") and not (self.cfg.get("writer", {}) or {}).get("answer_optional", False):
             return None
         question = f.get("label", "") + ((" " + f["question"]) if f.get("question") else "")
-        try:
-            return self.writer.answer(self._job, self._company_name(self._job), question.strip(),
-                                      limits_from_question(question, f.get("maxlength")), self._log)
-        except WriterUnavailable as e:
-            self._log(f"      writer unavailable: {str(e)[:100]}")
+        got = None
+        if self.writer and self.writer.ready():
+            try:
+                got = self.writer.answer(self._job, self._company_name(self._job), question.strip(),
+                                         limits_from_question(question, f.get("maxlength")), self._log)
+            except WriterUnavailable as e:
+                self._log(f"      writer unavailable: {str(e)[:100]}")
+        if not got and f.get("required"):
+            got = self._fallback_text(f)
+        return got
+
+    def _fallback_text(self, f):
+        """Plain background-based answer used when the writer fails, so a required essay never skips the job."""
+        txt = (self.cfg.get("fallback_answer") or "").strip()
+        if not txt:
             return None
+        mx = f.get("maxlength")
+        if mx and len(txt) > mx:
+            cut = txt[:mx]
+            end = max(cut.rfind(". "), cut.rfind("."))
+            txt = cut[:end + 1] if end > mx * 0.4 else cut
+        self._log("      (writer gave nothing: used the standard background answer)")
+        return txt
 
     def _resolve(self, f, value, opts):
         if f["kind"] == "combobox" and not opts:

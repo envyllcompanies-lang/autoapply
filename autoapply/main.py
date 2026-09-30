@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, __version__
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-09-29-m"
+REQUEUE_VERSION = "2026-09-29-n"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -320,6 +320,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
     profile = yaml.safe_load((base / cfg.get("profile_file", "profile.yaml")).read_text())
     brain = Brain(cfg, profile, base, log)
+    mailbox.preflight(log)
     brain.applied_before = {r[0] for r in db.conn.execute(
         "SELECT DISTINCT company FROM jobs WHERE status IN ('applied','unconfirmed')")}
     _resolve_old_unconfirmed(db, brain, log)
@@ -411,6 +412,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             job = by_key.get(row["key"]) or stub_job(row)
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
+                continue
+            why_out = prefilter(job, s)               # safety net: a queued job that no longer passes today's filters is dropped
+            if why_out:
+                db.update(job.key, status="filtered", reason=why_out)
                 continue
             ck = (job.company.lower(), job.title.strip().lower())
             if nofind.get(job.source, 0) >= 2:
@@ -515,6 +520,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
                     dead.add(ck)
                     log(f"    ? submitted but NOT confirmed (will not retry; checked the inbox too): {str(e)[:260]}")
+            except sub.NotSubmitted as e:
+                db.update(job.key, status="failed", reason=str(e)[:300], attempts=row["attempts"] + 1)
+                log(f"    ✗ not sent (the form rejected it): {str(e)[:220]}")
             except sub.Unanswerable as e:
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)

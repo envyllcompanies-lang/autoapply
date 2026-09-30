@@ -392,6 +392,10 @@ FOREIGN = re.compile(
     r"thailand|bangalore|bengaluru|hyderabad|pune|mumbai|delhi|gurgaon|noida|seoul|tokyo|sydney|melbourne|manila|jakarta|tel aviv|berlin|"
     r"amsterdam|madrid|lisbon|warsaw|krakow|bucharest|zurich|munich|stockholm|copenhagen|vienna|brussels|cape town|johannesburg|nairobi|"
     r"lagos|cairo|riyadh|istanbul|sao paulo|buenos aires|bogota|lima|santiago|mexico city|shenzhen|shanghai|beijing|taipei|"
+    r"jamaica|costa rica|panama|peru|ecuador|uruguay|venezuela|dominican republic|guatemala|el salvador|honduras|nicaragua|bolivia|paraguay|"
+    r"trinidad|bahamas|barbados|nigeria|ghana|kenya|south africa|egypt|morocco|tunisia|pakistan|bangladesh|sri lanka|nepal|ukraine|serbia|croatia|"
+    r"bulgaria|hungary|czech|greece|turkey|russia|saudi|qatar|kuwait|bahrain|jordan|lebanon|belgium|austria|norway|finland|estonia|lithuania|latvia|"
+    r"slovakia|slovenia|cyprus|malta|iceland|luxembourg|belarus|georgia \(country\)|armenia|kazakhstan|uzbekistan|cambodia|myanmar|mongolia|"
     r"dach|nordics|benelux|anz|jp|kr|emea)\b", re.I)
 
 

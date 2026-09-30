@@ -106,6 +106,8 @@ def question_checks():
                           ("Proficiency in supply chain planning", ["No experience", "Basic", "Proficient", "Expert"], "Proficient")):
         check(ask(q, "select", opts) == want, f"proficiency rating wrong: {q} -> {ask(q, 'select', opts)!r}, want {want!r}")
     check(ask("Why are you leaving your current role?", "textarea", []).startswith("My most recent role"), "reason for leaving not answered")
+    check(ask("This role is required to be based near our New York City, NY hub. Are you open to relocation? If not, please explain.", "combobox", YN, loc="New York, NY") == "Yes", "relocation question containing 'if not' was skipped")
+    check(ask("Are you not currently authorized to work in the United States?", "radio", YN) is None, "negated authorization question must still be skipped")
     edu = ["High School", "Associate's", "Bachelor's", "Master's", "PhD"]
     table = [
         # work authorization and sponsorship
@@ -862,6 +864,30 @@ def direct_link_checks():
         sources.FETCHERS.clear(); sources.FETCHERS.update(old)
 
 
+def location_checks():
+    import yaml as _y
+    from autoapply.sources import Job, prefilter
+    sc = _y.safe_load((ROOT / "config.yaml").read_text())["search"]
+    for loc, bad in (("TELECOMMUTE, Jamaica (Remote)", True), ("TELECOMMUTE, Argentina", True), ("Costa Rica (Remote)", True), ("United States (Telecommute)", False), ("Remote", False),
+                     ("Remote - US", False)):
+        got = prefilter(Job("agg-workablejobs", "pavago", "1", "Project Coordinator", loc, "", "", ""), sc)
+        check(bool(got) == bad, f"location filter wrong for {loc!r}: {got!r}")
+    from autoapply import aggregators as A
+    api = {"jobs": [{"id": "a", "state": "published", "title": "Project Coordinator", "locations": ["TELECOMMUTE", "Argentina"], "workplace": "remote",
+                     "location": {"city": "", "countryName": "Argentina"}, "company": {"title": "Pavago"}, "url": "u1", "description": "x"},
+                    {"id": "b", "state": "published", "title": "Project Coordinator", "locations": ["TELECOMMUTE", "United States"], "workplace": "remote",
+                     "location": {"city": "", "countryName": "United States"}, "company": {"title": "SMB Team"}, "url": "u2", "description": "x"}]}
+    class _R:
+        def json(self): return api
+    old = A._get
+    A._get = lambda *a, **k: _R()
+    try:
+        got = A.workablejobs({"aggregators": {"queries": ["project coordinator"], "locations": []}})
+    finally:
+        A._get = old
+    check([j.job_id for j in got] == ["b"], f"Workable job board: only US-based remote jobs should stay, got {[j.job_id for j in got]}")
+
+
 def safety_checks():
     """Never double-submit, never a false 'applied'."""
     import re as _re
@@ -903,7 +929,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, safety_checks, direct_link_checks, open_form_checks):
+    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others

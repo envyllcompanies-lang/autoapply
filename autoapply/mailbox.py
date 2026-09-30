@@ -25,8 +25,35 @@ CONFIRM_SUBJECT = re.compile(r"thank(s| you) for (applying|your (application|int
                              r"application (has been )?(received|submitted)|you('ve| have) applied", re.I)
 NOT_CONFIRM = re.compile(r"security code|verification code|verify your|password|sign[- ]in|welcome to|job alert|newsletter|recommended", re.I)
 
+_DISABLED = ""          # set to a reason once the login has been refused, so we stop hammering the server
+
+
 def configured() -> bool:
-    return bool(os.environ.get("IMAP_USER") and os.environ.get("IMAP_PASS"))
+    return bool(os.environ.get("IMAP_USER") and os.environ.get("IMAP_PASS")) and not _DISABLED
+
+
+def disabled_reason() -> str:
+    return _DISABLED
+
+
+def preflight(log=print) -> bool:
+    """Try the mailbox login once at the start of a run. On a refused login, switch mail features off with a clear message."""
+    global _DISABLED
+    if not (os.environ.get("IMAP_USER") and os.environ.get("IMAP_PASS")):
+        _DISABLED = "IMAP_USER / IMAP_PASS are not set"
+        log("MAIL OFF: IMAP_USER / IMAP_PASS are not set. No confirmation reading, no summary emails, no email-verified sign-ups.")
+        return False
+    try:
+        imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+        imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
+        imap.logout()
+        log(f"mail: logged in to {os.environ['IMAP_USER']} OK")
+        return True
+    except Exception as e:
+        _DISABLED = str(e)[:120]
+        log(f"MAIL OFF: the inbox login for {os.environ['IMAP_USER']} was refused ({_DISABLED}). Use a Google APP PASSWORD "
+            "(myaccount.google.com/apppasswords) as IMAP_PASS, and make sure IMAP is enabled in Gmail settings.")
+        return False
 
 
 def _body(msg) -> str:
@@ -80,9 +107,14 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
     """Yield parsed messages (newest first) that arrived shortly before since_ts or later."""
     user, pw = os.environ["IMAP_USER"], os.environ["IMAP_PASS"]
     host = os.environ.get("IMAP_HOST", "imap.gmail.com")
+    global _DISABLED
     imap = imaplib.IMAP4_SSL(host, timeout=30)
     try:
-        imap.login(user, pw)
+        try:
+            imap.login(user, pw)
+        except imaplib.IMAP4.error as e:
+            _DISABLED = str(e)[:120]
+            raise
         for folder in folders:
             try:
                 typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
