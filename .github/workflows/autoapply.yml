@@ -73,7 +73,7 @@ jobs:
           git config user.name "autoapply-bot"
           git config user.email "autoapply-bot@users.noreply.github.com"
           # Only the small files that are the bot's memory. (Fetched job feeds under logs/agg_cache are not kept.)
-          HIST="applications.db discovered_boards.json boards_state.json accounts.json reports logs/usage_minutes.json"
+          HIST="applications.db discovered_boards.json boards_state.json accounts.json reports logs/usage_minutes.json logs/usage.json"
           rm -rf /tmp/hist && mkdir -p /tmp/hist
           for f in $HIST; do
             if [ -e "$f" ]; then mkdir -p "/tmp/hist/$(dirname "$f")"; cp -r "$f" "/tmp/hist/$f"; fi

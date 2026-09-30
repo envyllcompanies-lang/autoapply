@@ -42,6 +42,28 @@ EXTRACT_JS = r"""
     return '';
   };
 
+  const BTN_WORDS = /^(attach|upload|browse|choose|select|add)\b/i;
+  const STRIP = /\b(attach|dropbox|google drive|enter manually|paste|upload( a)?( file)?|browse|choose( a)? file|no file chosen|or drag and drop( here)?|drag and drop|drop (your )?files? here|remove|replace|accepted file types?:[^\n]*|(max(imum)?|file) size[^\n]*|pdf, doc[^\n]*)\b/gi;
+  const fileLabelOf = el => {
+    const txt = x => clean(x && x.innerText);
+    if (el.id) { const l = document.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l && txt(l) && !BTN_WORDS.test(txt(l))) return txt(l); }
+    if (el.getAttribute('aria-labelledby')) {
+      const t = clean(el.getAttribute('aria-labelledby').split(/\s+/).map(i => txt(document.getElementById(i))).join(' '));
+      if (t && !BTN_WORDS.test(t)) return t;
+    }
+    if (el.getAttribute('aria-label') && !BTN_WORDS.test(el.getAttribute('aria-label'))) return clean(el.getAttribute('aria-label'));
+    if (el.id) for (const k of ['upload-label-' + el.id, el.id + '-label', el.id + '_label', 'label-' + el.id, el.id + 'Label']) {
+      const x = document.getElementById(k); if (x && txt(x)) return txt(x);
+    }
+    let p = el.parentElement;
+    for (let i = 0; i < 6 && p; i++, p = p.parentElement) {       // the smallest box around the input that has its own words
+      const t = clean((p.innerText || '').replace(STRIP, ' '));
+      if (t.length > 2 && t.length <= 90) return t;
+      if (t.length > 90) break;
+    }
+    return clean(el.name || el.id || '');
+  };
+
   let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = document.querySelectorAll('input, textarea, select');
@@ -63,7 +85,11 @@ EXTRACT_JS = r"""
       f.kind = 'select';
       f.options = [...el.options].map(o => clean(o.text)).filter(t => t && !/^(select|choose|--)/i.test(t));
     } else if (el.tagName === 'TEXTAREA') f.kind = 'textarea';
-    else if (type === 'file') { f.kind = 'file'; f.accept = el.accept || ''; }
+    else if (type === 'file') {
+      f.kind = 'file'; f.accept = el.accept || ''; f.label = fileLabelOf(el);
+      f.hint = [el.id, el.name, el.getAttribute('data-qa'), el.getAttribute('data-testid'), el.getAttribute('data-automation-id')].filter(Boolean).join(' ');
+      f.elid = el.id || '';
+    }
     else f.kind = ['email', 'tel', 'url', 'number', 'date'].includes(type) ? type : 'text';
     if (/\*/.test(f.label)) f.required = true;
     fields.push(f);
@@ -265,7 +291,8 @@ def _blocker(page) -> str | None:
 def _few_inputs(page) -> bool:
     """A real confirmation page has (almost) no fields left; a mid-form 'thank you' heading does not count."""
     try:
-        return page.locator("input[type=text], input[type=email], input[type=file], textarea, select").locator("visible=true").count() < 2
+        return page.locator("input:not([type]), input[type=text], input[type=email], input[type=tel], input[type=file], textarea, select") \
+            .locator("visible=true").count() < 2
     except Exception:
         return True
 
@@ -571,35 +598,124 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
             elif kind == "file":
                 path = files.get(str(val).upper())
                 if path:
-                    _upload(page, el, path, f, log)
+                    _upload(page, _file_input(page, f), path, f, log)
         except Exception as e:
             log(f"      ! could not fill '{f.get('label','')[:50]}': {str(e).splitlines()[0]}")
 
 
-def _upload(page, el, path, f, log):
-    """Attach a file and make sure the page really registered it (React forms sometimes ignore a bare set_input_files)."""
-    def has_file():
-        try:
-            return bool(el.evaluate("e => e.files && e.files.length"))
-        except Exception:
-            return False
-    el.set_input_files(str(path))
-    page.wait_for_timeout(1200)
-    if has_file():
-        return
-    log(f"      ! upload for '{f.get('label','')[:40]}' did not register, retrying with the file chooser")
+def _file_input(page, f):
+    """The input for this file field, even if the site re-drew it after the first upload (the marker attribute is then gone)."""
+    loc = page.locator(f'[data-aa="{f["id"]}"]')
     try:
-        with page.expect_file_chooser(timeout=6000) as fc:
-            el.evaluate("e => { e.value=''; e.click(); }")
-        fc.value.set_files(str(path))
+        if loc.count():
+            return loc
     except Exception:
+        pass
+    if f.get("elid"):
+        loc = page.locator(f'input[type=file][id="{f["elid"]}"]')
+        if loc.count():
+            return loc
+    return page.locator(f'[data-aa="{f["id"]}"]')
+
+
+def _file_shown(page, name: str) -> bool:
+    try:
+        return page.get_by_text(name, exact=False).locator("visible=true").count() > 0
+    except Exception:
+        return False
+
+
+def _registered(page, el, name: str) -> bool:
+    """The site shows the file name (styled upload widgets), or a plain visible file input holds the file."""
+    if _file_shown(page, name):
+        return True
+    try:
+        return bool(el.count()) and el.evaluate(
+            "e => !!(e.files && e.files.length) && e.offsetWidth > 30 && e.offsetHeight > 10 && "
+            "getComputedStyle(e).opacity !== '0' && getComputedStyle(e).visibility !== 'hidden'")
+    except Exception:
+        return False
+
+
+def _via_chooser(page, el, path) -> bool:
+    """Open the site's own file picker (its Attach / Upload button, or the input itself) and hand it the file."""
+    targets = []
+    try:
+        iid = el.get_attribute("id") if el.count() else None
+        if iid:
+            targets.append(page.locator(f'label[for="{iid}"]').locator("visible=true"))
+        box = el.locator("xpath=ancestor::*[.//button or .//*[@role='button'] or .//label][1]")
+        for role in ("button", "link"):
+            targets.append(box.get_by_role(role, name=re.compile(r"^\s*(attach|upload|browse|choose|select|add)\b", re.I)).locator("visible=true"))
+    except Exception:
+        pass
+    try:
+        if el.count():
+            el.evaluate("e => { e.value = ''; }")       # picking the same file again must still count as a change
+    except Exception:
+        pass
+    for t in targets:
         try:
-            with page.expect_file_chooser(timeout=6000) as fc:
-                page.get_by_role("button", name=re.compile(r"attach|upload|browse|choose|select file", re.I)).locator("visible=true").first.click()
-            fc.value.set_files(str(path))
-        except Exception as e:
-            log(f"      ! file chooser retry failed: {str(e).splitlines()[0][:100]}")
-    page.wait_for_timeout(1200)
+            if t.count():
+                with page.expect_file_chooser(timeout=3000) as fc:
+                    t.first.click()
+                fc.value.set_files(str(path))
+                return True
+        except Exception:
+            continue
+    try:
+        with page.expect_file_chooser(timeout=3000) as fc:
+            el.evaluate("e => { e.value = ''; e.click(); }")
+        fc.value.set_files(str(path))
+        return True
+    except Exception:
+        return False
+
+
+def _upload(page, el, path, f, log, force_chooser: bool = False):
+    """Attach a file and make sure the site really took it. Styled upload boxes (Greenhouse, Lever, Workday) show the file
+    name once they have it; if one doesn't, the site's own Attach button is used. A plain form field that simply holds the
+    file is left holding it."""
+    name = Path(path).name
+    if not force_chooser:
+        el.set_input_files(str(path))
+        for _ in range(6):
+            page.wait_for_timeout(500)
+            if _registered(page, el, name):
+                return True
+    ok = _via_chooser(page, el, path)
+    if ok:
+        for _ in range(6):
+            page.wait_for_timeout(500)
+            if _registered(page, el, name):
+                if not force_chooser:
+                    log(f"      (upload for '{f.get('label','')[:40]}' needed the site's own Attach button)")
+                return True
+    try:                                              # never leave the field emptier than we found it
+        if el.count() and not el.evaluate("e => !!(e.files && e.files.length)"):
+            el.set_input_files(str(path))
+    except Exception:
+        pass
+    if force_chooser:
+        log(f"      ! could not confirm the re-attached file for '{f.get('label','')[:40]}'")
+    return False
+
+
+def _wait_uploads(page, limit_s: int = 20):
+    """Uploads go to the site's storage in the background: don't press Submit while one is still running."""
+    end = time.time() + limit_s
+    rx = re.compile(r"\buploading\b|upload in progress|processing (your )?(file|resume|r\u00e9sum\u00e9)|parsing (your )?(resume|r\u00e9sum\u00e9)", re.I)
+    while time.time() < end:
+        try:
+            if not page.get_by_text(rx).locator("visible=true").count():
+                break
+        except Exception:
+            break
+        page.wait_for_timeout(700)
+    try:
+        page.wait_for_load_state("networkidle", timeout=8000)
+    except Exception:
+        pass
 
 
 def verify(page, fields: list[dict], answers: dict, log=print):
@@ -679,6 +795,25 @@ def _security_prompt(page) -> bool:
         return False
 
 
+_REJECT_RX = re.compile(r"required|invalid|please (enter|select|provide|upload|choose|attach|complete|fill)|must |missing|"
+                        r"can.t be blank|cannot be blank|is not valid", re.I)
+
+
+def _rejected(page, before_url, btn):
+    """Raise NotSubmitted when the form is plainly still there, unsent, with 'X is required'-style errors on it."""
+    errs = _page_errors(page)
+    if errs and page.url == before_url and not _few_inputs(page) and _still_visible(btn) and _REJECT_RX.search(" ".join(errs)) \
+            and not SUCCESS_RE.search(page.inner_text("body")):
+        raise NotSubmitted(f"the form was rejected, not sent; page errors: {errs}")
+
+
+def _still_visible(btn) -> bool:
+    try:
+        return btn is not None and btn.count() > 0 and btn.first.is_visible()
+    except Exception:
+        return False
+
+
 def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     before_url = page.url
     before_hits = len(SUCCESS_RE.findall(page.inner_text("body")))
@@ -703,9 +838,10 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
                 raise Blocked("the site asked for an emailed security code (its own human check): left for you to finish by hand")
             if (b := _blocker(page)):
                 raise Blocked(f"{b} after submit")
+            if waited >= 6000 and waited % 3000 == 0:
+                _rejected(page, before_url, btn)          # the form bounced the submit with 'X is required': stop waiting
+        _rejected(page, before_url, btn)
         errs = _page_errors(page)
-        if errs and page.url == before_url and re.search(r"required|invalid|please (enter|select|provide|upload|choose)|must |missing", " ".join(errs), re.I):
-            raise NotSubmitted(f"the form was rejected, not sent; page errors: {errs}")
         tail = " ".join(page.inner_text("body").split())[-220:]
         msg = "no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}"
     except (Blocked, Unconfirmed, NotSubmitted):
@@ -762,17 +898,19 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                     log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
             raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
         if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
-            letter_txt = brain.lazy_letter(job)              # a full one-page letter, written only when a form has a cover-letter upload
+            need = [f for f in fields if plan["answers"].get(f["id"]) == "COVER_LETTER" and f.get("required")]
+            letter_txt = brain.lazy_letter(job, required=bool(need))   # a full one-page letter, written only when a form has a cover-letter upload
             if letter_txt:
                 (shot.parent / "cover_letter.txt").write_text(letter_txt)
                 files["COVER_LETTER"] = files["_LETTER_MAKER"](letter_txt)
             else:
-                need = [f for f in fields if plan["answers"].get(f["id"]) == "COVER_LETTER" and f.get("required")]
                 if need:
-                    raise Unanswerable("form requires a cover letter and a full, truthful one could not be written")
+                    raise Unanswerable("form requires a cover letter, the writer couldn't write one and there is no cover_letter_template")
                 plan["answers"] = {k: v for k, v in plan["answers"].items() if v != "COVER_LETTER"}   # optional: apply without one
-                log("      (no full cover letter could be written; it is optional, applying with the résumé only)")
+                log("      (no cover letter could be written; it is optional, applying with the résumé only)")
         fill(page, fields, plan["answers"], files, log, deadline=limit_at)
+        if any(f["kind"] == "file" and plan["answers"].get(f["id"]) for f in fields):
+            _wait_uploads(page)
         verify(page, fields, plan["answers"], log)
         uploaded = uploaded or any(f["kind"] == "file" for f in fields)
         btn, kind = _find_advance(page)
@@ -788,7 +926,22 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if dry_run:
                 return "dry_run"
             try:
-                result = submit(page, btn=btn, on_click=on_click)
+                try:
+                    result = submit(page, btn=btn, on_click=on_click)
+                except NotSubmitted as e:
+                    res_fields = [f for f in fields if plan["answers"].get(f["id"]) == "RESUME"]
+                    if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|file", str(e), re.I)):
+                        raise
+                    # the form says the résumé is missing, so nothing was sent: attach it with the site's own button, submit once more
+                    log("      the form says the résumé is missing: attaching it again with the site's own button and submitting once more")
+                    page.screenshot(path=str(shot.with_name("resume_missing.png")), full_page=True)
+                    for f in res_fields:
+                        _upload(page, _file_input(page, f), files["RESUME"], f, log, force_chooser=True)
+                    _wait_uploads(page)
+                    btn2, kind2 = _find_advance(page)
+                    if kind2 != "submit":
+                        raise
+                    result = submit(page, btn=btn2, on_click=on_click)
             except (Unconfirmed, NotSubmitted):
                 page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
                 raise

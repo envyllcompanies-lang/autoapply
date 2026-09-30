@@ -18,6 +18,8 @@ LETTER = ("Dear Acme team,\n\nCapitol Edge started as a solo build and now runs 
 
 def reply(msgs):
     first, last = msgs[1]["content"], msgs[-1]["content"]
+    if "Multiple-choice question on the application form" in first: return "1"
+    if "Application form field (short text)" in first: return "N/A"
     if last.startswith("Revise."): return CLEAN
     if "Write my cover letter" in first: return LETTER
     q = first.split("Application question:\n")[1]
@@ -180,9 +182,9 @@ M.discover = lambda companies, log=print, base=None: [
     J(2, "Operations Manager", "main.html", "Requires 8+ years of experience in operations. Security clearance required."),
     J(3, "Operations Analyst", "captcha.html", loc="Denver, CO", co="captchaco"),
     J(4, "Business Analyst", "unknown.html"),
-    J(5, "Business Analyst", "fail.html"),
+    J(5, "Business Analyst", "fail.html", co="failco"),              # essay the writer won't do -> your fallback_answer
     J(6, "Supply Chain Analyst", "noai.html", GOOD + " Please do not use AI tools to write your application."),
-    J(7, "Logistics Coordinator", "fab.html", GOOD + " MARK_FAB"),
+    J(7, "Logistics Coordinator", "fab.html", GOOD + " MARK_FAB", co="fabco"),
     J(8, "Senior Staff Engineer", "main.html", ""),
     J(9, "Operations Coordinator", "reloc_no.html", loc="Chicago, United States"),
     J(10, "Project Coordinator", "reloc_yes.html", loc="New York, NY"),
@@ -239,9 +241,9 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "skipped", "5": "skipped", "6": "skipped", "7": "applied", "8": "filtered", "9": "skipped", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied",
+exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied",
        "13": "blocked", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "20": "manual", "R-77": "applied"}
-if "--dry" in sys.argv: exp.update({"1": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
+if "--dry" in sys.argv: exp.update({"1": "dry_run", "4": "dry_run", "5": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
                                     "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-77": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
 if "--dry" not in sys.argv:

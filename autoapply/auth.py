@@ -22,6 +22,25 @@ VERIFY_MSG = re.compile(r"verify your (e-?mail|account)|check your (e-?mail|inbo
                         r"(sent|sending) (you )?(an )?e-?mail|activate your account|verification (code|link|e-?mail)", re.I)
 EXISTS_MSG = re.compile(r"already (exists|registered|in use|have an account)|account with this e-?mail|is taken", re.I)
 BAD_LOGIN = re.compile(r"incorrect|invalid|not recogni[sz]ed|failed|wrong|unable to (sign|log)|no account", re.I)
+UNVERIFIED_MSG = re.compile(r"not (yet )?(been )?(verified|activated|confirmed)|verify your (e-?mail|account) (before|to|first)|"
+                            r"account (is |has )?not (yet )?(been )?(active|activated|verified|confirmed)|confirm your e-?mail( address)? (before|to|first)|"
+                            r"resend (the |a )?(verification|activation|confirmation)", re.I)
+
+
+def _body(page) -> str:
+    try:
+        return page.inner_text("body")
+    except Exception:
+        return ""
+
+
+def _form_errors(page) -> list[str]:
+    try:
+        errs = page.locator('[role="alert"], [aria-live="assertive"], .error, [class*="error" i], [data-automation-id*="error" i]') \
+            .locator("visible=true").all_inner_texts()
+    except Exception:
+        return []
+    return [" ".join(e.split())[:100] for e in errs if e.strip()][:3]
 
 
 class Accounts:
@@ -138,35 +157,56 @@ def _verify_email(page, acc: Accounts, since: float, log):
         raise AuthBlocked("verification email had no link or code")
 
 
-def _sign_in(page, acc: Accounts, log):
+def _sign_in(page, acc: Accounts, log, url_after: str | None = None):
+    t0 = time.time()
     _fill_credentials(page, acc)
     if not _submit_auth(page, "signin"):
         raise AuthBlocked("could not find the sign-in button")
     _settle(page)
-    if is_auth_page(page):
-        body = page.inner_text("body")
-        if BAD_LOGIN.search(body):
-            raise AuthBlocked("sign-in was refused (account exists with a different password?)")
+    body = _body(page)
+    if UNVERIFIED_MSG.search(body):
+        # made in an earlier run whose verification email was never read: get a fresh email and finish it now
+        log("      account: it exists but was never verified; asking the site to send the email again")
+        _click_named(page, re.compile(r"resend|send (it |the email )?again|send (a )?new|verify( my)? (email|account)|activate", re.I))
+        _settle(page, 1500)
+        _verify_email(page, acc, t0 - 30, log)
+        acc.remember(acc.host(page.url), "verified")
+        if url_after:
+            page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+            _settle(page, 2000)
+        return "verified"
+    if is_auth_page(page) and BAD_LOGIN.search(body):
+        raise AuthBlocked("sign-in was refused: an account with this email probably exists with a different password "
+                          "(sign in by hand once, or reset that site's password to your ACCOUNT_PASSWORD)")
+    return "signed_in"
 
 
 def _create(page, acc: Accounts, log, start_url=None):
     t0 = time.time()
+    host = acc.host(page.url)
     _fill_credentials(page, acc)
     _tick_agreements(page)
     if not _submit_auth(page, "create"):
         raise AuthBlocked("could not find the create-account button")
     _settle(page)
-    acc.remember(acc.host(page.url), "created")
-    body = page.inner_text("body")
+    body = _body(page)
     if EXISTS_MSG.search(body):
+        acc.remember(host, "exists")
         log("      account: already exists, signing in instead")
         return "exists"
     if VERIFY_MSG.search(body):
+        acc.remember(host, "created")
         _verify_email(page, acc, t0, log)
+        acc.remember(host, "verified")
         if start_url:
             page.goto(start_url, wait_until="domcontentloaded", timeout=45000)   # come back and sign in
             _settle(page, 2000)
         return "verified"
+    if page.locator("input[type=password]").locator("visible=true").count() >= 2:
+        errs = _form_errors(page)
+        if errs:                                  # still on the create form with complaints: the account was not made
+            raise AuthBlocked(f"the site did not accept the new account: {'; '.join(errs)}")
+    acc.remember(host, "created")
     return "created"
 
 
@@ -192,18 +232,18 @@ def handle(page, acc: Accounts, log=print, url_after: str | None = None):
                     _click_named(page, re.compile(r"sign in|log ?in|already have", re.I))
                     _settle(page, 1500)
                 if is_auth_page(page) and page.locator("input[type=password]").locator("visible=true").count() == 1:
-                    _sign_in(page, acc, log)
+                    _sign_in(page, acc, log, url_after)
             continue
         # a sign-in form (one password box)
         if known:
             log(f"      account: signing in on {host}")
-            _sign_in(page, acc, log)
+            _sign_in(page, acc, log, url_after)
             continue
         if _click_named(page, re.compile(r"create( an)? account|register|sign up|new (user|candidate)", re.I)):
             _settle(page, 1500)
             continue
-        log(f"      account: signing in on {host} (first try)")
-        _sign_in(page, acc, log)
-        acc.remember(host, "signed_in")
+        log(f"      account: signing in on {host} (no 'create account' link found)")
+        if _sign_in(page, acc, log, url_after) == "signed_in" and not is_auth_page(page):
+            acc.remember(host, "signed_in")
     if is_auth_page(page):
         raise AuthBlocked("still on the login screen after trying to sign in or create an account")

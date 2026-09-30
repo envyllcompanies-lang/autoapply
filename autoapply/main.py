@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, __version__
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-09-29-n"
+REQUEUE_VERSION = "2026-09-29-o"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -302,7 +302,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     base = cfg_file.parent
     cfg = yaml.safe_load(cfg_file.read_text())
     merge_board_file(cfg, base)
-    s = cfg.get("search", {})
+    s = cfg.setdefault("search", {})
+    # on-site/hybrid roles only where you'd live: the same list that answers relocation questions (remote roles are always fine)
+    s["_onsite_ok"] = list((cfg.get("facts") or {}).get("relocation_ok_locations") or [])
     dry_run = dry_run or cfg.get("dry_run", False)
     today = date.today().isoformat()
     log = Logger(base / "logs" / f"{today}.log")

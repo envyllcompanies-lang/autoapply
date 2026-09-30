@@ -40,10 +40,15 @@ class DB:
         cur = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','blocked') AND ("
             " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
-            " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%')")
+            " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%'"
+            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%')")
+        # submits the site bounced back with 'X is required' (e.g. the résumé upload didn't register): nothing was sent
+        cur2 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
+            " AND lower(reason) LIKE '%required%' AND lower(reason) NOT LIKE '%thank%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount
+        return cur.rowcount + cur2.rowcount
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()

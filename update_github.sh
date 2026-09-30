@@ -76,7 +76,7 @@ done
 
 have="$(gh secret list -R "$SLUG" 2>/dev/null | awk '{print $1}')"
 missing=""
-for need in CONFIG_YAML PROFILE_YAML ABOUT_ME_MD GROQ_API_KEY GEMINI_API_KEY ACCOUNT_PASSWORD IMAP_USER IMAP_PASS; do
+for need in CONFIG_YAML PROFILE_YAML ABOUT_ME_MD GROQ_API_KEY ACCOUNT_PASSWORD IMAP_USER IMAP_PASS; do
   echo "$have" | grep -qx "$need" || missing="$missing $need"
 done
 if [ -n "$missing" ]; then

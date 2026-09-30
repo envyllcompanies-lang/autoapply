@@ -145,9 +145,9 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     """Poll the inbox until a fresh verification email arrives. Returns {'link':..., 'code':...} or None."""
     deadline = time.time() + timeout
     hint = (host_hint or "").lower()
-    while time.time() < deadline:
+    while time.time() < deadline and not _DISABLED:
         try:
-            for info in _recent(since_ts, 12):
+            for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
                     continue
                 if hint and hint not in (info["from"] + info["subject"]).lower() and hint not in (info["link"] or "").lower():
@@ -167,7 +167,7 @@ def find_confirmation(company_hint: str, since_ts: float, timeout: int = 90, log
     words = [w for w in re.split(r"[^a-z0-9]+", (company_hint or "").lower()) if len(w) > 2]
     key = re.sub(r"[^a-z0-9]", "", (company_hint or "").lower())
     deadline = time.time() + timeout
-    while True:
+    while not _DISABLED:
         try:
             for info in _recent(since_ts, 20, ("INBOX",)):
                 if info["ts"] < since_ts - 30:
@@ -183,6 +183,7 @@ def find_confirmation(company_hint: str, since_ts: float, timeout: int = 90, log
         if time.time() >= deadline:
             return None
         time.sleep(10)
+    return None
 
 
 def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:

@@ -219,11 +219,7 @@ class Brain:
         w = cfg.get("writer", {}) or {}
         self.writer = Writer(cfg, profile, base) if w.get("enabled") else None
         if self.writer:
-            if self.writer.ready():
-                log("Writer: essay questions will be answered by " +
-                    ", ".join(p["name"] for p in self.writer.providers) + " (free tiers, in that order)")
-            else:
-                log("Writer: no provider has a key/endpoint available, so jobs with essay questions will be skipped")
+            log(self.writer.status_line())
 
     def _refuse_unfinished_setup(self, base: Path):
         """A hands-off bot must never send template placeholders to a real employer."""
@@ -409,9 +405,10 @@ class Brain:
         self._letters = getattr(self, "_letters", {})
         return "\n".join(L).strip() + "\n", ""
 
-    def lazy_letter(self, job) -> str | None:
-        """A full-length letter, written only for forms that require one. None when the writer can't produce a full,
-        truthful one (a thin template letter would hurt more than skipping the job)."""
+    def lazy_letter(self, job, required: bool = False) -> str | None:
+        """A full one-page letter from the writer, written only for forms that ask for one. When the writer can't produce
+        one: an optional letter is left out (None); a REQUIRED one gets your standard full-length letter from config.yaml
+        (cover_letter_template), so the application still goes in."""
         if job.key in self._letters:
             return self._letters[job.key]
         letter = None
@@ -420,16 +417,39 @@ class Brain:
                 letter = self.writer.cover_letter(job, self._company_name(job), self._log)
             except WriterUnavailable as e:
                 self._log(f"      writer unavailable for cover letter ({str(e)[:80]})")
+        if not letter and required:
+            letter = self.template_letter(job)
+            if letter:
+                self._log("      (used your standard cover letter: this form requires one and the writer couldn't write it)")
         if not letter:
             return None
         self._letters[job.key] = letter.strip() + "\n"
         return self._letters[job.key]
 
+    def template_letter(self, job) -> str | None:
+        tpl = (self.cfg.get("cover_letter_template") or "").strip()
+        if not tpl:
+            return None
+        return tpl.format_map(_Safe(dict(company=self._company_name(job), role=level_title(job.title).strip() or "open",
+                                         name=self.facts.get("full_name", ""), first_name=self.facts.get("first_name", "")))).strip()
+
     def _company_name(self, job) -> str:
         names = self.cfg.get("company_names", {}) or {}
         if getattr(job, "extra", None) and job.extra.get("company_name"):
             return job.extra["company_name"]
-        return names.get(job.company) or re.sub(r"[-_]+", " ", job.company).title()
+        if names.get(job.company):
+            return names[job.company]
+        if not hasattr(self, "_wd_names"):          # Workday boards carry their display name: 'wf/wd1/WellsFargoJobs/Wells Fargo'
+            self._wd_names = {}
+            for spec in ((self.cfg.get("companies") or {}).get("workday") or []):
+                parts = str(spec).split("/")
+                if len(parts) > 3 and parts[3].strip():
+                    self._wd_names.setdefault(parts[0].lower(), parts[3].strip())
+        got = self._wd_names.get(str(job.company).lower())
+        if got:
+            return got
+        name = re.sub(r"[-_]+", " ", job.company).strip()
+        return name.title() if name.islower() or name.isupper() else name
 
     def _letter(self, job, top_bullets, matched_skills) -> str:
         p, f = self.profile, self.facts
@@ -450,12 +470,81 @@ class Brain:
         ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
         for fld in fields:
             val = self._answer(fld, cover_letter, ctx)
+            if val is None and fld.get("required"):
+                val = self._llm_fill(fld)
             if val is None:
                 if fld.get("required"):
                     missing.append(fld["id"])
             else:
                 answers[fld["id"]] = val
+        self._place_resume(fields, answers, missing)
         return {"answers": answers, "unanswerable_required": missing}
+
+    _NOT_RESUME_FILE = re.compile(r"cover|transcript|portfolio|writing sample|photo|headshot|picture|certificat|licen[cs]e|passport|"
+                                  r"\bid\b|identification|reference|recommendation|additional|other|supporting|work sample", re.I)
+    _AUTOFILL_FILE = re.compile(r"auto-?fill|autocomplete|parse|import|quick apply|apply with", re.I)
+
+    def _place_resume(self, fields, answers, missing):
+        """Every application gets the résumé: if no upload box was recognised as the résumé by its label, the first plain
+        upload box is used for it. An 'autofill from résumé' box is only used when it is the only one."""
+        files_ = [f for f in fields if f["kind"] == "file"]
+        if not files_:
+            return
+        res = [f for f in files_ if answers.get(f["id"]) == "RESUME"]
+        if len(res) > 1:
+            real = [f for f in res if not self._AUTOFILL_FILE.search(f.get("label", "") + " " + str(f.get("hint") or ""))]
+            if real:
+                for f in res:
+                    if f not in real and not f.get("required"):
+                        answers.pop(f["id"], None)
+        if res:
+            return
+        cand = [f for f in files_ if f["id"] not in answers and not self._NOT_RESUME_FILE.search(f.get("label", "") + " " + str(f.get("hint") or ""))]
+        if cand:
+            answers[cand[0]["id"]] = "RESUME"
+            if cand[0]["id"] in missing:
+                missing.remove(cand[0]["id"])
+
+    _NEVER_GUESS = re.compile(r"gender|\bsex\b|race|ethnic|hispanic|latin[oa]|veteran|disab|sexual|orientation|pronoun|transgender|"
+                              r"lgbt|religio|marital|date of birth|birth ?date|social security|ssn|salary history|current salary|"
+                              r"lift|password|signature|initials|full legal name", re.I)
+
+    def _llm_fill(self, f: dict):
+        """Last resort for a REQUIRED field no rule could answer: the writer picks the true option (or writes a few words)
+        from your facts, so an ordinary question never ends the application. Never used for human checks, legal waivers,
+        AI-policy confirmations, negated authorization questions or demographics."""
+        if not (self.writer and self.writer.ready() and self._job is not None):
+            return None
+        kind = f["kind"]
+        text = f"{f.get('label', '')} {f.get('question', '')}".strip()
+        low = text.lower()
+        if not text or HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or AI_WORDS.search(low) \
+                or QUALIFY_CERT_RX.search(low) or self._NEVER_GUESS.search(low):
+            return None
+        if NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
+            return None
+        if re.search(r"relocat|commut|on-?site|in[- ]office|in person|hybrid", low) and not self._location_ok(low):
+            return None
+        opts = f.get("options") or []
+        company = self._company_name(self._job)
+        try:
+            if kind in ("select", "radio", "combobox") and opts:
+                got = self.writer.choose(self._job, company, text, opts, multi=False, log=self._log)
+            elif kind == "checkbox_group" and opts:
+                got = self.writer.choose(self._job, company, text, opts, multi=True, log=self._log)
+            elif kind in ("text", "number") and len(low) < 300:
+                got = self.writer.short_answer(self._job, company, text, int(f.get("maxlength") or 150), self._log)
+                if got and kind == "number":
+                    m = re.search(r"\d+(?:\.\d+)?", got)
+                    got = m.group(0) if m else None
+            else:
+                return None
+        except WriterUnavailable as e:
+            self._log(f"      writer unavailable: {str(e)[:100]}")
+            return None
+        if got:
+            self._log(f"      (writer answered {text[:60]!r} -> {str(got)[:50]!r})")
+        return got or None
 
     def _location_ok(self, label: str = "") -> bool:
         """True when the job is remote or in a place listed in facts.relocation_ok_locations."""
@@ -517,15 +606,16 @@ class Brain:
         opts = f.get("options") or []
 
         if kind == "file":
-            if re.search(r"cover", low):
+            both = low + " " + str(f.get("hint") or "").lower().replace("_", " ").replace("-", " ")
+            if re.search(r"cover", both):
                 return "COVER_LETTER" if self.cfg.get("cover_letters", False) else None   # optional ones too: a full letter helps
-            if re.search(r"resume|résumé|cv\b|curriculum", low):
+            if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
                 return "RESUME"
             return None
         if kind == "textarea" and re.search(r"cover letter", low):
             if not self.cfg.get("cover_letters", False):
                 return None          # cover letters are switched off: a form that requires one is skipped
-            return letter or self.lazy_letter(self._job) or None       # optional box + no full letter: left empty
+            return letter or self.lazy_letter(self._job, required=bool(f.get("required"))) or None   # optional + no letter: left empty
 
         # 1) user's own canned answers win
         for rx, ans, only_opts in self.answers:

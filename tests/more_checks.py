@@ -59,8 +59,12 @@ def question_checks():
     b.writer = _W("Dear Acme,\n\nToo short.\n\nBrian")
     b.writer.cover_letter = lambda job, c, log=print, _t=b.writer.text: None
     check(ask("Cover Letter", "file", []) == "COVER_LETTER", "optional cover-letter upload not offered a letter")
-    b._letters = {}; check(b.lazy_letter(b._job) is None, "no letter must mean None, never a thin template")
-    check(ask("Cover letter", "textarea", []) is None, "cover-letter box filled without a full letter")
+    b._letters = {}; check(b.lazy_letter(b._job) is None, "an optional letter the writer can't write must be left out")
+    check(ask("Cover letter", "textarea", [], req=False) is None, "optional cover-letter box filled without a written letter")
+    b._letters = {}
+    got = ask("Cover letter", "textarea", [], req=True, company="acme")
+    check(bool(got) and len(got.split()) >= 270 and "Dear Acme hiring team" in got and "{" not in got,
+          f"a REQUIRED cover-letter box must get the full standard letter, got {str(got)[:80]!r}")
     b.writer = None
     EDU2 = ["Associate’s Degree", "Bachelor’s Degree", "Master’s Degree", "Doctoral Degree", "In Progress - degree not yet completed", "High school diploma or equivalent"]
     check(ask("What is your highest level of completed education?*", "combobox", EDU2) == "Bachelor’s Degree", "highest level of COMPLETED education not answered")
@@ -867,11 +871,33 @@ def direct_link_checks():
 def location_checks():
     import yaml as _y
     from autoapply.sources import Job, prefilter
-    sc = _y.safe_load((ROOT / "config.yaml").read_text())["search"]
-    for loc, bad in (("TELECOMMUTE, Jamaica (Remote)", True), ("TELECOMMUTE, Argentina", True), ("Costa Rica (Remote)", True), ("United States (Telecommute)", False), ("Remote", False),
-                     ("Remote - US", False)):
-        got = prefilter(Job("agg-workablejobs", "pavago", "1", "Project Coordinator", loc, "", "", ""), sc)
+    c = _y.safe_load((ROOT / "config.yaml").read_text())
+    sc = dict(c["search"]); sc["_onsite_ok"] = c["facts"]["relocation_ok_locations"]
+    cases = [
+        ("Belize (Remote)", True), ("Oman (Remote)", True), ("United Arab Emirates (Remote)", True), ("TELECOMMUTE, Mozambique (Remote)", True),
+        ("TELECOMMUTE, Abu Dhabi, Abu Dhabi", True), ("Qatar (Remote)", True), ("Costa Rica (Remote)", True), ("TELECOMMUTE, Jamaica (Remote)", True),
+        ("Remote - EMEA", True), ("Remote (LATAM)", True), ("Toronto, ON, CA", True), ("Remote, Canada", True), ("London, UK", True),
+        ("Remote-Canada", True), ("TELECOMMUTE, Argentina", True), ("Remote, India", True), ("Vancouver, BC", True), ("Mexico City", True),
+        ("Colorado (Remote)", False), ("California (Remote)", False), ("Denver, CO", False), ("Denver, Colorado, United States", False),
+        ("United States (Remote)", False), ("Remote - US", False), ("Remote (US & Canada)", False), ("Remote", False), ("Anywhere", False),
+        ("New York, NY", False), ("Jamaica, NY", False), ("Los Angeles, California, United States", False), ("United States", False),
+        ("TELECOMMUTE, United States (Remote)", False), ("Remote - North America", False), ("New Mexico (Remote)", False), ("US-CO-Denver", False),
+        ("Colorado Springs, Colorado, United States", False), ("Irvine, CA", False), ("Hybrid - New York", False), ("USA - Denver, CO", False),
+        ("New York, New York, United States; Remote", False), ("Remote, US-based", False), ("United States (Telecommute)", False),
+        # on-site outside the cities you'd move to
+        ("Atlanta, Georgia, United States", True), ("Coppell, Texas, United States", True), ("San Francisco, CA", True), ("Washington, DC", True),
+    ]
+    for loc, bad in cases:
+        got = prefilter(Job("greenhouse", "acme", "1", "Project Coordinator", loc, "", "", ""), sc)
         check(bool(got) == bad, f"location filter wrong for {loc!r}: {got!r}")
+    titles = [("Structural Engineer (PE) - QA/QC Plan Reviewer", True), ("Operations Analyst, PE Fund Administration", False),
+              ("Microsoft Dynamics 365 System Administrator", True), ("AI Engineer - SDLC Process Improvement", True), ("Exenta ERP Analyst", True),
+              ("Workday Business Analyst", True), ("CNC Programmer", True), ("Operations Coordinator", False), ("Licensed Insurance Agent", True),
+              ("Project Coordinator -Labor Compliance Analyst", False), ("Operations Analyst - Canada", True), ("Operations Coordinator (US & Canada)", False),
+              ("Operations Associate, EMEA", True), ("Business Operations Associate", False)]
+    for t, bad in titles:
+        got = prefilter(Job("greenhouse", "acme", "1", t, "Denver, CO", "", "", ""), sc)
+        check(bool(got) == bad, f"title filter wrong for {t!r}: {got!r}")
     from autoapply import aggregators as A
     api = {"jobs": [{"id": "a", "state": "published", "title": "Project Coordinator", "locations": ["TELECOMMUTE", "Argentina"], "workplace": "remote",
                      "location": {"city": "", "countryName": "Argentina"}, "company": {"title": "Pavago"}, "url": "u1", "description": "x"},
@@ -886,6 +912,7 @@ def location_checks():
     finally:
         A._get = old
     check([j.job_id for j in got] == ["b"], f"Workable job board: only US-based remote jobs should stay, got {[j.job_id for j in got]}")
+    print("ok  locations: other countries dropped, on-site only in your cities, remote/US-wide kept; licence/coding titles dropped")
 
 
 def safety_checks():

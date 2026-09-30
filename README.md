@@ -16,7 +16,7 @@ form, fills it in from your résumé and answers, and submits. Cost: $0.
   confirm a submit, and one check-in a day even if nothing happened (so silence never means "broken"). Each email lists what
   was applied to, what is left for you, why other postings didn't go through, and how many free minutes are used.
 - **The employers' own "we received your application" emails** land in the same inbox. The bot reads that inbox to confirm submits.
-- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-09-29-n`; each success is a `✓ applied` line.
+- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-09-29-o`; each success is a `✓ applied` line.
   The run's **Artifacts** hold the résumé, cover letter and form screenshots for every application (kept 30 days).
 - `reports/<date>.md` and `logs/<date>.log` in the repo keep the history.
 
@@ -29,17 +29,24 @@ form, fills it in from your résumé and answers, and submits. Cost: $0.
    own form, and any company board found that way is remembered for later runs. Optional, free and worth adding: **Adzuna**
    (developer.adzuna.com, secrets `ADZUNA_APP_ID` + `ADZUNA_APP_KEY`) and **Jooble** (jooble.org/api/about, secret `JOOBLE_API_KEY`).
 
-Every posting is filtered (titles, seniority, years asked, location, pay, security clearance and citizenship-only wording) and scored
-0–100. Postings at or above `min_score` are applied to, best first.
+Every posting is filtered (titles, seniority, licences, years asked, location, pay, security clearance and citizenship-only wording) and
+scored 0–100. Postings at or above `min_score` are applied to, best first. Location rules: remote and US-wide roles anywhere in the US;
+on-site and hybrid roles only in the places in `relocation_ok_locations` (the same list that answers "are you willing to relocate");
+anything tied to another country (for example "Belize (Remote)") is dropped. Add cities, or `"*"`, to that list to widen it.
 
 ## How it applies
 - Multi-page forms (Next / Save and Continue) and one-page forms, including account gates: it creates an account with
   **delgado@alumni.usc.edu** and the `ACCOUNT_PASSWORD` secret, confirms it from the inbox, and signs in on later visits.
 - Uploads **your own résumé file** (`briandelgado_resume.pdf`, set by `resume_file` in `config.yaml`) unchanged on every application. No résumé is generated.
-- **Cover letters:** when a form has a cover-letter upload or box, the bot writes a full one-page letter (about 320 to 380 words, four paragraphs, letterhead, date, signed with your name) from your real background only. If the cover letter is optional and a full one can't be written, it applies with the résumé alone; if it is required, the job goes on your hand list. Thin template letters are never sent.
-- Answers every standard question from your `facts` (work authorization as a permanent resident, sponsorship, EEO, dates, education,
-  "N years of X", travel, relocation for the cities you approved). Anything it can't answer truthfully means the job is skipped,
-  never guessed. Each employer gets at most `max_per_company` (3) applications.
+- **Cover letters:** when a form has a cover-letter upload or box, the bot writes a full one-page letter (about 320 to 380 words, four paragraphs, letterhead, date, signed with your name) from your real background only. If the writer can't: an optional letter is left out and it applies with the résumé alone; a **required** one gets `cover_letter_template` from `config.yaml` (a full, true one-page letter with the company and role filled in).
+- **Résumé upload is checked:** styled upload boxes (Greenhouse, Lever, Workday) must show the file name before it moves on; if they don't, it
+  uses the site's own Attach button. If a site still answers the submit with "Resume/CV is required", nothing was sent, so it attaches the
+  résumé again and submits once more; if that fails too, the job is retried in a later run instead of being counted as submitted.
+- Answers every standard question from your `facts` and `answers:` (work authorization as a permanent resident, sponsorship, EEO, dates,
+  education, "N years of X", travel, relocation for the cities you approved). A required multiple-choice or short question that no rule covers
+  is answered by the writer from your facts; required essays the writer can't do get `fallback_answer`. Only these still stop an application:
+  human checks, legal waivers (arbitration etc.), "do you meet the minimum qualifications" certifications, AI-policy confirmations and oddly
+  negated work-authorization questions. Each employer gets at most `max_per_company` (3) applications.
 - Submits, then checks the confirmation page or the inbox. Everything is logged in `applications.db`, so nothing is applied to twice.
 
 ## What it will not do (on purpose), and what lands on your hand list
@@ -68,9 +75,10 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 | Secret | What | Needed |
 |---|---|---|
 | `CONFIG_YAML`, `PROFILE_YAML`, `ABOUT_ME_MD`, `VOICE_MD` | your `config.yaml`, `profile.yaml`, `about_me.md`, `voice.md` | yes (voice optional). **After editing config.yaml, run the update script** or the bot keeps using the old copy. |
-| `GROQ_API_KEY`, `GEMINI_API_KEY` | free writer keys (console.groq.com, aistudio.google.com) | yes |
+| `GROQ_API_KEY` | free writer key (console.groq.com/keys) | yes |
+| `GEMINI_API_KEY` | optional second free writer (aistudio.google.com) | optional |
 | `ACCOUNT_PASSWORD` | the one password used for every account the bot creates | for sites that need an account |
-| `IMAP_USER`, `IMAP_PASS` | the Gmail login (app password) that receives alumni-address mail; used to confirm new accounts, confirm submits, and send the summary emails | for accounts and emails |
+| `IMAP_USER`, `IMAP_PASS` | `delgado@alumni.usc.edu` and a Google **app password** for it (myaccount.google.com/apppasswords); used to confirm new accounts, confirm submits and send the summary emails. The log's first lines say `mail: logged in … OK` or `MAIL OFF` with the reason | for accounts and emails |
 | `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`, `JOOBLE_API_KEY` | free job-board keys | optional |
 
 ## Tuning (`config.yaml`)
@@ -82,11 +90,12 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 - `search.workday_places` and `search.workday_queries` control how the big Workday employers are searched ("<role> <city>").
 
 ## The free writer (essays and cover letters)
-Providers are tried best-first and fall through when one is out of quota: Gemini Pro → Gemini Flash → Gemini Flash-Lite → Groq
-`gpt-oss-120b` → Groq `gpt-oss-20b` → Ollama on your own machine. Free tiers change; if a model name stops working, edit `model` in `config.yaml`.
-Google may use free-tier prompts for training, so only résumé-style facts are sent (never your address or phone).
-- **Truth only.** Every number in an answer must exist in your facts, or the answer is revised and then dropped. A question that needs a story
-  you haven't given (a failure, a conflict, leading people) skips the job rather than inventing one. It may not name software that isn't in your facts.
+Only providers with a key are used (the log's first lines list them). With just `GROQ_API_KEY`: Groq `gpt-oss-120b` → `llama-3.3-70b` →
+`gpt-oss-20b` → `qwen3.8-27b`, each with its own free daily allowance; a model whose daily limit is used up is set aside until it resets,
+and per-minute limits are waited out. A Gemini key (aistudio.google.com) adds Gemini in front. Ollama is only for running on your own Mac.
+Only résumé-style facts are sent (never your address, phone or EEO answers).
+- **Truth first.** The writer is told to use only your facts. An answer that mentions a number or tool not in your facts is sent back once
+  for a fix; it is never thrown away and a job is never skipped because of it.
 - **Your voice.** `voice.md` sets the style (answer first, 75 to 200 words, no buzzwords, no em dashes); `about_me.md` and `profile.yaml`
   hold the true stories and which experience to use for which kind of question.
 - It doesn't try to fool AI detectors (no fake typos or tangents) and never hides AI use.
@@ -96,14 +105,15 @@ To improve `about_me.md` and `voice.md`, paste this into ChatGPT and read the re
 
 ## Statuses
 `applied` confirmed · `unconfirmed` submitted but no confirmation seen (check the inbox, not retried) · `manual` / `blocked` finish by hand ·
-`skipped` no truthful answer, or the posting bans AI, or the per-employer cap · `failed` retried once in a later run ·
+`skipped` a question it won't answer for you (see above), or the posting bans AI, or the per-employer cap · `failed` not sent (e.g. the form
+rejected it), retried in a later run ·
 `queued` waiting for a later run · `low_score` / `filtered` not a fit · `dry_run` filled but not sent
 
 ## Run it on your own machine instead (optional)
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt && python -m playwright install chromium
-export GROQ_API_KEY=... GEMINI_API_KEY=... ACCOUNT_PASSWORD=... IMAP_USER=... IMAP_PASS=...
+export GROQ_API_KEY=... ACCOUNT_PASSWORD=... IMAP_USER=... IMAP_PASS=...
 python -m autoapply --dry-run --limit 3    # fills 3 real forms and submits nothing; look at applications/<today>/*/form.png
 python -m autoapply --loop                 # forever, checking every search.loop_minutes
 ```

@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import html
 import json
+import random
 import re
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
@@ -117,11 +119,39 @@ WD_PLACES = ["Denver", "Los Angeles", "New York", "Remote"]
 _MANY_LOCS = re.compile(r"^\s*(\d+|multiple|various)\s+locations?\s*$", re.I)
 
 
-def _wd_post(api: str, offset: int, text: str):
-    r = requests.post(f"{api}/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": text},
-                      headers={**UA, "Content-Type": "application/json"}, timeout=TIMEOUT)
+_WD_GATES: dict = {}
+_WD_LOCK = threading.Lock()
+
+
+def _wd_gate(url: str) -> threading.BoundedSemaphore:
+    """Workday rate-limits per data centre (wd1, wd5, ...): at most 3 requests at a time to each one."""
+    m = re.search(r"\.(wd\d+)\.myworkdayjobs\.com", url)
+    key = m.group(1) if m else "wd"
+    with _WD_LOCK:
+        return _WD_GATES.setdefault(key, threading.BoundedSemaphore(3))
+
+
+def _wd_request(method: str, url: str, **kw) -> requests.Response:
+    """GET/POST with polite retries on 'Too Many Requests' (429) and temporary errors, honouring Retry-After."""
+    kw.setdefault("timeout", TIMEOUT)
+    r = None
+    for attempt in range(4):
+        with _wd_gate(url):
+            r = (requests.post if method == "POST" else requests.get)(url, **kw)
+        if r.status_code not in (429, 502, 503, 504) or attempt == 3:
+            break
+        try:
+            wait = float((getattr(r, "headers", None) or {}).get("Retry-After") or 0)
+        except (TypeError, ValueError):
+            wait = 0
+        time.sleep(min(wait or 3 * 2 ** attempt, 20) + random.uniform(0, 1.5))
     r.raise_for_status()
-    return r.json()
+    return r
+
+
+def _wd_post(api: str, offset: int, text: str):
+    return _wd_request("POST", f"{api}/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": text},
+                       headers={**UA, "Content-Type": "application/json"}).json()
 
 
 def workday(spec: str) -> list[Job]:
@@ -180,10 +210,10 @@ def workday(spec: str) -> list[Job]:
                   location=p.get("locationsText", "") or "", url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
                   description=p.get("title", ""), extra={"company_name": display} if display else {})
         many = bool(_MANY_LOCS.match(job.location))
-        gate = {**s, "locations_include": []} if many else s      # '2 Locations': the real cities are in the detail page
+        gate = {**s, "locations_include": [], "_onsite_ok": []} if many else s      # '2 Locations': the real cities are in the detail page
         if details < DETAIL_CAP and _needs_detail(job, gate):
             try:
-                d = requests.get(f"{api}{path}", headers=UA, timeout=TIMEOUT).json().get("jobPostingInfo", {})
+                d = _wd_request("GET", f"{api}{path}", headers=UA).json().get("jobPostingInfo", {})
                 job.description = _strip_html(d.get("jobDescription", "")) or job.description
                 places = [x for x in [d.get("location")] + list(d.get("additionalLocations") or []) if x]
                 if places and (many or not job.location):
@@ -385,19 +415,85 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
     return jobs
 
 
-FOREIGN = re.compile(
-    r"\b(india|korea|japan|china|singapore|australia|new zealand|canada|toronto|mexico|brazil|latam|latin america|emea|apac|europe|"
-    r"germany|france|paris|london|uk|united kingdom|ireland|dublin|spain|italy|netherlands|poland|israel|dubai|uae|philippines|"
-    r"indonesia|vietnam|taiwan|hong kong|argentina|colombia|chile|sweden|switzerland|denmark|portugal|romania|malaysia|kuala lumpur|"
-    r"thailand|bangalore|bengaluru|hyderabad|pune|mumbai|delhi|gurgaon|noida|seoul|tokyo|sydney|melbourne|manila|jakarta|tel aviv|berlin|"
-    r"amsterdam|madrid|lisbon|warsaw|krakow|bucharest|zurich|munich|stockholm|copenhagen|vienna|brussels|cape town|johannesburg|nairobi|"
-    r"lagos|cairo|riyadh|istanbul|sao paulo|buenos aires|bogota|lima|santiago|mexico city|shenzhen|shanghai|beijing|taipei|"
-    r"jamaica|costa rica|panama|peru|ecuador|uruguay|venezuela|dominican republic|guatemala|el salvador|honduras|nicaragua|bolivia|paraguay|"
-    r"trinidad|bahamas|barbados|nigeria|ghana|kenya|south africa|egypt|morocco|tunisia|pakistan|bangladesh|sri lanka|nepal|ukraine|serbia|croatia|"
-    r"bulgaria|hungary|czech|greece|turkey|russia|saudi|qatar|kuwait|bahrain|jordan|lebanon|belgium|austria|norway|finland|estonia|lithuania|latvia|"
-    r"slovakia|slovenia|cyprus|malta|iceland|luxembourg|belarus|georgia \(country\)|armenia|kazakhstan|uzbekistan|cambodia|myanmar|mongolia|"
-    r"dach|nordics|benelux|anz|jp|kr|emea)\b", re.I)
+# Every country except the United States, plus regions and big foreign cities. Used on locations and titles.
+_COUNTRIES = (
+    r"afghanistan|albania|algeria|andorra|angola|antigua|argentina|armenia|australia|austria|azerbaijan|bahamas|bahrain|bangladesh|"
+    r"barbados|belarus|belgium|belize|benin|bhutan|bolivia|bosnia|botswana|brazil|brasil|brunei|bulgaria|burkina faso|burundi|"
+    r"cabo verde|cape verde|cambodia|cameroon|canada|central african republic|chad|chile|china|colombia|comoros|congo|costa rica|"
+    r"cote d.?ivoire|côte d.?ivoire|ivory coast|croatia|cuba|cyprus|czech republic|czechia|denmark|djibouti|dominica|"
+    r"dominican republic|ecuador|egypt|el salvador|equatorial guinea|eritrea|estonia|eswatini|swaziland|ethiopia|fiji|finland|france|"
+    r"gabon|gambia|germany|deutschland|ghana|greece|grenada|guatemala|guinea|guinea-bissau|guyana|haiti|honduras|hungary|iceland|india|"
+    r"indonesia|iran|iraq|ireland|israel|italy|jamaica|japan|jordan|kazakhstan|kenya|kiribati|kosovo|kuwait|kyrgyzstan|laos|latvia|"
+    r"lebanon|lesotho|liberia|libya|liechtenstein|lithuania|luxembourg|madagascar|malawi|malaysia|maldives|mali|malta|marshall islands|"
+    r"mauritania|mauritius|mexico|méxico|micronesia|moldova|monaco|mongolia|montenegro|morocco|mozambique|myanmar|namibia|nauru|nepal|"
+    r"netherlands|holland|new zealand|nicaragua|niger|nigeria|north korea|north macedonia|macedonia|norway|oman|pakistan|"
+    r"palau|palestine|panama|papua new guinea|paraguay|peru|philippines|poland|portugal|qatar|romania|russia|rwanda|saint kitts|"
+    r"saint lucia|saint vincent|san marino|sao tome|são tomé|saudi arabia|saudi|senegal|serbia|seychelles|sierra leone|"
+    r"singapore|slovakia|slovenia|solomon islands|somalia|south africa|south korea|korea|south sudan|spain|españa|sri lanka|sudan|"
+    r"suriname|sweden|switzerland|syria|taiwan|tajikistan|tanzania|thailand|timor-leste|east timor|togo|tonga|trinidad|tobago|tunisia|"
+    r"turkey|türkiye|turkiye|turkmenistan|tuvalu|uganda|ukraine|united arab emirates|uae|u\.a\.e|united kingdom|uk|u\.k|england|"
+    r"scotland|wales|northern ireland|great britain|britain|uruguay|uzbekistan|vanuatu|vatican|venezuela|vietnam|viet nam|yemen|zambia|"
+    r"zimbabwe|hong kong|macau|macao|greenland|bermuda|cayman islands|curacao|curaçao|aruba|bonaire|anguilla|gibraltar|isle of man"
+)
+_REGIONS = (r"emea|apac|apj|latam|latin america|south america|central america|caribbean|europe|european union|eu|asia|asia pacific|africa|"
+            r"middle east|mena|gcc|oceania|nordics|nordic|dach|benelux|anz|balkans|scandinavia")
+_FOREIGN_CITIES = (
+    r"toronto|vancouver|montreal|montréal|ottawa|calgary|edmonton|winnipeg|mississauga|quebec|"
+    r"london|paris|berlin|munich|münchen|hamburg|frankfurt|amsterdam|dublin|madrid|barcelona|lisbon|rome|milan|zurich|zürich|geneva|"
+    r"vienna|prague|warsaw|krakow|kraków|wroclaw|budapest|bucharest|sofia|athens|istanbul|stockholm|oslo|copenhagen|helsinki|brussels|"
+    r"tel aviv|dubai|abu dhabi|doha|riyadh|jeddah|cairo|lagos|nairobi|johannesburg|cape town|mumbai|bangalore|bengaluru|hyderabad|pune|"
+    r"chennai|delhi|new delhi|gurgaon|gurugram|noida|kolkata|karachi|lahore|islamabad|dhaka|colombo|kathmandu|kuala lumpur|jakarta|manila|"
+    r"cebu|bangkok|ho chi minh|hanoi|shanghai|beijing|shenzhen|guangzhou|taipei|seoul|tokyo|osaka|sydney|melbourne|brisbane|perth|"
+    r"auckland|wellington|mexico city|guadalajara|monterrey|bogota|bogotá|medellin|medellín|lima|santiago|buenos aires|"
+    r"sao paulo|são paulo|rio de janeiro|montevideo|quito|caracas|kyiv|kiev|lviv|minsk|moscow|tbilisi|yerevan|baku|almaty|tashkent|"
+    r"belgrade|zagreb|ljubljana|bratislava|vilnius|riga|tallinn|reykjavik|valletta|nicosia"
+)
+FOREIGN = re.compile(rf"(?<![a-z])({_COUNTRIES}|{_REGIONS}|{_FOREIGN_CITIES}|jp|kr)(?![a-z])", re.I)
 
+_US_STATES = (
+    r"alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|"
+    r"kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|"
+    r"new hampshire|new jersey|new mexico|new york|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|"
+    r"south carolina|south dakota|tennessee|texas|utah|vermont|virginia|washington|west virginia|wisconsin|wyoming|district of columbia|"
+    r"puerto rico|guam|american samoa|virgin islands|northern mariana|new england|pacific northwest|midwest|east coast|west coast|"
+    r"denver|boulder|aspen|los angeles|nyc|brooklyn|manhattan|queens|bronx|chicago|seattle|san francisco|boston|atlanta|dallas|houston|"
+    r"austin|phoenix|philadelphia|miami|salt lake city|minneapolis|detroit|nashville|charlotte|raleigh|pittsburgh|baltimore|jersey city"
+)
+_US_WORDS = re.compile(rf"united states|(?<![a-z])usa(?![a-z])|(?<![a-z.])u\.s\.?(a\.?)?(?![a-z])|(?<![a-z])us(?![a-z])|north america|"
+                       rf"(?<![a-z])americas(?![a-z])|nationwide|(?<![a-z])({_US_STATES})(?![a-z])", re.I)
+_US_ABBR = re.compile(r",\s*(al|ak|az|ar|ca|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|la|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|"
+                      r"pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc|pr)(?![a-z])", re.I)
+_CA_PROVINCE_ABBR = re.compile(r",\s*(on|bc|ab|qc|mb|sk|ns|nb|nl|pe|pei|yt|nt|nu)(?![a-z])", re.I)
+REMOTE_RX = re.compile(r"remote|telecommut|work from home|(?<![a-z])wfh(?![a-z])|anywhere|virtual|distributed|home[- ]based|nationwide", re.I)
+
+
+def us_place(text: str) -> bool:
+    """True when the text names the United States, a US state or territory, or a US city ('Denver, CO', 'Remote - US')."""
+    low = (text or "").lower()
+    if _US_WORDS.search(low):
+        return True
+    for m in _US_ABBR.finditer(low):
+        if m.group(1).lower() == "ca" and (_CA_PROVINCE_ABBR.search(low) or "canada" in low):
+            continue                                   # 'Toronto, ON, CA' is Canada
+        return True
+    return False
+
+
+def foreign_place(text: str) -> bool:
+    """True when the text is tied to another country and not also to the US ('Belize (Remote)', 'Remote - EMEA')."""
+    return bool(FOREIGN.search(text or "")) and not us_place(text)
+
+
+def _remote_ish(loc: str) -> bool:
+    low = (loc or "").lower().strip()
+    return bool(REMOTE_RX.search(low)) or bool(re.fullmatch(r"(united states( of america)?|usa|u\.s\.a?\.?|us)(\s*\(.*\))?", low))
+
+
+LICENSE_RX = re.compile(r"\(p\.?e\.?\)|(?<![\w.])p\.e\.|professional engineer|(?<![\w-])pe (license|licensed|required|stamp)|(?<![\w-])licensed(?![\w-])|"
+                        r"(?<![\w-])(cpa|rn|lpn)(?![\w-])|attorney|(?<![\w-])counsel(?![\w-])|physician|dynamics 365|systems? administrator|sysadmin|"
+                        r"erp analyst|devops|(?<![\w-])sdlc(?![\w-])|(?<![\w-])ai engineer|machine learning|data engineer|structural engineer|"
+                        r"(?<![\w-])programmer(?![\w-])|salesforce (admin|administrator|developer)|netsuite (admin|administrator|developer)|"
+                        r"workday (business )?analyst|workday consultant|sap (consultant|analyst)|hris analyst", re.I)
 
 TECH_RX = re.compile(
     r"\b(software|firmware|asic|silicon|devops|sre|site reliability|machine learning|ml engineer|data scientist|data engineer|backend|"
@@ -444,18 +540,22 @@ def prefilter(job: Job, search: dict) -> str | None:
     if any(k in t for k in exc):
         return "title matched exclude list"
     if search.get("smart_title_filter", True):
-        if TECH_RX.search(t):
-            return "technical or specialist role outside your background"
+        if TECH_RX.search(t) or LICENSE_RX.search(title):
+            return "technical, licensed or specialist role outside your background"
         if SENIOR_RX.search(title):
             return "senior-level title"
         if NOT_A_JOB_RX.search(t):
             return "talent-pool posting or student program, not an open role"
-        if FOREIGN.search(t):
+        if foreign_place(title):
             return "role is based in another country"
     if locs and not any(k in loc for k in locs):
         return f"location '{job.location}' not allowed"
-    if search.get("us_remote_only", True):
-        # "remote" postings tied to another country need work authorization there
-        if FOREIGN.search(t + " " + loc) and not re.search(r"united states|\bus\b|u\.s\.|usa|denver|new york|california|colorado|los angeles", loc):
-            return "remote role tied to another country"
+    if search.get("us_remote_only", True) and foreign_place(job.location):
+        return "role is tied to another country"
+    # On-site / hybrid roles only in the places you said you'd live (facts.relocation_ok_locations, passed in by main);
+    # remote and US-wide roles are always fine.
+    onsite_ok = [str(x).lower() for x in (search.get("_onsite_ok") or [])]
+    if onsite_ok and "*" not in onsite_ok and loc.strip() and not _remote_ish(loc):
+        if not any(re.search(r"(?<![a-z])" + re.escape(x) + r"(?![a-z])", loc) for x in onsite_ok):
+            return f"on-site in '{job.location[:60]}', outside the cities you'd move to"
     return None
