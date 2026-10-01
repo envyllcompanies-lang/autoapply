@@ -148,12 +148,12 @@ def _settle(page, ms=2500):
         pass
 
 
-def _verify_email(page, acc: Accounts, since: float, log):
+def _verify_email(page, acc: Accounts, since: float, log, timeout: int = 150):
     if not mailbox.configured():
         why = mailbox.disabled_reason() or "IMAP_USER / IMAP_PASS not set"
         raise AuthBlocked(f"account needs email verification but the inbox can't be read ({why}): fix the app password and it will work")
     log("      account: waiting for the verification email…")
-    res = mailbox.wait_for_verification(since_ts=since, host_hint=acc.host(page.url).split(".")[0], log=log)
+    res = mailbox.wait_for_verification(since_ts=since, host_hint=acc.host(page.url).split(".")[0], timeout=timeout, log=log)
     if not res:
         raise AuthBlocked("verification email did not arrive in time")
     if res.get("link"):
@@ -247,6 +247,53 @@ def _wd_press(page, scope, aid: str, label_rx) -> bool:
 def _wd_scope(page):
     dlg = page.locator('[role="dialog"]').filter(has=page.locator("input[type=password]")).locator("visible=true")
     return dlg.last if dlg.count() else page
+
+
+def _wd_reset_password(page, acc: Accounts, log, url_after: str | None) -> bool:
+    """Workday 'Forgot your password?': ask for the reset email, open its link from your inbox, set the password to
+    ACCOUNT_PASSWORD, and come back to the application. True when it worked."""
+    host = acc.host(page.url)
+    t0 = time.time()
+    log(f"      account: sign-in refused on {host}; resetting the password through your email")
+    link = _wd(page, "forgotPasswordLink")
+    try:
+        if link.count():
+            link.first.click(force=True)
+        elif not _click_named(page, re.compile(r"forgot (your )?password", re.I), roles=("link", "button")):
+            log("      account: no 'Forgot your password?' link")
+            return False
+        _settle(page, 2000)
+        box = page.locator('input[data-automation-id="email"], input[type=email], input[type=text]').locator("visible=true")
+        if not box.count():
+            return False
+        box.first.fill(acc.email)
+        if not _wd_press(page, page, "resetPasswordSubmitButton", re.compile(r"^\s*(reset password|submit|send|continue|reset)\s*$", re.I)):
+            return False
+        _settle(page, 2000)
+        if not mailbox.configured():
+            return False
+        res = mailbox.wait_for_verification(since_ts=t0 - 30, host_hint=host.split(".")[0], timeout=90, log=log)
+        if not res or not res.get("link"):
+            log("      account: the password-reset email did not arrive in time")
+            return False
+        page.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
+        _settle(page, 2500)
+        pws = page.locator("input[type=password]").locator("visible=true")
+        if pws.count() < 1:
+            log("      account: the reset link did not show a new-password form")
+            return False
+        for i in range(pws.count()):
+            pws.nth(i).fill(acc.password)
+        _wd_press(page, page, "resetPasswordSubmitButton", re.compile(r"^\s*(reset password|change password|save|submit|update|continue)\s*$", re.I))
+        _settle(page, 2500)
+        log("      account: password reset; signing in")
+        if url_after:
+            page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+            _settle(page, 2500)
+        return True
+    except Exception as e:
+        log(f"      account: password reset failed ({str(e)[:80]})")
+        return False
 
 
 def _workday(page, acc: Accounts, log, url_after: str | None):
@@ -351,7 +398,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             acc.__dict__.setdefault("_wd_verify_tried", {})[host] = True
             log("      account: sign-in refused; checking the inbox for this site's verify-your-email link")
             try:
-                _verify_email(page, acc, t0 - 2 * 86400, log)
+                _verify_email(page, acc, t0 - 2 * 86400, log, 60)
                 acc.remember(host, "verified")
                 if url_after:
                     page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
@@ -359,6 +406,12 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 continue
             except AuthBlocked as e:
                 log(f"      account: {e}")
+        if BAD_LOGIN.search(body) and not getattr(acc, "_wd_reset_tried", {}).get(host):
+            # the account exists with some other password: reset it to ACCOUNT_PASSWORD through your own inbox, then sign in
+            acc.__dict__.setdefault("_wd_reset_tried", {})[host] = True
+            if _wd_reset_password(page, acc, log, url_after):
+                acc.remember(host, "reset")
+                continue
         if BAD_LOGIN.search(body):
             raise AuthBlocked("Workday refused the sign-in: an account with this email exists with a different password "
                               "(reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on)")

@@ -1010,6 +1010,23 @@ def _page_errors(page) -> list[str]:
     return [e.strip()[:80] for e in errs if e.strip()][:4]
 
 
+def _wd_start(page) -> bool:
+    """Workday's own start screens, by their fixed ids: the job page's Apply button, 'Start Your Application'
+    (Apply Manually first, else Use My Last Application) and the social sign-in page's 'Sign in with email'."""
+    if "myworkdayjobs.com" not in page.url:
+        return False
+    for aid in ("applyManually", "useMyLastApplication", "SignInWithEmailButton", "signInWithEmailButton", "adventureButton"):
+        loc = page.locator(f'[data-automation-id="{aid}"]').locator("visible=true")
+        try:
+            if loc.count():
+                loc.first.click(force=True)
+                page.wait_for_timeout(2500)
+                return True
+        except Exception:
+            continue
+    return False
+
+
 def _landing(page) -> bool:
     """Click 'Apply Manually' / 'Apply' style buttons on a page that has no form yet."""
     for role in ("button", "link"):
@@ -1198,6 +1215,9 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
         fields = extract(page)
         if len(fields) < 2:                                # still drawing (Workday) or a description page with an Apply button
             page.wait_for_timeout(2500)
+            _settle(page)
+            fields = extract(page)
+        if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _wd_start(page):
             _settle(page)
             fields = extract(page)
         if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _landing(page):

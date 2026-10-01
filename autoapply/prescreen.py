@@ -117,6 +117,8 @@ def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print) -> list
         pass
     n = int(s.get("prescreen_per_run", 15))
     min_fit = int(s.get("min_fit", 55))
+    db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))   # cutoff raised
+    db.conn.commit()
     rows = db.conn.execute("SELECT * FROM jobs WHERE status='queued' AND fit IS NULL ORDER BY score DESC LIMIT ?", (n * 2,)).fetchall()
     done, out = 0, []
     for row in rows:

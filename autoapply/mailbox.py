@@ -16,9 +16,10 @@ from email.header import decode_header, make_header
 from email.utils import parsedate_to_datetime
 
 LINK_RX = re.compile(r"https?://[^\s\"'<>)\]]+", re.I)
-GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account", re.I)
+GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account|reset|password|passwordreset", re.I)
 BAD_LINK = re.compile(r"unsubscribe|privacy|terms|facebook|twitter|linkedin\.com/company|instagram|\.(png|jpg|gif)\b", re.I)
-HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration", re.I)
+HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration|"
+                  r"reset (your )?password|password reset|forgot(ten)? password", re.I)
 CODE_RX = re.compile(r"(?<!\d)(\d{4,8})(?!\d)")
 CONFIRM_SUBJECT = re.compile(r"thank(s| you) for (applying|your (application|interest))|application (received|submitted|confirmation)|"
                              r"(we(?:'ve|\u2019ve| have)? |successfully )received your (application|resume|r\u00e9sum\u00e9)|your application (to|for|with|at)\b|"
