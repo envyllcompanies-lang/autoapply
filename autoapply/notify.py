@@ -11,14 +11,14 @@ from email.message import EmailMessage
 
 import requests
 
-MANUAL_STATUSES = ("manual", "blocked", "unconfirmed", "failed", "needs_human")
+MANUAL_STATUSES = ("blocked", "unconfirmed", "failed")
 # reasons that are not worth the applicant's time (nothing to finish by hand)
 NOISE = ("no application form found", "not a real application form", "posting no longer listed", "same role at same company",
          "already applied", "same posting already handled", "could not find the employer")
 
 
 def manual_rows(rows, min_score: int = 55, limit: int = 25):
-    """Best-scoring postings that still need a human: blocked by a captcha/login, unconfirmed, or a site that blocks bots."""
+    """Best-scoring exceptions worth reporting; the runner does not create a human-work queue."""
     out = []
     for r in rows:
         if r["status"] not in MANUAL_STATUSES or (r["score"] or 0) < min_score:
@@ -38,7 +38,7 @@ def _link(r):
 def why_lines(groups: dict, limit: int = 6) -> list[str]:
     """One line per common reason postings did not go through, so a quiet run explains itself."""
     tally: dict[tuple, int] = {}
-    for status in ("blocked", "failed", "skipped", "unconfirmed", "needs_human"):
+    for status in ("blocked", "failed", "skipped", "unconfirmed"):
         for r in groups.get(status, []):
             why = re.sub(r"\s+", " ", (r["reason"] or "")).strip()
             if not why or any(n in why for n in NOISE):
@@ -62,9 +62,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
         lines += [f"  - {r['title']} @ {r['company']}\n    {r['url']}" for r in unc[:15]]
         lines.append("")
     if manual:
-        human = sum(1 for r in manual if r["status"] == "needs_human")
-        label = f"FINISH BY HAND ({len(manual)}): " + (f"{human} require human verification; " if human else "") + "the site would not let the bot finish automatically"
-        lines.append(label)
+        lines.append(f"EXCEPTIONS ({len(manual)}): these were not submitted automatically")
         for r in manual:
             lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}")
         lines.append("")
@@ -78,7 +76,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
     if by_site:
         lines += ["BY SITE (this run)"] + by_site + [""]
     if paused:
-        lines += ["PAUSED SITES (their human checks keep stopping the bot, so it lists their jobs for you and tries one again a day later)"]
+        lines += ["SUPPRESSED SITES (repeated human verification blocked unattended applications)"]
         lines += [f"  - {x}" for x in paused] + [""]
     if run_url:
         lines += [f"Run log and résumé PDFs: {run_url}"]
