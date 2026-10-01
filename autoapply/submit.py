@@ -1142,7 +1142,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             page.wait_for_timeout(2500)
             _settle(page)
             fields = extract(page)
-        if len(fields) < 2 and _landing(page):            # description / "Apply Manually" page: get to the form
+        if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _landing(page):
+            # description page, Workday's "Start Your Application" (Apply Manually) or "Sign in with email": get to the form
             _settle(page)
             fields = extract(page)
         if accounts and accounts.enabled and any(f["kind"] == "password" for f in fields):

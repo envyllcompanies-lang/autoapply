@@ -468,7 +468,12 @@ class Brain:
         self._job = job
         answers, missing = {}, []
         ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
+        exp_vals = self._experience_answers(fields)          # Workday 'My Experience': your real jobs, never the one applied to
         for fld in fields:
+            if fld["id"] in exp_vals:
+                if exp_vals[fld["id"]] is not None:
+                    answers[fld["id"]] = exp_vals[fld["id"]]
+                continue
             val = self._answer(fld, cover_letter, ctx)
             if val is None and fld.get("required"):
                 val = self._llm_fill(fld)
@@ -777,6 +782,54 @@ class Brain:
 
         # 3) open-ended prompt -> free LLM writer (required questions only, unless answer_optional)
         return self._write(f, low, kind)
+
+    _MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+    def _month_year(self, txt: str):
+        m = re.search(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{4})", txt or "")
+        if not m or m.group(1).lower() not in self._MONTHS:
+            return None
+        return f"{self._MONTHS[m.group(1).lower()]:02d}/01/{m.group(2)}"
+
+    def _experience_answers(self, fields) -> dict:
+        """Work-history blocks (Workday 'Work Experience 1, 2 ...': Job Title, Company, Location, I currently work here, From,
+        To, Role Description) filled from profile.yaml experience, newest first. Returns {field id: value or None}."""
+        labs = [(f, _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))) for f in fields]
+        if not (any(l == "job title" for _, l in labs) and any(l in ("company", "company name", "employer") for _, l in labs)):
+            return {}
+        jobs = list(self.profile.get("experience") or [])
+        seen: dict = {}
+        out = {}
+        for f, l in labs:
+            key = {"job title": "title", "title": "title", "company": "company", "company name": "company", "employer": "company",
+                   "location": "location", "from": "from", "start date": "from", "to": "to", "end date": "to",
+                   "role description": "desc", "description": "desc", "i currently work here": "current"}.get(l)
+            if not key:
+                continue
+            n = seen.get(key, 0)
+            seen[key] = n + 1
+            if n >= len(jobs):
+                out[f["id"]] = None
+                continue
+            j = jobs[n]
+            dates = str(j.get("dates", ""))
+            parts = re.split(r"\s*[–—-]\s*", dates, maxsplit=1)
+            now = bool(re.search(r"present|current|now", dates, re.I))
+            if key == "title":
+                out[f["id"]] = j.get("title") or None
+            elif key == "company":
+                out[f["id"]] = j.get("company") or None
+            elif key == "location":
+                out[f["id"]] = j.get("location") or None
+            elif key == "from":
+                out[f["id"]] = self._month_year(parts[0])
+            elif key == "to":
+                out[f["id"]] = None if now else self._month_year(parts[1] if len(parts) > 1 else "")
+            elif key == "desc":
+                out[f["id"]] = (" ".join((b.get("text", "") if isinstance(b, dict) else str(b)) for b in (j.get("bullets") or []))[:1900]) or None
+            elif key == "current":
+                out[f["id"]] = True if now else ""
+        return out
 
     def _meets_minimums(self) -> bool:
         """True when the posting being applied to asks for no more than you have: entry/early level (at most 2 required years;
