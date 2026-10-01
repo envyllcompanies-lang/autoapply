@@ -481,8 +481,27 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         cap = min(cap, limit)
     if brain.writer and s.get("prescreen", False):
         from . import prescreen
+        # re-check every queued title against the current rules (rules get stricter over time)
+        from .sources import prefilter as _pf
+        n_sw = 0
+        for r in db.conn.execute("SELECT * FROM jobs WHERE status='queued'").fetchall():
+            j = by_key.get(r["key"]) or row_job(r)
+            if j is None:
+                continue
+            import dataclasses as _dc
+            why = level_out(_dc.replace(j, description=""), s)
+            if not why:
+                try:
+                    why = _pf(j, s)
+                except Exception:
+                    why = None
+            if why:
+                db.update(r["key"], status="filtered", reason=str(why)[:200])
+                n_sw += 1
+        if n_sw:
+            log(f"Queue clean-up: {n_sw} queued jobs no longer meet the rules and were removed")
         log("Match check (your résumé vs. each posting, like LinkedIn's match score):")
-        screened = prescreen.run(db, brain, by_key, row_job, s, level_out, log)
+        screened = prescreen.run(db, brain, by_key, row_job, s, level_out, log, site_rank)
         if screened:
             top = sorted(screened, key=lambda x: -x[0])[:5]
             TOP_MATCHES.extend(f"{f}% {r['title']} @ {r['company']}: {w}" for f, w, r in top)
@@ -494,6 +513,15 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             fit = None
         return (site_rank(r), -(fit if fit and fit > 0 else 0.8 * (r["score"] or 0)))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
+    if s.get("prescreen", False) and s.get("require_match", True):
+        # only jobs that passed the résumé-vs-posting match check (search.min_fit) are applied to
+        min_fit = int(s.get("min_fit", 75))
+        def _fit(r):
+            try:
+                return r["fit"] or 0
+            except (IndexError, KeyError):
+                return 0
+        queue = [r for r in queue if _fit(r) >= min_fit]
     log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
         return finish(cfg, db, run_start, log, base, today, t_start, dry_run)

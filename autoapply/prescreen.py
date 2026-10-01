@@ -60,6 +60,12 @@ def fetch_description(url: str) -> str:
                     d = r.json()
                     lists = " ".join(f"{x.get('text', '')}: {_text(x.get('content', ''))}" for x in d.get("lists") or [])
                     return (str(d.get("descriptionPlain") or "") + "\n" + lists + "\n" + str(d.get("additionalPlain") or ""))[:9000]
+        # any other site: the posting page's own text (BambooHR, Breezy, Workable and most career pages render it server-side)
+        r = requests.get(url, headers={**UA, "Accept": "text/html"}, timeout=20)
+        if r.ok and "html" in r.headers.get("content-type", ""):
+            txt = _text(r.text)
+            if len(txt) > 600:
+                return txt[:9000]
     except Exception:
         pass
     return ""
@@ -82,7 +88,10 @@ def _digest(profile: dict) -> str:
 PROMPT = ("You screen job postings for one candidate, the way LinkedIn's job-match feature does. Using the candidate's background "
           "and the posting, rate how well the candidate fits on a 0-100 scale: 85+ strong (meets the required qualifications, "
           "relevant experience), 65-84 good (meets most, close stretch), 45-64 weak (several required things missing), under 45 "
-          "poor (needs experience, licenses or skills the candidate clearly lacks). Judge only what is written. Reply with JSON "
+          "poor (needs experience, licenses or skills the candidate clearly lacks). Also score UNDER 60 when the job is not a "
+          "salaried professional office role a new business graduate would want: retail store, restaurant, hospitality, "
+          "warehouse floor, call center, commission sales, construction/trades, facilities maintenance, freelance or gig work, "
+          "or pay stated under $60,000 a year. Judge only what is written. Reply with JSON "
           'only: {"fit": <integer>, "why": "<one short sentence naming the main match or gap>"}')
 
 
@@ -92,7 +101,7 @@ def screen(brain, job: Job, log=print) -> tuple[int | None, str]:
         return None, ""
     user = (f"CANDIDATE\n{_digest(brain.profile)}\nTarget: entry-level operations, coordination, analyst, supply chain, "
             f"project roles; 0-3 years of experience.\n\nPOSTING\n{job.title} at {job.company} ({job.location})\n"
-            f"{(job.description or '')[:5000]}")
+            f"{(job.description or '')[:3500]}")
     try:
         out = w._complete([{"role": "system", "content": PROMPT}, {"role": "user", "content": user}], 300, log, temperature=0.0)
     except Exception as e:
@@ -108,7 +117,7 @@ def screen(brain, job: Job, log=print) -> tuple[int | None, str]:
         return (min(100, int(n.group(1))) if n else None), ""
 
 
-def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print) -> list[tuple]:
+def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print, site_rank=None) -> list[tuple]:
     """Screen up to search.prescreen_per_run unscreened queued jobs (best score first). Returns [(fit, why, row)] screened."""
     try:
         db.conn.execute("ALTER TABLE jobs ADD COLUMN fit INTEGER")
@@ -119,7 +128,9 @@ def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print) -> list
     min_fit = int(s.get("min_fit", 55))
     db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))   # cutoff raised
     db.conn.commit()
-    rows = db.conn.execute("SELECT * FROM jobs WHERE status='queued' AND fit IS NULL ORDER BY score DESC LIMIT ?", (n * 2,)).fetchall()
+    rows = db.conn.execute("SELECT * FROM jobs WHERE status='queued' AND fit IS NULL ORDER BY score DESC LIMIT ?", (n * 4,)).fetchall()
+    if site_rank:
+        rows = sorted(rows, key=lambda r: (site_rank(r), -(r["score"] or 0)))      # forms the bot fills best first
     done, out = 0, []
     for row in rows:
         if done >= n:
@@ -137,7 +148,7 @@ def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print) -> list
             log(f"  match check: {job.title} @ {job.company}: {why_out[:90]}")
             continue
         if len(job.description or "") < 300:
-            db.update(row["key"], fit=-1)                 # no posting text to judge: left to the score alone
+            db.update(row["key"], status="low_score", fit=-1, reason="posting text could not be read for the match check")
             continue
         fit, why = screen(brain, job, log)
         done += 1
