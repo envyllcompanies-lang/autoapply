@@ -97,6 +97,11 @@ except ImportError:
 except AssertionError as e:
     problems.append("button group: " + str(e)[:200])
 
+// ---- empty skip_sources really means no source is skipped ----
+# This guards the discovery configuration used by settings.yaml.
+if yaml.safe_load((ROOT / "settings.yaml").read_text())["search"]["skip_sources"] != []:
+    problems.append("settings.yaml must not silently skip a source")
+
 # ---- ATS classifier / human-gate boundary ----
 from autoapply.ats import detect, is_human_gate
 if detect("https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/123").name != "workday":
