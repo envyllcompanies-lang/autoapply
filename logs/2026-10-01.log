@@ -950,3 +950,65 @@
 [15:48:27]   by site  workday: 4 skipped, 3 blocked, 2 applied
 [15:48:27]   by site  lever: 1 blocked
 [15:48:29] Summary emailed to delgado@alumni.usc.edu
+[16:22:45] === autoapply run (LIVE) build 2026-10-01-r ===
+[16:22:45] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order)
+[16:22:48] mail: logged in to delgado@alumni.usc.edu OK
+[16:23:06] Discovering jobs…
+[16:23:06] Job search already ran at 14:45 (searches run every 20 h): this run only applies
+[16:23:06] 0 open roles, 0 new
+[16:23:06] Scored 0 new roles: 0 good fits, 0 below the bar, 0 filtered out by title/location (finding and scoring took 0.4 min)
+[16:23:06] 735 jobs queued; applying to up to 12 now
+[16:23:06] Time for this run: 11 min in all (81 of 1850 free Actions minutes used this month)
+[16:23:07] Accounts: ON (delgado@alumni.usc.edu)
+[16:23:07] → Procurement Analyst @ hawaiianhost (score 75)
+[16:23:11]       step 1: 27 fields (18 required)
+[16:23:12]       ? unanswered: 'I understand and agree that an investigative consumer report may be made concerning my cha' kind=radio options=['Yes', 'No']
+[16:23:12]     ✗ skipped: can't truthfully answer required: I understand and agree that an investigative consumer report
+[16:23:21] → Legal Operations Specialist @ palantir (score 74)
+[16:23:27]       step 1: 22 fields (9 required)
+[16:23:40]     ✗ blocked: hCaptcha after submit
+[16:23:50] → Marketing & Engagement Coordinator, Enterprise & Procurement Service @ foundationccc (score 74)
+[16:24:31]       step 1: 16 fields (13 required)
+[16:25:56]       step 2: 10 fields (6 required)
+[16:25:57]       ? unanswered: 'Language*' kind=combobox options=['Select One']
+[16:25:57]       ? unanswered: 'Comprehension*' kind=combobox options=['Select One']
+[16:25:57]       ? unanswered: 'Overall*' kind=combobox options=['Select One']
+[16:25:57]     ✗ skipped: can't truthfully answer required: Language*; Comprehension*; Overall*
+[16:26:06] → Assistant Manager, Plant Operations & Construction @ fox (score 73)
+[16:26:45]       (account page: creating the account / signing in)
+[16:26:45]       account: creating one on fox.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:26:47]       account: created
+[16:26:54]       step 1: 15 fields (9 required)
+[16:28:04]       step 2: 2 fields (0 required)
+[16:28:11]       step 3: 6 fields (3 required)
+[16:28:22]       step 4: 5 fields (1 required)
+[16:28:32]       step 5: 1 fields (0 required)
+[16:28:35]     ✓ applied
+[16:28:43] → Freelance Resource Operations Coordinator @ fox (score 73)
+[16:29:27]       step 1: 15 fields (9 required)
+[16:30:36]       step 2: 2 fields (0 required)
+[16:30:44]       step 3: 6 fields (3 required)
+[16:30:53]       step 4: 5 fields (1 required)
+[16:31:04]       step 5: 1 fields (0 required)
+[16:31:07]     ✓ applied
+[16:31:16] → Assistant Facilities Manager @ jll (score 73)
+[16:32:00]       step 1: 17 fields (9 required)
+[16:33:23]       step 2: 17 fields (9 required)
+[16:33:33]       ! could not fill 'How Did You Hear About Us?*': Locator.click: Timeout 10000ms exceeded.
+[16:33:43]       ! could not fill 'First Name*': Locator.fill: Timeout 10000ms exceeded.
+[16:33:53]       ! could not fill 'Last Name*': Locator.fill: Timeout 10000ms exceeded.
+[16:34:03]       ! could not fill 'Address Line 1': Locator.fill: Timeout 10000ms exceeded.
+[16:34:23]       ! could not fill 'City': Locator.fill: Timeout 10000ms exceeded.
+[16:34:33]       ! could not fill 'Postal Code': Locator.fill: Timeout 10000ms exceeded.
+[16:34:43]       ! could not fill 'Email*': Locator.fill: Timeout 10000ms exceeded.
+[16:34:53]       ! could not fill 'Phone Number*': Locator.fill: Timeout 10000ms exceeded.
+[16:35:03]       ! could not fill 'Have you previously worked for JLL or any of our s': Locator.evaluate: Timeout 10000ms exceeded.
+[16:35:22]       ! could not fill 'Country*': Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+[16:35:39]       ! could not fill 'State': Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+[16:35:56]       ! could not fill 'Phone Device Type*': Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+[16:37:13]     ✗ skipped: stuck on step 3; page says: ['Yes\nNo']
+[16:37:22] Run time limit reached (11 min): the rest waits for the next run
+[16:37:22] Summary: 2 applied, 1 blocked, 4 skipped, 1 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-01.md
+[16:37:22]   by site  workday: 2 applied, 2 skipped
+[16:37:22]   by site  lever: 2 skipped, 1 blocked
+[16:37:26] Summary emailed to delgado@alumni.usc.edu
