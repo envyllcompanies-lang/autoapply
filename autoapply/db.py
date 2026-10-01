@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     source TEXT, company TEXT, title TEXT, location TEXT,
     url TEXT, apply_url TEXT,
     first_seen TEXT,
-    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed | needs_human | unconfirmed
+    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed | unconfirmed
     score INTEGER,
     reason TEXT,
     resume_path TEXT, cover_path TEXT, screenshot TEXT,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 """
 
-FINAL = ("applied", "filtered", "low_score", "blocked", "skipped", "needs_human", "unconfirmed")
+FINAL = ("applied", "filtered", "low_score", "blocked", "skipped", "unconfirmed")
 
 
 class DB:
@@ -63,9 +63,8 @@ class DB:
         # parked only because their site was paused, or stopped by things the bot now handles (Workday accounts, start
         # pages, footer buttons): the bot does them itself. Real human checks (hCaptcha, emailed codes) stay as they are.
         cur6 = self.conn.execute(
-            "UPDATE jobs SET status='queued', attempts=0 WHERE (status='manual' AND reason LIKE 'apply by hand: % stopped the bot at a human check%on its last%')"
-            " OR (status='blocked' AND (reason LIKE 'account:%' OR reason LIKE 'not a real application form%' OR reason LIKE 'no Next or Submit%'"
-            " OR reason LIKE 'no application form found%'))")
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND (reason LIKE 'account:%' OR reason LIKE 'not a real application form%' OR reason LIKE 'no Next or Submit%'"
+            " OR reason LIKE 'no application form found%')")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
         return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount + cur5.rowcount + cur6.rowcount
