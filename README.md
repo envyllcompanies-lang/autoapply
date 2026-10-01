@@ -37,6 +37,9 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
 ## How it applies
 - Multi-page forms (Next / Save and Continue) and one-page forms, including account gates: it creates an account with
   **delgado@alumni.usc.edu** and the `ACCOUNT_PASSWORD` secret, confirms it from the inbox, and signs in on later visits.
+  Any site works: when a sign-up says "check your email", the bot finds the newest verification email, then either types the
+  code in (one box, or one box per digit; numbers like `482913`, `731 204` or letter-number codes like `X7K2QF`) or opens the
+  verification link (clicking "Verify" on the page if the link asks for it), and carries on with the application.
 - Uploads **your own résumé file** (`briandelgado_resume.pdf`, set by `resume_file` in `config.yaml`) unchanged on every application. No résumé is generated.
 - **Cover letters:** when a form has a cover-letter upload or box, the bot writes a full one-page letter (about 320 to 380 words, four paragraphs, letterhead, date, signed with your name) from your real background only. If the writer can't: an optional letter is left out and it applies with the résumé alone; a **required** one gets `cover_letter_template` from `config.yaml` (a full, true one-page letter with the company and role filled in).
 - **Résumé upload is checked:** styled upload boxes (Greenhouse, Lever, Workday) must show the file name before it moves on; if they don't, it
@@ -51,8 +54,9 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
 
 ## What it will not do (on purpose), and what lands on your hand list
 - **CAPTCHAs and "are you human" checks are never solved or worked around.** Those jobs go on the FINISH BY HAND list.
-- **Sites that email a security code before accepting an application** (some Greenhouse forms) are also left for you. The bot does not read
-  or enter those codes, because they are that site's human check.
+- **Greenhouse jobs are left out entirely** (`skip_sources` in `settings.yaml`, and any Greenhouse form reached from a job board).
+  Its forms can demand an emailed anti-bot code before accepting an application, and the bot does not enter those. If another site
+  asks for that kind of code at the moment of submitting an application (not for an account), the job goes on the hand list.
 - If a site keeps stopping the bot this way (three in a row from at least two employers), the bot **pauses that site for a day**
   instead of spending your free minutes on it, lists that site's good fits for you, and lets one application through the next day
   to see whether the check went away. The same goes for one employer whose form has already stopped it this week.

@@ -2,6 +2,7 @@
 # Sections merge; a list or a single value here replaces the one in config.yaml.
 
 search:
+  skip_sources: [ashby, greenhouse]   # Greenhouse left out on purpose (its forms can ask for an emailed anti-bot code)
   pause_sites: false          # never stop trying a whole site because some of its forms showed a human check
   skip_blocked_employers: false
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying

@@ -19,7 +19,8 @@ class AuthBlocked(Exception):
 
 
 VERIFY_MSG = re.compile(r"verify your (e-?mail|account)|check your (e-?mail|inbox)|confirmation (e-?mail|link)|"
-                        r"(sent|sending) (you )?(an )?e-?mail|activate your account|verification (code|link|e-?mail)", re.I)
+                        r"(sent|sending) (you )?(an )?e-?mail|activate your account|verification (code|link|e-?mail)|"
+                        r"(sent|emailed) (you )?(a|an|the) (\d[- ]digit )?(one.?time )?(code|passcode)|enter the (\d[- ]digit |one.?time )?code", re.I)
 # (not 'already have an account?': that is the sign-in link every sign-up page shows)
 EXISTS_MSG = re.compile(r"already (exists|registered|in use|taken|associated)|(account|user) (with|for) (this|that|the) e-?mail (address )?(already|exists)|"
                         r"e-?mail (address )?(is )?already|is taken", re.I)
@@ -148,6 +149,50 @@ def _settle(page, ms=2500):
         pass
 
 
+CODE_INPUT = ("input[autocomplete=one-time-code], input[name*=code i], input[id*=code i], input[name*=otp i], input[id*=otp i], "
+              "input[name*=pin i], input[id*=pin i], input[name*=token i], input[aria-label*=code i], input[placeholder*=code i], "
+              "input[aria-label*=digit i], input[inputmode=numeric][maxlength='1'], input[maxlength='1']")
+
+
+def _code_inputs(page) -> list:
+    """The visible box(es) a site wants a one-time code typed into: one box, or a row of one-character boxes."""
+    try:
+        boxes = [b for b in page.locator(CODE_INPUT).locator("visible=true").all()
+                 if (b.get_attribute("type") or "text").lower() not in ("password", "email", "hidden", "checkbox", "radio")]
+    except Exception:
+        return []
+    singles = [b for b in boxes if (b.get_attribute("maxlength") or "") == "1"]
+    # group one-character boxes by the closest container that holds two or more of them, and use the biggest group
+    # (a digit row), so a lone 'middle initial' box elsewhere on the page is never typed into
+    _grp = "e => { let p = e.parentElement; while (p && p.querySelectorAll('input[maxlength=\"1\"]').length < 2) p = p.parentElement;" \
+           " if (!p) return ''; const path = []; for (let q = p; q; q = q.parentElement) path.push(q.tagName + [...(q.parentElement ? q.parentElement.children : [])].indexOf(q)); return path.join('/'); }"
+    groups: dict = {}
+    try:
+        for b in singles:
+            groups.setdefault(b.evaluate(_grp), []).append(b)
+        singles = max(groups.values(), key=len) if groups else []
+    except Exception:
+        singles = []
+    return singles if len(singles) >= 4 else [b for b in boxes if b not in singles][:1]
+
+
+def _type_code(page, boxes: list, code: str):
+    """Type the code (one character per box when the site splits it up), then press the verify/continue button."""
+    if len(boxes) >= 4:
+        boxes[0].click()
+        for ch, b in zip(code, boxes):
+            b.fill(ch)
+        if len(code) > len(boxes):
+            boxes[-1].type(code[len(boxes):])
+    else:
+        boxes[0].fill(code)
+    page.wait_for_timeout(600)
+    if not _click_named(page, re.compile(r"^\s*(verify|confirm|submit|continue|next|activate|sign in|log ?in)( (code|e-?mail|account))?\s*$", re.I),
+                        roles=("button",)):
+        if not _submit_auth(page, "signin"):
+            boxes[-1].press("Enter")
+
+
 def _verify_email(page, acc: Accounts, since: float, log, timeout: int = 150):
     if not mailbox.configured():
         why = mailbox.disabled_reason() or "IMAP_USER / IMAP_PASS not set"
@@ -156,25 +201,42 @@ def _verify_email(page, acc: Accounts, since: float, log, timeout: int = 150):
     res = mailbox.wait_for_verification(since_ts=since, host_hint=acc.host(page.url).split(".")[0], timeout=timeout, log=log)
     if not res:
         raise AuthBlocked("verification email did not arrive in time")
-    if res.get("link") and re.search(r"myworkdayjobs\.com/.*/(activate|verify)|redirect=", res["link"], re.I):
+    code_box = _code_inputs(page)
+    if res.get("code") and code_box:
+        # the page is waiting for a code and the email has one: type it in, even when the email also has a link
+        log("      account: typing the emailed code")
+        _type_code(page, code_box, res["code"])
+        _settle(page)
+    elif res.get("link") and re.search(r"myworkdayjobs\.com/.*/(activate|verify)|redirect=", res["link"], re.I):
         # Workday's verify link signs you in and goes straight to the application ('...?redirect=.../apply/applyManually'):
         # follow it in this tab so the bot lands on the form
         log("      account: opening the verify link (it leads straight to the application)")
         page.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
         _settle(page, 3000)
     elif res.get("link"):
+        log("      account: opening the verification link")
         p2 = page.context.new_page()
         try:
             p2.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
             _settle(p2, 2000)
+            # some links land on 'click to confirm' instead of confirming on open
+            if _click_named(p2, re.compile(r"^\s*(verify|confirm|activate)( (my )?(e-?mail|account))?\s*$", re.I)):
+                _settle(p2, 1500)
         finally:
             p2.close()
+        # the original tab may still say 'check your email': reload so it sees the verified account
+        try:
+            if VERIFY_MSG.search(page.inner_text("body")):
+                page.reload(wait_until="domcontentloaded", timeout=45000)
+                _settle(page, 1500)
+        except Exception:
+            pass
     elif res.get("code"):
-        box = page.locator("input[autocomplete=one-time-code], input[name*=code i], input[id*=code i], input[type=text], input[type=tel]").locator("visible=true")
-        if not box.count():
+        box = code_box or page.locator("input[type=text], input[type=tel], input[type=number]").locator("visible=true").all()
+        if not box:
             raise AuthBlocked("got a verification code but found no place to type it")
-        box.first.fill(res["code"])
-        _submit_auth(page, "signin")
+        log("      account: typing the emailed code")
+        _type_code(page, box, res["code"])
         _settle(page)
     else:
         raise AuthBlocked("verification email had no link or code")

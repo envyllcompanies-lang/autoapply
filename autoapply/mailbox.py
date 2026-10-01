@@ -76,6 +76,46 @@ def _plain_lines(body: str) -> list[str]:
     return [ln.strip() for ln in txt.splitlines() if ln.strip()]
 
 
+CODE_WORD = re.compile(r"\b(code|passcode|pass code|otp|one.?time (pass)?(code|password|pin)|pin|verification|security)\b", re.I)
+# a code token: 4-8 digits, or 5-10 letters/digits that mix both (e.g. 'X7K2QF'); 'ABC-123' style is joined
+ALNUM_RX = re.compile(r"(?<![A-Za-z0-9])([A-Z0-9]{2,5}[- ]?[A-Z0-9]{2,5})(?![A-Za-z0-9])")
+NOT_CODE = re.compile(r"^(19|20)\d\d$")          # a year
+
+
+def _token(s: str) -> str | None:
+    sp = re.search(r"(?<![\d-])(\d{3,4})[ -](\d{3,4})(?![\d-])", s)      # '731 204' / '731-204'
+    if sp and not CODE_RX.search(s[:sp.start()]):
+        return sp.group(1) + sp.group(2)
+    for m in CODE_RX.finditer(s):
+        if not NOT_CODE.match(m.group(1)):
+            return m.group(1)
+    for m in ALNUM_RX.finditer(s):
+        t = re.sub(r"[- ]", "", m.group(1))
+        if 5 <= len(t) <= 10 and re.search(r"\d", t) and re.search(r"[A-Z]", t):
+            return t
+    return None
+
+
+def find_code(subj: str, body: str) -> str | None:
+    """The one-time code in a verification email, or None. Looks next to the word 'code' (same line or the line after)
+    first, so a zip code, year or order number elsewhere in the email is not picked up."""
+    lines = _plain_lines(body)
+    if CODE_WORD.search(subj):
+        hit = re.search(r"(?:code|passcode|pin)\s*(?:is)?\s*[:\-]?\s*([A-Z0-9][A-Z0-9 -]{3,11})", subj, re.I)
+        if hit and (t := _token(hit.group(1).upper())):
+            return t
+    for i, ln in enumerate(lines[:80]):
+        if CODE_WORD.search(ln):
+            for cand in (ln[CODE_WORD.search(ln).end():], lines[i + 1] if i + 1 < len(lines) else ""):
+                t = _token(cand.strip())
+                if t:
+                    return t
+    for ln in lines[:40]:                             # the code alone on its own line, as most templates show it
+        if re.fullmatch(r"\d{4,8}|[A-Z0-9]{5,10}", ln) and _token(ln):
+            return _token(ln)
+    return None
+
+
 def parse_message(raw: bytes) -> dict:
     """{'subject','from','to','ts','link','code','hint','body'} for one raw email (link/code may be None)."""
     msg = email.message_from_bytes(raw)
@@ -96,10 +136,7 @@ def parse_message(raw: bytes) -> dict:
             break
     if not link and links and HINT.search(subj):
         link = links[0]
-    code = None
-    if re.search(r"code|passcode|otp|one.?time|pin", subj + " " + body[:1500], re.I):
-        m = CODE_RX.search(re.sub(r"<[^>]+>", " ", body))
-        code = m.group(1) if m else None
+    code = find_code(subj, body)
     return {"subject": subj, "from": msg.get("From", ""), "to": msg.get("To", ""), "ts": ts, "link": link, "code": code,
             "hint": bool(HINT.search(subj)) or bool(link) or bool(code), "body": body[:6000]}
 
