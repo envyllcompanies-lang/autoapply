@@ -25,7 +25,7 @@ class ATS:
 _PATTERNS = (
     ("workday", re.compile(r"(?:myworkdayjobs\.com|workday\.com)", re.I), 1.0, 0),
     ("greenhouse", re.compile(r"(?:greenhouse\.io|job-boards\.greenhouse\.io)", re.I), 1.0, 2),
-    ("lever", re.compile(r"(?:jobs\.lever\.co|jobs\.lever\.co|lever\.co)", re.I), 1.0, 1),
+    ("lever", re.compile(r"(?:jobs\.lever\.co|lever\.co)", re.I), 1.0, 1),
     ("workable", re.compile(r"(?:workable\.com|apply\.workable\.com)", re.I), 1.0, 2),
     ("bamboohr", re.compile(r"(?:bamboohr\.com)", re.I), 0.95, 1),
     ("breezy", re.compile(r"(?:breezy\.hr)", re.I), 0.95, 1),
