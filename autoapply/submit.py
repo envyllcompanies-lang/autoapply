@@ -1179,8 +1179,13 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
             url_says_done = page.url != before_url and re.search(r"thank|success|submitted|confirmation", page.url, re.I)
             if len(SUCCESS_RE.findall(body)) > before_hits or url_says_done:
                 return "confirmed"
-            if _security_prompt(page):
-                raise Blocked("the site asked for an emailed security code (its own human check): left for you to finish by hand")
+            body_l = " ".join(body.split())
+            if re.search(
+                r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re|you are) human|"
+                r"are you a robot|human verification|cloudflare.{0,30}(challenge|verify)",
+                body_l, re.I,
+            ) and not _email_code_prompt(page):
+                raise Blocked("the submit is held by an anti-bot/human verification challenge")
             if (b := _blocker(page)):
                 raise Blocked(f"{b} after submit")
             if waited >= 6000 and waited % 3000 == 0:
