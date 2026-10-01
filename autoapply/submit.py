@@ -969,7 +969,7 @@ LANDING_RX = re.compile(r"^\s*(apply manually|start (your )?application|apply( n
                         r"(sign in|continue|apply|sign up) with (e-?mail|your e-?mail)( address)?)\s*$", re.I)
 CLOSED_RX = re.compile(r"page you are looking for (doesn.t|does not) exist|(job|position|posting|requisition) (is )?(no longer|not) (available|open|accepting)|"
                        r"no longer accepting applications|this job (has been|was) (closed|filled|removed)|job not found|position has been filled", re.I)
-MAX_STEPS = 16
+MAX_STEPS = 32
 
 
 def _find_advance(page):
