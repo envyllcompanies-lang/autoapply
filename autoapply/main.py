@@ -606,7 +606,6 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 if got:
                     db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}", attempts=row["attempts"] + 1)
                     brain.applied_before.add(job.company)
-                    note_success(db, ats)
                     log(f"    ✓ applied (the company's confirmation email arrived: {got[:70]!r})")
                     done += 1
                 else:
