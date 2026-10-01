@@ -1,5 +1,5 @@
 """End-of-run summary: an email to the applicant address (over the same Gmail app password the inbox reader uses) plus a
-"finish by hand" list for postings the bot could not or should not submit itself."""
+exception list for postings the bot could not or should not submit itself."""
 from __future__ import annotations
 
 import html
@@ -18,7 +18,7 @@ NOISE = ("no application form found", "not a real application form", "posting no
 
 
 def manual_rows(rows, min_score: int = 55, limit: int = 25):
-    """Best-scoring exceptions worth reporting; the runner does not create a human-work queue."""
+    """Best-scoring exceptions worth reporting; the unattended runner does not create a human-work queue."""
     out = []
     for r in rows:
         if r["status"] not in MANUAL_STATUSES or (r["score"] or 0) < min_score:
