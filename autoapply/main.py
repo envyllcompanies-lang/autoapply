@@ -684,14 +684,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     }
                     try:
                         (d / "resume.json").write_text(json.dumps(resume, indent=2))
-                        if page:
-                            page.screenshot(path=str(d / "needs_human.png"), full_page=True)
                     except Exception:
                         pass
                     db.update(job.key, status="needs_human",
                               reason=("human verification required; resume at " + (page.url if page else job.apply_url) +
                                       " | " + blocked_text[:300]),
-                              screenshot=str(d / "needs_human.png"),
                               attempts=row["attempts"] + 1)
                     dead.add(ck)
                     note_block(db, ats_of(job), job.company, blocked_text, today)
