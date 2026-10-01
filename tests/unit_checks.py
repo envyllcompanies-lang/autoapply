@@ -97,6 +97,20 @@ except ImportError:
 except AssertionError as e:
     problems.append("button group: " + str(e)[:200])
 
+# ---- ATS classifier / human-gate boundary ----
+from autoapply.ats import detect, is_human_gate
+if detect("https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/123").name != "workday":
+    problems.append("ATS classifier missed Workday")
+if detect("https://job-boards.greenhouse.io/acme/jobs/123").name != "greenhouse":
+    problems.append("ATS classifier missed Greenhouse")
+if detect("https://jobs.lever.co/acme/123").name != "lever":
+    problems.append("ATS classifier missed Lever")
+if not is_human_gate("Please complete the hCaptcha challenge to prove you are human"):
+    problems.append("human gate classifier missed hCaptcha")
+if is_human_gate("Verify your email address using the code we sent you"):
+    problems.append("ordinary account verification was misclassified as a human gate")
+print("ok  ATS detection and human-verification boundary")
+
 # ---- verification-email parsing ----
 def _mail_test():
     from autoapply import mailbox
