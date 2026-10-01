@@ -45,11 +45,26 @@ def _form_errors(page) -> list[str]:
     return [" ".join(e.split())[:100] for e in errs if e.strip()][:3]
 
 
+def strong_password(pw: str) -> str:
+    """A password every job site accepts (Workday: 8+ characters with an uppercase letter, a lowercase letter, a number and a
+    special character), made the same way every time from ACCOUNT_PASSWORD so you always know it: your saved password,
+    then 'Aa1!', then 'Job' if it is still shorter than 8 characters. A password that already qualifies is used as is."""
+    if not pw:
+        return pw
+    ok = len(pw) >= 8 and re.search(r"[A-Z]", pw) and re.search(r"[a-z]", pw) and re.search(r"\d", pw) and re.search(r"[^A-Za-z0-9]", pw)
+    if ok:
+        return pw
+    out = pw + "Aa1!"
+    if len(out) < 8:
+        out += "Job"
+    return out
+
+
 class Accounts:
     def __init__(self, cfg: dict, base):
         a = cfg.get("accounts") or {}
         self.email = a.get("email") or (cfg.get("facts") or {}).get("account_email") or (cfg.get("facts") or {}).get("email", "")
-        self.password = os.environ.get("ACCOUNT_PASSWORD") or a.get("password") or ""
+        self.password = strong_password(os.environ.get("ACCOUNT_PASSWORD") or a.get("password") or "")
         self.enabled = bool(a.get("enabled", True)) and bool(self.password) and bool(self.email)
         self.create_in_dry_run = bool(a.get("create_in_dry_run", False))
         self.path = base / "accounts.json"
