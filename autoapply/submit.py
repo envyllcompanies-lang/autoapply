@@ -1051,19 +1051,6 @@ def _landing(page) -> bool:
     return False
 
 
-SECURITY_TEXT = re.compile(r"security code|verification code|enter the (\d|six|eight|8|6)[- ]?(character|digit)? ?code", re.I)
-
-
-def _security_prompt(page) -> bool:
-    """A site that answers a submit with 'enter the code we emailed you' is running its own human check."""
-    try:
-        if page.locator('input[id^="security-input"]').locator("visible=true").count() >= 4:
-            return True
-        one = page.locator('input[autocomplete="one-time-code"], input[name*="security" i], input[id*="security" i]')
-        return one.locator("visible=true").count() > 0 and bool(SECURITY_TEXT.search(page.inner_text("body")))
-    except Exception:
-        return False
-
 
 _REJECT_RX = re.compile(r"required|invalid|please (enter|select|provide|upload|choose|attach|complete|fill)|must |missing|"
                         r"can.t be blank|cannot be blank|is not valid", re.I)
