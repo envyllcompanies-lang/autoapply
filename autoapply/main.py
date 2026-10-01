@@ -589,22 +589,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                           attempts=row["attempts"] + (0 if dry_run else 1))
                 if status == "applied":
                     brain.applied_before.add(job.company)
-                    note_success(db, ats)
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
                 blocked_text = str(e)
-                if is_human_gate(blocked_text):
-                    # Human verification is a hard boundary. Never solve, replay, or infer the challenge.
-                    # This runner is intentionally unattended: record the reason and move on immediately.
-                    db.update(job.key, status="blocked",
-                              reason=("human verification required; unattended runner skipped this application | " + blocked_text[:300]),
-                              attempts=row["attempts"] + 1)
-                    dead.add(ck)
-                    note_block(db, ats_of(job), job.company, blocked_text, today)
-                    log(f"    ✗ skipped: human verification required ({blocked_text[:220]})")
-                    done += 1
-                    continue
                 if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
                     # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
                     # for the run after the password is updated, and no more time is spent on that site this run
