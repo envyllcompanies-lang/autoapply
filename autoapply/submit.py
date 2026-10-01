@@ -195,8 +195,8 @@ class Blocked(Exception):
     pass
 
 
-# greenhouse: left out on the applicant's choice (its forms can demand an emailed anti-bot code before accepting an application)
-UNSUPPORTED_ALWAYS = re.compile(r"linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|smartrecruiters\.com/oneclick|[?&]gh_jid=", re.I)
+# Greenhouse is supported. Its normal `gh_jid` query parameter identifies the job and must never be treated as an unsupported board.
+UNSUPPORTED_ALWAYS = re.compile(r"linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|smartrecruiters\.com/oneclick", re.I)
 UNSUPPORTED_NEEDS_ACCOUNT = re.compile(r"myworkdayjobs|\.workday\.com|icims\.com|taleo\.net|successfactors|oraclecloud\.com|"
                                        r"ultipro\.com|ukg\.com|paylocity|paycomonline|brassring|adp\.com", re.I)
 ACCOUNTS_ENABLED = False          # set by main when the ACCOUNT_PASSWORD secret exists
