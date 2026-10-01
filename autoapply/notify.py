@@ -11,7 +11,7 @@ from email.message import EmailMessage
 
 import requests
 
-MANUAL_STATUSES = ("manual", "blocked", "unconfirmed", "failed")
+MANUAL_STATUSES = ("manual", "blocked", "unconfirmed", "failed", "needs_human")
 # reasons that are not worth the applicant's time (nothing to finish by hand)
 NOISE = ("no application form found", "not a real application form", "posting no longer listed", "same role at same company",
          "already applied", "same posting already handled", "could not find the employer")
@@ -38,7 +38,7 @@ def _link(r):
 def why_lines(groups: dict, limit: int = 6) -> list[str]:
     """One line per common reason postings did not go through, so a quiet run explains itself."""
     tally: dict[tuple, int] = {}
-    for status in ("blocked", "failed", "skipped", "unconfirmed"):
+    for status in ("blocked", "failed", "skipped", "unconfirmed", "needs_human"):
         for r in groups.get(status, []):
             why = re.sub(r"\s+", " ", (r["reason"] or "")).strip()
             if not why or any(n in why for n in NOISE):
@@ -62,7 +62,9 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
         lines += [f"  - {r['title']} @ {r['company']}\n    {r['url']}" for r in unc[:15]]
         lines.append("")
     if manual:
-        lines.append(f"FINISH BY HAND ({len(manual)}): good fits the site would not let the bot submit")
+        human = sum(1 for r in manual if r["status"] == "needs_human")
+        label = f"FINISH BY HAND ({len(manual)}): " + (f"{human} require human verification; " if human else "") + "the site would not let the bot finish automatically"
+        lines.append(label)
         for r in manual:
             lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}")
         lines.append("")
