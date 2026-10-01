@@ -21,7 +21,7 @@ from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, __version__
-from .ats import detect as detect_ats, is_human_gate
+from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
@@ -141,84 +141,6 @@ def site_rank(row) -> int:
         return 2
     detected = detect_ats(url, "")
     return min(SITE_RANK.get(src, detected.priority), detected.priority)
-
-
-# ----------------------------------------------------------------------------------------- sites that keep showing a human check
-HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|security code|human check|are you a robot", re.I)
-GATE_AFTER_BLOCKS = 3       # this many human-check stops in a row (from two or more employers) pause a site for a day
-
-
-def ats_of(job) -> str:
-    """Which application system a posting lives on: greenhouse, lever, workday ... or the site's own host."""
-    if not job.source.startswith("agg-"):
-        return job.source.lower()
-    url = job.apply_url or job.url or ""
-    found = board_of(url)
-    if found:
-        return found[0]
-    if "myworkdayjobs.com" in url:
-        return "workday"
-    return (urlparse(url).netloc or "web").lower()
-
-
-def _site_state(db: DB, ats: str) -> dict:
-    try:
-        return json.loads(db.meta_get(f"hc:{ats}") or "{}")
-    except Exception:
-        return {}
-
-
-def note_block(db: DB, ats: str, company: str, why: str, today: str):
-    """A human check (CAPTCHA, emailed code ...) stopped an application. The bot never gets past those, so a site that does
-    this again and again is paused instead of spending the run's free minutes on it."""
-    if not HUMAN_CHECK.search(why or ""):
-        return
-    st = _site_state(db, ats)
-    cos = [c for c in st.get("cos", []) if c != company][-4:] + [company]
-    st.update(n=int(st.get("n", 0)) + 1, cos=cos, last=today)
-    if st["n"] >= GATE_AFTER_BLOCKS and len(set(cos)) >= 2 and not st.get("probe_after"):
-        st["probe_after"] = (date.fromisoformat(today) + timedelta(days=1)).isoformat()
-    db.meta_set(f"hc:{ats}", json.dumps(st))
-
-
-def note_success(db: DB, ats: str):
-    if _site_state(db, ats):
-        db.meta_set(f"hc:{ats}", "")
-
-
-def site_paused(db: DB, ats: str, today: str) -> str | None:
-    """Why this site is paused today (None = go ahead). Once a day one application is let through to see if the check went away."""
-    st = _site_state(db, ats)
-    after = st.get("probe_after")
-    if not after:
-        return None
-    if today >= after:
-        st["probe_after"] = (date.fromisoformat(today) + timedelta(days=1)).isoformat()
-        db.meta_set(f"hc:{ats}", json.dumps(st))
-        return None
-    return (f"apply by hand: {ats} stopped the bot at a human check (CAPTCHA or emailed code) on its last {st.get('n', '?')} tries, "
-            f"so that site is paused until {after}")
-
-
-def employer_blocked(db: DB, company: str) -> str | None:
-    """The same employer's application already stopped at a human check this week: its other postings will too."""
-    since = (datetime.now() - timedelta(days=7)).isoformat(timespec="seconds")
-    for r in db.conn.execute("SELECT reason FROM jobs WHERE lower(company)=? AND status='blocked' AND updated >= ?", (company.lower(), since)):
-        if HUMAN_CHECK.search(r["reason"] or ""):
-            return r["reason"]
-    return None
-
-
-def paused_sites(db: DB, today: str) -> list[str]:
-    out = []
-    for r in db.conn.execute("SELECT k, v FROM meta WHERE k LIKE 'hc:%'"):
-        try:
-            st = json.loads(r["v"] or "{}")
-        except Exception:
-            continue
-        if st.get("probe_after") and st["probe_after"] > today:
-            out.append(f"{r['k'][3:]}: human check on its last {st.get('n', '?')} tries, paused until {st['probe_after']}")
-    return out
 
 
 def site_summary(rows) -> list[str]:
@@ -698,7 +620,6 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 dead.add(ck)
                 if "could not find the employer" in str(e):
                     nofind[job.source] = nofind.get(job.source, 0) + 1
-                note_block(db, ats_of(job), job.company, str(e), today)
                 log(f"    ✗ blocked: {e}")
             except sub.Unconfirmed as e:
                 got = None
