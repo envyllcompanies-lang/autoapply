@@ -408,7 +408,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
 
     # 1. discover
     log("Discovering jobs…")
-    skip_src = {x.lower() for x in (s.get("skip_sources") or ["ashby"])}
+    skip_src = {x.lower() for x in (s.get("skip_sources") or [])}
     manual_src = {x.lower() for x in (s.get("manual_sources") or [])}
     companies = {k: list(v or []) for k, v in (cfg.get("companies", {}) or {}).items()}
     for ats, toks in load_boards(base).items():          # boards found earlier by following aggregator links
