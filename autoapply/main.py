@@ -21,6 +21,7 @@ from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, __version__
+from .ats import detect as detect_ats, is_human_gate
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
@@ -138,7 +139,8 @@ def site_rank(row) -> int:
         return 2
     if "greenhouse" in url:
         return 2
-    return SITE_RANK.get(src, 1)
+    detected = detect_ats(url, "")
+    return min(SITE_RANK.get(src, detected.priority), detected.priority)
 
 
 # ----------------------------------------------------------------------------------------- sites that keep showing a human check
@@ -670,7 +672,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 done += 1
             except sub.Blocked as e:
                 blocked_text = str(e)
-                if HUMAN_CHECK.search(blocked_text):
+                if is_human_gate(blocked_text):
                     # Human verification is a hard boundary. Never solve, replay, or infer the challenge.
                     # Persist resume state, then move immediately to the next application.
                     resume = {
