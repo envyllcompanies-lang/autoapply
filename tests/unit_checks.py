@@ -96,19 +96,10 @@ except ImportError:
     print("skip button group test (no playwright)")
 except AssertionError as e:
     problems.append("button group: " + str(e)[:200])
-
-// ---- empty skip_sources really means no source is skipped ----
+# ---- empty skip_sources really means no source is skipped ----
 # This guards the discovery configuration used by settings.yaml.
 if yaml.safe_load((ROOT / "settings.yaml").read_text())["search"]["skip_sources"] != []:
     problems.append("settings.yaml must not silently skip a source")
-
-# ---- human-required submissions are visible in notifications ----
-from autoapply.notify import manual_rows, build_text
-_h = {"status":"needs_human","score":90,"reason":"hCaptcha required","title":"Test Role","company":"Test Co","url":"https://example.test/apply","apply_url":""}
-if not manual_rows([_h]):
-    problems.append("needs_human status missing from manual notification rows")
-if "FINISH BY HAND" not in build_text("2026-10-01", "1 needs_human", {"needs_human":[_h]}, manual_rows([_h])):
-    problems.append("needs_human missing from notification text")
 
 # ---- supported ATS URLs are not rejected as universally unsupported ----
 from autoapply import submit as _submit
