@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     source TEXT, company TEXT, title TEXT, location TEXT,
     url TEXT, apply_url TEXT,
     first_seen TEXT,
-    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed
+    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed | needs_human | unconfirmed
     score INTEGER,
     reason TEXT,
     resume_path TEXT, cover_path TEXT, screenshot TEXT,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 """
 
-FINAL = ("applied", "filtered", "low_score", "blocked", "skipped")
+FINAL = ("applied", "filtered", "low_score", "blocked", "skipped", "needs_human", "unconfirmed")
 
 
 class DB:
