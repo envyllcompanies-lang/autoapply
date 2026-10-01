@@ -1010,6 +1010,17 @@ def _page_errors(page) -> list[str]:
     return [e.strip()[:80] for e in errs if e.strip()][:4]
 
 
+def _visible_buttons(page) -> str:
+    """The first visible buttons/links on a page, to explain in the log why the bot could not go on."""
+    try:
+        txt = page.locator("button, a[role=button], [data-automation-id]").locator("visible=true").evaluate_all(
+            "els => els.slice(0, 40).map(e => (e.getAttribute('data-automation-id') || '') + ':' + (e.innerText || '').trim().slice(0, 30))"
+            ".filter(t => t.length > 2)")
+        return "; ".join(dict.fromkeys(txt))[:300]
+    except Exception:
+        return "?"
+
+
 def _wd_start(page) -> bool:
     """Workday's own start screens, by their fixed ids: the job page's Apply button, 'Start Your Application'
     (Apply Manually first, else Use My Last Application) and the social sign-in page's 'Sign in with email'."""
@@ -1217,8 +1228,16 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             page.wait_for_timeout(2500)
             _settle(page)
             fields = extract(page)
-        if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _wd_start(page):
+        for _k in range(3):        # Workday after sign-in: the job page (Apply) -> Start Your Application (Apply Manually) -> form
+            if len(fields) >= 3 or any(f["kind"] in ("file", "password", "email") for f in fields) or not _wd_start(page):
+                break
             _settle(page)
+            if accounts and accounts.enabled and auth.is_auth_page(page):
+                try:
+                    auth.handle(page, accounts, log, url_after=start_url)
+                except auth.AuthBlocked as e:
+                    raise Blocked(f"account: {e}")
+                _settle(page)
             fields = extract(page)
         if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _landing(page):
             # description page, Workday's "Start Your Application" (Apply Manually) or "Sign in with email": get to the form
@@ -1279,8 +1298,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
         page.screenshot(path=str(shot if step == 1 else shot.with_name(f"step{step}.png")), full_page=True)
         if kind is None:
             if total < 4 or not uploaded:
-                raise Blocked(f"not a real application form ({total} fields, no résumé upload)")
-            raise Blocked("no Next or Submit button found on this step")
+                raise Blocked(f"not a real application form ({total} fields, no résumé upload); page shows: {_visible_buttons(page)}")
+            raise Blocked(f"no Next or Submit button found on this step; page shows: {_visible_buttons(page)}")
         if kind == "submit":
             if total < 4 or not uploaded:
                 raise Blocked(f"not a real application form ({total} fields, no résumé upload)")

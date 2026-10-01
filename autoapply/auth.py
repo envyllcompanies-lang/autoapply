@@ -156,7 +156,13 @@ def _verify_email(page, acc: Accounts, since: float, log, timeout: int = 150):
     res = mailbox.wait_for_verification(since_ts=since, host_hint=acc.host(page.url).split(".")[0], timeout=timeout, log=log)
     if not res:
         raise AuthBlocked("verification email did not arrive in time")
-    if res.get("link"):
+    if res.get("link") and re.search(r"myworkdayjobs\.com/.*/(activate|verify)|redirect=", res["link"], re.I):
+        # Workday's verify link signs you in and goes straight to the application ('...?redirect=.../apply/applyManually'):
+        # follow it in this tab so the bot lands on the form
+        log("      account: opening the verify link (it leads straight to the application)")
+        page.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
+        _settle(page, 3000)
+    elif res.get("link"):
         p2 = page.context.new_page()
         try:
             p2.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
@@ -331,7 +337,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 acc.remember(host, "created")
                 _verify_email(page, acc, t0, log)
                 acc.remember(host, "verified")
-                if url_after:
+                if url_after and (is_auth_page(page) or "/apply" not in page.url):
                     page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
                     _settle(page, 2000)
                 continue
@@ -388,7 +394,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             _settle(page, 1500)
             _verify_email(page, acc, t0 - 30, log)
             acc.remember(host, "verified")
-            if url_after:
+            if url_after and (is_auth_page(page) or "/apply" not in page.url):
                 page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
                 _settle(page, 2000)
             continue
@@ -400,7 +406,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             try:
                 _verify_email(page, acc, t0 - 2 * 86400, log, 60)
                 acc.remember(host, "verified")
-                if url_after:
+                if url_after and (is_auth_page(page) or "/apply" not in page.url):
                     page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
                     _settle(page, 2500)
                 continue

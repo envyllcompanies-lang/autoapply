@@ -172,8 +172,10 @@ def workday(spec: str) -> list[Job]:
         n = 0
         for p in data.get("jobPostings") or []:
             path = p.get("externalPath", "")
-            if path and path not in seen:
+            req = path.rsplit("_", 1)[-1] if "_" in path else path      # the same requisition listed under two cities
+            if path and path not in seen and req not in seen:
                 seen.add(path)
+                seen.add(req)
                 posts.append(p)
                 n += 1
         return n
