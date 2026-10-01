@@ -2,14 +2,14 @@
 # Sections merge; a list or a single value here replaces the one in config.yaml.
 
 search:
-  skip_sources: [ashby, greenhouse]   # Greenhouse left out on purpose (its forms can ask for an emailed anti-bot code)
+  skip_sources: [ashby]   # Greenhouse left out on purpose (its forms can ask for an emailed anti-bot code)
   pause_sites: false          # never stop trying a whole site because some of its forms showed a human check
   skip_blocked_employers: false
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
-  prescreen: true            # LinkedIn-style match % (résumé vs. full posting) before applying; best matches first
-  prescreen_per_run: 30
-  skip_sites: [lever]       # Lever shows an hCaptcha after every submit from GitHub: never finishes
-  min_fit: 70               # postings rated under this match % are set aside
+  prescreen: false            # LLM match analysis is telemetry only; deterministic score stays on the critical path
+  prescreen_per_run: 2
+  skip_sites: []
+  min_fit: 55
   max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
 
 scoring:
