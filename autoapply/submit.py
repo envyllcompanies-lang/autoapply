@@ -1394,6 +1394,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                     raise Unanswerable("form requires a cover letter, the writer couldn't write one and there is no cover_letter_template")
                 plan["answers"] = {k: v for k, v in plan["answers"].items() if v != "COVER_LETTER"}   # optional: apply without one
                 log("      (no cover letter could be written; it is optional, applying with the résumé only)")
+        if on_phase:
+            on_phase("profile_complete")
         fill(page, fields, plan["answers"], files, log, deadline=limit_at)
         if on_phase:
             on_phase("questions_complete")
