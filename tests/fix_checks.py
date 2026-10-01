@@ -328,6 +328,49 @@ def browser_checks():
             finally:
                 MB.configured, MB.wait_for_verification = olds
             page.close()
+            # Mid-application email OTP: the code is requested on a later wizard step,
+            # not during account creation. The browser must stay on the application and resume.
+            page = ctx.new_page()
+            page.set_content("""<!doctype html><html><body>
+              <div id="step1"><h1>Application step 1</h1>
+                <label>First Name <input id="first"></label>
+                <label>Last Name <input id="last"></label>
+                <label>Email <input id="email" type="email"></label>
+                <label>Resume/CV <input id="resume" type="file"></label>
+                <button id="next" type="button">Next</button>
+              </div>
+              <div id="step2" style="display:none">
+                <h1>Verify your application</h1>
+                <p>We sent a verification code to your email. Enter the code to continue.</p>
+                <input id="otp" name="verification_code" autocomplete="one-time-code" inputmode="numeric">
+                <button id="verify" type="button">Verify code</button>
+              </div>
+              <div id="done" style="display:none"><h1>Thank you for applying!</h1></div>
+              <script>
+                next.onclick = () => { step1.style.display='none'; step2.style.display='block'; };
+                verify.onclick = () => {
+                  if (otp.value === '731204') { step2.style.display='none'; done.style.display='block'; }
+                };
+              </script>
+            </body></html>""")
+            old_configured, old_wait = MB.configured, MB.wait_for_verification
+            MB.configured = lambda: True
+            MB.wait_for_verification = lambda **k: {"link": None, "code": "731204"}
+            logs = []
+            try:
+                job = Job("greenhouse", "otpco", "otp-1", "Treasury Operations Associate", "Denver, CO",
+                          "http://example.test/job", "http://example.test/apply", "x")
+                got = S.apply(page, job, brain, "", {"RESUME": pdf, "_LETTER_MAKER": lambda t: None},
+                              TMP / "midstep_otp.png", False, logs.append, None)
+                check(got == "confirmed", f"mid-application emailed OTP did not resume: {got!r}; log: {' | '.join(logs)[-500:]}")
+                check(any("application requested a verification code" in x for x in logs),
+                      "mid-application OTP path never polled the mailbox")
+            except Exception as e:
+                check(False, f"mid-application OTP crashed: {type(e).__name__}: {e}")
+            finally:
+                MB.configured, MB.wait_for_verification = old_configured, old_wait
+                page.close()
+
             b.close()
     finally:
         srv.shutdown()
