@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, level, __ve
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-01-t"
+REQUEUE_VERSION = "2026-10-01-z"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -669,7 +669,34 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
-                if re.search(r"password must include|password must (contain|have)", str(e), re.I):
+                blocked_text = str(e)
+                if HUMAN_CHECK.search(blocked_text):
+                    # Human verification is a hard boundary. Never solve, replay, or infer the challenge.
+                    # Persist resume state, then move immediately to the next application.
+                    resume = {
+                        "status": "needs_human",
+                        "url": page.url if page else job.apply_url,
+                        "job": {"company": job.company, "title": job.title, "apply_url": job.apply_url},
+                        "reason": blocked_text[:500],
+                        "timestamp": datetime.now().isoformat(timespec="seconds"),
+                    }
+                    try:
+                        (d / "resume.json").write_text(json.dumps(resume, indent=2))
+                        if page:
+                            page.screenshot(path=str(d / "needs_human.png"), full_page=True)
+                    except Exception:
+                        pass
+                    db.update(job.key, status="needs_human",
+                              reason=("human verification required; resume at " + (page.url if page else job.apply_url) +
+                                      " | " + blocked_text[:300]),
+                              screenshot=str(d / "needs_human.png"),
+                              attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    note_block(db, ats_of(job), job.company, blocked_text, today)
+                    log(f"    ⏸ needs human: {blocked_text[:220]}")
+                    done += 1
+                    continue
+                if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
                     # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
                     # for the run after the password is updated, and no more time is spent on that site this run
                     db.update(job.key, status="queued", reason="waiting for a stronger ACCOUNT_PASSWORD (8+ chars, upper, lower, number, symbol)")
@@ -756,7 +783,7 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     groups: dict[str, list] = {}
     for r in rows:
         groups.setdefault(r["status"], []).append(r)
-    order = ["applied", "unconfirmed", "manual", "dry_run", "blocked", "skipped", "failed", "queued", "low_score", "filtered"]
+    order = ["applied", "unconfirmed", "needs_human", "manual", "dry_run", "blocked", "skipped", "failed", "queued", "low_score", "filtered"]
     counts = ", ".join(f"{len(groups[k])} {k}" for k in order if k in groups) or "nothing new"
     manual = notify.manual_rows(rows)
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
