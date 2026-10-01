@@ -423,11 +423,20 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     if fresh_enough and not dry_run:
         log(f"Job search already ran at {last[11:16]} (searches run every {every_h:.0f} h): this run only applies")
         jobs = []
+        searched = False
     else:
+        searched = True
         jobs = discover(companies, log, base=base)
         jobs += discover_aggregators(cfg, base, log)
         if len(jobs) > 1000:
             db.meta_set("discovered_at", datetime.now().isoformat(timespec="seconds"))
+    try:                       # the daily snapshot of 1M+ postings: cheap (seconds), so every run looks at it
+        from .jobboard import discover_jobboard
+        have = {r[0] for r in db.conn.execute("SELECT apply_url FROM jobs WHERE apply_url != ''")} | \
+               {r[0] for r in db.conn.execute("SELECT url FROM jobs WHERE url != ''")} | {j.apply_url for j in jobs}
+        jobs += discover_jobboard(cfg, base, log, have)
+    except Exception as e:
+        log(f"  agg/jobboard failed: {e}")
     by_key = {j.key: j for j in jobs}
 
     # 2. filter + score only what we've never seen
@@ -499,7 +508,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if time.time() > deadline:
                 log(f"Run time limit reached ({(deadline - t_start) / 60:.0f} min): the rest waits for the next run")
                 break
-            job = by_key.get(row["key"]) or (stub_job(row) if by_key else row_job(row))
+            job = by_key.get(row["key"]) or (stub_job(row) if searched else row_job(row))
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
                 continue

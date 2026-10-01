@@ -665,7 +665,7 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                 digits = re.sub(r"\D", "", str(val))
                 if not f.get("hasDay") and len(digits) == 8:
                     digits = digits[:2] + digits[4:]
-                el.click()
+                el.focus()                               # the visible 'MM' label sits on top: focus the box, then type
                 page.keyboard.type(digits, delay=60)
                 page.keyboard.press("Tab")
             elif kind == "wdprompt":
@@ -1202,6 +1202,10 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 return "dry_run"
             try:
                 auth.handle(page, accounts, log, url_after=start_url)
+                page.wait_for_timeout(1500)
+                _settle(page)
+                if auth.is_auth_page(page):          # just created: Workday wants the new account signed into (or verified)
+                    auth.handle(page, accounts, log, url_after=start_url)
             except auth.AuthBlocked as e:
                 raise Blocked(f"account: {e}")
             page.wait_for_timeout(1200)

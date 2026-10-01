@@ -105,7 +105,7 @@ FIELD_RULES = [
     (r"start date|earliest.*start|available to start|notice period|when (can|could) you start|availability|next career move|when are you looking", ("earliest_start_date",), None),
     (r"salary|compensation|pay expectation|desired pay|expected pay|pay range", ("salary_expectation",), "salary"),
     (r"(related|relative|friend|family).{0,60}(work|employ)|family members?|\brelatives?\b|know (anyone|someone|any)|current(ly)? employees?.{0,40}(know|refer)|have you been referred|were you referred", ("know_employee",), "choice"),
-    (r"\bsms\b|text messag|text you|contact (you )?(by|via) text", ("sms_consent",), "choice"),
+    (r"\bsms\b|text messag|text you|contact (you )?(by|via) text|consent to (receive )?texts?\b|\btexts? from", ("sms_consent",), "choice"),
     (r"referred by|referrer|referral (name|employee|code|email)|employee referral|name of (the )?(employee|person)", ("referral_name",), None),
     (r"how did you (hear|find|learn)|hear about (us|this|the)|where did you (hear|find|learn)|referral source", ("how_did_you_hear",), None),
     (r"(previously|ever|formerly) (been )?(employed|worked)|former employee|worked (for|at) .{0,40}before|"
@@ -862,6 +862,12 @@ class Brain:
                 r"are you (currently )?(subject to|bound by|a party to|under)\b.{0,80}(agreement|restriction|non-?compete|non-?solicit|covenant|contract)|"
                 r"(do|does) (you|your).{0,30}(have|hold).{0,30}(non-?compete|non-?solicit|contractual restriction)", low):
             return pick_option(opts, "No") if has_opts else "No"      # you are not bound by a non-compete or similar agreement
+        if kind == "checkbox_group" and opts and re.search(r"(office|location)s?\W.{0,40}(interest|prefer|consider|open to|willing)|which (office|location)", low):
+            ok = [str(x).lower() for x in self.facts.get("relocation_ok_locations", []) or []]
+            got = [o for o in opts if any(re.search(r"(?<![a-z])" + re.escape(x) + r"(?![a-z])", o.lower()) for x in ok)
+                   or re.search(r"remote", o, re.I)]
+            if got:
+                return got                               # the offices in the places you would live
         if has_opts and opts and re.search(r"relocat", low) and any(re.search(r"willing to relocate", o, re.I) for o in opts):
             if self._location_ok(low):
                 got = next((o for o in opts if re.match(r"\W*yes,? i am willing to relocate", o, re.I)), None) or \
