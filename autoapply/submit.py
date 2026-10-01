@@ -329,6 +329,29 @@ def _blocker(page) -> str | None:
     return None
 
 
+def _email_code_prompt(page) -> bool:
+    """True for an explicit email/OTP verification screen, not a CAPTCHA or ordinary form field."""
+    try:
+        body = " ".join(page.inner_text("body").split())
+        code_box = page.locator(
+            "input[autocomplete=one-time-code], input[name*=otp i], input[id*=otp i], "
+            "input[name*=verification i], input[id*=verification i], input[name*=code i], "
+            "input[id*=code i], input[placeholder*=code i], input[aria-label*=code i], "
+            "input[inputmode=numeric][maxlength='1'], input[maxlength='1']"
+        ).locator("visible=true")
+        if not code_box.count():
+            return False
+        return bool(re.search(
+            r"verification code|one[- ]time (code|password|passcode|pin)|"
+            r"enter (the )?(code|passcode|otp)|check (your )?(email|inbox)|"
+            r"(we|we've|we have|the site) (sent|emailed|e-?mailed) (you )?(a |an )?"
+            r"(code|passcode|one[- ]time|verification)|"
+            r"code (was|has been|is) sent (to|via|by) (your )?e-?mail",
+            body, re.I))
+    except Exception:
+        return False
+
+
 def _few_inputs(page) -> bool:
     """A real confirmation page has (almost) no fields left; a mid-form 'thank you' heading does not count."""
     try:
@@ -1069,6 +1092,36 @@ def _to_form(page, fields, accounts, log, start_url, job_url=""):
         if _form_ready(fields) or not (_wd_start(page) or _landing(page)):
             break
         _settle(page)
+        # Any wizard step may request a code sent to the applicant's inbox.
+        if _email_code_prompt(page):
+            if not auth.mailbox.configured():
+                raise Blocked("email verification code requested, but the application inbox is not configured")
+            try:
+                log("      email: application requested a verification code; checking the inbox")
+                res = auth.mailbox.wait_for_verification(
+                    since_ts=mail_since,
+                    host_hint=(getattr(job, "company", "") or ""),
+                    timeout=min(120, max(30, int(limit_at - time.time()))),
+                    log=log,
+                    require_code=True,
+                )
+                if not res or not res.get("code"):
+                    raise Blocked("email verification code did not arrive in time")
+                boxes = auth._code_inputs(page)
+                if not boxes:
+                    raise Blocked("received an email verification code but found no code input on the application page")
+                log("      email: typing the application verification code")
+                auth._type_code(page, boxes, res["code"])
+                page.wait_for_timeout(1000)
+                _settle(page)
+                if _email_code_prompt(page):
+                    mail_since = time.time() - 5
+                    continue
+            except Blocked:
+                raise
+            except Exception as e:
+                raise Blocked(f"email verification code could not be completed: {str(e)[:160]}")
+
         if accounts and accounts.enabled and auth.is_auth_page(page):
             return extract(page)                   # the caller signs in, then calls this again
         fields = extract(page)
@@ -1235,6 +1288,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
     from . import auth, writer as _w
     start_url = page.url
     total, uploaded, prev_sig, stuck, answered = 0, False, None, 0, {}
+    # Correlate inbox codes with the current application action, not just account creation.
+    mail_since = time.time() - 45
     limit_at = time.time() + MAX_APPLY_SECONDS
     _w.DEADLINE[0] = limit_at - 45            # the writer never makes the whole application run out of time
     for step in range(1, MAX_STEPS + 1):
@@ -1339,6 +1394,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if dry_run:
                 return "dry_run"
             try:
+                mail_since = time.time() - 5
                 try:
                     result = submit(page, btn=btn, on_click=on_click)
                 except NotSubmitted as e:
@@ -1360,6 +1416,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 raise
             page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)
             return result
+        mail_since = time.time() - 5                  # this click may trigger an email OTP on the next step
         btn.click(force=True)                                 # Next / Save and Continue
         page.wait_for_timeout(1500)
         try:
