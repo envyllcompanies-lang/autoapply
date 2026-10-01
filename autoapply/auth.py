@@ -345,7 +345,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
                 _settle(page, 2000)
             continue
-        if BAD_LOGIN.search(body) and acc.known.get(host) in ("created", "exists") and not getattr(acc, "_wd_verify_tried", {}).get(host):
+        state = (acc.known.get(host) or {}).get("state") if isinstance(acc.known.get(host), dict) else acc.known.get(host)
+        if BAD_LOGIN.search(body) and state in ("created", "exists") and not getattr(acc, "_wd_verify_tried", {}).get(host):
             # a new Workday account often can't sign in until its 'verify your email' link is opened: open it, then try again
             acc.__dict__.setdefault("_wd_verify_tried", {})[host] = True
             log("      account: sign-in refused; checking the inbox for this site's verify-your-email link")

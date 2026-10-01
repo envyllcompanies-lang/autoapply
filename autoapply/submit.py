@@ -972,9 +972,18 @@ MAX_STEPS = 16
 
 def _find_advance(page):
     """(button, 'submit'|'next') for the visible primary action of the current step, or (None, None)."""
+    # Workday's footer button: one button whose text is Next / Save and Continue, or Submit on the Review page
+    for aid in ("bottom-navigation-next-button", "pageFooterNextButton"):
+        wd = page.locator(f'button[data-automation-id="{aid}"]').locator("visible=true")
+        try:
+            if wd.count():
+                txt = (wd.first.inner_text() or "").strip()
+                return wd.first, ("submit" if re.search(r"submit", txt, re.I) else "next")
+        except Exception:
+            pass
     loc = page.locator("button, input[type=submit], input[type=button], [role=button]").locator("visible=true")
     nxt = final = None
-    for i in range(min(loc.count(), 60)):
+    for i in range(min(loc.count(), 200)):
         el = loc.nth(i)
         try:
             txt = (el.inner_text() or el.get_attribute("value") or el.get_attribute("aria-label") or "").strip()

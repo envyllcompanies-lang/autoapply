@@ -858,6 +858,12 @@ class Brain:
     def _special(self, f, low, kind, opts, has_opts):
         """Rules that need more than a fact lookup. Returns _UNSET when none applies, None when the job must be skipped."""
         optionish = has_opts or kind == "checkbox_single"
+        if has_opts and re.search(r"(ever|currently) (had|have|been).{0,40}(sanction|disciplin|excluded|debarred|suspended|revoked)|"
+                                  r"licen[sc]e.{0,40}(ever been )?(suspended|revoked|restricted|surrendered)|"
+                                  r"(excluded|debarred|suspended) from (any )?(federal|state|medicare|medicaid)", low):
+            got = pick_option(opts, "No")
+            if got:
+                return got                             # you hold no professional license and have never been sanctioned
         if (has_opts or kind in ("text", "textarea")) and re.search(
                 r"are you (currently )?(subject to|bound by|a party to|under)\b.{0,80}(agreement|restriction|non-?compete|non-?solicit|covenant|contract)|"
                 r"(do|does) (you|your).{0,30}(have|hold).{0,30}(non-?compete|non-?solicit|contractual restriction)", low):
