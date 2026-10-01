@@ -1277,7 +1277,7 @@ def _settle(page, max_ms: int = 9000):
         waited += 500
 
 
-def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None, on_click=None) -> str:
+def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None, on_click=None, on_phase=None) -> str:
     """Expects open_form(page, job.apply_url) to have been called already. Handles one-page forms and multi-step wizards
     (with account creation / sign-in when the site needs it)."""
     from . import auth, writer as _w
@@ -1395,8 +1395,12 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 plan["answers"] = {k: v for k, v in plan["answers"].items() if v != "COVER_LETTER"}   # optional: apply without one
                 log("      (no cover letter could be written; it is optional, applying with the résumé only)")
         fill(page, fields, plan["answers"], files, log, deadline=limit_at)
+        if on_phase:
+            on_phase("questions_complete")
         if any(f["kind"] == "file" and plan["answers"].get(f["id"]) for f in fields):
             _wait_uploads(page)
+            if on_phase:
+                on_phase("documents_complete")
         verify(page, fields, plan["answers"], log)
         uploaded = uploaded or any(f["kind"] == "file" for f in fields)
         btn, kind = _find_advance(page)
@@ -1416,6 +1420,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if total < 4 or not uploaded:
                 raise Blocked(f"not a real application form ({total} fields, no résumé upload); page shows: {_visible_buttons(page)}")
             page.screenshot(path=str(shot), full_page=True)
+            if on_phase:
+                on_phase("ready_for_review")
             if dry_run:
                 return "dry_run"
             try:
