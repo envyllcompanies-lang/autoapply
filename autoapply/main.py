@@ -620,13 +620,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 ats = ats_of(job)
                 why = employer_blocked(db, job.company) if s.get("skip_blocked_employers", True) else None
                 if why:
-                    db.update(job.key, status="manual", reason=f"apply by hand: {job.company}'s application already stopped at a human check this week ({why[:60]})")
-                    log("    ⏸ this employer's form already stopped the bot at a human check: listed for you instead")
+                    db.update(job.key, status="skipped", reason=f"human verification repeatedly blocks this employer; unattended runner skipped it ({why[:60]})")
+                    log("    ✗ skipped: this employer repeatedly requires human verification")
                     continue
                 why = site_paused(db, ats, today) if s.get("pause_sites", True) else None
                 if why:
-                    db.update(job.key, status="manual", reason=why)
-                    log(f"    ⏸ {ats} is paused (human checks): listed for you instead")
+                    db.update(job.key, status="skipped", reason=f"human verification repeatedly blocks {ats}; unattended runner skipped this site for now")
+                    log(f"    ✗ skipped: {ats} is temporarily suppressed after repeated human checks")
                     continue
                 sub.open_form(page, job.apply_url)   # check for blockers before spending tokens on tailoring
                 if len(job.description or "") < 300:  # only the title is known (big Workday sites, stubs): read the posting itself
@@ -674,25 +674,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 blocked_text = str(e)
                 if is_human_gate(blocked_text):
                     # Human verification is a hard boundary. Never solve, replay, or infer the challenge.
-                    # Persist resume state, then move immediately to the next application.
-                    resume = {
-                        "status": "needs_human",
-                        "url": page.url if page else job.apply_url,
-                        "job": {"company": job.company, "title": job.title, "apply_url": job.apply_url},
-                        "reason": blocked_text[:500],
-                        "timestamp": datetime.now().isoformat(timespec="seconds"),
-                    }
-                    try:
-                        (d / "resume.json").write_text(json.dumps(resume, indent=2))
-                    except Exception:
-                        pass
-                    db.update(job.key, status="needs_human",
-                              reason=("human verification required; resume at " + (page.url if page else job.apply_url) +
-                                      " | " + blocked_text[:300]),
+                    # This runner is intentionally unattended: record the reason and move on immediately.
+                    db.update(job.key, status="blocked",
+                              reason=("human verification required; unattended runner skipped this application | " + blocked_text[:300]),
                               attempts=row["attempts"] + 1)
                     dead.add(ck)
                     note_block(db, ats_of(job), job.company, blocked_text, today)
-                    log(f"    ⏸ needs human: {blocked_text[:220]}")
+                    log(f"    ✗ skipped: human verification required ({blocked_text[:220]})")
                     done += 1
                     continue
                 if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
@@ -782,7 +770,7 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     groups: dict[str, list] = {}
     for r in rows:
         groups.setdefault(r["status"], []).append(r)
-    order = ["applied", "unconfirmed", "needs_human", "manual", "dry_run", "blocked", "skipped", "failed", "queued", "low_score", "filtered"]
+    order = ["applied", "unconfirmed", "blocked", "skipped", "failed", "dry_run", "queued", "low_score", "filtered"]
     counts = ", ".join(f"{len(groups[k])} {k}" for k in order if k in groups) or "nothing new"
     manual = notify.manual_rows(rows)
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
