@@ -1092,36 +1092,6 @@ def _to_form(page, fields, accounts, log, start_url, job_url=""):
         if _form_ready(fields) or not (_wd_start(page) or _landing(page)):
             break
         _settle(page)
-        # Any wizard step may request a code sent to the applicant's inbox.
-        if _email_code_prompt(page):
-            if not auth.mailbox.configured():
-                raise Blocked("email verification code requested, but the application inbox is not configured")
-            try:
-                log("      email: application requested a verification code; checking the inbox")
-                res = auth.mailbox.wait_for_verification(
-                    since_ts=mail_since,
-                    host_hint=(getattr(job, "company", "") or ""),
-                    timeout=min(120, max(30, int(limit_at - time.time()))),
-                    log=log,
-                    require_code=True,
-                )
-                if not res or not res.get("code"):
-                    raise Blocked("email verification code did not arrive in time")
-                boxes = auth._code_inputs(page)
-                if not boxes:
-                    raise Blocked("received an email verification code but found no code input on the application page")
-                log("      email: typing the application verification code")
-                auth._type_code(page, boxes, res["code"])
-                page.wait_for_timeout(1000)
-                _settle(page)
-                if _email_code_prompt(page):
-                    mail_since = time.time() - 5
-                    continue
-            except Blocked:
-                raise
-            except Exception as e:
-                raise Blocked(f"email verification code could not be completed: {str(e)[:160]}")
-
         if accounts and accounts.enabled and auth.is_auth_page(page):
             return extract(page)                   # the caller signs in, then calls this again
         fields = extract(page)
