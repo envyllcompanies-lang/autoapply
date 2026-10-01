@@ -586,16 +586,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     raise RuntimeError(f"resume_file {cfg.get('resume_file')} is missing: not applying with a made-up résumé")
                 files = {"RESUME": (fixed if use_fixed else render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf")),
                          "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf", name=profile.get("name", ""), contact=profile.get("contact_line", "")))}
-                def _phase(name):
-                    mapping = {
-                        "profile_complete": ApplicationState.PROFILE_COMPLETE,
-                        "questions_complete": ApplicationState.QUESTIONS_COMPLETE,
-                        "documents_complete": ApplicationState.DOCUMENTS_COMPLETE,
-                        "ready_for_review": ApplicationState.READY_FOR_REVIEW,
-                    }
-                    target = mapping.get(name)
-                    if target is not None and workflow.state is not target:
-                        workflow.transition(target)
+                # Form execution owns the detailed phase work; terminal state is recorded below.
                 result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc,
                                    on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.update(
                                        _k, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=_a + 1)))))
