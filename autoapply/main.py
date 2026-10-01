@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, level, __ve
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-01-r"
+REQUEUE_VERSION = "2026-10-01-t"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -55,6 +55,9 @@ def merge_board_file(cfg: dict, base: Path) -> int:
                 added += 1
     cfg["company_names"] = {**{str(k): v for k, v in names.items()}, **(cfg.get("company_names") or {})}
     return added
+
+
+TOP_MATCHES: list = []      # best match-check results of this run, for the summary email
 
 
 def merge_settings(cfg: dict, base: Path) -> dict:
@@ -476,7 +479,21 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         cap = min(cap, int(s["per_run_cap"]))
     if limit is not None:
         cap = min(cap, limit)
-    queue = sorted(db.retryable(s.get("max_attempts", 2)), key=lambda r: (site_rank(r), -(r["score"] or 0)))
+    if brain.writer and s.get("prescreen", False):
+        from . import prescreen
+        log("Match check (your résumé vs. each posting, like LinkedIn's match score):")
+        screened = prescreen.run(db, brain, by_key, row_job, s, level_out, log)
+        if screened:
+            top = sorted(screened, key=lambda x: -x[0])[:5]
+            TOP_MATCHES.extend(f"{f}% {r['title']} @ {r['company']}: {w}" for f, w, r in top)
+
+    def _rank(r):
+        try:
+            fit = r["fit"]
+        except (IndexError, KeyError):
+            fit = None
+        return (site_rank(r), -(fit if fit and fit > 0 else 0.8 * (r["score"] or 0)))
+    queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
     log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
         return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
@@ -741,6 +758,8 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     if os.environ.get("GITHUB_ACTIONS"):
         footer += f" · {month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month (before this run)"
     by_site = site_summary(rows)
+    if TOP_MATCHES:
+        footer = "TOP MATCHES SCREENED THIS RUN\n" + "\n".join("- " + t for t in TOP_MATCHES) + "\n\n" + footer
     text = notify.build_text(today, counts, groups, manual, run_url, footer, paused_sites(db, today), by_site)
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}

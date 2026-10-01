@@ -52,6 +52,7 @@ NOT_ELIGIBLE = [
 ]
 TITLE_NOT_ELIGIBLE = [
     (re.compile(r"\bpart[- ]time\b", re.I), "part-time"),
+    (re.compile(r"\b(seasonal|temporary|temp)\b|\bper diem\b", re.I), "seasonal / temporary"),
     (re.compile(r"\b(intern|internship|co-?op|summer associate|summer analyst)\b", re.I), "internship / summer program"),
     (re.compile(r"\bveterans?\b|\bmilitary\b|skillbridge", re.I), "veterans / military program"),
     (re.compile(r"\b(mba|phd|ph\.d|doctoral)\b", re.I), "MBA / PhD program"),

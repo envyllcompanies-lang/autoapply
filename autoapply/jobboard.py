@@ -56,7 +56,7 @@ def discover_jobboard(cfg: dict, base: Path, log=print, known_urls: set | None =
     search = cfg.get("search") or {}
     levels = set(a.get("levels", ["entry"]))
     sites = set(a.get("sites", ["Workday", "Greenhouse", "Lever", "BambooHR"]))   # sites the bot can fill
-    max_age = int(a.get("max_age_days", 30))
+    max_age = int(a.get("max_age_days", 14))
     cap = int(a.get("max_jobs", 6000))
     dest = Path(base) / "logs" / "jobboard"
     if not _fetch(dest, log):

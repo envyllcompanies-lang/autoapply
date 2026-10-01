@@ -28,6 +28,10 @@ class DB:
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
         self.conn.execute("CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)")
+        try:
+            self.conn.execute("ALTER TABLE jobs ADD COLUMN fit INTEGER")     # LinkedIn-style match % (prescreen.py)
+        except sqlite3.OperationalError:
+            pass
         # a submit that showed no confirmation may still have gone through: never retry it automatically
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='failed' AND reason LIKE 'no confirmation after submit%'")
         self.conn.commit()
@@ -56,9 +60,15 @@ class DB:
             "UPDATE jobs SET status='queued', attempts=0 WHERE status='manual' AND (reason LIKE 'apply by hand: % stopped the bot at a human check on its last%'"
             " OR reason LIKE 'apply by hand: %application already stopped at a human check%')")
         cur5 = self.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND reason LIKE '%Password must include%'")
+        # parked only because their site was paused, or stopped by things the bot now handles (Workday accounts, start
+        # pages, footer buttons): the bot does them itself. Real human checks (hCaptcha, emailed codes) stay as they are.
+        cur6 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE (status='manual' AND reason LIKE 'apply by hand: % stopped the bot at a human check%on its last%')"
+            " OR (status='blocked' AND (reason LIKE 'account:%' OR reason LIKE 'not a real application form%' OR reason LIKE 'no Next or Submit%'"
+            " OR reason LIKE 'no application form found%'))")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount + cur5.rowcount
+        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount + cur5.rowcount + cur6.rowcount
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
