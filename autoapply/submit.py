@@ -489,6 +489,13 @@ def open_form(page, url: str):
     if (b := _blocker(page)):
         raise Blocked(b)
     if not _has_form(page):
+        try:
+            if CLOSED_RX.search(page.inner_text("body")[:3000]):
+                raise Blocked("posting closed: the employer's page says the job is no longer available")
+        except Blocked:
+            raise
+        except Exception:
+            pass
         raise Blocked("no application form found on page")
 
 
@@ -907,7 +914,10 @@ def verify(page, fields: list[dict], answers: dict, log=print):
 NEXT_RX = re.compile(r"^\s*(next|continue|save\s*(and|&)\s*(continue|next)|next step|review( (and|&) submit| application)?|proceed|"
                      r"continue to .{2,40}|go to (next|review).{0,20})\s*[>\u2192]?\s*$", re.I)
 FINAL_RX = re.compile(r"^\s*(submit( (your )?application)?|send( my)? application|finish|complete( application)?|apply( now)?)\s*[>\u2192]?\s*$", re.I)
-LANDING_RX = re.compile(r"^\s*(apply manually|start (your )?application|apply( now)?|continue application)\s*$", re.I)
+LANDING_RX = re.compile(r"^\s*(apply manually|start (your )?application|apply( now)?|continue application|"
+                        r"(sign in|continue|apply|sign up) with (e-?mail|your e-?mail)( address)?)\s*$", re.I)
+CLOSED_RX = re.compile(r"page you are looking for (doesn.t|does not) exist|(job|position|posting|requisition) (is )?(no longer|not) (available|open|accepting)|"
+                       r"no longer accepting applications|this job (has been|was) (closed|filled|removed)|job not found|position has been filled", re.I)
 MAX_STEPS = 16
 
 

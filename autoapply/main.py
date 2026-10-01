@@ -618,6 +618,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     weak_pw.add(ats_of(job))
                     log(f"    ✗ {ats_of(job)} rejected the saved account password as too weak: its jobs wait until it is updated")
                     continue
+                if str(e).startswith("posting closed"):
+                    db.update(job.key, status="skipped", reason=str(e))
+                    log("    ✗ skipped: the posting is closed")
+                    continue
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 if "could not find the employer" in str(e):

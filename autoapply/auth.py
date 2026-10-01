@@ -302,6 +302,16 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             if errs:
                 raise AuthBlocked(f"Workday did not accept the new account: {'; '.join(errs)[:200]}")
             continue
+        if n_pw == 1 and host not in acc.known and not tried_create:
+            # a Sign In page first (no account here yet): go to Create Account
+            link = _wd(page, "createAccountLink")
+            if link.count():
+                link.first.click(force=True)
+                _settle(page, 2000)
+                continue
+            if _click_named(page, re.compile(r"^\s*create account\s*$", re.I), roles=("button", "link")):
+                _settle(page, 2000)
+                continue
         # sign in
         if n_pw >= 2:                                   # on the sign-up form: open the Sign In pop-up / page
             link = _wd(page, "signInLink")

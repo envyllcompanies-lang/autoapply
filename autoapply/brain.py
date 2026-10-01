@@ -800,6 +800,33 @@ class Brain:
     def _special(self, f, low, kind, opts, has_opts):
         """Rules that need more than a fact lookup. Returns _UNSET when none applies, None when the job must be skipped."""
         optionish = has_opts or kind == "checkbox_single"
+        if (has_opts or kind in ("text", "textarea")) and re.search(
+                r"are you (currently )?(subject to|bound by|a party to|under)\b.{0,80}(agreement|restriction|non-?compete|non-?solicit|covenant|contract)|"
+                r"(do|does) (you|your).{0,30}(have|hold).{0,30}(non-?compete|non-?solicit|contractual restriction)", low):
+            return pick_option(opts, "No") if has_opts else "No"      # you are not bound by a non-compete or similar agreement
+        if has_opts and opts and re.search(r"relocat", low) and any(re.search(r"willing to relocate", o, re.I) for o in opts):
+            if self._location_ok(low):
+                got = next((o for o in opts if re.match(r"\W*yes,? i am willing to relocate", o, re.I)), None) or \
+                      next((o for o in opts if re.search(r"willing to relocate", o, re.I) and not re.match(r"\W*no\b", o, re.I)), None)
+            else:
+                got = next((o for o in opts if re.match(r"\W*no\b", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got
+        if has_opts and opts and re.search(r"\breside|\bresidents?\b|\bresidency\b|live in (one|any) of", low) and \
+                any(re.search(r"(do not|don.t|not) (currently )?reside|(currently )?reside in (one|any)|i (do not|don.t) live|i live in", o, re.I) for o in opts):
+            home = str(self.facts.get("state") or "Colorado")
+            states_txt = low + " " + " ".join(o.lower() for o in opts)
+            listed = bool(re.search(r"(?<![a-z])" + re.escape(home.lower()) + r"(?![a-z])", states_txt)) or \
+                bool(re.search(r"(?<![a-z])co(?![a-z])", f.get("label", "")))
+            neg = re.compile(r"(do not|don.t|not) (currently )?(reside|live)|none of", re.I)
+            if listed:
+                got = next((o for o in opts if not neg.search(o) and re.search(r"reside|live", o, re.I) and
+                            re.search(re.escape(home), o, re.I)), None) or \
+                      next((o for o in opts if not neg.search(o) and re.search(r"reside|live", o, re.I)), None)
+            else:
+                got = next((o for o in opts if neg.search(o)), None)       # you live in Colorado, which is not on their list
+            if got:
+                return [got] if kind == "checkbox_group" else got
         if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
         if optionish and LEGAL_RX.search(low):
