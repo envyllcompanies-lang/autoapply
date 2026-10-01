@@ -179,14 +179,18 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
             pass
 
 
-def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print) -> dict | None:
-    """Poll the inbox until a fresh verification email arrives. Returns {'link':..., 'code':...} or None."""
+def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False) -> dict | None:
+    """Poll the inbox until a fresh verification email arrives.
+    When require_code is true, only messages containing a parseable one-time code are returned.
+    """
     deadline = time.time() + timeout
     hint = (host_hint or "").lower()
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
+                    continue
+                if require_code and not info.get("code"):
                     continue
                 if hint and hint not in (info["from"] + info["subject"]).lower() and hint not in (info["link"] or "").lower():
                     # sender/link do not mention the site: still accept a clear verification message
