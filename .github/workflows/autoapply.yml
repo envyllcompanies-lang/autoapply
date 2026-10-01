@@ -54,6 +54,9 @@ jobs:
           printf '%s' "$ABOUT_ME_MD" > about_me.md
           if [ -n "$VOICE_MD" ]; then printf '%s' "$VOICE_MD" > voice.md; fi
 
+      - name: Compile preflight
+        run: python -m compileall -q autoapply tests
+
       - name: Run
         timeout-minutes: 40
         env:
