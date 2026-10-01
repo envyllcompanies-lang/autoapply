@@ -1,0 +1,6 @@
+# Pushing a change to this file on the 'probe' branch starts a probe run (fills real forms, never submits).
+id: 8   # bump to start a new test run on the probe branch
+pick: {workable: 4, lever: 3, greenhouse: 2, breezy: 1, workday: 2}
+urls: []
+create_accounts: false
+max_seconds_per_job: 420

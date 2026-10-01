@@ -16,7 +16,7 @@ form, fills it in from your résumé and answers, and submits. Cost: $0.
   confirm a submit, and one check-in a day even if nothing happened (so silence never means "broken"). Each email lists what
   was applied to, what is left for you, why other postings didn't go through, and how many free minutes are used.
 - **The employers' own "we received your application" emails** land in the same inbox. The bot reads that inbox to confirm submits.
-- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-09-29-o`; each success is a `✓ applied` line.
+- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-09-30-p`; each success is a `✓ applied` line.
   The run's **Artifacts** hold the résumé, cover letter and form screenshots for every application (kept 30 days).
 - `reports/<date>.md` and `logs/<date>.log` in the repo keep the history.
 
@@ -77,7 +77,7 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 | `CONFIG_YAML`, `PROFILE_YAML`, `ABOUT_ME_MD`, `VOICE_MD` | your `config.yaml`, `profile.yaml`, `about_me.md`, `voice.md` | yes (voice optional). **After editing config.yaml, run the update script** or the bot keeps using the old copy. |
 | `GROQ_API_KEY` | free writer key (console.groq.com/keys) | yes |
 | `GEMINI_API_KEY` | optional second free writer (aistudio.google.com) | optional |
-| `ACCOUNT_PASSWORD` | the one password used for every account the bot creates | for sites that need an account |
+| `ACCOUNT_PASSWORD` | the one password used for every account the bot creates. **Workday requires 8+ characters with an uppercase letter, a lowercase letter, a number and a special character**; a weaker one makes every Workday application fail at the account step | for sites that need an account |
 | `IMAP_USER`, `IMAP_PASS` | `delgado@alumni.usc.edu` and a Google **app password** for it (myaccount.google.com/apppasswords); used to confirm new accounts, confirm submits and send the summary emails. The log's first lines say `mail: logged in … OK` or `MAIL OFF` with the reason | for accounts and emails |
 | `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`, `JOOBLE_API_KEY` | free job-board keys | optional |
 
@@ -88,6 +88,21 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 - Pay: target $75K; postings whose top pay is under `salary_floor` ($65K) lose 40 points. Locations: Denver / Colorado, Los Angeles area, NYC and
   remote score higher and are approved for relocation answers; add cities to `relocation_ok_locations`.
 - `search.workday_places` and `search.workday_queries` control how the big Workday employers are searched ("<role> <city>").
+
+## `settings.yaml` (public tuning, in the repository)
+Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the entry-level setting (`search.max_level`:
+0 entry only, 1 entry + early career), the senior-pay cutoff and the writer's model list, so they can be tuned without re-sending secrets.
+
+## Entry-level check
+Every posting is rated entry / early / mid / senior from the years it *requires* (preferred years are ignored), whether it manages
+people, title rank (senior, lead, manager, II/III ...), a graduate-degree requirement and pay (starting at $100K+ = not entry level).
+Part-time, internships, veterans-only and MBA/PhD programs, clearance-required roles and pay under `salary_floor` are dropped.
+Queued jobs are re-checked by title at the start of each run and against the full posting right before applying.
+
+## Test runs on real forms (`probe` branch)
+Pushing a change to `probe/request.yaml` on the `probe` branch runs `.github/workflows/probe.yml`: it opens real application forms,
+fills them exactly like a live run and **never submits**, then saves what it found on each form (fields, answers, what stayed empty,
+screenshots) to `probe/out/<id>/` on that branch. Live runs on `main` are not affected.
 
 ## The free writer (essays and cover letters)
 Only providers with a key are used (the log's first lines list them). With just `GROQ_API_KEY`: Groq `gpt-oss-120b` → `llama-3.3-70b` →

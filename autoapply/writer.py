@@ -87,6 +87,9 @@ def _save_usage(u: dict):
         pass
 
 
+DEADLINE = [0.0]     # set per application by the form filler: the writer never waits past it
+
+
 class _Limiter:
     """Sliding 60-second window on requests and (estimated) tokens, plus daily request/token budgets and cool-downs
     (a provider that said 'daily limit reached, try again in 2h' is set aside until then, across runs of the same day)."""
@@ -144,7 +147,10 @@ class _Limiter:
             over = (self.rpm and reqs >= self.rpm) or (self.tpm and toks + tokens > self.tpm)
             if not over or not self.events:
                 break
-            time.sleep(max(0.5, self.events[0][0] + 60 - now + 0.2))
+            pause = max(0.5, self.events[0][0] + 60 - now + 0.2)
+            if DEADLINE[0] and now + pause > DEADLINE[0]:
+                raise WriterUnavailable(f"{self.name}: per-minute limit and no time left for this application")
+            time.sleep(pause)
         self.events.append((time.time(), tokens))
         if self.name:
             u = _usage(); u[self.name] = u.get(self.name, 0) + 1; _save_usage(u)
@@ -274,6 +280,12 @@ class Writer:
             f"You are ghostwriting job-application answers for {self.name}. Write in first person, as {self.first}.\n\n"
             f"{TRUTH_RULES}\n\n# VOICE\n{self.voice}\n\n# FACTS ABOUT {self.first.upper()} (only source of truth)\n"
             f"{self.about}\n\n{compact_digest(profile)}\n\n# LOGISTICS (for yes/no and multiple-choice questions)\n{safe}")
+        # A small prompt for one-line boxes and multiple-choice picks: a fraction of the tokens, so the free per-minute
+        # allowance is not spent waiting on them.
+        self.system_small = (
+            f"You fill in job-application form fields for {self.name}, in first person, using only these facts. "
+            f"Never invent anything; if the facts do not cover it, say so as instructed.\n\n"
+            f"{compact_digest(profile)}\n\n# LOGISTICS\n{safe}")
 
     # ------------------------------------------------------------------ transport
     def _chat(self, p: dict, messages: list[dict], max_tokens: int, temperature: float | None = None) -> str:
@@ -300,7 +312,7 @@ class Writer:
             payload = {"model": cands[0], "messages": messages, "max_tokens": max_tokens,
                        "temperature": p.get("temperature", 0.8) if temperature is None else temperature, **(p.get("extra") or {})}
             lim.wait(est)
-            r = requests.post(p["base_url"].rstrip("/") + "/chat/completions", headers=headers, json=payload, timeout=120)
+            r = requests.post(p["base_url"].rstrip("/") + "/chat/completions", headers=headers, json=payload, timeout=(10, 75))
             if r.status_code in (400, 404) and re.search(r"model", r.text, re.I) and (len(cands) > 1 or p.get("discover")):
                 cands.pop(0)                       # this model name is gone or not offered: try the next one
                 continue
@@ -354,6 +366,8 @@ class Writer:
         return sorted(ids, key=lambda i: ("preview" in i, [-v for v in ver(i)]))[:4]
 
     def _complete(self, messages: list[dict], max_tokens: int = 900, log=print, temperature: float | None = None) -> str:
+        if DEADLINE[0] and time.time() > DEADLINE[0] - 20:
+            raise WriterUnavailable("no time left for this application")
         est = sum(len(m["content"]) for m in messages) // 4 + max_tokens
         errors = []
         for round_ in range(2):
@@ -363,6 +377,8 @@ class Writer:
                 short = [self.limiters[p["name"]].cooling() for p in self.providers if p["name"] not in self.dead]
                 short = [w for w in short if 0 < w <= 75]
                 if round_ == 0 and short:
+                    if DEADLINE[0] and time.time() + min(short) > DEADLINE[0] - 20:
+                        break
                     time.sleep(min(short) + 0.5)
                     continue
                 break
@@ -516,7 +532,7 @@ class Writer:
         user = (f"Role: {job.title} at {company}\nApplication form field (short text): {question}\n\n"
                 f"Reply with only what goes in the box, at most {min(max_chars, 150)} characters. If it asks for something my facts "
                 f"do not contain (an ID, a code, a person's name), reply exactly N/A.")
-        msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user}]
+        msgs = [{"role": "system", "content": self.system_small}, {"role": "user", "content": user}]
         out = self._clean(self._complete(msgs, 500, log, temperature=0.2)).splitlines()
         out = out[0].strip() if out else ""
         return out[:max_chars] if out else None
@@ -531,7 +547,7 @@ class Writer:
                "Reply with the number of the single option that is true for me (the closest fit if several could be).")
         user = (f"Role: {job.title} at {company}\nMultiple-choice question on the application form:\n{question}\n\nOptions:\n{numbered}\n\n"
                 f"{how} Use only my FACTS and LOGISTICS. Reply 0 if none can be answered from them. Reply with numbers only.")
-        msgs = [{"role": "system", "content": self.system}, {"role": "user", "content": user}]
+        msgs = [{"role": "system", "content": self.system_small}, {"role": "user", "content": user}]
         out = self._complete(msgs, 600, log, temperature=0.0)
         nums = [int(n) for n in re.findall(r"\d+", out.split("\n")[-1] if out.strip() else "")] or [int(n) for n in re.findall(r"\d+", out)]
         picks = list(dict.fromkeys(opts[n - 1] for n in nums if 1 <= n <= len(opts)))

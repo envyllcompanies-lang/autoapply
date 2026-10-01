@@ -20,7 +20,9 @@ class AuthBlocked(Exception):
 
 VERIFY_MSG = re.compile(r"verify your (e-?mail|account)|check your (e-?mail|inbox)|confirmation (e-?mail|link)|"
                         r"(sent|sending) (you )?(an )?e-?mail|activate your account|verification (code|link|e-?mail)", re.I)
-EXISTS_MSG = re.compile(r"already (exists|registered|in use|have an account)|account with this e-?mail|is taken", re.I)
+# (not 'already have an account?': that is the sign-in link every sign-up page shows)
+EXISTS_MSG = re.compile(r"already (exists|registered|in use|taken|associated)|(account|user) (with|for) (this|that|the) e-?mail (address )?(already|exists)|"
+                        r"e-?mail (address )?(is )?already|is taken", re.I)
 BAD_LOGIN = re.compile(r"incorrect|invalid|not recogni[sz]ed|failed|wrong|unable to (sign|log)|no account", re.I)
 UNVERIFIED_MSG = re.compile(r"not (yet )?(been )?(verified|activated|confirmed)|verify your (e-?mail|account) (before|to|first)|"
                             r"account (is |has )?not (yet )?(been )?(active|activated|verified|confirmed)|confirm your e-?mail( address)? (before|to|first)|"
@@ -210,8 +212,125 @@ def _create(page, acc: Accounts, log, start_url=None):
     return "created"
 
 
+# ------------------------------------------------------------------------------------------------ Workday
+def _wd(scope, aid: str):
+    return scope.locator(f'[data-automation-id="{aid}"]').locator("visible=true")
+
+
+def _wd_press(page, scope, aid: str, label_rx) -> bool:
+    """Workday covers its buttons with an invisible click-catcher: click that, else the button itself."""
+    for loc in (scope.get_by_role("button", name=label_rx).locator("visible=true"), _wd(scope, aid)):
+        try:
+            if loc.count():
+                loc.last.click(force=True, timeout=5000)
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def _wd_scope(page):
+    dlg = page.locator('[role="dialog"]').filter(has=page.locator("input[type=password]")).locator("visible=true")
+    return dlg.last if dlg.count() else page
+
+
+def _workday(page, acc: Accounts, log, url_after: str | None):
+    """Workday's own sign-up / sign-in: email + password + verify password + privacy box, or the Sign In pop-up."""
+    host = acc.host(page.url)
+    t0 = time.time()
+    tried_create = False
+    for _ in range(5):
+        if not is_auth_page(page):
+            return
+        scope = _wd_scope(page)
+        n_pw = scope.locator("input[type=password]").locator("visible=true").count()
+        if n_pw >= 2 and host not in acc.known and not tried_create:
+            tried_create = True
+            log(f"      account: creating one on {host} with {acc.email}")
+            for aid, val in (("email", acc.email), ("password", acc.password), ("verifyPassword", acc.password)):
+                box = _wd(scope, aid)
+                if box.count():
+                    box.first.fill(val)
+            if not _wd(scope, "email").count():
+                _fill_credentials(page, acc, scope)
+            ck = _wd(scope, "createAccountCheckbox")
+            if ck.count() and not ck.first.is_checked():
+                ck.first.check(force=True)
+            _tick_agreements(page)
+            if not _wd_press(page, scope, "createAccountSubmitButton", re.compile(r"^\s*create account\s*$", re.I)):
+                raise AuthBlocked("could not find Workday's Create Account button")
+            _settle(page, 2500)
+            body = _body(page)
+            if not is_auth_page(page):
+                acc.remember(host, "created")
+                log("      account: created")
+                return
+            if VERIFY_MSG.search(body) and not EXISTS_MSG.search(body):
+                acc.remember(host, "created")
+                _verify_email(page, acc, t0, log)
+                acc.remember(host, "verified")
+                if url_after:
+                    page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+                    _settle(page, 2000)
+                continue
+            if EXISTS_MSG.search(body):
+                acc.remember(host, "exists")
+                log("      account: Workday says one already exists for this email: signing in")
+                continue
+            errs = _form_errors(page)
+            alert = page.locator('[data-automation-id="errorMessage"], [role="alert"], [data-automation-id="inputAlert"]').locator("visible=true")
+            try:
+                errs += [t.strip() for t in alert.all_inner_texts() if t.strip()][:4]
+            except Exception:
+                pass
+            log(f"      account: Workday did not create it; page says: {'; '.join(errs)[:220] or 'nothing'}")
+            if errs:
+                raise AuthBlocked(f"Workday did not accept the new account: {'; '.join(errs)[:200]}")
+            continue
+        # sign in
+        if n_pw >= 2:                                   # on the sign-up form: open the Sign In pop-up / page
+            link = _wd(page, "signInLink")
+            if link.count():
+                link.first.click(force=True)
+            else:
+                _click_named(page, re.compile(r"^\s*sign in\s*$", re.I), roles=("button", "link"), scope=page.locator("form, main").first)
+            _settle(page, 2000)
+            scope = _wd_scope(page)
+        log(f"      account: signing in on {host}")
+        em, pw = _wd(scope, "email"), _wd(scope, "password")
+        if em.count() and pw.count():
+            em.first.fill(acc.email)
+            pw.first.fill(acc.password)
+        else:
+            _fill_credentials(page, acc, scope)
+        if not _wd_press(page, scope, "signInSubmitButton", re.compile(r"^\s*sign in\s*$", re.I)):
+            raise AuthBlocked("could not find Workday's Sign In button")
+        _settle(page, 2500)
+        body = _body(page)
+        if not is_auth_page(page):
+            acc.remember(host, "signed_in")
+            return
+        if UNVERIFIED_MSG.search(body):
+            log("      account: it exists but was never verified; asking Workday to send the email again")
+            _click_named(page, re.compile(r"resend|send (it |the email )?again|verify", re.I))
+            _settle(page, 1500)
+            _verify_email(page, acc, t0 - 30, log)
+            acc.remember(host, "verified")
+            if url_after:
+                page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+                _settle(page, 2000)
+            continue
+        if BAD_LOGIN.search(body):
+            raise AuthBlocked("Workday refused the sign-in: an account with this email exists with a different password "
+                              "(reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on)")
+    if is_auth_page(page):
+        raise AuthBlocked("still on Workday's sign-in screen after trying to sign in or create an account")
+
+
 def handle(page, acc: Accounts, log=print, url_after: str | None = None):
     """Get past a login / create-account screen. Raises AuthBlocked when it cannot."""
+    if "myworkdayjobs.com" in page.url or page.locator('[data-automation-id="createAccountSubmitButton"], [data-automation-id="signInSubmitButton"]').count():
+        return _workday(page, acc, log, url_after)
     host = acc.host(page.url)
     for _ in range(4):
         if not is_auth_page(page):

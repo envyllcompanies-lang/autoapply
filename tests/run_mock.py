@@ -241,7 +241,7 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied",
+exp = {"1": "applied", "2": "filtered", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "filtered", "agg1": "applied", "agg2": "filtered", "12": "applied",
        "13": "blocked", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "20": "manual", "R-77": "applied"}
 if "--dry" in sys.argv: exp.update({"1": "dry_run", "4": "dry_run", "5": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
                                     "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-77": "dry_run"})
