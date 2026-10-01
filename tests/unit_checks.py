@@ -104,6 +104,8 @@ if yaml.safe_load((ROOT / "settings.yaml").read_text())["search"]["skip_sources"
 # ---- supported ATS URLs are not rejected as universally unsupported ----
 from autoapply import submit as _submit
 for _u in ("https://job-boards.greenhouse.io/acme/jobs/123",
+           "https://job-boards.greenhouse.io/acme/jobs/123?gh_jid=123",
+           "https://boards.greenhouse.io/acme/jobs/123?gh_jid=123",
            "https://jobs.lever.co/acme/123",
            "https://jobs.ashbyhq.com/acme/123"):
     if _submit.UNSUPPORTED_ALWAYS.search(_u):
