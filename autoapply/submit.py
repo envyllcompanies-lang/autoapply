@@ -5,6 +5,8 @@ import re
 import time
 from pathlib import Path
 
+from .captcha import CaptchaDisabled, challenge_from_page, provider_from_settings
+
 EXTRACT_JS = r"""
 () => {
   const clean = t => (t || '').replace(/\s+/g, ' ').trim().slice(0, 400);
@@ -323,6 +325,24 @@ def _blocker(page) -> str | None:
                 if el.is_visible():
                     box = el.bounding_box()
                     if box and box["width"] > 30 and box["height"] > 30:
+                        if "reCAPTCHA" in name or "hCaptcha" in name or "Turnstile" in name:
+                            challenge = challenge_from_page(page)
+                            if challenge:
+                                provider = provider_from_settings({
+                                    "captcha": {
+                                        "provider": "twocaptcha",
+                                        "api_key_env": "TWOCAPTCHA_API_KEY",
+                                    }
+                                })
+                                try:
+                                    provider.solve(challenge)
+                                except CaptchaDisabled as exc:
+                                    detail = f" ({challenge.kind}"
+                                    if challenge.site_key:
+                                        detail += ", site key detected"
+                                    detail += f"): {exc}"
+                                    return f"{name}; 2Captcha boundary{detail}"
+                            return f"{name}; CAPTCHA provider could not be invoked"
                         return name
             except Exception:
                 pass
