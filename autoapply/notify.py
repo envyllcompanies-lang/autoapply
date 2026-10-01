@@ -12,7 +12,7 @@ from email.message import EmailMessage
 import requests
 
 MANUAL_STATUSES = ("blocked", "unconfirmed", "failed")
-# reasons that are not worth the applicant's time (nothing to finish by hand)
+# reasons that are not worth reporting as an exception
 NOISE = ("no application form found", "not a real application form", "posting no longer listed", "same role at same company",
          "already applied", "same posting already handled", "could not find the employer")
 
