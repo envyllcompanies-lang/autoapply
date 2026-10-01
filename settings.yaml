@@ -25,3 +25,8 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+
+# CAPTCHA handling is metadata-only; unattended solving is intentionally unavailable.
+captcha:
+  provider: twocaptcha
+  api_key_env: TWOCAPTCHA_API_KEY
