@@ -102,6 +102,14 @@ except AssertionError as e:
 if yaml.safe_load((ROOT / "settings.yaml").read_text())["search"]["skip_sources"] != []:
     problems.append("settings.yaml must not silently skip a source")
 
+# ---- supported ATS URLs are not rejected as universally unsupported ----
+from autoapply import submit as _submit
+for _u in ("https://job-boards.greenhouse.io/acme/jobs/123",
+           "https://jobs.lever.co/acme/123",
+           "https://jobs.ashbyhq.com/acme/123"):
+    if _submit.UNSUPPORTED_ALWAYS.search(_u):
+        problems.append("supported ATS incorrectly marked unsupported: " + _u)
+
 # ---- ATS classifier / human-gate boundary ----
 from autoapply.ats import detect, is_human_gate
 if detect("https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/123").name != "workday":
