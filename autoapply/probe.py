@@ -136,6 +136,31 @@ def main():
     except Exception as e:
         log(f"Groq model list failed: {e}")
     db = DB(str(base / cfg.get("db", "applications.db")))
+    if req.get("inbox_check"):
+        # which of these employers' emails reached the inbox (any folder) since a date: sender, subject, date only
+        import imaplib, email as _em
+        from email.header import decode_header, make_header
+        names = [str(x).lower() for x in req["inbox_check"]]
+        since = str(req.get("since", "30-Sep-2026"))
+        imap = imaplib.IMAP4_SSL("imap.gmail.com", timeout=30)
+        imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
+        for folder in ('"[Gmail]/All Mail"', "INBOX", '"[Gmail]/Spam"'):
+            if imap.select(folder, readonly=True)[0] != "OK":
+                continue
+            _, data = imap.search(None, f'(SINCE "{since}")')
+            ids = data[0].split()
+            log(f"{folder}: {len(ids)} messages since {since}")
+            for i in ids[-600:]:
+                _, d = imap.fetch(i, "(BODY.PEEK[HEADER.FIELDS (FROM SUBJECT DATE)])")
+                h = _em.message_from_bytes(d[0][1])
+                frm, subj = str(make_header(decode_header(h.get("From", "")))), str(make_header(decode_header(h.get("Subject", ""))))
+                hay = (frm + " " + subj).lower()
+                if any(n in hay for n in names) or re.search(r"workday|myworkday|thank you for (applying|your (application|interest))|application (received|submitted)", hay):
+                    log(f"  {h.get('Date', '')[:25]} | {frm[:50]} | {subj[:90]}")
+            if folder == '"[Gmail]/All Mail"':
+                break
+        imap.logout()
+        return
     rows = _pick_jobs(db, req)
     log(f"=== probe {req.get('id')}: {len(rows)} forms, fill only, nothing is submitted ===")
     sub.MAX_APPLY_SECONDS = int(req.get("max_seconds_per_job", 420))
