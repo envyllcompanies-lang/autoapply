@@ -775,7 +775,7 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     manual = notify.manual_rows(rows)
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
     if manual:
-        lines += [f"## Finish by hand ({len(manual)})", "", "| Score | Role | Company | Why |", "|---:|---|---|---|"]
+        lines += [f"## Exceptions not submitted automatically ({len(manual)})", "", "| Score | Role | Company | Why |", "|---:|---|---|---|"]
         for r in manual:
             lines.append(f"| {r['score'] or ''} | [{r['title']}]({r['apply_url'] or r['url']}) | {r['company']} | {(r['reason'] or '').replace('|', '/')[:140]} |")
         lines.append("")
@@ -812,7 +812,7 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
     daily_check_in = db.meta_get("last_email_day") != today
     if not dry_run and (applied_n or manual or groups.get("unconfirmed") or daily_check_in or not n.get("only_if_activity", True)):
-        subject = f"autoapply: {applied_n} applied" + (f", {len(manual)} to finish by hand" if manual else "") + ("" if applied_n or manual else " (running, nothing new to send)")
+        subject = f"autoapply: {applied_n} applied" + (f", {len(manual)} exceptions" if manual else "") + ("" if applied_n or manual else " (running, nothing new to send)")
         if notify.send_email(cfg, subject, text, log):
             db.meta_set("last_email_day", today)
     notify.send_webhook(cfg, text, log)
