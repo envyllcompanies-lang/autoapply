@@ -588,7 +588,7 @@ def _wd_prompt(page, el, val: str, label: str, log):
     for _ in range(4):
         if selected():
             break
-        opts = page.locator('[data-automation-id="promptOption"], [role="option"]').locator("visible=true")
+        opts = page.locator('[data-automation-id="promptLeafNode"], [data-automation-id="promptOption"], [role="option"]').locator("visible=true")
         texts = [t.strip() for t in opts.all_inner_texts()]
         if not texts:
             break
@@ -643,12 +643,18 @@ def _fill_location(page, el, val: str, log):
 
 def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=print, deadline: float | None = None):
     by_id = {f["id"]: f for f in fields}
+    misses = 0
     for fid, val in answers.items():
         f = by_id.get(fid)
         if f is None or val is None or val == "":
             continue
         if deadline and time.time() > deadline:
             raise RuntimeError(f"took longer than {MAX_APPLY_SECONDS // 60} minutes on this site")
+        if misses >= 2:                      # something (a list left open, a pop-up) covers the form: clear it, stop waiting long
+            _clear_overlays(page)
+            if misses >= 4:
+                log("      ! the form stopped responding to input on this page; moving on")
+                break
         try:
             kind = f["kind"]
             el = page.locator(f'[data-aa="{fid}"]') if not fid.startswith("g_") else None
@@ -692,7 +698,17 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     el.click(force=True, timeout=4000)
                 page.wait_for_timeout(400)
                 want = _norm(val)
-                if f.get("options"):                       # a fixed list: click the option that matches
+                known = [o for o in (f.get("options") or []) if not re.match(r"^\s*(select one|select|choose|--)", o, re.I)]
+                if (not known or str(val) == "@highest") and el.evaluate("e => e.tagName") == "BUTTON":
+                    page.wait_for_timeout(500)               # Workday list whose choices load when opened
+                    opts = page.locator('[role="option"]').locator("visible=true")
+                    texts = [t.strip() for t in opts.all_inner_texts()]
+                    i = _best_option(texts, str(val))
+                    if i is not None:
+                        opts.nth(i).click()
+                    else:
+                        _type_pick(page, el, str(val))
+                elif f.get("options"):                       # a fixed list: click the option that matches
                     opts = page.locator('[role="option"]').locator("visible=true")
                     texts = opts.all_inner_texts()
                     i = next((k for k, t in enumerate(texts) if _norm(t) == want), None)
@@ -732,8 +748,41 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                 path = files.get(str(val).upper())
                 if path:
                     _upload(page, _file_input(page, f), path, f, log)
+            misses = 0
         except Exception as e:
             log(f"      ! could not fill '{f.get('label','')[:50]}': {str(e).splitlines()[0]}")
+            if "Timeout" in str(e):
+                misses += 1
+
+
+def _best_option(texts: list[str], val: str):
+    """Index of the option for a wanted value; '@highest' means the top level of a scale (5 - Fluent, Native, Expert)."""
+    real = [(i, t) for i, t in enumerate(texts) if t and not re.match(r"^\s*(select one|select|choose|--)", t, re.I)]
+    if not real:
+        return None
+    if val == "@highest":
+        for pat in (r"native|bilingual", r"fluent", r"expert|advanced", r"proficient"):
+            got = next((i for i, t in real if re.search(pat, t, re.I)), None)
+            if got is not None:
+                return got
+        return real[-1][0]
+    want = _norm(val)
+    got = next((i for i, t in real if _norm(t) == want), None)
+    if got is None:
+        got = next((i for i, t in real if want and (want in _norm(t) or _norm(t) in want)), None)
+    return got
+
+
+def _clear_overlays(page):
+    """Close whatever is open on top of the form (a dropdown list, a search-and-pick pop-up)."""
+    try:
+        for _ in range(2):
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(200)
+        page.mouse.click(5, 5)
+        page.wait_for_timeout(300)
+    except Exception:
+        pass
 
 
 def _type_pick(page, el, val: str):

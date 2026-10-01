@@ -696,6 +696,11 @@ class Brain:
                 if got:
                     return got
             return ""                                 # already set to United States (+1) by the country choice: leave it
+        if kind == "combobox" and re.match(r"\W*(overall|speaking|writing|reading|listening|comprehension|verbal|written)\W*\*?\W*$", lab) \
+                and not any(re.search(r"fluent|native|advanced|expert|proficient", o, re.I) for o in (opts or [])):
+            return "@highest"                          # Workday language rows whose choices load when opened
+        if kind == "combobox" and re.match(r"\W*language\W*\*?\W*$", lab) and len([o for o in (opts or []) if not re.match(r"select", o, re.I)]) == 0:
+            return "English"
         if has_opts and opts and re.match(r"\W*(overall|speaking|writing|reading|listening|comprehension|verbal|written)\W*\*?\W*$", lab) \
                 and any(re.search(r"fluent|native|advanced|expert|proficient", o, re.I) for o in opts):
             for pat in (r"native|bilingual", r"fluent", r"expert|advanced", r"proficient"):
@@ -882,6 +887,14 @@ class Brain:
                 return [got] if kind == "checkbox_group" else got
         if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
+        if optionish and re.search(r"investigative consumer report|consumer report|background (check|screening|investigation)|"
+                                   r"criminal (background|history) check|employment verification", low) and \
+                re.search(r"understand|agree|authori[sz]e|consent|acknowledge", low) and not LEGAL_RX.search(low):
+            if kind == "checkbox_single":
+                return True
+            got = next((o for o in opts if re.search(r"^\W*(yes|i agree|i understand|i consent|i authori|agree)", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got   # a background check you have said you are fine with
         if optionish and LEGAL_RX.search(low):
             return None                      # arbitration / waiver / non-compete: never agreed to automatically
         if optionish and AI_POLICY_RX.search(low) and not re.search(r"did you|have you|do you use|will you use", low):
