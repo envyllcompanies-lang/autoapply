@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, level, __ve
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-09-30-p"
+REQUEUE_VERSION = "2026-10-01-q"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -111,6 +111,31 @@ def stub_job(row):
         return None
     return Job(source=src, company=row["company"], job_id=str(row["key"]).split(":")[-1], title=row["title"] or "",
                location=row["location"] or "", url=row["url"] or row["apply_url"], apply_url=row["apply_url"] or row["url"], description="")
+
+
+def row_job(row):
+    """A queued posting rebuilt from the history (runs that skip the job search). Its own page is read before applying."""
+    if not (row["apply_url"] or row["url"]):
+        return None
+    return Job(source=row["source"] or "web", company=row["company"], job_id=str(row["key"]).split(":")[-1], title=row["title"] or "",
+               location=row["location"] or "", url=row["url"] or row["apply_url"], apply_url=row["apply_url"] or row["url"], description="")
+
+
+SITE_RANK = {"lever": 0, "breezy": 0, "bamboohr": 0, "recruitee": 0, "workday": 0, "workable": 2, "greenhouse": 2}
+
+
+def site_rank(row) -> int:
+    """Sites that let the bot finish (no human check from GitHub's servers) go first; Workable and Greenhouse, whose
+    submits are often held by a human check, come after them."""
+    src = (row["source"] or "").lower()
+    url = (row["apply_url"] or row["url"] or "").lower()
+    if "myworkdayjobs" in url:
+        return 0
+    if "workable" in url or "workab" in src:
+        return 2
+    if "greenhouse" in url:
+        return 2
+    return SITE_RANK.get(src, 1)
 
 
 # ----------------------------------------------------------------------------------------- sites that keep showing a human check
@@ -388,8 +413,21 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     sources.SEARCH = {**(cfg.get("search", {}) or {}),
                       "_title_keys": [str(k).lower() for k in ((cfg.get("scoring") or {}).get("title_keywords") or {})]}
     sources.KNOWN = {r["key"]: r["status"] for r in db.conn.execute("SELECT key, status FROM jobs")}
-    jobs = discover(companies, log, base=base)
-    jobs += discover_aggregators(cfg, base, log)
+    every_h = float(s.get("discover_every_hours", 20))
+    last = db.meta_get("discovered_at", "")
+    fresh_enough = False
+    try:
+        fresh_enough = bool(last) and (datetime.now() - datetime.fromisoformat(last)).total_seconds() < every_h * 3600
+    except Exception:
+        pass
+    if fresh_enough and not dry_run:
+        log(f"Job search already ran at {last[11:16]} (searches run every {every_h:.0f} h): this run only applies")
+        jobs = []
+    else:
+        jobs = discover(companies, log, base=base)
+        jobs += discover_aggregators(cfg, base, log)
+        if len(jobs) > 1000:
+            db.meta_set("discovered_at", datetime.now().isoformat(timespec="seconds"))
     by_key = {j.key: j for j in jobs}
 
     # 2. filter + score only what we've never seen
@@ -429,7 +467,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         cap = min(cap, int(s["per_run_cap"]))
     if limit is not None:
         cap = min(cap, limit)
-    queue = db.retryable(s.get("max_attempts", 2))
+    queue = sorted(db.retryable(s.get("max_attempts", 2)), key=lambda r: (site_rank(r), -(r["score"] or 0)))
     log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
         return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
@@ -460,7 +498,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if time.time() > deadline:
                 log(f"Run time limit reached ({(deadline - t_start) / 60:.0f} min): the rest waits for the next run")
                 break
-            job = by_key.get(row["key"]) or stub_job(row)
+            job = by_key.get(row["key"]) or (stub_job(row) if by_key else row_job(row))
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
                 continue
@@ -517,12 +555,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         continue
                     db.update(job.key, apply_url=job.apply_url)
                 ats = ats_of(job)
-                why = employer_blocked(db, job.company)
+                why = employer_blocked(db, job.company) if s.get("skip_blocked_employers", True) else None
                 if why:
                     db.update(job.key, status="manual", reason=f"apply by hand: {job.company}'s application already stopped at a human check this week ({why[:60]})")
                     log("    ⏸ this employer's form already stopped the bot at a human check: listed for you instead")
                     continue
-                why = site_paused(db, ats, today)
+                why = site_paused(db, ats, today) if s.get("pause_sites", True) else None
                 if why:
                     db.update(job.key, status="manual", reason=why)
                     log(f"    ⏸ {ats} is paused (human checks): listed for you instead")
@@ -533,7 +571,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         job.description = (job.description + "\n" + page.inner_text("body"))[:8000]
                     except Exception:
                         pass
-                why_lv = level_out(job, s)            # now that the whole posting is known: years, pay, managing people
+                try:
+                    page_txt = page.inner_text("body")[:12000]
+                except Exception:
+                    page_txt = ""
+                why_lv = level_out(Job(job.source, job.company, job.job_id, job.title, job.location, job.url, job.apply_url,
+                                       (job.description or "") + "\n" + page_txt), s)   # the whole posting and form: years, pay
                 if why_lv:
                     db.update(job.key, status="filtered", reason=why_lv)
                     log(f"    ✗ skipped: {why_lv[:140]}")

@@ -51,9 +51,13 @@ class DB:
         cur3 = self.conn.execute(
             "UPDATE jobs SET status='queued', reason='recheck-inbox: ' || reason WHERE status='unconfirmed' AND attempts <= 1"
             " AND (apply_url LIKE '%workable.com%' OR source LIKE '%workab%') AND reason LIKE 'no confirmation after submit; page ends:%'")
+        # jobs listed 'by hand' only because their whole site or employer was paused: the bot tries them itself now
+        cur4 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='manual' AND (reason LIKE 'apply by hand: % stopped the bot at a human check on its last%'"
+            " OR reason LIKE 'apply by hand: %application already stopped at a human check%')")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount + cur3.rowcount
+        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()

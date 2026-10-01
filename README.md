@@ -16,7 +16,7 @@ form, fills it in from your résumé and answers, and submits. Cost: $0.
   confirm a submit, and one check-in a day even if nothing happened (so silence never means "broken"). Each email lists what
   was applied to, what is left for you, why other postings didn't go through, and how many free minutes are used.
 - **The employers' own "we received your application" emails** land in the same inbox. The bot reads that inbox to confirm submits.
-- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-09-30-p`; each success is a `✓ applied` line.
+- **Actions tab** on GitHub: open a run and read the log. It starts with `build 2026-10-01-q`; each success is a `✓ applied` line.
   The run's **Artifacts** hold the résumé, cover letter and form screenshots for every application (kept 30 days).
 - `reports/<date>.md` and `logs/<date>.log` in the repo keep the history.
 

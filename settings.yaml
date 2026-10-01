@@ -2,6 +2,9 @@
 # Sections merge; a list or a single value here replaces the one in config.yaml.
 
 search:
+  pause_sites: false          # never stop trying a whole site because some of its forms showed a human check
+  skip_blocked_employers: false
+  discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
   max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
 
 scoring:

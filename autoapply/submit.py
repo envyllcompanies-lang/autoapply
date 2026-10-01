@@ -1035,6 +1035,8 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         errs = _page_errors(page)
         tail = " ".join(page.inner_text("body").split())[-220:]
         said = _server_said(replies)
+        if replies and all(_cf_challenge(u) for _m, _st, u, _b in replies):
+            raise Blocked("Cloudflare's human check held the submit (the form only talked to the check, not the employer)")
         if said.startswith("REJECTED"):
             raise NotSubmitted(f"the site's server refused the application: {said[9:]}")
         if not replies and re.search(r"submitting|sending|please wait|processing", tail, re.I):
@@ -1052,6 +1054,11 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     e = Unconfirmed(msg)
     e.t0 = t_click
     raise e
+
+
+def _cf_challenge(url: str) -> bool:
+    """Cloudflare Turnstile / challenge-platform traffic ('/cdn-cgi/challenge-platform/...', ids like '...-1.2.1.1-...')."""
+    return bool(re.search(r"cdn-cgi/challenge|challenges\.cloudflare|turnstile|-\d\.\d\.\d\.\d-", url or "", re.I))
 
 
 def _server_said(replies) -> str:
