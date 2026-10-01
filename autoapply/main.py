@@ -600,9 +600,20 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                                    on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.update(
                                        _k, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=_a + 1)))))
                 if result == "confirmed":
-                    workflow.transition(ApplicationState.SUBMITTED)
-                    workflow.transition(ApplicationState.CONFIRMED)
+                    for state in (
+                        ApplicationState.PROFILE_COMPLETE,
+                        ApplicationState.QUESTIONS_COMPLETE,
+                        ApplicationState.DOCUMENTS_COMPLETE,
+                        ApplicationState.READY_FOR_REVIEW,
+                        ApplicationState.SUBMITTED,
+                        ApplicationState.CONFIRMED,
+                    ):
+                        workflow.transition(state)
                 else:
+                    workflow.transition(ApplicationState.PROFILE_COMPLETE)
+                    workflow.transition(ApplicationState.QUESTIONS_COMPLETE)
+                    workflow.transition(ApplicationState.DOCUMENTS_COMPLETE)
+                    workflow.transition(ApplicationState.READY_FOR_REVIEW)
                     workflow.transition(ApplicationState.SUBMITTED)
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
