@@ -24,7 +24,7 @@ from . import render, submit as sub, auth, sources, mailbox, notify, level, __ve
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-01-q"
+REQUEUE_VERSION = "2026-10-01-r"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -492,6 +492,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         done = 0
         dead = set()          # (company, title) already skipped/blocked this run
         nofind: dict = {}     # job source -> listings whose real application page could not be found this run
+        weak_pw: set = set()  # sites that rejected ACCOUNT_PASSWORD this run
         for row in queue:
             if done >= cap:
                 break
@@ -528,6 +529,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}")
                     log(f"    ✓ {job.title} @ {job.company}: the earlier submit did go through ({got[:60]})")
                     continue
+            if weak_pw and (("myworkdayjobs" in (job.apply_url or "")) and "workday" in weak_pw):
+                continue
             log(f"→ {job.title} @ {job.company} (score {row['score']})")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
             d.mkdir(parents=True, exist_ok=True)
@@ -608,6 +611,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
+                if re.search(r"password must include|password must (contain|have)", str(e), re.I):
+                    # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
+                    # for the run after the password is updated, and no more time is spent on that site this run
+                    db.update(job.key, status="queued", reason="waiting for a stronger ACCOUNT_PASSWORD (8+ chars, upper, lower, number, symbol)")
+                    weak_pw.add(ats_of(job))
+                    log(f"    ✗ {ats_of(job)} rejected the saved account password as too weak: its jobs wait until it is updated")
+                    continue
                 db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 if "could not find the employer" in str(e):
