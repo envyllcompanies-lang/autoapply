@@ -20,11 +20,11 @@ from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
-from . import render, submit as sub, auth, sources, mailbox, notify, __version__
+from . import render, submit as sub, auth, sources, mailbox, notify, level, __version__
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-09-29-o"
+REQUEUE_VERSION = "2026-09-30-p"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -55,6 +55,46 @@ def merge_board_file(cfg: dict, base: Path) -> int:
                 added += 1
     cfg["company_names"] = {**{str(k): v for k, v in names.items()}, **(cfg.get("company_names") or {})}
     return added
+
+
+def merge_settings(cfg: dict, base: Path) -> dict:
+    """Fold settings.yaml (non-private tuning kept in the repository) over the private config.yaml: nested sections merge,
+    lists and plain values replace. writer.drop_providers removes providers by name."""
+    p = base / "settings.yaml"
+    if not p.exists():
+        return cfg
+    try:
+        over = yaml.safe_load(p.read_text()) or {}
+    except Exception as e:
+        print(f"! settings.yaml could not be read: {e}", flush=True)
+        return cfg
+
+    def deep(a, b):
+        for k, v in b.items():
+            if isinstance(v, dict) and isinstance(a.get(k), dict):
+                deep(a[k], v)
+            else:
+                a[k] = v
+    drop = set(((over.get("writer") or {}).pop("drop_providers", None)) or [])
+    deep(cfg, over)
+    w = cfg.get("writer") or {}
+    if drop and isinstance(w.get("providers"), list):
+        w["providers"] = [x for x in w["providers"] if x.get("name") not in drop]
+    return cfg
+
+
+def level_out(job, s: dict) -> str | None:
+    """Why this posting is above your level or not open to you (None = fine). search.max_level: 0 entry, 1 early (default)."""
+    lo, hi = level.pay_range(job.description or "")
+    lv = level.classify(job.title, job.description or "", lo, hi)
+    if not lv.eligible:
+        return "not open to you: " + "; ".join(r for r in lv.reasons if not r.startswith(("title", "requires", "pay", "level", "manager")))
+    if lv.level > int(s.get("max_level", 1)):
+        return "above entry level: " + lv.why()
+    floor = s.get("_pay_floor")
+    if hi and floor and hi < float(floor):
+        return f"pays too little: tops out near ${hi:,.0f} a year (your floor is ${float(floor):,.0f})"
+    return None
 
 
 def norm_co(name: str) -> str:
@@ -300,11 +340,12 @@ def run(cfg_path: str, dry_run: bool = False, limit: int | None = None):
 def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     cfg_file = Path(cfg_path).resolve()
     base = cfg_file.parent
-    cfg = yaml.safe_load(cfg_file.read_text())
+    cfg = merge_settings(yaml.safe_load(cfg_file.read_text()), base)
     merge_board_file(cfg, base)
     s = cfg.setdefault("search", {})
     # on-site/hybrid roles only where you'd live: the same list that answers relocation questions (remote roles are always fine)
     s["_onsite_ok"] = list((cfg.get("facts") or {}).get("relocation_ok_locations") or [])
+    s["_pay_floor"] = (cfg.get("scoring") or {}).get("salary_floor")
     dry_run = dry_run or cfg.get("dry_run", False)
     today = date.today().isoformat()
     log = Logger(base / "logs" / f"{today}.log")
@@ -326,6 +367,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     brain.applied_before = {r[0] for r in db.conn.execute(
         "SELECT DISTINCT company FROM jobs WHERE status IN ('applied','unconfirmed')")}
     _resolve_old_unconfirmed(db, brain, log)
+    n_up = 0
+    for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
+        lv = level.classify(r["title"] or "")
+        if not lv.eligible or lv.level > int(s.get("max_level", 1)):
+            db.update(r["key"], status="filtered", reason=("not open to you: " if not lv.eligible else "above entry level: ") + lv.why())
+            n_up += 1
+    if n_up:
+        log(f"Dropped {n_up} queued jobs whose titles are above entry level or not open to you")
 
     # 1. discover
     log("Discovering jobs…")
@@ -350,7 +399,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     max_score = s.get("max_scored_per_run", 100000)
     min_score = s.get("min_score", 70)
     for j in fresh:
-        if (why := prefilter(j, s)):
+        if (why := prefilter(j, s) or level_out(j, s)):
             db.add(j, "filtered", reason=why)
             n_filt += 1
             continue
@@ -415,7 +464,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if job is None:
                 db.update(row["key"], status="skipped", reason="posting no longer listed")
                 continue
-            why_out = prefilter(job, s)               # safety net: a queued job that no longer passes today's filters is dropped
+            why_out = prefilter(job, s) or level_out(job, s)               # safety net: a queued job that no longer passes today's filters is dropped
             if why_out:
                 db.update(job.key, status="filtered", reason=why_out)
                 continue
@@ -435,6 +484,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if per_company and n_co >= per_company:
                 db.update(job.key, status="skipped", reason=f"already applied to {n_co} roles at this company")
                 continue
+            if str(row["reason"] or "").startswith("recheck-inbox") and mailbox.configured():
+                got = mailbox.find_confirmation(brain._company_name(job), time.time() - 7 * 86400, 0, log)
+                if got:
+                    db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}")
+                    log(f"    ✓ {job.title} @ {job.company}: the earlier submit did go through ({got[:60]})")
+                    continue
             log(f"→ {job.title} @ {job.company} (score {row['score']})")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
             d.mkdir(parents=True, exist_ok=True)
@@ -478,8 +533,16 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         job.description = (job.description + "\n" + page.inner_text("body"))[:8000]
                     except Exception:
                         pass
+                why_lv = level_out(job, s)            # now that the whole posting is known: years, pay, managing people
+                if why_lv:
+                    db.update(job.key, status="filtered", reason=why_lv)
+                    log(f"    ✗ skipped: {why_lv[:140]}")
+                    page.close()
+                    continue
                 if brain.writer and cfg.get("respect_ai_policies", True):
                     sub.guard_ai_policy(page, job)   # skip employers that say no AI-assisted applications
+                from . import writer as _w
+                _w.DEADLINE[0] = time.time() + sub.MAX_APPLY_SECONDS      # cover letter + answers share one time budget
                 resume_md, letter = brain.tailor(job)
                 (d / "resume.md").write_text(resume_md)
                 name = slug(cfg.get("facts", {}).get("full_name", "resume")).replace("-", "_") or "resume"

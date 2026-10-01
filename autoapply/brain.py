@@ -634,6 +634,31 @@ class Brain:
         if sp is not _UNSET:
             return sp
 
+        lab = str(f.get("label", "")).lower()
+        if kind == "wddate":
+            if re.match(r"\W*(today.s )?date\W*(signed)?\W*\*?\W*$|.*(signature|signed on)", lab):
+                return date.today().strftime("%m/%d/%Y")          # the signature date on a self-identification form
+            if re.search(r"start|available|begin", lab):
+                v = self.facts.get("earliest_start_date_value") or ""
+                return v or None
+            return None
+        if kind == "checkbox_single" and re.search(r"\(united states( of america)?\)\s*\*?\s*$", lab) and \
+                re.search(r"american indian|asian|black|hispanic|latino|pacific islander|white|two or more|not specified|decline", lab):
+            low = lab
+            want = str(self.facts.get("race_ethnicity") or "")      # Workday draws race/ethnicity as one box per choice
+            if want and re.search(r"hispanic|latino", want, re.I):
+                return True if re.search(r"hispanic|latino", low) else ""
+            if want and _norm(want).split()[0] in low:
+                return True
+            return True if (not want and re.search(r"not specified|decline", low)) else ""
+        if kind == "checkbox_single" and re.match(r"\W*(yes, i have a disability|no, i (do not|don.t) have a disability|"
+                                                  r"i (do not|don.t) (want|wish) to (answer|self.identify))", lab):
+            d = str(self.facts.get("disability_status") or "").lower()      # Workday's disability form: one box per choice
+            if d in ("none", "no", "not disabled", "no disability"):
+                return True if re.match(r"\W*no, i", lab) else ""
+            if d in ("yes", "disabled"):
+                return True if re.match(r"\W*yes, i", lab) else ""
+            return True if re.match(r"\W*i (do not|don.t)", lab) else ""
         if kind == "checkbox_single":
             if re.search(r"\bsms\b|text messag|texts? (you|me)|via text", low) and not AI_WORDS.search(low) \
                     and re.match(r"y", str(self.facts.get("sms_consent", "")), re.I):
@@ -657,12 +682,33 @@ class Brain:
             got = self._by_options(opts)
             if got:
                 return got
-        # 2) facts
-        if kind != "textarea":
+        if kind in ("text", "textarea") and len(low) < 40 and (re.search(r"(address|street)( line)? ?2\b|\bline 2\b", low) or
+                                                               re.match(r"\W*(apt\.?|apartment|suite|unit)\b(?!.*(street|address))", low)):
+            return ""                                 # no second address line
+        if kind in ("text", "tel", "combobox", "wdprompt", "select") and re.search(r"country (phone )?code|phone (country )?code|dial(l?ing)? code", low) and len(low) < 40:
+            if has_opts and opts:
+                got = next((o for o in opts if re.search(r"united states|\busa?\b", o, re.I) and "+1" in o), None)
+                if got:
+                    return got
+            return ""                                 # already set to United States (+1) by the country choice: leave it
+        if has_opts and opts and re.match(r"\W*(overall|speaking|writing|reading|listening|comprehension|verbal|written)\W*\*?\W*$", lab) \
+                and any(re.search(r"fluent|native|advanced|expert|proficient", o, re.I) for o in opts):
+            for pat in (r"native|bilingual", r"fluent", r"expert|advanced", r"proficient"):
+                got = next((o for o in opts if re.search(pat, o, re.I)), None)
+                if got:
+                    return [got] if kind == "checkbox_group" else got     # Workday language rows: the language picked is English
+        if kind in ("text", "tel", "number") and re.search(r"(phone )?extension\b|^\W*ext\.?\W*$", low):
+            return ""                                 # no extension
+        # 2) facts (Workable draws every free-text question as a textarea: short factual ones get the fact too)
+        short_box = kind != "textarea" or (len(low) < 160 and not re.search(
+            r"\b(why|describe|explain|tell us|walk us|example|share (a|an|your (experience|approach|story))|how (do|did|would|have|will) you)\b", low))
+        if short_box:
             for rx, keys, mode in FIELD_RULES:
                 if not rx.search(low):
                     continue
                 if mode == "choice" and not has_opts:
+                    if kind in ("text", "textarea") and keys[0] == "know_employee" and self._fact(keys):
+                        return str(self._fact(keys))      # 'Were you referred by a current employee? If so, who?' -> No
                     continue
                 if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
@@ -681,6 +727,10 @@ class Brain:
                     got = self._resolve(f, str(val), opts) or self._semantic(keys[0], val, opts, f["kind"], low)
                     if got:
                         return got
+                    if kind == "combobox" and mode is None and len(low) < 40 and keys[0] in ("country", "state", "city", "location", "county"):
+                        # a long list the page loads as you scroll (Workday's 250 countries): type the real value and
+                        # let the list find it, never settle for whatever option happened to be loaded
+                        return "United States of America" if keys[0] == "country" and re.match(r"(united states|us|usa)$", str(val), re.I) else str(val)
                     continue         # this rule can't pick an option here; let a later rule try
                 return str(val)
             if has_opts and re.search(r"experience|proficien|familiar|comfortable|skilled|knowledge", low) and any(
@@ -728,6 +778,24 @@ class Brain:
         # 3) open-ended prompt -> free LLM writer (required questions only, unless answer_optional)
         return self._write(f, low, kind)
 
+    def _meets_minimums(self) -> bool:
+        """True when the posting being applied to asks for no more than you have: entry/early level (at most 2 required years;
+        you have 3+ years of work), a bachelor's at most, no professional license and no security clearance."""
+        job = getattr(self, "_job", None)
+        if job is None:
+            return False
+        from . import level
+        from .sources import LICENSE_RX
+        desc = job.description or ""
+        lo, hi = level.pay_range(desc)
+        lv = level.classify(job.title, desc, lo, hi)
+        if not lv.eligible or lv.level > 1 or level.ADV_DEGREE_REQ.search(desc) or LICENSE_RX.search(job.title):
+            return False
+        if re.search(r"\b(license[d]? (required|is required)|must (be|hold)[^.]{0,30}licen[sc]e|certified (public|professional)|"
+                     r"(cpa|pmp|pe|cdl|rn)\b[^.]{0,20}required|bilingual[^.]{0,30}required|fluen[ct][^.]{0,40}(required|must))", desc, re.I):
+            return False
+        return True
+
     # ------------------------------------------------------------------ special cases
     def _special(self, f, low, kind, opts, has_opts):
         """Rules that need more than a fact lookup. Returns _UNSET when none applies, None when the job must be skipped."""
@@ -739,7 +807,21 @@ class Brain:
         if optionish and AI_POLICY_RX.search(low) and not re.search(r"did you|have you|do you use|will you use", low):
             return None                      # AI-in-the-application policies: the writer is AI, so never confirm them
         if has_opts and QUALIFY_CERT_RX.search(low):
-            return None                      # never certify qualifications for the user
+            if self._meets_minimums():
+                return pick_option(opts, "Yes")  # entry-level posting, no license / graduate degree / clearance: you meet them
+            return None                      # otherwise never certify qualifications for the user
+        if kind in ("text", "textarea") and ACK_RX.search(low) and re.search(r"true|accurate|correct|complete|truthful", low) \
+                and not (LEGAL_RX.search(low) or AI_WORDS.search(low)):
+            return self.facts.get("full_name")   # 'I certify my answers are true' typed-signature box
+        if kind in ("text", "textarea", "number") and re.search(r"salary|compensation|pay\b|rate|expect", low) and \
+                re.search(r"per month|monthly|a month|/ ?month", low):
+            nums = [float(x.replace(",", "")) for x in re.findall(r"\d[\d,]{3,}", str(self.facts.get("salary_expectation", "")))]
+            if len(nums) >= 2:
+                lo, hi = round(nums[0] / 12 / 100) * 100, round(nums[1] / 12 / 100) * 100
+                return f"{lo:.0f}" if kind == "number" else f"${lo:,.0f} to ${hi:,.0f} per month"
+        if (has_opts or kind == "text") and re.search(r"(current|existing|active)\W+(\[?[\w&.\]-]+\]?\W+)?(member(ship)?|customer|client|subscriber|"
+                                                       r"student|patient)\b|are you (a|an) (member|customer|client|subscriber)", low):
+            return pick_option(opts, "No") if has_opts else "No"      # not a member / customer of the employer
         if (has_opts or kind == "text") and re.search(r"(ever|previously)\W+(been\W+)?(interviewed|interview)\b|interviewed (at|with|for)\b", low):
             return pick_option(opts, "No") if has_opts else "No"
         if (has_opts or kind == "text") and re.search(r"(ever|previously)\W+applied|applied (to|for|at|with)\W.{0,60}(before|previously|in the past)", low):

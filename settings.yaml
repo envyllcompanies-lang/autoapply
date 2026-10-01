@@ -1,0 +1,19 @@
+# Non-private settings kept in the repository and merged over your private config.yaml (which lives in GitHub secrets).
+# Sections merge; a list or a single value here replaces the one in config.yaml.
+
+search:
+  max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
+
+scoring:
+  pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
+
+writer:
+  # Groq's free models, best first. Each has its own daily allowance, so when one runs out the next takes over.
+  # Gemini has no valid key; a model Groq no longer offers is skipped automatically after one try.
+  providers:
+    - {name: groq, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-120b",
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
+    - {name: groq-20b, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-20b",
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
+    - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}

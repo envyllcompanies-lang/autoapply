@@ -136,7 +136,7 @@ def question_checks():
         ("Have you ever interviewed at Anthropic before?*", "combobox", YN, "No"),
         ("Do you have any relatives or close friends who work at Acme?", "radio", YN, "No"),
         ("Do you have any existing family members at Koalafi? *", "combobox", YN, "No"),
-        ("Were you referred by a current employee? If so, name:", "text", [], "N/A"),
+        ("Were you referred by a current employee? If so, name:", "text", [], "No"),
         # where he lives / will work
         ("Do you currently reside in the Denver Metro area? *", "combobox", YN, "No"),
         ("Do you live in Colorado?", "radio", YN, "Yes"),
@@ -208,7 +208,7 @@ def question_checks():
         ("AI Policy for Application*", "combobox", YN, None),
         ("Do you certify that you did not use AI to complete this application?", "checkbox_single", [], None),
         ("Did you use AI to help with this application?", "radio", YN, "Yes"),
-        ("I certify that I meet the minimum qualifications for this role", "radio", YN, None),
+        ("I certify that I meet the minimum qualifications for this role", "radio", YN, "Yes"),   # entry-level posting with no license / grad degree: you meet them
     ]
     for row in table:
         label, kind, opts, want = row[:4]

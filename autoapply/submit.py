@@ -21,15 +21,25 @@ EXTRACT_JS = r"""
     if (!t) t = el.getAttribute('aria-label') || '';
     if (!t) { const l = el.closest('label'); if (l) t = l.innerText; }
     if (!t) {
+      // the nearest question text BEFORE this box in its block: never an answer option's <label> (it holds its own input)
+      // and never a label that belongs to a later box (Lever cards put several questions in one block)
+      const SEL = 'label, legend, .application-label, [class*="question-label"], [class*="field-label"], [class*="questionLabel"]';
       let p = el.parentElement;
-      for (let i = 0; i < 4 && p && !t; i++, p = p.parentElement) {
-        const l = p.querySelector('label, legend');
-        if (l && !l.contains(el)) t = l.innerText;
+      for (let i = 0; i < 5 && p && !t; i++, p = p.parentElement) {
+        const before = [...p.querySelectorAll(SEL)].filter(l => !l.contains(el) && !l.querySelector('input, textarea, select') &&
+                         (l.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING) && clean(l.innerText).length > 1);
+        if (before.length) t = before[before.length - 1].innerText;
       }
     }
-    return clean(t || el.placeholder || el.name || '');
+    const ph = /^(type|enter|start typing|select|choose|search|your answer|answer here|write)( your| an?| here)?\b/i.test(el.placeholder || '') ? '' : (el.placeholder || '');
+    return clean(t || ph || el.name || '');
   };
   const questionOf = (members) => {           // text of the smallest container holding a whole radio/checkbox group
+    const grp = members[0].closest('[role="radiogroup"],[role="group"],fieldset');
+    if (grp && grp.getAttribute('aria-labelledby')) {
+      const t = clean(grp.getAttribute('aria-labelledby').split(/\s+/).map(i => document.getElementById(i)?.innerText || '').join(' '));
+      if (t.length > 3) return t + (members.some(m => m.required || m.getAttribute('aria-required') === 'true') && !/[*\u2731]/.test(t) ? ' *' : '');
+    }
     let p = members[0].parentElement;
     while (p && !members.every(m => p.contains(m))) p = p.parentElement;
     for (let i = 0; i < 3 && p; i++, p = p.parentElement) {
@@ -64,14 +74,26 @@ EXTRACT_JS = r"""
     return clean(el.name || el.id || '');
   };
 
+  const HONEY = /for robots|robots only|leave (this )?(field |box )?(blank|empty)|do not (fill|enter|complete)|honeypot|if you are (a )?human/i;
+  const fieldQuestion = el => {             // Workday: <div data-automation-id="formField-..."><fieldset><legend>question</legend> ... <button>
+    const box = el.closest('[data-automation-id^="formField"]');
+    if (!box) return '';
+    const l = box.querySelector('legend, label');
+    const t = clean(l && !l.contains(el) ? l.innerText : '');
+    return t;
+  };
   let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = document.querySelectorAll('input, textarea, select');
   for (const el of els) {
     const type = (el.getAttribute('type') || el.tagName).toLowerCase();
     if (['hidden', 'submit', 'button', 'reset', 'image', 'search'].includes(type)) continue;
-    if (el.disabled || el.name === 'g-recaptcha-response' || el.closest('[aria-hidden="true"]')) continue;
-    if (!visible(el)) continue;
+    const choice = type === 'radio' || type === 'checkbox';
+    // Workable-style choices: the real <input> is hidden (aria-hidden, zero size) inside a visible role="radio" / <label> wrapper
+    const shown = choice ? (el.closest('[role="radio"],[role="checkbox"],label') || el) : el;
+    if (el.disabled || el.name === 'g-recaptcha-response' || (el.parentElement && el.parentElement.closest('[aria-hidden="true"]'))) continue;
+    if (el.getAttribute('aria-hidden') === 'true' && !choice) continue;
+    if (!visible(el) && !(choice && visible(shown))) continue;
     const required = el.required || el.getAttribute('aria-required') === 'true';
     if (type === 'radio' || type === 'checkbox') {
       const g = el.name || tag(el);
@@ -79,8 +101,23 @@ EXTRACT_JS = r"""
       groups[g].required ||= required;
       continue;
     }
-    const f = { id: tag(el), required, label: labelOf(el), maxlength: (el.maxLength > 0 && el.maxLength < 100000) ? el.maxLength : null };
-    if (el.getAttribute('role') === 'combobox' || el.getAttribute('aria-autocomplete') === 'list') f.kind = 'combobox';
+    const lab0 = labelOf(el);
+    if (HONEY.test(lab0) || HONEY.test(el.getAttribute('aria-label') || '') || HONEY.test(el.placeholder || '')) continue;   // spam traps
+    const f = { id: tag(el), required, label: lab0, maxlength: (el.maxLength > 0 && el.maxLength < 100000) ? el.maxLength : null };
+    const dsec = el.getAttribute('data-automation-id') || '';
+    if (/^dateSection(Day|Year)-input$/.test(dsec)) continue;                 // Workday date: handled as one field (the month box)
+    if (dsec === 'dateSectionMonth-input') {
+      const q = fieldQuestion(el) || 'Date';
+      fields.push({ id: tag(el), kind: 'wddate', label: q, required: /[*\u2731]/.test(q),
+                    maxlength: null, hasDay: !!el.closest('[data-automation-id="dateInputWrapper"]')?.querySelector('[data-automation-id="dateSectionDay-input"]') });
+      continue;
+    }
+    if (el.getAttribute('data-uxi-widget-type') === 'selectinput') {           // Workday search-and-pick box
+      f.kind = 'wdprompt';
+      const q = fieldQuestion(el); if (q) f.label = q;
+      if (/[*\u2731]/.test(f.label) || el.getAttribute('aria-required') === 'true') f.required = true;
+    }
+    else if (el.getAttribute('role') === 'combobox' || el.getAttribute('aria-autocomplete') === 'list') f.kind = 'combobox';
     else if (el.tagName === 'SELECT') {
       f.kind = 'select';
       f.options = [...el.options].map(o => clean(o.text)).filter(t => t && !/^(select|choose|--)/i.test(t));
@@ -90,25 +127,28 @@ EXTRACT_JS = r"""
       f.hint = [el.id, el.name, el.getAttribute('data-qa'), el.getAttribute('data-testid'), el.getAttribute('data-automation-id')].filter(Boolean).join(' ');
       f.elid = el.id || '';
     }
-    else f.kind = ['email', 'tel', 'url', 'number', 'date'].includes(type) ? type : 'text';
-    if (/\*/.test(f.label)) f.required = true;
+    else f.kind = ['email', 'tel', 'url', 'number', 'date', 'password'].includes(type) ? type : 'text';
+    if (/[*\u2731]/.test(f.label)) f.required = true;
     fields.push(f);
   }
   for (const [name, g] of Object.entries(groups)) {
     const opts = g.members.map(m => ({ id: tag(m), label: labelOf(m) || m.value }));
-    const q = questionOf(g.members);
+    const q = fieldQuestion(g.members[0]) || questionOf(g.members);
     if (g.type === 'checkbox' && g.members.length === 1)
       fields.push({ id: opts[0].id, kind: 'checkbox_single', label: opts[0].label, question: q, required: g.required });
     else
       fields.push({ id: 'g_' + opts[0].id, kind: g.type === 'radio' ? 'radio' : 'checkbox_group',
-                    label: q || name, required: g.required || /\*/.test(q),
+                    label: q || name, required: g.required || /[*\u2731]/.test(q),
                     options: opts.map(o => o.label), option_ids: opts.map(o => o.id) });
   }
   // custom dropdowns drawn as buttons (Workday)
   for (const b of document.querySelectorAll('button[aria-haspopup="listbox"]')) {
     if (b.disabled || b.closest('[aria-hidden="true"]') || !visible(b)) continue;
-    const lab = labelOf(b);
-    fields.push({ id: tag(b), kind: 'combobox', label: lab, required: /\*/.test(lab) || b.getAttribute('aria-required') === 'true', maxlength: null });
+    const q = fieldQuestion(b);
+    const own = labelOf(b);
+    const lab = q || own;
+    const req = /[*\u2731]/.test(lab) || /required/i.test(b.getAttribute('aria-label') || '') || b.getAttribute('aria-required') === 'true';
+    fields.push({ id: tag(b), kind: 'combobox', label: lab + (req && !/[*\u2731]/.test(lab) ? ' *' : ''), required: req, maxlength: null });
   }
   // Ashby-style Yes/No answered with two plain <button>s instead of radio inputs
   const btnGroups = new Map();
@@ -127,7 +167,7 @@ EXTRACT_JS = r"""
       if (txt.length > 3) q = txt;
     }
     const ord = bs.map(b => ({ id: tag(b), label: clean(b.innerText) }));
-    fields.push({ id: 'g_' + ord[0].id, kind: 'radio', label: q, required: /\*/.test(q),
+    fields.push({ id: 'g_' + ord[0].id, kind: 'radio', label: q, required: /[*\u2731]/.test(q),
                   options: ord.map(o => o.label), option_ids: ord.map(o => o.id) });
   }
   return fields;
@@ -304,7 +344,7 @@ def _has_form(page) -> bool:
 
 
 COOKIE_BTN = re.compile(r"^\s*(accept( all)?( cookies)?|allow all( cookies)?|i accept|agree|got it|ok(ay)?|close|dismiss)\s*$", re.I)
-OPEN_BTN = re.compile(r"^\s*(apply( now| here| today| online| for (this|the) (job|position|role)| to (this|the) (job|position|role))?"
+OPEN_BTN = re.compile(r"^\s*(apply( now| here| today| online)?( (for|to)( this| the)? (job|position|role|opening|vacancy))?( now)?"
                       r"|start( your)? application|begin application|i'?m interested|apply manually|continue to application)\s*[>\u2192]?\s*$", re.I)
 KNOWN_FRAMES = re.compile(r"greenhouse\.io|lever\.co|workable\.com|bamboohr\.com|recruitee\.com|breezy\.hr|smartrecruiters|icims|jobvite|applytojob|"
                           r"paylocity|ultipro|myworkdayjobs|teamtailor|personio|rippling|gusto|comeet|jazzhr|zohorecruit|freshteam", re.I)
@@ -340,8 +380,11 @@ def _open_by_button(page) -> bool:
         for i in range(min(loc.count(), 3)):
             el = loc.nth(i)
             try:
-                href = el.get_attribute("href") if role == "link" else None
-                if href and href.startswith(("http://", "https://")):
+                href = el.get_attribute("href")          # Workday's Apply is an <a role="button" href=".../apply">
+                if href and href.startswith("/") and not href.startswith("//"):
+                    from urllib.parse import urljoin
+                    href = urljoin(page.url, href)
+                if href and href.startswith(("http://", "https://")) and href.split("#")[0] != page.url.split("#")[0]:
                     page.goto(href, wait_until="domcontentloaded", timeout=45000)
                     page.wait_for_timeout(2500)
                     return True
@@ -407,6 +450,8 @@ def open_form(page, url: str):
     with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added."""
     page.goto(url, wait_until="domcontentloaded", timeout=45000)
     page.wait_for_timeout(2500)
+    if "myworkdayjobs.com" in page.url:
+        _settle(page)                          # Workday draws the page with JavaScript after it 'loads'
     _dismiss_cookies(page)
     tried = set()
     for _ in range(4):
@@ -435,6 +480,8 @@ def open_form(page, url: str):
             except Exception:
                 moved = False
             if moved:
+                if "myworkdayjobs.com" in page.url:
+                    _settle(page)
                 _dismiss_cookies(page)
                 break
         if not moved:
@@ -496,6 +543,66 @@ def _pick(options: list[str], want) -> int | None:
     return None
 
 
+def _autocomplete(el, f) -> bool:
+    """A location box that wants a suggestion picked (Lever, Greenhouse, most career sites) - everything except a plain
+    address-form 'City' box (Workday, BambooHR), which is just typed."""
+    if re.match(r"^\W*city\W*\*?\W*$", f.get("label", ""), re.I):
+        try:
+            return bool(el.evaluate("e => e.getAttribute('role') === 'combobox' || !!e.getAttribute('aria-autocomplete')"))
+        except Exception:
+            return False
+    return True
+
+
+WD_HEAR_ORDER = [r"job ?board|job ?site|online job|job posting|job search", r"linkedin", r"indeed", r"glassdoor",
+                 r"internet|online|website|web ?site|career ?site|careers? (page|website)|company website", r"other"]
+
+
+def _wd_prompt(page, el, val: str, label: str, log):
+    """Workday's search-and-pick box ('How Did You Hear About Us?', 'Field of Study', 'School'): open it, pick the option that
+    matches (for 'how did you hear', a job board / LinkedIn / website), drilling into sub-lists until something is selected."""
+    want = _norm(val)
+    hear = bool(re.search(r"hear|source|learn about|find (out|us)", label, re.I))
+
+    def selected() -> bool:
+        try:
+            box = el.locator("xpath=ancestor::*[@data-automation-id='multiSelectContainer'][1]")
+            return box.locator('[data-automation-id="selectedItem"], [data-automation-id="selectedItemList"] li').count() > 0 or \
+                bool(re.search(r"[1-9]\d* items? selected", box.inner_text()))
+        except Exception:
+            return False
+
+    el.click()
+    page.wait_for_timeout(900)
+    if not hear and val:
+        el.fill(val)
+        el.press("Enter")
+        page.wait_for_timeout(1500)
+    for _ in range(4):
+        if selected():
+            break
+        opts = page.locator('[data-automation-id="promptOption"], [role="option"]').locator("visible=true")
+        texts = [t.strip() for t in opts.all_inner_texts()]
+        if not texts:
+            break
+        pick = next((i for i, t in enumerate(texts) if _norm(t) == want), None)
+        if pick is None and hear:
+            for pat in WD_HEAR_ORDER:
+                pick = next((i for i, t in enumerate(texts) if re.search(pat, t, re.I)), None)
+                if pick is not None:
+                    break
+        if pick is None:
+            pick = next((i for i, t in enumerate(texts) if want and (want in _norm(t) or _norm(t) in want)), 0)
+        opts.nth(pick).click()
+        page.wait_for_timeout(1200)
+    try:
+        page.keyboard.press("Escape")
+    except Exception:
+        pass
+    if not selected():
+        log(f"      ! could not pick an option in '{label[:50]}'")
+
+
 def _fill_location(page, el, val: str, log):
     """Autocomplete location boxes (Lever etc.) clear themselves unless a suggestion is picked, so pick one."""
     city = val.split(",")[0].strip()
@@ -538,8 +645,18 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
         try:
             kind = f["kind"]
             el = page.locator(f'[data-aa="{fid}"]') if not fid.startswith("g_") else None
-            if kind == "text" and re.search(r"location|city|where are you (based|located)|currently (live|located)", f.get("label", ""), re.I):
+            if kind == "text" and re.search(r"location|city|where are you (based|located)|currently (live|located)", f.get("label", ""), re.I) \
+                    and _autocomplete(el, f):
                 _fill_location(page, el, str(val), log)
+            elif kind == "wddate":                       # Workday MM/DD/YYYY boxes: type the digits, it moves along by itself
+                digits = re.sub(r"\D", "", str(val))
+                if not f.get("hasDay") and len(digits) == 8:
+                    digits = digits[:2] + digits[4:]
+                el.click()
+                page.keyboard.type(digits, delay=60)
+                page.keyboard.press("Tab")
+            elif kind == "wdprompt":
+                _wd_prompt(page, el, str(val), f.get("label", ""), log)
             elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
                 el.fill(str(val))
             elif kind == "select":
@@ -551,7 +668,21 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     if i is not None:
                         el.select_option(index=i)
             elif kind == "combobox":
-                el.click()
+                try:
+                    shown = _norm(el.evaluate("e => e.tagName === 'BUTTON' ? e.innerText : (e.value || '')"))
+                except Exception:
+                    shown = ""
+                if shown and (shown == _norm(val) or (len(shown) > 3 and (shown in _norm(val) or _norm(val) in shown))):
+                    continue                               # already set (Workday presets Country to the United States)
+                try:
+                    page.keyboard.press("Escape")          # a list left open by the previous box covers this one
+                except Exception:
+                    pass
+                try:
+                    el.click(timeout=4000)
+                except Exception:
+                    el.scroll_into_view_if_needed(timeout=3000)
+                    el.click(force=True, timeout=4000)
                 page.wait_for_timeout(400)
                 want = _norm(val)
                 if f.get("options"):                       # a fixed list: click the option that matches
@@ -561,9 +692,7 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     if i is None:
                         i = next((k for k, t in enumerate(texts) if want and (want in _norm(t) or _norm(t) in want)), None)
                     if i is None:
-                        el.fill(str(val))
-                        page.wait_for_timeout(500)
-                        page.keyboard.press("Enter")
+                        _type_pick(page, el, str(val))
                     else:
                         opts.nth(i).click()
                 else:                                      # search-as-you-type (places): type, take the first suggestion
@@ -581,17 +710,14 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     log(f"      ! no option matched {str(val)[:40]!r} for '{f.get('label','')[:50]}'")
                 else:
                     loc = page.locator(f'[data-aa="{f["option_ids"][i]}"]')
-                    if loc.evaluate("e => e.tagName") == "BUTTON":
-                        loc.click()
-                    else:
-                        loc.check(force=True)
+                    _choose(page, loc)
             elif kind == "checkbox_group":
                 for v in (val if isinstance(val, list) else [val]):
                     i = _pick(f["options"], v)
                     if i is None:
                         log(f"      ! no option matched {str(v)[:40]!r} for '{f.get('label','')[:50]}'")
                     else:
-                        page.locator(f'[data-aa="{f["option_ids"][i]}"]').check(force=True)
+                        _choose(page, page.locator(f'[data-aa="{f["option_ids"][i]}"]'))
             elif kind == "checkbox_single":
                 if val is True or str(val).lower() in ("true", "yes"):
                     el.check(force=True)
@@ -601,6 +727,52 @@ def fill(page, fields: list[dict], answers: dict, files: dict[str, Path], log=pr
                     _upload(page, _file_input(page, f), path, f, log)
         except Exception as e:
             log(f"      ! could not fill '{f.get('label','')[:50]}': {str(e).splitlines()[0]}")
+
+
+def _type_pick(page, el, val: str):
+    """The wanted option is not among the loaded ones (long lists that load as you scroll): type it so the list jumps
+    or filters to it, then click the option that matches; Enter only as a last resort."""
+    want = _norm(val)
+    try:
+        is_btn = el.evaluate("e => e.tagName") == "BUTTON"
+    except Exception:
+        is_btn = False
+    if is_btn:
+        page.keyboard.type(val, delay=40)            # Workday listboxes jump to the typed text
+    else:
+        el.fill("")
+        el.press_sequentially(val, delay=40)
+    page.wait_for_timeout(900)
+    opts = page.locator('[role="option"]').locator("visible=true")
+    texts = opts.all_inner_texts()
+    i = next((k for k, t in enumerate(texts) if _norm(t) == want), None)
+    if i is None:
+        i = next((k for k, t in enumerate(texts) if want and (_norm(t).startswith(want) or want in _norm(t))), None)
+    if i is not None:
+        opts.nth(i).click()
+    else:
+        page.keyboard.press("Enter")
+
+
+def _choose(page, loc):
+    """Select a radio / checkbox option the way a person would: click what is visible (a <button>, the role="radio" wrapper
+    Workable draws, or the <label>), then make sure the input really is checked."""
+    tag = loc.evaluate("e => e.tagName")
+    if tag == "BUTTON":
+        loc.click()
+        return
+    shown = loc.evaluate("""e => { const r = e.getBoundingClientRect(); if (r.width > 2 && r.height > 2) return false;
+                                  const w = e.closest('[role="radio"],[role="checkbox"],label'); if (!w) return false;
+                                  w.setAttribute('data-aa-click', '1'); return true; }""")
+    if shown:
+        try:
+            page.locator('[data-aa-click="1"]').first.click(timeout=4000)
+        finally:
+            page.evaluate("() => document.querySelectorAll('[data-aa-click]').forEach(x => x.removeAttribute('data-aa-click'))")
+        page.wait_for_timeout(150)
+        if loc.evaluate("e => e.checked"):
+            return
+    loc.check(force=True)
 
 
 def _file_input(page, f):
@@ -822,6 +994,25 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         if not btn.count():
             btn = page.get_by_role("button", name=re.compile(r"submit|send application|apply", re.I)).last
     t_click = time.time()
+    replies: list = []
+
+    def _on_resp(resp):
+        try:
+            rq = resp.request
+            if rq.method != "GET" and rq.resource_type in ("xhr", "fetch", "document") and not re.search(
+                    r"google|analytics|segment|sentry|datadog|hotjar|clarity|doubleclick|facebook|linkedin\.com/px|bat\.bing", rq.url, re.I):
+                body = ""
+                try:
+                    body = " ".join(resp.text().split())[:300]
+                except Exception:
+                    pass
+                replies.append((rq.method, resp.status, rq.url.split("?")[0][-90:], body))
+        except Exception:
+            pass
+    try:
+        page.on("response", _on_resp)
+    except Exception:
+        pass
     if on_click:
         on_click()                       # write-ahead: from here on, a crash or timeout must never lead to a second submit
     btn.click()
@@ -843,27 +1034,76 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         _rejected(page, before_url, btn)
         errs = _page_errors(page)
         tail = " ".join(page.inner_text("body").split())[-220:]
-        msg = "no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + f"; page ends: {tail!r}"
+        said = _server_said(replies)
+        if said.startswith("REJECTED"):
+            raise NotSubmitted(f"the site's server refused the application: {said[9:]}")
+        if not replies and re.search(r"submitting|sending|please wait|processing", tail, re.I):
+            raise Blocked("the form stayed on 'Submitting…' and never contacted the employer (an invisible human check held it)")
+        msg = "no confirmation after submit" + (f"; page errors: {errs}" if errs else "") + (f"; server said: {said}" if said else "") + f"; page ends: {tail!r}"
     except (Blocked, Unconfirmed, NotSubmitted):
         raise
     except Exception as ex:              # page closed / navigated away after the click: the submit may have gone through
         msg = f"no confirmation after submit (page error after click: {str(ex).splitlines()[0][:120]})"
+    finally:
+        try:
+            page.remove_listener("response", _on_resp)
+        except Exception:
+            pass
     e = Unconfirmed(msg)
     e.t0 = t_click
     raise e
 
 
+def _server_said(replies) -> str:
+    """What the employer's server answered to the submit: 'REJECTED ...' for a 4xx with a reason, else a short summary."""
+    if not replies:
+        return ""
+    bad = [r for r in replies if 400 <= r[1] < 500 and r[1] not in (401, 403, 404)]
+    if bad:
+        m, st, url, body = bad[-1]
+        if re.search(r"captcha|recaptcha|hcaptcha|turnstile|bot|challenge", body, re.I):
+            return f"{st} human check: {body[:160]}"
+        return f"REJECTED {m} {url} -> {st}: {body[:220]}"
+    return "; ".join(f"{m} {url} -> {st}" for m, st, url, _ in replies[-3:])
+
+
+def _settle(page, max_ms: int = 9000):
+    """Wait until a page that draws itself with JavaScript (Workday) stops adding fields: the same number of inputs and
+    buttons twice in a row."""
+    try:
+        page.wait_for_load_state("networkidle", timeout=min(max_ms, 6000))
+    except Exception:
+        pass
+    last, same, waited = -1, 0, 0
+    while waited < max_ms:
+        try:
+            n = page.locator("input, textarea, select, button").locator("visible=true").count()
+        except Exception:
+            n = -2
+        if n == last and n > 0:
+            same += 1
+            if same >= 2:
+                return
+        else:
+            same = 0
+        last = n
+        page.wait_for_timeout(500)
+        waited += 500
+
+
 def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None, on_click=None) -> str:
     """Expects open_form(page, job.apply_url) to have been called already. Handles one-page forms and multi-step wizards
     (with account creation / sign-in when the site needs it)."""
-    from . import auth
+    from . import auth, writer as _w
     start_url = page.url
     total, uploaded, prev_sig, stuck, answered = 0, False, None, 0, {}
     limit_at = time.time() + MAX_APPLY_SECONDS
+    _w.DEADLINE[0] = limit_at - 45            # the writer never makes the whole application run out of time
     for step in range(1, MAX_STEPS + 1):
         if time.time() > limit_at:
             raise RuntimeError(f"took longer than {MAX_APPLY_SECONDS // 60} minutes on this site")
         page.wait_for_timeout(600)
+        _settle(page)
         if step > 1 and SUCCESS_RE.search(page.inner_text("body")) and _few_inputs(page):
             return "confirmed"
         if (b := _blocker(page)):
@@ -881,8 +1121,30 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if (b := _blocker(page)):
                 raise Blocked(b)
         fields = extract(page)
-        if len(fields) < 2 and _landing(page):            # description / "Apply Manually" page: get to the form
+        if len(fields) < 2:                                # still drawing (Workday) or a description page with an Apply button
+            page.wait_for_timeout(2500)
+            _settle(page)
             fields = extract(page)
+        if len(fields) < 2 and _landing(page):            # description / "Apply Manually" page: get to the form
+            _settle(page)
+            fields = extract(page)
+        if accounts and accounts.enabled and any(f["kind"] == "password" for f in fields):
+            log("      (account page: creating the account / signing in)")
+            if dry_run and not accounts.create_in_dry_run:
+                page.screenshot(path=str(shot), full_page=True)
+                return "dry_run"
+            try:
+                auth.handle(page, accounts, log, url_after=start_url)
+            except auth.AuthBlocked as e:
+                raise Blocked(f"account: {e}")
+            page.wait_for_timeout(1200)
+            _settle(page)
+            if (b := _blocker(page)):
+                raise Blocked(b)
+            fields = extract(page)
+        if any(f["kind"] == "password" for f in fields):
+            raise Blocked("account: the site needs an account and accounts are off (no ACCOUNT_PASSWORD) or sign-in did not finish")
+
         sig = tuple(sorted(f.get("label", "") for f in fields))
         stuck = stuck + 1 if sig == prev_sig else 0
         if stuck >= 2:

@@ -500,6 +500,8 @@ TECH_RX = re.compile(
     r"back-end|frontend|front-end|full[- ]?stack|platform engineer|security engineer|network|cloud|kernel|hardware|rf engineer|"
     r"mobile|ios|android|research (scientist|engineer)|architect|technical program manager|tpm|counsel|attorney|physician|nurse|clinical|"
     r"therapist|pharmac\w*|dentist|driver|cdl|welder|electrician|mechanic|barista|cook|chef|cashier|teacher|professor|"
+    r"systems engineer|infrastructure (engineer|&|and)|operations engineer|spacecraft|avionics|propulsion|flight (safety|software)|"
+    r"it (support|specialist|technician|systems|analyst|operations|asset)|help ?desk|desktop support|developer|uipath|rpa|"
     r"safeguards|enforcement analyst|fraud investigator|security operations|soc analyst|cyber\w*|infosec|information security|penetration)\b", re.I)
 SENIOR_RX = re.compile(r"\b(iii|iv|v)\s*$|^\s*lead\b|\b(sr|snr)\b\.?|associate director|regional (manager|director)|\bvp\b", re.I)
 NOT_A_JOB_RX = re.compile(r"talent (community|pool|network)|general application|future opportunit|join (our|the) (team|talent)|expression of interest|"

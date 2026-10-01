@@ -46,9 +46,14 @@ class DB:
         cur2 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
             " AND lower(reason) LIKE '%required%' AND lower(reason) NOT LIKE '%thank%'")
+        # Workable submits that sat on the form (a YES/NO question the bot could not see, or 'Submitting…' held by a hidden
+        # check) and got no confirmation email: almost certainly never sent. One more try; the inbox is checked first.
+        cur3 = self.conn.execute(
+            "UPDATE jobs SET status='queued', reason='recheck-inbox: ' || reason WHERE status='unconfirmed' AND attempts <= 1"
+            " AND (apply_url LIKE '%workable.com%' OR source LIKE '%workab%') AND reason LIKE 'no confirmation after submit; page ends:%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount
+        return cur.rowcount + cur2.rowcount + cur3.rowcount
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
