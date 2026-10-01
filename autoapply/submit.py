@@ -1006,10 +1006,28 @@ def _find_advance(page):
 
 def _page_errors(page) -> list[str]:
     try:
-        errs = page.locator('[aria-invalid="true"], [role="alert"], .error, .field-error, [class*="error"]').locator("visible=true").all_inner_texts()
+        errs = page.locator('[data-automation-id="errorMessage"], [data-automation-id="inputError"], [data-automation-id*="rror" i], '
+                            '[aria-invalid="true"], [role="alert"], .error, .field-error, [class*="error"]').locator("visible=true").all_inner_texts()
     except Exception:
         return []
     return [e.strip()[:80] for e in errs if e.strip()][:4]
+
+
+def _invalid_labels(page) -> str:
+    """Labels of the fields the site flagged as wrong or missing (so the log says what to fix)."""
+    try:
+        out = page.evaluate("""() => {
+          const els = [...document.querySelectorAll('[aria-invalid="true"], [data-automation-id*="rror" i]')];
+          const names = els.map(el => {
+            const box = el.closest('[data-automation-id^="formField"], fieldset, .field, [role=group]') || el.parentElement;
+            const lab = box && (box.querySelector('label, legend') || {}).innerText;
+            return ((el.getAttribute('aria-label') || lab || el.innerText || '') + '').trim().slice(0, 60);
+          }).filter(Boolean);
+          return [...new Set(names)].slice(0, 6);
+        }""")
+        return "; ".join(out)
+    except Exception:
+        return ""
 
 
 def _visible_buttons(page) -> str:
@@ -1038,6 +1056,35 @@ def _wd_start(page) -> bool:
         except Exception:
             continue
     return False
+
+
+def _form_ready(fields) -> bool:
+    return len(fields) >= 3 or any(f["kind"] in ("file", "password", "email") for f in fields)
+
+
+def _to_form(page, fields, accounts, log, start_url, job_url=""):
+    """From a job page / 'Start Your Application' / signed-in landing page to the application form itself.
+    Run before the account step and again after it (Workday drops you back on the job page once you sign in)."""
+    from . import auth
+    for _k in range(3):
+        if _form_ready(fields) or not (_wd_start(page) or _landing(page)):
+            break
+        _settle(page)
+        if accounts and accounts.enabled and auth.is_auth_page(page):
+            return extract(page)                   # the caller signs in, then calls this again
+        fields = extract(page)
+    if not _form_ready(fields) and "myworkdayjobs.com" in page.url:
+        # Workday's direct route to the form: <job page>/apply/applyManually
+        base = re.sub(r"/apply(/.*)?$", "", (job_url or start_url or page.url).split("?")[0]).rstrip("/")
+        if "/job/" in base:
+            log("      (opening Workday's application form directly)")
+            try:
+                page.goto(base + "/apply/applyManually", wait_until="domcontentloaded", timeout=30000)
+                _settle(page)
+                fields = extract(page)
+            except Exception:
+                pass
+    return fields
 
 
 def _landing(page) -> bool:
@@ -1217,21 +1264,8 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             page.wait_for_timeout(2500)
             _settle(page)
             fields = extract(page)
-        for _k in range(3):        # Workday after sign-in: the job page (Apply) -> Start Your Application (Apply Manually) -> form
-            if len(fields) >= 3 or any(f["kind"] in ("file", "password", "email") for f in fields) or not _wd_start(page):
-                break
-            _settle(page)
-            if accounts and accounts.enabled and auth.is_auth_page(page):
-                try:
-                    auth.handle(page, accounts, log, url_after=start_url)
-                except auth.AuthBlocked as e:
-                    raise Blocked(f"account: {e}")
-                _settle(page)
-            fields = extract(page)
-        if len(fields) < 3 and not any(f["kind"] in ("file", "password", "email") for f in fields) and _landing(page):
-            # description page, Workday's "Start Your Application" (Apply Manually) or "Sign in with email": get to the form
-            _settle(page)
-            fields = extract(page)
+        if step == 1 or not _form_ready(fields):
+            fields = _to_form(page, fields, accounts, log, start_url, getattr(job, "apply_url", ""))
         if accounts and accounts.enabled and any(f["kind"] == "password" for f in fields):
             log("      (account page: creating the account / signing in)")
             if dry_run and not accounts.create_in_dry_run:
@@ -1250,13 +1284,16 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if (b := _blocker(page)):
                 raise Blocked(b)
             fields = extract(page)
+            if not _form_ready(fields):              # signed in, but back on the job page: go to the form again
+                fields = _to_form(page, fields, accounts, log, start_url, getattr(job, "apply_url", ""))
         if any(f["kind"] == "password" for f in fields):
             raise Blocked("account: the site needs an account and accounts are off (no ACCOUNT_PASSWORD) or sign-in did not finish")
 
         sig = tuple(sorted(f.get("label", "") for f in fields))
         stuck = stuck + 1 if sig == prev_sig else 0
         if stuck >= 2:
-            raise Unanswerable(f"stuck on step {step}; page says: {_page_errors(page) or 'nothing'}")
+            raise Unanswerable(f"stuck on step {step}; page says: {_page_errors(page) or 'nothing'}; "
+                               f"fields flagged: {_invalid_labels(page) or 'none'}; buttons: {_visible_buttons(page)[:160]}")
         prev_sig = sig
         log(f"      step {step}: {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
         total += len(fields)
@@ -1289,9 +1326,16 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             if total < 4 or not uploaded:
                 raise Blocked(f"not a real application form ({total} fields, no résumé upload); page shows: {_visible_buttons(page)}")
             raise Blocked(f"no Next or Submit button found on this step; page shows: {_visible_buttons(page)}")
+        if kind == "submit" and (total < 4 or not uploaded) and re.match(r"^\s*apply\b", (btn.inner_text() or ""), re.I) and step < 4:
+            log("      (that 'Apply' button opens the form; clicking it)")
+            btn.click(force=True)
+            page.wait_for_timeout(2500)
+            total = 0
+            prev_sig = None
+            continue
         if kind == "submit":
             if total < 4 or not uploaded:
-                raise Blocked(f"not a real application form ({total} fields, no résumé upload)")
+                raise Blocked(f"not a real application form ({total} fields, no résumé upload); page shows: {_visible_buttons(page)}")
             page.screenshot(path=str(shot), full_page=True)
             if dry_run:
                 return "dry_run"

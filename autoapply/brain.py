@@ -864,6 +864,11 @@ class Brain:
             got = pick_option(opts, "No")
             if got:
                 return got                             # you hold no professional license and have never been sanctioned
+        if has_opts and re.search(r"(do|does) you (have|maintain|use) (a |an )?(personal |public |active )?linkedin|"
+                                  r"linkedin (profile|account)\W*$", low) and self.facts.get("linkedin"):
+            got = pick_option(opts, "Yes")
+            if got:
+                return got                             # you have a LinkedIn profile
         if (has_opts or kind in ("text", "textarea")) and re.search(
                 r"are you (currently )?(subject to|bound by|a party to|under)\b.{0,80}(agreement|restriction|non-?compete|non-?solicit|covenant|contract)|"
                 r"(do|does) (you|your).{0,30}(have|hold).{0,30}(non-?compete|non-?solicit|contractual restriction)", low):

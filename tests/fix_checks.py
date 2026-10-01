@@ -156,6 +156,10 @@ def answer_checks():
           {"id": "b", "kind": "file", "label": "Attach", "hint": "cover_letter", "required": False}]
     plan = b.map_fields(job, f1, "")
     check(plan["answers"].get("a") == "RESUME" and plan["answers"].get("b") != "RESUME", f"résumé by id: {plan}")
+    b.facts.setdefault("linkedin", "https://www.linkedin.com/in/example")
+    fl = [{"id": "li", "kind": "radio", "label": "Do you have a personal LinkedIn profile? ✱", "required": True, "options": ["Yes", "No"]}]
+    plan = b.map_fields(job, fl, "")
+    check(plan["answers"].get("li") == "Yes" and not plan["unanswerable_required"], f"has-LinkedIn question: {plan}")
     f2 = [{"id": "a", "kind": "file", "label": "Upload", "hint": "", "required": True},
           {"id": "t", "kind": "text", "label": "First Name", "required": True}]
     plan = b.map_fields(job, f2, "")

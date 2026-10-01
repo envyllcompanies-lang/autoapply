@@ -513,6 +513,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             fit = None
         return (site_rank(r), -(fit if fit and fit > 0 else 0.8 * (r["score"] or 0)))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
+    skip_sites = [x.lower() for x in s.get("skip_sites", []) or []]
+    if skip_sites:
+        queue = [r for r in queue if not any(x in ((r["source"] or "") + " " + (r["apply_url"] or r["url"] or "")).lower()
+                                             for x in skip_sites)]
     if s.get("prescreen", False) and s.get("require_match", True):
         # only jobs that passed the résumé-vs-posting match check (search.min_fit) are applied to
         min_fit = int(s.get("min_fit", 75))

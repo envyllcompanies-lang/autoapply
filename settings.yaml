@@ -8,6 +8,7 @@ search:
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
   prescreen: true            # LinkedIn-style match % (résumé vs. full posting) before applying; best matches first
   prescreen_per_run: 30
+  skip_sites: [lever]       # Lever shows an hCaptcha after every submit from GitHub: never finishes
   min_fit: 70               # postings rated under this match % are set aside
   max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
 

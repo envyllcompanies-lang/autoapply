@@ -260,9 +260,16 @@ def _sign_in(page, acc: Accounts, log, url_after: str | None = None):
             page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
             _settle(page, 2000)
         return "verified"
-    if is_auth_page(page) and BAD_LOGIN.search(body):
-        raise AuthBlocked("sign-in was refused: an account with this email probably exists with a different password "
-                          "(sign in by hand once, or reset that site's password to your ACCOUNT_PASSWORD)")
+    if is_auth_page(page) and (BAD_LOGIN.search(body) or _form_errors(page)):
+        # an account with this email exists with another password: reset it through the inbox, then sign in again
+        if _reset_password(page, acc, log, url_after):
+            if is_auth_page(page):
+                if page.locator("input[type=password]").locator("visible=true").count() >= 2:
+                    _click_named(page, re.compile(r"sign in|log ?in|already have", re.I))
+                    _settle(page, 1500)
+                return _sign_in(page, acc, log, url_after)
+            return "signed_in"
+        raise AuthBlocked("sign-in was refused and the password could not be reset through your email")
     return "signed_in"
 
 
@@ -293,6 +300,82 @@ def _create(page, acc: Accounts, log, start_url=None):
             raise AuthBlocked(f"the site did not accept the new account: {'; '.join(errs)}")
     acc.remember(host, "created")
     return "created"
+
+
+RESETS: dict = {}          # host -> password resets done this run (any site)
+FORGOT_RX = re.compile(r"forgot(ten)? (your |my )?password|reset (your |my )?password|can.?t (sign|log) ?in|trouble (signing|logging) in|"
+                       r"need help (signing|logging) in|password help", re.I)
+SEND_RX = re.compile(r"^\s*(send|submit|reset( password)?|continue|next|request( reset)?( link)?|e-?mail me|send (reset )?(link|e-?mail|instructions))\b.{0,25}$", re.I)
+SAVE_RX = re.compile(r"^\s*(reset( password)?|change password|set password|save|submit|update( password)?|continue|confirm)\b.{0,20}$", re.I)
+
+
+def _reset_password(page, acc: Accounts, log, url_after: str | None) -> bool:
+    """Any site: 'Forgot password?' -> your email -> the reset email's link (or code) -> new password = ACCOUNT_PASSWORD
+    -> back to the application. True when it worked."""
+    host = acc.host(page.url)
+    if RESETS.get(host, 0) >= 2:
+        return False
+    RESETS[host] = RESETS.get(host, 0) + 1
+    if "myworkdayjobs.com" in page.url:
+        return _wd_reset_password(page, acc, log, url_after)
+    if not mailbox.configured():
+        return False
+    t0 = time.time()
+    log(f"      account: sign-in refused on {host}; resetting the password through your email")
+    try:
+        if not _click_named(page, FORGOT_RX, roles=("link", "button")):
+            log("      account: no 'Forgot password?' link on this site")
+            return False
+        _settle(page, 2000)
+        box = page.locator("input[type=email], input[name*=mail i], input[id*=mail i], input[name*=user i], input[type=text]").locator("visible=true")
+        if not box.count():
+            log("      account: the reset page has no email box")
+            return False
+        box.first.fill(acc.email)
+        if not _click_named(page, SEND_RX):
+            box.first.press("Enter")
+        _settle(page, 2000)
+        res = mailbox.wait_for_verification(since_ts=t0 - 30, host_hint=host.split(".")[0], timeout=120, log=log)
+        if not res:
+            log("      account: the password-reset email did not arrive in time")
+            return False
+        if res.get("link"):
+            page.goto(res["link"], wait_until="domcontentloaded", timeout=45000)
+            _settle(page, 2500)
+        elif res.get("code"):
+            cb = page.locator("input[autocomplete=one-time-code], input[name*=code i], input[id*=code i], input[name*=token i]").locator("visible=true")
+            if not cb.count():
+                cb = page.locator("input[type=text], input[type=tel], input[type=number]").locator("visible=true")
+            if not cb.count():
+                log("      account: got a reset code but found no box for it")
+                return False
+            cb.first.fill(res["code"])
+        pws = page.locator("input[type=password]").locator("visible=true")
+        if not pws.count():
+            if res.get("code"):                      # code first, then the new-password page
+                _click_named(page, SEND_RX) or _click_named(page, SAVE_RX)
+                _settle(page, 2000)
+                pws = page.locator("input[type=password]").locator("visible=true")
+            if not pws.count():
+                log("      account: the reset did not show a new-password form")
+                return False
+        for i in range(pws.count()):
+            pws.nth(i).fill(acc.password)
+        if not _click_named(page, SAVE_RX):
+            pws.last.press("Enter")
+        _settle(page, 2500)
+        if _form_errors(page) and page.locator("input[type=password]").locator("visible=true").count():
+            log(f"      account: the new password was not accepted: {'; '.join(_form_errors(page))[:120]}")
+            return False
+        acc.remember(host, "verified")
+        log("      account: password reset; signing in")
+        if url_after:
+            page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+            _settle(page, 2500)
+        return True
+    except Exception as e:
+        log(f"      account: password reset failed ({str(e)[:80]})")
+        return False
 
 
 # ------------------------------------------------------------------------------------------------ Workday
