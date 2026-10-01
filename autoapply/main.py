@@ -22,11 +22,24 @@ from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, __version__
 from .ats import detect as detect_ats
+from .core.state_machine import ApplicationState, WorkflowState
+from .core.recovery import RecoverableFailure, RecoveryExecutor, RetryPolicy
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
 REQUEUE_VERSION = "2026-10-01-z"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
+
+
+def _new_page_with_recovery(ctx, log, attempts: int = 2):
+    """Retry only browser-page creation; never retry a submit or any post-submit operation."""
+    executor = RecoveryExecutor(RetryPolicy(max_attempts=max(1, attempts), base_delay_seconds=1.0))
+    def operation():
+        try:
+            return ctx.new_page()
+        except Exception as exc:
+            raise RecoverableFailure(str(exc)) from exc
+    return executor.run(operation, on_failure=lambda n, exc: log(f"    retrying browser page creation ({n}/{attempts}): {exc}"))
 
 
 def merge_board_file(cfg: dict, base: Path) -> int:
@@ -518,8 +531,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             d.mkdir(parents=True, exist_ok=True)
             page = None
             clicked: list = []
+            workflow = WorkflowState(ApplicationState.DISCOVERED)
             try:
-                page = ctx.new_page()
+                workflow.transition(ApplicationState.QUALIFIED)
+                page = _new_page_with_recovery(ctx, log)
+                workflow.transition(ApplicationState.STARTED)
                 if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
                     try:
                         job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
@@ -570,9 +586,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     raise RuntimeError(f"resume_file {cfg.get('resume_file')} is missing: not applying with a made-up résumé")
                 files = {"RESUME": (fixed if use_fixed else render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf")),
                          "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf", name=profile.get("name", ""), contact=profile.get("contact_line", "")))}
+                workflow.transition(ApplicationState.PROFILE_COMPLETE)
+                workflow.transition(ApplicationState.QUESTIONS_COMPLETE)
+                workflow.transition(ApplicationState.DOCUMENTS_COMPLETE)
+                workflow.transition(ApplicationState.READY_FOR_REVIEW)
                 result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc,
                                    on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.update(
                                        _k, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=_a + 1)))))
+                if result == "confirmed":
+                    workflow.transition(ApplicationState.SUBMITTED)
+                    workflow.transition(ApplicationState.CONFIRMED)
+                else:
+                    workflow.transition(ApplicationState.SUBMITTED)
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
                           cover_path=str(files.get("COVER_LETTER", "")), screenshot=str(d / "form.png"),
@@ -582,6 +607,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 log(f"    ✓ {status}")
                 done += 1
             except sub.Blocked as e:
+                workflow.notes.append(str(e)[:300])
                 blocked_text = str(e)
                 if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
                     # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
