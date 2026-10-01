@@ -67,7 +67,7 @@ class DB:
             " OR reason LIKE 'no application form found%')")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount + cur5.rowcount + cur6.rowcount
+        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur5.rowcount + cur6.rowcount
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
