@@ -540,16 +540,6 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         continue
                     db.update(job.key, apply_url=job.apply_url)
                 ats = ats_of(job)
-                why = employer_blocked(db, job.company) if s.get("skip_blocked_employers", True) else None
-                if why:
-                    db.update(job.key, status="skipped", reason=f"human verification repeatedly blocks this employer; unattended runner skipped it ({why[:60]})")
-                    log("    ✗ skipped: this employer repeatedly requires human verification")
-                    continue
-                why = site_paused(db, ats, today) if s.get("pause_sites", True) else None
-                if why:
-                    db.update(job.key, status="skipped", reason=f"human verification repeatedly blocks {ats}; unattended runner skipped this site for now")
-                    log(f"    ✗ skipped: {ats} is temporarily suppressed after repeated human checks")
-                    continue
                 sub.open_form(page, job.apply_url)   # check for blockers before spending tokens on tailoring
                 if len(job.description or "") < 300:  # only the title is known (big Workday sites, stubs): read the posting itself
                     try:
