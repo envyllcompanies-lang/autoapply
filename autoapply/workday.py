@@ -473,6 +473,14 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
                 f"redoing {[f['label'][:30] for f in fields if f['id'] in redo][:8] or 'the required fields'}")
             if redo:
                 answers = {i: v for i, v in answers.items() if i in redo}
+            # an optional box Workday calls invalid and the bot has no answer for (a leftover value): empty it
+            for f in fields:
+                if f["id"] in redo and not f.get("required") and f["kind"] in ("text", "url", "tel", "email", "number") \
+                        and f.get("has_value") and plan["answers"].get(f["id"]) in (None, ""):
+                    try:
+                        S._loc(page, f).fill("", timeout=3000)
+                    except Exception:
+                        pass
         known[sid] = {_ident(f) for f in fields}
         # lists first: picking a country or state makes Workday redraw (and empty) the name and address boxes
         kinds = {f["id"]: f["kind"] for f in fields}

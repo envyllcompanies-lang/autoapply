@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  actions: write            # lets a finished run start the next one (non-stop mode)
 
 concurrency:
   group: autoapply         # never two runs at once
@@ -28,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
+      - name: Note the start time
+        run: echo "T0=$(date +%s)" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
@@ -108,3 +112,16 @@ jobs:
           path: applications/
           retention-days: 30
           if-no-files-found: ignore
+
+      # Non-stop mode (public repository only): GitHub's own schedule often fires hours late, so each run starts the next
+      # one itself when it ends. Runs never overlap (see 'concurrency'). A run that had little to do waits out the rest
+      # of 25 minutes first, so job sites are not asked the same thing every two minutes. To stop the chain, disable the
+      # workflow (Actions -> autoapply -> Disable workflow).
+      - name: Start the next run
+        if: always() && github.event.repository.visibility == 'public'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          left=$(( 1500 - ($(date +%s) - ${T0:-0}) ))
+          if [ "$left" -gt 0 ] && [ "$left" -lt 1500 ]; then sleep "$left"; fi
+          gh workflow run autoapply.yml --repo "$GITHUB_REPOSITORY" --ref main || echo "could not start the next run (the hourly schedule will)"

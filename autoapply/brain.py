@@ -667,6 +667,10 @@ class Brain:
         has_opts = kind in ("select", "radio", "combobox", "checkbox_group")
         opts = f.get("options") or []
 
+        if kind in ("text", "url", "textarea") and re.search(r"facebook|twitter|\bx\b.{0,25}(url|username|handle|profile)|\(formerly twitter\)|"
+                                                             r"instagram|tiktok|snapchat|youtube|pinterest", low) \
+                and not re.search(r"linkedin|github|portfolio", low):
+            return None          # a Facebook / X / Instagram box never gets your website or LinkedIn address (sites reject it)
         if kind == "file":
             both = low + " " + str(f.get("hint") or "").lower().replace("_", " ").replace("-", " ")
             if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):

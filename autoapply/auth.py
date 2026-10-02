@@ -61,11 +61,20 @@ def strong_password(pw: str) -> str:
     return out
 
 
+def long_password(pw: str, n: int = 14) -> str:
+    """The same password made longer the same way every time, for sites that insist on 12+ characters."""
+    out = strong_password(pw)
+    while out and len(out) < n:
+        out += "Zq7!"
+    return out
+
+
 class Accounts:
     def __init__(self, cfg: dict, base):
         a = cfg.get("accounts") or {}
         self.email = a.get("email") or (cfg.get("facts") or {}).get("account_email") or (cfg.get("facts") or {}).get("email", "")
-        self.password = strong_password(os.environ.get("ACCOUNT_PASSWORD") or a.get("password") or "")
+        self._base_pw = os.environ.get("ACCOUNT_PASSWORD") or a.get("password") or ""
+        self.password = strong_password(self._base_pw)
         self.enabled = bool(a.get("enabled", True)) and bool(self.password) and bool(self.email)
         self.create_in_dry_run = bool(a.get("create_in_dry_run", False))
         self.path = base / "accounts.json"
@@ -79,8 +88,20 @@ class Accounts:
         u = urlparse(url)
         return ((u.hostname or "") + (f":{u.port}" if u.port and u.port not in (80, 443) else "")).lower()
 
+    def use(self, host: str, long: bool | None = None):
+        """Set the password for this site: the usual one, or the longer form on a site that demanded 12+ characters
+        (which form a site got is remembered in accounts.json; the password itself never is)."""
+        rec = self.known.get(host) if isinstance(self.known.get(host), dict) else {}
+        if long is None:
+            long = bool(rec.get("long_pw")) or bool(getattr(self, "_long", {}).get(host))
+        if long:
+            self.__dict__.setdefault("_long", {})[host] = True
+        base = getattr(self, "_base_pw", "") or self.password
+        self.password = long_password(base) if long else strong_password(base)
+
     def remember(self, host: str, state: str = "created"):
-        self.known[host] = {"email": self.email, "state": state, "at": time.strftime("%Y-%m-%d")}
+        self.known[host] = {"email": self.email, "state": state, "at": time.strftime("%Y-%m-%d"),
+                            **({"long_pw": True} if getattr(self, "_long", {}).get(host) else {})}
         self.path.write_text(json.dumps(self.known, indent=1, sort_keys=True))
 
 
@@ -499,9 +520,10 @@ def _wd_reset_password(page, acc: Accounts, log, url_after: str | None) -> bool:
 def _workday(page, acc: Accounts, log, url_after: str | None):
     """Workday's own sign-up / sign-in: email + password + verify password + privacy box, or the Sign In pop-up."""
     host = acc.host(page.url)
+    acc.use(host)
     t0 = time.time()
     tried_create = False
-    for _ in range(5):
+    for _ in range(6):
         if not is_auth_page(page):
             return
         scope = _wd_scope(page)
@@ -543,6 +565,12 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 continue
             errs = _wd_errors(page)
             log(f"      account: Workday did not create it; page says: {'; '.join(errs)[:220] or 'nothing'}")
+            need = re.search(r"minimum of (\d+) characters", " ".join(errs), re.I)
+            if need and int(need.group(1)) > len(acc.password) and int(need.group(1)) <= 14:
+                log(f"      account: this site wants {need.group(1)}+ characters: using the longer form of your password here")
+                acc.use(host, long=True)
+                tried_create = False
+                continue
             if errs:
                 raise AuthBlocked(f"Workday did not accept the new account: {'; '.join(errs)[:200]}")
             continue
@@ -631,6 +659,7 @@ def handle(page, acc: Accounts, log=print, url_after: str | None = None):
     if "myworkdayjobs.com" in page.url or page.locator('[data-automation-id="createAccountSubmitButton"], [data-automation-id="signInSubmitButton"]').count():
         return _workday(page, acc, log, url_after)
     host = acc.host(page.url)
+    acc.use(host)
     for _ in range(4):
         if not is_auth_page(page):
             return
