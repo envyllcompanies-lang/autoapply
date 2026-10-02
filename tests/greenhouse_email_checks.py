@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import os
 
-from autoapply import mailbox
+from autoapply import mailbox, submit
 
 
 def check(ok: bool, msg: str):
@@ -86,6 +86,13 @@ def main():
             since_ts=1900, company_hint="Acme", timeout=1, log=lambda *_: None
         )
         check(got and got["code"] == "X7K2QF", f"alphanumeric Greenhouse code failed: {got!r}")
+
+        greenhouse_screen = (
+            "Code Requested 9104A104 Security code for your application to Charlie Health. "
+            "Copy and paste this code into the security code field on your application."
+        )
+        check(submit.EMAIL_CODE_RE.search(greenhouse_screen) is not None,
+              "Greenhouse security-code page wording was not recognized")
 
         print("ok  greenhouse email: provider, freshness, employer correlation, and numeric/alphanumeric code filtering")
     finally:
