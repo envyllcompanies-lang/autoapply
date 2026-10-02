@@ -371,6 +371,50 @@ def browser_checks():
                 MB.configured, MB.wait_for_verification = old_configured, old_wait
                 page.close()
 
+            # Post-submit email OTP: the initial Submit click must not be repeated.
+            # The site itself transitions to a security-code screen after accepting the application.
+            page = ctx.new_page()
+            page.set_content("""<!doctype html><html><body>
+              <div id="form"><h1>Application</h1><input id="name" value="Test"><button id="submit" type="button">Submit Application</button></div>
+              <div id="verify" style="display:none">
+                <h1>Security code</h1>
+                <p>We emailed you a security code. Enter the code in the security code field.</p>
+                <input id="otp" name="verification_code" autocomplete="one-time-code">
+                <button id="confirm" type="button">Verify code</button>
+              </div>
+              <div id="done" style="display:none"><h1>Application submitted successfully</h1></div>
+              <script>
+                let submits = 0;
+                submit.onclick = () => {
+                  submits++;
+                  form.style.display='none';
+                  verify.style.display='block';
+                };
+                confirm.onclick = () => {
+                  if (otp.value === '9104A104') {
+                    verify.style.display='none'; done.style.display='block';
+                  }
+                };
+                window.getSubmitCount = () => submits;
+              </script>
+            </body></html>""")
+            old_configured, old_wai = MB.configured, MB.wait_for_verification
+            MB.configured = lambda: True
+            MB.wait_for_verification = lambda **k: {"link": None, "code": "9104A104"}
+            logs = []
+            try:
+                import autoapply.submit as S
+                got = S.submit(page, timeout_ms=5000, on_click=lambda: None)
+                count = page.evaluate("window.getSubmitCount()")
+                check(got == "confirmed", f"post-submit emailed OTP did not complete: {got!r}; log: {' | '.join(logs)[-500:]}")
+                check(count == 1, f"post-submit OTP caused a second application submit: {count}")
+                check(page.locator("#done").is_visible(), "post-submit OTP did not reach confirmation")
+            except Exception as e:
+                check(False, f"post-submit emailed OTP crashed: {type(e).__name__}: {e}")
+            finally:
+                MB.configured, MB.wait_for_verification = old_configured, old_wai
+                page.close()
+
             b.close()
     finally:
         srv.shutdown()
