@@ -349,6 +349,16 @@ def _blocker(page) -> str | None:
     return None
 
 
+EMAIL_CODE_RE = re.compile(
+    r"verification code|security code|security code field|one[- ]time (code|password|passcode|pin)|"
+    r"enter (the )?(code|passcode|otp)|code (field|requested)|check (your )?(email|inbox)|"
+    r"(we|we've|we have|the site) (sent|emailed|e-?mailed) (you )?(a |an )?"
+    r"(code|passcode|one[- ]time|verification)|"
+    r"code (was|has been|is) sent (to|via|by) (your )?e-?mail",
+    re.I,
+)
+
+
 def _email_code_prompt(page) -> bool:
     """True for an explicit email/OTP verification screen, not a CAPTCHA or ordinary form field."""
     try:
@@ -361,13 +371,7 @@ def _email_code_prompt(page) -> bool:
         ).locator("visible=true")
         if not code_box.count():
             return False
-        return bool(re.search(
-            r"verification code|one[- ]time (code|password|passcode|pin)|"
-            r"enter (the )?(code|passcode|otp)|check (your )?(email|inbox)|"
-            r"(we|we've|we have|the site) (sent|emailed|e-?mailed) (you )?(a |an )?"
-            r"(code|passcode|one[- ]time|verification)|"
-            r"code (was|has been|is) sent (to|via|by) (your )?e-?mail",
-            body, re.I))
+        return bool(EMAIL_CODE_RE.search(body))
     except Exception:
         return False
 
