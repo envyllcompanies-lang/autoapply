@@ -21,7 +21,7 @@ def main():
 
         messages = [
             {
-                "from": "no-reply@greenhouse.io",
+                "from": "no-reply@us.greenhouse-mail.io",
                 "subject": "Your verification code",
                 "body": "Use code 731204 to continue your application with Acme.",
                 "code": "731204",
