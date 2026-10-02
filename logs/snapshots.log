@@ -4728,3 +4728,63 @@ label: * Address
   [button] + Add
 label: SVGs not supported by thi
 
+=== 2026-10-02 23:41:29  blocked  People Operations Associate @ gradle
+url: https://job-boards.greenhouse.io/gradle/jobs/8192215
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+  text: Interested in building your career at Develocity? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name
+  <input:text #preferred_name filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: LinkedIn*
+  <input:text #question_69094850 required filled>
+label: What timezone are you located in?*
+  <input:text #question_69094851 required empty>
+  [button] 
+  [button] 
+label: Will you now or in the future require employer sponsorship for an employment-based visa status?*
+  <input:text #question_69094852 required filled>
+label: GDPR Disclosure *
+  <input:text #question_69094853 required empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
