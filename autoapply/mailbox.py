@@ -204,6 +204,40 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     return None
 
 
+def wait_for_greenhouse_code(since_ts: float, company_hint: str = "", job_hint: str = "", timeout: int = 150, log=print) -> dict | None:
+    """Return a fresh Greenhouse application verification code from the applicant inbox.
+
+    Greenhouse states that customer emails sent through its platform come from no-reply@greenhouse.io.
+    We require that sender domain, a verification/code signal, and a fresh parseable code all agree before
+    returning anything. Company/job hints are used to reject unrelated Greenhouse messages when available.
+    """
+    deadline = time.time() + timeout
+    company_words = [w for w in re.split(r"[^a-z0-9]+", (company_hint or "").lower()) if len(w) > 2]
+    job_words = [w for w in re.split(r"[^a-z0-9]+", (job_hint or "").lower()) if len(w) > 3]
+    while time.time() < deadline and not _DISABLED:
+        try:
+            for info in _recent(since_ts, 20, ("INBOX", "[Gmail]/Spam")):
+                sender = (info.get("from") or "").lower()
+                if not re.search(r"(?:^|[ <])no-reply@greenhouse\\.io(?:>|$)", sender):
+                    continue
+                subj = info.get("subject", "")
+                body = info.get("body", "")[:3000]
+                if not info.get("code") or not re.search(r"verification|verify|one[- ]time|passcode|security|code", subj + " " + body, re.I):
+                    continue
+                text_blob = (subj + " " + body).lower()
+                # If the employer/job is named, require at least one identifying hint. If neither is present,
+                # the Greenhouse sender + verification signal is still a strong enough provider boundary.
+                if company_words and not any(w in text_blob for w in company_words):
+                    if job_words and not any(w in text_blob for w in job_words):
+                        continue
+                log("      mail: found a fresh Greenhouse application verification email")
+                return {"link": info.get("link"), "code": info["code"], "provider": "greenhouse"}
+        except Exception as e:
+            log(f"      mail: {str(e)[:80]}")
+        time.sleep(6)
+    return None
+
+
 def find_confirmation(company_hint: str, since_ts: float, timeout: int = 90, log=print) -> str | None:
     """Subject of an 'we received your application' email from this employer that arrived after since_ts, else None."""
     words = [w for w in re.split(r"[^a-z0-9]+", (company_hint or "").lower()) if len(w) > 2]
