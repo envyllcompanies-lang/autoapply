@@ -420,6 +420,42 @@ def browser_checks():
                 MB.configured, MB.wait_for_verification = old_configured, old_wai
                 page.close()
 
+            # Regression: the security-code input can disappear immediately after
+            # acceptance while Greenhouse still requires a second Submit Application click.
+            page = ctx.new_page()
+            page.set_content("""<!doctype html><html><body>
+              <div id="form"><button id="submit" type="button">Submit Application</button></div>
+              <div id="verify" style="display:none"><h1>Greenhouse Recruiting</h1>
+                <p>Enter the security code we emailed you. After you enter the code, resubmit your application.</p>
+                <input id="otp" name="verification_code" autocomplete="one-time-code">
+              </div>
+              <div id="done" style="display:none"><h1>Application submitted successfully.</h1></div>
+              <script>
+                let submits = 0;
+                submit.onclick = () => {
+                  submits++;
+                  if (submits === 1) {
+                    form.style.display='none'; verify.style.display='block';
+                    setTimeout(() => { otp.remove(); verify.innerHTML += '<button id="submit2" type="button">Submit Application</button>'; submit2.onclick=() => { submits++; verify.style.display='none'; done.style.display='block'; }; }, 50);
+                  }
+                };
+                window.getSubmitCount = () => submits;
+              </script>
+            </body></html>""")
+            old_configured, old_wait = MB.configured, MB.wait_for_verification
+            MB.configured = lambda: True
+            MB.wait_for_verification = lambda **k: {"link": None, "code": "731204"}
+            logs = []
+            try:
+                got = S.submit(page, timeout_ms=9000, on_click=lambda: None)
+                check(got == "confirmed", f"Greenhouse disappearing-code resubmit failed: {got!r}; log: {' | '.join(logs)[-700:]}")
+                check(page.evaluate("window.getSubmitCount()") == 2, "Greenhouse disappearing-code path did not submit twice")
+            except Exception as e:
+                check(False, f"Greenhouse disappearing-code regression crashed: {type(e).__name__}: {e}")
+            finally:
+                MB.configured, MB.wait_for_verification = old_configured, old_wait
+                page.close()
+
             b.close()
     finally:
         srv.shutdown()
