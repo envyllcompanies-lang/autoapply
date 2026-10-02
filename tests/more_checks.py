@@ -924,6 +924,102 @@ def match_checks():
           "submit-once record; old Workday failures requeued")
 
 
+def submit_guard_checks():
+    """What counts as 'sent', 'held' and 'not sent' after the Submit click, and a phone box inside a country-code widget."""
+    import http.server
+    import threading
+    from playwright.sync_api import sync_playwright
+    from autoapply import submit as S
+
+    class H(http.server.BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def do_GET(self):
+            if self.path.endswith("/apply"):          # a job whose title has 'Success' in it; its button only leads to a login page
+                body = b'<html><body><h1>Customer Success Associate</h1><form><input name=a><input name=b></form><button onclick="location.href=location.href.replace(/apply$/, \'login\')">Submit</button></body></html>'
+            else:
+                body = b"<html><body><h1>Sign in to continue</h1><p>Your session has ended.</p></body></html>"
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{srv.server_address[1]}"
+    try:
+        with sync_playwright() as pw:
+            b = pw.chromium.launch()
+            page = b.new_page()
+            page.set_default_timeout(10000)
+
+            # the phone box of a country-code widget is a field; the widget's own search box and country list are not
+            page.set_content('<form><label for="fn">First name</label><input id="fn" type="text">'
+                             '<label for="ph">Phone</label><div class="iti iti--allow-dropdown"><div class="iti__flag-container">'
+                             '<div class="iti__selected-flag" role="combobox"></div><input type="text" class="iti__search-input" placeholder="Search">'
+                             '<ul class="iti__country-list" role="listbox"><li class="iti__country" role="option">United States +1</li></ul></div>'
+                             '<input id="ph" type="tel" class="iti__tel-input" required></div></form>')
+            fields = page.evaluate(S.EXTRACT_JS)
+            kinds = sorted((f["kind"], f["label"]) for f in fields)
+            check(("tel", "Phone") in kinds and len(fields) == 2, f"phone box inside a country-code widget: {kinds}")
+
+            # 'protected by reCAPTCHA' in the small print is not a human check holding the submit
+            page.set_content('<form><input name=a><input name=b></form><p>This site is protected by reCAPTCHA and the Google Privacy Policy applies.</p>'
+                             '<button onclick="setTimeout(() => { document.body.innerHTML = \'<h1>Thank you for applying</h1>\'; }, 1600)">Submit</button>')
+            clicks = []
+            try:
+                got = S.submit(page, timeout_ms=7000, btn=page.locator("button"), on_click=lambda: clicks.append(1))
+            except Exception as e:
+                got = f"{type(e).__name__}: {e}"
+            check(got == "confirmed" and clicks == [1], f"small print mentioning reCAPTCHA was taken for a held submit: {got}")
+
+            # a human check that APPEARS after the click does hold it
+            page.set_content('<form><input name=a><input name=b></form>'
+                             '<button onclick="setTimeout(() => { document.body.insertAdjacentHTML(\'beforeend\', \'<p>Please complete the CAPTCHA to continue</p>\'); }, 600)">Submit</button>')
+            try:
+                got = S.submit(page, timeout_ms=6000, btn=page.locator("button"))
+            except Exception as e:
+                got = f"{type(e).__name__}: {e}"
+            check(got.startswith("Blocked") and "human verification" in got, f"a check appearing after the click should hold the submit: {got}")
+
+            # a word that was already in the address ('Success' in the job title) proves nothing when the address changes
+            page.goto(f"{base}/jobs/Customer-Success-Associate/apply")
+            try:
+                got = S.submit(page, timeout_ms=3000, btn=page.locator("button"))
+            except Exception as e:
+                got = f"{type(e).__name__}: {e}"
+            check(got.startswith("Unconfirmed"), f"a job with 'Success' in its address was counted as sent when its page merely changed: {got}")
+
+            # a Submit button that cannot be pressed: nothing was sent, and it is not recorded as clicked
+            page.set_content('<form><input name=a><input name=b></form><button id="s">Submit</button>'
+                             '<div style="position:fixed;inset:0;background:rgba(0,0,0,.2)">a pop-up covers the page</div>')
+            clicks = []
+            old_click = None
+            try:
+                got = S.submit(page, timeout_ms=3000, btn=page.locator("#s"), on_click=lambda: clicks.append(1))
+            except Exception as e:
+                got = f"{type(e).__name__}: {e}"
+            check(got.startswith("NotSubmitted") and not clicks, f"a covered Submit button: {got[:160]} clicks={clicks}")
+
+            # ...but Workday's own invisible click-catcher over a button is not 'something in the way': a click there presses it
+            page.set_content('<form><input name=a><input name=b></form><div style="position:relative;display:inline-block">'
+                             '<button id="s" style="width:140px;height:40px">Submit</button>'
+                             '<div data-automation-id="click_filter" style="position:absolute;inset:0" '
+                             'onclick="document.body.innerHTML = \'<h1>Thank you for applying</h1>\'"></div></div>')
+            clicks = []
+            try:
+                got = S.submit(page, timeout_ms=5000, btn=page.locator("#s"), on_click=lambda: clicks.append(1))
+            except Exception as e:
+                got = f"{type(e).__name__}: {e}"
+            check(got == "confirmed" and clicks == [1], f"a button under Workday's own click-catcher: {got[:160]} clicks={clicks}")
+            b.close()
+    finally:
+        srv.shutdown()
+    print("ok  after Submit: small print is not a human check, old words in the address prove nothing, an unpressable button is 'not sent'; "
+          "phone box inside a country-code widget is read")
+
+
 def open_form_checks():
     """Every common way a job link can be built must end on the real form."""
     import tempfile
@@ -1079,7 +1175,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
+    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, submit_guard_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others

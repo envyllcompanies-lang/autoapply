@@ -7,7 +7,7 @@ from pathlib import Path
 
 EXTRACT_JS = r"""
 () => {
-  const clean = t => (t || '').replace(/\s+/g, ' ').trim().slice(0, 400);
+  const clean = t => (t || '').replace(/\s+/g, ' ').trim().slice(0, 1200);
   const visible = el => {
     if (el.type === 'file') return true;             // usually hidden behind a styled button
     const r = el.getBoundingClientRect(), s = getComputedStyle(el);
@@ -102,7 +102,8 @@ EXTRACT_JS = r"""
   const flow = document.querySelector('[data-automation-id="applyFlowPage"]');
   const root = flow || document;
   const chrome = el => !!el.closest('header, nav, footer, [data-automation-id="header"], [data-automation-id="utilityButtonBar"], ' +
-                                    '[data-automation-id="footerContainer"], .iti, [class*="iti__"]');
+                                    '[data-automation-id="footerContainer"], [class*="iti__country"], [class*="iti__search"], ' +
+                                    '[class*="iti__dropdown"], [class*="iti__selected"], [class*="iti__flag"]');
   const HONEY = /for robots|robots only|leave (this )?(field |box )?(blank|empty)|do not (fill|enter|complete)|honeypot|if you are (a )?human/i;
   const fieldQuestion = el => {             // Workday: <div data-automation-id="formField-..."><fieldset><legend>question</legend> ... <button>
     const box = el.closest('[data-automation-id^="formField"]');
@@ -606,7 +607,8 @@ def _body_text(page, limit: int = 12000) -> str:
         return ""
 
 
-PLACEHOLDER = re.compile(r"^\s*(select( one)?|choose( one)?|please select|-+|none( selected)?)?\s*\.?\s*$", re.I)
+PLACEHOLDER = re.compile(r"^[\s\-\u2013\u2014]*((please )?(select|choose|pick)( (one|an? [a-z]+|option|from (the )?list))?|none( selected)?|"
+                         r"not selected|no selection)?[\s\-\u2013\u2014.\u2026:]*$", re.I)
 
 _OPTIONS_JS = r"""(ids) => {
   const vis = e => { const r = e.getBoundingClientRect(), s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none'; };
@@ -762,15 +764,38 @@ def _norm(s):
     return re.sub(r"\W+", " ", str(s)).strip().lower()
 
 
-def _pick(options: list[str], want) -> int | None:
+def _has_words(hay: str, needle: str) -> bool:
+    """needle occurs in hay as whole words (both already passed through _norm): 'male' is not in 'female', 'no' not in 'now'."""
+    return bool(needle) and re.search(r"(?<![a-z0-9])" + re.escape(needle) + r"(?![a-z0-9])", hay) is not None
+
+
+def _match_option(texts: list[str], want) -> int | None:
+    """Index of the option that IS the wanted value: the same text; else an option that starts with it ('No' ->
+    'No, I will not ...'); else one that contains it as whole words; else one the wanted value starts with ('United
+    States' for 'United States of America'). A short value ('No', 'Yes') never matches by sitting somewhere inside a
+    longer sentence: a wrong answer on an application is worse than none."""
     w = _norm(want)
-    for i, o in enumerate(options):
-        if _norm(o) == w:
+    if not w:
+        return None
+    norm = [_norm(t) for t in texts]
+    for i, o in enumerate(norm):
+        if o == w:
             return i
-    for i, o in enumerate(options):
-        if w and (w in _norm(o) or _norm(o) in w):
+    for i, o in enumerate(norm):
+        if o.startswith(w + " "):
+            return i
+    if len(w) > 3:
+        for i, o in enumerate(norm):
+            if _has_words(o, w):
+                return i
+    for i, o in enumerate(norm):
+        if len(o) > 3 and w.startswith(o + " "):
             return i
     return None
+
+
+def _pick(options: list[str], want) -> int | None:
+    return _match_option(options, want)
 
 
 def _autocomplete(el, f) -> bool:
@@ -812,7 +837,7 @@ def _search_terms(val: str) -> list[str]:
     key = [w for w in words if w.lower() not in _STOP]
     out = [val]
     if len(key) >= 2:
-        out += [" ".join(key), f"{key[0]} {key[-1]}", " ".join(key[-2:]), key[0]]
+        out += [" ".join(key), f"{key[0]} {key[-1]}", " ".join(key[-2:])]
     out.append("Other")
     return list(dict.fromkeys(x for x in out if len(x) >= 3))
 
@@ -825,6 +850,8 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
     label = f.get("label", "")
     want = _norm(val)
     hear = bool(re.search(r"hear|source|learn about|find (out|us)|referr", label, re.I))
+    # a school has to be THE school: 'University of California' is not 'University of Southern California'
+    school = bool(re.search(r"school|university|college|institution", label, re.I))
 
     def chosen() -> list[str]:
         try:
@@ -839,9 +866,10 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
                 pick = next((i for i, t in enumerate(texts) if re.search(pat, t, re.I) and t not in seen), None)
                 if pick is not None:
                     break
-        if pick is None and want:
-            pick = next((i for i, t in enumerate(texts) if t not in seen and (want in _norm(t) or (len(_norm(t)) > 3 and _norm(t) in want))), None)
-        if pick is None and want and not hear:        # 'Industrial Engineering' for 'Industrial and Systems Engineering'
+        if pick is None and len(want) > 3:            # the wanted text inside a longer entry: '... (USC)', 'LinkedIn Jobs'
+            pick = next((i for i, t in enumerate(texts) if t not in seen and _has_words(_norm(t), want)), None)
+        if pick is None and want and not hear and not school:
+            # a shorter entry that is part of the wanted text: 'Industrial Engineering' for 'Industrial and Systems Engineering'
             ww = set(want.split()) - _STOP
             for i, t in enumerate(texts):
                 tw = set(_norm(t).split()) - _STOP
@@ -850,9 +878,24 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
                     break
         return pick
 
+    def right(h: str) -> bool:
+        return _norm(h) == want or (len(want) > 3 and _has_words(_norm(h), want))
+
     have = chosen()
-    if have and (hear or any(_norm(h) == want or (want and want in _norm(h)) for h in have)):
+    if have and (hear or any(right(h) for h in have)):
         return True                                   # already holds an answer (Workday keeps it from your profile)
+
+    def picked() -> bool:
+        """The box now holds a choice that this call made (not one that was simply there before). For a school that has
+        to be the school itself or 'Other': a look-alike that Workday may have taken on its own does not count."""
+        now = chosen()
+        if not now:
+            return False
+        if any(right(h) for h in now):
+            return True
+        if school:
+            return now != have and any(_norm(h) == "other" for h in now)
+        return now != have
 
     def open_list():
         try:
@@ -878,11 +921,11 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
             seen.add(texts[pick])
             _click_option(page, opts[pick])
             page.wait_for_timeout(700)
-            if chosen():
+            if picked():
                 ok = True
                 break
         if not ok:                                    # search: type it, Enter, take the match
-            for term in (WD_HEAR_SEARCH if hear else _search_terms(val)):
+            for term in (WD_HEAR_SEARCH if hear else [val, "Other"] if school else _search_terms(val)):
                 box = _loc(page, f)
                 try:
                     _close_list(page)                 # the last search's pop-up would swallow the click
@@ -893,7 +936,7 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
                 except Exception:
                     continue
                 page.wait_for_timeout(1400)
-                if chosen():                          # a single match is taken straight away
+                if picked():                          # a single exact match is taken by Workday straight away
                     ok = True
                     break
                 opts = _options(page)
@@ -902,22 +945,20 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
                 pick = next((i for i, t in enumerate(texts) if _norm(t) == w), None)
                 if pick is None:
                     pick = match(texts, set())
-                if pick is None:
+                if pick is None and hear:             # any job board will do for 'how did you hear'; nothing else is guessed
                     pick = next((i for i, t in enumerate(texts) if w in _norm(t)), None)
-                if pick is None and not hear and len(texts) == 1 and w != "other":
-                    pick = 0
                 if pick is not None:
                     _click_option(page, opts[pick])
                     page.wait_for_timeout(700)
-                    if chosen():
+                    if picked():
                         ok = True
                         break
     finally:
         _close_list(page)
-    if not ok and chosen():
+    if not ok and picked():
         ok = True
     if not ok:
-        log(f"      ! could not pick an option in '{label[:50]}'")
+        log(f"      ! could not pick an option in '{label[:50]}' (wanted {str(val)[:40]!r}): left as it was")
     return ok
 
 
@@ -972,11 +1013,25 @@ def _set_text(el, val: str):
 def _set_date(page, f: dict, el, val):
     """Workday's MM / DD / YYYY boxes. Typing the digits into the month box moves along by itself; if the boxes do not
     show the date afterwards, each box is typed on its own."""
-    digits = re.sub(r"\D", "", str(val))
-    if len(digits) < 6:
+    sv = str(val).strip()
+    m_iso = re.match(r"^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?$", sv)                # 2026-11-01, 2026-11
+    m_us = re.match(r"^(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})$", sv)             # 11/1/2026
+    m_my = re.match(r"^(\d{1,2})[/.\-](\d{4})$", sv)                           # 11/2026
+    if m_iso:
+        yyyy, mm, dd = m_iso.group(1), m_iso.group(2), m_iso.group(3) or "01"
+    elif m_us:
+        mm, dd, yyyy = m_us.groups()
+    elif m_my:
+        mm, yyyy, dd = m_my.group(1), m_my.group(2), "01"
+    else:
+        digits = re.sub(r"\D", "", sv)
+        if len(digits) < 6:
+            raise RuntimeError(f"not a date: {val!r}")
+        mm, yyyy = digits[:2], digits[-4:]
+        dd = digits[2:4] if len(digits) == 8 else "01"
+    mm, dd = mm.zfill(2), dd.zfill(2)
+    if not (1 <= int(mm) <= 12 and 1 <= int(dd) <= 31):
         raise RuntimeError(f"not a date: {val!r}")
-    mm, yyyy = digits[:2], digits[-4:]
-    dd = digits[2:4] if len(digits) == 8 else "01"
     has_day = bool(f.get("hasDay"))
 
     def ok() -> bool | None:
@@ -1014,7 +1069,6 @@ def _set_date(page, f: dict, el, val):
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
-    want = _norm(val)
     try:
         is_btn = bool(el.evaluate("e => e.tagName === 'BUTTON'", timeout=1500))
     except Exception:
@@ -1026,8 +1080,8 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
         except Exception:
             return ""
 
-    s0 = _norm(shown())
-    if val != "@highest" and s0 and (s0 == want or (len(s0) > 3 and (s0 in want or want in s0))):
+    s0 = shown()
+    if val != "@highest" and s0 and not PLACEHOLDER.match(s0) and _match_option([s0], val) is not None:
         return True                                   # already set (Workday presets Country to the United States)
     if _list_open(page):
         _close_list(page)                             # a list left open by the previous box covers this one
@@ -1044,7 +1098,9 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     texts = [o["text"] for o in opts]
     known = [o for o in (f.get("options") or []) if not PLACEHOLDER.match(o)]
     i = _best_option(texts, val) if texts else None
-    if i is None and (is_btn or known):
+    if i is None and val == "@highest":
+        pass                                          # no choices could be read: nothing to pick the top of
+    elif i is None and (is_btn or known):
         # not among the loaded choices (long lists load as you scroll): type it so the list jumps or filters to it
         if is_btn:
             page.keyboard.type(val, delay=40)
@@ -1054,11 +1110,10 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
         page.wait_for_timeout(900)
         opts = _options(page, el)
         texts = [o["text"] for o in opts]
-        i = next((k for k, x in enumerate(texts) if _norm(x) == want), None)
-        if i is None:
-            i = next((k for k, x in enumerate(texts) if want and (_norm(x).startswith(want) or want in _norm(x))), None)
-        if i is None:
-            page.keyboard.press("Enter")
+        i = _match_option(texts, val) if texts else None
+        if i is None and not is_btn:
+            page.keyboard.press("Enter")              # a search box: Enter takes its top suggestion
+        # (a list of fixed choices is never answered with 'whatever is highlighted': nothing picked is reported instead)
     elif i is None:                                   # search-as-you-type (places): type, take the first suggestion
         el.fill("", timeout=3000)
         el.press_sequentially(val, delay=50)
@@ -1166,11 +1221,8 @@ def _best_option(texts: list[str], val: str):
             if got is not None:
                 return got
         return real[-1][0]
-    want = _norm(val)
-    got = next((i for i, t in real if _norm(t) == want), None)
-    if got is None:
-        got = next((i for i, t in real if want and (want in _norm(t) or _norm(t) in want)), None)
-    return got
+    j = _match_option([t for _i, t in real], val)
+    return real[j][0] if j is not None else None
 
 
 def _clear_overlays(page):
@@ -1461,6 +1513,21 @@ def _visible_buttons(page) -> str:
         return "?"
 
 
+def _submits_a_form(btn) -> bool:
+    """The button is the submit control of a <form> that holds fields (as opposed to an 'Apply' button on a description
+    page, which only opens the form). When it cannot be told, it is treated as a real submit button."""
+    try:
+        return bool(btn.evaluate("""e => {
+            const f = e.closest('form');
+            if (!f) return false;
+            const t = (e.getAttribute('type') || (e.tagName === 'BUTTON' ? 'submit' : '')).toLowerCase();
+            const n = [...f.querySelectorAll('input:not([type=hidden]):not([type=submit]):not([type=button]), textarea, select')]
+                        .filter(x => x.offsetWidth > 0 || x.type === 'file').length;
+            return (t === 'submit' || e.tagName === 'INPUT') && n >= 2; }""", timeout=1500))
+    except Exception:
+        return True
+
+
 def _form_ready(fields) -> bool:
     return len(fields) >= 3 or any(f["kind"] in ("file", "password", "email") for f in fields)
 
@@ -1510,13 +1577,33 @@ def _still_visible(btn) -> bool:
         return False
 
 
+_DONE_URL = re.compile(r"thank|success|submitted|confirmation", re.I)
+_HUMAN_WORDS = re.compile(r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re|you are) human|are you a robot|human verification|"
+                          r"cloudflare.{0,30}(challenge|verify)", re.I)
+
+
 def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     before_url = page.url
-    before_hits = len(SUCCESS_RE.findall(page.inner_text("body")))
+    before_text = page.inner_text("body")
+    before_hits = len(SUCCESS_RE.findall(before_text))
+    # words that are already there before the click prove nothing afterwards: a job called 'Customer Success Associate'
+    # has 'success' in its address, and most forms say 'protected by reCAPTCHA' in their small print
+    url_words_before = {w.lower() for w in _DONE_URL.findall(before_url)}
+    human_words_before = bool(_HUMAN_WORDS.search(" ".join(before_text.split())))
+    site_host = _host(before_url)
     if btn is None:
         btn = page.locator("button[type=submit], input[type=submit]").filter(visible=True).last
         if not btn.count():
             btn = page.get_by_role("button", name=re.compile(r"submit|send application|apply", re.I)).last
+    # Can the button be pressed at all? Checked without pressing it, so a button that is covered or disabled ends as
+    # "not sent" (tried again later) and not as "clicked, outcome unknown" (never tried again).
+    force = False
+    try:
+        btn.click(trial=True, timeout=8000)
+    except Exception as ex:
+        if not _own_cover(btn):
+            raise NotSubmitted(f"the Submit button could not be pressed ({str(ex).splitlines()[0][:110]}): nothing was sent")
+        force = True                     # Workday's own invisible click-catcher lies over the button: a click there is the click
     t_click = time.time()
     replies: list = []
 
@@ -1530,7 +1617,7 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
                     body = " ".join(resp.text().split())[:300]
                 except Exception:
                     pass
-                replies.append((rq.method, resp.status, rq.url.split("?")[0][-90:], body))
+                replies.append((rq.method, resp.status, rq.url.split("?")[0][-90:], body, _host(rq.url)))
         except Exception:
             pass
     try:
@@ -1539,14 +1626,14 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         pass
     if on_click:
         on_click()                       # write-ahead: from here on, a crash or timeout must never lead to a second submit
-    btn.click()
+    btn.click(force=True) if force else btn.click()
     waited = 0
     try:
         while waited < timeout_ms:
             page.wait_for_timeout(1000)
             waited += 1000
             body = page.inner_text("body")
-            url_says_done = page.url != before_url and re.search(r"thank|success|submitted|confirmation", page.url, re.I)
+            url_says_done = page.url != before_url and bool({w.lower() for w in _DONE_URL.findall(page.url)} - url_words_before)
             if len(SUCCESS_RE.findall(body)) > before_hits or url_says_done:
                 return "confirmed"
             if waited >= 2000 and _code_after_submit(page, body):
@@ -1555,11 +1642,7 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
                 raise Blocked("after Submit the site asked for a security code it emailed; the bot does not enter that one, "
                               "so nothing was sent: apply to this one yourself")
             body_l = " ".join(body.split())
-            if re.search(
-                r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re|you are) human|"
-                r"are you a robot|human verification|cloudflare.{0,30}(challenge|verify)",
-                body_l, re.I,
-            ) and not _email_code_prompt(page):
+            if not human_words_before and _HUMAN_WORDS.search(body_l) and not _email_code_prompt(page):
                 raise Blocked("the submit is held by an anti-bot/human verification challenge")
             if (b := _blocker(page)):
                 raise Blocked(f"{b} after submit")
@@ -1568,8 +1651,8 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         _rejected(page, before_url, btn)
         errs = _page_errors(page)
         tail = " ".join(page.inner_text("body").split())[-220:]
-        said = _server_said(replies)
-        if replies and all(_cf_challenge(u) for _m, _st, u, _b in replies):
+        said = _server_said(replies, site_host)
+        if replies and all(_cf_challenge(r[2]) for r in replies):
             raise Blocked("Cloudflare's human check held the submit (the form only talked to the check, not the employer)")
         if said.startswith("REJECTED"):
             raise NotSubmitted(f"the site's server refused the application: {said[9:]}")
@@ -1590,22 +1673,53 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     raise e
 
 
+def _own_cover(btn) -> bool:
+    """Workday lays an invisible click-catcher ('click_filter') over some of its buttons. That is the button's own
+    cover, not a pop-up in the way: a click on it presses the button."""
+    try:
+        return bool(btn.evaluate("""e => {
+            const r = e.getBoundingClientRect();
+            const t = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+            return !!t && t !== e && !e.contains(t) && t.getAttribute('data-automation-id') === 'click_filter'
+                   && !!e.parentElement && e.parentElement.contains(t); }""", timeout=1500))
+    except Exception:
+        return False
+
+
 def _cf_challenge(url: str) -> bool:
     """Cloudflare Turnstile / challenge-platform traffic ('/cdn-cgi/challenge-platform/...', ids like '...-1.2.1.1-...')."""
     return bool(re.search(r"cdn-cgi/challenge|challenges\.cloudflare|turnstile|-\d\.\d\.\d\.\d-", url or "", re.I))
 
 
-def _server_said(replies) -> str:
-    """What the employer's server answered to the submit: 'REJECTED ...' for a 4xx with a reason, else a short summary."""
+def _host(url: str) -> str:
+    from urllib.parse import urlparse
+    try:
+        return (urlparse(url).hostname or "").lower()
+    except Exception:
+        return ""
+
+
+def _server_said(replies, site_host: str = "") -> str:
+    """What the site's own server answered to the submit. 'REJECTED ...' only when it refused (a 4xx with a reason) and
+    accepted nothing else: if any other request to the same site went through after the click, the application may have
+    been sent, and it must then never be treated as 'not sent' (which would let it be submitted again)."""
     if not replies:
         return ""
-    bad = [r for r in replies if 400 <= r[1] < 500 and r[1] not in (401, 403, 404)]
+
+    def own(r) -> bool:                               # the form's own site, not a tracker or widget on another one
+        h = r[4] if len(r) > 4 else ""
+        return not site_host or not h or h == site_host or h.split(".")[-2:] == site_host.split(".")[-2:]
+    mine = [r for r in replies if own(r)]
+    bad = [r for r in mine if 400 <= r[1] < 500 and r[1] not in (401, 403, 404)]
+    took = [r for r in mine if 200 <= r[1] < 400]
     if bad:
-        m, st, url, body = bad[-1]
+        m, st, url, body = bad[-1][:4]
         if re.search(r"captcha|recaptcha|hcaptcha|turnstile|bot|challenge", body, re.I):
             return f"{st} human check: {body[:160]}"
-        return f"REJECTED {m} {url} -> {st}: {body[:220]}"
-    return "; ".join(f"{m} {url} -> {st}" for m, st, url, _ in replies[-3:])
+        if not took:
+            return f"REJECTED {m} {url} -> {st}: {body[:220]}"
+        return f"{m} {url} -> {st} (but another request to the site was accepted): {body[:120]}"
+    return "; ".join(f"{r[0]} {r[2]} -> {r[1]}" for r in replies[-3:])
 
 
 def _settle(page, max_ms: int = 9000):
@@ -1648,7 +1762,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                    on_click=None, on_stage=None) -> str:
     from . import auth, workday, writer as _w
     start_url = page.url
-    total, uploaded, prev_sig, stuck, answered, code_tries = 0, False, None, 0, {}, 0
+    total, uploaded, prev_sig, stuck, answered, code_tries, opened = 0, False, None, 0, {}, 0, False
     # Correlate inbox codes with the current application action, not just account creation.
     mail_since = time.time() - 45
     limit_at = time.time() + MAX_APPLY_SECONDS
@@ -1780,8 +1894,13 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             if total < 4 or not uploaded:
                 raise Blocked(f"not a real application form ({total} fields, no résumé upload); page shows: {_visible_buttons(page)}")
             raise Blocked(f"no Next or Submit button found on this step; page shows: {_visible_buttons(page)}")
-        if kind == "submit" and (total < 4 or not uploaded) and re.match(r"^\s*apply\b", (btn.inner_text() or ""), re.I) and step < 4:
+        n_filled = sum(1 for v in plan["answers"].values() if v not in (None, ""))
+        if kind == "submit" and (total < 4 or not uploaded) and re.match(r"^\s*apply\b", (btn.inner_text() or ""), re.I) and step < 4 \
+                and not opened and n_filled < 2 and not _submits_a_form(btn):
+            # an 'Apply' button on a description page that only opens the form. Never taken for a button that submits the
+            # fields just filled in: that would send a tiny application with no record of the click.
             log("      (that 'Apply' button opens the form; clicking it)")
+            opened = True
             btn.click(force=True)
             page.wait_for_timeout(2500)
             total = 0
@@ -1799,7 +1918,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                     result = submit(page, btn=btn, on_click=on_click)
                 except NotSubmitted as e:
                     res_fields = [f for f in fields if plan["answers"].get(f["id"]) == "RESUME"]
-                    if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|file", str(e), re.I)):
+                    if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|\bfiles?\b", str(e), re.I)):
                         raise
                     # the form says the résumé is missing, so nothing was sent: attach it with the site's own button, submit once more
                     log("      the form says the résumé is missing: attaching it again with the site's own button and submitting once more")

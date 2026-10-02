@@ -56,6 +56,20 @@ def helper_checks():
                                      "messages": ["Error: The field First Name is required and must have a value."]})
     check(got == {"a", "b"}, f"flagged fields: {got}")
     mail_checks()
+    # matching a wanted value to the choices of a list: whole words, and a short value never by sitting inside a sentence
+    sponsor = ["Yes, I will now or in the future require sponsorship", "No, I will not now or in the future require sponsorship"]
+    for want, opts, exp in (("No", sponsor, 1), ("Yes", sponsor, 0), ("Male", ["Female", "Male"], 1), ("Male", ["Female", "Non-binary"], None),
+                            ("Colorado", ["California", "Colorado (CO)"], 1), ("United States of America", ["Canada", "United States"], 1),
+                            ("Bachelor's Degree", ["Associate's Degree", "Bachelor's Degree"], 1), ("No", ["Not sure", "Unknown"], None),
+                            ("I am not a protected veteran", ["I am a protected veteran", "I am not a protected veteran"], 1)):
+        check(S._match_option(opts, want) == exp, f"_match_option({want!r}, {opts}) = {S._match_option(opts, want)}, expected {exp}")
+    check(S._best_option(["Select One", "Female", "Male"], "Male") == 2 and S._best_option(["Select One", "Female"], "Male") is None, "_best_option picked a look-alike")
+    check(all(S.PLACEHOLDER.match(x) for x in ("Select One", "Select...", "Select an option", "-- Select --", "Choose one", "", "None selected"))
+          and not any(S.PLACEHOLDER.match(x) for x in ("Colorado", "Selective Service: registered", "No", "Mobile")), "placeholder texts of an unanswered list")
+    check(S._server_said([("POST", 422, "/apply", "email is required", "jobs.example.com")], "jobs.example.com").startswith("REJECTED")
+          and not S._server_said([("POST", 200, "/apply", "", "jobs.example.com"), ("POST", 429, "/track", "slow down", "jobs.example.com")], "jobs.example.com").startswith("REJECTED")
+          and not S._server_said([("POST", 400, "/collect", "bad", "tracker.example.net")], "jobs.example.com").startswith("REJECTED"),
+          "'the site refused it' must mean the form's own site refused and accepted nothing else")
     print("ok  Workday helpers: page types, posting address, search terms, matching Workday's complaints to fields, "
           "picking the right email (this employer's, verify vs. reset)")
 
@@ -136,6 +150,18 @@ def fixture_checks(ctx):
     fields = S.extract(page)
     up = next((f for f in fields if f["kind"] == "file"), {})
     check(up.get("label", "").startswith("Resume/Cover Letter") and up.get("has_file") == ["jordansample_resume.pdf"], f"résumé box: {up}")
+    # the real résumé box is headed 'Resume/Cover Letter': the résumé must go into it (not a cover letter, not nothing)
+    cfg0 = json.loads(json.dumps(CFG))
+    cfg0["cover_letters"] = False
+    b0 = Brain(cfg0, PROFILE, ROOT, lambda *a: None)
+    b0.writer = None
+    plan = b0.map_fields(Job("workday", "x", "1", "Operations Analyst", "", "u", "u", ""), fields, "")
+    check(plan["answers"].get(up.get("id")) == "RESUME", f"the 'Resume/Cover Letter' box should get the résumé, got {plan['answers'].get(up.get('id'))!r}")
+    cfg0["cover_letters"] = True
+    b1 = Brain(cfg0, PROFILE, ROOT, lambda *a: None)
+    b1.writer = None
+    check(b1.map_fields(Job("workday", "x", "1", "Operations Analyst", "", "u", "u", ""), fields, "")["answers"].get(up.get("id")) == "RESUME",
+          "with cover letters switched on, the 'Resume/Cover Letter' box must still get the résumé")
     secs = page.evaluate(WD.SECTIONS_JS)
     check([s["name"] for s in secs] == ["Work Experience", "Education", "Languages", "Websites/Portfolio"] and not any(s["required"] or s["rows"] for s in secs),
           f"sections behind 'Add': {secs}")
@@ -268,6 +294,7 @@ def flow_checks(p):
         r = run("brock")
         check(r["got"] == "confirmed" and any("verify link" in x for x in r["logs"]),
               f"account that must be verified, with the sign-in choice page coming back after every step: {r['got']}; log: {tail(r)}")
+        check((r["data"] or {}).get("files") == ["briandelgado_resume.pdf"], f"a résumé box headed 'Resume/Cover Letter' did not get the résumé: {(r['data'] or {}).get('files')}")
         r = run("resetco", seed=True)
         check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]), f"existing account, other password: {r['got']}; log: {tail(r)}")
 
@@ -284,6 +311,12 @@ def flow_checks(p):
                   f"{tenant}: education: {d.get('education-1--school')} / {d.get('education-1--degree')}")
             check(d.get("education-1--fieldOfStudy") == ["Industrial Engineering"], f"{tenant}: field of study should fall back to the closest listed one: {d.get('education-1--fieldOfStudy')}")
             check(not d.get("education-1--gradeAverage"), f"{tenant}: an optional GPA box should be left empty")
+
+        # -- your school is not in the employer's list: 'Other', never a school with a similar name
+        r = run("strict3")
+        d = r["data"] or {}
+        check(r["got"] == "confirmed" and d.get("education-1--school") == ["Other"],
+              f"school missing from the list: expected 'Other', got {d.get('education-1--school')} ({r['got']}); log: {tail(r)}")
 
         # -- a page sent back by the server with only a banner; an empty phone-code box
         r = run("bounce")

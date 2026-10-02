@@ -21,7 +21,7 @@ hand (tick "dry run" to fill forms without submitting anything).
   confirm a submit, and one check-in a day even if nothing happened (so silence never means "broken"). Each email lists what
   was applied to, what is left for you, why other postings didn't go through, and how many free minutes are used.
 - **The employers' own "we received your application" emails** land in the same inbox. The bot reads that inbox to confirm submits.
-- **Actions tab** on GitHub: open a run and read the log. It starts with the build name (`build 2026-10-01-ab`); each success
+- **Actions tab** on GitHub: open a run and read the log. It starts with the build name (`build 2026-10-02-a`); each success
   is a `✓ applied` line with how long it took. The run's **Artifacts** hold the résumé, cover letter and form screenshots for
   every application (kept 30 days).
 - `reports/<date>.md` and `logs/<date>.log` in the repo keep the history.
@@ -59,7 +59,8 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
   → Review), fills the step, presses Next and then looks at what Workday did. If Workday sends the page back, it redoes only
   the fields Workday flagged (adding a required Work Experience / Education block if that is what was missing) and tries
   again; after three tries it stops and reports Workday's own words. A job Workday says you already applied to is recorded
-  as applied and nothing is sent again.
+  as applied and nothing is sent again. It never submits a Workday application whose résumé box did not show the file, and
+  when your school is not in an employer's list it picks "Other", never a school with a similar name.
 - **Accounts, on any site:** when a form needs one, the bot creates it with **delgado@alumni.usc.edu** and the
   `ACCOUNT_PASSWORD` secret; if the site says an account already exists it signs in; if the sign-in is refused it uses
   "Forgot password?", opens the reset email from your inbox, sets the password to `ACCOUNT_PASSWORD` and signs in. When a

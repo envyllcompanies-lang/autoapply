@@ -124,7 +124,8 @@ def kind(st: dict) -> str:
     """Which Workday page this is: closed | error | already | auth | form | flow | start | job | unknown."""
     if not st:
         return "unknown"
-    if st.get("error"):
+    in_form = bool(st.get("flow") and (st.get("next") or st.get("page")))
+    if st.get("error") and not in_form:               # (a complaint box inside a form step is not an error page)
         return "closed" if CLOSED.search(st["error"]) else "error"
     if st.get("flow"):
         if st.get("passwords") or st.get("signin") or st.get("emailButton"):
@@ -136,7 +137,7 @@ def kind(st: dict) -> str:
         return "auth"
     if st.get("start"):
         return "start"
-    if st.get("already"):
+    if st.get("already") and re.search(r"appl", st["already"], re.I):       # 'You applied ...', not a note about something else
         return "already"
     if st.get("applyButton"):
         return "job"
@@ -306,8 +307,12 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
     'already_applied'; raises the same exceptions as the generic form driver."""
     from . import submit as S, auth
     t_end = time.time() + S.MAX_APPLY_SECONDS
-    home = posting_url(getattr(job, "apply_url", "") or page.url)
-    manual = home + "/apply/applyManually" if "/job/" in home else ""
+    src = getattr(job, "apply_url", "") or ""
+    if "myworkdayjobs.com" not in src:                 # an employer's own career page that handed over to Workday
+        src = page.url
+    home = posting_url(src)
+    manual = home + "/apply/applyManually" if "/job/" in home and "myworkdayjobs.com" in home else ""
+    resume_box = resume_in = False                     # a résumé box was shown / the résumé is in it
     visits: dict[tuple, int] = {}            # step -> how many times it has been filled in
     moves = auth_tries = email_clicks = total = 0
     flagged: dict[tuple, dict] = {}          # step -> Workday's complaints from the last try
@@ -372,6 +377,7 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
             continue
 
         # ---------------------------------------------------------------- a step of the application
+        moves = 0                                      # (the allowance for finding the form starts afresh after each step)
         name = st.get("name") or st.get("heading") or st.get("page") or "application"
         if name != stage and on_stage:
             on_stage(name)
@@ -383,6 +389,8 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
             btn = page.locator(NEXT).locator("visible=true").first
             if not (st.get("done") or total >= 4):
                 raise S.Blocked(f"not a real application form: Workday shows Submit before any step was filled in ({total} fields)")
+            if resume_box and not resume_in:
+                raise RuntimeError("the résumé did not get attached (Workday's upload box never showed the file): not submitting without it")
             page.screenshot(path=str(shot), full_page=True)
             if dry_run:
                 log(f"      {name}: ready to submit (dry run stops here)")
@@ -450,6 +458,14 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
         S.fill(page, fields, answers, files, log, deadline=t_end)
         if any(f["kind"] == "file" and answers.get(f["id"]) for f in fields):
             S._wait_uploads(page)
+        if any(f["kind"] == "file" and plan["answers"].get(f["id"]) == "RESUME" for f in fields):
+            resume_box = True
+            try:
+                resume_in = resume_in or page.locator('[data-automation-id="file-upload-item-name"]').count() > 0
+            except Exception:
+                pass
+            if not resume_in:
+                log("      ! the résumé does not show in Workday's upload box")
         S.verify(page, fields, answers, log)
         if S._list_open(page):
             S._close_list(page)
@@ -458,6 +474,8 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
         except Exception:
             pass
         st_now = read_state(page, 3000)
+        if kind(st_now) == "form" and (st_now.get("index"), st_now.get("page")) != (st.get("index"), st.get("page")):
+            continue                                   # the page moved on by itself meanwhile: Next belongs to the step just filled, not this one
         what, info = _advance(page, st_now if kind(st_now) == "form" else st)
         took = time.time() - t0
         if what == "moved":

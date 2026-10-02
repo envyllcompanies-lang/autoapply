@@ -612,10 +612,10 @@ class Brain:
 
         if kind == "file":
             both = low + " " + str(f.get("hint") or "").lower().replace("_", " ").replace("-", " ")
+            if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
+                return "RESUME"          # also a combined 'Resume/Cover Letter' box (Workday names it so): the résumé goes there
             if re.search(r"cover", both):
                 return "COVER_LETTER" if self.cfg.get("cover_letters", False) else None   # optional ones too: a full letter helps
-            if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
-                return "RESUME"
             return None
         if kind == "textarea" and re.search(r"cover letter", low):
             if not self.cfg.get("cover_letters", False):

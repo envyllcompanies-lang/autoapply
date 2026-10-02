@@ -19,9 +19,11 @@ Tenants (first part of the path) switch behaviours on:
   emailfirst the sign-in page first shows 'Sign in with email'
   brock      as one real employer did on 2026-10-01: the 'Sign in with Google / Apple / email' page comes back after every
              account step, the new account cannot sign in until its emailed link is opened (the refusal only says
-             'Invalid Username/Password'), and that link leads back to the application, still signed out
+             'Invalid Username/Password'), and that link leads back to the application, still signed out. Its résumé
+             box is headed 'Resume/Cover Letter', as on the real pages in tests/fixtures/workday
   strict     Work Experience and Education are required (their headings carry a *)
   strict2    the same, but Workday only says so after Next
+  strict3    like strict, and the employer's school list does not have your school (it has look-alikes and 'Other')
   bounce     Application Questions is sent back once by the server with a banner and no field marked
   closed     the posting is gone
   applied    the job page says you already applied
@@ -70,7 +72,8 @@ const TREES = {
   source: {'Job Board': ['Indeed.com', 'LinkedIn', 'Glassdoor'], 'Social Media': ['Facebook', 'Instagram'], 'Referral': ['Employee Referral'], 'Career Fair': null},
   countryPhoneCode: ['United States of America (+1)', 'Canada (+1)', 'Mexico (+52)'],
   skills: ['Excel', 'SQL', 'Python', 'Project Management', 'Process Improvement'],
-  school: ['Colorado School of Mines', 'University of Colorado Boulder', 'University of Southern California', 'Other'],
+  school: T === 'strict3' ? ['Colorado School of Mines', 'University of California', 'Southern California Institute of Architecture', 'California Southern University', 'Other']
+                          : ['Colorado School of Mines', 'University of Colorado Boulder', 'University of Southern California', 'Other'],
   fieldOfStudy: ['Business Administration', 'Industrial Engineering', 'Mechanical Engineering', 'Other'],
 };
 const MULTI = {skills: true};
@@ -115,7 +118,8 @@ const group = (name, inner) => `<div role="group" aria-labelledby="${name.replac
 
 function upload() {
   const files = data.files || [];
-  return `<div role="group" aria-labelledby="Resume/CV-section"><h4 id="Resume/CV-section">Resume/CV</h4><div data-automation-id="formField-"><label id="label5">Upload a file (5MB max)${star(true)}</label>` +
+  const head = T === 'brock' ? 'Resume/Cover Letter' : 'Resume/CV';
+  return `<div role="group" aria-labelledby="Resume/CV-section"><h4 id="Resume/CV-section">${head}</h4><div data-automation-id="formField-"><label id="label5">Upload a file (5MB max)${star(true)}</label>` +
     `<div data-automation-id="attachments-FileUpload" aria-labelledby="label5"><div data-automation-id="file-upload-drop-zone">Drop files here or ` +
     `<button data-automation-id="select-files" id="resumeAttachments--attachments" type="button">Select files</button></div>` +
     `<input data-automation-id="file-upload-input-ref" type="file" class="hid">` + files.map(n =>
@@ -124,7 +128,7 @@ function upload() {
       `<button data-automation-id="delete-file" type="button" aria-label="Delete ${esc(n)}">x</button></div>`).join('') + `</div></div></div><div data-automation-id="smartDivider"></div>`;
 }
 function section(name, key, rows) {
-  const req = T === 'strict';
+  const req = T === 'strict' || T === 'strict3';
   return `<div role="group" aria-labelledby="${name.replace(/ /g, '-')}-section"><h4 id="${name.replace(/ /g, '-')}-section">${name}${req ? ' ' + star(true) : ''}</h4>${rows}` +
     `<div><button data-automation-id="add-button" data-sec="${key}" type="button">Add${rows ? ' Another' : ''}</button></div></div><div data-automation-id="smartDivider"></div>`;
 }
@@ -247,7 +251,7 @@ function validate(step) {
      ['phoneNumber--countryPhoneCode', 'Country Phone Code'], ['phoneNumber--phoneNumber', 'Phone Number']].forEach(([i, l]) => need(i, l));
   }
   if (step === 2) {
-    if (T === 'strict' || T === 'strict2') {
+    if (T === 'strict' || T === 'strict2' || T === 'strict3') {
       if (!(data.workRows || []).length) bad.push('Error: Work Experience is required. Add at least one entry.');
       if (!(data.eduRows || []).length) bad.push('Error: Education is required. Add at least one entry.');
     }
