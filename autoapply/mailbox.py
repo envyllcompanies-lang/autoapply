@@ -86,13 +86,15 @@ def _token(s: str) -> str | None:
     sp = re.search(r"(?<![\d-])(\d{3,4})[ -](\d{3,4})(?![\d-])", s)      # '731 204' / '731-204'
     if sp and not CODE_RX.search(s[:sp.start()]):
         return sp.group(1) + sp.group(2)
-    for m in CODE_RX.finditer(s):
-        if not NOT_CODE.match(m.group(1)):
-            return m.group(1)
+    # Check mixed alphanumeric tokens first: CODE_RX would otherwise capture a numeric prefix
+    # such as "9104" from a Greenhouse code like "9104A104".
     for m in ALNUM_RX.finditer(s):
         t = re.sub(r"[- ]", "", m.group(1))
         if 5 <= len(t) <= 10 and re.search(r"\d", t) and re.search(r"[A-Z]", t):
             return t
+    for m in CODE_RX.finditer(s):
+        if not NOT_CODE.match(m.group(1)):
+            return m.group(1)
     return None
 
 
