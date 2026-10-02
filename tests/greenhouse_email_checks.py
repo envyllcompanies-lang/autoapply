@@ -87,6 +87,13 @@ def main():
         )
         check(got and got["code"] == "X7K2QF", f"alphanumeric Greenhouse code failed: {got!r}")
 
+        screenshot_code = mailbox.find_code(
+            "Security code for your application to Charlie Health",
+            "Copy and paste this code into the security code field on your application: 9104A104",
+        )
+        check(screenshot_code == "9104A104",
+              f"Greenhouse screenshot-format code was truncated: {screenshot_code!r}")
+
         greenhouse_screen = (
             "Code Requested 9104A104 Security code for your application to Charlie Health. "
             "Copy and paste this code into the security code field on your application."
