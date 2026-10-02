@@ -1303,7 +1303,7 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
             try:
                 log("      email: application requested a verification code; checking the inbox")
                 job_url = getattr(job, "apply_url", "") or getattr(job, "url", "") or ""
-                is_greenhouse = bool(re.search(r"(?:^|\\.)greenhouse\\.io(?:/|$)", job_url, re.I))
+                is_greenhouse = bool(re.search(r"(?:^|\.)greenhouse\.io(?:/|$)", job_url, re.I))
                 if is_greenhouse and hasattr(auth.mailbox, "wait_for_greenhouse_code"):
                     res = auth.mailbox.wait_for_greenhouse_code(
                         since_ts=mail_since,
