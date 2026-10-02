@@ -1164,8 +1164,55 @@ def _still_visible(btn) -> bool:
         return False
 
 
+def _is_greenhouse_security_flow(page) -> bool:
+    """Identify Greenhouse's email-security-code screen without relying on the email sender."""
+    try:
+        url = page.url or ""
+        body = page.inner_text("body")[:8000]
+        return bool(
+            re.search(r"greenhouse\\.io", url, re.I)
+            or re.search(r"Greenhouse Recruiting|©\\s*20\\d\\d\\s+Greenhouse|"
+                         r"Copy and paste this code into the security code field|"
+                         r"After you enter the code, resubmit your application", body, re.I)
+        )
+    except Exception:
+        return False
+
+
+def _resubmit_greenhouse_after_code(page, timeout_s: int, log=print) -> bool:
+    """Greenhouse requires the application to be submitted again after its emailed security code is entered."""
+    btn, kind = _find_advance(page)
+    if btn is None or kind != "submit":
+        btn = page.get_by_role(
+            "button",
+            name=re.compile(r"submit(\\s+application)?", re.I),
+        ).locator("visible=true").last
+    if not btn.count():
+        raise Blocked("Greenhouse security code was entered but the Submit Application button was not found")
+    log("      email: Greenhouse security code accepted; resubmitting application")
+    btn.click()
+    deadline = time.time() + max(5, timeout_s)
+    while time.time() < deadline:
+        page.wait_for_timeout(500)
+        body = page.inner_text("body")
+        if SUCCESS_RE.search(body):
+            return True
+        if re.search(r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re|you are) human|"
+                     r"are you a robot|human verification|cloudflare.{0,30}(challenge|verify)", 
+                     " ".join(body.split()), re.I):
+            raise Blocked("Greenhouse resubmit is held by an anti-bot/human verification challenge")
+        if not _email_code_prompt(page):
+            try:
+                _settle(page, max_ms=2500)
+            except Exception:
+                pass
+            if SUCCESS_RE.search(page.inner_text("body")):
+                return True
+    return False
+
+
 def _complete_email_verification(page, since_ts: float, timeout_s: int, log=print) -> bool:
-    """Complete a post-submit email OTP challenge without submitting the application a second time."""
+    """Complete an email OTP challenge; Greenhouse specifically requires a second Submit after code entry."""
     from . import auth
 
     if not auth.mailbox.configured():
@@ -1191,10 +1238,16 @@ def _complete_email_verification(page, since_ts: float, timeout_s: int, log=prin
         auth._type_code(page, boxes, result["code"])
         page.wait_for_timeout(1200)
         _settle(page)
+        if _is_greenhouse_security_flow(page):
+            if not _email_code_prompt(page):
+                return True
+            if not _resubmit_greenhouse_after_code(page, remaining, log=log):
+                raise Blocked("Greenhouse application did not confirm after resubmitting with the security code")
+            return True
         if not _email_code_prompt(page):
             return True
 
-        # Some sites require an explicit Verify/Continue after the code is entered.
+        # Other ATSes may require an explicit Verify/Continue after the code is entered.
         verify = page.get_by_role(
             "button",
             name=re.compile(r"verify|confirm|continue|finish|done", re.I),
@@ -1206,8 +1259,6 @@ def _complete_email_verification(page, since_ts: float, timeout_s: int, log=prin
             if not _email_code_prompt(page):
                 return True
 
-        # If the same prompt remains, wait for a newly delivered code rather than
-        # reusing the previous token.
         since_ts = time.time() - 2
     return False
 
