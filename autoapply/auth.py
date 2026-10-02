@@ -520,6 +520,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 ck.first.check(force=True)
             _tick_agreements(page)
             before = _body(page)
+            acc.__dict__.setdefault("_made_at", {})[host] = time.time()       # its verification email can only come after this
             if not _wd_press(page, scope, "createAccountSubmitButton", re.compile(r"^\s*create account\s*$", re.I)):
                 raise AuthBlocked("could not find Workday's Create Account button")
             _settle(page, 2500)
@@ -598,7 +599,11 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             try:
                 # (made a moment ago: its email may still be on its way. Found already there: only an email that is
                 #  already in the inbox can help, so one look is enough)
-                _verify_email(page, acc, t0 - 2 * 86400, log, 60 if state == "created" else 10)
+                made = getattr(acc, "_made_at", {}).get(host)
+                if made and time.time() - made < 600:      # made a moment ago in this run: only an email from after that
+                    _verify_email(page, acc, made, log, 60)
+                else:
+                    _verify_email(page, acc, t0 - 2 * 86400, log, 60 if state == "created" else 10)
                 acc.remember(host, "verified")
                 if url_after and (is_auth_page(page) or "/apply" not in page.url):
                     page.goto(url_after, wait_until="domcontentloaded", timeout=45000)

@@ -103,6 +103,9 @@ def mail_checks():
         check(got is None, f"another employer's Workday email was taken for this one's: {got}")
         got = ask([generic_old], host_hint="acme", kind="verify", site_host="careers.acme.com")
         check(got is None, f"an hours-old email that does not name the site was accepted: {got}")
+        other = msg("PCG <noreply@mail.example>", "Verify your candidate account", "https://click.mail.example/t/abc", 85)
+        got = ask([other], host_hint="avalonbay", kind="verify", site_host="avalonbay.wd5.myworkdayjobs.com")
+        check(got is None, f"an email sent 85 seconds ago for another employer was taken for this one's: {got}")
         got = ask([generic_new], host_hint="acme", kind="verify", site_host="careers.acme.com")
         check(got and got["link"] == generic_new["link"], f"a just-arrived verification email from a generic sender should be accepted, got {got}")
     finally:

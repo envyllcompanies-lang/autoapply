@@ -550,7 +550,10 @@ class Writer:
         how = ("Reply with the numbers of ALL options that are true for me, separated by commas." if multi else
                "Reply with the number of the single option that is true for me (the closest fit if several could be).")
         user = (f"Role: {job.title} at {company}\nMultiple-choice question on the application form:\n{question}\n\nOptions:\n{numbered}\n\n"
-                f"{how} Use only my FACTS and LOGISTICS. Reply 0 if none can be answered from them. Reply with numbers only.")
+                f"{how} Use only my FACTS and LOGISTICS. If the question asks whether something unusual applies to me (a tie to this "
+                f"employer, a relative who works there, a public office, a military programme, a past dispute, a restriction) and "
+                f"my facts say nothing of the kind, it does not apply to me: pick the 'No' option. Reply 0 only if no option can "
+                f"honestly be chosen. Reply with numbers only.")
         msgs = [{"role": "system", "content": self.system_small}, {"role": "user", "content": user}]
         out = self._complete(msgs, 600, log, temperature=0.0)
         nums = [int(n) for n in re.findall(r"\d+", out.split("\n")[-1] if out.strip() else "")] or [int(n) for n in re.findall(r"\d+", out)]

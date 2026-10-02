@@ -476,6 +476,8 @@ class Brain:
                 continue
             val = self._answer(fld, cover_letter, ctx)
             if val is None and fld.get("required"):
+                val = self._plain(fld)
+            if val is None and fld.get("required"):
                 val = self._llm_fill(fld)
             if val is None:
                 if fld.get("required"):
@@ -484,6 +486,61 @@ class Brain:
                 answers[fld["id"]] = val
         self._place_resume(fields, answers, missing)
         return {"answers": answers, "unanswerable_required": missing}
+
+    # Things an employer asks every applicant to rule out. None of them is true of you (a recent graduate with no public
+    # office, no ties to the employer and no military programme), so a required Yes/No question about one is answered No.
+    _NOT_ME = re.compile(
+        r"\belected\b|appointed (position|official|office)|public (office|official)|government (official|entity|position|employee|agency)|"
+        r"politically exposed|skillbridge|conflict of interest|"
+        r"interaction with .{1,60} in your (current|previous|prior|most recent) (role|position|job)|"
+        r"contracts? with your (organi[sz]ation|employer|company)|"
+        r"(relatives?|family members?|related to|spouse|domestic partner).{0,80}(work|employ)|"
+        r"(debarred|excluded|sanctioned|suspended).{0,80}(federal|government|program|health ?care)", re.I)
+
+    def _plain(self, f: dict):
+        """Required questions with one plain true answer that the rules above did not reach (seen on real Workday forms).
+        Only for a Yes/No list, a relocation list or a date; never a waiver, a certification or a demographic question."""
+        kind = f["kind"]
+        low = f"{f.get('label', '')} {f.get('question', '')}".strip().lower()
+        opts = [o for o in (f.get("options") or []) if not re.match(r"\s*(select|choose|--)", o, re.I)]
+        if not low or HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
+                or self._NEVER_GUESS.search(low):
+            return None
+        if kind == "wddate" and re.search(r"graduat", low):
+            return self._grad_date()                   # 'anticipated graduation date': the date you did graduate
+        if kind not in ("select", "radio", "combobox") or not opts:
+            return None
+        yes_no = {_norm(o) for o in opts} <= {"yes", "no"} and len(opts) == 2
+        if re.search(r"relocat", low):
+            if self._location_ok(low):                 # the job is in a place you said yes to (or remote)
+                return pick_option(opts, "Yes")
+            return pick_option(opts, "No")
+        if re.search(r"(able|willing) to (meet|work|commute|comply with).{0,60}(location|on-?site|in[- ]office|hybrid|schedule) requirement|"
+                     r"meet the location requirement", low) and yes_no:
+            return pick_option(opts, "Yes") if self._location_ok(low) else None
+        if yes_no and self._NOT_ME.search(low):
+            return pick_option(opts, "No")
+        if re.match(r"\W*(degree|degree type|level of degree)\W*\*?\W*$", low):
+            deg = str(self.facts.get("degree") or "")
+            if re.search(r"b\.?\s?s\.?\b|bachelor of science", deg, re.I):
+                return next((o for o in opts if re.match(r"\W*(b\.?s\.?|bachelor of science|bachelor.?s( degree)?)\W*$", o, re.I)), None) \
+                    or next((o for o in opts if re.search(r"bachelor", o, re.I)), None)
+        return None
+
+    def _grad_date(self) -> str | None:
+        """facts.graduation_date ('May 2025') as MM/DD/YYYY for a date box (the 15th when only the month is known)."""
+        raw = str(self.facts.get("graduation_date_value") or self.facts.get("graduation_date") or "").strip()
+        m = re.match(r"^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$", raw)
+        if m:
+            return f"{int(m.group(1)):02d}/{int(m.group(2)):02d}/{m.group(3)}"
+        months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+        m = re.search(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{4})", raw)
+        if m and m.group(1).lower() in months:
+            return f"{months.index(m.group(1).lower()) + 1:02d}/15/{m.group(2)}"
+        m = re.match(r"^(\d{1,2})[/-](\d{4})$", raw)
+        if m:
+            return f"{int(m.group(1)):02d}/15/{m.group(2)}"
+        return None
 
     _NOT_RESUME_FILE = re.compile(r"cover|transcript|portfolio|writing sample|photo|headshot|picture|certificat|licen[cs]e|passport|"
                                   r"\bid\b|identification|reference|recommendation|additional|other|supporting|work sample", re.I)

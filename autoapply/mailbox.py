@@ -184,7 +184,7 @@ def _mentions(hint: str, info: dict) -> bool:
     stand on its own, so it is not found inside ordinary words."""
     if not hint:
         return True
-    text = (info["from"] + " " + info["subject"] + " " + (info["link"] or "")).lower()
+    text = (info["from"] + " " + info["subject"] + " " + (info["link"] or "") + " " + str(info.get("body") or "")[:4000]).lower()
     if len(hint) >= 4:
         return hint in text
     return bool(re.search(r"(?<![a-z0-9])" + re.escape(hint) + r"(?![a-z0-9])", text))
@@ -216,7 +216,11 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     An email that does not name the site at all is only accepted when it has just arrived."""
     deadline = time.time() + timeout
     hint = (host_hint or "").lower()
-    fresh = max(since_ts, time.time() - 600)
+    # An email that does not name the site is only this site's if it arrived because of what was just done here: after
+    # since_ts when that is moments ago, else during this wait. (On 2026-10-02 another employer's verification email,
+    # ninety seconds old, was taken for this one's and the bot ended up on the other employer's application.)
+    start = time.time()
+    fresh = since_ts - 5 if since_ts > start - 600 else start - 20
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
@@ -233,7 +237,7 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                 if hint and not _mentions(hint, info):
                     # sender/link do not mention the site: still accept a clear message of the wanted kind, if it is new
                     clear = r"reset|password" if kind == "reset" else r"verif|confirm|activate"
-                    if info["ts"] < fresh - 120 or not re.search(clear, info["subject"], re.I):
+                    if info["ts"] < fresh or not re.search(clear, info["subject"], re.I):
                         continue
                 log(f"      mail: found '{info['subject'][:60]}'")
                 return {"link": info["link"], "code": info["code"]}

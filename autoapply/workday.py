@@ -313,6 +313,8 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
     home = posting_url(src)
     manual = home + "/apply/applyManually" if "/job/" in home and "myworkdayjobs.com" in home else ""
     resume_box = resume_in = False                     # a résumé box was shown / the résumé is in it
+    email_last = False                                 # the last thing done was pressing 'Sign in with email'
+    blank_auth = strays = 0
     visits: dict[tuple, int] = {}            # step -> how many times it has been filled in
     moves = auth_tries = email_clicks = total = 0
     flagged: dict[tuple, dict] = {}          # step -> Workday's complaints from the last try
@@ -333,6 +335,12 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
         b = S._blocker(page)
         if b and not (k == "auth" and b == "login required"):
             raise S.Blocked(b)
+        if "myworkdayjobs.com" in home and "myworkdayjobs.com" in page.url and S._host(page.url) != S._host(home):
+            strays += 1                                # on another employer's Workday site (a link led there): go back
+            if strays > 2 or not manual:
+                raise S.Blocked("ended up on another employer's Workday site: stopped before filling anything in there")
+            page.goto(manual, wait_until="domcontentloaded", timeout=45000)
+            continue
 
         if k == "auth":
             if stage != "account" and on_stage:
@@ -344,14 +352,25 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
                 page.screenshot(path=str(shot), full_page=True)
                 log("      (dry run stops at the account screen; a live run creates/signs in here)")
                 return "dry_run"
-            if st.get("emailButton") and not st.get("passwords"):
-                # the page that offers Google / Apple / email: choose email. It comes back after every step of the account
-                # set-up (once the account is made, once it is verified), so these clicks are not counted as sign-in tries.
+            if st.get("emailButton") and (not st.get("passwords") or not email_last):
+                # the page (or pop-up over the sign-in form) that offers Google / Apple / email: choose email. It comes
+                # back after every step of the account set-up, so these clicks are not counted as sign-in tries.
+                email_last = True
                 email_clicks += 1
                 if email_clicks > 6:
                     raise S.Blocked(f"account: Workday keeps returning to its 'Sign in with email' page; page shows: {S._visible_buttons(page)}")
                 _click(page, '[data-automation-id="SignInWithEmailButton"], [data-automation-id="signInWithEmailButton"]')
                 page.wait_for_timeout(1500)
+                continue
+            email_last = False
+            if not st.get("passwords") and not auth.VERIFY_MSG.search(auth._body(page)):
+                # Workday's sign-in page with nothing drawn in it yet (seen right after an account was made)
+                blank_auth += 1
+                if blank_auth > 4:
+                    raise S.Blocked(f"account: Workday's sign-in page stayed empty; page shows: {S._visible_buttons(page)}")
+                page.wait_for_timeout(2500)
+                if blank_auth >= 2 and manual:
+                    page.goto(manual, wait_until="domcontentloaded", timeout=45000)
                 continue
             auth_tries += 1
             if auth_tries > 5:
@@ -455,6 +474,9 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
             if redo:
                 answers = {i: v for i, v in answers.items() if i in redo}
         known[sid] = {_ident(f) for f in fields}
+        # lists first: picking a country or state makes Workday redraw (and empty) the name and address boxes
+        kinds = {f["id"]: f["kind"] for f in fields}
+        answers = dict(sorted(answers.items(), key=lambda kv: 0 if kinds.get(kv[0]) == "combobox" else 1))
         S.fill(page, fields, answers, files, log, deadline=t_end)
         if any(f["kind"] == "file" and answers.get(f["id"]) for f in fields):
             S._wait_uploads(page)
