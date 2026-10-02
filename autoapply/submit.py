@@ -1302,13 +1302,24 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
                 raise Blocked("email verification code requested, but the application inbox is not configured")
             try:
                 log("      email: application requested a verification code; checking the inbox")
-                res = auth.mailbox.wait_for_verification(
-                    since_ts=mail_since,
-                    host_hint=(getattr(job, "company", "") or ""),
-                    timeout=min(120, max(30, int(limit_at - time.time()))),
-                    log=log,
-                    require_code=True,
-                )
+                job_url = getattr(job, "apply_url", "") or getattr(job, "url", "") or ""
+                is_greenhouse = bool(re.search(r"(?:^|\\.)greenhouse\\.io(?:/|$)", job_url, re.I))
+                if is_greenhouse and hasattr(auth.mailbox, "wait_for_greenhouse_code"):
+                    res = auth.mailbox.wait_for_greenhouse_code(
+                        since_ts=mail_since,
+                        company_hint=(getattr(job, "company", "") or ""),
+                        job_hint=(getattr(job, "title", "") or getattr(job, "name", "") or ""),
+                        timeout=min(120, max(30, int(limit_at - time.time()))),
+                        log=log,
+                    )
+                else:
+                    res = auth.mailbox.wait_for_verification(
+                        since_ts=mail_since,
+                        host_hint=(getattr(job, "company", "") or ""),
+                        timeout=min(120, max(30, int(limit_at - time.time()))),
+                        log=log,
+                        require_code=True,
+                    )
                 if not res or not res.get("code"):
                     raise Blocked("email verification code did not arrive in time")
                 boxes = auth._code_inputs(page)
