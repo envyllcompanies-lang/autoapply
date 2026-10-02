@@ -218,7 +218,7 @@ def wait_for_greenhouse_code(since_ts: float, company_hint: str = "", job_hint: 
         try:
             for info in _recent(since_ts, 20, ("INBOX", "[Gmail]/Spam")):
                 sender = (info.get("from") or "").lower()
-                if not re.search(r"(?:^|[ <])no-reply@greenhouse\\.io(?:>|$)", sender):
+                if not re.search(r"(?:^|[ <])no-reply@(?:greenhouse\\.io|[a-z0-9.-]+\\.greenhouse-mail\\.io)(?:>|$)", sender):
                     continue
                 subj = info.get("subject", "")
                 body = info.get("body", "")[:3000]
