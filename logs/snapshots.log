@@ -1,0 +1,374 @@
+=== 2026-10-02 13:31:00  blocked  Operations Coordinator ( CRE ) @ cw
+url: https://cw.wd1.myworkdayjobs.com/en-US/External/login
+stage: account
+why: account: still at Workday's sign-in after 5 tries; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Search for Jobs; logoButton:; logo:; headerTitle:; navigationContainer:English
+Search for Jobs; utilityButtonBar:English; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; navigationItem-Search for Jobs:Search for Job
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button]  {logoButton}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{signInContent}
+  [button]  {LINKED_IN_charm}
+  [button]  {GLASSDOOR_charm}
+  [button]  {SOCIAL_MEDIA_X_charm}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 13:31:35  blocked  Product Operations Associate, Aladdin Platform Engineering @ blackrock
+url: https://blackrock.wd1.myworkdayjobs.com/blackrock_professional/job/New-York-NY/Product-Operations-Associate--Aladdin-Platform-Engineering_R266544/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Product Operations Associate, Aladdin Platform Engineering
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #0294bd21-5008-43c7-ae67-3fb82fa08d83 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Sign In
+  text: By signing in, you agree to the processing of your information in accordance with our
+  [button] Sign in with Apple {AppleSignInButton}
+  [button] Sign in with Google {GoogleSignInButton}
+  [button] Sign in with email {SignInWithEmailButton}
+
+=== 2026-10-02 13:33:26  skipped  Business Operations Analyst 1 @ pcg
+url: https://pcg.wd1.myworkdayjobs.com/pcg_external_careers/job/United-States-Remote/Business-Operations-Analyst-1_JR102201/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: In the last two years, to the best of your knowledge have yo
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Business Operations Analyst 1
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-104b36dfc250100123a3bd745a0d0000}
+label: Are you at least 18 years of age or older?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0000
+ {formField-104b36dfc250100123a3bd745a0d0003}
+label: Are you eligible to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0003
+ {formField-104b36dfc250100123a3be0de4b70001}
+label: Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70001
+ {formField-104b36dfc250100123a3be0de4b70004}
+label: By acknowledging below, you agree that this position must be performed entirely within the United States and w
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70004
+ {formField-f05416505c091001237cbe7b3e4b0000}
+label: What is the earliest date you would be available to start?
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-104b36dfc250100123a3be0de4b70007}
+label: Please select your desired salary range.*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70007
+ {formField-104b36dfc250100123a3bf4157410001}
+label: Have you ever been employed by PCG?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410001
+ {formField-104b36dfc250100123a3bf4157410004}
+label: In the last two years, to the best of your knowledge have you been employed by a client, competitor, or busine
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410004
+ {formField-104b36dfc250100123a3bf4157410008}
+label: In the last two years, to the best of your knowledge have you served in an elected or appointed (paid or unpai
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410008
+ {formField-104b36dfc250100123a3bfdadb350000}
+label: Do you have any family members, relatives, or friends employed by PCG or any of its affiliates (including Staf
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350000
+ {formField-104b36dfc250100123a3bfdadb350003}
+label: What is the name of the PCG client, competitor, business partner, or the government agency you were employed b
+  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350003 required empty>
+ {formField-104b36dfc250100123a3bfdadb350004}
+label: What is/was your title, position, or role with your organization?*
+  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350004 required empty>
+ {formField-104b36dfc250100123a3bfdadb350005}
+label: Did you ever have any interaction with PCG in your current role?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350005
+ {formField-104b36dfc250100123a3c07464040000}
+label: Does PCG have any active or recent contracts with your organization?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040000
+ {formField-104b36dfc250100123a3c07464040004}
+label: If you were to accept an offer from PCG, are you subject to any non-competition agreement, non-solicitation ag
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040004
+ {formField-104b36dfc250100123a3c07464040007}
+label: Do you currently work for Public Partnerships (PPL) or have worked for Public Partnerships (PPL) in the past 1
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040007
+ {formField-104b36dfc250100123a3c0746404000a}
+label: Are you applying as part of a DoD Skillbridge application?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c0746404000a
+ {formField-104b36dfc250100123a3c10e17d60002}
+label: Are you able to meet the location requirements that are listed in the job description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c10e17d60002
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 13:34:45  skipped  Capital Project Coordinator I @ avalonbay
+url: https://pcg.wd1.myworkdayjobs.com/pcg_external_careers/job/United-States-Remote/Business-Operations-Analyst-1_JR102201/apply
+stage: Application Questions
+why: can't truthfully answer required: Did you ever have any interaction with PCG in your current r; Does PCG have any active or recent contracts with your organ
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Business Operations Analyst 1
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-104b36dfc250100123a3bd745a0d0000}
+label: Are you at least 18 years of age or older?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0000
+ {formField-104b36dfc250100123a3bd745a0d0003}
+label: Are you eligible to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0003
+ {formField-104b36dfc250100123a3be0de4b70001}
+label: Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70001
+ {formField-104b36dfc250100123a3be0de4b70004}
+label: By acknowledging below, you agree that this position must be performed entirely within the United States and w
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70004
+ {formField-f05416505c091001237cbe7b3e4b0000}
+label: What is the earliest date you would be available to start?
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-104b36dfc250100123a3be0de4b70007}
+label: Please select your desired salary range.*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70007
+ {formField-104b36dfc250100123a3bf4157410001}
+label: Have you ever been employed by PCG?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410001
+ {formField-104b36dfc250100123a3bf4157410004}
+label: In the last two years, to the best of your knowledge have you been employed by a client, competitor, or busine
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410004
+ {formField-104b36dfc250100123a3bf4157410008}
+label: In the last two years, to the best of your knowledge have you served in an elected or appointed (paid or unpai
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410008
+ {formField-104b36dfc250100123a3bfdadb350000}
+label: Do you have any family members, relatives, or friends employed by PCG or any of its affiliates (including Staf
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350000
+ {formField-104b36dfc250100123a3bfdadb350003}
+label: What is the name of the PCG client, competitor, business partner, or the government agency you were employed b
+  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350003 required empty>
+ {formField-104b36dfc250100123a3bfdadb350004}
+label: What is/was your title, position, or role with your organization?*
+  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350004 required empty>
+ {formField-104b36dfc250100123a3bfdadb350005}
+label: Did you ever have any interaction with PCG in your current role?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350005
+ {formField-104b36dfc250100123a3c07464040000}
+label: Does PCG have any active or recent contracts with your organization?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040000
+ {formField-104b36dfc250100123a3c07464040004}
+label: If you were to accept an offer from PCG, are you subject to any non-competition agreement, non-solicitation ag
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040004
+ {formField-104b36dfc250100123a3c07464040007}
+label: Do you currently work for Public Partnerships (PPL) or have worked for Public Partnerships (PPL) in the past 1
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040007
+ {formField-104b36dfc250100123a3c0746404000a}
+label: Are you applying as part of a DoD Skillbridge application?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c0746404000a
+ {formField-104b36dfc250100123a3c10e17d60002}
+label: Are you able to meet the location requirements that are listed in the job description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c10e17d60002
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 13:35:30  skipped  2027 Early Careers: Analyst, Human Resources – New York, NY @ aig
+url: https://aig.wd1.myworkdayjobs.com/aig/job/NY-New-York/XMLNAME-2027-Early-Careers--Analyst--Human-Resources---New-York--NY_JR2603600-1/apply/applyManually
+stage: Application Questions 1 of 2
+why: can't truthfully answer required: If you have not graduated yet, what is your anticipated grad
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] AIG Careers {navigationItem-AIG Careers}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# 2027 Early Careers: Analyst, Human Resources – New York, NY
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+{progressBarActiveStep} current step 3 of 7 Application Questions 1 of 2
+label: current step 3 of 7
+label: Application Questions 1 of 2
+label: step 4 of 7
+label: Application Questions 2 of 2
+label: step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+# Application Questions 1 of 2
+{applyFlowPrimaryQuestionsPage}
+ {formField-9739c46b870d10018089a6ff226e0000}
+label: Are you legally authorized to work in the country to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--9739c46b870d10018089a6ff226e0000
+ {formField-9739c46b870d10018089a6ff226e0001}
+label: Will you now or in the future require sponsorship for employment visa status?*
+  [dropdown] nothing chosen #primaryQuestionnaire--9739c46b870d10018089a6ff226e0001
+ {formField-9739c46b870d10018089a7991ce40002}
+label: If you have not graduated yet, what is your anticipated graduation date?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--9739c46b870d10018089a7991ce40002-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--9739c46b870d10018089a7991ce40002-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--9739c46b870d10018089a7991ce40002-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 13:36:14  skipped  Trainee, Procurement Operations – Spring/Fall 2027 @ spe
+url: https://spe.wd1.myworkdayjobs.com/SonypicturesEntertainment/job/Culver-City-California/Trainee--Procurement-Operations---Spring-Fall-2027_JR114720/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: If you are not currently living in the same location as this
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Join our Talent Community! {navigationItem-Join our Talent Community!}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Trainee, Procurement Operations – Spring/Fall 2027
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-15bde00507631001b0a55cbcf4a40000}
+label: If on the previous page, you added a website or portfolio that requires a password, please list the credential
+  <textarea #primaryQuestionnaire--15bde00507631001b0a55cbcf4a40000 empty>
+ {formField-15bde00507631001b0a55cbcf4a40001}
+label: Are you at least 18 years of age?*
+  [dropdown] nothing chosen #primaryQuestionnaire--15bde00507631001b0a55cbcf4a40001
+ {formField-15bde00507631001b0a55d5707f90002}
+label: If you are not currently living in the same location as this job, are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--15bde00507631001b0a55d5707f90002
+ {formField-15bde00507631001b0a55df0c6510000}
+label: Do you have relatives who currently work for Sony Pictures?*
+  [dropdown] nothing chosen #primaryQuestionnaire--15bde00507631001b0a55df0c6510000
+ {formField-15bde00507631001b0a55df0c6510004}
+label: If hired, can you provide verification that you have a legal right to work in the United States for Sony Pictu
+  [dropdown] nothing chosen #primaryQuestionnaire--15bde00507631001b0a55df0c6510004
+ {formField-15bde00507631001b0a55df0c6510007}
+label: Base Salary Expectations per year?
+  <textarea #primaryQuestionnaire--15bde00507631001b0a55df0c6510007 empty>
+  [button] Back {pageFooterBackButton}
+  [button] Next {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
