@@ -207,9 +207,9 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
 def wait_for_greenhouse_code(since_ts: float, company_hint: str = "", job_hint: str = "", timeout: int = 150, log=print) -> dict | None:
     """Return a fresh Greenhouse application verification code from the applicant inbox.
 
-    Greenhouse states that customer emails sent through its platform come from no-reply@greenhouse.io.
-    We require that sender domain, a verification/code signal, and a fresh parseable code all agree before
-    returning anything. Company/job hints are used to reject unrelated Greenhouse messages when available.
+    Accept Greenhouse verification senders, including regional greenhouse-mail.io senders such as
+    no-reply@us.greenhouse-mail.io. A verification/code signal and a fresh parseable code must also
+    agree before returning anything. Company/job hints are used to reject unrelated Greenhouse messages when available.
     """
     deadline = time.time() + timeout
     company_words = [w for w in re.split(r"[^a-z0-9]+", (company_hint or "").lower()) if len(w) > 2]
@@ -218,7 +218,7 @@ def wait_for_greenhouse_code(since_ts: float, company_hint: str = "", job_hint: 
         try:
             for info in _recent(since_ts, 20, ("INBOX", "[Gmail]/Spam")):
                 sender = (info.get("from") or "").lower()
-                if not re.search(r"(?:^|[ <])no-reply@(?:greenhouse\\.io|[a-z0-9.-]+\\.greenhouse-mail\\.io)(?:>|$)", sender):
+                if not re.search(r"(?:^|[ <])no-reply@(?:greenhouse\.io|[a-z0-9.-]+\.greenhouse-mail\.io)(?:>|$)", sender):
                     continue
                 subj = info.get("subject", "")
                 body = info.get("body", "")[:3000]
