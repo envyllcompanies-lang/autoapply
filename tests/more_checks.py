@@ -668,7 +668,18 @@ def workflow_checks():
         check(not any("agg_cache" in f for f in listed), "history script saved the feed cache")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    print("ok  workflow: 4 runs a day, history saved (missing files tolerated, push race retried)")
+    job_if = wf["jobs"]["apply"].get("if", "")
+    check(trig["schedule"][1]["cron"] == "37 * * * *" and "github.event.schedule == '7 1,13,17,21 * * *'" in job_if
+          and "visibility == 'public'" in job_if, f"the hourly starts must be skipped unless the repository is public: {job_if!r}")
+    up = [st for st in wf["jobs"]["apply"]["steps"] if "upload-artifact" in str(st.get("uses", ""))][0]
+    check("visibility != 'public'" in up.get("if", ""), "filled-in forms must never be uploaded from a public repository")
+    os.environ["AUTOAPPLY_UNLIMITED"] = "1"
+    try:
+        check(M.run_time_allowance({"search": {"max_run_minutes": 25}}, Path(tempfile.gettempdir())) == 50 and M.budget_ok({}, Path(tempfile.gettempdir()), print),
+              "public repository: runs should be 50 minutes with no monthly budget")
+    finally:
+        del os.environ["AUTOAPPLY_UNLIMITED"]
+    print("ok  workflow: 4 runs a day while private, non-stop while public, history saved (missing files tolerated, push race retried)")
 
 
 # ------------------------------------------------------------------------------------------------ 8. publish script

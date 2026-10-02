@@ -5,6 +5,9 @@ on:
     # Four runs a day, spaced across the US working day (UTC): 9am ET, 1pm ET, 5pm ET, 9pm ET.
     # Free private-repo Actions minutes are 2,000 a month; the bot budgets its own run time against that (see README).
     - cron: "7 1,13,17,21 * * *"
+    # Every hour, used ONLY while the repository is public (public repositories have no minutes limit): together with
+    # 50-minute runs that is non-stop. While the repository is private these hourly starts are skipped and cost nothing.
+    - cron: "37 * * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -21,8 +24,9 @@ concurrency:
 
 jobs:
   apply:
+    if: github.event_name != 'schedule' || github.event.schedule == '7 1,13,17,21 * * *' || github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
@@ -58,8 +62,9 @@ jobs:
         run: python -m compileall -q autoapply tests
 
       - name: Run
-        timeout-minutes: 40
+        timeout-minutes: 68
         env:
+          AUTOAPPLY_UNLIMITED: ${{ github.event.repository.visibility == 'public' && '1' || '' }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
@@ -95,7 +100,8 @@ jobs:
           echo "::error::could not save applications.db (history)"; exit 1
 
       - name: Upload résumés, cover letters and form screenshots
-        if: always()
+        # never from a public repository: anyone could download the filled-in forms (address, phone, answers)
+        if: always() && github.event.repository.visibility != 'public'
         uses: actions/upload-artifact@v4
         with:
           name: applications-${{ github.run_id }}

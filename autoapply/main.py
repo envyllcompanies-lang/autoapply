@@ -288,9 +288,14 @@ def heartbeat(base: Path):
         _write_usage(base, data)
 
 
+def unlimited() -> bool:
+    """The repository is public, so GitHub does not count its Actions minutes: runs are long and back to back."""
+    return bool(os.environ.get("AUTOAPPLY_UNLIMITED"))
+
+
 def budget_ok(cfg: dict, base: Path, log) -> bool:
     """Free private repos get 2,000 Actions minutes a month. Past the budget the run stops early instead of failing later."""
-    if not os.environ.get("GITHUB_ACTIONS"):
+    if not os.environ.get("GITHUB_ACTIONS") or unlimited():
         return True
     budget = float((cfg.get("search") or {}).get("actions_minutes_budget", 1850))
     used = month_used(base)
@@ -306,6 +311,8 @@ def run_time_allowance(cfg: dict, base: Path, today: date | None = None) -> floa
     from quiet runs flows to later ones. Off Actions (your own machine) the only limit is search.max_run_minutes."""
     s = cfg.get("search") or {}
     cap = float(s.get("max_run_minutes", 30))
+    if unlimited():
+        return float(s.get("max_run_minutes_unlimited", 50))
     if not os.environ.get("GITHUB_ACTIONS"):
         return cap
     today = today or date.today()
@@ -320,7 +327,7 @@ def apply_deadline(t_start: float, now: float, allow_min: float, s: dict) -> flo
     """When the apply loop must stop. Finding jobs counts against the run's time, but a run whose search overran still
     gets a short window (search.min_apply_minutes) to apply, so it never finds jobs and then applies to none of them.
     No run goes past max_run_minutes + 6 in total."""
-    hard = t_start + 60 * (float(s.get("max_run_minutes", 30)) + 6)
+    hard = t_start + 60 * ((float(s.get("max_run_minutes_unlimited", 50)) if unlimited() else float(s.get("max_run_minutes", 30))) + 6)
     return min(hard, max(t_start + allow_min * 60, now + 60 * float(s.get("min_apply_minutes", 6))))
 
 
@@ -460,7 +467,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
 
     # 3. apply, best matches first, within today's cap
     cap = s.get("daily_cap", 25) - db.applied_today()
-    if s.get("per_run_cap"):
+    if unlimited():          # non-stop mode: the day's ceiling is higher and one run may use all of it
+        cap = int(s.get("daily_cap_unlimited", 120)) - db.applied_today()
+    elif s.get("per_run_cap"):
         cap = min(cap, int(s["per_run_cap"]))
     if limit is not None:
         cap = min(cap, limit)
