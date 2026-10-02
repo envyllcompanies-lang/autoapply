@@ -1245,6 +1245,31 @@ def _complete_email_verification(page, since_ts: float, timeout_s: int, log=prin
                 raise Blocked("Greenhouse application did not confirm after resubmitting with the security code")
             return True
         if not _email_code_prompt(page):
+            # Some ATSes (including Greenhouse-backed employer pages) use the code as a
+            # gate on the final submission: after the code is accepted, the page asks
+            # for the application to be submitted again rather than showing Verify/Continue.
+            body = " ".join(page.inner_text("body").split())
+            resubmit_hint = re.search(
+                r"resubmit (?:your )?(?:application|app)|submit (?:your )?(?:application|app) again|"
+                r"after (?:you )?enter(?:ing)? the code.*submit",
+                body,
+                re.I,
+            )
+            if resubmit_hint:
+                btn2, kind2 = _find_advance(page)
+                if btn2 is not None and kind2 == "submit":
+                    log("      email: security code accepted; resubmitting application")
+                    btn2.click()
+                    page.wait_for_timeout(1200)
+                    _settle(page)
+                    if SUCCESS_RE.search(page.inner_text("body")):
+                        return True
+                    if _email_code_prompt(page):
+                        continue
+                    if _blocker(page):
+                        raise Blocked("submission after email security code is held by an anti-bot/human verification challenge")
+                    if _few_inputs(page):
+                        return True
             return True
 
         # Other ATSes may require an explicit Verify/Continue after the code is entered.
