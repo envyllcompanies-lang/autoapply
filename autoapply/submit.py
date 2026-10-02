@@ -1239,11 +1239,27 @@ def _complete_email_verification(page, since_ts: float, timeout_s: int, log=prin
         page.wait_for_timeout(1200)
         _settle(page)
         if _is_greenhouse_security_flow(page):
+            # Greenhouse may either keep the code field visible or remove it as soon
+            # as the code is accepted. In both cases, the security page can require
+            # a second Submit Application click. Do not treat disappearance of the
+            # code field alone as confirmation.
+            body = " ".join(page.inner_text("body").split())
+            needs_resubmit = bool(re.search(
+                r"resubmit (?:your )?(?:application|app)|submit (?:your )?(?:application|app) again|"
+                r"after (?:you )?enter(?:ing)? the code.*submit",
+                body,
+                re.I,
+            ))
+            if needs_resubmit:
+                if not _resubmit_greenhouse_after_code(page, remaining, log=log):
+                    raise Blocked("Greenhouse application did not confirm after resubmitting with the security code")
+                return True
             if not _email_code_prompt(page):
                 return True
-            if not _resubmit_greenhouse_after_code(page, remaining, log=log):
-                raise Blocked("Greenhouse application did not confirm after resubmitting with the security code")
-            return True
+            # The code is still being requested; loop once more so a fresh code can
+            # be read if the first one was rejected or expired.
+            since_ts = time.time() - 2
+            continue
         if not _email_code_prompt(page):
             # Some ATSes (including Greenhouse-backed employer pages) use the code as a
             # gate on the final submission: after the code is accepted, the page asks
