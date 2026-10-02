@@ -536,11 +536,10 @@ def mail_checks():
         {"status": "unconfirmed", "score": 65, "reason": "no confirmation after submit", "title": "Ops G", "company": "g", "url": "u7", "apply_url": ""},
     ]
     got = notify.manual_rows(rows)
-    check([r["title"] for r in got] == ["Ops E", "Ops A", "Ops G", "Ops D"] or [r["title"] for r in got] == ["Ops E", "Ops G", "Ops A", "Ops D"],
-          f"manual_rows picked {[r['title'] for r in got]}")
+    check([r["title"] for r in got] in (["Ops E", "Ops A", "Ops G"], ["Ops E", "Ops G", "Ops A"]), f"manual_rows picked {[r['title'] for r in got]}")
     check(len(notify.manual_rows(rows, limit=2)) == 2, "manual_rows limit")
     text = notify.build_text("2026-09-29", "2 applied", {"applied": [dict(title="Ops H", company="h", score=80, url="u8")], "unconfirmed": [rows[6]]}, got, "https://run")
-    for want in ("APPLIED (1)", "SUBMITTED BUT NOT CONFIRMED", "FINISH BY HAND", "Ops A", "https://run"):
+    for want in ("APPLIED (1)", "SUBMITTED BUT NOT CONFIRMED", "EXCEPTIONS (3)", "Ops A", "https://run"):
         check(want in text, f"summary text lacks {want!r}")
 
     quiet = notify.build_text("2026-09-29", "2 blocked, 1 skipped", {"blocked": [rows[0], rows[0]], "skipped": [dict(rows[5], reason="posting restricts AI-assisted applications")]},
@@ -601,7 +600,7 @@ def mail_checks():
     finally:
         mailbox._recent = old
     check(not hasattr(mailbox, "security_code") and not hasattr(mailbox, "wait_for_security_code"), "the inbox reader must not read employers' security codes")
-    print("ok  summary email, daily check-in, finish-by-hand list, confirmation-email matching")
+    print("ok  summary email, daily check-in, exceptions list, confirmation-email matching")
 
 
 # ------------------------------------------------------------------------------------------------ 6. aggregator helpers
@@ -736,7 +735,7 @@ def script_checks():
         check("briandelgado_resume.pdf" in listed, "update_github.sh did not push the résumé PDF the bot uploads")
         check("autoapply/old_module.py" not in listed, "update_github.sh left a deleted module behind")
         check(not (listed & {"config.yaml", "profile.yaml", "about_me.md", "voice.md"}), f"private files were pushed: {listed & {'config.yaml', 'profile.yaml', 'about_me.md', 'voice.md'}}")
-        check(not any("__pycache__" in f or f.startswith("tests/work") for f in listed), "cache or test scratch files were pushed")
+        check(not any("__pycache__" in f or f.startswith("tests/work/") for f in listed), "cache or test scratch files were pushed")
         check((tmp / "verify" / "applications.db").read_bytes() == b"history", "the bot's saved history was changed")
         sec = tmp / "secrets"
         check((sec / "CONFIG_YAML").read_text() == (folder / "config.yaml").read_text(), "CONFIG_YAML secret not refreshed")
@@ -756,49 +755,173 @@ def script_checks():
         listed = set(sh("git ls-files", tmp / "verify").stdout.split())
         check("reports/2026-09-29.md" in listed and "# edited" in (tmp / "verify" / "boards.yaml").read_text(), "the race lost either the update or the bot's report")
         check("gh workflow run autoapply.yml" in (tmp / "gh.log").read_text(), "--run did not start a run")
+
+        # the code on GitHub has moved on (it was updated there directly): an older folder must not be put back over it
+        init = tmp / "verify" / "autoapply" / "__init__.py"
+        init.write_text('__version__ = "2099-01-01-aa"\n')
+        (tmp / "verify" / "autoapply" / "newer_module.py").write_text("new")
+        sh("git add -A && git -c user.name=t -c user.email=t@t commit -qm newer && git push -q origin HEAD:main", tmp / "verify", base_env)
+        (folder / "config.yaml").write_text((folder / "config.yaml").read_text() + "\n# my edit\n")
+        r = sh("bash update_github.sh", folder, env)
+        check(r.returncode == 0 and "newer than this folder" in r.stdout, f"older folder vs newer GitHub code: {r.stdout[-300:]} {r.stderr[-200:]}")
+        sh("git pull -q", tmp / "verify")
+        check(init.read_text().strip() == '__version__ = "2099-01-01-aa"' and (tmp / "verify" / "autoapply" / "newer_module.py").exists(),
+              "an older folder overwrote newer code on GitHub")
+        check((sec / "CONFIG_YAML").read_text().endswith("# my edit\n"), "secrets should still be refreshed when the code is left alone")
+        for a, b in (("2026-10-01-z", "2026-10-01-aa"), ("2026-10-01-aa", "2026-10-01-ab"), ("2026-09-30-zz", "2026-10-01-a")):
+            o = sh("order() { echo \"$1\" | awk -F- '{ printf \"%s-%s-%s-%02d%s\", $1, $2, $3, length($4), $4 }'; }; "
+                   f"printf '%s\\n%s\\n' \"$(order {b})\" \"$(order {a})\" | LC_ALL=C sort | head -1", tmp).stdout.strip()
+            check(o.startswith(a[:10]) and o.endswith(a.split("-")[-1]), f"build order: {a} should come before {b} (got {o})")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    print("ok  update_github.sh: pushes code without touching history, refreshes secrets, survives a run saving mid-update")
+    print("ok  update_github.sh: pushes code without touching history, refreshes secrets, survives a run saving mid-update, "
+          "never puts older code over newer")
 
 
 # ------------------------------------------------------------------------------------------------ 9. human-check pause
 def gate_checks():
+    """Sites are never paused or skipped; they are tried in the order the measured results suggest."""
     from autoapply.db import DB
     tmp = Path(tempfile.mkdtemp())
     try:
         db = DB(str(tmp / "g.db"))
-        d0, d1, d2 = "2026-09-29", "2026-09-30", "2026-10-01"
-        M.note_block(db, "lever", "a", "no application form found on page", d0)
-        check(not M._site_state(db, "lever"), "a block that is not a human check was counted")
-        for _ in range(3):
-            M.note_block(db, "lever", "a", "hCaptcha", d0)
-        check(M.site_paused(db, "lever", d0) is None, "one employer alone should not pause a whole site")
-        M.note_block(db, "lever", "b", "the site asked for an emailed security code (its own human check)", d0)
-        why = M.site_paused(db, "lever", d0)
-        check(bool(why) and f"paused until {d1}" in why and "4 tries" in why, f"site should be paused: {why}")
-        check(M.site_paused(db, "greenhouse", d0) is None, "an unrelated site was paused")
-        check(any(x.startswith("lever") for x in M.paused_sites(db, d0)), "paused_sites should list it")
-        check(M.site_paused(db, "lever", d1) is None, "the next day one application should be let through")
-        check(M.site_paused(db, "lever", d1) is not None, "only one probe a day")
-        check(M.site_paused(db, "lever", d2) is None, "and another the day after")
-        M.note_success(db, "lever")
-        check(M.site_paused(db, "lever", d1) is None and not M.paused_sites(db, d1) and not M._site_state(db, "lever"), "a success should reopen the site")
+        W = "https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/Denver/Ops_R-%d"
 
-        db.add(Job("greenhouse", "Acme", "1", "Ops", "", "u", "", ""), "blocked", reason="reCAPTCHA checkbox after submit")
-        db.add(Job("greenhouse", "Beta", "2", "Ops", "", "u", "", ""), "blocked", reason="no application form found on page")
-        db.add(Job("greenhouse", "Delta", "3", "Ops", "", "u", "", ""), "manual", reason="apply by hand: greenhouse stopped the bot at a human check")
-        check(bool(M.employer_blocked(db, "acme")) and not M.employer_blocked(db, "beta") and not M.employer_blocked(db, "delta") and not M.employer_blocked(db, "gamma"),
-              "employer_blocked should only follow real human-check stops")
-        db.conn.execute("UPDATE jobs SET updated='2020-01-01T00:00:00' WHERE company='Acme'")
-        check(not M.employer_blocked(db, "acme"), "an old block should not count")
+        def add(src, n, status, reason, url=""):
+            j = Job(src, f"co{n}", str(n), "Ops", "", url, url, "")
+            db.add(j, status, score=80, reason=reason)
+            db.update(j.key, attempts=1)
+            return db.get(j.key)
+        check(M.site_health(db) == {}, "no attempts yet: no measured health")
+        lv = [add("lever", i, "blocked", "hCaptcha after submit") for i in range(3)]
+        add("lever", 9, "blocked", "no application form found on page")
+        wd = add("workday", 20, "applied", "confirmed", W % 20)
+        add("workday", 21, "blocked", "not a real application form (0 fields, no résumé upload)", W % 21)
+        gh = add("greenhouse", 30, "blocked", "the site asked for an emailed security code (its own human check)")
+        bb = add("bamboohr", 40, "skipped", "stuck on step 3")
+        h = M.site_health(db)
+        check(h["lever"] == {"ok": 0, "human": 3, "other": 1} and h["workday"] == {"ok": 1, "human": 0, "other": 1}, f"site_health: {h}")
+        check(M.site_rank(wd, h) == 0, "a site where applications go through is tried first")
+        check(M.site_rank(lv[0], h) == 3, "a site that ended at a human check every time is tried last")
+        check(M.site_rank(gh, h) == 2 and M.site_rank(bb, h) == 1, f"priors: greenhouse {M.site_rank(gh, h)}, bamboohr {M.site_rank(bb, h)}")
+        check(M.site_rank(lv[0], {}) == 2 and M.site_rank(wd, {}) == 0, "with nothing measured the priors decide")
+        add("lever", 50, "applied", "confirmed")
+        add("lever", 51, "applied", "confirmed")
+        check(M.site_rank(lv[0], M.site_health(db)) == 0, "once applications get through on a site it moves to the front")
+        lines = M.health_lines(h)
+        check(len(lines) == 1 and lines[0].startswith("lever:") and "3 recent tries" in lines[0], f"health_lines: {lines}")
+        db.conn.execute("UPDATE jobs SET updated='2020-01-01T00:00:00'")
+        check(M.site_health(db) == {}, "old results should not count")
+        check(not hasattr(M, "site_paused") and not hasattr(M, "employer_blocked"), "no site or employer is paused any more")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     for src, url, want in [("greenhouse", "", "greenhouse"), ("Lever", "", "lever"),
                            ("agg-themuse", "https://boards.greenhouse.io/acme/jobs/5", "greenhouse"),
                            ("agg-themuse", "https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/Denver/Ops_R-1", "workday"),
+                           ("web", "https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/Denver/Ops_R-1", "workday"),
                            ("agg-remoteok", "https://careers.example.com/apply/9", "careers.example.com")]:
         check(M.ats_of(Job(src, "x", "1", "t", "", url, url, "")) == want, f"ats_of({src}, {url}) = {M.ats_of(Job(src, 'x', '1', 't', '', url, url, ''))}")
-    print("ok  sites that keep showing a human check are paused, probed daily, reopened on success")
+    print("ok  sites are ranked by measured results (finishers first, human-check sites last), none paused")
+
+
+def match_checks():
+    """The résumé match check that decides what is applied to (search.min_fit) and what waits or is set aside,
+    the requeue of old Workday failures, and the submit-once record."""
+    from types import SimpleNamespace
+    from autoapply.db import DB
+    from autoapply import prescreen as PS
+    tmp = Path(tempfile.mkdtemp())
+    try:
+        db = DB(str(tmp / "m.db"))
+        long_text = "Operations analyst role. " * 30
+        s = {"prescreen": True, "min_fit": 70, "min_score_without_match": 80}
+
+        class FakeWriter:
+            def __init__(self, reply=None, up=True, boom=False):
+                self.reply, self.up, self.boom, self.calls = reply, up, boom, 0
+
+            def ready(self):
+                return self.up
+
+            def _complete(self, msgs, n, log, temperature=0.0, prefer=()):
+                self.calls += 1
+                if self.boom:
+                    raise RuntimeError("free daily limit reached")
+                return self.reply
+
+        def job(n, score, desc=long_text, status="queued", fit=None):
+            j = Job("workday", f"co{n}", str(n), "Operations Analyst", "Denver, CO", f"https://x/{n}", f"https://x/{n}", desc)
+            db.add(j, status, score=score, reason="title +50")
+            if fit is not None:
+                db.update(j.key, fit=fit)
+            return j, db.get(j.key)
+
+        def brain(w):
+            return SimpleNamespace(writer=w, profile={})
+        j, r = job(1, 60)
+        check(PS.gate(db, brain(FakeWriter('{"fit": 90, "why": "x"}')), j, r, {"prescreen": False}) == ("go", None, ""), "match check switched off: every queued job goes")
+        w = FakeWriter('{"fit": 82, "why": "strong operations background"}')
+        got = PS.gate(db, brain(w), j, r, s)
+        row = db.get(j.key)
+        check(got[0] == "go" and got[1] == 82 and row["fit"] == 82 and row["status"] == "queued" and row["reason"].startswith("match 82%: strong"),
+              f"a match over the bar: {got} {dict(row)}")
+        check(PS.gate(db, brain(w), j, row, s)[0] == "go" and w.calls == 1, "a job is only ever checked once (the stored match is used)")
+        j, r = job(2, 60)
+        got = PS.gate(db, brain(FakeWriter('{"fit": 55, "why": "retail role"}')), j, r, s)
+        row = db.get(j.key)
+        check(got[0] == "low" and row["status"] == "low_score" and row["fit"] == 55 and row["reason"] == "match 55%: retail role", f"a match under the bar: {got} {dict(row)}")
+        j, r = job(3, 60, desc="short")
+        check(PS.gate(db, brain(w), j, r, s)[0] == "page", "a posting whose text is not known yet must be read from its page first")
+        check(PS.gate(db, brain(w), j, r, s, have_page=True)[0] == "later", "no posting text even on the page, modest keyword score: waits")
+        j, r = job(4, 85, desc="short")
+        check(PS.gate(db, brain(w), j, r, s, have_page=True)[0] == "go", "no posting text but a keyword score over 80: goes ahead")
+        j, r = job(5, 60)
+        check(PS.gate(db, brain(FakeWriter(up=False)), j, r, s)[0] == "later" and db.get(j.key)["status"] == "queued",
+              "the free writer is out of allowance: the job waits for a later run and is not dropped")
+        check(PS.gate(db, brain(FakeWriter(boom=True)), j, r, s)[0] == "later", "a match check that errors must not let the job through or drop it")
+        check(PS.gate(db, brain(None), j, r, s)[0] == "later", "no writer at all: modest keyword score waits")
+        j, r = job(6, 85)
+        check(PS.gate(db, brain(FakeWriter(up=False)), j, r, s)[0] == "go", "no match check available but a keyword score over 80: goes ahead")
+        j, r = job(7, 75, status="failed", fit=60)
+        got = PS.gate(db, brain(w), j, r, s)
+        check(got[0] == "low" and db.get(j.key)["status"] == "low_score", f"a retry whose stored match is under today's bar is set aside: {got} {db.get(j.key)['status']}")
+        check(PS.gate(db, brain(FakeWriter("I think about 75 out of 100")), *job(8, 60), s)[1] == 75, "a reply that is not JSON still yields its number")
+
+        # ---- submit-once: a job whose Submit was clicked is never queued again, whatever its status says
+        j, r = job(20, 80)
+        db.mark_submit(j.key, 1)
+        check(db.get(j.key)["status"] == "unconfirmed" and db.get(j.key)["submitted_at"], "the Submit click must be written down before it happens")
+        db.update(j.key, status="failed", reason="page crashed")
+        check(j.key not in {x["key"] for x in db.retryable(3)}, "a job whose Submit was clicked came back for another try")
+        db.update(j.key, status="queued", reason="recheck-inbox: no confirmation after submit")
+        check(j.key in {x["key"] for x in db.retryable(3)}, "the inbox re-check is the one way back into the queue")
+        j2, _ = job(21, 80)
+        db.update(j2.key, status="failed", reason="the form was rejected, not sent", attempts=1, submitted_at="")
+        check(j2.key in {x["key"] for x in db.retryable(3)}, "a submit the site itself rejected (nothing sent) may be tried again")
+
+        # ---- a new build gives old Workday failures another go, but never one whose Submit was clicked
+        W = "https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/Denver/Ops_R-%d"
+
+        def wd(n, status, reason, clicked=False, url=None):
+            j = Job("workday", f"wd{n}", str(n), "Ops", "", url or W % n, url or W % n, "")
+            db.add(j, status, score=80, reason=reason)
+            db.update(j.key, attempts=2, **({"submitted_at": "2026-10-01T10:00:00"} if clicked else {}))
+            return j.key
+        a = wd(30, "skipped", "stuck on step 9; page says: nothing")
+        b = wd(31, "failed", "took longer than 8 minutes on this site")
+        c = wd(32, "unconfirmed", "submit clicked; outcome not yet known", clicked=True)
+        d = wd(33, "blocked", "the site asked for an emailed security code (its own human check): left for you to finish by hand", url="https://boards.greenhouse.io/x/jobs/33")
+        e = wd(34, "skipped", "stuck on step 3", url="https://jobs.lever.co/x/34")
+        f = wd(35, "blocked", "account: Workday refused the sign-in")
+        n = db.requeue_if_new_version("test-build-1")
+        st = {k: (db.get(k)["status"], db.get(k)["attempts"]) for k in (a, b, c, d, e, f)}
+        check(st[a] == ("queued", 0) and st[b] == ("queued", 0) and st[f] == ("queued", 0), f"old Workday failures should be tried again: {st}")
+        check(st[c][0] == "unconfirmed" and st[d][0] == "blocked" and st[e][0] == "skipped", f"these must stay as they are: {st}")
+        check(n >= 3 and db.requeue_if_new_version("test-build-1") == 0, "the requeue runs once per build")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    print("ok  match check: 70% bar, checked once, waits when the writer is out, never lets a job through or drops it by mistake; "
+          "submit-once record; old Workday failures requeued")
 
 
 def open_form_checks():
@@ -956,7 +1079,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
+    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others

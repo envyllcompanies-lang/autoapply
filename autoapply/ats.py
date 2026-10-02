@@ -22,21 +22,24 @@ class ATS:
     priority: int
 
 
+# (name, how to recognise it in an address, confidence, default place in line). The place in line is only a starting
+# point: main.site_rank() orders the sites by what has actually been going through lately. 0 = finishes (Workday),
+# 1 = no known obstacle, 2 = submits from a data-centre address are often held by a human check.
 _PATTERNS = (
     ("workday", re.compile(r"(?:myworkdayjobs\.com|workday\.com)", re.I), 1.0, 0),
-    ("greenhouse", re.compile(r"(?:greenhouse\.io|job-boards\.greenhouse\.io)", re.I), 1.0, 2),
-    ("lever", re.compile(r"(?:jobs\.lever\.co|lever\.co)", re.I), 1.0, 1),
-    ("workable", re.compile(r"(?:workable\.com|apply\.workable\.com)", re.I), 1.0, 2),
-    ("bamboohr", re.compile(r"(?:bamboohr\.com)", re.I), 0.95, 1),
-    ("breezy", re.compile(r"(?:breezy\.hr)", re.I), 0.95, 1),
-    ("recruitee", re.compile(r"(?:recruitee\.com)", re.I), 0.95, 1),
-    ("ashby", re.compile(r"(?:ashbyhq\.com)", re.I), 0.95, 1),
-    ("icims", re.compile(r"(?:icims\.com)", re.I), 0.9, 1),
+    ("greenhouse", re.compile(r"greenhouse\.io", re.I), 1.0, 2),
+    ("lever", re.compile(r"lever\.co", re.I), 1.0, 2),
+    ("workable", re.compile(r"workable\.com", re.I), 1.0, 2),
+    ("bamboohr", re.compile(r"bamboohr\.com", re.I), 0.95, 1),
+    ("breezy", re.compile(r"breezy\.hr", re.I), 0.95, 1),
+    ("recruitee", re.compile(r"recruitee\.com", re.I), 0.95, 1),
+    ("ashby", re.compile(r"ashbyhq\.com", re.I), 0.95, 2),
+    ("icims", re.compile(r"icims\.com", re.I), 0.9, 1),
     ("taleo", re.compile(r"(?:taleo\.net|oraclecloud\.com)", re.I), 0.85, 2),
-    ("smartrecruiters", re.compile(r"(?:smartrecruiters\.com)", re.I), 0.95, 1),
-    ("jobvite", re.compile(r"(?:jobvite\.com)", re.I), 0.9, 1),
-    ("successfactors", re.compile(r"(?:successfactors\.com)", re.I), 0.9, 2),
-    ("phenom", re.compile(r"(?:phenompeople\.com)", re.I), 0.9, 2),
+    ("smartrecruiters", re.compile(r"smartrecruiters\.com", re.I), 0.95, 1),
+    ("jobvite", re.compile(r"jobvite\.com", re.I), 0.9, 1),
+    ("successfactors", re.compile(r"successfactors\.com", re.I), 0.9, 2),
+    ("phenom", re.compile(r"phenompeople\.com", re.I), 0.9, 2),
 )
 
 
@@ -52,7 +55,7 @@ def detect(url: str, page_text: str = "") -> ATS:
     fingerprints = (
         ("workday", ("data-automation-id", "myworkdayjobs", "workday")),
         ("greenhouse", ("greenhouse", "application_questions")),
-        ("lever", ("lever", "selectedLocation")),
+        ("lever", ("lever", "selectedlocation")),          # (the page text is compared in lower case)
         ("workable", ("workable", "job_application")),
         ("bamboohr", ("bamboohr",)),
         ("smartrecruiters", ("smartrecruiters",)),

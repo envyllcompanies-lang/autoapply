@@ -2,15 +2,15 @@
 # Sections merge; a list or a single value here replaces the one in config.yaml.
 
 search:
-  skip_sources: []
-  pause_sites: false          # never stop trying a whole site because some of its forms showed a human check
-  skip_blocked_employers: false
+  skip_sources: []            # no job source is skipped
+  skip_sites: []              # no application system is skipped: they are tried in the order of what has actually been
+                              # going through lately (Workday first; sites that keep ending at a human check last)
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
-  prescreen: false            # LLM match analysis is telemetry only; deterministic score stays on the critical path
-  prescreen_per_run: 2
-  skip_sites: []
-  min_fit: 55
-  max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
+  prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
+  min_fit: 70                 # ...and only jobs with a match of 70% or more are applied to
+  min_score_without_match: 80 # when the free match check has no allowance left: only jobs whose keyword score is this
+                              # high go ahead, the rest wait for a later run (they are not dropped)
+  max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
 
 scoring:
   pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
@@ -25,8 +25,3 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
-
-# CAPTCHA handling is metadata-only; unattended solving is intentionally unavailable.
-captcha:
-  provider: twocaptcha
-  api_key_env: TWOCAPTCHA_API_KEY

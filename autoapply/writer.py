@@ -365,7 +365,10 @@ class Writer:
         ver = lambda i: [float(x) for x in re.findall(r"\d+(?:\.\d+)?", i)] or [0]
         return sorted(ids, key=lambda i: ("preview" in i, [-v for v in ver(i)]))[:4]
 
-    def _complete(self, messages: list[dict], max_tokens: int = 900, log=print, temperature: float | None = None) -> str:
+    def _complete(self, messages: list[dict], max_tokens: int = 900, log=print, temperature: float | None = None,
+                  prefer: tuple = ()) -> str:
+        """prefer: provider names to try first (the match check uses the smaller models, so the best one's free daily
+        allowance is kept for the application answers themselves)."""
         if DEADLINE[0] and time.time() > DEADLINE[0] - 20:
             raise WriterUnavailable("no time left for this application")
         est = sum(len(m["content"]) for m in messages) // 4 + max_tokens
@@ -383,7 +386,8 @@ class Writer:
                     continue
                 break
             # prefer providers with quota available right now, otherwise the one that frees up soonest
-            order = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, i))
+            order = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5,
+                                                            0 if live[i]["name"] in prefer else 1, i))
             for i in order:
                 p = live[i]
                 try:

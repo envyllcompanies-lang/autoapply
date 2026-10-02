@@ -1,19 +1,22 @@
-"""LinkedIn-style match pre-screen: before applying, compare the actual posting with your résumé and rate the fit 0-100,
-the way LinkedIn's 'top applicant' / match signal does, with a one-line reason.
+"""Look before applying: is the posting still up, and is it a match?
 
-For the best-scoring queued jobs that have not been screened yet, it:
-  1. fetches the full posting text from the employer's own public feed (Workday, Greenhouse, Lever JSON) when the job
-     list only had a title,
-  2. re-runs the entry-level / pay check against that full text,
-  3. asks the free writer for {"fit": 0-100, "why": "..."} using a short résumé digest (no personal details),
-and stores the result in the 'fit' column. Jobs under search.min_fit are set aside as low matches; the rest are applied
-to best match first. Every job is screened once.
+Two checks, both done right before a job would be applied to and neither needing a browser:
+
+  preflight()  asks the employer's own public feed (Workday, Greenhouse, Lever) whether the posting still exists and
+               reads its full text. A posting the feed no longer lists is skipped without spending run time on it.
+  gate()       compares that full text with your résumé, the way LinkedIn's match signal does, and gives a 0-100 fit with
+               a one-line reason. Jobs under search.min_fit are set aside; the rest are applied to. The result is stored
+               in the 'fit' column, so every job is only ever checked once.
+
+The match check uses the free writer's smaller models and a short résumé digest (no personal details), so the best
+model's daily allowance is left for the application answers themselves.
 """
 from __future__ import annotations
 
 import html
 import json
 import re
+import time
 from urllib.parse import urlparse
 
 import requests
@@ -31,8 +34,11 @@ def _text(h: str) -> str:
     return re.sub(r"[ \t]+", " ", html.unescape(h)).strip()
 
 
-def fetch_description(url: str) -> str:
-    """The posting's full text from the employer's public JSON feed ('' when the site is not one of these)."""
+def preflight(url: str, deep: bool = True) -> dict:
+    """Before a browser is opened: is the posting still up, and what does it say? Read from the employer's own public feed
+    (Workday, Greenhouse, Lever), which answers in a fraction of a second. Returns {'closed': bool, 'description': str};
+    'closed' is only True when the employer's feed itself says the job is gone."""
+    out = {"closed": False, "description": ""}
     try:
         u = urlparse(url)
         host, parts = u.netloc.lower(), [p for p in u.path.split("/") if p]
@@ -40,35 +46,55 @@ def fetch_description(url: str) -> str:
             tenant = host.split(".")[0]
             if parts and re.fullmatch(r"[a-z]{2}-[A-Z]{2}", parts[0]):
                 parts = parts[1:]                          # /en-US/<site>/job/...
+            if "apply" in parts:
+                parts = parts[:parts.index("apply")]
             if len(parts) >= 3 and "job" in parts:
                 site = parts[0]
                 rest = "/".join(parts[parts.index("job"):])
-                r = requests.get(f"https://{host}/wday/cxs/{tenant}/{site}/{rest}", headers=UA, timeout=20)
-                if r.ok:
+                r = requests.get(f"https://{host}/wday/cxs/{tenant}/{site}/{rest}", headers=UA, timeout=15)
+                if r.status_code in (404, 410):
+                    out["closed"] = True
+                elif r.ok:
                     info = r.json().get("jobPostingInfo") or {}
-                    return _text(info.get("jobDescription", ""))[:9000]
-        elif "greenhouse.io" in host:
+                    if info.get("canApply") is False or info.get("posted") is False:
+                        out["closed"] = True
+                    out["description"] = _text(info.get("jobDescription", ""))[:9000]
+            return out
+        if "greenhouse.io" in host:
             m = re.search(r"/([\w-]+)/jobs/(\d+)", u.path)
             if m:
-                r = requests.get(f"https://boards-api.greenhouse.io/v1/boards/{m.group(1)}/jobs/{m.group(2)}", headers=UA, timeout=20)
-                if r.ok:
-                    return _text(r.json().get("content", ""))[:9000]
-        elif "lever.co" in host:
+                r = requests.get(f"https://boards-api.greenhouse.io/v1/boards/{m.group(1)}/jobs/{m.group(2)}", headers=UA, timeout=15)
+                if r.status_code in (404, 410):
+                    out["closed"] = True
+                elif r.ok:
+                    out["description"] = _text(r.json().get("content", ""))[:9000]
+            return out
+        if "lever.co" in host:
             if len(parts) >= 2:
-                r = requests.get(f"https://api.lever.co/v0/postings/{parts[0]}/{parts[1]}", headers=UA, timeout=20)
-                if r.ok:
+                r = requests.get(f"https://api.lever.co/v0/postings/{parts[0]}/{parts[1]}", headers=UA, timeout=15)
+                if r.status_code in (404, 410):
+                    out["closed"] = True
+                elif r.ok:
                     d = r.json()
                     lists = " ".join(f"{x.get('text', '')}: {_text(x.get('content', ''))}" for x in d.get("lists") or [])
-                    return (str(d.get("descriptionPlain") or "") + "\n" + lists + "\n" + str(d.get("additionalPlain") or ""))[:9000]
+                    out["description"] = (str(d.get("descriptionPlain") or "") + "\n" + lists + "\n" + str(d.get("additionalPlain") or ""))[:9000]
+            return out
+        if not deep:
+            return out
         # any other site: the posting page's own text (BambooHR, Breezy, Workable and most career pages render it server-side)
-        r = requests.get(url, headers={**UA, "Accept": "text/html"}, timeout=20)
+        r = requests.get(url, headers={**UA, "Accept": "text/html"}, timeout=15)
         if r.ok and "html" in r.headers.get("content-type", ""):
             txt = _text(r.text)
             if len(txt) > 600:
-                return txt[:9000]
+                out["description"] = txt[:9000]
     except Exception:
         pass
-    return ""
+    return out
+
+
+def fetch_description(url: str) -> str:
+    """The posting's full text from the employer's public feed or page ('' when it cannot be read)."""
+    return preflight(url)["description"]
 
 
 def _digest(profile: dict) -> str:
@@ -82,8 +108,10 @@ def _digest(profile: dict) -> str:
         L.append(f"Project: {p.get('name') or p.get('title', '')}")
     for g in profile.get("skills", []) or []:
         L.append(f"Skills ({g.get('group', '')}): {', '.join(g.get('items', []))}")
-    return "\n".join(L)[:3500]
+    return "\n".join(L)[:2600]
 
+
+PREFER = ("groq-qwen", "groq-20b")        # the smaller free models do the match check; the best one is kept for answers
 
 PROMPT = ("You screen job postings for one candidate, the way LinkedIn's job-match feature does. Using the candidate's background "
           "and the posting, rate how well the candidate fits on a 0-100 scale: 85+ strong (meets the required qualifications, "
@@ -101,12 +129,18 @@ def screen(brain, job: Job, log=print) -> tuple[int | None, str]:
         return None, ""
     user = (f"CANDIDATE\n{_digest(brain.profile)}\nTarget: entry-level operations, coordination, analyst, supply chain, "
             f"project roles; 0-3 years of experience.\n\nPOSTING\n{job.title} at {job.company} ({job.location})\n"
-            f"{(job.description or '')[:3500]}")
+            f"{(job.description or '')[:3200]}")
+    from . import writer as _w
+    old_deadline = _w.DEADLINE[0]
+    _w.DEADLINE[0] = time.time() + 50                      # never sit out a long rate limit for a match check
     try:
-        out = w._complete([{"role": "system", "content": PROMPT}, {"role": "user", "content": user}], 300, log, temperature=0.0)
+        out = w._complete([{"role": "system", "content": PROMPT}, {"role": "user", "content": user}], 300, log, temperature=0.0,
+                          prefer=PREFER)
     except Exception as e:
         log(f"      match check unavailable: {str(e)[:80]}")
         return None, ""
+    finally:
+        _w.DEADLINE[0] = old_deadline
     m = re.search(r"\{.*\}", out or "", re.S)
     try:
         d = json.loads(m.group(0)) if m else {}
@@ -117,49 +151,45 @@ def screen(brain, job: Job, log=print) -> tuple[int | None, str]:
         return (min(100, int(n.group(1))) if n else None), ""
 
 
-def run(db, brain, by_key: dict, row_job, s: dict, level_out, log=print, site_rank=None) -> list[tuple]:
-    """Screen up to search.prescreen_per_run unscreened queued jobs (best score first). Returns [(fit, why, row)] screened."""
+def gate(db, brain, job: Job, row, s: dict, log=print, have_page: bool = False) -> tuple[str, int | None, str]:
+    """The match check for one job, right before it would be applied to. Returns (verdict, fit, why):
+      'go'    apply (the match is at or above search.min_fit, or the check is switched off)
+      'low'   set aside: the match is below the bar (the job is marked low_score)
+      'page'  the posting text is not known yet: open the page, then ask again with have_page=True
+      'later' it cannot be judged now (the free writer is out of allowance): the job stays queued for another run,
+              unless its keyword score is high enough to go without a match check (search.min_score_without_match)."""
+    if not s.get("prescreen", True):
+        return "go", None, ""
+    min_fit = int(s.get("min_fit", 70))
     try:
-        db.conn.execute("ALTER TABLE jobs ADD COLUMN fit INTEGER")
-        db.conn.commit()
-    except Exception:
-        pass
-    n = int(s.get("prescreen_per_run", 15))
-    min_fit = int(s.get("min_fit", 55))
-    db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))   # cutoff raised
-    db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'",
-                    (min_fit,))                                                                            # cutoff lowered
-    db.conn.commit()
-    rows = db.conn.execute("SELECT * FROM jobs WHERE status='queued' AND fit IS NULL ORDER BY score DESC LIMIT ?", (n * 4,)).fetchall()
-    if site_rank:
-        rows = sorted(rows, key=lambda r: (site_rank(r), -(r["score"] or 0)))      # forms the bot fills best first
-    done, out = 0, []
-    for row in rows:
-        if done >= n:
-            break
-        job = by_key.get(row["key"]) or row_job(row)
-        if job is None:
-            continue
-        if len(job.description or "") < 400:
-            desc = fetch_description(job.apply_url or job.url)
-            if desc:
-                job.description = desc
-        why_out = level_out(job, s)
-        if why_out:
-            db.update(row["key"], status="filtered", reason=why_out, fit=0)
-            log(f"  match check: {job.title} @ {job.company}: {why_out[:90]}")
-            continue
-        if len(job.description or "") < 300:
-            db.update(row["key"], status="low_score", fit=-1, reason="posting text could not be read for the match check")
-            continue
-        fit, why = screen(brain, job, log)
-        done += 1
-        if fit is None:
-            break                                          # writer out of quota: try again next run
-        if fit < min_fit:
-            db.update(row["key"], status="low_score", fit=fit, reason=f"match {fit}%: {why}")
-        else:
-            db.update(row["key"], fit=fit, reason=f"match {fit}%: {why} | " + str(row["reason"] or "")[:200])
-        out.append((fit, why, row))
-        log(f"  match {fit:3d}%  {job.title} @ {job.company} — {why[:100]}")
-    return out
+        fit = row["fit"]
+    except (IndexError, KeyError):
+        fit = None
+    if fit and fit > 0:                                    # checked on an earlier run: the stored result stands
+        if fit >= min_fit:
+            return "go", fit, ""
+        try:
+            waiting = row["status"] != "low_score"         # e.g. waiting for a retry, with a match under today's bar
+        except (IndexError, KeyError):
+            waiting = False
+        if waiting:
+            old = re.sub(r"^match \d+%:.*? \| ", "", str(row["reason"] or ""))
+            db.update(job.key, status="low_score", reason=f"match {fit}%: under the {min_fit}% bar | {old[:200]}")
+        return "low", fit, ""
+    score = (row["score"] or 0) if row is not None else 0
+    fallback = "go" if score >= int(s.get("min_score_without_match", 80)) else "later"
+    if len(job.description or "") < 300:
+        return ("page" if not have_page else fallback), None, ""
+    w = getattr(brain, "writer", None)
+    if w is None or not w.ready():
+        return fallback, None, ""
+    fit, why = screen(brain, job, log)
+    if fit is None:
+        return fallback, None, ""
+    old = str((row["reason"] if row is not None else "") or "")
+    old = re.sub(r"^match \d+%:.*? \| ", "", old)
+    if fit < min_fit:
+        db.update(job.key, status="low_score", fit=fit, reason=f"match {fit}%: {why}")
+        return "low", fit, why
+    db.update(job.key, fit=fit, reason=f"match {fit}%: {why} | {old[:200]}")
+    return "go", fit, why

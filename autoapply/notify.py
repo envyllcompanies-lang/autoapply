@@ -49,12 +49,30 @@ def why_lines(groups: dict, limit: int = 6) -> list[str]:
     return [f"  - {status} x{n}: {why}" for (status, why), n in top]
 
 
-def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str = "", footer: str = "", paused: list | None = None, by_site: list | None = None) -> str:
+def _fit(r) -> str:
+    try:
+        return f", match {r['fit']}%" if r["fit"] and r["fit"] > 0 else ""
+    except (KeyError, IndexError, TypeError):
+        return ""
+
+
+def _stage(r) -> str:
+    try:
+        return f" (stopped at: {r['stage']})" if r["stage"] else ""
+    except (KeyError, IndexError, TypeError):
+        return ""
+
+
+def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str = "", footer: str = "", paused: list | None = None,
+               by_site: list | None = None, needs: list | None = None) -> str:
     lines = [f"autoapply {today}: {counts}", ""]
+    if needs:
+        lines.append(f"NEEDS YOU ({len(needs)}): the employer asked for something the bot cannot do")
+        lines += [f"  - {x}" for x in needs] + [""]
     applied = groups.get("applied", [])
     if applied:
         lines.append(f"APPLIED ({len(applied)})")
-        lines += [f"  - {r['title']} @ {r['company']}  (score {r['score']})\n    {r['url']}" for r in applied[:40]]
+        lines += [f"  - {r['title']} @ {r['company']}  (score {r['score']}{_fit(r)})\n    {r['url']}" for r in applied[:40]]
         lines.append("")
     unc = groups.get("unconfirmed", [])
     if unc:
@@ -64,7 +82,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
     if manual:
         lines.append(f"EXCEPTIONS ({len(manual)}): these were not submitted automatically")
         for r in manual:
-            lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}")
+            lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}{_stage(r)}")
         lines.append("")
     if not applied and not manual:
         lines.append("No applications were submitted this run. The bot is running; this is what happened instead:")
@@ -76,7 +94,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
     if by_site:
         lines += ["BY SITE (this run)"] + by_site + [""]
     if paused:
-        lines += ["SUPPRESSED SITES (repeated human verification blocked unattended applications)"]
+        lines += ["SITES THAT KEEP ENDING AT A HUMAN CHECK (still tried, but after the sites that finish)"]
         lines += [f"  - {x}" for x in paused] + [""]
     if run_url:
         lines += [f"Run log and résumé PDFs: {run_url}"]

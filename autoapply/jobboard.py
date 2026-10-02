@@ -50,9 +50,10 @@ def _id(url: str) -> str:
 
 
 def discover_jobboard(cfg: dict, base: Path, log=print, known_urls: set | None = None) -> list[Job]:
-    a = (cfg.get("aggregators") or {}).get("jobboard") or {}
-    if a.get("enabled", True) is False:
-        return []
+    agg = cfg.get("aggregators") or {}
+    a = agg.get("jobboard") or {}
+    if a.get("enabled", True) is False or (agg.get("enabled") is False and "jobboard" not in agg):
+        return []                              # switched off (or all aggregators are, and this one was not asked for by name)
     search = cfg.get("search") or {}
     levels = set(a.get("levels", ["entry"]))
     sites = set(a.get("sites", ["Workday", "Greenhouse", "Lever", "BambooHR"]))   # sites the bot can fill

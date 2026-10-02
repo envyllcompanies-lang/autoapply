@@ -695,6 +695,8 @@ class Brain:
                 got = next((o for o in opts if re.search(r"united states|\busa?\b", o, re.I) and "+1" in o), None)
                 if got:
                     return got
+            if kind == "wdprompt" and not f.get("selected"):
+                return "United States of America (+1)"  # Workday left it empty: search for it and pick it
             return ""                                 # already set to United States (+1) by the country choice: leave it
         if kind == "combobox" and re.match(r"\W*(overall|speaking|writing|reading|listening|comprehension|verbal|written)\W*\*?\W*$", lab) \
                 and not any(re.search(r"fluent|native|advanced|expert|proficient", o, re.I) for o in (opts or [])):
@@ -722,6 +724,8 @@ class Brain:
                     continue
                 if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
+                if keys[0] == "gpa" and not f.get("required"):
+                    return None      # a grade average is only given when the form insists on one
                 val = self._fact(keys)
                 if mode == "travel" and has_opts:
                     return self._travel_option(opts, kind)

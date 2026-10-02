@@ -36,6 +36,24 @@ gh repo view "$SLUG" >/dev/null 2>&1 || { echo "There is no repo $SLUG yet. Run 
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 gh repo clone "$SLUG" "$TMP/repo" -- -q
+
+# Never put an older copy of the code over a newer one: the code on GitHub may have been updated since this folder was made
+# (builds are named like 2026-10-01-ab; after -z comes -aa).
+build() { if [ -f "$1" ]; then sed -n 's/^__version__ *= *"\(.*\)".*/\1/p' "$1" | head -1; fi; }
+order() { echo "$1" | awk -F- '{ printf "%s-%s-%s-%02d%s", $1, $2, $3, length($4), $4 }'; }
+HERE_V="$(build "$SRC/autoapply/__init__.py")"
+THERE_V="$(build "$TMP/repo/autoapply/__init__.py")"
+PUSH_CODE=1
+if [ -n "$HERE_V" ] && [ -n "$THERE_V" ] && [ "$HERE_V" != "$THERE_V" ] && [ "${AUTOAPPLY_PUSH_OLDER:-0}" != 1 ]; then
+  first="$(printf '%s\n%s\n' "$(order "$HERE_V")" "$(order "$THERE_V")" | LC_ALL=C sort | head -1)"
+  if [ "$first" = "$(order "$HERE_V")" ]; then
+    PUSH_CODE=0
+    echo "The code on GitHub (build $THERE_V) is newer than this folder (build $HERE_V): leaving the code on GitHub as it is."
+    echo "(Your secrets are still refreshed below. To get the newest code into a folder:  gh repo clone $SLUG)"
+  fi
+fi
+
+if [ "$PUSH_CODE" = 1 ]; then
 for p in autoapply tests .github boards.yaml README.md requirements.txt setup_github.sh update_github.sh .gitignore; do
   rm -rf "$TMP/repo/$p"
   [ -e "$SRC/$p" ] && cp -R "$SRC/$p" "$TMP/repo/$p"
@@ -60,6 +78,7 @@ else
   done
   [ "$pushed" = 1 ] || { echo "Could not push the code. Try again in a minute."; exit 1; }
   echo "Code pushed."
+fi
 fi
 cd "$SRC"
 

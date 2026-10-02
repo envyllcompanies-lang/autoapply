@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 """
 
+# Statuses that end a job's life in the queue. 'unconfirmed' = Submit was clicked and no confirmation was seen: it is never
+# submitted again; later runs only look in the inbox for the employer's confirmation email.
 FINAL = ("applied", "filtered", "low_score", "blocked", "skipped", "unconfirmed")
 
 
@@ -28,10 +30,14 @@ class DB:
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
         self.conn.execute("CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)")
-        try:
-            self.conn.execute("ALTER TABLE jobs ADD COLUMN fit INTEGER")     # LinkedIn-style match % (prescreen.py)
-        except sqlite3.OperationalError:
-            pass
+        for col, kind in (("fit", "INTEGER"),          # match % of your résumé against the posting (prescreen.py)
+                          ("stage", "TEXT"),           # how far the last attempt got: 'account', 'My Information', 'Review' ...
+                          ("submitted_at", "TEXT"),    # when Submit was clicked; set BEFORE the click, never cleared by a retry rule
+                          ("followup", "TEXT")):       # an email from the employer asking for something more
+            try:
+                self.conn.execute(f"ALTER TABLE jobs ADD COLUMN {col} {kind}")
+            except sqlite3.OperationalError:
+                pass
         # a submit that showed no confirmation may still have gone through: never retry it automatically
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='failed' AND reason LIKE 'no confirmation after submit%'")
         self.conn.commit()
@@ -65,9 +71,19 @@ class DB:
         cur6 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND (reason LIKE 'account:%' OR reason LIKE 'not a real application form%' OR reason LIKE 'no Next or Submit%'"
             " OR reason LIKE 'no application form found%')")
+        # set aside only because their posting text could not be read ahead of time: it is now read from the page itself
+        cur7 = self.conn.execute("UPDATE jobs SET status='queued', fit=NULL WHERE status='low_score' AND fit = -1")
+        # Workday applications that got stuck part-way under the old page-by-page guessing (a date box, a pop-up list, a
+        # block behind 'Add') or ran out of time. The Workday driver handles those pages now, and Submit was never clicked.
+        cur8 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','failed') AND apply_url LIKE '%myworkdayjobs.com%'"
+            " AND (submitted_at IS NULL OR submitted_at = '') AND (status='failed' OR reason LIKE 'stuck on step%')")
+        # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
+        self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
+                          " AND reason NOT LIKE 'recheck-inbox%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur5.rowcount + cur6.rowcount
+        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8))
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
@@ -103,10 +119,19 @@ class DB:
             (date.today().isoformat() + "%",)).fetchone()[0]
 
     def retryable(self, max_attempts: int):
-        """Scored-high jobs that failed transiently and deserve another go."""
+        """Scored-high jobs that failed transiently and deserve another go. A job whose Submit button was ever clicked is
+        never among them, whatever its status says: the only way back in is the inbox re-check of a submit that provably
+        never reached the employer (reason 'recheck-inbox: ...')."""
         return self.conn.execute(
-            "SELECT * FROM jobs WHERE status IN ('queued','failed','dry_run') AND attempts < ? ORDER BY score DESC",
+            "SELECT * FROM jobs WHERE status IN ('queued','failed','dry_run') AND attempts < ?"
+            " AND (submitted_at IS NULL OR submitted_at = '' OR reason LIKE 'recheck-inbox%') ORDER BY score DESC",
             (max_attempts,)).fetchall()
+
+    def mark_submit(self, key: str, attempts: int):
+        """Write-ahead record of a Submit click: from here on a crash, a timeout or a cancelled run must never lead to a
+        second submit of the same application."""
+        self.update(key, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=attempts,
+                    submitted_at=datetime.now().isoformat(timespec="seconds"))
 
     def since(self, iso_ts: str):
         return self.conn.execute(

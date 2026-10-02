@@ -150,10 +150,19 @@ print(r.stdout.rstrip())
 if r.returncode != 0:
     problems.append("more_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
 
-r = subprocess.run([sys.executable, str(ROOT / "tests" / "fix_checks.py")], capture_output=True, text=True)
-print(r.stdout.rstrip())
-if r.returncode != 0:
-    problems.append("fix_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
+for _name in ("fix_checks.py", "workday_checks.py", "captcha_boundary.py"):
+    r = subprocess.run([sys.executable, str(ROOT / "tests" / _name)], capture_output=True, text=True)
+    print(r.stdout.rstrip())
+    if r.returncode != 0:
+        problems.append(f"{_name} failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
+
+# ---- the bot's own code: no name used without being defined, no call into another module that is not there
+from autoapply import selfcheck
+_broken = selfcheck.problems(sorted((ROOT / "tests").glob("*.py")))
+if _broken:
+    problems.append("code check: " + "; ".join(_broken[:5]))
+else:
+    print("ok  code check: every name and cross-module reference in the bot and its tests resolves")
 
 print("RESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import calendar
+import dataclasses
 import json
 import os
 import random
@@ -20,12 +21,12 @@ from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
-from . import render, submit as sub, auth, sources, mailbox, notify, level, __version__
+from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, __version__
 from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-01-z"
+REQUEUE_VERSION = "2026-10-01-ab"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -58,7 +59,8 @@ def merge_board_file(cfg: dict, base: Path) -> int:
     return added
 
 
-TOP_MATCHES: list = []      # best match-check results of this run, for the summary email
+TOP_MATCHES: list = []      # (fit, line) for the match checks of this run, for the summary email
+FOLLOWUPS: list = []        # employers that emailed asking for something more ('incomplete application', an assessment)
 
 
 def merge_settings(cfg: dict, base: Path) -> dict:
@@ -125,22 +127,67 @@ def row_job(row):
                location=row["location"] or "", url=row["url"] or row["apply_url"], apply_url=row["apply_url"] or row["url"], description="")
 
 
-SITE_RANK = {"lever": 0, "breezy": 0, "bamboohr": 0, "recruitee": 0, "workday": 0, "workable": 2, "greenhouse": 2}
+# How likely each application system is to let an unattended application finish, before anything has been measured:
+# 0 = finishes (Workday: the only system the bot has completed again and again), 1 = no known obstacle,
+# 2 = submits are often held by a human check when they come from a data-centre address.
+SITE_PRIOR = {"workday": 0, "bamboohr": 1, "breezy": 1, "recruitee": 1, "smartrecruiters": 1, "icims": 1, "jobvite": 1,
+              "ashby": 2, "workable": 2, "greenhouse": 2, "lever": 2}
+HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|security code|human check|human verification|are you a robot|anti-bot", re.I)
 
 
-def site_rank(row) -> int:
-    """Sites that let the bot finish (no human check from GitHub's servers) go first; Workable and Greenhouse, whose
-    submits are often held by a human check, come after them."""
-    src = (row["source"] or "").lower()
-    url = (row["apply_url"] or row["url"] or "").lower()
-    if "myworkdayjobs" in url:
-        return 0
-    if "workable" in url or "workab" in src:
-        return 2
-    if "greenhouse" in url:
-        return 2
-    detected = detect_ats(url, "")
-    return min(SITE_RANK.get(src, detected.priority), detected.priority)
+def ats_of(job) -> str:
+    """Which application system a posting lives on: workday, greenhouse, lever ... or the site's own host."""
+    src = (getattr(job, "source", "") or "").lower()
+    url = getattr(job, "apply_url", "") or getattr(job, "url", "") or ""
+    if "myworkdayjobs.com" in url:
+        return "workday"
+    if src and src != "web" and not src.startswith("agg-"):
+        return src
+    found = board_of(url)
+    if found:
+        return found[0]
+    return detect_ats(url).name
+
+
+def _row_ats(row) -> str:
+    return ats_of(SimpleNamespace(source=row["source"] or "", apply_url=row["apply_url"] or "", url=row["url"] or ""))
+
+
+def site_health(db: DB, days: int = 14) -> dict:
+    """What actually happened on each application system lately: {'workday': {'ok': 7, 'human': 0, 'other': 12}}.
+    'ok' = applications that went through, 'human' = stopped by a human check, 'other' = everything else that was tried."""
+    since = (datetime.now() - timedelta(days=days)).isoformat(timespec="seconds")
+    out: dict = {}
+    for r in db.conn.execute("SELECT source, url, apply_url, status, reason FROM jobs WHERE attempts > 0 AND updated >= ?"
+                             " AND status IN ('applied','blocked','unconfirmed','failed','skipped')", (since,)):
+        site = out.setdefault(_row_ats(r), {"ok": 0, "human": 0, "other": 0})
+        if r["status"] == "applied":
+            site["ok"] += 1
+        elif HUMAN_CHECK.search(r["reason"] or ""):
+            site["human"] += 1
+        else:
+            site["other"] += 1
+    return out
+
+
+def site_rank(row, health: dict | None = None) -> int:
+    """Order in which application systems are tried, from measured results rather than a fixed list: 0 = applications
+    have been going through there, 1 = untested or mixed, 2 = submits are often held by a human check, 3 = every recent
+    try ended at a human check. Nothing is paused or skipped: lower-ranked sites simply wait until the better ones are done."""
+    ats = _row_ats(row)
+    h = (health or {}).get(ats)
+    if h:
+        if h["ok"] and h["ok"] * 3 >= h["human"]:
+            return 0
+        if h["human"] >= 3 and not h["ok"]:
+            return 3
+    return SITE_PRIOR.get(ats, 1)
+
+
+def health_lines(health: dict) -> list[str]:
+    """One line per application system that keeps ending at a human check (for the summary email)."""
+    return [f"{ats}: stopped by a human check on {h['human']} recent tries, none went through (tried last, after the sites that finish)"
+            for ats, h in sorted(health.items()) if h["human"] >= 3 and not h["ok"]]
 
 
 def site_summary(rows) -> list[str]:
@@ -150,8 +197,7 @@ def site_summary(rows) -> list[str]:
     for r in rows:
         if r["status"] in ("queued", "low_score", "filtered"):
             continue
-        job = SimpleNamespace(source=r["source"] or "", apply_url=r["apply_url"] or "", url=r["url"] or "")
-        site = tally.setdefault(ats_of(job), {})
+        site = tally.setdefault(_row_ats(r), {})
         site[r["status"]] = site.get(r["status"], 0) + 1
     ranked = sorted(tally.items(), key=lambda kv: -sum(kv[1].values()))[:10]
     return [f"  {name}: " + ", ".join(f"{n} {st}" for st, n in sorted(c.items(), key=lambda kv: -kv[1])) for name, c in ranked]
@@ -303,6 +349,20 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     log = Logger(base / "logs" / f"{today}.log")
     run_start = datetime.now().isoformat(timespec="seconds")
     log(f"=== autoapply run ({'DRY RUN' if dry_run else 'LIVE'}) build {__version__} ===")
+    try:
+        broken = selfcheck.problems()
+    except Exception as e:          # the checker itself must never be the reason a run does not start
+        log(f"(code check skipped: {type(e).__name__}: {str(e)[:100]})")
+        broken = []
+    if broken:          # e.g. a function that was deleted but is still called: every application would fail the same way
+        log("The bot's own code has a mistake in it, so this run stops before touching any job:")
+        for b in broken[:15]:
+            log(f"  - {b}")
+        if not dry_run:
+            notify.send_email(cfg, "autoapply could not start: its code needs a fix",
+                              "This run stopped before applying to anything, because the bot's code has a mistake in it:\n\n"
+                              + "\n".join("  - " + b for b in broken[:15]) + f"\n\n(build {__version__})", log)
+        raise SystemExit("code check failed: " + broken[0])
     if not budget_ok(cfg, base, log):
         if os.environ.get("GITHUB_ACTIONS"):
             add_usage(base, ACTIONS_OVERHEAD_MIN)          # even a skipped run spends its set-up minutes
@@ -319,6 +379,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     brain.applied_before = {r[0] for r in db.conn.execute(
         "SELECT DISTINCT company FROM jobs WHERE status IN ('applied','unconfirmed')")}
     _resolve_old_unconfirmed(db, brain, log)
+    _note_followups(db, brain, log)
     n_up = 0
     for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
         lv = level.classify(r["title"] or "")
@@ -403,54 +464,50 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         cap = min(cap, int(s["per_run_cap"]))
     if limit is not None:
         cap = min(cap, limit)
-    if brain.writer and s.get("prescreen", False):
-        from . import prescreen
-        # re-check every queued title against the current rules (rules get stricter over time)
-        from .sources import prefilter as _pf
-        n_sw = 0
-        for r in db.conn.execute("SELECT * FROM jobs WHERE status='queued'").fetchall():
-            j = by_key.get(r["key"]) or row_job(r)
-            if j is None:
-                continue
-            import dataclasses as _dc
-            why = level_out(_dc.replace(j, description=""), s)
-            if not why:
-                try:
-                    why = _pf(j, s)
-                except Exception:
-                    why = None
-            if why:
-                db.update(r["key"], status="filtered", reason=str(why)[:200])
-                n_sw += 1
-        if n_sw:
-            log(f"Queue clean-up: {n_sw} queued jobs no longer meet the rules and were removed")
-        log("Match check (your résumé vs. each posting, like LinkedIn's match score):")
-        screened = prescreen.run(db, brain, by_key, row_job, s, level_out, log, site_rank)
-        if screened:
-            top = sorted(screened, key=lambda x: -x[0])[:5]
-            TOP_MATCHES.extend(f"{f}% {r['title']} @ {r['company']}: {w}" for f, w, r in top)
+
+    # re-check every queued title against the current rules (rules get stricter over time)
+    n_sw = 0
+    for r in db.conn.execute("SELECT * FROM jobs WHERE status='queued'").fetchall():
+        j = by_key.get(r["key"]) or row_job(r)
+        if j is None:
+            continue
+        why = level_out(dataclasses.replace(j, description=""), s)
+        if not why:
+            try:
+                why = prefilter(j, s)
+            except Exception:
+                why = None
+        if why:
+            db.update(r["key"], status="filtered", reason=str(why)[:200])
+            n_sw += 1
+    if n_sw:
+        log(f"Queue clean-up: {n_sw} queued jobs no longer meet the rules and were removed")
+
+    health = site_health(db)
+    match_on = bool(s.get("prescreen", True))
+    min_fit = int(s.get("min_fit", 70))
+    no_match_bar = int(s.get("min_score_without_match", 80))
+    if match_on:      # the bar may have moved since these were checked: set aside what is now under it, bring back what is now over it
+        db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))
+        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'", (min_fit,))
+        db.conn.commit()
+
+    def _fit(r) -> int:
+        try:
+            return r["fit"] or 0
+        except (IndexError, KeyError):
+            return 0
 
     def _rank(r):
-        try:
-            fit = r["fit"]
-        except (IndexError, KeyError):
-            fit = None
-        return (site_rank(r), -(fit if fit and fit > 0 else 0.8 * (r["score"] or 0)))
+        fit = _fit(r)
+        return (site_rank(r, health), -(fit if fit > 0 else 0.8 * (r["score"] or 0)))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
     skip_sites = [x.lower() for x in s.get("skip_sites", []) or []]
     if skip_sites:
         queue = [r for r in queue if not any(x in ((r["source"] or "") + " " + (r["apply_url"] or r["url"] or "")).lower()
                                              for x in skip_sites)]
-    if s.get("prescreen", False) and s.get("require_match", True):
-        # only jobs that passed the résumé-vs-posting match check (search.min_fit) are applied to
-        min_fit = int(s.get("min_fit", 75))
-        def _fit(r):
-            try:
-                return r["fit"] or 0
-            except (IndexError, KeyError):
-                return 0
-        queue = [r for r in queue if _fit(r) >= min_fit]
-    log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
+    log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now"
+        + (f" (each is first checked against your résumé: the bar is a {min_fit}% match)" if match_on and brain.writer else ""))
     if cap <= 0 or not queue:
         return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
@@ -462,7 +519,42 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         log(f"Time for this run: {(deadline - t_start) / 60:.0f} min in all ({month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month)")
     per_company = int(s.get("max_per_company", 3))
     sub.MAX_APPLY_SECONDS = int(float(s.get("max_minutes_per_job", 8)) * 60)
+    facts = cfg.get("facts") or {}
     heartbeat(base)
+
+    def judge(row):
+        """Everything that can be decided about a queued job without opening a browser: still listed, still within today's
+        rules, posting still up (the employer's own feed says so in a fraction of a second), your level and pay once the
+        full text is known, and the résumé match. Returns (verdict, job): 'go', 'page' (judge again once its page is
+        open), 'later' (cannot be judged now, stays queued) or 'drop' (already recorded why)."""
+        job = by_key.get(row["key"]) or (stub_job(row) if searched else row_job(row))
+        if job is None:
+            db.update(row["key"], status="skipped", reason="posting no longer listed")
+            return "drop", None
+        why_out = prefilter(job, s) or level_out(job, s)       # safety net: a queued job that no longer passes today's filters is dropped
+        if why_out:
+            db.update(job.key, status="filtered", reason=why_out)
+            return "drop", None
+        url0 = job.apply_url or job.url or ""
+        direct = not job.source.startswith("agg-") or bool(board_of(url0)) or "myworkdayjobs.com" in url0
+        if direct and s.get("preflight", True):
+            pre = prescreen.preflight(url0, deep=len(job.description or "") < 300)
+            if pre["closed"]:
+                db.update(job.key, status="skipped", reason="posting closed: the employer's own feed no longer lists it")
+                log(f"  ✗ {job.title} @ {job.company}: the posting is closed (no time spent on it)")
+                return "drop", None
+            if len(pre["description"]) > len(job.description or ""):
+                job.description = pre["description"]
+            if len(job.description or "") >= 300 and (why_lv := level_out(job, s)):
+                db.update(job.key, status="filtered", reason=why_lv)
+                log(f"  ✗ {job.title} @ {job.company}: {why_lv[:120]}")
+                return "drop", None
+        verdict, fit, why = prescreen.gate(db, brain, job, row, s, log)
+        if why:
+            log(f"  match {fit:3d}%  {job.title} @ {job.company} — {why[:100]}")
+            TOP_MATCHES.append((fit, f"{fit}% {job.title} @ {job.company}: {why}"))
+        return ("drop" if verdict == "low" else verdict), job
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=cfg.get("headless", True))
         ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 1800}, locale="en-US")
@@ -471,53 +563,88 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         acc = auth.Accounts(cfg, base)
         sub.ACCOUNTS_ENABLED = acc.enabled
         log(f"Accounts: {'ON (' + acc.email + ')' if acc.enabled else 'off (no ACCOUNT_PASSWORD secret), login sites are skipped'}")
-        done = 0
+        done = laters = 0
         dead = set()          # (company, title) already skipped/blocked this run
         nofind: dict = {}     # job source -> listings whose real application page could not be found this run
         weak_pw: set = set()  # sites that rejected ACCOUNT_PASSWORD this run
-        for row in queue:
+        bad_hosts: set = set()   # career sites that would not let the bot sign in this run: their other jobs wait, untouched
+        verdicts: dict = {}   # job key -> judge() result worked out ahead of time (during the pause after an application)
+
+        def lookahead(start: int, until: float):
+            """Use the pause between two applications to check the next jobs in line, so the next one is ready to go."""
+            ready = 0
+            for r in queue[start:start + 60]:
+                if ready >= 2 or time.time() >= until:
+                    break
+                v = verdicts.get(r["key"])
+                if v is None:
+                    v = verdicts[r["key"]] = judge(r)
+                if v[0] in ("go", "page"):
+                    ready += 1
+
+        for idx, row in enumerate(queue):
             if done >= cap:
                 break
             if time.time() > deadline:
                 log(f"Run time limit reached ({(deadline - t_start) / 60:.0f} min): the rest waits for the next run")
                 break
-            job = by_key.get(row["key"]) or (stub_job(row) if searched else row_job(row))
-            if job is None:
-                db.update(row["key"], status="skipped", reason="posting no longer listed")
-                continue
-            why_out = prefilter(job, s) or level_out(job, s)               # safety net: a queued job that no longer passes today's filters is dropped
-            if why_out:
-                db.update(job.key, status="filtered", reason=why_out)
-                continue
-            ck = (job.company.lower(), job.title.strip().lower())
-            if nofind.get(job.source, 0) >= 2:
+            ck = ((row["company"] or "").lower(), (row["title"] or "").strip().lower())
+            if nofind.get(row["source"] or "", 0) >= 2:
                 continue          # this board keeps handing out listings with no real form: don't burn minutes on more of them now
             if ck in dead:
-                db.update(job.key, status="skipped", reason="same role at same company already skipped this run")
+                db.update(row["key"], status="skipped", reason="same role at same company already skipped this run")
                 continue
-            co_n = norm_co(job.company)
+            co_n = norm_co(row["company"] or "")
             hist = [r for r in db.conn.execute("SELECT key, company, title FROM jobs WHERE status IN ('applied','unconfirmed') AND key != ?",
-                                               (job.key,)) if norm_co(r["company"]) == co_n]
+                                               (row["key"],)) if norm_co(r["company"]) == co_n]
             if any(r["title"].strip().lower() == ck[1] for r in hist):
-                db.update(job.key, status="skipped", reason="already applied to this role at this company")
+                db.update(row["key"], status="skipped", reason="already applied to this role at this company")
                 continue
             n_co = len(hist)
             if per_company and n_co >= per_company:
-                db.update(job.key, status="skipped", reason=f"already applied to {n_co} roles at this company")
+                db.update(row["key"], status="skipped", reason=f"already applied to {n_co} roles at this company")
                 continue
-            if str(row["reason"] or "").startswith("recheck-inbox") and mailbox.configured():
-                got = mailbox.find_confirmation(brain._company_name(job), time.time() - 7 * 86400, 0, log)
-                if got:
-                    db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}")
-                    log(f"    ✓ {job.title} @ {job.company}: the earlier submit did go through ({got[:60]})")
+            if str(row["reason"] or "").startswith("recheck-inbox"):
+                # an earlier submit that never reached the employer's server: one more try, but only after looking in the
+                # inbox for a confirmation. If the inbox cannot be read, it is not submitted again blind.
+                if not mailbox.configured():
                     continue
-            if weak_pw and (("myworkdayjobs" in (job.apply_url or "")) and "workday" in weak_pw):
+                rj = by_key.get(row["key"]) or row_job(row)
+                got = mailbox.find_confirmation(brain._company_name(rj), time.time() - 7 * 86400, 0, log) if rj else None
+                if got:
+                    db.update(row["key"], status="applied", reason=f"confirmed by email: {got[:100]}")
+                    log(f"    ✓ {row['title']} @ {row['company']}: the earlier submit did go through ({got[:60]})")
+                    continue
+            host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
+            if host and host in bad_hosts:
+                continue          # the bot could not sign in to this career site a moment ago: its other jobs stay queued
+            if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
                 continue
-            log(f"→ {job.title} @ {job.company} (score {row['score']})")
+
+            verdict, job = verdicts.pop(row["key"], None) or judge(row)
+            if verdict == "drop":
+                continue
+            if verdict == "later":
+                laters += 1
+                if laters == 1:
+                    log(f"  (the match check has no free allowance left right now: jobs with a keyword score under {no_match_bar} wait for a later run)")
+                continue
+
+            fit_now = _fit(db.get(job.key) or row)
+            log(f"→ {job.title} @ {job.company} (score {row['score']}" + (f", match {fit_now}%" if fit_now > 0 else "") + ")")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
             d.mkdir(parents=True, exist_ok=True)
             page = None
             clicked: list = []
+            stage = [""]
+            t_job = time.time()
+
+            def note_stage(name, _k=job.key, _st=stage):
+                _st[0] = str(name)[:60]
+                db.update(_k, stage=_st[0])
+
+            def snap(status, why, _job=job, _st=stage):
+                snapshot.save(base, page, _job, status, why, facts, _st[0])
             try:
                 page = ctx.new_page()
                 if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
@@ -539,24 +666,31 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         log("    ✗ skipped: already applied to this posting via another listing")
                         continue
                     db.update(job.key, apply_url=job.apply_url)
-                ats = ats_of(job)
-                sub.open_form(page, job.apply_url)   # check for blockers before spending tokens on tailoring
-                if len(job.description or "") < 300:  # only the title is known (big Workday sites, stubs): read the posting itself
-                    try:
-                        job.description = (job.description + "\n" + page.inner_text("body"))[:8000]
-                    except Exception:
-                        pass
+                    host = (urlparse(job.apply_url).netloc or "").lower()
+                landing = sub.open_form(page, job.apply_url) or ""   # check for blockers before spending tokens on tailoring
                 try:
                     page_txt = page.inner_text("body")[:12000]
                 except Exception:
                     page_txt = ""
+                if len(job.description or "") < 300:  # only the title is known (big Workday sites, stubs): read the posting itself
+                    job.description = (job.description + "\n" + (landing if len(landing) > len(page_txt) else page_txt))[:8000]
                 why_lv = level_out(Job(job.source, job.company, job.job_id, job.title, job.location, job.url, job.apply_url,
                                        (job.description or "") + "\n" + page_txt), s)   # the whole posting and form: years, pay
                 if why_lv:
                     db.update(job.key, status="filtered", reason=why_lv)
                     log(f"    ✗ skipped: {why_lv[:140]}")
-                    page.close()
                     continue
+                if verdict == "page":                 # the posting text was not known until its page was open: the match check now
+                    v2, fit2, why2 = prescreen.gate(db, brain, job, row, s, log, have_page=True)
+                    if why2:
+                        log(f"    match {fit2}% — {why2[:110]}")
+                        TOP_MATCHES.append((fit2, f"{fit2}% {job.title} @ {job.company}: {why2}"))
+                    if v2 == "low":
+                        log(f"    ✗ set aside: under the {min_fit}% match bar")
+                        continue
+                    if v2 == "later":
+                        log(f"    … waits for a later run (no match check available now and its keyword score is under {no_match_bar})")
+                        continue
                 if brain.writer and cfg.get("respect_ai_policies", True):
                     sub.guard_ai_policy(page, job)   # skip employers that say no AI-assisted applications
                 from . import writer as _w
@@ -571,15 +705,21 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 files = {"RESUME": (fixed if use_fixed else render.resume_pdf(browser, resume_md, d / f"{name}_resume.pdf")),
                          "_LETTER_MAKER": (lambda txt, _d=d, _n=name: render.letter_pdf(browser, txt, _d / f"{_n}_cover_letter.pdf", name=profile.get("name", ""), contact=profile.get("contact_line", "")))}
                 result = sub.apply(page, job, brain, letter, files, d / "form.png", dry_run, log, acc,
-                                   on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.update(
-                                       _k, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=_a + 1)))))
+                                   on_click=(None if dry_run else (lambda _k=job.key, _a=row["attempts"]: (clicked.append(1), db.mark_submit(_k, _a + 1)))),
+                                   on_stage=note_stage)
+                took = f"{(time.time() - t_job) / 60:.1f} min"
+                if result == "already_applied":
+                    db.update(job.key, status="applied", reason="the site says you already applied to this job", attempts=row["attempts"] + 1)
+                    brain.applied_before.add(job.company)
+                    log("    ✓ already applied earlier (recorded; nothing was sent again)")
+                    continue
                 status = "applied" if result == "confirmed" else "dry_run"
                 db.update(job.key, status=status, reason=result, resume_path=str(files["RESUME"]),
                           cover_path=str(files.get("COVER_LETTER", "")), screenshot=str(d / "form.png"),
                           attempts=row["attempts"] + (0 if dry_run else 1))
                 if status == "applied":
                     brain.applied_before.add(job.company)
-                log(f"    ✓ {status}")
+                log(f"    ✓ {status} ({took})")
                 done += 1
             except sub.Blocked as e:
                 blocked_text = str(e)
@@ -590,16 +730,20 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     weak_pw.add(ats_of(job))
                     log(f"    ✗ {ats_of(job)} rejected the saved account password as too weak: its jobs wait until it is updated")
                     continue
-                if str(e).startswith("posting closed"):
-                    db.update(job.key, status="skipped", reason=str(e))
+                if blocked_text.startswith("posting closed"):
+                    db.update(job.key, status="skipped", reason=blocked_text)
                     log("    ✗ skipped: the posting is closed")
                     continue
-                db.update(job.key, status="blocked", reason=str(e), attempts=row["attempts"] + 1)
+                snap("blocked", blocked_text)
+                db.update(job.key, status="blocked", reason=blocked_text, attempts=row["attempts"] + 1)
                 dead.add(ck)
-                if "could not find the employer" in str(e):
+                if "could not find the employer" in blocked_text:
                     nofind[job.source] = nofind.get(job.source, 0) + 1
+                if blocked_text.startswith("account:") and host:
+                    bad_hosts.add(host)
                 log(f"    ✗ blocked: {e}")
             except sub.Unconfirmed as e:
+                snap("unconfirmed", str(e))
                 got = None
                 if mailbox.configured():
                     got = mailbox.find_confirmation(brain._company_name(job), getattr(e, "t0", 0) or time.time() - 120, 75, log)
@@ -613,22 +757,26 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     dead.add(ck)
                     log(f"    ? submitted but NOT confirmed (will not retry; checked the inbox too): {str(e)[:260]}")
             except sub.NotSubmitted as e:
-                db.update(job.key, status="failed", reason=str(e)[:300], attempts=row["attempts"] + 1)
+                snap("not sent", str(e))
+                # the site bounced the submit with its own error: nothing was sent, so this one may be tried again
+                db.update(job.key, status="failed", reason=str(e)[:300], attempts=row["attempts"] + 1, submitted_at="")
                 log(f"    ✗ not sent (the form rejected it): {str(e)[:220]}")
             except sub.Unanswerable as e:
+                snap("skipped", str(e))
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 log(f"    ✗ skipped: {e}")
             except Exception as e:
+                snap("failed", str(e).splitlines()[0] if str(e) else type(e).__name__)
                 if clicked:          # submit was already clicked: it may have gone through, so never retry it
                     db.update(job.key, status="unconfirmed", reason=("error after submit click: " + str(e).splitlines()[0])[:300],
                               attempts=row["attempts"] + 1)
                     dead.add(ck)
                     log(f"    ? submit clicked, then an error: not retrying ({str(e).splitlines()[0][:150]})")
                 else:
-                    db.update(job.key, status="failed", reason=str(e).splitlines()[0][:300],
+                    db.update(job.key, status="failed", reason=(str(e).splitlines()[0] if str(e) else type(e).__name__)[:300],
                               attempts=row["attempts"] + 1)
-                    log(f"    ✗ failed: {str(e).splitlines()[0][:200]}")
+                    log(f"    ✗ failed: {(str(e).splitlines()[0] if str(e) else type(e).__name__)[:200]}")
                 if page:
                     try:
                         page.screenshot(path=str(d / "error.png"), full_page=True)
@@ -642,7 +790,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         pass
             heartbeat(base)
             if not dry_run:
-                time.sleep(random.uniform(*s.get("delay_seconds", [3, 10])))
+                pause = random.uniform(*s.get("delay_seconds", [3, 10]))
+                t_pause = time.time()
+                if pause > 0.5:
+                    lookahead(idx + 1, t_pause + pause)      # the pause is not wasted: the next jobs in line are checked meanwhile
+                rest = pause - (time.time() - t_pause)
+                if rest > 0:
+                    time.sleep(rest)
         browser.close()
     return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
@@ -661,6 +815,27 @@ def _resolve_old_unconfirmed(db: DB, brain: Brain, log):
     for key, subj in found.items():
         db.update(key, status="applied", reason=f"confirmed by email: {subj[:100]}")
         log(f"  ✓ earlier unconfirmed submit is confirmed by the company's email: {subj[:70]!r}")
+
+
+def _note_followups(db: DB, brain: Brain, log):
+    """An employer that answers an application with 'incomplete application' or 'please complete the assessment' does not
+    treat it as finished. The bot cannot do those steps, so you are told about each one, once."""
+    if not mailbox.configured():
+        return
+    cutoff = datetime.fromtimestamp(time.time() - 7 * 86400).isoformat(timespec="seconds")
+    rows = db.conn.execute("SELECT key, company, title, followup FROM jobs WHERE status IN ('applied','unconfirmed') AND updated >= ?",
+                           (cutoff,)).fetchall()
+    if not rows:
+        return
+    names = {r["key"]: brain._company_name(type("J", (), {"company": r["company"], "extra": {}})()) for r in rows}
+    by = {r["key"]: r for r in rows}
+    for key, subj in mailbox.scan_followups(names, time.time() - 7 * 86400).items():
+        if (by[key]["followup"] or "") == subj:
+            continue                                        # already told
+        db.conn.execute("UPDATE jobs SET followup=? WHERE key=?", (subj, key))      # (not through update(): 'updated' stays as it was)
+        db.conn.commit()
+        FOLLOWUPS.append(f"{by[key]['title']} @ {names[key]}: the employer emailed \"{subj[:100]}\"")
+        log(f"  ! {names[key]} asks for something more on '{by[key]['title']}': {subj[:80]!r}")
 
 
 def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
@@ -703,14 +878,16 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
         footer += f" · {month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month (before this run)"
     by_site = site_summary(rows)
     if TOP_MATCHES:
-        footer = "TOP MATCHES SCREENED THIS RUN\n" + "\n".join("- " + t for t in TOP_MATCHES) + "\n\n" + footer
-    text = notify.build_text(today, counts, groups, manual, run_url, footer, paused_sites(db, today), by_site)
+        top = [line for _fit, line in sorted(TOP_MATCHES, key=lambda x: -x[0])[:6]]
+        footer = "BEST MATCHES CHECKED THIS RUN\n" + "\n".join("- " + x for x in top) + "\n\n" + footer
+    text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site, needs=list(FOLLOWUPS))
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
     daily_check_in = db.meta_get("last_email_day") != today
-    if not dry_run and (applied_n or manual or groups.get("unconfirmed") or daily_check_in or not n.get("only_if_activity", True)):
-        subject = f"autoapply: {applied_n} applied" + (f", {len(manual)} exceptions" if manual else "") + ("" if applied_n or manual else " (running, nothing new to send)")
+    if not dry_run and (applied_n or manual or FOLLOWUPS or groups.get("unconfirmed") or daily_check_in or not n.get("only_if_activity", True)):
+        subject = (f"autoapply: {applied_n} applied" + (f", {len(FOLLOWUPS)} need you" if FOLLOWUPS else "")
+                   + (f", {len(manual)} not sent" if manual else "") + ("" if applied_n or manual or FOLLOWUPS else " (running, nothing new to send)"))
         if notify.send_email(cfg, subject, text, log):
             db.meta_set("last_email_day", today)
     notify.send_webhook(cfg, text, log)

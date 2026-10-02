@@ -179,12 +179,44 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
             pass
 
 
-def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False) -> dict | None:
-    """Poll the inbox until a fresh verification email arrives.
-    When require_code is true, only messages containing a parseable one-time code are returned.
-    """
+def _mentions(hint: str, info: dict) -> bool:
+    """The email names the site it is expected from (in its sender, subject or link). A short name ('ms', 'wf') has to
+    stand on its own, so it is not found inside ordinary words."""
+    if not hint:
+        return True
+    text = (info["from"] + " " + info["subject"] + " " + (info["link"] or "")).lower()
+    if len(hint) >= 4:
+        return hint in text
+    return bool(re.search(r"(?<![a-z0-9])" + re.escape(hint) + r"(?![a-z0-9])", text))
+
+
+def _is_reset(info: dict) -> bool:
+    return bool(re.search(r"reset|forgot", info["subject"], re.I) or re.search(r"reset", info["link"] or "", re.I))
+
+
+def _other_employer(site_host: str, info: dict) -> bool:
+    """A Workday email whose link belongs to a different employer's Workday site than the one being used right now."""
+    site = (site_host or "").split(":")[0].lower()
+    if not site.endswith("myworkdayjobs.com") or not info.get("link"):
+        return False
+    try:
+        from urllib.parse import urlparse
+        lh = (urlparse(info["link"]).hostname or "").lower()
+    except Exception:
+        return False
+    return lh.endswith("myworkdayjobs.com") and lh != site
+
+
+def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False,
+                          kind: str = "", site_host: str = "") -> dict | None:
+    """Poll the inbox until the email this site just sent arrives: {'link', 'code'} or None.
+    require_code: only messages with a one-time code in them.
+    kind: 'verify' never returns a password-reset email, 'reset' only returns one (both can sit in the inbox together).
+    site_host: the site being used; another employer's Workday email is never taken for this one's.
+    An email that does not name the site at all is only accepted when it has just arrived."""
     deadline = time.time() + timeout
     hint = (host_hint or "").lower()
+    fresh = max(since_ts, time.time() - 600)
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
@@ -192,9 +224,16 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                     continue
                 if require_code and not info.get("code"):
                     continue
-                if hint and hint not in (info["from"] + info["subject"]).lower() and hint not in (info["link"] or "").lower():
-                    # sender/link do not mention the site: still accept a clear verification message
-                    if not re.search(r"verif|confirm|activate", info["subject"], re.I):
+                if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):
+                    continue
+                if kind == "verify" and _is_reset(info):
+                    continue
+                if _other_employer(site_host, info):
+                    continue
+                if hint and not _mentions(hint, info):
+                    # sender/link do not mention the site: still accept a clear message of the wanted kind, if it is new
+                    clear = r"reset|password" if kind == "reset" else r"verif|confirm|activate"
+                    if info["ts"] < fresh - 120 or not re.search(clear, info["subject"], re.I):
                         continue
                 log(f"      mail: found '{info['subject'][:60]}'")
                 return {"link": info["link"], "code": info["code"]}
@@ -243,6 +282,32 @@ def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:
             text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
             flat = re.sub(r"[^a-z0-9]", "", text)
             if (flat_key and flat_key in flat) or (words and all(w in text for w in words[:2])):
+                found[key] = m["subject"]
+                break
+    return found
+
+
+FOLLOWUP_SUBJECT = re.compile(r"incomplete application|complete your application|finish your application|additional information|"
+                              r"action (required|needed)|assessment|questionnaire|more information (is )?(needed|required)", re.I)
+
+
+def scan_followups(companies: dict, since_ts: float, n: int = 80) -> dict:
+    """{key: subject} for each company (key -> display name) that has emailed asking for something more since since_ts:
+    'incomplete application', 'please complete the assessment', 'additional information needed'. These are applications
+    the site accepted but the employer does not treat as finished, so you are told about them."""
+    found = {}
+    try:
+        msgs = [m for m in _recent(since_ts, n, ("INBOX",)) if FOLLOWUP_SUBJECT.search(m["subject"])
+                and not re.search(r"verify your|security code|verification code|password|job alert|newsletter", m["subject"], re.I)]
+    except Exception:
+        return found
+    for key, name in companies.items():
+        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
+        if len(flat_key) < 3:
+            continue
+        for m in msgs:
+            flat = re.sub(r"[^a-z0-9]", "", (m["subject"] + " " + m["from"]).lower())
+            if flat_key in flat:
                 found[key] = m["subject"]
                 break
     return found
