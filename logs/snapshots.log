@@ -1,268 +1,3 @@
-=== 2026-10-02 13:31:00  blocked  Operations Coordinator ( CRE ) @ cw
-url: https://cw.wd1.myworkdayjobs.com/en-US/External/login
-stage: account
-why: account: still at Workday's sign-in after 5 tries; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
-Search for Jobs; logoButton:; logo:; headerTitle:; navigationContainer:English
-Search for Jobs; utilityButtonBar:English; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; navigationItem-Search for Jobs:Search for Job
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [button]  {logoButton}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-{signInContent}
-  [button]  {LINKED_IN_charm}
-  [button]  {GLASSDOOR_charm}
-  [button]  {SOCIAL_MEDIA_X_charm}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-02 13:31:35  blocked  Product Operations Associate, Aladdin Platform Engineering @ blackrock
-url: https://blackrock.wd1.myworkdayjobs.com/blackrock_professional/job/New-York-NY/Product-Operations-Associate--Aladdin-Platform-Engineering_R266544/apply/applyManually
-stage: account
-why: account: still on Workday's sign-in screen after trying to sign in or create an account
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Sign In {utilityButtonSignIn}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Product Operations Associate, Aladdin Platform Engineering
-{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
-label: current step 1 of 6
-label: Create Account/Sign In
-label: step 2 of 6
-label: My Information
-label: step 3 of 6
-label: My Experience
-label: step 4 of 6
-label: Application Questions
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-{signInContent}
-# Sign In
- {formField-email}
-label: Email Address*
-  <input:text #input-6 {email} required filled>
- {formField-password}
-label: Password*
-  <input:password #input-7 {password} required>
-  [button]  {click_filter}
-  [button] Sign In {signInSubmitButton}
-  [button] Create Account {createAccountLink}
-  [button] Forgot your password? {forgotPasswordLink}
-label: Enter website. This input is for robots only, do not enter if you're human.
-  <input:text #0294bd21-5008-43c7-ae67-3fb82fa08d83 {beecatcher} empty>
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-(dialog)
-  [button] 
-{signInContent}
-# Sign In
-  text: By signing in, you agree to the processing of your information in accordance with our
-  [button] Sign in with Apple {AppleSignInButton}
-  [button] Sign in with Google {GoogleSignInButton}
-  [button] Sign in with email {SignInWithEmailButton}
-
-=== 2026-10-02 13:33:26  skipped  Business Operations Analyst 1 @ pcg
-url: https://pcg.wd1.myworkdayjobs.com/pcg_external_careers/job/United-States-Remote/Business-Operations-Analyst-1_JR102201/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: In the last two years, to the best of your knowledge have yo
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Business Operations Analyst 1
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-104b36dfc250100123a3bd745a0d0000}
-label: Are you at least 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0000
- {formField-104b36dfc250100123a3bd745a0d0003}
-label: Are you eligible to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0003
- {formField-104b36dfc250100123a3be0de4b70001}
-label: Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70001
- {formField-104b36dfc250100123a3be0de4b70004}
-label: By acknowledging below, you agree that this position must be performed entirely within the United States and w
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70004
- {formField-f05416505c091001237cbe7b3e4b0000}
-label: What is the earliest date you would be available to start?
-  text: current value is MM/DD/YYYY
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionMonth-input} empty>
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionDay-input} empty>
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-104b36dfc250100123a3be0de4b70007}
-label: Please select your desired salary range.*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70007
- {formField-104b36dfc250100123a3bf4157410001}
-label: Have you ever been employed by PCG?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410001
- {formField-104b36dfc250100123a3bf4157410004}
-label: In the last two years, to the best of your knowledge have you been employed by a client, competitor, or busine
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410004
- {formField-104b36dfc250100123a3bf4157410008}
-label: In the last two years, to the best of your knowledge have you served in an elected or appointed (paid or unpai
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410008
- {formField-104b36dfc250100123a3bfdadb350000}
-label: Do you have any family members, relatives, or friends employed by PCG or any of its affiliates (including Staf
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350000
- {formField-104b36dfc250100123a3bfdadb350003}
-label: What is the name of the PCG client, competitor, business partner, or the government agency you were employed b
-  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350003 required empty>
- {formField-104b36dfc250100123a3bfdadb350004}
-label: What is/was your title, position, or role with your organization?*
-  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350004 required empty>
- {formField-104b36dfc250100123a3bfdadb350005}
-label: Did you ever have any interaction with PCG in your current role?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350005
- {formField-104b36dfc250100123a3c07464040000}
-label: Does PCG have any active or recent contracts with your organization?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040000
- {formField-104b36dfc250100123a3c07464040004}
-label: If you were to accept an offer from PCG, are you subject to any non-competition agreement, non-solicitation ag
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040004
- {formField-104b36dfc250100123a3c07464040007}
-label: Do you currently work for Public Partnerships (PPL) or have worked for Public Partnerships (PPL) in the past 1
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040007
- {formField-104b36dfc250100123a3c0746404000a}
-label: Are you applying as part of a DoD Skillbridge application?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c0746404000a
- {formField-104b36dfc250100123a3c10e17d60002}
-label: Are you able to meet the location requirements that are listed in the job description?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c10e17d60002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-02 13:34:45  skipped  Capital Project Coordinator I @ avalonbay
-url: https://pcg.wd1.myworkdayjobs.com/pcg_external_careers/job/United-States-Remote/Business-Operations-Analyst-1_JR102201/apply
-stage: Application Questions
-why: can't truthfully answer required: Did you ever have any interaction with PCG in your current r; Does PCG have any active or recent contracts with your organ
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Business Operations Analyst 1
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-104b36dfc250100123a3bd745a0d0000}
-label: Are you at least 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0000
- {formField-104b36dfc250100123a3bd745a0d0003}
-label: Are you eligible to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bd745a0d0003
- {formField-104b36dfc250100123a3be0de4b70001}
-label: Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70001
- {formField-104b36dfc250100123a3be0de4b70004}
-label: By acknowledging below, you agree that this position must be performed entirely within the United States and w
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70004
- {formField-f05416505c091001237cbe7b3e4b0000}
-label: What is the earliest date you would be available to start?
-  text: current value is MM/DD/YYYY
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionMonth-input} empty>
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionDay-input} empty>
-  <input #primaryQuestionnaire--f05416505c091001237cbe7b3e4b0000-dateS {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-104b36dfc250100123a3be0de4b70007}
-label: Please select your desired salary range.*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3be0de4b70007
- {formField-104b36dfc250100123a3bf4157410001}
-label: Have you ever been employed by PCG?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410001
- {formField-104b36dfc250100123a3bf4157410004}
-label: In the last two years, to the best of your knowledge have you been employed by a client, competitor, or busine
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410004
- {formField-104b36dfc250100123a3bf4157410008}
-label: In the last two years, to the best of your knowledge have you served in an elected or appointed (paid or unpai
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bf4157410008
- {formField-104b36dfc250100123a3bfdadb350000}
-label: Do you have any family members, relatives, or friends employed by PCG or any of its affiliates (including Staf
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350000
- {formField-104b36dfc250100123a3bfdadb350003}
-label: What is the name of the PCG client, competitor, business partner, or the government agency you were employed b
-  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350003 required empty>
- {formField-104b36dfc250100123a3bfdadb350004}
-label: What is/was your title, position, or role with your organization?*
-  <textarea #primaryQuestionnaire--104b36dfc250100123a3bfdadb350004 required empty>
- {formField-104b36dfc250100123a3bfdadb350005}
-label: Did you ever have any interaction with PCG in your current role?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3bfdadb350005
- {formField-104b36dfc250100123a3c07464040000}
-label: Does PCG have any active or recent contracts with your organization?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040000
- {formField-104b36dfc250100123a3c07464040004}
-label: If you were to accept an offer from PCG, are you subject to any non-competition agreement, non-solicitation ag
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040004
- {formField-104b36dfc250100123a3c07464040007}
-label: Do you currently work for Public Partnerships (PPL) or have worked for Public Partnerships (PPL) in the past 1
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c07464040007
- {formField-104b36dfc250100123a3c0746404000a}
-label: Are you applying as part of a DoD Skillbridge application?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c0746404000a
- {formField-104b36dfc250100123a3c10e17d60002}
-label: Are you able to meet the location requirements that are listed in the job description?*
-  [dropdown] nothing chosen #primaryQuestionnaire--104b36dfc250100123a3c10e17d60002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-02 13:35:30  skipped  2027 Early Careers: Analyst, Human Resources – New York, NY @ aig
 url: https://aig.wd1.myworkdayjobs.com/aig/job/NY-New-York/XMLNAME-2027-Early-Careers--Analyst--Human-Resources---New-York--NY_JR2603600-1/apply/applyManually
 stage: Application Questions 1 of 2
@@ -5471,6 +5206,325 @@ why: could not find the employer's application page
 # This job is not available anymore
 # Project Coordinator at Softheon
   text: Philadelphia, Pennsylvania, United States
+  [button] Search similar jobs
+# Visit website
+  text: Softheon is a dynamic and forward-thinking Software as a Service (SaaS) organization that is dedicated to ensuring affordable, accessible, a
+  text: Our culture is built on collaboration, innovation, and appreciation. We value each employee's unique talents and contributions and understan
+  text: At Softheon, Our Mission is powering growth to make healthcare more productive, intelligent, and successful. Our Vision is Making healthcare
+  text: Softheon offers every full-time employee a comprehensive benefits package including:
+  text: Opportunity to work on cutting-edge cloud-based healthcare solutions;
+  text: Work from your home company with a one-time home office stipend;
+  text: Excellent benefits package that includes health, vision and dental coverage for you, your spouse and dependents;
+  text: Additional benefits, including a monthly wellness stipend and internet stipend, 401K w/ a match; immediately vested, employee assistance pro
+  text: 15 days to discretionary PTO based on YOS plus 9 additional holidays;
+  text: Referral bonuses, discretionary bonus program, spot bonuses and professional development opportunities;
+  text: An opportunity for you to be part of a team committed to improving healthcare access and affordability by leveraging innovative technology s
+  text: *Please note that candidates applying for Softheon must currently reside within the United States.
+  text: Join Softheon, and together, we'll shape the future of healthcare in America.
+  text: Are you ready to make a difference? Join us at Softheon and help revolutionize healthcare for all
+  text: At Softheon, we embrace and celebrate diversity in all its forms as an equal opportunity employer. We strongly believe that employing a dive
+  text: Employment with Softheon is at-will, which means either the employee or Softheon may terminate the employment relationship at any time, with
+(dialog)
+  [button] Cookies settings
+  [button] Accept all
+  [button] Decline all
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
+
+=== 2026-10-02 18:23:30  skipped  Payments & Commercial Abuse Analyst @ adobe
+url: https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/Payments---Commercial-Abuse-Analyst_R171848
+why: posting restricts AI-assisted applications: "AI or recording tools during live interviews is not permitted"
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+! Payments & Commercial Abuse Analyst page is loaded
+# Payments & Commercial Abuse Analyst
+  [link] Apply {adventureButton}
+  text: The responsibilities below represent the primary areas of focus for this role and may evolve alongside emerging risks, business priorities, 
+  text: Payments Risk & Commercial Abuse Investigations
+  text: Investigate complex payment fraud, monetization abuse, account misuse, and commercial abuse schemes impacting Adobe's commerce ecosystem
+  text: , including unauthorized resale activity, synthetic identity abuse, payment instrument abuse, chargeback fraud, refund abuse, and the unauth
+  text: Analyze transactions, customer behaviors, payment activity, subscription usage, account relationships, and associated signals to identify su
+  text: Evaluate escalations, emerging threat patterns, and high-risk activity to develop risk assessments and response recommendations.
+  text: Analytics, Intelligence & Detection Development
+  text: Utilize SQL, analytical tools, and investigative methodologies to identify trends, uncover fraud patterns, validate hypotheses, and generate
+  text: Translate investigative findings into scalable detection strategies, risk signals, decisioning logic, and operational controls that reduce f
+  text: Partner with Data Science, Engineering, and AI teams to define abuse indicators, improve model performance, and enhance detection capabiliti
+  text: Produce intelligence assessments, trend analyses, and strategic insights on emerging abuse patterns, monetization risks, and evolving fraud 
+  text: Commerce Risk Strategy & Optimization
+  text: Balance fraud prevention objectives with customer experience considerations when evaluating controls, policies, detection strategies, and en
+  text: Provide recommendations to strengthen payment risk controls, fraud mitigation strategies, automation opportunities, and long-term commerce r
+  text: Collaborate with Product, Commerce, Risk, Customer Support, Trust & Safety, and Engineering teams to address emerging threats, improve platf
+  text: Qualifications & Core Competencies
+  text: Exceptional written and verbal communication skills, with the ability to translate complex investigative findings, payment risk data, and ab
+  text: Strong analytical and investigative skills, with the ability to identify patterns, assess risk, and transform complex data into meaningful i
+  text: A naturally inquisitive and investigative mindset, with a passion for understanding how malicious actors exploit commerce systems, products,
+  text: Strong understanding of payment and commerce risk concepts, including chargebacks, friendly fraud, account abuse, refund abuse, affiliate ab
+  text: Experience identifying risk signals, anomalous behaviors, and abuse patterns and translating findings into scalable detection, mitigation, o
+  text: Creative and strategic problem-solving capabilities, including the ability to anticipate emerging risks and develop innovative, scalable sol
+  text: Proven ability to manage competing priorities and adapt quickly in a dynamic, fast-paced environment.
+  text: Self-motivated, proactive, and comfortable operating with ambiguity while working independently and collaboratively across cross-functional 
+  text: Strong attention to detail, sound judgment, and commitment to delivering thorough, accurate, and high-confidence investigative outcomes.
+  text: Experience in payments risk, commerce fraud, fraud investigations, abuse prevention, trust and safety operations, fraud analytics, cybersecu
+  text: Familiarity with machine learning concepts, risk models, AI-driven abuse trends, or the application of AI and automation to fraud detection 
+  text: Ability to balance fraud prevention objectives with customer experience, operational efficiency, and business outcomes when evaluating risk 
+  text: Adobe empowers everyone to create through innovative platforms and tools that unleash creativity, productivity and personalized customer exp
+  text: Our 30,000+ employees worldwide are creating the future and raising the bar as we drive the next decade of growth. We’re on a mission to hir
+  text: focus on people, purpose and community
+  text: Equal Employment Opportunity
+  text: AI Use Guidelines for Interviews:
+  text: AI in the hiring experience
+  text: At Adobe, for sales roles starting salaries are expressed as total target compensation (TTC = base + commission), and short-term incentives 
+  text: In addition, certain roles may be eligible for long-term incentives in the form of a new hire equity award.
+  text: Adobe will consider qualified applicants with arrest or conviction records for employment in accordance with state and local laws and “fair 
+  text: There is no deadline to apply to this job posting because Adobe accepts applications for this role on an ongoing basis. The posting will rem
+  text: Massachusetts Legal Notice
+  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
+# Similar Jobs (4)
+# Digital Employee Experience Analyst
+# Font Licensing & Cost Analyst
+# Senior Revenue Assurance Analyst
+  text: End Date: December 31, 2026 (30+ days left to apply)
+  [button] View All 4 Jobs {toggle-all-jobs}
+# About Us
+  text: recognized around the world
+  text: There's more than meets the eye when it comes to Adobe.
+  text: Take the quiz and see how well you know us!
+  [button] Read More {readMore}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 18:24:46  blocked  Associate Buyer Planner @ highridgemedical
+url: https://highridgemedical.wd503.myworkdayjobs.com/hrmcareers/job/US-CO-Westminster/Associate-Buyer-Planner_JR100124/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Associate Buyer Planner
+{progressBarActiveStep} current step 1 of 7 Create Account/Sign In
+label: current step 1 of 7
+label: Create Account/Sign In
+label: step 2 of 7
+label: My Information
+label: step 3 of 7
+label: My Experience
+label: step 4 of 7
+label: Application Questions
+label: step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #3726145d-c595-496c-9d53-ff6a20977f11 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Highridge Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 18:25:23  skipped  CAMPUS: Capital Group Rotational Program Business & Operations Track Associate - US - Los Angeles @ capgroup
+url: https://capgroup.wd1.myworkdayjobs.com/capitalgroupcareers/job/Los-Angeles/CAMPUS--Capital-Group-Rotational-Program-Business---Operations-Track-Associate---US---Los-Angeles_JR7418-1/apply/applyManuall
+stage: Application Questions 1 of 2
+why: can't truthfully answer required: 1) Have you ever been convicted of a crime (felony, misdemea
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] CG Careers Home {navigationItem-CG Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# CAMPUS: Capital Group Rotational Program Business & Operations Track Associate - US - Los Angeles
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions 1 of 2
+label: current step 3 of 6
+label: Application Questions 1 of 2
+label: step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 1 of 2
+{applyFlowPrimaryQuestionsPage}
+ {formField-0e39251443db1015018a627c3d0f0000}
+label: Do you have a family member, or relative who is currently employed with Capital Group?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a627c3d0f0000
+ {formField-0e39251443db1015018a63174fdf0002}
+label: Employment offers are conditioned upon satisfactory proof of your identity and authorization to work in the U.
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63174fdf0002
+ {formField-0e39251443db1015018a63174fdf0005}
+label: Will you now or in the future require sponsorship for an employment-based visa?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63174fdf0005
+ {formField-0e39251443db1015018a63b238f40000}
+label: What is your desired total cash compensation (i.e., base, bonus, commission etc., )*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63b238f40000
+ {formField-0e39251443db1015018a661c3de30002}
+label: 1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the following prior to 
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a661c3de30002
+ {formField-0e39251443db1015018a66b65bfd0000}
+label: 2) Are you currently released from custody for a criminal offense on bail, bond, probation, parole on your own
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a66b65bfd0000
+ {formField-0e39251443db1015018a66b65bfd0004}
+label: Do you hold any active or expired FINRA licenses (i.e. series 6, 7, 63, 65, etc.)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a66b65bfd0004
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 18:26:15  skipped  CAMPUS: Capital Group Rotational Program Business & Operations Track Associate - US - New York @ capgroup
+url: https://capgroup.wd1.myworkdayjobs.com/capitalgroupcareers/job/New-York/CAMPUS--Capital-Group-Rotational-Program-Business---Operations-Track-Associate---US---New-York_JR7419-1/apply/applyManually
+stage: Application Questions 1 of 2
+why: can't truthfully answer required: 1) Have you ever been convicted of a crime (felony, misdemea; Do you hold any active or expired FINRA licenses (i.e. serie
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] CG Careers Home {navigationItem-CG Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# CAMPUS: Capital Group Rotational Program Business & Operations Track Associate - US - New York
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions 1 of 2
+label: current step 3 of 6
+label: Application Questions 1 of 2
+label: step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 1 of 2
+{applyFlowPrimaryQuestionsPage}
+ {formField-0e39251443db1015018a627c3d0f0000}
+label: Do you have a family member, or relative who is currently employed with Capital Group?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a627c3d0f0000
+ {formField-0e39251443db1015018a63174fdf0002}
+label: Employment offers are conditioned upon satisfactory proof of your identity and authorization to work in the U.
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63174fdf0002
+ {formField-0e39251443db1015018a63174fdf0005}
+label: Will you now or in the future require sponsorship for an employment-based visa?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63174fdf0005
+ {formField-0e39251443db1015018a63b238f40000}
+label: What is your desired total cash compensation (i.e., base, bonus, commission etc., )*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a63b238f40000
+ {formField-0e39251443db1015018a661c3de30002}
+label: 1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the following prior to 
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a661c3de30002
+ {formField-0e39251443db1015018a66b65bfd0000}
+label: 2) Are you currently released from custody for a criminal offense on bail, bond, probation, parole on your own
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a66b65bfd0000
+ {formField-0e39251443db1015018a66b65bfd0004}
+label: Do you hold any active or expired FINRA licenses (i.e. series 6, 7, 63, 65, etc.)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e39251443db1015018a66b65bfd0004
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-02 18:26:28  blocked  Investment Banking - Financial Institutions Group - FinTech, Wealth, & Asset Management - Analyst @ jpmorgan-chase
+url: https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210773925
+why: no application form found on page
+
+
+=== 2026-10-02 18:26:58  blocked  Account Coordinator @ walmart
+url: https://click.appcast.io/t/dDjnzgA-oC4-8F-6qvppBSOb2didthnhOUf_yhh2EgY=
+why: no application form found on page
+<iframe https://geo.captcha-delivery.com/captcha/>
+
+=== 2026-10-02 18:28:12  blocked  Project Coordinator @ softheon
+url: https://jobs.workable.com/view/8PTbviDkXfPs7Bn28dk1P8/remote-project-coordinator-in-atlanta-at-softheon
+why: could not find the employer's application page
+  [button] Search for jobs
+  [link] Log in / Sign up
+# This job is not available anymore
+# Project Coordinator at Softheon
+  text: Atlanta, Georgia, United States
+  [button] Search similar jobs
+# Visit website
+  text: Softheon is a dynamic and forward-thinking Software as a Service (SaaS) organization that is dedicated to ensuring affordable, accessible, a
+  text: Our culture is built on collaboration, innovation, and appreciation. We value each employee's unique talents and contributions and understan
+  text: At Softheon, Our Mission is powering growth to make healthcare more productive, intelligent, and successful. Our Vision is Making healthcare
+  text: Softheon offers every full-time employee a comprehensive benefits package including:
+  text: Opportunity to work on cutting-edge cloud-based healthcare solutions;
+  text: Work from your home company with a one-time home office stipend;
+  text: Excellent benefits package that includes health, vision and dental coverage for you, your spouse and dependents;
+  text: Additional benefits, including a monthly wellness stipend and internet stipend, 401K w/ a match; immediately vested, employee assistance pro
+  text: 15 days to discretionary PTO based on YOS plus 9 additional holidays;
+  text: Referral bonuses, discretionary bonus program, spot bonuses and professional development opportunities;
+  text: An opportunity for you to be part of a team committed to improving healthcare access and affordability by leveraging innovative technology s
+  text: *Please note that candidates applying for Softheon must currently reside within the United States.
+  text: Join Softheon, and together, we'll shape the future of healthcare in America.
+  text: Are you ready to make a difference? Join us at Softheon and help revolutionize healthcare for all
+  text: At Softheon, we embrace and celebrate diversity in all its forms as an equal opportunity employer. We strongly believe that employing a dive
+  text: Employment with Softheon is at-will, which means either the employee or Softheon may terminate the employment relationship at any time, with
+(dialog)
+  [button] Cookies settings
+  [button] Accept all
+  [button] Decline all
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
+
+=== 2026-10-02 18:28:20  blocked  Business Operations Analyst I @ softheon
+url: https://jobs.workable.com/view/dQVVnGQKrvcQdRjKkvSkeY/remote-business-operations-analyst-i-in-georgia-at-softheon
+why: could not find the employer's application page
+  [button] Search for jobs
+  [link] Log in / Sign up
+# This job is not available anymore
+# Business Operations Analyst I at Softheon
   [button] Search similar jobs
 # Visit website
   text: Softheon is a dynamic and forward-thinking Software as a Service (SaaS) organization that is dedicated to ensuring affordable, accessible, a
