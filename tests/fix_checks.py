@@ -371,18 +371,20 @@ def browser_checks():
                 MB.configured, MB.wait_for_verification = old_configured, old_wait
                 page.close()
 
-            # Post-submit email OTP: the initial Submit click must not be repeated.
-            # The site itself transitions to a security-code screen after accepting the application.
+            # Greenhouse post-submit email security code: the first Submit reveals the code page,
+            # then the code must be entered and the application must be submitted again.
             page = ctx.new_page()
             page.set_content("""<!doctype html><html><body>
               <div id="form"><h1>Application</h1><input id="name" value="Test"><button id="submit" type="button">Submit Application</button></div>
               <div id="verify" style="display:none">
-                <h1>Security code</h1>
-                <p>We emailed you a security code. Enter the code in the security code field.</p>
+                <h1>Greenhouse Recruiting</h1>
+                <p>Copy and paste this code into the security code field on your application:</p>
                 <input id="otp" name="verification_code" autocomplete="one-time-code">
-                <button id="confirm" type="button">Verify code</button>
+                <p>After you enter the code, resubmit your application.</p>
+                <button id="submit2" type="button">Submit Application</button>
               </div>
-              <div id="done" style="display:none"><h1>Application submitted successfully</h1></div>
+              <div id="done" style="display:none"><h1>Thank you for applying!</h1><p>Application submitted successfully.</p></div>
+              <footer>© 2026 Greenhouse</footer>
               <script>
                 let submits = 0;
                 submit.onclick = () => {
@@ -390,8 +392,9 @@ def browser_checks():
                   form.style.display='none';
                   verify.style.display='block';
                 };
-                confirm.onclick = () => {
-                  if (otp.value === '9104A104') {
+                submit2.onclick = () => {
+                  submits++;
+                  if (otp.value === 'I49GcNQ9') {
                     verify.style.display='none'; done.style.display='block';
                   }
                 };
@@ -400,17 +403,19 @@ def browser_checks():
             </body></html>""")
             old_configured, old_wai = MB.configured, MB.wait_for_verification
             MB.configured = lambda: True
-            MB.wait_for_verification = lambda **k: {"link": None, "code": "9104A104"}
+            MB.wait_for_verification = lambda **k: {"link": None, "code": "I49GcNQ9"}
             logs = []
             try:
                 import autoapply.submit as S
-                got = S.submit(page, timeout_ms=5000, on_click=lambda: None)
+                got = S.submit(page, timeout_ms=7000, on_click=lambda: None)
                 count = page.evaluate("window.getSubmitCount()")
-                check(got == "confirmed", f"post-submit emailed OTP did not complete: {got!r}; log: {' | '.join(logs)[-500:]}")
-                check(count == 1, f"post-submit OTP caused a second application submit: {count}")
-                check(page.locator("#done").is_visible(), "post-submit OTP did not reach confirmation")
+                check(got == "confirmed", f"Greenhouse security-code resubmit did not complete: {got!r}; log: {' | '.join(logs)[-700:]}")
+                check(count == 2, f"Greenhouse security-code flow did not resubmit exactly once after code entry: {count}")
+                check(page.locator("#done").is_visible(), "Greenhouse security-code resubmit did not reach confirmation")
+                check(any("resubmitting application" in x for x in logs),
+                      "Greenhouse security-code path never logged the required resubmit")
             except Exception as e:
-                check(False, f"post-submit emailed OTP crashed: {type(e).__name__}: {e}")
+                check(False, f"Greenhouse security-code resubmit crashed: {type(e).__name__}: {e}")
             finally:
                 MB.configured, MB.wait_for_verification = old_configured, old_wai
                 page.close()
