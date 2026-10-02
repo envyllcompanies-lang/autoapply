@@ -1164,6 +1164,54 @@ def _still_visible(btn) -> bool:
         return False
 
 
+def _complete_email_verification(page, since_ts: float, timeout_s: int, log=print) -> bool:
+    """Complete a post-submit email OTP challenge without submitting the application a second time."""
+    from . import auth
+
+    if not auth.mailbox.configured():
+        raise Blocked("email verification code requested, but the application inbox is not configured")
+    deadline = time.time() + max(5, timeout_s)
+    while time.time() < deadline:
+        if not _email_code_prompt(page):
+            return True
+        remaining = max(5, int(deadline - time.time()))
+        result = auth.mailbox.wait_for_verification(
+            since_ts=since_ts,
+            host_hint="",
+            timeout=min(90, remaining),
+            log=log,
+            require_code=True,
+        )
+        if not result or not result.get("code"):
+            raise Blocked("email verification code did not arrive in time")
+        boxes = auth._code_inputs(page)
+        if not boxes:
+            raise Blocked("received an email verification code but found no code input on the application page")
+        log("      email: typing the application verification code")
+        auth._type_code(page, boxes, result["code"])
+        page.wait_for_timeout(1200)
+        _settle(page)
+        if not _email_code_prompt(page):
+            return True
+
+        # Some sites require an explicit Verify/Continue after the code is entered.
+        verify = page.get_by_role(
+            "button",
+            name=re.compile(r"verify|confirm|continue|finish|done", re.I),
+        ).locator("visible=true").last
+        if verify.count():
+            verify.click()
+            page.wait_for_timeout(1200)
+            _settle(page)
+            if not _email_code_prompt(page):
+                return True
+
+        # If the same prompt remains, wait for a newly delivered code rather than
+        # reusing the previous token.
+        since_ts = time.time() - 2
+    return False
+
+
 def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
     before_url = page.url
     before_hits = len(SUCCESS_RE.findall(page.inner_text("body")))
@@ -1203,12 +1251,22 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
             url_says_done = page.url != before_url and re.search(r"thank|success|submitted|confirmation", page.url, re.I)
             if len(SUCCESS_RE.findall(body)) > before_hits or url_says_done:
                 return "confirmed"
+            if _email_code_prompt(page):
+                if not _complete_email_verification(
+                    page,
+                    since_ts=t_click - 2,
+                    timeout_s=max(10, min(120, int(timeout_ms / 1000))),
+                    log=print,
+                ):
+                    raise Blocked("email verification code could not be completed")
+                # The original submit has already happened; never click it again.
+                continue
             body_l = " ".join(body.split())
             if re.search(
                 r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re|you are) human|"
                 r"are you a robot|human verification|cloudflare.{0,30}(challenge|verify)",
                 body_l, re.I,
-            ) and not _email_code_prompt(page):
+            ):
                 raise Blocked("the submit is held by an anti-bot/human verification challenge")
             if (b := _blocker(page)):
                 raise Blocked(f"{b} after submit")
