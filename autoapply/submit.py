@@ -1170,8 +1170,8 @@ def _is_greenhouse_security_flow(page) -> bool:
         url = page.url or ""
         body = page.inner_text("body")[:8000]
         return bool(
-            re.search(r"greenhouse\\.io", url, re.I)
-            or re.search(r"Greenhouse Recruiting|©\\s*20\\d\\d\\s+Greenhouse|"
+            re.search(r"greenhouse\.io", url, re.I)
+            or re.search(r"Greenhouse Recruiting|©\s*20\d\d\s+Greenhouse|"
                          r"Copy and paste this code into the security code field|"
                          r"After you enter the code, resubmit your application", body, re.I)
         )
@@ -1185,7 +1185,7 @@ def _resubmit_greenhouse_after_code(page, timeout_s: int, log=print) -> bool:
     if btn is None or kind != "submit":
         btn = page.get_by_role(
             "button",
-            name=re.compile(r"submit(\\s+application)?", re.I),
+            name=re.compile(r"submit(\s+application)?", re.I),
         ).locator("visible=true").last
     if not btn.count():
         raise Blocked("Greenhouse security code was entered but the Submit Application button was not found")
