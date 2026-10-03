@@ -648,3 +648,30 @@
 [06:24:30]     … waits for a later run (no match check available now and its keyword score is under 80)
 [06:24:30] Summary: 1 blocked, 2 skipped, 1 queued, 3 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-03.md
 [06:24:30]   by site  greenhouse: 2 skipped, 1 blocked
+[06:47:28] === autoapply run (LIVE) build 2026-10-02-d ===
+[06:47:28] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order)
+[06:47:33] mail: logged in to delgado@alumni.usc.edu OK
+[06:47:59] Discovering jobs…
+[06:47:59] Job search already ran at 13:30 (searches run every 20 h): this run only applies
+[06:48:08]   agg/jobboard: 1,449,746 jobs in today's snapshot, 137,869 entry-level on sites the bot can fill, 0 pass your title/location filters
+[06:48:08] 0 open roles, 0 new
+[06:48:08] Scored 0 new roles: 0 good fits, 0 below the bar, 0 filtered out by title/location (finding and scoring took 0.7 min)
+[06:48:08] 26 jobs queued; applying to up to 116 now (each is first checked against your résumé: the bar is a 70% match)
+[06:48:08] Time for this run: 50 min in all (616 of 1850 free Actions minutes used this month)
+[06:48:10] Accounts: ON (delgado@alumni.usc.edu)
+[06:48:10]   match  50%  AI Infrastructure Operations, Demand Planning @ anthropic — Candidate has operations and vendor coordination experience but lacks AI infrastructure, demand plan
+[06:48:11]   match  55%  Business Systems Analyst, New Product Introduction @ anthropic — Candidate lacks direct experience with Salesforce, billing systems, and pricing model design require
+[06:48:11]       writer: groq-20b: free daily limit reached (back in 2 min)
+[06:48:12]   match  72%  Tech Operations Specialist @ gitlab — Candidate's strong background in process improvement, SOP development, and data management aligns we
+[06:48:12] → Tech Operations Specialist @ gitlab (score 47, match 72%)
+[06:48:22]       step 1: 18 fields (8 required)
+[06:48:22]       writer: groq: free daily limit reached (back in 3 min)
+[06:49:11]       writer: groq-qwen: free daily limit reached (back in 8 min)
+[06:49:11]       writer unavailable for cover letter (groq: free daily limit reached (back in 3 min); groq-qwen: free daily limit reac)
+[06:49:11]       (no cover letter could be written; it is optional, applying with the résumé only)
+[06:49:21]     ✗ blocked: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+[06:49:31]   (the match check has no free allowance left right now: jobs with a keyword score under 80 wait for a later run)
+[06:49:31] → Service Associate - Base Operations @ continuum-resource-network (score 49)
+[06:49:37]     … waits for a later run (no match check available now and its keyword score is under 80)
+[06:49:37] Summary: 1 blocked, 1 queued, 2 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-03.md
+[06:49:37]   by site  greenhouse: 1 blocked
