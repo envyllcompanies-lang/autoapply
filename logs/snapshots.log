@@ -1,139 +1,3 @@
-=== 2026-10-02 18:00:12  failed  Sales Operations Analyst - Public Sector @ elastic
-url: about:blank
-why: Page.goto: net::ERR_TOO_MANY_REDIRECTS at https://jobs.elastic.co/jobs?gh_jid=8053209&gh_jid=8053209
-(the page could not be read: Page.evaluate: Execution context was destroyed, most likely because of a navigation)
-
-=== 2026-10-02 18:01:52  blocked  Manufacturing Planner, ECLSS & TCS @ vast
-url: https://job-boards.greenhouse.io/vast/jobs/4711059006
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Manufacturing Planner, ECLSS & TCS
-  text: Long Beach, California, United States
-  [button] Apply
-  text: space stations and space infrastructure
-  text: Manufacturing Planner, ECLSS/TCS
-  text: Production Manager,ECLSS/TCS
-  text: Develop and maintain production schedules, demand forecasts, resource availability, and capacity analysis
-  text: Coordinate with procurement and supply chain teams to ensure timely availability of materials and components required for manufacturing
-  text: Analyze internal and external capacity and identify bottlenecks or constraints
-  text: Monitor inventory levels of raw materials, work-in-progress, and finished goods
-  text: Implement strategies to minimize excess inventory while ensuring continuity of production
-  text: Communicate to engineering and leadership with no later than release dates for manufacturing deadlines
-  text: Coordinate with engineering and quality assurance teams to ensure adherence to specifications and standards
-  text: Monitor production progress and identify deviations from the schedule
-  text: Take corrective actions to mitigate delays and maintain on-time delivery
-  text: Identify opportunities for process improvement and efficiency gains
-  text: Implement best practices to enhance manufacturing processes and reduce lead times
-  text: Collaborate with cross-functional teams including manufacturing, procurement, engineering, and logistics to align on plans and resolve issue
-  text: High school diploma or equivalent
-  text: 2+ years experience in manufacturing planning, scheduling, or operations management
-  text: Preferred Skills & Experience:
-  text: Excellent communication skills and the ability to collaborate effectively with cross-functional teams are crucial for success in this role
-  text: Working knowledge of database query and visualization software such as SQL, Tableau, etc.
-  text: Understanding of Quality Management in aerospace manufacturing
-  text: Proficiency in using enterprise resource planning (ERP) systems and manufacturing execution systems (MES)
-  text: Committed to continuous improvement and a willingness to embrace new technologies, methodologies, and best practices
-  text: Willingness to work late & weekends on an as needed basis to support critical milestones
-  text: Manufacturing Planner I: $67,000 - $95,000
-  text: Manufacturing Planner II: $76,000 - $108,000
-  text: We calibrate level and compensation to the selected candidate's experience and demonstrated capability. We welcome applicants across a range
-  text: Interested in building your career at Vast? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: School
-  text: University of Southern California
-  <input:text #school--0 empty>
-  [button] 
-  [button] 
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  [button] 
-label: Discipline
-  text: Industrial Arts & Carpentry
-  <input:text #discipline--0 empty>
-  [button] 
-  [button] 
-  [button] Add another
-label: LinkedIn Profile
-  <input:text #question_8672615006 filled>
-label: ITAR Compliance*
-  text: U.S. person. This ITAR/EAR status includes U.S. citizens, U.S. nationals, lawful permanent residents (green card holders), and asylees and r
-  <input:text #question_8672616006 required empty>
-  [button] 
-  [button] 
-label: Are you currently working at Vast as a contractor?*
-  <input:text #question_8672617006 required empty>
-  [button] 
-  [button] 
-label: Have you ever been employed by Vast?
-  <input:text #question_8672618006 empty>
-  [button] 
-  [button] 
-label: How did you hear about Vast?*
-  <input:text #question_8672619006 required empty>
-  [button] 
-  [button] 
-label: If other, please specify
-  <input:text #question_8672620006 filled>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Vast’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any appl
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
 === 2026-10-02 18:02:45  blocked  Technology Business Analyst - Client Data &amp; AUM Reporting @ neuberger-berman
 url: https://jobs.workable.com/view/fpDtfzPgd3fSan2vesamt6/technology-business-analyst---client-data-%26amp%3B-aum-reporting-in-new-york-at-neuberger-berman
 why: could not find the employer's application page
@@ -4678,4 +4542,118 @@ why: no application form found on page
   [button] OUR SITES opens-menu
   text: Terms of Use/Your Privacy Rights
   [button] Close privacy/terms of use policy
+
+=== 2026-10-03 03:03:37  blocked  Data Analyst (Entry-Level) @ recidiviz
+url: https://job-boards.greenhouse.io/recidiviz/jobs/4717510006
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Data Analyst (Entry-Level)
+  text: Remote, New York City, or Oakland
+  [button] Apply
+# Data Analyst
+  text: Travel is encouraged approximately once per year to state partners within the continental USA, and occasionally required. We expect these tr
+  text: Recidiviz is thrilled to be hiring a Data Analyst to join our team! We're a small, fast-moving group that works with complex criminal justic
+# About us
+  text: Recidiviz is creating safer, healthier communities by improving outcomes for people in the criminal justice system. We build technology to r
+  text: Using software tools and thoughtful product design, we've been able to safely and permanently reduce incarceration and improve outcomes. We 
+  text: People who succeed at Recidiviz lead with kindness and humility, assume good intent, learn from failure, and fix problems when they see them
+# About the role
+  text: This role works alongside experienced analysts and teammates across several teams on work that targets the drivers of incarceration. Our Dat
+# Core responsibilities
+  text: Exploring our datasets to find patterns and insights about American criminal justice systems
+  text: Carrying out well-scoped analyses with guidance from senior analysts and our State Engagement team
+  text: Supporting product launches in the states where we work by following established launch processes, preparing the analytical data each launch
+  text: Building clear, well-documented visualizations and dashboards using our existing tools
+  text: Communicating findings to internal teams, and presenting to state partners alongside teammates
+  text: Analyzing trends in areas related to our own work to understand how our products function
+# Wild success
+  text: You've contributed to real impact.
+  text: You've become a go-to analyst for your states.
+# Minimum qualifications
+  text: Strong communication and collaboration skills, to help nurture a knowledgeable, data-oriented culture
+  text: Enthusiasm for working with internal and external partners from diverse backgrounds and worldviews, such as government staff, researchers, j
+  text: Care and curiosity in inspecting source data and checking results closely, so the data and analyses you prepare can be trusted and reused
+  text: 6 or more months of practical experience exploring, analyzing, and cleaning real-world datasets. Internships and research count, and part-ti
+  text: Working proficiency in SQL, including joins, aggregations, and window functions
+  text: Familiarity with Python, specifically the Pandas package, for data analysis and visualization
+# Preferred qualifications
+  text: Interest in criminal justice or public policy, or experience working with public-sector data
+  text: Experience with a BI or dashboarding tool such as Looker or Tableau
+  text: Familiarity with any part of our data stack, which includes Google Cloud Platform, BigQuery, Looker, Jupyter notebooks, and Python/Pandas
+# Compensation
+  text: Compensation is standardized based on roles and responsibilities. This ensures equitable compensation and responsible stewardship of our res
+  text: The annual compensation for this role is: $85,000.
+# What we offer
+  text: Effective, extremely thoughtful colleagues, working together on a mission that matters
+  text: 90% medical, dental, and vision insurance coverage for you and your dependents
+  text: Flexible time off, including 20 days of PTO, 3 days of paid volunteering time, and 13 paid holidays
+  text: 12 weeks of paid parental leave
+  text: 401(k) retirement plan with 5% company match and no vesting period
+  text: Complimentary One Medical membership (depending on location)
+  text: Partnership with Carrot to provide employees with inclusive fertility and family-forming benefits, as well as a small but growing number of 
+  text: Monthly ClassPass credit for personal wellness
+  text: Free mental health support via Talkspace
+  text: Well-located offices in Oakland and Manhattan, with the flexibility to work remotely or go into either office as you choose
+  text: An annual company offsite each spring and other ad-hoc gatherings
+  text: All the exhilarating challenges and stretch opportunities of a tech startup, combined with the mission-driven heart of a nonprofit
+# More about Recidiviz
+  text: Recidiviz was an all-volunteer effort until early 2019, when Clementine, Andrew, and Joshua founded the organization. Since then, we've buil
+  text: Today, Recidiviz works with (and earns revenue from) over 19 state partners – big and small, red and blue – and covers more than 45% of the 
+# An important note
+  text: Lasting change is always built on diversity. Recidiviz recruits, employs, trains, compensates and promotes regardless of race, religion, col
+  text: Interested in building your career at Recidiviz? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name
+  <input:text #preferred_name filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: School
+  <input:text #school--0 empty>
+  [button] 
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  [button] 
+  [button] Add another
+label: (In 2-3 sentences) What about Recidiviz's mission or approach makes you excited to contribute your specific sk
+  <textarea #question_8722520006 required filled>
+  text: Our hiring team reads all application question responses.)
+  text: If you choose to use AI to help craft your responses, please ensure that your unique experiences, perspectives, and skills are showcased in 
+  text: We want to ensure your application stands out & is the strongest representation of your background when being considered for this role.
+label: In 2-3 sentences, please describe your deepest experience turning complex data into actionable insights.*
+  <textarea #question_8722521006 required filled>
+label: Do you have at least 6 months of professional experience exploring, analyzing, and processing complex datasets
+  <input:text #question_8722522006 required empty>
+  [button] 
+  [button] 
+label: This role will have technical live coding interviews in SQL & Python (Pandas library). Are you comfortable bei
+  <input:text #question_8722523006 required empty>
+  [button] 
+  [button] 
+label: Our compensation is standardized based on roles and responsibilities. This ensu
 
