@@ -78,12 +78,6 @@ class DB:
         cur8 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','failed') AND apply_url LIKE '%myworkdayjobs.com%'"
             " AND (submitted_at IS NULL OR submitted_at = '') AND (status='failed' OR reason LIKE 'stuck on step%')")
-        # Greenhouse's old driver stopped after the site emailed a security code. The new driver can read the
-        # Greenhouse message, enter the code, and resubmit. Those old attempts explicitly said nothing was sent, so they
-        # are safe to retry; reset attempts so the normal retry ceiling does not hide them.
-        cur9 = self.conn.execute(
-            "UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND "
-            "reason LIKE 'after Submit the site asked for a security code it emailed; the bot does not enter that one,%'")
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")
