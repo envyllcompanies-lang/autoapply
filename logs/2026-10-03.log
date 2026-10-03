@@ -757,3 +757,43 @@
 [07:40:01]     … waits for a later run (no match check available now and its keyword score is under 80)
 [07:40:01] Summary: 1 blocked, 1 skipped, 1 queued, 1 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-03.md
 [07:40:01]   by site  greenhouse: 1 blocked, 1 skipped
+[08:02:50] === autoapply run (LIVE) build 2026-10-02-d ===
+[08:02:51] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order)
+[08:02:52] mail: logged in to delgado@alumni.usc.edu OK
+[08:03:37] Discovering jobs…
+[08:03:37] Job search already ran at 13:30 (searches run every 20 h): this run only applies
+[08:03:47]   agg/jobboard: 1,449,746 jobs in today's snapshot, 137,869 entry-level on sites the bot can fill, 0 pass your title/location filters
+[08:03:47] 0 open roles, 0 new
+[08:03:47] Scored 0 new roles: 0 good fits, 0 below the bar, 0 filtered out by title/location (finding and scoring took 0.9 min)
+[08:03:47] 10 jobs queued; applying to up to 115 now (each is first checked against your résumé: the bar is a 70% match)
+[08:03:48] Time for this run: 50 min in all (633 of 1850 free Actions minutes used this month)
+[08:03:48] Accounts: ON (delgado@alumni.usc.edu)
+[08:03:49]   match  70%  Sales Analyst @ alpaca — Strong process improvement and data analysis skills fit the role, but lacks direct sales or account 
+[08:03:49] → Sales Analyst @ alpaca (score 45, match 70%)
+[08:04:00]       step 1: 23 fields (14 required)
+[08:04:21]     ✗ blocked: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+[08:04:21]   match  55%  Sales Planner @ roku — Operations and data skills match, but lacks direct advertising sales and programmatic experience
+[08:04:21]   match  70%  Program Analyst, Level I @ shinvestmentsllc — Candidate has strong operations and data analysis skills that align with a program analyst role, but
+[08:04:22]       writer: groq-20b: free daily limit reached (back in 0 min)
+[08:04:22]   match  78%  School Operations Coordinator @ kippsocal — Strong operations and coordination experience aligns with school logistics role
+[08:04:30] → Program Analyst, Level I @ shinvestmentsllc (score 45, match 70%)
+[08:04:36]     ✗ skipped: not open to you: needs a security clearance
+[08:04:36] → School Operations Coordinator @ kippsocal (score 57, match 78%)
+[08:04:46]       step 1: 31 fields (22 required)
+[08:04:49]       (writer answered 'State ✱' -> 'CA')
+[08:05:01]       (writer answered 'Are you affiliated with KIPP SoCal? ✱' -> 'No, I am not affiliated with KIPP')
+[08:05:01]       writer: groq-qwen: free daily limit reached (back in 34 min)
+[08:05:22]       writer: groq: free daily limit reached (back in 25 min)
+[08:05:22]       writer: groq-20b: free daily limit reached (back in 24 min)
+[08:05:22]       writer unavailable: groq-qwen: free daily limit reached (back in 34 min); groq: free daily limit reached (back in 25 min
+[08:05:22]       (writer gave nothing: used the standard background answer)
+[08:05:22]       ? unanswered: 'Yes' kind=checkbox_single options=[]
+[08:05:22]       ? unanswered: 'I voluntarily consent to KIPP SoCal Public Schools and/or any of its officers, employees, ' kind=radio options=['Yes', 'No']
+[08:05:22]       ? unanswered: 'Have you ever resigned from (or otherwise left) school employment because of allegations o' kind=radio options=['Yes', 'No']
+[08:05:22]     ✗ skipped: can't truthfully answer required: Yes; I voluntarily consent to KIPP SoCal Public Schools and/or an; Have you ever resigned from (or otherwise left) school emplo
+[08:05:32]   (the match check has no free allowance left right now: jobs with a keyword score under 80 wait for a later run)
+[08:05:32] → Service Associate - Base Operations @ continuum-resource-network (score 49)
+[08:05:39]     … waits for a later run (no match check available now and its keyword score is under 80)
+[08:05:39] Summary: 1 blocked, 1 skipped, 1 queued, 1 low_score, 1 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-03.md
+[08:05:39]   by site  greenhouse: 1 blocked
+[08:05:39]   by site  lever: 1 skipped
