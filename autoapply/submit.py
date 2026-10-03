@@ -1222,13 +1222,22 @@ def _complete_email_verification(page, since_ts: float, timeout_s: int, log=prin
         if not _email_code_prompt(page):
             return True
         remaining = max(5, int(deadline - time.time()))
-        result = auth.mailbox.wait_for_verification(
-            since_ts=since_ts,
-            host_hint="",
-            timeout=min(90, remaining),
-            log=log,
-            require_code=True,
-        )
+        if _is_greenhouse_security_flow(page):
+            result = auth.mailbox.wait_for_greenhouse_code(
+                since_ts=since_ts,
+                company_hint="",
+                job_hint="",
+                timeout=min(90, remaining),
+                log=log,
+            )
+        else:
+            result = auth.mailbox.wait_for_verification(
+                since_ts=since_ts,
+                host_hint="",
+                timeout=min(90, remaining),
+                log=log,
+                require_code=True,
+            )
         if not result or not result.get("code"):
             raise Blocked("email verification code did not arrive in time")
         boxes = auth._code_inputs(page)
