@@ -5049,3 +5049,21 @@ label: SVGs not supported by this browser.SVGs not supported by this browser.
   text: Hi-Altitude Brands collects and processes personal data in accordance with applicable data protection laws.
   [button] Cookie settings
 
+=== 2026-10-03 10:09:35  blocked  Founding Growth & Operations @ talentpluto
+url: https://apply.workable.com/talentpluto/j/5DA9860C89/apply
+stage: page 1
+why: not a real application form (4 fields, no résumé upload); page shows: :Import resume from; :Clear; :+1; :Submit application; :Cookie settings
+# Founding Growth & Operations
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+  [button] Submit application
+  [button] Cookie settings
+
