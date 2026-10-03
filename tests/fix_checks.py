@@ -354,8 +354,10 @@ def browser_checks():
               </script>
             </body></html>""")
             old_configured, old_wait = MB.configured, MB.wait_for_verification
+            old_gh = getattr(MB, "wait_for_greenhouse_code", None)
             MB.configured = lambda: True
-            MB.wait_for_verification = lambda **k: {"link": None, "code": "731204"}
+            MB.wait_for_verification = lambda **k: (_ for _ in ()).throw(AssertionError("Greenhouse must not use the generic mailbox verifier"))
+            MB.wait_for_greenhouse_code = lambda **k: {"link": None, "code": "731204", "provider": "greenhouse"}
             logs = []
             try:
                 job = Job("greenhouse", "otpco", "otp-1", "Treasury Operations Associate", "Denver, CO",
@@ -369,6 +371,8 @@ def browser_checks():
                 check(False, f"mid-application OTP crashed: {type(e).__name__}: {e}")
             finally:
                 MB.configured, MB.wait_for_verification = old_configured, old_wait
+                if old_gh is not None:
+                    MB.wait_for_greenhouse_code = old_gh
                 page.close()
 
             # Greenhouse post-submit email security code: the first Submit reveals the code page,
@@ -402,8 +406,10 @@ def browser_checks():
               </script>
             </body></html>""")
             old_configured, old_wai = MB.configured, MB.wait_for_verification
+            old_gh = getattr(MB, "wait_for_greenhouse_code", None)
             MB.configured = lambda: True
-            MB.wait_for_verification = lambda **k: {"link": None, "code": "I49GcNQ9"}
+            MB.wait_for_verification = lambda **k: (_ for _ in ()).throw(AssertionError("Greenhouse must not use the generic mailbox verifier"))
+            MB.wait_for_greenhouse_code = lambda **k: {"link": None, "code": "I49GcNQ9", "provider": "greenhouse"}
             logs = []
             try:
                 import autoapply.submit as S
@@ -418,6 +424,8 @@ def browser_checks():
                 check(False, f"Greenhouse security-code resubmit crashed: {type(e).__name__}: {e}")
             finally:
                 MB.configured, MB.wait_for_verification = old_configured, old_wai
+                if old_gh is not None:
+                    MB.wait_for_greenhouse_code = old_gh
                 page.close()
 
             # Regression: the security-code input can disappear immediately after
