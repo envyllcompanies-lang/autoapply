@@ -78,12 +78,15 @@ class DB:
         cur8 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','failed') AND apply_url LIKE '%myworkdayjobs.com%'"
             " AND (submitted_at IS NULL OR submitted_at = '') AND (status='failed' OR reason LIKE 'stuck on step%')")
+        # held at the emailed security code after Submit: nothing was sent, and the bot now reads that code from the inbox
+        cur9 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='blocked' AND reason LIKE 'after Submit the site asked for a security code%'")
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8))
+        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9))
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()

@@ -924,7 +924,9 @@ def match_checks():
         d = wd(33, "blocked", "the site asked for an emailed security code (its own human check): left for you to finish by hand", url="https://boards.greenhouse.io/x/jobs/33")
         e = wd(34, "skipped", "stuck on step 3", url="https://jobs.lever.co/x/34")
         f = wd(35, "blocked", "account: Workday refused the sign-in")
+        g = wd(36, "blocked", "after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself", clicked=True, url="https://boards.greenhouse.io/x/jobs/36")
         n = db.requeue_if_new_version("test-build-1")
+        check(db.get(g)["status"] == "queued" and not db.get(g)["submitted_at"], f"a job held at the emailed security code (nothing sent) should be tried again now that the bot types the code: {db.get(g)['status']}")
         st = {k: (db.get(k)["status"], db.get(k)["attempts"]) for k in (a, b, c, d, e, f)}
         check(st[a] == ("queued", 0) and st[b] == ("queued", 0) and st[f] == ("queued", 0), f"old Workday failures should be tried again: {st}")
         check(st[c][0] == "unconfirmed" and st[d][0] == "blocked" and st[e][0] == "skipped", f"these must stay as they are: {st}")
