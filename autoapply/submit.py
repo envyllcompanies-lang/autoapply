@@ -1646,7 +1646,7 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None, mail_hint: st
                                   "(inbox not readable or code not accepted): apply to this one yourself")
                 code_tries += 1
                 log("      email: the site asked for a security code after Submit; reading it from the application inbox")
-                res = auth.mailbox.wait_for_verification(since_ts=t_click - 5, host_hint=mail_hint, timeout=100, log=log,
+                res = auth.mailbox.wait_for_verification(since_ts=t_click - 5, host_hint="", timeout=180, log=log,
                                                          require_code=True, site_host=site_host)
                 boxes = auth._code_inputs(page) if res and res.get("code") else []
                 if not boxes:
