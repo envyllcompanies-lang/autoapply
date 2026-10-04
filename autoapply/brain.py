@@ -1112,6 +1112,10 @@ class Brain:
             return True if re.match(r"y", str(self.facts.get("authorized_to_work_in_us", "")), re.I) else None
         if re.search(r"(do|will|does)\W+not\W+(now\W+or\W+in\W+the\W+future\W+)?require\W+(\w+\W+)?sponsor|without (visa )?sponsorship", low):
             return True if re.match(r"n", str(self.facts.get("requires_sponsorship_now_or_future", "")), re.I) else None
+        if re.search(r"i am/was an? .{0,40}(appointee|senior employee|disclosure report filer|dod official|military officer|government official|"
+                     r"federal employee|elected)|personally (and substantially )?(made a decision|participated|served) .{0,60}(government|contracting officer|"
+                     r"source selection|program manager)|served as .{0,60}(contracting officer|source selection|program manager)", low):
+            return ""                # post-government-service disclosures: you confirmed none of them is true, so the box stays unticked
         if re.search(r"\b(at least|over|older than)\W+18\b|18 years", low) and re.match(r"y", str(self.facts.get("over_18", "")), re.I):
             return True
         return _UNSET

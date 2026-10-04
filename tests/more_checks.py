@@ -79,6 +79,12 @@ def question_checks():
     check(ask("Do you have experience with Excel?", "radio", YN) == "Yes", "Excel experience (skill listed as 'Excel (advanced)')")
     check(ask("Do you require accommodation to complete the application process?", "radio", YN) == "No", "application accommodation")
     check(ask("Phone type", "select", ["Mobile", "Home", "Work"]) == "Mobile", "phone type")
+    check(ask("1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the notice below for your area.", "combobox",
+              ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", "criminal-record question with a city-notice option")
+    check(ask("Do you have a valid driver's license?", "combobox", ["Select One", "Yes", "No"]) == "Yes", "driver's license")
+    for q in ("I am/was a political appointee.", "I am/was a public financial disclosure report filer.", "I am/was a covered DoD official as defined by DFARS 252.203-7000.",
+              "Personally made a decision on behalf of the government to award a contract, subcontract, or grant."):
+        check(ask(q, "checkbox_single", []) == "", f"government-role statement must stay unticked and count as answered: {q}")
     for q, want in (("Are you a government official or public official?", "No"), ("Are you related to a government official or politically exposed person (PEP)?", "No"),
                     ("Is any member of your immediate family a public official?", "No"), ("Are you subject to a non-compete agreement with a current or former employer?", "No"),
                     ("Are you bound by any restrictive covenants?", "No"), ("Do you currently have any other employment?", "No"), ("Do you have any conflicts of interest?", "No"),

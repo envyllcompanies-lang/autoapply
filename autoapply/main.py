@@ -26,7 +26,7 @@ from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-03-f"
+REQUEUE_VERSION = "2026-10-03-g"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
