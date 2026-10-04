@@ -44,7 +44,7 @@ given a keyword score of 0–100; postings at or above `min_score` are queued.
 
 **The match check.** Right before a queued job would be applied to, the bot reads the full posting from the employer's own
 feed (which also says in a fraction of a second whether the job is still open) and has the free writer compare it with your
-résumé, the way LinkedIn's match score does. Only jobs at **70% or more** (`search.min_fit` in `settings.yaml`) are applied
+résumé, the way LinkedIn's match score does. Only jobs at **60% or more** (`search.min_fit` in `settings.yaml`) are applied
 to; the rest are set aside with the reason. Each job is checked once and the result is remembered. When the free writer has
 no allowance left, only jobs with a keyword score of 80+ go ahead and the rest wait for a later run. The email lists the best
 matches it checked.
@@ -125,7 +125,7 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 - `search.workday_places` and `search.workday_queries` control how the big Workday employers are searched ("<role> <city>").
 
 ## `settings.yaml` (public tuning, in the repository)
-Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 70),
+Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 60),
 the entry-level setting (`search.max_level`: 0 entry only, 1 entry + early career), the senior-pay cutoff and the writer's model
 list, so they can be tuned without re-sending secrets.
 
