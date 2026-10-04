@@ -1,77 +1,3 @@
-=== 2026-10-03 05:35:23  blocked  Business Analyst @ avalerehealth
-url: https://jobs.lever.co/avalerehealth/9ff10efa-6df8-48ee-b188-7645f7ae5950/apply
-stage: page 1
-why: hCaptcha (a human check: the bot stops here) after submit
-# Business Analyst
-# SUBMIT YOUR APPLICATION
-  [button] Apply with LinkedIn
-<iframe about:blank>
-label: Resume/CV ✱ <file> Success!
-label: Full name ✱
-label: He/him
-label: She/her
-label: They/them
-label: Xe/xem
-label: Ze/hir
-label: Ey/em
-label: Hir/hir
-label: Fae/faer
-label: Hu/hu
-label: Use name only
-label: Custom
-  text: Let us know what pronouns you use so that we can address you correctly.
-label: Email ✱
-label: Phone ✱
-label: Current location ✱
-label: Current company ✱
-# PREFERRED NAME
-  <textarea name=cards[6e18b790-d5ac-41e9-9f5d-1e80c53a66 required filled>
-# USA/CANADA APPLICATION QUESTIONS
-  <select name=cards[9b11d5b8-9c6c-417b-89c1-9fdad8ef71 required filled options=20>
-label: Yes
-label: No
-  text: Do you require any adjustments or accommodations to participate in our recruitment process? If yes, please specify.
-  <textarea name=cards[9b11d5b8-9c6c-417b-89c1-9fdad8ef71 filled>
-# (US/CANADA/SINGAPORE) DIVERSITY & INCLUSION SURVEY - AVALERE HEALTH
-  text: Avalere Health is an equal opportunities employer, and we ensure that no applicant is subject to less favourable treatment on the grounds of
-  text: What gender do you identify as?
-label: Female
-label: Male
-label: Gender fluid
-label: Non-binary
-label: Other gender identity
-label: Prefer not to say
-  text: Which of the following best describes your sexual orientation?
-label: Bisexual
-label: Gay/lesbian
-label: Heterosexual
-label: Other/I use another term
-  text: Which option best describes your ethnic group?
-label: White American, European American, or Middle Eastern American
-label: Black or African American
-label: Native American or Alaska Native
-label: Asian American
-label: Native Hawaiian or Other Pacific Islander
-label: Hispanic/Latino/Latinx
-label: Two or more races
-label: Other
-  text: Do you have any caring responsibilities?
-  text: If yes, please select all that apply. This question asks if you look after or give any help or support to anyone because they have a long-te
-label: None
-label: Primary carer of a child/children (under 18)
-label: Primary carer of a disabled adult (18 and over)
-label: Primary carer of a disabled child/children
-label: Primary carer of an older person
-label: Secondary carer (another person carries out the main caring role)
-  text: I agree for Avalere Health to collect this information for the D&I purposes stated above.
-  text: The information collected is optional and you can answer ‘prefer not to say’ should you wish. All data collected is anonymized. You can find
-label: Yes, Avalere Health can collect this D&I information.
-label: By applying for this position, your data will be processed as per Avalere Health 's Privacy Policy.
-label: Avalere Health has my consent to contact me about future job opportunities.
-<iframe https://newassets.hcaptcha.com/captcha/v1/05219f0822161da4c4a6f3aed6bf6d6fae1ba8>
-  [button] SUBMIT APPLICATION
-  text: We may use AI tools to support elements of the hiring process, such as reviewing applications, analyzing CV/resumes, assessing responses, or
-
 === 2026-10-03 05:35:47  blocked  Remote | Travel Scheduling Coordinator | Entry-Level @ destinationknot
 url: https://jobs.lever.co/destinationknot/2a1cfbcc-8e78-42ca-8a04-f07f0d846ee7/apply
 stage: page 1
@@ -5601,5 +5527,55 @@ label: Enter website. This input is for robots only, do not enter if you're huma
   [link]  {socialIcon}
   [link]  {socialIcon}
   [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 03:19:26  blocked  Lifestyle Coordinator - Parq on Speer @ greystar
+url: https://greystar.wd1.myworkdayjobs.com/External/job/Parq-on-Speer-Denver-CO/Lifestyle-Coordinator---Parq-on-Speer_R0201903/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Lifestyle Coordinator - Parq on Speer
+{progressBarActiveStep} current step 1 of 7 Create Account/Sign In
+label: current step 1 of 7
+label: Create Account/Sign In
+label: step 2 of 7
+label: My Information
+label: step 3 of 7
+label: My Experience
+label: step 4 of 7
+label: Application Questions
+label: step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #eea2bc5a-f5c3-4be4-968f-d5e0cc050bbd {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
 
