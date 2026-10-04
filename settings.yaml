@@ -6,6 +6,7 @@ search:
   skip_sites: []              # no application system is skipped: they are tried in the order of what has actually been
                               # going through lately (Workday first; sites that keep ending at a human check last)
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
+  min_score: 35               # keyword score needed to be looked at at all (a rough first sieve; the match check below decides)
   prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
   min_fit: 70                 # ...and only jobs with a match of 70% or more are applied to
   min_score_without_match: 80 # when the free match check has no allowance left: only jobs whose keyword score is this

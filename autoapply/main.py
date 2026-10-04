@@ -409,6 +409,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                       "_title_keys": [str(k).lower() for k in ((cfg.get("scoring") or {}).get("title_keywords") or {})]}
     sources.KNOWN = {r["key"]: r["status"] for r in db.conn.execute("SELECT key, status FROM jobs")}
     every_h = float(s.get("discover_every_hours", 20))
+    if unlimited():          # non-stop mode: minutes are not counted, so new postings are looked for every few hours
+        every_h = float(s.get("discover_every_hours_unlimited", 3))
     last = db.meta_get("discovered_at", "")
     fresh_enough = False
     try:
@@ -499,6 +501,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     if match_on:      # the bar may have moved since these were checked: set aside what is now under it, bring back what is now over it
         db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))
         db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'", (min_fit,))
+        # the keyword bar is only a first sieve (the résumé match decides): when it is lowered, jobs that were under the old
+        # one and were never match-checked come back to be checked
+        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND (fit IS NULL OR fit <= 0) AND attempts = 0"
+                        " AND score >= ? AND (submitted_at IS NULL OR submitted_at = '')", (int(s.get("min_score", 70)),))
         db.conn.commit()
 
     def _fit(r) -> int:
