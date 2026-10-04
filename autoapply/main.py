@@ -26,7 +26,7 @@ from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-04-a"
+REQUEUE_VERSION = "2026-10-04-b"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -132,7 +132,7 @@ def row_job(row):
 # 2 = submits are often held by a human check when they come from a data-centre address.
 SITE_PRIOR = {"workday": 0, "bamboohr": 1, "breezy": 1, "recruitee": 1, "smartrecruiters": 1, "icims": 1, "jobvite": 1,
               "ashby": 2, "workable": 2, "greenhouse": 2, "lever": 2}
-HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|security code|human check|human verification|are you a robot|anti-bot", re.I)
+HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verification|are you a robot|anti-bot", re.I)
 
 
 def ats_of(job) -> str:

@@ -72,7 +72,7 @@ def is_human_gate(text: str) -> bool:
     return bool(re.search(
         r"captcha|hcaptcha|re?captcha|turnstile|cloudflare.*(verify|human|challenge)|"
         r"prove you.?re human|are you a robot|human verification|human check|"
-        r"its own human check|security code.*(human|robot|verification)",
+        r"its own human check",
         text or "", re.I,
     ))
 

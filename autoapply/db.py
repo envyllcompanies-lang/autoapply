@@ -80,7 +80,7 @@ class DB:
             " AND (submitted_at IS NULL OR submitted_at = '') AND (status='failed' OR reason LIKE 'stuck on step%')")
         # held at the emailed security code after Submit: nothing was sent, and the bot now reads that code from the inbox
         cur9 = self.conn.execute(
-            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='blocked' AND reason LIKE 'after Submit the site asked for a security code%'")
+            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='blocked' AND (reason LIKE 'after Submit the site asked for a security code%' OR reason LIKE 'after Submit the site asked for an emailed code%')")
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")

@@ -1642,15 +1642,15 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None, mail_hint: st
                 # Not a step of the form: the site answered the Submit click by asking for a code it emailed. Waiting here
                 # used to end as "submitted but not confirmed", which was wrong (nothing was sent) and cost two minutes.
                 if code_tries or not auth.mailbox.configured():
-                    raise Blocked("after Submit the site asked for a security code it emailed and it could not be completed "
-                                  "(inbox not readable or code not accepted): apply to this one yourself")
+                    raise NotSubmitted("after Submit the site asked for an emailed code and it was not accepted (or the inbox could not be read); "
+                                       "nothing was sent: tried again next run")
                 code_tries += 1
                 log("      email: the site asked for a security code after Submit; reading it from the application inbox")
                 res = auth.mailbox.wait_for_verification(since_ts=t_click - 5, host_hint="", timeout=180, log=log,
                                                          require_code=True, site_host=site_host)
                 boxes = auth._code_inputs(page) if res and res.get("code") else []
                 if not boxes:
-                    raise Blocked("after Submit the site asked for a security code, but it did not arrive in the inbox in time")
+                    raise NotSubmitted("after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run")
                 auth._type_code(page, boxes, res["code"])
                 page.wait_for_timeout(3000)
                 if len(SUCCESS_RE.findall(page.inner_text("body"))) <= before_hits and not _code_after_submit(page, page.inner_text("body")) \
