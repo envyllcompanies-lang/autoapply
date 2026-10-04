@@ -1,1403 +1,3 @@
-=== 2026-10-03 02:12:43  blocked  Event Coordinator, Live Events @ convene
-url: https://job-boards.greenhouse.io/convene/jobs/8203824
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Event Coordinator, Live Events
-  [button] Apply
-  text: Convene Hospitality Group (CHG) operates a global portfolio of lifestyle brands focused on creating places and experiences that bring people
-  text: Event Operations Coordinator | The Mallory, NYC
-  text: https://www.themallorynyc.com.
-  text: As we continue building our opening team, we are seeking an Event Operations Coordinator to support the end-to-end execution of all meetings
-  text: Event Support & Production Coordination:
-  text: Support the Event Producers in the end-to-end execution of meetings and events.
-  text: Coordinate event logistics including but not limited to load-in/load-out, freight, security, vendor meals, and vendor arrivals.
-  text: Place and manage vendor orders including but not limited to rentals, entertainment services, marketing materials, catering, etc.,
-  text: Provide support and take ownership of smaller meetings and events as assigned by the Sr. Event Producer (“SEP”), including the creation of P
-  text: Act as the primary point of contact for designated clients, ensuring their vision is translated into a successful operational reality.
-  text: Create, distribute, and manage essential event materials including but not limited to the run-of-show, production schedules (timing & action
-  text: Assist with site tours and execute “Surprise & Delight” moments for clients.
-  text: On-Site Execution & Fringe Hour Coverage:
-  text: Provide on-the-floor support during peak event times and fringe hours (early mornings/late evenings).
-  text: Serve as a secondary point of contact for clients on event days, ensuring all culinary, service, AV, and vendor needs are met.
-  text: Supervise event setups and breakdown to ensure proper execution, while tracking client assets and storing them properly post-event.
-  text: Operations & Administrative Coordination:
-  text: Partner with building management on security, maintenance, and facility issues; facilitate and administer proper procedure when necessary.
-  text: Manage vendor compliance and coordinate with third-party partners (florists, musicians, etc.) for event enhancements.
-  text: Assist with administrative tasks including security checkpoints, declining checkbooks, facilitate invoice processing for AP, creation of cli
-  text: Manage internal event calendars and communications across departments (Commercial, Production, Service).
-  text: Manage and monitor office supplies, assist with codifying and memorializing SOPs and best practices, and organize team outings.
-# What We Look For
-  text: The above job definition information has been designed to indicate the general nature and level of work performed by employees within this c
-  text: This role is also eligible for Convene's annual incentive performance bonus plan.
-  text: This information reflects the anticipated base salary range for this position based on current national data. Minimums and maximums may vary
-  text: At Convene Hospitality Group, we want you to feel supported in every part of your life. Here’s what you can expect:
-  text: Development & Recognition:
-  text: At Convene Hospitality Group, we believe great teams are built by bringing together people with different backgrounds, perspectives, and exp
-  text: Convene Hospitality Group is proud to be an equal opportunity employer. We welcome applicants of all backgrounds, experiences, and perspecti
-  text: Interested in building your career at Convene Hospitality Group? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  [button] 
-  text: <file>
-  [button] 
-label: Are you legally authorized to work in the United States?*
-  <input:text #question_69202698 required empty>
-  [button] 
-  [button] 
-label: How did you learn about Convene Hospitality Group and this position?*
-  <textarea #question_69202699 required filled>
-label: Have you previously been employed by Convene Hospitality Group?*
-  <input:text #question_69202700 required empty>
-  [button] 
-  [button] 
-label: Were you referred by someone at CHG?*
-  <input:text #question_69202701 required empty>
-  [button] 
-  [button] 
-label: If you were referred by a CHG employee, please indicate the employee's name here and provide some context on h
-  <textarea #question_69202702 required filled>
-label: Website/Portfolio/Github
-  <input:text #question_69202703 filled>
-label: LinkedIn Profile
-  <input:text #question_69202704 filled>
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-03 02:37:06  unconfirmed  Workplace Services Rotational Coordinator @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/8599917002/
-stage: page 1
-why: no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Str
-  <input empty>
-# Workplace Services Rotational Coordinator
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile INVALID filled>
-label: Please enter a valid LinkedIn profile URL.
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  <input:text empty>
-  text: Secondary Major / Field of study
-label: Month
-  <input:text empty>
-label: Year
-  <input:text empty>
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
-=== 2026-10-03 02:39:38  blocked  Rotational Development Program @ flexport
-url: https://job-boards.greenhouse.io/flexport/jobs/8224715
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Rotational Development Program
-  text: New York City, New York, United States
-  [button] Apply
-# About Flexport:
-  text: At Flexport, we believe global trade can move the human race forward. That’s why it’s our mission to make global commerce so easy there will
-  text: The recent global supply chain crisis has put Flexport center stage as we continue to play a pivotal role in how goods move around the world
-# Build the operational and technical skill set that runs global trade
-  text: At Flexport, we believe global trade can move the human race forward. We're shaping the future of a $10T industry with technology and people
-  text: This is an 18-month program, not a rotation for rotation's sake. Every assignment is live, revenue-generating work. Every participant leaves
-# What you'll do
-  text: You'll rotate through three functions, six months each, with AI/low-code curriculum running continuously across all three:
-  text: Gateway Ops (Air or Ocean).
-  text: Sales / Account Management.
-# Throughout the program, you'll get:
-  text: A day-to-day manager in your current rotation and a Rotation Program Manager tracking your development, with mid-point and end-of-rotation e
-  text: Certifications in AI/low-code tooling, from foundational bootcamp through applied builds to a capstone project.
-  text: Bi-weekly cohort touchpoints and a standing alumni mentor community.
-  text: Increased earning potential as you clear program benchmarks
-# This role is for you if you
-  text: Are on track to graduate, or recently graduated, and want to build a career at the intersection of supply chain operations and technology — 
-  text: Are genuinely curious about AI and low-code tooling and want to build real fluency, not just check a resume box.
-  text: Can operate with minimal supervision, prioritize a high volume of work, and communicate clearly under pressure.
-  text: Want real ownership fast? This program hands you live client and business work from the very beginning — it is not a shadowing or classroom 
-  text: Have a "compliance-first" mindset. We operate in a heavily regulated industry, and that matters in every rotation.
-# Ready to build the future of global trade — and the skill set to run it?
-# Commitment to Equal Opportunity
-  text: At Flexport, our ability to fulfill our mission of making global commerce easy and accessible relies on having a diverse, dedicated and enga
-# Global Data Privacy Notice for Job Candidates and Applicants
-  text: Interested in building your career at Flexport? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country
-  <input:text #country empty>
-  [button] 
-  <input:tel #phone filled>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: LinkedIn Profile*
-  <input:text #question_69374229 required filled>
-label: What event did you attend?*
-  <input:text #question_69374230 required empty>
-  [button] 
-  [button] 
-label: How did you first hear about Flexport?*
-  text: Career Platform (LinkedIn, Glassdoor, BuiltIn, etc.)
-  <input:text #question_69374231 required empty>
-  [button] 
-  [button] 
-label: Let us know which specific channel/event/medium/etc you heard about us:
-  <input:text #question_69374232 empty>
-label: Will you now or in the future require Flexport to commence ("sponsor") an immigration case in order to employ 
-  <input:text #question_69374233 required empty>
-  [button] 
-  [button] 
-label: Are you authorized to work lawfully in the United States for Flexport?*
-  <input:text #question_69374234 required empty>
-  [button] 
-  [button] 
-label: Have you previously been employed by Flexport or any of its entities; or by an agency representing Flexport?*
-  <input:text #question_69374235 required empty>
-  [button] 
-  [button] 
-label: What month/year are you graduating?
-  <input:text #question_69551553 empty>
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-03 02:39:49  blocked  PMC: Junior Analyst / Analyst, Finance & Planning @ pmc
-url: https://www.pmc.com/join-our-team/
-why: no application form found on page
-  [button] OUR BRANDS opens-menu
-  [button] ABOUT US opens-menu
-  text: Copyright © 2026 Penske Media Corporation. All Rights Reserved.
-  [button] OUR SITES opens-menu
-  text: Terms of Use/Your Privacy Rights
-  [button] Close privacy/terms of use policy
-
-=== 2026-10-03 03:03:37  blocked  Data Analyst (Entry-Level) @ recidiviz
-url: https://job-boards.greenhouse.io/recidiviz/jobs/4717510006
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Data Analyst (Entry-Level)
-  text: Remote, New York City, or Oakland
-  [button] Apply
-# Data Analyst
-  text: Travel is encouraged approximately once per year to state partners within the continental USA, and occasionally required. We expect these tr
-  text: Recidiviz is thrilled to be hiring a Data Analyst to join our team! We're a small, fast-moving group that works with complex criminal justic
-# About us
-  text: Recidiviz is creating safer, healthier communities by improving outcomes for people in the criminal justice system. We build technology to r
-  text: Using software tools and thoughtful product design, we've been able to safely and permanently reduce incarceration and improve outcomes. We 
-  text: People who succeed at Recidiviz lead with kindness and humility, assume good intent, learn from failure, and fix problems when they see them
-# About the role
-  text: This role works alongside experienced analysts and teammates across several teams on work that targets the drivers of incarceration. Our Dat
-# Core responsibilities
-  text: Exploring our datasets to find patterns and insights about American criminal justice systems
-  text: Carrying out well-scoped analyses with guidance from senior analysts and our State Engagement team
-  text: Supporting product launches in the states where we work by following established launch processes, preparing the analytical data each launch
-  text: Building clear, well-documented visualizations and dashboards using our existing tools
-  text: Communicating findings to internal teams, and presenting to state partners alongside teammates
-  text: Analyzing trends in areas related to our own work to understand how our products function
-# Wild success
-  text: You've contributed to real impact.
-  text: You've become a go-to analyst for your states.
-# Minimum qualifications
-  text: Strong communication and collaboration skills, to help nurture a knowledgeable, data-oriented culture
-  text: Enthusiasm for working with internal and external partners from diverse backgrounds and worldviews, such as government staff, researchers, j
-  text: Care and curiosity in inspecting source data and checking results closely, so the data and analyses you prepare can be trusted and reused
-  text: 6 or more months of practical experience exploring, analyzing, and cleaning real-world datasets. Internships and research count, and part-ti
-  text: Working proficiency in SQL, including joins, aggregations, and window functions
-  text: Familiarity with Python, specifically the Pandas package, for data analysis and visualization
-# Preferred qualifications
-  text: Interest in criminal justice or public policy, or experience working with public-sector data
-  text: Experience with a BI or dashboarding tool such as Looker or Tableau
-  text: Familiarity with any part of our data stack, which includes Google Cloud Platform, BigQuery, Looker, Jupyter notebooks, and Python/Pandas
-# Compensation
-  text: Compensation is standardized based on roles and responsibilities. This ensures equitable compensation and responsible stewardship of our res
-  text: The annual compensation for this role is: $85,000.
-# What we offer
-  text: Effective, extremely thoughtful colleagues, working together on a mission that matters
-  text: 90% medical, dental, and vision insurance coverage for you and your dependents
-  text: Flexible time off, including 20 days of PTO, 3 days of paid volunteering time, and 13 paid holidays
-  text: 12 weeks of paid parental leave
-  text: 401(k) retirement plan with 5% company match and no vesting period
-  text: Complimentary One Medical membership (depending on location)
-  text: Partnership with Carrot to provide employees with inclusive fertility and family-forming benefits, as well as a small but growing number of 
-  text: Monthly ClassPass credit for personal wellness
-  text: Free mental health support via Talkspace
-  text: Well-located offices in Oakland and Manhattan, with the flexibility to work remotely or go into either office as you choose
-  text: An annual company offsite each spring and other ad-hoc gatherings
-  text: All the exhilarating challenges and stretch opportunities of a tech startup, combined with the mission-driven heart of a nonprofit
-# More about Recidiviz
-  text: Recidiviz was an all-volunteer effort until early 2019, when Clementine, Andrew, and Joshua founded the organization. Since then, we've buil
-  text: Today, Recidiviz works with (and earns revenue from) over 19 state partners – big and small, red and blue – and covers more than 45% of the 
-# An important note
-  text: Lasting change is always built on diversity. Recidiviz recruits, employs, trains, compensates and promotes regardless of race, religion, col
-  text: Interested in building your career at Recidiviz? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-label: Location (City)*
-  text: <city>, Colorado, United States
-  <input:text #candidate-location required empty>
-  [button] 
-  [button] Locate me
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: School
-  <input:text #school--0 empty>
-  [button] 
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  [button] 
-  [button] Add another
-label: (In 2-3 sentences) What about Recidiviz's mission or approach makes you excited to contribute your specific sk
-  <textarea #question_8722520006 required filled>
-  text: Our hiring team reads all application question responses.)
-  text: If you choose to use AI to help craft your responses, please ensure that your unique experiences, perspectives, and skills are showcased in 
-  text: We want to ensure your application stands out & is the strongest representation of your background when being considered for this role.
-label: In 2-3 sentences, please describe your deepest experience turning complex data into actionable insights.*
-  <textarea #question_8722521006 required filled>
-label: Do you have at least 6 months of professional experience exploring, analyzing, and processing complex datasets
-  <input:text #question_8722522006 required empty>
-  [button] 
-  [button] 
-label: This role will have technical live coding interviews in SQL & Python (Pandas library). Are you comfortable bei
-  <input:text #question_8722523006 required empty>
-  [button] 
-  [button] 
-label: Our compensation is standardized based on roles and responsibilities. This ensu
-
-=== 2026-10-03 03:27:25  blocked  Vendor and Continuity Coordinator @ elevationscreditunion
-url: https://job-boards.greenhouse.io/elevationscreditunion/jobs/4734895005
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Vendor and Continuity Coordinator
-  text: Broomfield, Colorado, United States
-  [button] Apply
-  text: When joining Elevations, you can expect to work for a company with:
-  text: A leadership team that strives to make this the best place you’ve ever worked!
-  text: A focus on supporting our employees’ mental, physical, and financial well-being
-  text: A commitment to diversity, equity, and inclusion recognized by the Denver Business Journal and Colorado Association of Realtors
-  text: A highly engaged workforce devoted to innovation, continuous improvement, and collaboration
-  text: A reputation for excellence, as evidenced by being a two-time recipient of the Malcolm Baldrige National Quality Award
-  text: A passion for consistently providing amazing experiences and creating raving fans
-  text: If you join our team, here are some of the perks you can expect:
-  text: A competitive total rewards package with 4 weeks paid time off for full-time employees, work anniversary paid time off, paid volunteer time 
-  text: Comprehensive medical, dental, and vision plans with employer contributions to supercharge your Health Savings Account
-  text: Up to a 4% match on 401(k) contributions
-  text: Up to twelve weeks of fully paid parental leave
-  text: An extensive Employee Assistance Program that provides personalized care options for your whole household
-  text: Ample opportunity to learn, develop and grow with access to LinkedIn Learning, career and leadership development programs, job shadowing, a 
-# Location:
-  text: Elevations Credit Union- Broomfield Basecamp
-  text: Hybrid: Employees who are able to perform the essential functions of their jobs away from an Elevations location may do so with the expectat
-# Summary/Objective:
-# Essential Functions include:
-  text: Assist legal department management with the administration of the vendor management program, including program design, maintenance, and repo
-  text: Assist vendor owners with their vendor relationships throughout the life cycle of a relationship including onboarding, due diligence, perfor
-  text: Assist legal counsel in the review of contract and agreements.
-  text: Maintain and enhance the Business Continuity Program, including annual updates to the business impact analysis, department documentation, an
-  text: Maintain the systems for vendor management, business continuity, and other legal department systems.
-  text: Other legal department duties as assigned.
-# Reports to:
-# Manages:
-  text: This role does not have supervisory responsibility
-# Required Skills, Education and Experience:
-  text: A four-year college degree or completion of a specialized course of study at a business or trade school.
-  text: Two years of relevant experience in a financial institution.
-  text: Knowledge of laws, regulations and credit union operations.
-  text: Demonstrated ability to establish and maintain effective working relationships with internal and external stakeholders, exercise sound profe
-  text: General knowledge of the Microsoft office suite of applications (outlook, powerpoint, word, excel, teams).
-# Preferred Skills, Education and Experience:
-  text: Knowledge of Microsoft Power Apps platform is desired
-  text: Three years’ business continuity, vendor management and/or general risk management experience in a financial institution
-# Work Environment:
-  text: Elevations uses multi-factor authentication to keep our data safe. As such, a personal smartphone is a requirement for employment with us. T
-# Physical Requirements:
-  text: Sitting frequently, walking occasionally, use of hands frequently, hearing constantly, talking frequently, exerting up to 10 lbs of force oc
-# Position Type/Expected Hours of Work:
-  text: Full-time/ 40 hours per week
-# Classification:
-# Compensation:
-  text: The person hired into this position will likely earn between $26.00 and $32.52 hourly, plus annual bonus.
-  text: Actual compensation offered may vary from the posted hiring range based on factors such as relevant experience, time in role, base salary of
-# Anticipated Application Window:
-  text: This role is anticipated to close within 25 days from the date of posting. However, if the position has not been filled, Elevations may keep
-# Other Duties:
-  text: Candidates for certain positions may be required to submit to a credit history report in determining qualification for employment with Eleva
-  text: ELEVATIONS CREDIT UNION’S COMMITMENT TO PRIVACY
-  text: Your privacy is important to us. When you use this Careers site to apply for a job at Elevations Credit Union (“we” and “us”), we collect yo
-  text: Applicants have rights under Federal Employment Laws
-  text: Employee Polygraph Protection Act (EPPA)
-  text: Interested in building your career at Elevations Credit Union? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  [button] 
-  text: <file>
-  [button] 
-label: LinkedIn Profile
-  <input:text #question_9083664005 filled>
-label: What's your preferred first name?*
-  <input:text #question_9083665005 required filled>
-label: Are you at least 18 years of age?*
-  <input:text #question_9083666005 required empty>
-  [button] 
-  [button] 
-  text: Elevations Credit Union does not employ individuals who are younger than 18.
-label: Do you live in Colorado (and if not, are you willing to relocate)?*
-  <input:text #question_9083667005 required empty>
-  [button] 
-  [button] 
-  text: Note: Because of how our payroll is set up, Elevations only employs people who reside in Colorado. This is true for all of our roles, includ
-label: Do any of your relatives work for Elevations Credit Union or serve on its board of directors?*
-  <input:text #question_9083668005 required empty>
-  [button] 
-  [button] 
-  text: Elevations Credit Union prohibits the employment of relatives, except in the instances of marriage. For the purposes of this policy, the ter
-label: Have you ever been employed at Elevations Credit Union?*
-  <input:text #question_9083669005 required empty>
-  [button] 
-  [button] 
-label: If hired, will you require employer sponsorship now or in the future in order to be authorized to work for us 
-  <input:text #question_9083670005 required empty>
-  [button] 
-  [button] 
-label: What is your desired pay?*
-  <input:text #question_9083671005 required filled>
-label: If hired, would you be willing to complete a background and credit check?*
-  <input:text #question_9083672005 required empty>
-  [button] 
-  [button] 
-label: If you were referred to Elevations by one of our employees, please list their first and last name here:
-  <input:text #question_9083673005 filled>
-# Volu
-
-=== 2026-10-03 03:52:21  blocked  Industrial Engineer @ vast
-url: https://job-boards.greenhouse.io/vast/jobs/4671178006
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Industrial Engineer
-  text: Long Beach, California, United States
-  [button] Apply
-  text: space stations and space infrastructure
-  text: Manager, Industrial Engineering
-  text: Design and own factory and production area layouts, maintaining up-to-date floor plans and work center configurations with clear visual indi
-  text: Lead future-state factory design and capacity planning to meet rate production requirements as the program scales, partnering closely with t
-  text: Partner with production and operations teams to evaluate layout options and space trades, challenging footprint assumptions and right-sizing
-  text: Host regular process walks of production lines, questioning every step to identify what can be deleted, simplified, or standardized, and dri
-  text: Lead structured continuous improvement programs using Lean, Six Sigma, and value stream methodologies, conducting time and motion studies (M
-  text: Drive process standardization across products, assemblies, and work centers to reduce variability and build the operational foundation requi
-  text: Develop tools and analyses to diagnose delivery, capacity, and cost problems, translating production data into clear, actionable decisions f
-  text: Execute complex projects with urgency, minimizing time and cost to the business — get hands-on, lead by example, and get things done
-  text: Bachelor's degree in Industrial, Manufacturing, Mechanical, or related engineering discipline
-  text: 1+ years of professional or internship experience in a manufacturing environment
-# Preferred Qualifications:
-  text: Experience as an industrial, operations, or manufacturing engineer in a high-pace developmental or early production manufacturing environmen
-  text: Demonstrated experience in factory layout design, capacity modeling, and process mapping
-  text: Proficiency in CAD tools for layout and workspace design (e.g. SketchUp, AutoCAD, SolidWorks, or equivalent)
-  text: Industrial Engineer I: $84,460.00 - $119,892.00
-  text: Industrial Engineer II: $96,760.00 - $137,352.00
-  text: Senior Industrial Engineer: $104,960.00 - $148,992.00
-  text: We calibrate level and compensation to the selected candidate's experience and demonstrated capability. We welcome applicants across a range
-  text: Interested in building your career at Vast? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  [button] 
-  text: <file>
-  [button] 
-label: School
-  <input:text #school--0 empty>
-  [button] 
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  [button] 
-label: Discipline
-  text: Industrial Arts & Carpentry
-  <input:text #discipline--0 empty>
-  [button] 
-  [button] 
-label: Start date month
-  <input:text #start-month--0 empty>
-  [button] 
-label: Start date year
-  <input:number #start-year--0 empty>
-label: End date month
-  <input:text #end-month--0 empty>
-  [button] 
-label: End date year
-  <input:number #end-year--0 empty>
-  [button] Add another
-label: LinkedIn Profile
-  <input:text #question_8363379006 filled>
-label: Which company are you currently employed with?*
-  <textarea #question_8363381006 required filled>
-  text: If you are not currently employed, please enter “N/A.”
-label: How did you hear about Vast? *
-  <input:checkbox #question_8498305006[]_17679839006 required question-answered>
-label: Vast Careers Page
-  <input:checkbox #question_8498305006[]_17679841006 required question-answered>
-label: LinkedIn
-  <input:checkbox #question_8498305006[]_17679843006 required question-answered>
-label: Indeed
-  <input:checkbox #question_8498305006[]_17679845006 required question-answered>
-label: Google Job Search
-  <input:checkbox #question_8498305006[]_17679847006 required question-answered>
-label: Employee Referral
-  <input:checkbox #question_8498305006[]_17679849006 required question-answered>
-label: Friend or Family Member at Vast
-  <input:checkbox #question_8498305006[]_17679851006 required question-answered>
-label: Former Colleague at Vast
-  <input:checkbox #question_8498305006[]_17679854006 required question-answered>
-label: Recruiter Outreach
-  <input:checkbox #question_8498305006[]_17679859006 required question-answered>
-label: Industry Event or Conference
-  <input:checkbox #question_8498305006[]_17679864006 required question-answered>
-label: News Coverage of Vast
-  <input:checkbox #question_8498305006[]_17679867006 required question-answered>
-label: Social Media
-  <input:checkbox #question_8498305006[]_17679870006 required question-answered>
-label: University / Alumni Network
-  <input:checkbox #question_8498305006[]_17679872006 required question-answered>
-label: Professional Network
-  <input:checkbox #question_8498305006[]_17679874006 required question-answered>
-label: Other
-label: ITAR Compliance*
-  text: U.S. person. This ITAR/EAR status includes U.S. citizens, U.S. nationals, lawful permanent residents (green card holders), and asylees and r
-  <input:text #question_8541143006 required empty>
-  [button] 
-  [button] 
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Vast’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any appl
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text 
-
-=== 2026-10-03 03:54:20  blocked  Junior Inbound Compliance Analyst (KYC) @ carta
-url: https://job-boards.greenhouse.io/carta/jobs/7904721003
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Junior Inbound Compliance Analyst (KYC)
-  text: Sandy, Utah; Seattle, Washington; New York, NY
-  [button] Apply
-# The Company You’ll Join
-  text: Carta is the connected platform and AI-native ecosystem for private capital. Built to replace fragmented tools with a single system of recor
-# The Team You'll Work With
-  text: You'll be joining our Inbound Compliance team.
-  text: This team sits at the front line of Carta's compliance function — managing the intake and resolution of KYC requests on behalf of some of th
-# The Problems You'll Solve
-  text: At Carta, our employees set out on a mission to unlock the power of equity ownership for more people in more places. We believe that the pro
-  text: Own the KYC request lifecycle.
-  text: Be the client's compliance guide.
-  text: Uphold the regulatory bar.
-  text: Stay ahead of a moving target.
-# About You
-  text: Detail-oriented under pressure.
-  text: Confident and client-ready.
-  text: 1 to 2+ years of compliance experience.
-  text: A proactive decision-maker.
-  text: Experienced in complex legal entities.
-  text: A communicator people trust.
-  text: Able to manage a full plate.
-  text: Building toward a compliance career.
-  text: Some legal or compliance exposure is a plus.
-  text: Preferred but not required
-  text: Experience with AI in practice.
-  text: Prior experience in financial or legal services.
-  text: Familiarity with KYC documentation.
-  text: Knowledge of private markets structures.
-  text: Regulatory framework exposure.
-  text: At Carta, you're not just an employee. You're a builder who is creating infrastructure that accelerates innovation and empowers more ownersh
-# Salary
-  text: Carta's compensation package includes a market competitive salary, equity for all full time roles, exceptional benefits, and, for applicable
-  text: $63,100 - $78,900 in San Francisco and New York (hourly rate of $30.34 - $37.93)
-  text: $59,945 - $74,955 in Seattle (hourly rate of $28.82 - $36.04)
-  text: *Annualized salary based on estimated 40 hour hours per week before overtime
-  text: We are hiring for multiple levels and locations, so final offers may vary from the amounts listed based on geography, experience and experti
-  text: We are an equal opportunity employer and are committed to providing a positive interview experience for every candidate. If accommodations d
-  text: Brazil Transparency Report
-  text: Please note that all official communications from us will come from an @carta.com or @carta-external.com domain. Report any contact from una
-  text: Interested in building your career at Carta? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country
-  <input:text #country empty>
-  [button] 
-  <input:tel #phone filled>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: Are you currently eligible to work in the country where this position is located for any employer?*
-  <input:text #question_32096591003 required empty>
-  [button] 
-  [button] 
-label: Do you now or in the future require visa sponsorship to continue working in the country where this position is
-  <input:text #question_32096592003 required empty>
-  [button] 
-  [button] 
-label: LinkedIn Profile*
-  <input:text #question_32096593003 required filled>
-label: Website
-  <input:text #question_32096594003 filled>
-label: Which is your preferred office location(s)?*
-  [button] 
-  <input:text #question_32096595003[] required empty>
-  [button] 
-  [button] 
-label: We work on a hybrid schedule where we come into office 3x/week and work remotely the remaining 2 days. In offi
-  <input:text #question_32096596003 required empty>
-  [button] 
-  [button] 
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Carta’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any app
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-03 04:18:50  blocked  Customer Success Performance Insight Analyst @ justworks
-url: https://job-boards.greenhouse.io/justworks/jobs/7939420
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Customer Success Performance Insight Analyst
-  [button] Apply
-# Who We Are
-  text: At Justworks, you’ll enjoy a welcoming and casual environment, great benefits, wellness program offerings, company retreats, and the ability
-  text: We’re helping businesses get off the ground by enabling them to focus on running their business. We solve HR issues. We’re data-driven and n
-  text: We're united by shared goals and shared motivations at Justworks. These are best summed up in our company values, which are reflected in our
-  text: If this sounds like you, you’ll fit right in.
-# Who You Are
-  text: You are a data-driven operator who thinks like a builder and brings rigorous systems thinking to Customer Experience (CX) analytics. You see
-  text: writing advanced, performant SQL every day
-  text: You have genuine depth in modern analytics platforms and understand how data flows through customer-facing and internal systems. You're forw
-  text: You are highly detail-oriented and structured, with a strong sense of ownership over the systems and analytics foundations you build. At the
-# Your Success Profile
-# What You Will Work On
-# Data Architecture & Systems
-  text: Design and build scalable reporting frameworks and data pipelines that enable self-service insights across CSO and cross-functional teams
-  text: Own data strategy and architecture for CX operations - defining metrics, data models, and governance standards that support both operational
-  text: Architect dashboards and data exports that provide visibility into customer health, agent performance, and operational efficiency across mul
-  text: Build systems thinking around CX data - distinguish between process issues and structural problems, knowing when to optimize existing flows 
-# Analytics & Insights
-  text: Analyze large, complex datasets to identify behavioral patterns, performance drivers, and root causes that inform opportunities to improve w
-  text: Use conversation analytics, transactional data, and customer interaction data to create reports on revenue-impacting and experience-driving 
-  text: Conduct deep-dive analysis on CSO performance, customer satisfaction trends, and operational health metrics; translate findings into clear r
-  text: Define, instrument, and track KPIs related to customer experience, agent performance, operational efficiency, and AI accuracy
-  text: Partner with leadership to influence strategy using data-driven storytelling and evidence-based insights
-# AI & Automation
-  text: Design, train, and implement LLM prompts to scale QA automation, insight generation, and customer feedback synthesis
-  text: Evaluate AI-generated outputs (chatbots, automated QA, etc.) for accuracy, clarity, and business impact; build feedback loops to continuousl
-  text: Identify opportunities for automation in QA processes, reporting, and customer feedback analysis; design workflows that leverage AI to free 
-  text: Continuously ask: what work here requires human judgment, and what can be intelligently automated? Then build systems to make the right call
-# Operational Excellence
-  text: Own day-to-day operational maintenance and optimization of analytics platforms (Rippit, dashboards, metrics, reporting pipelines, data expor
-  text: Act as primary liaison with analytics platform providers to troubleshoot issues, identify opportunities for optimization, and maintain syste
-  text: Ensure data integrity and governance across CX systems and reporting layers; establish standards for data quality, documentation, and access
-  text: Build and maintain knowledge systems (dashboards, runbooks, documentation) structured for both human and AI consumption
-  text: Manage NPS outreach (including direct customer follow-up) and conduct targeted deep dives to be presented to Leadership; synthesize findings
-# Cross-Functional Partnerships
-  text: Collaborate closely with Research and Voice of Customer (VoC) teams to synthesize insights, translate findings into CSO-specific performance
-  text: Partner with Support, Enablement, RevOps, Engineering, and Data & Analytics teams to align analytics tooling, data definitions, and insights
-  text: Deliver recurring reporting and insights to CSO leadership in digestible formats (dashboards, newsletters, executive summaries)
-  text: Translate CSO needs into data requirements and work with Data & Analytics team to build necessary infrastructure
-# How You Will Do Your Work
-  text: As a CS Performance Insights Analyst, how results are achieved is paramount for your success and ultimately results in our success as an org
-  text: In addition, all Justworkers focus on aligning their behaviors to our core values known as COGIS:
-# Qualifications
-# Required:
-  text: Advanced SQL proficiency (non-negotiable):
-  text: 3-5+ years of experience in data analytics, customer analytics, CX operations, quality assurance, or related roles with strong focus on buil
-  text: Demonstrated systems thinking applied to operations - you've designed processes, data flows, or analytics infrastructure that scale beyond m
-  text: Advanced experience designing and maintaining dashboards, reports, and data pipelines, underpinned by strong hands-on SQL
-  text: Strong data fluency: ability to define meaningful metrics, understand data quality, write clear data documentation, and verify analytical wo
-  text: Hands-on experience analyzing large datasets and translating findings into actionable insights that drive business decisions
-  text: Hands-on experience with BI/analytics tools (e.g., Tableau, Looker, Sigma, or similar) and comfort working with structured and unstructured 
-  text: Demonstrated experience designing, training, or managing LLMs or similar AI models to evaluate unstructured data (e.g., customer interaction
-  text: Proficiency with QA platforms (Rippit/MaestroQA preferred)
-  text: Strong troubleshooting and process optimization skills
-  text: Strong communication and organizational skills with ability to influence across teams including senior leadership
-  text: Ability to manage complex analytical workflows independently and collaboratively
-  text: High attention to detail and systems thinking
-# Preferred:
-  text: Experience building or scaling a CX, support, or customer operations analytics program
-  text: Experience with modern data stack tools (Snowflake, dbt, Atlan, or equivalent)
-  text: Familiarity with knowledge tools and chatbot systems (Confluence, internal knowledge bases, etc.)
-  text: Experience in customer enablement, training, or support operations
-  text: Experience designing AI-native workflows or leveraging AI to automate operational tasks
-  text: Experience with business software (Zendesk, Talkdesk, Gong, Jira, Workday, or similar)
-  text: Google Workspace proficiency (Sheets, Docs, Slides)
-  text: Track record of mentoring others on data literacy or analytics best practices
-  text: The base wage range for this position based in our New York City Office is targeted at $98,000.00 to $122,000.
-
-=== 2026-10-03 04:44:13  blocked  Support Operations, Privy @ stripe
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-label: Location (City)*
-  text: <city>, Colorado, United States
-  <input:text #candidate-location required empty>
-  [button] 
-  [button] Locate me
-  [button] 
-  text: <file>
-  [button] 
-label: School*
-  text: Acharya Nagarjuna University
-  <input:text #school--0 required empty>
-  [button] 
-  [button] 
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  [button] 
-  [button] Add another
-label: Why are you excited about Privy?*
-  <input:text #question_68869075 required filled>
-label: We are headquartered in NYC. Are you:*
-  text: Not local to NYC, open to relocation
-  [button] 
-  <input:text #question_68869076[] required empty>
-  [button] 
-  [button] 
-label: Please select the country or countries you anticipate working in for the role in which you are applying. *
-  <input:checkbox #question_68869077[]_749629577 required question-answered>
-label: Australia
-  <input:checkbox #question_68869077[]_749629578 required question-answered>
-label: Belgium
-  <input:checkbox #question_68869077[]_749629579 required question-answered>
-label: Brazil
-  <input:checkbox #question_68869077[]_749629580 required question-answered>
-label: Canada
-  <input:checkbox #question_68869077[]_749629581 required question-answered>
-label: France
-  <input:checkbox #question_68869077[]_749629582 required question-answered>
-label: Germany
-  <input:checkbox #question_68869077[]_749629583 required question-answered>
-label: India
-  <input:checkbox #question_68869077[]_749629584 required question-answered>
-label: Indonesia
-  <input:checkbox #question_68869077[]_749629585 required question-answered>
-label: Ireland
-  <input:checkbox #question_68869077[]_749629586 required question-answered>
-label: Israel
-  <input:checkbox #question_68869077[]_749629587 required question-answered>
-label: Italy
-  <input:checkbox #question_68869077[]_749629588 required question-answered>
-label: Japan
-  <input:checkbox #question_68869077[]_749629589 required question-answered>
-label: Luxembourg
-  <input:checkbox #question_68869077[]_749629590 required question-answered>
-label: Malaysia
-  <input:checkbox #question_68869077[]_749629591 required question-answered>
-label: Mexico
-  <input:checkbox #question_68869077[]_749629592 required question-answered>
-label: New Zealand
-  <input:checkbox #question_68869077[]_749629593 required question-answered>
-label: Poland
-  <input:checkbox #question_68869077[]_749629594 required question-answered>
-label: Portugal
-  <input:checkbox #question_68869077[]_749629595 required question-answered>
-label: Romania
-  <input:checkbox #question_68869077[]_749629596 required question-answered>
-label: Singapore
-  <input:checkbox #question_68869077[]_749629597 required question-answered>
-label: South Korea
-  <input:checkbox #question_68869077[]_749629598 required question-answered>
-label: Spain
-  <input:checkbox #question_68869077[]_749629599 required question-answered>
-label: Sweden
-  <input:checkbox #question_68869077[]_749629600 required question-answered>
-label: Switzerland
-  <input:checkbox #question_68869077[]_749629601 required question-answered>
-label: Taiwan
-  <input:checkbox #question_68869077[]_749629602 required question-answered>
-label: Thailand
-  <input:checkbox #question_68869077[]_749629603 required question-answered>
-label: The Netherlands
-  <input:checkbox #question_68869077[]_749629604 required question-answered>
-label: UAE
-  <input:checkbox #question_68869077[]_749629605 required question-answered>
-label: UK
-  <input:checkbox #question_68869077[]_749629606 required question-answered>
-label: US
-label: If located in the US, in what city and state do you reside?*
-  <input:text #question_68869078 required filled>
-label: Are you authorized to work in the location(s) you selected in your previous response?*
-  <input:text #question_68869079 required empty>
-  [button] 
-  [button] 
-label: Have you ever been employed by Stripe or a Stripe affiliate?*
-  <input:text #question_68869080 required empty>
-  [button] 
-  [button] 
-label: Who is your current or previous employer?*
-  <input:text #question_69458253 required filled>
-label: What is your current or previous job title?*
-  <input:text #question_69458257 required filled>
-label: Please select the country where you currently reside. *
-  <input:text #question_69459593 required empty>
-  [button] 
-  [button] 
-  text: If you don't see your country in the list, please select 'Other'.
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Stripe’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any ap
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-03 05:09:17  blocked  Government Program Operations Specialist @ judihealth
-url: https://job-boards.greenhouse.io/judihealth/jobs/5431365008
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Government Program Operations Specialist
-  text: Charlotte, North Carolina, United States; Denver, Colorado, United States; New York, New York, United States
-  [button] Apply
-# About Judi Health
-  text: Hybrid (Local to New York, NY, Denver, CO or Charlotte, NC)
-  text: The Government Programs Operations Specialist (MPPP) provides operational and administrative support to ensure the successful coordination, 
-  text: Position Responsibilities:
-  text: Create, maintain and organize program documentation, including SOPs, job aides, FAQs, and control documentation.
-  text: Submit and track development tickets; monitor progress and follow up to ensure timely completion of enhancements and fixes.
-  text: Support testing of system(s) or process updates to validate functionality and ensure outcomes meet business requirements.
-  text: Support quality assurance reviews of member notices, invoices and other communications to ensure accuracy, completeness, and compliance.
-  text: Track deliverables, timelines, and service level agreements (SLAs) to ensure timely completion of client reporting and program outputs.
-  text: Monitor program activities and escalate issues, risks, or discrepancies; assist in issue tracking and remediation efforts
-  text: Coordinate internal and external (client) meetings; prepare and maintain meeting agendas, notes, and action item tracking.
-  text: 1-3 years of experience in operations, program coordination, healthcare administration, or a related role (Medicare, PBM, or managed care ex
-  text: Associate’s or Bachelor’s degree preferred; High school diploma or equivalent required.
-  text: Strong organizational skills with demonstrated attention to detail and accuracy, particularly in documentation, tracking, and quality review
-  text: Experience managing multiple workstreams, including meeting coordination, task tracking, and deliverable management in a deadline-driven env
-  text: Familiarity with ticketing systems, project tracking tools, or workflow management platforms
-  text: Experience supporting testing, quality assurance, or validation activities for operational processes, systems, or communications preferred.
-  text: Exposure to healthcare regulatory or compliance environments (e.g., CMS, Medicare, notices, audits) is a plus.
-  text: Strong written and verbal communication skills, including the ability to document meeting outcomes, summarize issues, and communicate with c
-  text: Proven ability to work both independently and collaboratively across teams while managing competing priorities.
-  text: Charlotte, NC Salary Range
-  text: All employees are responsible for adherence to the Judi Health Code of Conduct including the reporting of non-compliance. This position desc
-  text: We provide equal employment opportunities to all employees and applicants for employment and prohibit discrimination and harassment of any t
-  text: https://www.judi.health/legal/privacy-policy
-  text: Interested in building your career at Judi Health? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: LinkedIn Profile
-  <input:text #question_18752703008 filled>
-label: Will you now or in the future require Visa sponsorship (e.g., H-1B, TN)?*
-  <input:text #question_18752704008 required empty>
-  [button] 
-  [button] 
-label: Are you legally authorized to work in the U.S.? *
-  <input:text #question_18752705008 required empty>
-  [button] 
-  [button] 
-label: Desired Salary or Hourly Rate*
-  <input:text #question_18752706008 required filled>
-label: Please confirm both your City and State*
-  <input:text #question_18752707008 required filled>
-label: Are you currently subject to any non‑compete, non‑solicitation, or restrictive covenant that could limit your 
-  <input:text #question_18752708008 required empty>
-  [button] 
-  [button] 
-label: Which best describes your pharmacy or PBM experience? (Select all that apply) *
-  <input:checkbox #question_18752709008[]_45083951008 required question-answered>
-label: PBM or pharmacy operations
-  <input:checkbox #question_18752709008[]_45083952008 required question-answered>
-label: Pharmacy technician or pharmacy support role
-  <input:checkbox #question_18752709008[]_45083953008 required question-answered>
-label: Medicare Advantage or government programs support
-  <input:checkbox #question_18752709008[]_45083954008 required question-answered>
-label: Healthcare role without pharmacy exposure
-  <input:checkbox #question_18752709008[]_45083955008 required question-answered>
-label: No Healthcare or pharmacy experience
-label: Have you worked directly with Medicare Part D claims and/or the CMS submission or dispute process? *
-  <input:checkbox #question_18752710008[]_45083956008 required question-answered>
-label: Yes - hands on experience
-  <input:checkbox #question_18752710008[]_45083957008 required question-answered>
-label: Some exposure (supporting role)
-  <input:checkbox #question_18752710008[]_45083958008 required question-answered>
-label: No
-label: Are you able to work a hybrid schedule (at least 3 days per week) in our New York City, Denver or Charlotte of
-  <input:text #question_18752711008 required empty>
-  [button] 
-  [button] 
-label: Which of the following best describes your ability to meet our hybrid work requirement (3 days per week in off
-  text: I am willing to relocate to one of these locations if selected for the role.
-  <input:text #question_18752712008 required empty>
-  [button] 
-  [button] 
-label: Have you previously been employed by Judi Health (formerly Capital Rx)?*
-  <input:text #question_18842341008 required empty>
-  [button] 
-  [button] 
-# U.S. Standard Demographic Questions
-  text: We invite applicants to share their demographic background. If you choose to complete this survey, your responses may be used to identify ar
-label: How would you describe your gender identity?
-  [button] 
-  <input:text #<phone> empty>
-  [button] 
-  [button] 
-label: How would you describe your racial/ethnic background?
-  text: Hispanic, Latinx or of Spanish Origin
-  [button] 
-  <input:text #<phone> empty>
-  [button] 
-  [button] 
-label: How would you describe your sexual orientation?
-  [button] 
-  <input:text #<phone> empty>
-  [button] 
-  [button] 
-label: Do you identify as transgender?
-  <input:text #<phone> empty>
-  [button] 
-  [button] 
-label: Do you have a d
-
-=== 2026-10-03 05:10:10  blocked  Fund Sales, IR & Operations Associate @ f2-finance
-url: https://jobs.workable.com/view/hAxH7wMJjtnNuKr5u1RN6h/fund-sales%2C-ir-%26-operations-associate-in-santa-monica-at-f2-finance
-why: could not find the employer's application page
-  [button] Search for jobs
-  [link] Log in / Sign up
-# Fund Sales, IR & Operations Associate
-# at F2 Finance
-  text: Santa Monica, California, United States
-  [button] Share job
-  [button] Apply now
-# Description
-  text: is an investment firm with a mission to provide investors with a consistent, stable, asset-backed return.
-  text: We are an emerging manager led by a founder with a track record of building multi-billion-dollar AUM businesses. This is an opportunity to j
-  text: Our flagship strategy, the
-  text: , provides investors with access to a portfolio of short-duration, asset-backed real estate loans. The Fund supports the lending activity of
-  text: We think of ourselves as an
-  text: . We aim to use modern technology, automation, data, and frontier AI models to operate with greater speed, precision, and leverage than trad
-  text: Investor Relations and Fund Operations Associate
-  text: to help grow and service the investor base for the Faes & Co Income Fund.
-  text: This is a hands-on associate role that sits directly with the founder. It is part fund operations, part investor relations, and part sales. 
-  text: This is not a graduate role. You will need at least two years of full-time, post-graduation experience
-  text: , and you will need to want real responsibility and direct exposure to how a private credit platform is built, rather than a narrow seat in 
-  text: This is an office-based role in Santa Monica, California. Working from our office is required.
-  text: You will work very closely with the founder on a daily basis, which means unusual access, fast feedback, and a clear path to grow with the p
-  text: Build and maintain a disciplined pipeline of prospective investors, including HNW investors, RIAs, family offices, wealth managers, and refe
-  text: Run consistent outreach and follow-up, and keep every prospect moving to a clear next step.
-  text: Organize investor meetings, calls, webinars, and events, and prepare the founder for them.
-  text: Attend conferences and industry events, source new relationships, and follow up promptly afterwards.
-  text: Track outreach activity, conversion, investor feedback, and campaign performance, and report on it to the founder.
-  text: Investor relations, fund operations, and reporting
-  text: Produce the monthly fund fact sheet and the quarterly investor report, including performance commentary and portfolio summaries.
-  text: Put together investor presentations, pitch materials, fund summaries, FAQs, and market commentary.
-  text: Act as a day-to-day point of contact for existing and prospective investors, respond to inquiries accurately and quickly, and coordinate due
-  text: Hold investors' hands through the onboarding and subscription process, from first document to funded commitment.
-  text: Work with our external fund administrator on KYC, investor onboarding, capital accounts, and administrative matters.
-  text: Make sure all Fund filings and KYC and compliance is completed accurately and on time.
-  text: Maintain investor records, the CRM, and the fundraising database so that the data is always current and reliable.
-  text: Beyond the minimum experience requirement, we care most about drive, judgment, and reliability.
-  text: You take work from a one line instruction to a finished product without needing to be actively managed at every step.
-  text: You want to build something and you are energized by a growth target.
-  text: You are comfortable reaching out to investors, holding a conversation about the Fund, and asking for the next meeting.
-  text: Fact sheets, reports, and filings have to be right, and you check your own work.
-  text: You keep multiple reporting cycles, pipelines, and follow-ups on track at once.
-  text: You can turn numbers and updates into something an investor will read and trust.
-  text: You already use frontier AI models in your daily workflow and you are quick with modern tools such as Slack, Notion, and Google Workspace.
-# Requirements
-  text: A minimum of 2 years of full-time, post-graduation experience
-  text: in investor relations, fund operations, fund administration, private credit, real estate finance, asset management, wealth management, inves
-  text: Genuine hustle and ambition. We want someone who wants to build a career, not just hold a role, and who can point to concrete evidence of ou
-  text: Bachelor's degree in Finance, Economics, Business, Marketing, Communications, or a related field.
-  text: Strong written communication, presentation, and organizational skills.
-  text: Excellent attention to detail and follow-through.
-  text: Ability to work from our Santa Monica, California office. This is an office-based role and is a mandatory requirement, so remote candidates 
-# Benefits
-  text: Competitive base salary appropriate to an associate level hire, plus a performance-based bonus or commission linked to capital raised.
-  text: 401k (with employer contribution)
-  text: good coffee, paid office lunch twice a week, endless snacks and a great work environment.
-# Visit website
-  text: F2 Finance is a leading private real estate lender, built on the foundation of certainty, speed, and integrity. We are a true balance sheet 
-  text: group, a financial services platform dedicated to alternative credit and private lending. Our funding comes from the Faes & Co Income Fund, 
-(dialog)
-  [button] Cookies settings
-  [button] Accept all
-  [button] Decline all
-  text: © Workable Technology Limited 2012-2026
-  [button] Cookie Settings
-
-=== 2026-10-03 05:11:01  blocked  Title Insurance | National Commercial Coordinator | Remote @ godot-consulting-group
-url: https://jobs.workable.com/view/fTKaTTZHr7nn7e7qtgUYeX/title-insurance-%7C-national-commercial-coordinator-%7C-remote-in-new-york-at-godot-consulting-group
-why: could not find the employer's application page
-  [button] Search for jobs
-  [link] Log in / Sign up
-# Title Insurance | National Commercial Coordinator | Remote
-# at Godot Consulting Group
-  text: New York, New York, United States
-  [button] Share job
-  [button] Apply now
-# Description
-# 
-  text: National Commercial Title Coordinator
-# About the Opportunity
-  text: Are you an organized, detail-driven real estate professional who excels at facilitating complex, multi-state commercial transactions? Our cl
-  text: to support top-tier title, escrow, and legal settlement teams across key regional markets.
-  text: Commercial Paralegals Welcome:
-  text: Commercial Real Estate Paralegal
-  text: , your background in title review, survey analysis, and multi-state deal mechanics makes you an
-  text: In this position, you will play a central part in driving transaction workflows, performing critical
-  text: , and coordinating multi-property commercial closings alongside national underwriters, attorneys, and lenders.
-# Key Responsibilities & Primary Functions
-  text: Comprehensive Title Review & Examination:
-  text: Conduct thorough reviews of title commitments, search packages, underlying legal documents, easements, encumbrances, and tax searches to ide
-  text: Proformas & Title Policies:
-  text: Draft, review, and issue complex
-  text: , required endorsements, and final
-  text: (ALTA) in strict accordance with underwriting guidelines.
-  text: Title Billing & Invoicing:
-  text: Calculate, issue, and manage
-  text: , title fees, endorsements, and recording charges for multi-state commercial transactions.
-  text: Transaction Coordination & Workflow:
-  text: Manage multi-state commercial pipelines from order intake to post-closing, ensuring strict adherence to critical closing dates.
-  text: Survey & Document Analysis:
-  text: Review ALTA/NSPS surveys, entity authorization documents, municipal lien reports, and UCC searches, flagging potential issues for commercial
-  text: Clearing Title Exceptions:
-  text: Work directly with sellers, buyers, lenders, and underwriters to obtain required mark-ups, affidavits, indemnities, and payoff statements to
-  text: Stakeholder Communication:
-  text: Serve as the primary operational point of contact for attorneys, commercial brokers, lenders, and internal underwriting teams across multipl
-# What We’re Looking For
-  text: 3+ years of experience as a
-  text: , Commercial Title Coordinator, or Commercial Title Examiner (Law Firm, Title Agency, or National Underwriter background preferred).
-  text: , and managing survey reviews and escrow/closing processes.
-  text: Exceptional project coordination, multi-tasking abilities, and meticulous attention to detail in high-volume, fast-paced environments.
-  text: Familiarity with industry-standard closing software (e.g., SoftPro, Resware, Qualia, or RamQuest).
-# What’s in It for You?
-  text: Top-of-market salary + discretionary performance bonus.
-  text: Premium Medical, Dental, Vision, and 401(k) matching.
-  text: Direct exposure to high-profile national commercial deals with room for professional growth.
-  text: Modern hybrid or remote work arrangements tailored to your lifestyle.
-# Ready to Make Your Next Career Move?
-  text: Submit your resume directly or email us at
-  text: to start a confidential conversation.
-  text: #CommercialRealEstate #TitleCoordinator #Paralegal #TitleReview #TitlePolicies #Proformas #TitleInsurance #RealEstateJobs #CRE #CommercialTi
-# Benefits
-  text: Health Care Plan (Medical, Dental & Vision)
-  text: Retirement Plan (401k, IRA)
-  text: Life Insurance (Basic, Voluntary & AD&D)
-  text: Paid Time Off (Vacation, Sick & Public Holidays)
-  text: Family Leave (Maternity, Paternity)
-# Visit website
-  text: is a direct hire search firm specializing in real estate finance and title insurance. We take the time to understand both companies and cand
-  text: Who you know gets you the interview. What you know gets you the job.
-  text: Get to know Godot. Follow us on LinkedIn
-(dialog)
-  [button] Cookies settings
-  [button] Accept all
-  [button] Decline all
-  text: © Workable Technology Limited 2012-2026
-  [button] Cookie Settings
-
-=== 2026-10-03 05:34:16  blocked  Quantitative Analyst I  @ fanaticsfbg
-url: https://job-boards.greenhouse.io/fanaticsfbg/jobs/4426177009
-stage: page 1
-why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
-# Quantitative Analyst I
-  [button] Apply
-# About Us
-  text: Fanatics is building a leading global digital sports platform. We ignite the passions of global sports fans and maximize the presence and re
-  text: Assist in the development, implementation, training and testing of mathematical models for pricing & managing the risk of sport betting even
-  text: Collect and clean sports-related data,
-  text: Analyze large datasets of play by play (simulated or historical) and betting data to identify patterns, trends, and correlations that can in
-  text: Use programming languages such as C# or Python to develop quantitative models, code and automate analytical processes, and perform data anal
-  text: Collaborate with senior quantitative analysts, traders & product managers to understand business requirements, implement solutions, and comm
-  text: Document and maintain clear and concise documentation of quantitative models, methodologies and analysis procedures for internal reference
-  text: Stay abreast of developments in quantitative analysis & betting markets, and related fields through self-study & training
-  text: Bachelor's or Master's degree in Mathematics, Statistics, Computer Science, Finance, Economics, or a related quantitative field.
-  text: Outstanding mathematical, statistical and analytical skills.
-  text: Excellent work ethic and good team skills
-  text: Detail-oriented mindset with a commitment to producing high-quality work and adhering to best practices in quantitative analysis and researc
-  text: Strong understanding of more advanced machine learning techniques is a plus
-  text: Proficiency in at least one programming languages such as Python, C#, R, or C++ is a plus
-  text: Depending on the role, your interview and onboarding experience may include in-person components, such as onsite interviews or Launching int
-  text: https://benefitsatfanatics.com/
-  text: Fanatics will never ask candidates for money, banking information, or other sensitive personal information as part of the interview process.
-  text: Interested in building your career at Fanatics Betting & Gaming? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application disabled
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name
-  <input:text #preferred_name filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-label: Location (City)*
-  text: <city>, Colorado, United States
-  <input:text #candidate-location required empty>
-  [button] 
-  [button] Locate me
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: School*
-  text: Acharya Nagarjuna University
-  <input:text #school--0 required empty>
-  [button] 
-  [button] 
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  [button] 
-label: Discipline*
-  text: Industrial Arts & Carpentry
-  <input:text #discipline--0 required empty>
-  [button] 
-  [button] 
-label: End date year*
-  <input:number #end-year--0 required filled>
-  [button] Add another
-label: LinkedIn Profile
-  <input:text #question_7769227009 filled>
-label: Website
-  <input:text #question_7769228009 filled>
-label: Are you over the age of 18 ?*
-  <input:text #question_7769229009 required empty>
-  [button] 
-  [button] 
-label: How did you hear about Fanatics?*
-  <input:text #question_7769230009 required empty>
-  [button] 
-  [button] 
-label: Are you able to work from our office 3 days per week?*
-  <input:text #question_7769231009 required empty>
-  [button] 
-  [button] 
-label: Do you now require visa sponsorship for employment?*
-  <input:text #question_7769232009 required empty>
-  [button] 
-  [button] 
-label: Will you in future require visa sponsorship to maintain work authorization? *
-  <input:text #question_7769233009 required empty>
-  [button] 
-  [button] 
-label: Are you able to provide proof of your legal work authorization?*
-  <input:text #question_7769234009 required empty>
-  [button] 
-  [button] 
-label: Are you now, or have you ever been employed by Fanatics, Inc. or any of its affiliates or subsidiaries?*
-  <input:text #question_7769235009 required empty>
-  [button] 
-  [button] 
-label: Are you bound by any restrictive covenants (non-compete, non-solicitation)?*
-  <input:text #question_7769236009 required empty>
-  [button] 
-  [button] 
-label: What is your base salary compensation expectation?*
-  <input:text #question_7769237009 required filled>
-label: Why are you interested in this specific role at Fanatics Betting & Gaming? *
-  <textarea #question_7809062009 required filled>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Fanatics Betting & Gaming’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group 
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
 === 2026-10-03 05:35:23  blocked  Business Analyst @ avalerehealth
 url: https://jobs.lever.co/avalerehealth/9ff10efa-6df8-48ee-b188-7645f7ae5950/apply
 stage: page 1
@@ -5505,6 +4105,1406 @@ label: NO
   text: This role is a hybrid position with several days a week onsite in our offices in Tribeca, NYC. Are you willing and able to commute to this l
   text: Have you personally processed vendor invoices and payments as part of an Accounts Payable function?
   text: Do you have experience coding invoices or expenses to the appropriate GL account, department, business unit, or cost center?
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-10-04 02:28:36  blocked  Resident Services Coordinator (Evening Shift) - Apiary Residences @ greystar
+url: https://greystar.wd1.myworkdayjobs.com/External/job/Apiary-Residences-Denver-CO/Resident-Services-Coordinator--Evening-Shift----Apiary-Residences_R0202869/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Resident Services Coordinator (Evening Shift) - Apiary Residences
+{progressBarActiveStep} current step 1 of 7 Create Account/Sign In
+label: current step 1 of 7
+label: Create Account/Sign In
+label: step 2 of 7
+label: My Information
+label: step 3 of 7
+label: My Experience
+label: step 4 of 7
+label: Application Questions
+label: step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #e8ebe20b-2d0b-4085-b59b-6833272937eb {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 02:29:07  blocked  Tenant Services Coordinator (CRE) @ cw
+url: https://cw.wd1.myworkdayjobs.com/External/job/Client-Site---USA---NY---New-York---124-East-14th-Street/Tenant-Services-Coordinator--CRE-_R327999/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Tenant Services Coordinator (CRE)
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #124a8101-fbc9-4dd6-b964-3ac0b1f2f2f5 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 02:29:42  blocked  Admin Business Coordinator - BlackRock Capital Markets, BGM @ blackrock
+url: https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional/job/New-York-NY/Admin-Business-Coordinator---BlackRock-Capital-Markets--BGM_R266628/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Admin Business Coordinator - BlackRock Capital Markets, BGM
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #928b2195-f107-41c7-88d6-0a551556d9c7 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 02:31:30  blocked  Global Operations - Event Ticketing Coordinator @ caa
+url: https://caa.wd1.myworkdayjobs.com/Careers/job/Los-Angeles-CA/Global-Operations---Event-Ticketing-Coordinator_JR9184/apply/applyManually
+stage: account
+why: account: still on Workday's sign-in screen after trying to sign in or create an account
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Global Operations - Event Ticketing Coordinator
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #d2ea5abd-c276-4c3c-bbc2-7298a9ad2de5 {beecatcher} empty>
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 02:32:29  skipped  Analyst, Media Planning @ mastercard
+url: https://mastercard.wd1.myworkdayjobs.com/CorporateCareers/job/Purchase-New-York/Analyst--Media-Planning_R-291052/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Prefer Not To Self Identify (United States of America)
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Analyst, Media Planning
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+label: completed step 4 of 6
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 6 Voluntary Disclosures
+label: current step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Information, VERAA and Section 503 Invitation to Self-Identify
+  text: Mastercard is an equal opportunity employer that is committed to building and maintaining a workplace in which all employees feel valued.
+  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
+  text: a person who was discharged or released from active duty because of a service-connected disability.
+  text: A “recently separated veteran” means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An “active duty wartime or campaign badge veteran” means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: If you believe you belong to any of the categories of protected veterans listed above, please indicate by checking the appropriate box below
+ {formField-gender}
+label: What is your Gender?*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicityMulti}
+label: What is your ethnicity?*
+  <input:checkbox #40a306eb2fa04253bc03cdd73e66f6b4-ethnicityMulti required question-unanswered>
+label: American Indian or Alaska Native (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #9d68a3a2bba1478899f43da4ea9aa976-ethnicityMulti required question-unanswered>
+label: Asian (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #00b90f77d1234faeb3c26da1c54ea692-ethnicityMulti required question-unanswered>
+label: Black or African American (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #cd9a04db864a47d5a3f1bfb6f3e77e9f-ethnicityMulti required question-unanswered>
+label: Hispanic or Latino (United States of America)
+  <input:checkbox #987be35785bf4b6795b10ee90c73afc9-ethnicityMulti required question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #866c0ed135ff106f0f0c284de630cd7f-ethnicityMulti required question-unanswered>
+label: Prefer Not To Self Identify (United States of America)
+  <input:checkbox #ee82d204e0f34e45b1f09f9cb358dd2e-ethnicityMulti required question-unanswered>
+label: Two or More Races (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #047b6a6ed15f42fc9ca0a696e5bbb7b6-ethnicityMulti required question-unanswered>
+label: White (Not Hispanic or Latino) (United States of America)
+ {formField-veteranStatus}
+label: Have you ever served in the military?*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Additional Disclosures; Terms and Conditions
+  text: Pay Transparency Non-Discrimination Disclosure
+  text: Mastercard will not discharge or otherwise discriminate against employees or applicants because they have inquired about, discussed, or disc
+  text: Mastercard Global Applicant Privacy Notice
+  text: (the “Privacy Notice”) for information on how Mastercard International Inc. and its affiliates (“Mastercard”) process your personal informat
+  text: By checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as described
+  text: For candidates in South Korea only
+  text: : by checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as describ
+  text: Collect and process your personal information as set out in the Privacy Notice;
+  text: Disclose your personal information as described in the Privacy Notice; and
+  text: Transfer your personal information cross-border from the country you reside in to the country in which the job you are applying for is locat
+  text: For candidates in the People’s Republic of China (excluding Hong Kong, Macao and Taiwan) only:
+  text: by checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as described
+  text: Collect and process your personal information (including but not limited to sensitive personal information) as set out in the Privacy Notice
+  text: Disclose your personal information to relevant Mastercard group companies, members of Mastercard’s HR and/or Legal department, and third-par
+  text: Transfer and store your personal information cross-border to the countries/regions (other than the one you reside) to the extent the relevan
+  text: I understand that this application will be fully considered, but its receipt does not imply that I will be offered employment. I also unders
+  text: Pre-Employment Inquiry Release
+  text: All information provided by you will be verified. Therefore, complete accuracy is required and expected. In connection with my application f
+  text: Mastercard is an equal opportunity employer. At Mastercard, we recruit, hire, train, promote, and provide all other privileges of employment
+  text: Mastercard neither charges any fee, nor requires any money deposits from jobseekers at any stage of recruitment nor collects any fees from e
+  text: Any person dealing with unauthorized parties for seeking job opportunities with Mastercard in lieu of money is doing so at his/her own risk.
+  text: In case you come across any person or organization demanding money in lieu of an offer letter for a job opportunity in Mastercard, you are e
+ {formField-acceptTermsAndAgreements}
+label: Except where consent is not required by applicable privacy law, I consent to the above terms*.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-04 02:32:56  blocked  Project Engineer @ schimenticonstructioncompany
+url: https://job-boards.greenhouse.io/schimenticonstructioncompany/jobs/6195162004
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Project Engineer
+  text: New York, New York, United States
+  [button] Apply
+  text: At Schimenti Construction Company,
+  text: Project start-up: complete new project updates in Procore system, distribute initial drawings and plans to all required team members, assist
+  text: Schedule calls and meetings with internal and external project team members to ensure consistent communication flow throughout the duration 
+  text: Assists with buyout process
+  text: Review, process, and distribute submittals via Procore
+  text: Create and distribute weekly reports as requested by Project Manager
+  text: Process and maintain RFIs in Procore or similar system
+  text: Prepare, process, and distribute subcontract agreements, purchase orders, and change orders
+  text: Assist in preparation of closeout package process: collect documentation from subcontractors, vendors, architects, clients, and members of t
+  text: Other job responsibilities as assigned
+  text: Occasional travel to project site as needed
+  text: Able to multitask, prioritize, and manage their time well on tight deadlines
+  text: Excellent written and verbal communication skills
+  text: High level of professionalism
+  text: Strong presentation skills
+  text: Team-player and ability to build relationships well across the organization and team
+  text: Schimenti provides a variety of comprehensive benefits to employees, including health insurance coverage, life and disability insurance,
+  text: enrollment in our ESOP (Employee Stock Ownership Plan),
+  text: a retirement savings plan, several paid holidays and paid time off (PTO).
+  text: Interested in building your career at Schimenti Construction Company? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+  [button] 
+label: Why are you interested in this position?*
+  <textarea #question_20008536004 required filled>
+label: I understand this is an in-office role with occasional travel required to project sites. *
+  <input:text #question_20008537004 required empty>
+  [button] 
+  [button] 
+label: What are your salary expectations?*
+  <input:text #question_20008538004 required filled>
+label: Currently or in the future, would you require Visa sponsorship to maintain employment in the United States?*
+  <input:text #question_20008539004 required empty>
+  [button] 
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Schimenti Construction Company’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected g
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-04 02:33:29  blocked  Recruiting Coordinator @ datadog
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name*
+  <input:text #preferred_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+  [button] 
+label: LinkedIn Profile
+  <input:text #question_69570477 filled>
+label: Website
+  <input:text #question_69570478 filled>
+label: I certify that the information provided in this application is true and correct to the best of my knowledge. I
+  <input:text #question_69570479 required empty>
+  [button] 
+  [button] 
+label: I understand my application will be processed in accordance with Datadog’s Candidate Privacy Policy.*
+  <input:text #question_69570480 required empty>
+  [button] 
+  [button] 
+  text: Applicant and Candidate Privacy Policy
+label: Are you legally authorised to work full-time in the country where this job is based?*
+  <input:text #question_69570481 required empty>
+  [button] 
+  [button] 
+label: In what cities are you available to work?*
+  [button] 
+  <input:text #question_69570482[] required empty>
+  [button] 
+  [button] 
+label: Please select all the languages you speak fluently.*
+  [button] 
+  <input:text #question_69570483[] required empty>
+  [button] 
+  [button] 
+  text: Select all the languages in which you have business-level fluency, both in verbal and written communication.
+label: How did you hear about this opportunity?*
+  <input:text #question_69570484 required empty>
+  [button] 
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Datadog’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any a
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-04 02:33:42  blocked  Operations Associate, Structuring and Execution @ capitolis
+url: https://capitolis.com/careers/
+why: reCAPTCHA checkbox (a human check: the bot stops here)
+  text: Capitolis is a pioneering technology provider for the capital markets.
+# Join Our Team
+  text: We are seeking Super Smart, Badass, Good Humans who want to help us build a better financial system for all. We are driven by purpose, and w
+  text: We are excited to be named to the Crain’s Best Places to Work in New York City list for 2026, 2025, 2024, 2023 and 2022.
+# People Attributes
+  text: Our People Attributes are characteristics that describe the DNA of Capitolis employees. They provide a consistent framework to hire, assess,
+  [button] SUPER SMART
+  [button] BADASS
+  [button] GOOD HUMANS
+  text: Click on Attributes to Explore More
+# Benefits
+  text: We deeply care for and support one another and our families
+  text: and aim to create an environment where we can be all that we can be. The benefits we offer are intentional and aligned with our values.
+  text: We want our employees to be able to focus on achieving our big, audacious goals, not distracted by fear of health expenses. We offer generou
+  text: Compensation for today and the future
+  text: We believe in our ability to impact one of the largest industries in the world. All our employees are stakeholders to share in our collectiv
+  text: A portion of employee compensation is tied to individual and company performance, and outperformance is rewarded. We also offer retirement s
+  text: Growth and development opportunities
+  text: We push each other to be all that we can be. Employees can rely on managers and colleagues to give honest and direct feedback and spend time
+  text: In-office culture with immense flexibility
+  text: We firmly believe we’re better together and that the power of collaboration from in-person interactions is unmatched. We
+  text: . At the same time, we offer the flexibility to support our employees and their families
+# Current Job Openings
+  text: If our Company Values and People Attributes speak to you, check out the below open roles.
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+# Life at Capitolis
+  text: The connections we form with our colleagues, clients, and community are incredibly meaningful and driven by a deep sense of purpose in every
+# lifeatcapitolis
+  text: From company culture to our very own employees, we’re here to share glimpses of life at our offices around the world.
+  text: We’re proud to share that Capitolis has been named
+  [button] …
+  text: Today, Capitolis announced an agreement to acquire
+  [button] …
+  text: We’re honored to be named one of @crainsnewyork
+  [button] …
+  text: We are excited to welcome Jon Gizzie as Head of
+  [button] …
+  text: G’mar Chatima Tovah. To those who observe Yom
+  [button] …
+  text: Shana Tova! Wishing everyone celebrating a happy,
+  [button] …
+  text: Today marks 25 years since the tragic terrorist
+  [button] …
+  text: Happy Labor Day! Wishing everyone a relaxing day
+  [button] …
+  [button] Load More
+# Global Offices
+# New York
+# Tel Aviv
+# London
+  text: © 2026 Capitolis | ISO 27001 Certified
+<iframe https://www.google.com/recaptcha/api2/anchor>
+
+=== 2026-10-04 02:34:46  blocked  Growth Strategy Analyst, GTM Data @ charliehealth
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Growth Strategy Analyst, GTM Data
+  [button] Apply
+# 
+# Why Charlie Health?
+  text: Millions of people across the country are navigating mental health conditions, substance use disorders, and eating disorders, but too often,
+  text: Charlie Health exists to change that. Our mission is to connect the world to life-saving behavioral health treatment. We deliver personalize
+  text: As a rapidly growing organization, we're reaching more communities every day and building a team that’s redefining what behavioral health tr
+  text: As a member of the Growth Strategy team, you'll support Charlie Health's national expansion by helping drive territory design, role scoping,
+  text: You'll lead territory builds, support regional reshuffling, and partner cross-functionally with Outreach leadership, Talent Acquisition, and
+  text: You'll also contribute to broader Growth Strategy initiatives related to market expansion, workforce planning analytics, and operational eff
+  text: We're a team of passionate, forward-thinking professionals eager to take on the challenge of the mental health crisis and play a formative r
+  text: Support territory mapping and book building for the Outreach team, using data and analytical models to ensure rep coverage is structured tho
+  text: Build and maintain the core analytical assets that drive workforce planning — TAM models, account scoring, capacity models, coverage gap ana
+  text: Partner with Outreach leadership, Talent Acquisition, and Sales Ops to translate analytical outputs into clear recommendations on where to h
+  text: Work closely with RevOps (Systems & Automation), Analytics, and Data Science to build on shared platforms and data infrastructure, align on 
+  text: Own the account cycling process — regularly auditing book composition, flagging stale or low-priority accounts, and surfacing reassignment o
+  text: Use market intelligence datasets to size addressable markets, identify coverage gaps, and pressure-test TAM assumptions underlying territory
+  text: Use Claude, Hex, Retool, n8n, and similar tools to automate manual workflows, scale account research, analyze rep activity and outcomes, and
+  text: Conduct experiment analysis and quantitative diagnostics on Outreach performance to surface where coverage, books, or hiring decisions need 
+  text: Improve territory mapping, workforce planning, and book-building processes through scalable, AI-assisted enhancements
+  text: Apply sound business judgment when data is incomplete or ambiguous, and prepare clear, defensible recommendations for Growth Strategy leader
+  text: 0–2 years of full-time experience (or relevant internship experience) in a hands-on technical/analytical role: GTM/RevOps analytics, growth 
+  text: Hands-on experience building with modern AI tools — Claude, ChatGPT, or similar — including writing prompts, chaining outputs, and automatin
+  text: Demonstrated experience building in low-code or no-code platforms — Hex, Retool, n8n, Zapier, Make, AppSheet, or similar. Bonus if applied t
+  text: SQL literacy — able to read, debug, and validate queries (including AI-generated ones), and write basic queries when needed. Hex + AI-assist
+  text: Strong analytical instincts and the ability to translate ambiguous business questions into models, dashboards, or tooling
+  text: Sound business judgment — comfortable making logical calls when data is incomplete, and able to translate analytical output into defensible 
+  text: Microsoft Office proficiency — Word, PowerPoint, Excel
+  text: Experience with TAM modeling, capacity planning, account scoring, or forecasting
+  text: Exposure to mapping or territory tools (eSpatial, MapAnything, Maptive, or similar)
+  text: Experience with BI tools (Tableau, Looker, or similar)
+  text: Python or R experience (not required — Hex + AI handle most of what would otherwise require it)
+  text: Prior exposure to GTM strategy, sales ops, RevOps, consulting, or banking environments — a plus, not a requirement, and only meaningful when
+# Benefits
+# Our Values
+  text: Connection: Care deeply & inspire hope.
+  text: Congruence: Stay curious & heed the evidence.
+  text: Commitment: Act with urgency & don’t give up.
+  text: Please do not call our public clinical admissions line in regard to this or any other job posting.
+  text: Please be cautious of potential recruitment fraud. If you are interested in exploring opportunities at Charlie Health, please go directly to
+  text: Recruiting agencies, please do not submit unsolicited referrals for this or any open role. We have a roster of agencies with whom we partner
+  text: At Charlie Health, we value being an Equal Opportunity Employer. We strive to cultivate an environment where individuals can be their authen
+  text: Charlie Health applicants are assessed solely on their qualifications for the role, without regard to disability or need for accommodation.
+  text: By submitting your application, you agree to receive SMS messages from Charlie Health regarding your application. Message and data rates may
+  text: Interested in building your career at Charlie Health? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  [button] 
+  text: <file>
+  [button] 
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  [button] 
+  [button] Add another
+label: LinkedIn Profile*
+  <input:text #question_17825314004 required filled>
+label: Website
+  <input:text #question_17825315004 filled>
+label: If you were referred by a Charlie Health team member, please provide their first and last name.
+  <input:text #question_17825316004 filled>
+label: Preferred Name
+  <input:text #question_17825317004 filled>
+label: Pronouns
+  <input:text #question_17825318004 filled>
+label: Do you currently live within a 75min commute of NYC and are willing to work at least four days per week out of
+  <input:text #question_17825319004 required empty>
+  [button] 
+  [button] 
+label: Do you now, or will you at any point in the future, require visa sponsorship to work in the United States?*
+  <input:text #question_17825320004 required empty>
+  [button] 
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Charlie Health’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status unde
+label: Gender
+  <input:te
+
+=== 2026-10-04 02:35:23  blocked  Growth Strategy Analyst, Performance & Comp @ charliehealth
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Growth Strategy Analyst, Performance & Comp
+  [button] Apply
+# 
+# Why Charlie Health?
+  text: Millions of people across the country are navigating mental health conditions, substance use disorders, and eating disorders, but too often,
+  text: Charlie Health exists to change that. Our mission is to connect the world to life-saving behavioral health treatment. We deliver personalize
+  text: As a rapidly growing organization, we're reaching more communities every day and building a team that’s redefining what behavioral health tr
+  text: As a member of the Growth Strategy team, you'll own the performance management infrastructure that keeps Charlie Health's Outreach organizat
+  text: You'll work cross-functionally to ensure incentive structures are well-designed, payouts are accurate, and goals are deployed with the right
+  text: Over time, you'll ramp into greater ownership of compensation plan design, performance analytics, and strategic projects that shape how Char
+  text: We're a team of passionate, forward-thinking professionals eager to take on the challenge of the mental health crisis and play a formative r
+  text: Own performance reporting and KPI infrastructure for the Outreach organization, including monthly goal tracking, quarterly scorecards, and b
+  text: Execute compensation plan workflows across Outreach roles — including quarterly bonus calculations — ensuring incentive structures are well-
+  text: Build and maintain performance trackers, dashboards, and reporting materials that give leadership reliable, real-time visibility into how th
+  text: Support the deployment of org-wide goals by ensuring tracking infrastructure is in place from day one, and performance against targets is vi
+  text: Partner with Growth Strategy leadership on performance reform initiatives, compensation plan redesign, and strategic analytics that drive ac
+  text: Conduct ad hoc analyses and modeling — including Snowflake-based data pulls — to support compensation plan design, performance diagnostics, 
+  text: Continuously improve performance management and compensation workflows by identifying inefficiencies and implementing more scalable, repeata
+  text: Prepare and present findings, recommendations, and updates to Growth Strategy leadership and cross-functional stakeholders
+  text: 0–2 years of full-time work experience; relevant full-time or internship experience in a start-up, consulting, private equity, or investment
+  text: Strong financial modeling and Excel / Google Sheets fluency — comfort building, auditing, and maintaining complex spreadsheets with formulas
+  text: Meticulous attention to detail — this role calculates bonus payouts and produces leadership-facing reporting where errors are costly and vis
+  text: Strong analytical instincts and the ability to translate quantitative work into clear narratives and recommendations
+  text: Sound business judgment — comfortable making logical calls when data is incomplete, and able to handle sensitive compensation data with disc
+  text: Exceptional communication, interpersonal, and relationship-building skills — able to work credibly with leadership and across functions
+  text: Proactive self-starter and natural multitasker who thrives with autonomy and tight recurring deadlines
+  text: Microsoft Office proficiency — Word, PowerPoint, Excel
+  text: Experience with SQL (Snowflake or similar) for data pulls and analysis
+  text: Experience with BI tools (Tableau, Looker, Hex, or similar)
+  text: Prior exposure to sales compensation, incentive plan design, or performance management workflows
+  text: Familiarity with Salesforce or similar CRM data structures
+  text: Experience preparing materials for senior leadership or executive reviews
+# Benefits
+# Our Values
+  text: Connection: Care deeply & inspire hope.
+  text: Congruence: Stay curious & heed the evidence.
+  text: Commitment: Act with urgency & don’t give up.
+  text: Please do not call our public clinical admissions line in regard to this or any other job posting.
+  text: Please be cautious of potential recruitment fraud. If you are interested in exploring opportunities at Charlie Health, please go directly to
+  text: Recruiting agencies, please do not submit unsolicited referrals for this or any open role. We have a roster of agencies with whom we partner
+  text: At Charlie Health, we value being an Equal Opportunity Employer. We strive to cultivate an environment where individuals can be their authen
+  text: Charlie Health applicants are assessed solely on their qualifications for the role, without regard to disability or need for accommodation.
+  text: By submitting your application, you agree to receive SMS messages from Charlie Health regarding your application. Message and data rates may
+  text: Interested in building your career at Charlie Health? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  [button] 
+  text: <file>
+  [button] 
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  [button] 
+  [button] Add another
+label: LinkedIn Profile*
+  <input:text #question_17825387004 required filled>
+label: Website
+  <input:text #question_17825388004 filled>
+label: If you were referred by a Charlie Health team member, please provide their first and last name.
+  <input:text #question_17825389004 filled>
+label: Preferred Name
+  <input:text #question_17825390004 filled>
+label: Pronouns
+  <input:text #question_17825391004 filled>
+label: Do you currently live within a 75min commute of NYC and are willing to work at least four days per week out of
+  <input:text #question_17825392004 required empty>
+  [button] 
+  [button] 
+label: Do you now, or will you at any point in the future, require visa sponsorship to work in the United States?*
+  <input:text #question_17825393004 required empty>
+  [button] 
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Charlie Health’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status unde
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please 
+
+=== 2026-10-04 02:36:52  blocked  Manufacturing Coordinator @ vast
+url: https://job-boards.greenhouse.io/vast/jobs/4699576006
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Manufacturing Coordinator
+  text: Long Beach, California, United States
+  [button] Apply
+  text: space stations and space infrastructure
+  text: Manager, Manufacturing Operations,
+  text: Fluid Systems Manufacturing
+  text: Second Shift: 2pm - 10:30pm
+  text: Oversee, monitor, and facilitate the movement of components throughout the manufacturing process to ensure timely progression through our Va
+  text: Coordinate the physical transfer of components across various stages including purchasing, receiving inspection, inventory, and relevant wor
+  text: Coordinate outside processing of components and liaise with the purchasing team to ensure timely delivery.
+  text: Support logistics operations by optimizing workflow staging as necessary.
+  text: Maintain accuracy and integrity of system data in collaboration with Supply Chain, Engineering, and Manufacturing teams to align with demand
+  text: Generate and maintain reports highlighting requirements, milestones, and limitations for internal and external stakeholders.
+  text: Collaborate with schedulers, and managers to fulfill action requirements.
+  text: Communicate effectively and escalate issues promptly across various platforms and to specific stakeholders.
+  text: Escalate issues such as part shortages, purchase order delays, and discrepancies in BOM to relevant departments.
+  text: Collaborate with engineers and the planning team on the release of runs.
+  text: Follow schedules through effective planning and shortage management coordination.
+  text: 2+ years in a manufacturing environment.
+  text: Preferred Skills & Experience:
+  text: 2+ years of experience with MRP/ERP systems (SAP, Oracle, etc.)
+  text: Highly detail oriented and self starter.
+  text: Willingness to work evenings and/or weekends to support critical mission milestones.
+  text: Ability to lift up to 25lbs unassisted.
+  text: Manufacturing Coordinator I: $19.00 - $25.00
+  text: Manufacturing Coordinator II: $22.00 - $30.00
+  text: Senior Manufacturing Coordinator: $28.00 - $38.00
+  text: We calibrate level and compensation to the selected candidate's experience and demonstrated capability. We welcome applicants across a range
+  text: Interested in building your career at Vast? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name
+  <input:text #preferred_name filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country
+  <input:text #country empty>
+  [button] 
+  <input:tel #phone filled>
+  [button] 
+  text: <file>
+  [button] 
+label: LinkedIn Profile
+  <input:text #question_8582830006 filled>
+label: Which company are you currently employed with?*
+  <textarea #question_8582831006 required filled>
+  text: If you are not currently employed, please enter “N/A.”
+label: How did you hear about Vast? *
+  <input:checkbox #question_8582832006[]_18649336006 required question-answered>
+label: Vast Careers Page
+  <input:checkbox #question_8582832006[]_18649337006 required question-answered>
+label: LinkedIn
+  <input:checkbox #question_8582832006[]_18649338006 required question-answered>
+label: Indeed
+  <input:checkbox #question_8582832006[]_18649339006 required question-answered>
+label: Google Job Search
+  <input:checkbox #question_8582832006[]_18649340006 required question-answered>
+label: Employee Referral
+  <input:checkbox #question_8582832006[]_18649341006 required question-answered>
+label: Friend or Family Member at Vast
+  <input:checkbox #question_8582832006[]_18649342006 required question-answered>
+label: Former Colleague at Vast
+  <input:checkbox #question_8582832006[]_18649343006 required question-answered>
+label: Recruiter Outreach
+  <input:checkbox #question_8582832006[]_18649344006 required question-answered>
+label: Industry Event or Conference
+  <input:checkbox #question_8582832006[]_18649345006 required question-answered>
+label: News Coverage of Vast
+  <input:checkbox #question_8582832006[]_18649346006 required question-answered>
+label: Social Media
+  <input:checkbox #question_8582832006[]_18649347006 required question-answered>
+label: University / Alumni Network
+  <input:checkbox #question_8582832006[]_18649348006 required question-answered>
+label: Professional Network
+  <input:checkbox #question_8582832006[]_18649349006 required question-answered>
+label: Other
+label: ITAR Compliance*
+  text: U.S. person. This ITAR/EAR status includes U.S. citizens, U.S. nationals, lawful permanent residents (green card holders), and asylees and r
+  <input:text #question_8582833006 required empty>
+  [button] 
+  [button] 
+label: Preferred client group? *
+  <input:checkbox #question_8582834006[]_18649350006 required question-answered>
+  <input:checkbox #question_8582834006[]_18649351006 required question-answered>
+label: Avionics Manufacturing
+  <input:checkbox #question_8582834006[]_18649352006 required question-answered>
+label: Integration
+  <input:checkbox #question_8582834006[]_18649353006 required question-answered>
+label: Open to any
+label: Preferred shift? *
+  <input:checkbox #question_8582835006[]_18649354006 required question-answered>
+label: First Shift
+  <input:checkbox #question_8582835006[]_18649355006 required question-answered>
+label: Second Shift
+  <input:checkbox #question_8582835006[]_18649356006 required question-answered>
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Vast’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any appl
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the
+
+=== 2026-10-04 02:37:21  blocked  Manufacturing Coordinator, Integration (2nd Shift) @ vast
+url: https://job-boards.greenhouse.io/vast/jobs/4696249006
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Manufacturing Coordinator, Integration (2nd Shift)
+  text: Long Beach, California, United States
+  [button] Apply
+  text: space stations and space infrastructure
+  text: Manufacturing Coordinator, 2nd shift
+  text: Second Shift: 2pm - 10:30pm
+  text: Oversee, monitor, and facilitate the movement of components throughout the manufacturing process to ensure timely progression through our Va
+  text: Coordinate the physical transfer of components across various stages including purchasing, receiving inspection, inventory, and relevant wor
+  text: Coordinate outside processing of components and liaise with the purchasing team to ensure timely delivery.
+  text: Support logistics operations by optimizing workflow staging as necessary.
+  text: Maintain accuracy and integrity of system data in collaboration with Supply Chain, Engineering, and Manufacturing teams to align with demand
+  text: Generate and maintain reports highlighting requirements, milestones, and limitations for internal and external stakeholders.
+  text: Collaborate with schedulers, and managers to fulfill action requirements.
+  text: Communicate effectively and escalate issues promptly across various platforms and to specific stakeholders.
+  text: Escalate issues such as part shortages, purchase order delays, and discrepancies in BOM to relevant departments.
+  text: Collaborate with engineers and the planning team on the release of runs.
+  text: Follow schedules through effective planning and shortage management coordination.
+  text: 2+ years in a manufacturing environment.
+  text: Preferred Skills & Experience:
+  text: 2+ years of experience with MRP/ERP systems (SAP, Oracle, etc.)
+  text: Highly detail oriented and self starter.
+  text: Willingness to work evenings and/or weekends to support critical mission milestones.
+  text: Ability to lift up to 25lbs unassisted.
+  text: Manufacturing Coordinator I: $19.00 - $25.00
+  text: Manufacturing Coordinator II: $22.00 - $30.00
+  text: Senior Manufacturing Coordinator: $28.00 - $38.00
+  text: We calibrate level and compensation to the selected candidate's experience and demonstrated capability. We welcome applicants across a range
+  text: Interested in building your career at Vast? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name
+  <input:text #preferred_name filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country
+  <input:text #country empty>
+  [button] 
+  <input:tel #phone filled>
+  [button] 
+  text: <file>
+  [button] 
+label: Which company are you currently employed with?*
+  <textarea #question_8574005006 required filled>
+  text: If you are not currently employed, please enter “N/A.”
+label: How did you hear about Vast? *
+  <input:checkbox #question_8574006006[]_18185718006 required question-answered>
+label: Vast Careers Page
+  <input:checkbox #question_8574006006[]_18185719006 required question-answered>
+label: LinkedIn
+  <input:checkbox #question_8574006006[]_18185720006 required question-answered>
+label: Indeed
+  <input:checkbox #question_8574006006[]_18185721006 required question-answered>
+label: Google Job Search
+  <input:checkbox #question_8574006006[]_18185722006 required question-answered>
+label: Employee Referral
+  <input:checkbox #question_8574006006[]_18185723006 required question-answered>
+label: Friend or Family Member at Vast
+  <input:checkbox #question_8574006006[]_18185724006 required question-answered>
+label: Former Colleague at Vast
+  <input:checkbox #question_8574006006[]_18185725006 required question-answered>
+label: Recruiter Outreach
+  <input:checkbox #question_8574006006[]_18185726006 required question-answered>
+label: Industry Event or Conference
+  <input:checkbox #question_8574006006[]_18185727006 required question-answered>
+label: News Coverage of Vast
+  <input:checkbox #question_8574006006[]_18185728006 required question-answered>
+label: Social Media
+  <input:checkbox #question_8574006006[]_18185729006 required question-answered>
+label: University / Alumni Network
+  <input:checkbox #question_8574006006[]_18185730006 required question-answered>
+label: Professional Network
+  <input:checkbox #question_8574006006[]_18185731006 required question-answered>
+label: Other
+label: ITAR Compliance*
+  text: U.S. person. This ITAR/EAR status includes U.S. citizens, U.S. nationals, lawful permanent residents (green card holders), and asylees and r
+  <input:text #question_8574007006 required empty>
+  [button] 
+  [button] 
+label: Shift preference? *
+  <input:checkbox #question_8574008006[]_18185732006 required question-answered>
+label: First Shift
+  <input:checkbox #question_8574008006[]_18185733006 required question-answered>
+label: Second Shift
+  <input:checkbox #question_8574008006[]_18185734006 required question-answered>
+label: Open to either
+label: Preferred client group?
+  <input:checkbox #question_8574009006[]_18185735006 question-unanswered>
+label: Integration
+  <input:checkbox #question_8574009006[]_18185736006 question-unanswered>
+label: Fluid Systems
+  <input:checkbox #question_8574009006[]_18185737006 question-unanswered>
+label: Avionics Manufacturing
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Vast’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any appl
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #secur
+
+=== 2026-10-04 02:38:25  unconfirmed  Logistics Team Member @ cookunity
+url: https://careers.cookunity.com/jobs/7785754003
+stage: page 1
+why: no confirmation after submit; page errors: ['Select an option\nYes\nNo']; page ends: 'le to perform the essential functions of the job for which you are applying, with or without a reasonable accommodation? (Optional) Select an option Yes No What is your availability to work? (Optional) Submit application'
+  [button] Apply Now
+# Logistics Team Member
+  text: New York, New York, United States
+# About CookUnity:
+  text: Food has lost its soul to modern convenience. And with it, it has lost the power to nourish, inspire, and connect us. So in 2018, CookUnity 
+  text: empower Chefs to nourish the world.
+  text: If that mission has you hungry in more ways than one, you’ve found the right job posting.
+  text: The Logistics team member is responsible for helping drive a smooth, on-time handover from FFM to last mile each morning. This role starts t
+  text: Daily Metrics Review & Pickup Planning
+  text: Start each shift by reviewing the previous day's logistics metrics, including FFM-to-last-mile handover timeliness and overall delivery dela
+  text: Review the supervisor count from the final hour of FFM operations to assess FFM capacity and anticipate its impact on last-mile handover.
+  text: When FFM is behind schedule, adjust and push driver pickup times to account for the delay.
+  text: When FFM is on track, review yesterday's delivery performance and fine-tune today's driver pickup times to help meet the delivery window.
+  text: Logistics Service & Order Checks
+  text: Check the Logistics Service to confirm all orders have been assigned.
+  text: Review for any orders with integration errors and resolve or escalate as needed.
+  text: Handover & Dispatch Execution
+  text: Complete the daily audit checklist to confirm handover readiness across all routes.
+  text: Confirm all routes are ready for handover and have been picked up.
+  text: Oversee cart-to-truck and pallet-to-truck loading.
+  text: Track middle-mile truck arrivals to ensure on-time dispatch.
+  text: Help ensure the end-to-end handover process runs smoothly and on time from FFM to last mile.
+  text: Driver & Route Issue Resolution
+  text: Troubleshoot driver issues in real time, including scanning problems, missing or damaged bags, and replacing damaged product.
+  text: Identify and resolve route coverage gaps as they come up.
+  text: Define pickup schedules for 3PL partners based on route distance and mileage.
+  text: Coordinate with 3PL's on pickup times and driver changes.
+  text: Manage 3PL no-shows by ensuring the affected route is covered or picked up by the 3PL.
+  text: 1+ years of experience in logistics, warehouse, distribution, or a related operations role.
+  text: Bilingual (English/Spanish) preferred.
+  text: Strong problem-solving skills with the ability to make real-time decisions under time pressure.
+  text: Comfortable coordinating directly with third-party logistics (3PL) providers and drivers.
+  text: Familiarity with reviewing logistics/delivery metrics and dashboards.
+  text: Ability to work an early morning shift, including weekends/holidays as needed based on operational demand.
+  text: Strong organizational skills and attention to detail, particularly around checklist-driven audits.
+  text: Ability to lift, carry, push, or pull up to 50 lbs regularly.
+  text: Ability to stand, walk, and bend for extended periods throughout the shift.
+  text: Ability to work in varying temperature environments, including cold storage/refrigerated areas.
+  text: Ability to move quickly and safely between the loading dock, warehouse floor, and office areas.
+  text: 🩺 Health Insurance coverage with Cigna
+  text: 🚀 Opportunity for advancement
+# Compensation
+  text: Pay Range for this position
+  text: CookUnity is an Equal Opportunity Employer
+  text: A quick note for all candidates
+  text: stay safe while applying to CookUnity.
+  text: Here are a few tips to help you protect yourself and know what to expect from us:
+  text: Apply only through our official channels.
+  text: Our recruiters are real people — and easy to verify.
+  text: We only communicate through official CookUnity channels.
+  text: We’ll never ask for payment or personal financial details.
+  text: If anyone does, please don’t share any information and let us know right away.
+  text: we care about keeping your experience (and safety) as genuine as possible.
+# Apply for this position
+  text: Join our team and help us transform the food industry!
+label: First Name
+  <input:text #«Rnn3rmdb»-form-item filled>
+label: Last Name
+  <input:text #«R17n3rmdb»-form-item filled>
+label: Email
+  <input:email #«R1nn3rmdb»-form-item filled>
+label: Phone
+  <input:text #«R27n3rmdb»-form-item filled>
+label: Resume/CV
+  <input:file has-file>
+  [button] Change File
+  text: Accepted file types: pdf, doc, docx, txt, rtf. Maximum size: 5 MiB.
+  text: File selected: <first>delgado_resume
+  [button] ✕
+label: Cover Letter (Optional)
+  <input:file no-file>
+  [button] Attach File
+label: Are you elegible to work in the US?
+  <select #«R3nn3rmdb»-form-item filled options=3>
+label: Availability for stand 8 hours
+  <select #«R47n3rmdb»-form-item INVALID empty options=3>
+label: Can you reliable commute to that area?
+  <select #«R4nn3rmdb»-form-item filled options=3>
+label: Available to lift weight 50 pounds
+  <select #«R57n3rmdb»-form-item filled options=3>
+label: Are you able to perform the essential functions of the job for which you are applying, with or without a reaso
+  <select #«R5nn3rmdb»-form-item filled options=3>
+label: What is your availability to work? (Optional)
+  <input:text #«R67n3rmdb»-form-item filled>
+  [button] Submit application
+
+=== 2026-10-04 02:40:24  blocked  Patient Care Coordinator  @ rockymountain
+url: https://job-boards.greenhouse.io/rockymountain/jobs/5250801007
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Patient Care Coordinator
+  [button] Apply
+# Rocky Mountain Spine & Sport Physical Therapy, a brand partner of Upstream Rehabilitation, is looking for a Pa
+  text: Are you looking for a position in a growing organization where you can make a significant impact on the lives of others?
+  text: What is a Patient Care Coordinator?
+  text: A Patient Care Coordinator is an entry-level office role that is responsible for maintaining pleasant and consistent daily operations of the
+  text: Our Patient Care Coordinators have excellent customer service skills.
+  text: Patient Care Coordinators learn new things – a lot! The Patient Care Coordinator multitasks in multiple computer programs each day.
+  text: A day in the life of a Patient Care Coordinator:
+  text: Greets everyone who enters the clinic in a friendly and welcoming manner.
+  text: Schedules new referrals received by fax or by telephone from patients, physician offices.
+  text: Verifies insurance coverage for patients.
+  text: Collects patient payments.
+  text: Maintains an orderly and organized front office workspace.
+  text: Fulltime positions include:
+  text: Annual paid Charity Day to give back to a cause meaningful to you
+  text: Medical, Dental, Vision, Life, Short-Term and Long-Term Disability Insurance
+  text: 3-week Paid Time Off plus paid holidays
+  text: The Patient Care Coordinator - I (PCC-I) supports clinic growth through excellence in execution of the practice management role and patient 
+  text: Collect all money due at the time of service
+  text: Convert referrals into evaluations
+  text: Create an inviting clinic atmosphere.
+  text: Monitor and influence arrival rate through creation of a great customer experience
+  text: Manage schedule efficiently
+  text: Manage non-clinical documentation
+  text: Manage caseload, D/C candidate, progress note, and insurance reporting
+  text: o Attend any required training with the Territory Field Trainers (TFT) for Raintree and other business process updates.
+  text: Complete quarterly compliance training.
+  text: High School Diploma or equivalent
+  text: Communication skills – must be able to relate well to Business Office and Field leadership
+  text: Ability to multitask, organizational detail, ability to meet deadlines, work with little to no supervision
+  text: As a member of a team, must possess efficient time management and presentation skills
+  text: This position is subject to inside environmental conditions: protections from weather conditions but not necessarily from temperature change
+  text: This is a full-time position operating within normal business hours Monday through Friday, with an expectation of minimum of 40 hours per we
+  text: This position is subject to sedentary work.
+  text: Constantly sits, with ability to interchange with standing as needed.
+  text: Constantly communicates with associates, must be able to hear and speak to accurately exchange information in these situations.
+  text: Frequently operates a computer and other office equipment such as printers, phone, keyboard, mouse and copy machines using gross and fine ma
+  text: Constantly uses repetitive motions to type.
+  text: Must be able to constantly view computer screen (near acuity) and read items on screen.
+  text: Must have ability to comprehend information provided, use judgement to appropriately respond in various situations.
+  text: Occasionally walks, stands, pushes or pulls 0-20 lbs., lifts 0-20 lbs. from floor to waist; carries, pushes, and pulls 0-20 lbs.
+  text: Rarely crawls, crouches, kneels, stoops, climbs stairs or ladders, reaches above shoulder height, lifts under 10 lbs. from waist to shoulder
+  text: This job description is not an all-inclusive list of all duties that may be required of the incumbent and is subject to change at any time w
+  text: Please do not contact the clinic directly.
+  text: CLICK HERE TO LEARN EVEN MORE ABOUT UPSTREAM
+  text: This annual salary ranges within the specified amounts depending on experience, credentials, certifications, and other qualifications. Full-
+  text: Upstream Rehabilitation is an Equal Opportunity Employer that strives to provide an inclusive work environment where our differences are cel
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country
+  <input:text #country empty>
+  [button] 
+  <input:tel #phone filled>
+  [button] 
+  text: <file>
+  [button] 
+label: LinkedIn Profile
+  <input:text #question_13008226007 filled>
+label: What is your desired hourly pay rate?*
+  <input:text #question_13008227007 required filled>
+label: Do you now, or in the future, require visa sponsorship for employment?*
+  <input:text #question_13008228007 required empty>
+  [button] 
+  [button] 
+label: Have you previously been employed by Upstream Rehabilitation or its affiliates?*
+  <input:text #question_13008229007 required empty>
+  [button] 
+  [button] 
+label: If you provided a phone number, do you consent to receiving follow-up communication via text message (or SMS m
+  <input:text #question_13008230007 required empty>
+  [button] 
+  [button] 
+  text: If yes, you can always opt-out by replying STOP.
+label: Do you have any relatives who are currently employed by Upstream and its brand affiliates?*
+  <input:text #question_13008231007 required empty>
+  [button] 
+  [button] 
+label: Are you over the age of 18?*
+  <input:text #question_13008232007 required empty>
+  [button] 
+  [button] 
+# EEOC
+  text: Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Upstream Rehabilitation’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group st
+label: Gender*
+  <input:text #<phone> required empty>
+  [button] 
+  [button] 
+label: Veteran Status*
+  text: I am not a protected veteran
+  <input:text #<phone> required empty>
+  [button] 
+  [button] 
+label: Disability Status*
+  text: No, I do not have a disability and have not had one in the past
+  <input:text #<phone> required empty>
+  [button] 
+  [button] 
+label: Race*
+  <input:text #<phone> required empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-04 02:42:31  blocked  Business Data Associate  @ octus
+url: https://job-boards.greenhouse.io/octus/jobs/5193252007
+stage: page 1
+why: after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself
+# Business Data Associate
+  text: New York, New York, United States
+  [button] Apply
+  text: We are looking for a Business Data Associate who will support our data team, customer success and internal product development. The initial 
+  text: LevPro, now part of Octus, is a modern operating system for leveraged credit asset managers, founded to modernize a $1.5 trillion finance se
+  text: Data responsibilities include:
+  text: Entering data, interpreting data and analyzing results
+  text: Developing and using data collection systems that optimize efficiency
+  text: Acquiring data from primary or secondary sources and maintaining databases
+  text: Customer Success responsibilities include:
+  text: Analyzing data to improve customer experience
+  text: Providing real-time customer support and feedback
+  text: Holding product demonstrations for new customers and developing user guides
+  text: Contributing to client onboarding and implementations to better understand client processes and build rapport with client stakeholders
+  text: Developing and monitoring project metrics
+  text: Exceptional attention to detail
+  text: Growth mindset, curiosity and eagerness to learn
+  text: Ability to push back on superiors
+  text: Ability to work independently and collaborate asynchronously with cross-functional teams
+  text: 1-2 years of relevant experience (Fixed Income / Leveraged Credit) preferred
+  text: Technical expertise in Excel and other data frameworks preferred, including using ChatGPT/others
+  text: Competitive pay and benefits
+  text: As much opportunity and responsibility as you can handle
+  text: A flexible, remote or in office work model
+  text: A highly collaborative and dynamic group environment
+  text: A stipend for learning (books, classes, etc.)
+  text: At Octus, we consider a range of factors in connection with compensation decisions, including experience, skills, location, and our business
+  text: The base salary range estimate for this position is $75,000 - $80,000. This position is eligible for a quarterly commission bonus.
+  text: The actual compensation will be at Octus’ sole discretion and will be determined by the aforementioned and other relevant factors.
+  text: Equal Employment Opportunity
+  text: Octus is committed to providing equal employment opportunities to all employees and applicants for employment without regard to race, colour
+  text: Interested in building your career at Octus? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  [button] 
+  text: <file>
+  [button] 
+label: LinkedIn Profile URL*
+  <input:text #question_12532927007 required filled>
+label: Are you currently authorized to work in the country where this position is based, without requiring sponsorshi
+  <input:text #question_12532928007 required empty>
+  [button] 
+  [button] 
+label: Will you in the future require employer sponsorship for work authorization in the country where this position 
+  <input:text #question_12532929007 required empty>
+  [button] 
+  [button] 
+label: Preferred first and last name*
+  <input:text #question_12532930007 required filled>
+  text: The name provided above should be your full legal name.
+  text: Please use this section to indicate any preferred names you would like to be recognized by, if different from your legal name.
+label: Do you have any family members or individuals with whom you have a close personal relationship currently emplo
+  <input:text #question_12532931007 required empty>
+  [button] 
+  [button] 
+label: (If Yes) Please provide the full name(s) of the Octus employee(s) and your relationship to them (e.g., spouse,
+  <input:text #question_12532932007 required filled>
+  text: If answered 'No' to the above, please enter "N/A"
+label: Do you have any restrictive covenants that would prevent you from working at Octus?*
+  <input:text #question_12532933007 required empty>
+  [button] 
+  [button] 
+label: If you answered Yes to the previous question, please explain below:*
+  <textarea #question_12532934007 required filled>
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Octus’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any app
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-04 02:43:57  blocked  Project Coordinator @ weekday-ai
+url: https://jobs.workable.com/view/mBFQqyHSE3kXfBZVy93JhL/remote-project-coordinator-in-united-states-at-weekday-ai
+why: could not find the employer's application page
+  [button] Search for jobs
+  [link] Log in / Sign up
+# Project Coordinator
+# at Weekday AI
+  [button] Share job
+  [button] Apply now
+# Description
+  text: This role is for one of our clients
+  text: Compensation: $45-$55 per hour
+  text: Join a leading AI lab's cutting-edge GenAI team and contribute to the development of advanced AI systems. We are seeking an organized and pr
+  text: to support AI research, training-data initiatives, and operational programs. In this role, you will serve as an important coordination point
+  text: The ideal candidate is comfortable managing multiple priorities, coordinating cross-functional teams, maintaining project documentation, and
+# Requirements
+# Key Responsibilities
+  text: Serve as the day-to-day point of contact for AI data and research projects, ensuring workflows remain organized and on track.
+  text: Partner with program leads and subject-matter experts to translate project requirements into clear guidelines and actionable instructions.
+  text: Support the onboarding, coordination, and ongoing engagement of domain experts as projects scale.
+  text: Participate in weekly business reviews, maintain meeting notes and action items, and facilitate project calls when required.
+  text: Monitor project quality, identify recurring issues, investigate root causes, and communicate findings to relevant stakeholders.
+  text: Assist research and product teams in developing, documenting, and refining project processes and guidelines.
+  text: Identify potential risks, dependencies, and bottlenecks early and coordinate with stakeholders to resolve them.
+  text: Track project milestones, deliverables, and operational metrics using tools such as Google Sheets and Microsoft Excel.
+  text: Maintain accurate project documentation and ensure timely follow-up across teams.
+  text: Adapt processes and priorities as project requirements evolve.
+# Qualifications
+  text: Must be based in the United States.
+  text: STEM background strongly preferred.
+  text: 3+ years of experience in project coordination, project management, program operations, or a similar role involving cross-functional collabo
+  text: Experience coordinating large teams or complex, multi-stakeholder projects.
+  text: AI training-data, human-data, machine learning, or AI research projects
+  text: Experience working as a Project Coordinator, Team Lead, EPM, Program Coordinator, or expert contributor on AI/data initiatives is a strong a
+  text: Experience supporting AI or data programs within technology-driven organizations is preferred.
+  text: Strong data-management skills, including proficiency with
+  text: Working knowledge of coding or technical concepts, with the ability to communicate effectively with technical teams.
+  text: Strong organizational, analytical, and problem-solving abilities.
+  text: Demonstrated ability to lead, coordinate, or manage large groups effectively.
+  text: Excellent written and verbal communication skills.
+  text: Ability to work independently, manage competing priorities, and operate effectively in a fast-changing environment.
+# Equal Employment Opportunity
+  text: We are committed to providing equal employment opportunities to all qualified applicants. We do not discriminate on the basis of any legally
+# Visit website
+  text: At Weekday (backed by YC; also Product Hunt #1 product of the day), we are building the next frontier in hiring. We have built the largest d
+(dialog)
+  [button] Cookies settings
+  [button] Accept all
+  [button] Decline all
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
+
+=== 2026-10-04 02:47:31  blocked  Financial & Data Analyst @ pavago
+url: https://apply.workable.com/pavago/j/C71BC15994/apply
+stage: page 1
+why: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+# Financial & Data Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+# Profile
+  [link] Clear
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_kPgLbyBFNCSp3pjk has-file>
+# Details
+  [link] Clear
+label: * What types of financial models have you built, and for what use cases?
+label: * Which BI tools (Tableau, Power BI, Looker) have you used, and what dashboards did you create?
+label: * How do you ensure accuracy when pulling and cleaning large datasets?
+label: * Describe a time your analysis influenced a business or investment decision.
+label: * What SQL queries do you use most frequently (joins, CTEs, aggregations)?
+label: * How do you present complex financial or data insights to non-technical stakeholders?
+label: * Please share your LinkedIn Profile URL.
+label: * What is your salary expectation for this position? (In USD per month)
   [button] Submitting… disabled
   [button] Cookie settings
 
