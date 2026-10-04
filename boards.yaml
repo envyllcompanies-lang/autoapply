@@ -13,6 +13,14 @@
 # (it retries every three weeks). Boards found through the job-board aggregators are added automatically as well.
 
 greenhouse:
+  - zendesk
+  - carvana
+  - grubhub
+  - roblox
+  - quizlet
+  - yelp
+  - tripadvisor
+  - lime
   # tech and remote-first companies (many have operations / analyst / coordinator / people-ops roles)
   - airbnb
   - figma
@@ -375,6 +383,11 @@ greenhouse:
   - deepintent
 
 lever:
+  - kickstarter
+  - outreach
+  - veeva
+  - kraken
+  - wealthsimple
   - palantir
   - spotify
   - plaid
@@ -637,8 +650,16 @@ bamboohr:
   - laprairie
   - apaveinc
 
-recruitee: []
-
+recruitee:
+  - bunq
+  - mollie
+  - catawiki
+  - studocu
+  - bynder
+  - sendcloud
+  - tiqets
+  - typeform
+  - miro
 breezy:
   - serendipity-labs
   - a-core-concrete-specialists
@@ -649,8 +670,61 @@ breezy:
 
 # Only read when `search.manual_sources` in config.yaml lists ashby (Ashby flags automated submissions as spam, so these
 # postings go on the "finish by hand" list instead of being submitted by the bot).
-ashby: []
-
+ashby:
+  - notion
+  - ramp
+  - linear
+  - vercel
+  - openai
+  - deel
+  - mercury
+  - brex
+  - retool
+  - watershed
+  - benchling
+  - rippling
+  - plaid
+  - airtable
+  - gusto
+  - faire
+  - flexport
+  - anduril
+  - lattice
+  - samsara
+  - zip
+  - clay
+  - posthog
+  - supabase
+  - replit
+  - perplexity
+  - cohere
+  - ironclad
+  - lemonade
+  - carta
+  - wealthfront
+  - chime
+  - sofi
+  - navan
+  - vanta
+  - drata
+  - attentive
+  - podium
+  - thumbtack
+  - zapier
+  - calendly
+  - loom
+  - webflow
+  - grammarly
+  - mixpanel
+  - amplitude
+  - sentry
+  - gitlab
+  - hashicorp
+  - harness
+  - hightouch
+  - fivetran
+  - astronomer
+  - modal
 # Display names for the cover letter (only needed where the token is not just the company name). Greenhouse, Workable,
 # Recruitee and Breezy boards report their own names, and Workday entries carry theirs at the end of the line.
 names:
