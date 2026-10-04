@@ -110,6 +110,15 @@ def find_code(subj: str, body: str) -> str | None:
                 t = _token(cand.strip())
                 if t:
                     return t
+    mixed = re.compile(r"(?=[A-Za-z0-9]*\d)(?=[A-Za-z0-9]*[A-Za-z])[A-Za-z0-9]{6,10}")     # a mixed-case code such as 'Xk3A9bQ2'
+    for i, ln in enumerate(lines[:80]):
+        if CODE_WORD.search(ln):
+            hit = re.search(r":\s*(" + mixed.pattern + r")\s*$", ln)
+            nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+            if hit:
+                return hit.group(1)
+            if mixed.fullmatch(nxt):
+                return nxt
     for ln in lines[:40]:                             # the code alone on its own line, as most templates show it
         if re.fullmatch(r"\d{4,8}|[A-Z0-9]{5,10}", ln) and _token(ln):
             return _token(ln)
@@ -236,7 +245,7 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                     continue
                 if hint and not _mentions(hint, info):
                     # sender/link do not mention the site: still accept a clear message of the wanted kind, if it is new
-                    clear = r"reset|password" if kind == "reset" else r"verif|confirm|activate"
+                    clear = r"reset|password" if kind == "reset" else (r"verif|confirm|activate|security code|code" if require_code else r"verif|confirm|activate")
                     if info["ts"] < fresh or not re.search(clear, info["subject"], re.I):
                         continue
                 log(f"      mail: found '{info['subject'][:60]}'")

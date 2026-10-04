@@ -1652,6 +1652,14 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None, mail_hint: st
                 if not boxes:
                     raise Blocked("after Submit the site asked for a security code, but it did not arrive in the inbox in time")
                 auth._type_code(page, boxes, res["code"])
+                page.wait_for_timeout(3000)
+                if len(SUCCESS_RE.findall(page.inner_text("body"))) <= before_hits and not _code_after_submit(page, page.inner_text("body")) \
+                        and _still_visible(btn):
+                    log("      email: code accepted; pressing Submit again as the site asks")
+                    try:
+                        btn.click(force=force)
+                    except Exception:
+                        pass
                 waited = 0                          # the code is in: wait again for the confirmation
                 continue
             body_l = " ".join(body.split())

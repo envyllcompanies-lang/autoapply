@@ -8,6 +8,8 @@ cases = [
  ("Your one-time passcode", "<div>Use the code below</div><div>X7K2QF</div><p>© 2026 Acme</p>", "X7K2QF"),
  ("Welcome to Acme careers", "Thanks for creating an account in 2026. Click https://acme.com/verify?t=abc", None),
  ("Your code: 5521", "body", "5521"),
+ ("Security code for your application to CharterUp", "Hi Brian,\n\nCopy and paste this code into the security code field on your application:\n\nXk3A9bQ2\n\nAfter you enter the code, resubmit your application.", "Xk3A9bQ2"),
+ ("Security code for your application to CharterUp", "Copy and paste this code into the security code field on your application: aB3dE7gH", "aB3dE7gH"),
  ("Security code", "Order #99881231 placed. Your security code:\n\n  904417", "904417"),
 ]
 bad=0
