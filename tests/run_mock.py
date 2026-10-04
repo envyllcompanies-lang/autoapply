@@ -116,7 +116,8 @@ page("noai", top="<p>Please do not use AI tools to write your application.</p>")
 page("captcha", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
 page("sec", action="secure.html")                      # answers the submit with an emailed-security-code prompt
 (work / "site" / "secure.html").write_text("<!doctype html><html><body><h2>Security code</h2><p>Enter the 8-character code that was sent to your email.</p>"
-    + "".join(f'<input id="security-input-{i}" maxlength="1" style="width:30px">' for i in range(8)) + "</body></html>")
+    + "".join(f'<input id="security-input-{i}" maxlength="1" style="width:30px">' for i in range(8))
+    + "<button type='button' onclick=\"if([...document.querySelectorAll('input')].map(i=>i.value).join('')==='AB12CD34')document.body.innerHTML='<h1>Thank you for applying</h1><p>Your application has been submitted.</p>'\">Verify</button></body></html>")
 page("unclearA", action="unclear_done.html"); page("unclearB", action="unclear_done.html")   # submit shows no confirmation
 (work / "site" / "unclear_done.html").write_text("<!doctype html><html><body><p>Working on it...</p></body></html>")
 for i in range(1, 5): page(f"cap{i}")
@@ -197,7 +198,7 @@ M.discover = lambda companies, log=print, base=None: [
     J(10, "Project Coordinator", "reloc_yes.html", loc="New York, NY"),
     J(11, "Operations Associate", "main.html", GOOD + " Pay range: $45,000 - $55,000 per year."),
     J(12, "Program Coordinator", "wizard.html", co="wizco"),
-    J(13, "Operations Associate", "sec.html", co="secco"),                 # emailed security code -> left for the user
+    J(13, "Operations Associate", "sec.html", co="secco"),                 # emailed security code after Submit -> read from the inbox, typed, confirmed
     J(14, "Operations Analyst", "unclearA.html", co="confirmco"),          # no confirmation page, but the company emails one
     J(15, "Operations Analyst", "unclearB.html", co="unconfco"),           # no confirmation anywhere
     J(16, "Operations Associate", "cap1.html", co="capco"),
@@ -222,7 +223,7 @@ cfg["writer"]["providers"] = [
 os.environ["TESTKEY"] = "x"; os.environ["ACCOUNT_PASSWORD"] = "Test-Pass-123!"
 import autoapply.mailbox as _MB
 _MB.configured = lambda: True
-_MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": None}
+_MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": "AB12CD34" if k.get("require_code") else None}
 _MB.find_confirmation = lambda name, since, timeout=90, log=print: "Thanks for applying to Acme!" if name.lower().startswith("confirmco") else None
 _MB.scan_confirmations = lambda companies, since_ts, n=60: {}
 MAILS = []
@@ -251,13 +252,12 @@ db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
 exp = {"1": "applied", "2": "filtered", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "filtered", "agg1": "applied", "agg2": "filtered", "12": "applied",
-       "13": "blocked", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "21": "low_score",
+       "13": "applied", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "21": "low_score",
        "R-200": "applied", "R-77": "applied"}
 if "--dry" in sys.argv: exp.update({"1": "dry_run", "4": "dry_run", "5": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
                                     "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-200": "dry_run", "R-77": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
 if "--dry" not in sys.argv:
-    if "security code" not in (rows["13"][2] or ""): problems.append(f"security-code job reason: {rows['13'][2]!r}")
     if not (rows["14"][2] or "").startswith("confirmed by email"): problems.append(f"emailed confirmation not used: {rows['14'][2]!r}")
     if "over" not in (rows["19"][2] or "") and "already applied to 3 roles" not in (rows["19"][2] or ""): problems.append(f"per-company cap reason: {rows['19'][2]!r}")
     if not (rows["21"][2] or "").startswith("match 40%"): problems.append(f"low-match job reason: {rows['21'][2]!r}")
@@ -269,7 +269,7 @@ if "--dry" not in sys.argv:
     if not MAILS: problems.append("no summary email was sent")
     else:
         subj, body = MAILS[-1]
-        for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "security code", "BEST MATCHES CHECKED", "match 86%"):
+        for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "BEST MATCHES CHECKED", "match 86%"):
             if want.lower() not in body.lower(): problems.append(f"summary email lacks {want!r}")
         if "applied" not in subj: problems.append(f"summary subject: {subj!r}")
         print("\nSUMMARY EMAIL SUBJECT:", subj)

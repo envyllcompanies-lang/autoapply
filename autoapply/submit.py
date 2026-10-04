@@ -1582,7 +1582,8 @@ _HUMAN_WORDS = re.compile(r"captcha|re?captcha|hcaptcha|turnstile|prove (you'?re
                           r"cloudflare.{0,30}(challenge|verify)", re.I)
 
 
-def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
+def submit(page, timeout_ms: int = 20000, btn=None, on_click=None, mail_hint: str = "", log=print) -> str:
+    from . import auth
     before_url = page.url
     before_text = page.inner_text("body")
     before_hits = len(SUCCESS_RE.findall(before_text))
@@ -1628,6 +1629,7 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
         on_click()                       # write-ahead: from here on, a crash or timeout must never lead to a second submit
     btn.click(force=True) if force else btn.click()
     waited = 0
+    code_tries = 0
     try:
         while waited < timeout_ms:
             page.wait_for_timeout(1000)
@@ -1639,8 +1641,19 @@ def submit(page, timeout_ms: int = 20000, btn=None, on_click=None) -> str:
             if waited >= 2000 and _code_after_submit(page, body):
                 # Not a step of the form: the site answered the Submit click by asking for a code it emailed. Waiting here
                 # used to end as "submitted but not confirmed", which was wrong (nothing was sent) and cost two minutes.
-                raise Blocked("after Submit the site asked for a security code it emailed; the bot does not enter that one, "
-                              "so nothing was sent: apply to this one yourself")
+                if code_tries or not auth.mailbox.configured():
+                    raise Blocked("after Submit the site asked for a security code it emailed and it could not be completed "
+                                  "(inbox not readable or code not accepted): apply to this one yourself")
+                code_tries += 1
+                log("      email: the site asked for a security code after Submit; reading it from the application inbox")
+                res = auth.mailbox.wait_for_verification(since_ts=t_click - 5, host_hint=mail_hint, timeout=100, log=log,
+                                                         require_code=True, site_host=site_host)
+                boxes = auth._code_inputs(page) if res and res.get("code") else []
+                if not boxes:
+                    raise Blocked("after Submit the site asked for a security code, but it did not arrive in the inbox in time")
+                auth._type_code(page, boxes, res["code"])
+                waited = 0                          # the code is in: wait again for the confirmation
+                continue
             body_l = " ".join(body.split())
             if not human_words_before and _HUMAN_WORDS.search(body_l) and not _email_code_prompt(page):
                 raise Blocked("the submit is held by an anti-bot/human verification challenge")
@@ -1915,7 +1928,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             try:
                 mail_since = time.time() - 5
                 try:
-                    result = submit(page, btn=btn, on_click=on_click)
+                    result = submit(page, btn=btn, on_click=on_click, mail_hint=getattr(job, "company", "") or "", log=log)
                 except NotSubmitted as e:
                     res_fields = [f for f in fields if plan["answers"].get(f["id"]) == "RESUME"]
                     if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|\bfiles?\b", str(e), re.I)):
@@ -1929,7 +1942,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                     btn2, kind2 = _find_advance(page)
                     if kind2 != "submit":
                         raise
-                    result = submit(page, btn=btn2, on_click=on_click)
+                    result = submit(page, btn=btn2, on_click=on_click, mail_hint=getattr(job, "company", "") or "", log=log)
             except (Unconfirmed, NotSubmitted):
                 page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
                 raise
