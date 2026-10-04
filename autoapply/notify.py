@@ -1,5 +1,5 @@
 """End-of-run summary: an email to the applicant address (over the same Gmail app password the inbox reader uses) plus a
-exception list for postings the bot could not or should not submit itself."""
+"finish by hand" list for postings the bot could not or should not submit itself."""
 from __future__ import annotations
 
 import html
@@ -11,14 +11,14 @@ from email.message import EmailMessage
 
 import requests
 
-MANUAL_STATUSES = ("blocked", "unconfirmed", "failed")
-# reasons that are not worth reporting as an exception
+MANUAL_STATUSES = ("manual", "blocked", "unconfirmed", "failed")
+# reasons that are not worth the applicant's time (nothing to finish by hand)
 NOISE = ("no application form found", "not a real application form", "posting no longer listed", "same role at same company",
          "already applied", "same posting already handled", "could not find the employer")
 
 
 def manual_rows(rows, min_score: int = 55, limit: int = 25):
-    """Best-scoring exceptions worth reporting; the unattended runner does not create a human-work queue."""
+    """Best-scoring postings that still need a human: blocked by a captcha/login, unconfirmed, or a site that blocks bots."""
     out = []
     for r in rows:
         if r["status"] not in MANUAL_STATUSES or (r["score"] or 0) < min_score:
@@ -49,30 +49,12 @@ def why_lines(groups: dict, limit: int = 6) -> list[str]:
     return [f"  - {status} x{n}: {why}" for (status, why), n in top]
 
 
-def _fit(r) -> str:
-    try:
-        return f", match {r['fit']}%" if r["fit"] and r["fit"] > 0 else ""
-    except (KeyError, IndexError, TypeError):
-        return ""
-
-
-def _stage(r) -> str:
-    try:
-        return f" (stopped at: {r['stage']})" if r["stage"] else ""
-    except (KeyError, IndexError, TypeError):
-        return ""
-
-
-def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str = "", footer: str = "", paused: list | None = None,
-               by_site: list | None = None, needs: list | None = None) -> str:
+def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str = "", footer: str = "", paused: list | None = None, by_site: list | None = None) -> str:
     lines = [f"autoapply {today}: {counts}", ""]
-    if needs:
-        lines.append(f"NEEDS YOU ({len(needs)}): the employer asked for something the bot cannot do")
-        lines += [f"  - {x}" for x in needs] + [""]
     applied = groups.get("applied", [])
     if applied:
         lines.append(f"APPLIED ({len(applied)})")
-        lines += [f"  - {r['title']} @ {r['company']}  (score {r['score']}{_fit(r)})\n    {r['url']}" for r in applied[:40]]
+        lines += [f"  - {r['title']} @ {r['company']}  (score {r['score']})\n    {r['url']}" for r in applied[:40]]
         lines.append("")
     unc = groups.get("unconfirmed", [])
     if unc:
@@ -80,9 +62,9 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
         lines += [f"  - {r['title']} @ {r['company']}\n    {r['url']}" for r in unc[:15]]
         lines.append("")
     if manual:
-        lines.append(f"EXCEPTIONS ({len(manual)}): these were not submitted automatically")
+        lines.append(f"FINISH BY HAND ({len(manual)}): good fits the site would not let the bot submit")
         for r in manual:
-            lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}{_stage(r)}")
+            lines.append(f"  - [{r['score']}] {r['title']} @ {r['company']}\n    {_link(r)}\n    why: {(r['reason'] or '')[:150]}")
         lines.append("")
     if not applied and not manual:
         lines.append("No applications were submitted this run. The bot is running; this is what happened instead:")
@@ -94,7 +76,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
     if by_site:
         lines += ["BY SITE (this run)"] + by_site + [""]
     if paused:
-        lines += ["SITES THAT KEEP ENDING AT A HUMAN CHECK (still tried, but after the sites that finish)"]
+        lines += ["PAUSED SITES (their human checks keep stopping the bot, so it lists their jobs for you and tries one again a day later)"]
         lines += [f"  - {x}" for x in paused] + [""]
     if run_url:
         lines += [f"Run log and résumé PDFs: {run_url}"]

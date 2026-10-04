@@ -16,10 +16,9 @@ from email.header import decode_header, make_header
 from email.utils import parsedate_to_datetime
 
 LINK_RX = re.compile(r"https?://[^\s\"'<>)\]]+", re.I)
-GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account|reset|password|passwordreset", re.I)
+GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account", re.I)
 BAD_LINK = re.compile(r"unsubscribe|privacy|terms|facebook|twitter|linkedin\.com/company|instagram|\.(png|jpg|gif)\b", re.I)
-HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration|"
-                  r"reset (your )?password|password reset|forgot(ten)? password", re.I)
+HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration", re.I)
 CODE_RX = re.compile(r"(?<!\d)(\d{4,8})(?!\d)")
 CONFIRM_SUBJECT = re.compile(r"thank(s| you) for (applying|your (application|interest))|application (received|submitted|confirmation)|"
                              r"(we(?:'ve|\u2019ve| have)? |successfully )received your (application|resume|r\u00e9sum\u00e9)|your application (to|for|with|at)\b|"
@@ -76,55 +75,6 @@ def _plain_lines(body: str) -> list[str]:
     return [ln.strip() for ln in txt.splitlines() if ln.strip()]
 
 
-CODE_WORD = re.compile(r"\b(code|passcode|pass code|otp|one.?time (pass)?(code|password|pin)|pin|verification|security)\b", re.I)
-# a code token: 4-8 digits, or 5-10 letters/digits that mix both (e.g. 'X7K2QF'); 'ABC-123' style is joined
-ALNUM_RX = re.compile(r"(?<![A-Za-z0-9])([A-Z0-9]{2,5}[- ]?[A-Z0-9]{2,5})(?![A-Za-z0-9])")
-NOT_CODE = re.compile(r"^(19|20)\d\d$")          # a year
-
-
-def _token(s: str) -> str | None:
-    sp = re.search(r"(?<![\d-])(\d{3,4})[ -](\d{3,4})(?![\d-])", s)      # '731 204' / '731-204'
-    if sp and not CODE_RX.search(s[:sp.start()]):
-        return sp.group(1) + sp.group(2)
-    for m in CODE_RX.finditer(s):
-        if not NOT_CODE.match(m.group(1)):
-            return m.group(1)
-    for m in ALNUM_RX.finditer(s):
-        t = re.sub(r"[- ]", "", m.group(1))
-        if 5 <= len(t) <= 10 and re.search(r"\d", t) and re.search(r"[A-Z]", t):
-            return t
-    return None
-
-
-def find_code(subj: str, body: str) -> str | None:
-    """The one-time code in a verification email, or None. Looks next to the word 'code' (same line or the line after)
-    first, so a zip code, year or order number elsewhere in the email is not picked up."""
-    lines = _plain_lines(body)
-    if CODE_WORD.search(subj):
-        hit = re.search(r"(?:code|passcode|pin)\s*(?:is)?\s*[:\-]?\s*([A-Z0-9][A-Z0-9 -]{3,11})", subj, re.I)
-        if hit and (t := _token(hit.group(1).upper())):
-            return t
-    for i, ln in enumerate(lines[:80]):
-        if CODE_WORD.search(ln):
-            for cand in (ln[CODE_WORD.search(ln).end():], lines[i + 1] if i + 1 < len(lines) else ""):
-                t = _token(cand.strip())
-                if t:
-                    return t
-    mixed = re.compile(r"(?=[A-Za-z0-9]*\d)(?=[A-Za-z0-9]*[A-Za-z])[A-Za-z0-9]{6,10}")     # a mixed-case code such as 'Xk3A9bQ2'
-    for i, ln in enumerate(lines[:80]):
-        if CODE_WORD.search(ln):
-            hit = re.search(r":\s*(" + mixed.pattern + r")\s*$", ln)
-            nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
-            if hit:
-                return hit.group(1)
-            if mixed.fullmatch(nxt):
-                return nxt
-    for ln in lines[:40]:                             # the code alone on its own line, as most templates show it
-        if re.fullmatch(r"\d{4,8}|[A-Z0-9]{5,10}", ln) and _token(ln):
-            return _token(ln)
-    return None
-
-
 def parse_message(raw: bytes) -> dict:
     """{'subject','from','to','ts','link','code','hint','body'} for one raw email (link/code may be None)."""
     msg = email.message_from_bytes(raw)
@@ -145,7 +95,10 @@ def parse_message(raw: bytes) -> dict:
             break
     if not link and links and HINT.search(subj):
         link = links[0]
-    code = find_code(subj, body)
+    code = None
+    if re.search(r"code|passcode|otp|one.?time|pin", subj + " " + body[:1500], re.I):
+        m = CODE_RX.search(re.sub(r"<[^>]+>", " ", body))
+        code = m.group(1) if m else None
     return {"subject": subj, "from": msg.get("From", ""), "to": msg.get("To", ""), "ts": ts, "link": link, "code": code,
             "hint": bool(HINT.search(subj)) or bool(link) or bool(code), "body": body[:6000]}
 
@@ -188,65 +141,18 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
             pass
 
 
-def _mentions(hint: str, info: dict) -> bool:
-    """The email names the site it is expected from (in its sender, subject or link). A short name ('ms', 'wf') has to
-    stand on its own, so it is not found inside ordinary words."""
-    if not hint:
-        return True
-    text = (info["from"] + " " + info["subject"] + " " + (info["link"] or "") + " " + str(info.get("body") or "")[:4000]).lower()
-    if len(hint) >= 4:
-        return hint in text
-    return bool(re.search(r"(?<![a-z0-9])" + re.escape(hint) + r"(?![a-z0-9])", text))
-
-
-def _is_reset(info: dict) -> bool:
-    return bool(re.search(r"reset|forgot", info["subject"], re.I) or re.search(r"reset", info["link"] or "", re.I))
-
-
-def _other_employer(site_host: str, info: dict) -> bool:
-    """A Workday email whose link belongs to a different employer's Workday site than the one being used right now."""
-    site = (site_host or "").split(":")[0].lower()
-    if not site.endswith("myworkdayjobs.com") or not info.get("link"):
-        return False
-    try:
-        from urllib.parse import urlparse
-        lh = (urlparse(info["link"]).hostname or "").lower()
-    except Exception:
-        return False
-    return lh.endswith("myworkdayjobs.com") and lh != site
-
-
-def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False,
-                          kind: str = "", site_host: str = "") -> dict | None:
-    """Poll the inbox until the email this site just sent arrives: {'link', 'code'} or None.
-    require_code: only messages with a one-time code in them.
-    kind: 'verify' never returns a password-reset email, 'reset' only returns one (both can sit in the inbox together).
-    site_host: the site being used; another employer's Workday email is never taken for this one's.
-    An email that does not name the site at all is only accepted when it has just arrived."""
+def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print) -> dict | None:
+    """Poll the inbox until a fresh verification email arrives. Returns {'link':..., 'code':...} or None."""
     deadline = time.time() + timeout
     hint = (host_hint or "").lower()
-    # An email that does not name the site is only this site's if it arrived because of what was just done here: after
-    # since_ts when that is moments ago, else during this wait. (On 2026-10-02 another employer's verification email,
-    # ninety seconds old, was taken for this one's and the bot ended up on the other employer's application.)
-    start = time.time()
-    fresh = since_ts - 5 if since_ts > start - 600 else start - 20
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
                     continue
-                if require_code and not info.get("code"):
-                    continue
-                if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):
-                    continue
-                if kind == "verify" and _is_reset(info):
-                    continue
-                if _other_employer(site_host, info):
-                    continue
-                if hint and not _mentions(hint, info):
-                    # sender/link do not mention the site: still accept a clear message of the wanted kind, if it is new
-                    clear = r"reset|password" if kind == "reset" else (r"verif|confirm|activate|security code|code" if require_code else r"verif|confirm|activate")
-                    if info["ts"] < fresh or not re.search(clear, info["subject"], re.I):
+                if hint and hint not in (info["from"] + info["subject"]).lower() and hint not in (info["link"] or "").lower():
+                    # sender/link do not mention the site: still accept a clear verification message
+                    if not re.search(r"verif|confirm|activate", info["subject"], re.I):
                         continue
                 log(f"      mail: found '{info['subject'][:60]}'")
                 return {"link": info["link"], "code": info["code"]}
@@ -295,32 +201,6 @@ def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:
             text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
             flat = re.sub(r"[^a-z0-9]", "", text)
             if (flat_key and flat_key in flat) or (words and all(w in text for w in words[:2])):
-                found[key] = m["subject"]
-                break
-    return found
-
-
-FOLLOWUP_SUBJECT = re.compile(r"incomplete application|complete your application|finish your application|additional information|"
-                              r"action (required|needed)|assessment|questionnaire|more information (is )?(needed|required)", re.I)
-
-
-def scan_followups(companies: dict, since_ts: float, n: int = 80) -> dict:
-    """{key: subject} for each company (key -> display name) that has emailed asking for something more since since_ts:
-    'incomplete application', 'please complete the assessment', 'additional information needed'. These are applications
-    the site accepted but the employer does not treat as finished, so you are told about them."""
-    found = {}
-    try:
-        msgs = [m for m in _recent(since_ts, n, ("INBOX",)) if FOLLOWUP_SUBJECT.search(m["subject"])
-                and not re.search(r"verify your|security code|verification code|password|job alert|newsletter", m["subject"], re.I)]
-    except Exception:
-        return found
-    for key, name in companies.items():
-        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
-        if len(flat_key) < 3:
-            continue
-        for m in msgs:
-            flat = re.sub(r"[^a-z0-9]", "", (m["subject"] + " " + m["from"]).lower())
-            if flat_key in flat:
                 found[key] = m["subject"]
                 break
     return found

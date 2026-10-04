@@ -96,34 +96,6 @@ except ImportError:
     print("skip button group test (no playwright)")
 except AssertionError as e:
     problems.append("button group: " + str(e)[:200])
-# ---- empty skip_sources really means no source is skipped ----
-# This guards the discovery configuration used by settings.yaml.
-if yaml.safe_load((ROOT / "settings.yaml").read_text())["search"]["skip_sources"] != []:
-    problems.append("settings.yaml must not silently skip a source")
-
-# ---- supported ATS URLs are not rejected as universally unsupported ----
-from autoapply import submit as _submit
-for _u in ("https://job-boards.greenhouse.io/acme/jobs/123",
-           "https://job-boards.greenhouse.io/acme/jobs/123?gh_jid=123",
-           "https://boards.greenhouse.io/acme/jobs/123?gh_jid=123",
-           "https://jobs.lever.co/acme/123",
-           "https://jobs.ashbyhq.com/acme/123"):
-    if _submit.UNSUPPORTED_ALWAYS.search(_u):
-        problems.append("supported ATS incorrectly marked unsupported: " + _u)
-
-# ---- ATS classifier / human-gate boundary ----
-from autoapply.ats import detect, is_human_gate
-if detect("https://acme.wd5.myworkdayjobs.com/en-US/Careers/job/123").name != "workday":
-    problems.append("ATS classifier missed Workday")
-if detect("https://job-boards.greenhouse.io/acme/jobs/123").name != "greenhouse":
-    problems.append("ATS classifier missed Greenhouse")
-if detect("https://jobs.lever.co/acme/123").name != "lever":
-    problems.append("ATS classifier missed Lever")
-if not is_human_gate("Please complete the hCaptcha challenge to prove you are human"):
-    problems.append("human gate classifier missed hCaptcha")
-if is_human_gate("Verify your email address using the code we sent you"):
-    problems.append("ordinary account verification was misclassified as a human gate")
-print("ok  ATS detection and human-verification boundary")
 
 # ---- verification-email parsing ----
 def _mail_test():
@@ -150,19 +122,10 @@ print(r.stdout.rstrip())
 if r.returncode != 0:
     problems.append("more_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
 
-for _name in ("fix_checks.py", "workday_checks.py", "captcha_boundary.py"):
-    r = subprocess.run([sys.executable, str(ROOT / "tests" / _name)], capture_output=True, text=True)
-    print(r.stdout.rstrip())
-    if r.returncode != 0:
-        problems.append(f"{_name} failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
-
-# ---- the bot's own code: no name used without being defined, no call into another module that is not there
-from autoapply import selfcheck
-_broken = selfcheck.problems(sorted((ROOT / "tests").glob("*.py")))
-if _broken:
-    problems.append("code check: " + "; ".join(_broken[:5]))
-else:
-    print("ok  code check: every name and cross-module reference in the bot and its tests resolves")
+r = subprocess.run([sys.executable, str(ROOT / "tests" / "fix_checks.py")], capture_output=True, text=True)
+print(r.stdout.rstrip())
+if r.returncode != 0:
+    problems.append("fix_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
 
 print("RESULT:", "ALL AS EXPECTED" if not problems else "PROBLEMS: " + "; ".join(problems))
 sys.exit(1 if problems else 0)

@@ -172,10 +172,8 @@ def workday(spec: str) -> list[Job]:
         n = 0
         for p in data.get("jobPostings") or []:
             path = p.get("externalPath", "")
-            req = path.rsplit("_", 1)[-1] if "_" in path else path      # the same requisition listed under two cities
-            if path and path not in seen and req not in seen:
+            if path and path not in seen:
                 seen.add(path)
-                seen.add(req)
                 posts.append(p)
                 n += 1
         return n
@@ -502,8 +500,6 @@ TECH_RX = re.compile(
     r"back-end|frontend|front-end|full[- ]?stack|platform engineer|security engineer|network|cloud|kernel|hardware|rf engineer|"
     r"mobile|ios|android|research (scientist|engineer)|architect|technical program manager|tpm|counsel|attorney|physician|nurse|clinical|"
     r"therapist|pharmac\w*|dentist|driver|cdl|welder|electrician|mechanic|barista|cook|chef|cashier|teacher|professor|"
-    r"systems engineer|infrastructure (engineer|&|and)|operations engineer|spacecraft|avionics|propulsion|flight (safety|software)|"
-    r"it (support|specialist|technician|systems|analyst|operations|asset)|help ?desk|desktop support|developer|uipath|rpa|"
     r"safeguards|enforcement analyst|fraud investigator|security operations|soc analyst|cyber\w*|infosec|information security|penetration)\b", re.I)
 SENIOR_RX = re.compile(r"\b(iii|iv|v)\s*$|^\s*lead\b|\b(sr|snr)\b\.?|associate director|regional (manager|director)|\bvp\b", re.I)
 NOT_A_JOB_RX = re.compile(r"talent (community|pool|network)|general application|future opportunit|join (our|the) (team|talent)|expression of interest|"

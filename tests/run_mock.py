@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT.parent))
 work = ROOT / "work"; shutil.rmtree(work, ignore_errors=True); (work / "site").mkdir(parents=True)
 
-SUBS, CALLS, HITS, MATCHED = [], {}, {}, []
+SUBS, CALLS, HITS = [], {}, {}
 CLEAN = ("Capitol Edge is the clearest example: I built it alone, about 6,000 lines of production code, and I keep it "
          "running. I like ops work where the process is the product, and this role looks like that.")
 FAB = "I raised revenue 45% at Otto's and ran it all in Rippling. This role is the same kind of work."
@@ -18,10 +18,6 @@ LETTER = ("Dear Acme team,\n\nCapitol Edge started as a solo build and now runs 
 
 def reply(msgs):
     first, last = msgs[1]["content"], msgs[-1]["content"]
-    if msgs[0]["content"].startswith("You screen job postings"):          # the résumé-vs-posting match check
-        MATCHED.append(first.split("POSTING\n")[1].split("\n")[0])
-        return '{"fit": 40, "why": "needs a nursing licence the candidate does not have"}' if "MARK_LOW" in first else '{"fit": 86, "why": "operations and analysis background fits"}'
-
     if "Multiple-choice question on the application form" in first: return "1"
     if "Application form field (short text)" in first: return "N/A"
     if last.startswith("Revise."): return CLEAN
@@ -116,8 +112,7 @@ page("noai", top="<p>Please do not use AI tools to write your application.</p>")
 page("captcha", top='<iframe src="https://www.google.com/recaptcha/api2/anchor?k=x" width="304" height="78"></iframe>')
 page("sec", action="secure.html")                      # answers the submit with an emailed-security-code prompt
 (work / "site" / "secure.html").write_text("<!doctype html><html><body><h2>Security code</h2><p>Enter the 8-character code that was sent to your email.</p>"
-    + "".join(f'<input id="security-input-{i}" maxlength="1" style="width:30px">' for i in range(8))
-    + "<button type='button' onclick=\"if([...document.querySelectorAll('input')].map(i=>i.value).join('')==='AB12CD34')document.body.innerHTML='<h1>Thank you for applying</h1><p>Your application has been submitted.</p>'\">Verify</button></body></html>")
+    + "".join(f'<input id="security-input-{i}" maxlength="1" style="width:30px">' for i in range(8)) + "</body></html>")
 page("unclearA", action="unclear_done.html"); page("unclearB", action="unclear_done.html")   # submit shows no confirmation
 (work / "site" / "unclear_done.html").write_text("<!doctype html><html><body><p>Working on it...</p></body></html>")
 for i in range(1, 5): page(f"cap{i}")
@@ -177,9 +172,6 @@ $('submitbtn').onclick=()=>{const p=new URLSearchParams({tag:'wizard',first_name
 </script></body></html>""")
 (work / "site" / "thanks.html").write_text("<!doctype html><html><body><h1>Thank you for applying!</h1><p>We've received your application.</p></body></html>")
 
-page("lowfit")
-sys.path.insert(0, str(ROOT)); import wd_mock
-WD_SRV, WD_BASE, WD_STATE = wd_mock.serve()
 import autoapply.writer as _W; _W._USAGE_FILE = work / "usage.json"
 from autoapply import main as M
 from autoapply.sources import Job
@@ -198,22 +190,20 @@ M.discover = lambda companies, log=print, base=None: [
     J(10, "Project Coordinator", "reloc_yes.html", loc="New York, NY"),
     J(11, "Operations Associate", "main.html", GOOD + " Pay range: $45,000 - $55,000 per year."),
     J(12, "Program Coordinator", "wizard.html", co="wizco"),
-    J(13, "Operations Associate", "sec.html", co="secco"),                 # emailed security code after Submit -> read from the inbox, typed, confirmed
+    J(13, "Operations Associate", "sec.html", co="secco"),                 # emailed security code -> left for the user
     J(14, "Operations Analyst", "unclearA.html", co="confirmco"),          # no confirmation page, but the company emails one
     J(15, "Operations Analyst", "unclearB.html", co="unconfco"),           # no confirmation anywhere
     J(16, "Operations Associate", "cap1.html", co="capco"),
     J(17, "Operations Coordinator", "cap2.html", co="capco"),
     J(18, "Project Coordinator", "cap3.html", co="capco"),
     J(19, "Program Coordinator", "cap4.html", co="capco"),                 # 4th at one employer: over the cap of 3
-    J(21, "Operations Analyst", "lowfit.html", GOOD + " " + "Day-to-day duties are listed below. " * 12 + "MARK_LOW", co="lowco"),   # poor match: never applied to
-    Job("workday", "wdco", "R-200", "Operations Analyst", "Remote", wd_mock.job_url(WD_BASE, "acme", "R-200"), wd_mock.job_url(WD_BASE, "acme", "R-200"), GOOD),
+    J(20, "Operations Associate", "main.html", co="ashco", src="ashby"),   # Ashby: listed for the user, never submitted
 ]
 
 cfg = yaml.safe_load((ROOT.parent / "config.yaml").read_text())
-cfg["aggregators"] = {"enabled": True, "sources": ["remoteok"], "base_urls": {"remoteok": B + "remoteok"}, "queries": [], "locations": [],
-                      "jobboard": {"enabled": False}}          # (the real 1.4M-job snapshot is not part of this offline test)
+cfg["aggregators"] = {"enabled": True, "sources": ["remoteok"], "base_urls": {"remoteok": B + "remoteok"}, "queries": [], "locations": []}
 cfg["facts"]["city"] = "Glenwood Springs"; cfg["search"]["delay_seconds"] = [0, 0]
-cfg["search"]["per_run_cap"] = 50; cfg["search"]["max_per_company"] = 3; cfg["search"]["min_fit"] = 70
+cfg["search"]["per_run_cap"] = 50; cfg["search"]["max_per_company"] = 3; cfg["search"]["manual_sources"] = ["ashby"]
 cfg["writer"]["providers"] = [
     {"name": "modelfix", "base_url": B + "modelfix", "model": ["old", "new"], "api_key_env": "TESTKEY", "rpm": 1000, "rpd": 1},
     {"name": "bad", "base_url": B + "bad", "model": "m", "api_key_env": "TESTKEY", "rpm": 1000},
@@ -223,7 +213,7 @@ cfg["writer"]["providers"] = [
 os.environ["TESTKEY"] = "x"; os.environ["ACCOUNT_PASSWORD"] = "Test-Pass-123!"
 import autoapply.mailbox as _MB
 _MB.configured = lambda: True
-_MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": "AB12CD34" if k.get("require_code") else None}
+_MB.wait_for_verification = lambda **k: {"link": B + "wizard.html?verify=1", "code": None}
 _MB.find_confirmation = lambda name, since, timeout=90, log=print: "Thanks for applying to Acme!" if name.lower().startswith("confirmco") else None
 _MB.scan_confirmations = lambda companies, since_ts, n=60: {}
 MAILS = []
@@ -251,25 +241,20 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "filtered", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "filtered", "agg1": "applied", "agg2": "filtered", "12": "applied",
-       "13": "applied", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "21": "low_score",
-       "R-200": "applied", "R-77": "applied"}
+exp = {"1": "applied", "2": "low_score", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "low_score", "agg1": "applied", "agg2": "skipped", "12": "applied",
+       "13": "blocked", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "20": "manual", "R-77": "applied"}
 if "--dry" in sys.argv: exp.update({"1": "dry_run", "4": "dry_run", "5": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
-                                    "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-200": "dry_run", "R-77": "dry_run"})
+                                    "16": "dry_run", "17": "dry_run", "18": "dry_run", "19": "dry_run", "13": "dry_run", "R-77": "dry_run"})
 problems = [f"job {k}: {rows[k][0]} != {v}" for k, v in exp.items() if rows[k][0] != v]
 if "--dry" not in sys.argv:
+    if "security code" not in (rows["13"][2] or ""): problems.append(f"security-code job reason: {rows['13'][2]!r}")
     if not (rows["14"][2] or "").startswith("confirmed by email"): problems.append(f"emailed confirmation not used: {rows['14'][2]!r}")
     if "over" not in (rows["19"][2] or "") and "already applied to 3 roles" not in (rows["19"][2] or ""): problems.append(f"per-company cap reason: {rows['19'][2]!r}")
-    if not (rows["21"][2] or "").startswith("match 40%"): problems.append(f"low-match job reason: {rows['21'][2]!r}")
-    if any(s.get("tag") == "lowfit" for s in SUBS): problems.append("a job under the match bar was applied to")
-    if not (rows["1"][2] or "").startswith("confirmed") : problems.append(f"applied job reason: {rows['1'][2]!r}")
-    wd = [s for s in WD_STATE.submitted if s["job"].endswith("R-200")]
-    if len(wd) != 1 or wd[0]["data"].get("name--legalName--firstName") != "Brian" or wd[0]["data"].get("files") != ["briandelgado_resume.pdf"]:
-        problems.append(f"the Workday application was not sent once with your details: {[ (s['job'], s['data'].get('name--legalName--firstName'), s['data'].get('files')) for s in wd ]}")
+    if "apply by hand" not in (rows["20"][2] or ""): problems.append(f"manual source reason: {rows['20'][2]!r}")
     if not MAILS: problems.append("no summary email was sent")
     else:
         subj, body = MAILS[-1]
-        for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "BEST MATCHES CHECKED", "match 86%"):
+        for want in ("APPLIED", "FINISH BY HAND", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "security code", "Ashco"):
             if want.lower() not in body.lower(): problems.append(f"summary email lacks {want!r}")
         if "applied" not in subj: problems.append(f"summary subject: {subj!r}")
         print("\nSUMMARY EMAIL SUBJECT:", subj)
@@ -282,7 +267,7 @@ if "--dry" not in sys.argv:
                  "gender": "Male", "vet": "I am not a protected veteran"}.items():
         if wz.get(k) != v: problems.append(f"multi-page wizard {k}={wz.get(k)!r} (want {v!r})")
     if not wz.get("why"): problems.append("wizard essay empty")
-    if "127.0.0.1:8765" not in json.loads((work / "accounts.json").read_text()): problems.append("account was not remembered")
+    if "127.0.0.1" not in json.loads((work / "accounts.json").read_text()): problems.append("account was not remembered")
     if by.get("reloc_yes", {}).get("reloc") != "Yes": problems.append(f"NYC relocation answer: {by.get('reloc_yes')}")
     if "reloc_no" in by: problems.append("answered a relocation question for a city you didn't approve")
     want = {"first_name": "Brian", "last_name": "Delgado-Ortega", "email": "delgado@alumni.usc.edu", "phone": "(970) 366-8832",
@@ -305,30 +290,25 @@ if "--dry" not in sys.argv:
     d = next((work / "applications").glob("*/acme-operations-associate"))
     print("\n--- resume.md (first 30 lines) ---\n" + "\n".join((d / "resume.md").read_text().splitlines()[:30]))
     print("\n--- cover_letter.txt ---\n" + ((d / "cover_letter.txt").read_text() if (d / "cover_letter.txt").exists() else "(none written: form did not require one)"))
-# 4) no site is paused or skipped: every job on a site whose human check stops the bot is still tried, and from then on
-#    that site's jobs wait behind the sites where applications go through
+# 4) a site whose human check keeps stopping the bot is paused: its remaining jobs are listed for you, not attempted
 cfg2 = copy.deepcopy(cfg); cfg2["db"] = "gate.db"; cfg2["aggregators"] = {"enabled": False}
 (work / "config2.yaml").write_text(yaml.safe_dump(cfg2))
 M.discover = lambda companies, log=print, base=None: [J(f"g{i}", "Operations Associate", f"gate{i}.html", co=f"gateco{i}", src="lever") for i in range(1, 6)] + \
     [J("ok", "Operations Associate", "gateok.html", co="okco", src="workable")]
 n_mail = len(MAILS)
 M.run(str(work / "config2.yaml"), dry_run="--dry" in sys.argv)
-gdb = sqlite3.connect(work / "gate.db"); gdb.row_factory = sqlite3.Row
-g = {r[0].split(":")[-1]: r[1:] for r in gdb.execute("select key,status,score,reason from jobs")}
+g = {r[0].split(":")[-1]: r[1:] for r in sqlite3.connect(work / "gate.db").execute("select key,status,score,reason from jobs")}
+blocked = [k for k in g if k.startswith("g") and k != "ok" and g[k][0] == "blocked"]
+paused = [k for k in g if k.startswith("g") and k != "ok" and g[k][0] == "manual"]
+if len(blocked) != 3 or len(paused) != 2: problems.append(f"human-check pause: {len(blocked)} blocked and {len(paused)} listed instead (want 3 and 2): {g}")
+for k in paused:
+    if HITS.get(f"/gate{k[1:]}.html"): problems.append(f"paused site's form {k} was still opened")
+    if "paused" not in (g[k][2] or ""): problems.append(f"paused reason for {k}: {g[k][2]!r}")
+for k in blocked:
+    if not HITS.get(f"/gate{k[1:]}.html"): problems.append(f"blocked job {k} was never tried")
+if g.get("ok", ("",))[0] != ("dry_run" if "--dry" in sys.argv else "applied"): problems.append(f"another site was held back by the pause: {g.get('ok')}")
 if "--dry" not in sys.argv:
-    blocked = [k for k in g if k.startswith("g") and g[k][0] == "blocked"]
-    if len(blocked) != 5: problems.append(f"every human-check job should still be tried and recorded as blocked: {len(blocked)} of 5: {g}")
-    for k in blocked:
-        if not HITS.get(f"/gate{k[1:]}.html"): problems.append(f"blocked job {k} was never tried")
-    if g.get("ok", ("",))[0] != "applied": problems.append(f"the job on the working site did not go through: {g.get('ok')}")
-    health = M.site_health(M.DB(str(work / "gate.db")))
-    lever_row = gdb.execute("select * from jobs where source='lever'").fetchone(); ok_row = gdb.execute("select * from jobs where source='workable'").fetchone()
-    if not (M.site_rank(lever_row, health) == 3 and M.site_rank(ok_row, health) == 0):
-        problems.append(f"measured ranking: lever {M.site_rank(lever_row, health)} (want 3), workable {M.site_rank(ok_row, health)} (want 0); health {health}")
-    if len(MAILS) <= n_mail or "KEEP ENDING AT A HUMAN CHECK" not in MAILS[-1][1] or "lever" not in MAILS[-1][1]: problems.append("summary email does not mention the site that keeps ending at a human check")
-    snaps = (work / "logs" / "snapshots.log").read_text() if (work / "logs" / "snapshots.log").exists() else ""
-    if "reCAPTCHA" not in snaps or "=== " not in snaps: problems.append("no snapshot was saved for the blocked applications")
-    if "delgado@alumni.usc.edu" in snaps or "366-8832" in snaps: problems.append("a snapshot contains your email address or phone number")
+    if len(MAILS) <= n_mail or "PAUSED SITES" not in MAILS[-1][1] or "lever" not in MAILS[-1][1]: problems.append("summary email does not mention the paused site")
 
 # 3) one stuck site cannot use up the run: the per-application time cap stops both the wizard loop and the field filler
 import time as _t
