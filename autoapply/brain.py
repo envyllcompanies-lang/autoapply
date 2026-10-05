@@ -683,6 +683,13 @@ class Brain:
                 return None          # cover letters are switched off: a form that requires one is skipped
             return letter or self.lazy_letter(self._job, required=bool(f.get("required"))) or None   # optional + no letter: left empty
 
+        if has_opts and opts and re.search(r"\bconvicted\b.{0,40}\b(crime|felony|misdemeanou?r|offen[sc]e)|"
+                                           r"released from custody|\bon (bail|probation|parole)\b|pending (criminal )?charges", low[:240]):
+            fact = str(self._fact(("criminal_conviction",)) or "").strip().lower()
+            if fact in ("no", "none", "false"):          # you confirmed there is no record: answered before any notice text can get in the way
+                got = pick_option(opts, "No")
+                if got:
+                    return [got] if kind == "checkbox_group" else got
         # 1) user's own canned answers win
         for rx, ans, only_opts in self.answers:
             if rx.search(low) and (has_opts or not only_opts):

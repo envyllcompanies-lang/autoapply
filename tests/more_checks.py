@@ -81,6 +81,9 @@ def question_checks():
     check(ask("Phone type", "select", ["Mobile", "Home", "Work"]) == "Mobile", "phone type")
     check(ask("1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the notice below. We will consider for employment qualified applicants with arrest and conviction records pursuant to the San Francisco Fair Chance Ordinance and the New York City Fair Chance Act. Applicants who are not in San Francisco or New York, select the appropriate answer. A conviction will not necessarily disqualify you.", "combobox",
               ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", "criminal-record question with a city-notice option")
+    for q in ("2) Are you currently released from custody for a criminal offense on bail, bond, probation, parole or on your own recognizance? Please read the notice below regarding applicants in Los Angeles, San Francisco and New York, including legal requirements about background checks and what you agree to by answering.",
+              "1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the following prior to answering: you may authorize a background check, waive nothing, and applicants are not required to disclose sealed records."):
+        check(ask(q, "combobox", ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", f"criminal/custody question with long notice text: {q[:50]}")
     check(ask("Do you have a valid driver's license?", "combobox", ["Select One", "Yes", "No"]) == "Yes", "driver's license")
     for q in ("I am/was a political appointee.", "I am/was a public financial disclosure report filer.", "I am/was a covered DoD official as defined by DFARS 252.203-7000.",
               "Personally made a decision on behalf of the government to award a contract, subcontract, or grant."):
