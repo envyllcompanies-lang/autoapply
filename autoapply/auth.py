@@ -620,7 +620,9 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 _settle(page, 2000)
             continue
         state = (acc.known.get(host) or {}).get("state") if isinstance(acc.known.get(host), dict) else acc.known.get(host)
-        if BAD_LOGIN.search(body) and state in ("created", "exists") and not getattr(acc, "_wd_verify_tried", {}).get(host):
+        # Several employers refuse a sign-in without saying anything at all: the page simply stays on Sign In. That is a refusal
+        # too (wrong password, or an account not verified yet), so the same recovery runs: the verify link, then a reset.
+        if state in ("created", "exists") and not getattr(acc, "_wd_verify_tried", {}).get(host):
             # a new Workday account often can't sign in until its 'verify your email' link is opened: open it, then try again
             acc.__dict__.setdefault("_wd_verify_tried", {})[host] = True
             log("      account: sign-in refused; checking the inbox for this site's verify-your-email link")
@@ -639,13 +641,13 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 continue
             except AuthBlocked as e:
                 log(f"      account: {e}")
-        if BAD_LOGIN.search(body) and not getattr(acc, "_wd_reset_tried", {}).get(host):
+        if not getattr(acc, "_wd_reset_tried", {}).get(host):
             # the account exists with some other password: reset it to ACCOUNT_PASSWORD through your own inbox, then sign in
             acc.__dict__.setdefault("_wd_reset_tried", {})[host] = True
             if _wd_reset_password(page, acc, log, url_after):
                 acc.remember(host, "reset")
                 continue
-        if BAD_LOGIN.search(body):
+        if True:
             said = "; ".join(_wd_errors(page))[:140]
             raise AuthBlocked("Workday refused the sign-in and the password could not be reset through your email"
                               + (f" (Workday says: {said})" if said else "")

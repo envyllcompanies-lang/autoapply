@@ -300,6 +300,9 @@ def flow_checks(p):
         check((r["data"] or {}).get("files") == ["briandelgado_resume.pdf"], f"a résumé box headed 'Resume/Cover Letter' did not get the résumé: {(r['data'] or {}).get('files')}")
         r = run("resetco", seed=True)
         check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]), f"existing account, other password: {r['got']}; log: {tail(r)}")
+        r = run("quietco", seed=True)
+        check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]),
+              f"sign-in refused with no message at all: the password must still be reset: {r['got']}; log: {tail(r)}")
 
         # -- required blocks behind 'Add' (marked in the heading, or only said after Next)
         for tenant in ("strict", "strict2"):

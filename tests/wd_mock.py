@@ -16,6 +16,7 @@ Tenants (first part of the path) switch behaviours on:
   acme       plain flow; the new account is signed in straight away
   verifyco   the new account must be verified from an emailed link before it can sign in
   resetco    an account already exists with another password (use ?seed=1 once): 'forgot password' is needed
+  quietco    like resetco (use ?seed=1), but a refused sign-in shows NO message at all, as several real employers do
   emailfirst the sign-in page first shows 'Sign in with email'
   brock      as one real employer did on 2026-10-01: the 'Sign in with Google / Apple / email' page comes back after every
              account step, the new account cannot sign in until its emailed link is opened (the refusal only says
@@ -304,6 +305,7 @@ function authPage() {
       mail('verify', location.origin + '/' + T + '/verify?redirect=' + encodeURIComponent(base + '/apply/applyManually')); go('social'); }
     else { P('acct', {email: e, pw: p, verified: true}); P('signed', true); PJ('step', 1); P('authmode', 'signin'); render(); } });
   on('signInSubmitButton', () => { const e = $('se').value, p = $('sp').value;
+    if (T === 'quietco' && (!acct || acct.email !== e || acct.pw !== p)) return;
     if (acct && acct.email === e && acct.pw === p && !acct.verified && T === 'brock') { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
     if (acct && acct.email === e && acct.pw === p && !acct.verified) { $('autherr').innerText = 'Your account has not been verified. Verify your email before signing in.'; mail('verify', location.origin + '/' + T + '/verify'); return; }
     if (!acct || acct.email !== e || acct.pw !== p) { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
