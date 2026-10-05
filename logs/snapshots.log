@@ -1,193 +1,3 @@
-=== 2026-10-05 01:56:32  blocked  Junior Digital Assets Operations Analyst @ omega-enterprises
-url: https://remoteok.com/sign-up
-why: could not find the employer's application page
-# Sign up to apply to remote jobs on the #1 remote work platform
-<iframe https://accounts.google.com/gsi/button>
-  <input:text empty>
-  <input:text empty>
-
-=== 2026-10-05 01:56:44  blocked  People Operations Coordinator @ hubspot
-url: https://www.themuse.com/jobs/hubspot/people-operations-coordinator-a452bc
-why: could not find the employer's application page
-# Job Not Found
-  text: The job posting you're looking for could not be found. It may have been removed or the URL might be incorrect.
-
-=== 2026-10-05 01:56:54  blocked  Supply Chain Procurement Specialist @ northrop-grumman
-url: https://www.themuse.com/jobs/northropgrumman/supply-chain-procurement-specialist-9d32f3
-why: could not find the employer's application page
-# Job Not Found
-  text: The job posting you're looking for could not be found. It may have been removed or the URL might be incorrect.
-
-=== 2026-10-05 01:57:03  blocked  Membership Coordinator @ coaching-com
-url: https://accounts.google.com/v3/signin/identifier
-why: could not find the employer's application page
-# Sign in
-  text: to continue to Google Forms
-  <input:text #identifierId empty>
-  [button] Forgot email?
-  text: Learn more about using Guest mode
-  [button] Next
-  [button] Create account opens-menu
-<iframe https://accounts.youtube.com/accounts/CheckConnection>
-
-=== 2026-10-05 02:08:06  blocked  Operations Coordinator ( CRE ) @ cw
-url: https://cw.wd1.myworkdayjobs.com/External/job/New-York-New-York-USA/Operations-Coordinator---CRE--_R337059/apply/applyManually
-stage: account
-why: account: still on Workday's sign-in screen after trying to sign in or create an account
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Sign In {utilityButtonSignIn}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Operations Coordinator ( CRE )
-{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
-label: current step 1 of 6
-label: Create Account/Sign In
-label: step 2 of 6
-label: My Information
-label: step 3 of 6
-label: My Experience
-label: step 4 of 6
-label: Application Questions
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-{signInContent}
-# Sign In
- {formField-email}
-label: Email Address*
-  <input:text #input-6 {email} required filled>
- {formField-password}
-label: Password*
-  <input:password #input-7 {password} required>
-  [button]  {click_filter}
-  [button] Sign In {signInSubmitButton}
-  [button] Create Account {createAccountLink}
-  [button] Forgot your password? {forgotPasswordLink}
-label: Enter website. This input is for robots only, do not enter if you're human.
-  <input:text #68127ddd-a52d-4eaf-91dc-ef5d1e5e5761 {beecatcher} empty>
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-05 02:09:07  skipped  Logistics Specialist I @ sierraspace
-url: https://sierraspace.wd1.myworkdayjobs.com/sierra_space_external_career_site/job/Louisville-CO/Logistics-Specialist-I_R26345/apply
-stage: Application Questions 1 of 2
-why: can't truthfully answer required: None of the above.; None of the above.
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Logistics Specialist I
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions 1 of 2
-label: current step 3 of 6
-label: Application Questions 1 of 2
-label: step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# Application Questions 1 of 2
-{applyFlowPrimaryQuestionsPage}
- {formField-7f1527415513101107e118727df20000}
-label: The Arms Export Control Act (22 U.S.C. § 2278) and the International Traffic in Arms Regulations (22 C.F.R. Su
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e118727df20000
- {formField-7f1527415513101107e118727df20005}
-label: Are you 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e118727df20005
- {formField-7f1527415513101107e1190ca1550002}
-label: Are you willing to relocate?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e1190ca1550002
- {formField-7f1527415513101107e1190ca1550005}
-label: Preferred Location(s)
-  <input:checkbox #8255185e82af101107e8bc2076930001-7f1527415513101107e1190ca15 question-unanswered>
-label: Nevada, Corporate Headquarters
-  <input:checkbox #8255185e82af101107e8bc2076930002-7f1527415513101107e1190ca15 question-unanswered>
-label: Overseas Deployment
-  <input:checkbox #8255185e82af101107e8bcba2bf00000-7f1527415513101107e1190ca15 question-unanswered>
-label: Alabama, Florida, Georgia
-  <input:checkbox #8255185e82af101107e8bcba2bf00001-7f1527415513101107e1190ca15 question-unanswered>
-label: California
-  <input:checkbox #8255185e82af101107e8bcba2bf00002-7f1527415513101107e1190ca15 question-unanswered>
-label: Colorado, Utah
-  <input:checkbox #8255185e82af101107e8bd54507a0000-7f1527415513101107e1190ca15 question-unanswered>
-label: Illinois, Ohio, Nebraska
-  <input:checkbox #8255185e82af101107e8bd54507a0001-7f1527415513101107e1190ca15 question-unanswered>
-label: New Hampshire
-  <input:checkbox #8255185e82af101107e8bd54507a0002-7f1527415513101107e1190ca15 question-unanswered>
-label: North Carolina
-  <input:checkbox #8255185e82af101107e8bd54507a0003-7f1527415513101107e1190ca15 question-unanswered>
-label: New Mexico, Texas
-  <input:checkbox #8255185e82af101107e8bdee456f0000-7f1527415513101107e1190ca15 question-unanswered>
-label: District of Columbia, Maryland, Virginia
- {formField-7f1527415513101107e11a4068010005}
-label: Are you currently employed? If yes, may we speak to your present employer?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e11a4068010005
- {formField-7f1527415513101107e11ada5d000003}
-label: Do you have intellectual property?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e11ada5d000003
- {formField-7f1527415513101107e11b7408070001}
-label: What’s your annual salary expectation range?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e11b7408070001
- {formField-7f1527415513101107e1204822d90001}
-label: Have you ever applied to Sierra Space before?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e1204822d90001
- {formField-7f1527415513101107e1204822d90004}
-label: Have you ever worked for Sierra Space before?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e1204822d90004
- {formField-7f1527415513101107e120e22d8b0001}
-label: Do you have relatives working for Sierra Space or any other Sierra Space subsidiaries?*
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e120e22d8b0001
- {formField-7f1527415513101107e120e22d8b0005}
-label: Do you have friends or professional colleagues working for Sierra Space or any other Sierra Space subsidiaries
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e120e22d8b0005
- {formField-7f1527415513101107e1217c344e0003}
-label: Certain federal law may require that you inform your federal agency of contacts regarding prospective employme
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e1217c344e0003
- {formField-7f1527415513101107e12215d7300001}
-label: The following statements are intended to preliminarily identify potential restrictions that may arise as a res
-  <input:checkbox #8255185e82af101107e8b0b0c4320000-7f1527415513101107e12215d73 required question-unanswered>
-label: I am/was a ‘senior employee’ as defined by 18 U.S.C. §207(c)(2).
-  <input:checkbox #8255185e82af101107e8b0b0c4320001-7f1527415513101107e12215d73 required question-unanswered>
-label: I am/was a political appointee.
-  <input:checkbox #8255185e82af101107e8b0b0c4320002-7f1527415513101107e12215d73 required question-unanswered>
-label: I am/was a public financial disclosure report filer.
-  <input:checkbox #8255185e82af101107e8b0b0c4320003-7f1527415513101107e12215d73 required question-unanswered>
-label: I am/was a covered DoD official as defined by DFARS <phone>.
-  <input:checkbox #8255185e82af101107e8b14ad0530000-7f1527415513101107e12215d73 required question-unanswered>
-label: I am/was a military officer in grades O-7 or above or a civilian equivalent.
-  <input:checkbox #8255185e82af101107e8b14ad0530001-7f1527415513101107e12215d73 required question-unanswered>
-label: None of the above.
- {formField-7f1527415513101107e122afeb220002}
-label: The following statements are intended to preliminarily identify potential conflicts of interest that may arise
-  [dropdown] nothing chosen #primaryQuestionnaire--7f1527415513101107e122afeb220002
- {formField-7f1527415513101107e1234a0d6c0000}
-label: Did you do any of the following activities or serve in the following roles? (Select all that apply)*
-  <input:checkbox #8255185e82af101107e8a84331160000-7f1527415513101107e1234a0d6 required question-unanswered>
-label: Served as procuring contracting officer, source selection authority, a member of the source selection evaluati
-  <input:checkbox #8255185e82af101107e8a84331160001-7f1527415513101107e1234a0d6 required question-unanswered>
-label: Served as the program manager, deputy program manager, or administrative contracting officer for a contract in
-  <input:checkbox #8255185e82af101107e8a84331160002-7f1527415513101107e1234a0d6 required question-unanswered>
-label: Personally made a decision on behalf of the government to award a contract, subcontract, modification of a con
-  <input:checkbox #8255185e82af101107e8a8dd387b0000-7f1527415513101107e1234a0d6 required question-unanswered>
-label: Personally made a decision on behalf of the government to establish overhead or other rates applicable to one 
-  <i
-
 === 2026-10-05 02:09:42  blocked  Resident Services Coordinator - Brooklyn, NY @ greystar
 url: https://greystar.wd1.myworkdayjobs.com/External/job/City-Office-New-York-New-York-NY/Resident-Services-Coordinator---Brooklyn--NY_R0202740/apply/applyManually
 stage: account
@@ -5649,4 +5459,115 @@ why: could not find the employer's application page
   text: · Opportunities for career advancement
   text: · Performance and promotion raises
   text: · Free Telehealt
+
+=== 2026-10-05 06:51:23  blocked  Trade Marketing Analyst @ sigma
+url: https://jobs.workable.com/view/o4L6gKPuhPiZaxS9tu6YsN/remote-trade-marketing-analyst-in-los-angeles-at-sigma
+why: could not find the employer's application page
+  [button] Search for jobs
+  [link] Log in / Sign up
+# Trade Marketing Analyst
+# at SIGMA
+  text: Los Angeles, California, United States
+  text: Marketing & Innovation 80002676
+  [button] Share job
+  [button] Apply now
+# Description
+  text: Align trade marketing initiatives by leveraging analytical tools, identifying new strategic opportunities; developing and updating sales pla
+  text: This is a remote position with travel up to 20% of the time to CA, Texas, AZ, Illinois, and New York.
+  text: Coordinates, develop and implement strategies for Category, Trade and Shopper initiatives for assigned area(s)
+  text: Develop department and category insights to deliver greater share of promotion, distribution and shelving
+  text: Analyze new growth opportunities by category; recommends new business opportunities
+  text: Evaluates and measures campaign results; recommends changes to strategy
+  text: Create and deliver comprehensive category reviews and execute category initiatives with client in collaboration with stakeholders including 
+  text: Implements Trade Marketing strategies; track budget, communicate results and make recommendations to stakeholders
+# Requirements
+  text: Bachelor’s Degree in Business, Finance, Marketing or related field or equivalent work experience
+  text: Three (2) years’ of trade marketing, brand management, or related experience
+  text: 1 year broker or sales analyst role experience
+  text: Bilingual in English and Spanish
+  text: Prior experience of planning and managing P&L
+  text: Database management experience in SQL, ACCESS, or similar
+  text: Consumer Packaged Goods experience
+  text: KNOWLEDGE, SKILLS & ABILITITES (KSA’s)
+  text: Working knowledge of category management processes and applications
+  text: Experience in SAP, BW Analyzer and High Jump
+  text: Working knowledge of consumption databases such as Nielsen
+  text: Strong business and financial knowledge with business analytics skills and the ability to plan, track and evaluate trade management
+  text: Ability to make recommendations for solutions based on information gathered and analyzed from existing systems and/or imperfect information
+  text: Ability to communicate across all levels of the organization, present complex ideas concisely and clearly articulate ideas verbally and in w
+  text: Strong troubleshooting and problem resolution skills
+  text: Proficient in Microsoft Office, including Word, Access and Power Point, advanced skills in Excel, including Data Analysis, Pivot tables, and
+  text: Ability to build professional relationships with Trade Marketing and cross functional teams while facilitating a collaborative environment
+  text: Ability to work within a matrix organization
+# Benefits
+  text: Employee assistance program
+  text: Equal Employment Opportunity Statement
+  text: Sigma Foods and the Bar-S brand are
+  text: Equal Opportunity Employers
+  text: . We are committed to providing equal employment opportunities to all applicants and employees and do not discriminate based on race, color,
+# Visit website
+(dialog)
+  [button] Cookies settings
+  [button] Accept all
+  [button] Decline all
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
+
+=== 2026-10-05 06:52:14  blocked  Financial Inclusion & Family Empowerment Coordinator @ harlem-children-s-zone
+url: https://jobs.workable.com/view/cYjfjrFbcye9SJpjo7BZAJ/financial-inclusion-%26-family-empowerment-coordinator-in-new-york-at-harlem-children's-zone
+why: could not find the employer's application page
+  [button] Search for jobs
+  [link] Log in / Sign up
+# Financial Inclusion & Family Empowerment Coordinator
+# at Harlem Children's Zone
+  text: New York, New York, United States
+  [button] Share job
+  [button] Apply now
+# Description
+  text: Harlem Children’s Zone (HCZ) — a world-renowned education and poverty-fighting organization based in New York — seeks enthusiastic, dedicate
+  text: Wealth Builds is an innovative effort to eliminate the racial wealth gap through nine evidence-based pillars beginning in Harlem and ultimat
+  text: We are seeking a committed and organized Coordinator to support the Financial Inclusion and Family Empowerment pillars. This role will sit o
+  text: For more information, check out
+  text: Want to Work at Harlem Children's Zone? Here's 7 Things You Need to Know
+# Requirements
+  text: 2+ Years of project management experience
+  text: 1+ Years of experience empowering families and working with them closely to achieve measurable outcomes
+# Who you are
+  text: Excellent project management skills
+  text: Strong organizational, planning, collaboration, and communication skills
+  text: Demonstrated ability to multitask while maintaining attention to detail and to do so as part of a team in a collaborative, fast-paced enviro
+  text: Must be a self-starter and take initiative, highly proactive, and self-disciplined
+  text: Possess an understanding of underserved communities and are willing to work closely with youth and families
+# What you'll do
+  text: Support the smooth and efficient execution of program operations under the management of the Director of Financial Education and the Assista
+  text: Collaborates with The Baby College (TBC), the community, and the staff pipeline to incorporate financial education programming
+  text: Manages cross-collaboration with TBC and Community Pride
+  text: Works with the director to ensure monthly community/ staff workshops
+  text: Design workshops for staff and community
+  text: Manages coordination with the financial coaching platform
+  text: Manages/coordinates with the TBC program, general planning, and implication of community/staff and fin lit opportunities with external org e
+  text: Works closely with the Director of Financial Education and Assistant Director of Financial Inclusion and Family Empowerment to ensure the fi
+  text: Manages a library of resources
+# Schedule
+  text: 9 am – 5 pm (participation will be required for occasional evening events)
+  text: Hybrid schedule, 4 days in office, 1 day remote
+# Benefits
+  text: As a member of the Harlem Children's Zone team, you will join a supportive and inclusive community dedicated to helping children, families —
+  text: Our exceptional full-time benefits include:
+  text: Highly competitive base salaries
+  text: Short-and long-term disability
+  text: Additional voluntary benefits
+  text: Additional Benefits (Discounts on flights, hotels, theme parks, concert tickets, and more.)
+  text: The annual salary range for this position is $60,000-$75,000 per year, with a comprehensive benefits package including employer-covered heal
+  text: . No telephone inquiries or recruiters, please. Replies will only be sent to qualified applicants. HCZ is an EOE.
+# Visit website
+  text: Harlem Children’s Zone (HCZ) breaks the cycle of intergenerational poverty with on-the ground, all-around programming that builds up opportu
+  text: From early childhood, education, and career programs to community outreach and wellness initiatives, HCZ opens pathways to mobility and pros
+  text: HCZ leads the way for communities around the country, improving the lives and livelihoods of millions. Together with our partners, we’re tra
+(dialog)
+  [button] Cookies settings
+  [button] Accept all
+  [button] Decline all
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
 
