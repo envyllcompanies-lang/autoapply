@@ -300,6 +300,12 @@ def flow_checks(p):
         check((r["data"] or {}).get("files") == ["briandelgado_resume.pdf"], f"a résumé box headed 'Resume/Cover Letter' did not get the résumé: {(r['data'] or {}).get('files')}")
         r = run("resetco", seed=True)
         check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]), f"existing account, other password: {r['got']}; log: {tail(r)}")
+        acc_g = A.Accounts({"accounts": {"email": "delgado@alumni.usc.edu"}}, Path(tempfile.mkdtemp()))
+        acc_g.password, acc_g.enabled = "Pw-123456!x", True
+        acc_g.known[A.Accounts.host(wd_mock.job_url(base, "ghostco", "R-100"))] = "signed_in"       # a stale record: no such account exists
+        r = run("ghostco", acc=acc_g)
+        check(r["got"] == "confirmed" and any("creating one" in x for x in r["logs"]),
+              f"no account for the email and no reset email: the account must be created: {r['got']}; log: {tail(r)}")
         r = run("slowco")
         check(r["got"] == "confirmed", f"a form that is drawn only after 25 seconds must be waited for: {r['got']}; log: {tail(r)}")
         r = run("quietco", seed=True)

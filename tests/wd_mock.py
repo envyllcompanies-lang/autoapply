@@ -16,6 +16,8 @@ Tenants (first part of the path) switch behaviours on:
   acme       plain flow; the new account is signed in straight away
   verifyco   the new account must be verified from an emailed link before it can sign in
   resetco    an account already exists with another password (use ?seed=1 once): 'forgot password' is needed
+  ghostco    no account exists for the email, though the bot's records say there is one: the sign-in is refused and
+             'Forgot password' sends no email at all; only creating the account works
   slowco     the application page shows only its progress bar for 25 seconds (counted from the first visit, reloads do not help) before the form is drawn (seen on real employers)
   quietco    like resetco (use ?seed=1), but a refused sign-in shows NO message at all, as several real employers do
   emailfirst the sign-in page first shows 'Sign in with email'
@@ -311,9 +313,10 @@ function authPage() {
     if (acct && acct.email === e && acct.pw === p && !acct.verified) { $('autherr').innerText = 'Your account has not been verified. Verify your email before signing in.'; mail('verify', location.origin + '/' + T + '/verify'); return; }
     if (!acct || acct.email !== e || acct.pw !== p) { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
     P('signed', true); if (!GJ('step')) PJ('step', 1); render(); });
-  on('resetPasswordSubmitButton', () => { mail('reset', location.origin + '/' + T + '/passwordreset'); go('forgot-sent'); });
+  on('resetPasswordSubmitButton', () => { if (T === 'ghostco' && !acct) { go('forgot-sent'); return; } mail('reset', location.origin + '/' + T + '/passwordreset'); go('forgot-sent'); });
 }
 function render() {
+  if (!window.__r0) { window.__r0 = 1; if (/^forgot/.test(G('authmode') || '')) P('authmode', 'signin'); }     // a reload shows the sign-in page again
   closePop();
   if (T === 'closed') { root.innerHTML = chrome(`<div data-automation-id="errorContainer"><span data-automation-id="errorMessage">The page you are looking for doesn't exist.</span><button data-automation-id="searchForJobsButton">Search for Jobs</button></div>`); return; }
   if (parts[1] === 'verify') { const a = G('acct'); if (a) { a.verified = true; P('acct', a); } P('authmode', T === 'brock' ? 'social' : 'signin');

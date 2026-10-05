@@ -523,7 +523,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
     acc.use(host)
     t0 = time.time()
     tried_create = False
-    for _ in range(6):
+    for _ in range(9):
         if not is_auth_page(page):
             return
         scope = _wd_scope(page)
@@ -646,6 +646,21 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             acc.__dict__.setdefault("_wd_reset_tried", {})[host] = True
             if _wd_reset_password(page, acc, log, url_after):
                 acc.remember(host, "reset")
+                continue
+            # No reset email comes when no account exists for this email on this site (an old record in accounts.json may be
+            # wrong): forget the record and make the account instead.
+            if not getattr(acc, "_wd_create_fallback", {}).get(host):
+                acc.__dict__.setdefault("_wd_create_fallback", {})[host] = True
+                log(f"      account: no reset email came, so this email probably has no account on {host}: creating one")
+                acc.known.pop(host, None)
+                tried_create = False
+                if url_after:                              # the reset attempt left the page on 'Forgot password': go back to the application
+                    page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+                    _settle(page, 2500)
+                    try:                                   # wait for the sign-in / sign-up form to be drawn before looking at it
+                        page.wait_for_selector("input[type=password]", state="visible", timeout=20000)
+                    except Exception:
+                        pass
                 continue
         if True:
             said = "; ".join(_wd_errors(page))[:140]

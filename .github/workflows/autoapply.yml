@@ -5,9 +5,11 @@ on:
     # Four runs a day, spaced across the US working day (UTC): 9am ET, 1pm ET, 5pm ET, 9pm ET.
     # Free private-repo Actions minutes are 2,000 a month; the bot budgets its own run time against that (see README).
     - cron: "7 1,13,17,21 * * *"
-    # Every hour, used ONLY while the repository is public (public repositories have no minutes limit): together with
-    # 50-minute runs that is non-stop. While the repository is private these hourly starts are skipped and cost nothing.
-    - cron: "37 * * * *"
+    # Every 15 minutes, used ONLY while the repository is public (public repositories have no minutes limit): together with
+    # 50-minute runs that is non-stop, and a broken chain is picked up again within about 15 minutes (GitHub's schedule often
+    # fires late). Runs never overlap (see 'concurrency'), so an extra start while one is running just waits or is dropped.
+    # While the repository is private these starts are skipped and cost nothing.
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
     inputs:
       dry_run:

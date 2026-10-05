@@ -94,6 +94,12 @@ def question_checks():
     check(ask("Why are you excited about joining the team at Hungryroot? *", "text", []) == "WRITTEN ANSWER", "short open-ended text question goes to the writer")
     check(ask("What is your date of birth? Tell us about it", "text", []) is None, "personal fields are never written")
     b.writer = _old_w
+    check(ask("Will you now or in the future require employment visa sponsorship (e.g., H-1B, H-4, TN, OPT)?", "combobox", ["Yes", "No"]) == "No", "visa sponsorship: not needed")
+    check(ask("Are you able to perform the essential functions of the job to which you are applying?", "combobox", ["Select One", "Yes", "No"]) == "Yes", "essential functions")
+    check(ask("Which best describes your educational background?", "combobox", ["High school diploma/GED", "Associate's degree", "Bachelor's degree", "Graduate degree"]) == "Bachelor's degree", "education level")
+    check(ask("If yes, please briefly describe the nature of the restriction and its expiration date, if known.", "textarea", [], req=False) == "N/A", "no restriction to describe")
+    check(ask("The expected starting salary for the position is $60,200 to $75,200 within a full position range. Are you comfortable with this?", "combobox", ["Yes", "No"]) == "Yes", "salary range reaching the floor")
+    check(ask("The compensation for this role is $26.50/hour and is non-negotiable. Are you comfortable moving forward?", "combobox", ["Yes", "No"]) is None, "pay below the floor stays for you")
     from datetime import date as _d, timedelta as _td
     wk = _d.today() + _td(days=7)
     check(ask("When can you start?*", "wddate", []) == wk.strftime("%m/%d/%Y"), "start date: one week from the application date (Workday date box)")

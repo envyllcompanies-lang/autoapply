@@ -554,6 +554,9 @@ class Brain:
                 return _UNSET
             return [val] if kind == "checkbox_group" else val
 
+        if kind in ("text", "textarea") and re.search(r"if yes.{0,60}(describe|explain|nature|details)|nature of the restriction", q) \
+                and re.search(r"restriction|non-?compet|agreement|obligation|contract", q) and c.get("non_compete") == "none":
+            return "N/A"
         if not has_opts and self._START_RX.search(q) and kind in ("wddate", "date", "text"):
             d = date.today() + timedelta(days=int(c.get("start_in_days", 7)))        # a week after the day the application is sent
             return d.strftime("%m/%d/%Y") if kind in ("wddate", "date") else f"{d.strftime('%B')} {d.day}, {d.year}"
@@ -628,6 +631,24 @@ class Brain:
             for rx, ans, _ in self.answers:
                 if rx.search("years of relevant experience") and re.fullmatch(r"\d+(?:\.\d+)?", str(ans).strip()):
                     return out(self._years_option(low, real, float(ans), kind))
+        if yn and re.search(r"(will you|do you|would you)\W+(\w+\W+){0,6}(require|need)\W+(\w+\W+){0,6}(visa )?sponsorship", q) \
+                and str(self.facts.get("requires_sponsorship_now_or_future", "")).strip().lower().startswith("n"):
+            return out(pick(r"^no\b"))
+        if yn and re.search(r"able to perform the essential functions", q):
+            return out(pick(r"^yes\b"))
+        if re.search(r"educational background|highest (level|degree)|level of education", q) and not yn:
+            got = pick(r"bachelor")
+            if got:
+                return out(got)
+        if yn and re.search(r"(compensation|salary|pay|rate|wage|range).{0,220}(comfortable|acceptable|agree|okay|accept|aligned?|works? for you)|"
+                            r"(comfortable|accept).{0,80}(compensation|salary|pay|rate|range)", q):
+            nums = []
+            for m in re.finditer(r"\$\s*([\d,]+(?:\.\d+)?)\s*(k\b)?", text, re.I):
+                v = float(m.group(1).replace(",", "")) * (1000 if m.group(2) else 1)
+                nums.append(v * 2080 if (v < 500 and re.search(r"hour|/hr|hourly", low)) else v)
+            floor = float((self.cfg.get("scoring") or {}).get("salary_floor") or 0)
+            if nums and floor:
+                return out(pick(r"^yes\b")) if max(nums) >= floor else _UNSET     # below your floor: left for you, not accepted
         if yn and re.search(r"\b(advanced|expert|strong)\b.{0,25}(expertise|proficien|skills?|knowledge|experience)", q):
             lvl = self._skill_level(q)
             if lvl:
