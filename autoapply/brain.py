@@ -554,6 +554,8 @@ class Brain:
                 return _UNSET
             return [val] if kind == "checkbox_group" else val
 
+        if kind in ("text", "textarea") and re.search(r"(if you answered no|if no).{0,80}(describe|explain).{0,60}functions that cannot", q):
+            return "N/A"
         if kind in ("text", "textarea") and re.search(r"if yes.{0,60}(describe|explain|nature|details)|nature of the restriction", q) \
                 and re.search(r"restriction|non-?compet|agreement|obligation|contract", q) and c.get("non_compete") == "none":
             return "N/A"
@@ -631,11 +633,24 @@ class Brain:
             for rx, ans, _ in self.answers:
                 if rx.search("years of relevant experience") and re.fullmatch(r"\d+(?:\.\d+)?", str(ans).strip()):
                     return out(self._years_option(low, real, float(ans), kind))
-        if yn and re.search(r"(will you|do you|would you)\W+(\w+\W+){0,6}(require|need)\W+(\w+\W+){0,6}(visa )?sponsorship", q) \
+        if yn and re.search(r"(will you|do you|would you)\W+(\w+\W+){0,10}(require|need)\W+(\w+\W+){0,6}(visa |immigration )?sponsorship", q) \
                 and str(self.facts.get("requires_sponsorship_now_or_future", "")).strip().lower().startswith("n"):
             return out(pick(r"^no\b"))
-        if yn and re.search(r"able to perform the essential functions", q):
+        if yn and re.search(r"able to (perform|complete)\W+(\w+\W+){0,6}essential (job )?(functions|duties)", q):
             return out(pick(r"^yes\b"))
+        if kind == "select" or kind == "combobox":
+            _ST = {"alabama": "AL", "alaska": "AK", "arizona": "AZ", "arkansas": "AR", "california": "CA", "colorado": "CO", "connecticut": "CT", "delaware": "DE",
+                   "florida": "FL", "georgia": "GA", "hawaii": "HI", "idaho": "ID", "illinois": "IL", "indiana": "IN", "iowa": "IA", "kansas": "KS", "kentucky": "KY",
+                   "louisiana": "LA", "maine": "ME", "maryland": "MD", "massachusetts": "MA", "michigan": "MI", "minnesota": "MN", "mississippi": "MS", "missouri": "MO",
+                   "montana": "MT", "nebraska": "NE", "nevada": "NV", "new hampshire": "NH", "new jersey": "NJ", "new mexico": "NM", "new york": "NY",
+                   "north carolina": "NC", "north dakota": "ND", "ohio": "OH", "oklahoma": "OK", "oregon": "OR", "pennsylvania": "PA", "rhode island": "RI",
+                   "south carolina": "SC", "south dakota": "SD", "tennessee": "TN", "texas": "TX", "utah": "UT", "vermont": "VT", "virginia": "VA",
+                   "washington": "WA", "west virginia": "WV", "wisconsin": "WI", "wyoming": "WY"}
+            if re.fullmatch(r"state( of residence| / province)?", (f.get("label") or "").lower().strip(" *:✱")) and self.facts.get("state"):
+                stn = str(self.facts["state"]).strip().lower()
+                ab = _ST.get(stn) or (stn.upper() if len(stn) == 2 else None)
+                if ab:
+                    return out(pick(r"^" + ab + r"$", r"^" + re.escape(stn) + r"$"))
         if re.search(r"educational background|highest (level|degree)|level of education", q) and not yn:
             got = pick(r"bachelor")
             if got:

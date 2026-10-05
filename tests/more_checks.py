@@ -100,6 +100,10 @@ def question_checks():
     check(ask("If yes, please briefly describe the nature of the restriction and its expiration date, if known.", "textarea", [], req=False) == "N/A", "no restriction to describe")
     check(ask("The expected starting salary for the position is $60,200 to $75,200 within a full position range. Are you comfortable with this?", "combobox", ["Yes", "No"]) == "Yes", "salary range reaching the floor")
     check(ask("The compensation for this role is $26.50/hour and is non-negotiable. Are you comfortable moving forward?", "combobox", ["Yes", "No"]) is None, "pay below the floor stays for you")
+    check(ask("Do you currently, or will you in the future, require immigration sponsorship for work authorization?", "combobox", ["Select One", "Yes", "No"]) == "No", "immigration sponsorship, long wording")
+    check(ask("Are you able to complete the essential job duties for the position to which you are applying?", "radio", YN) == "Yes", "essential job duties")
+    check(ask("State ✱", "select", ["AK", "AL", "AZ", "AR", "CA", "CO", "CT"]) == "CO", "state abbreviation")
+    check(ask("If you answered no to the question above, please describe the full functions that cannot be performed", "textarea", [], req=False) == "N/A", "functions that cannot be performed")
     from datetime import date as _d, timedelta as _td
     wk = _d.today() + _td(days=7)
     check(ask("When can you start?*", "wddate", []) == wk.strftime("%m/%d/%Y"), "start date: one week from the application date (Workday date box)")
