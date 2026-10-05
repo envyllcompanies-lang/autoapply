@@ -18,7 +18,7 @@ from .sources import Job, _strip_html, prefilter, discover as discover_boards
 UA = {"User-Agent": "Mozilla/5.0 (compatible; autoapply/1.0; personal job search)"}
 TIMEOUT = 25
 TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3,
-             "workablejobs": 3, "arbeitnow": 3}
+             "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3}
 
 ATS_RX = {
     "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
@@ -335,9 +335,25 @@ def arbeitnow(cfg, base="https://www.arbeitnow.com"):
     return out
 
 
-ALWAYS_ON = ("workablejobs", "arbeitnow")      # keyless feeds that run whatever the config's own source list says
+def workingnomads(cfg, base="https://www.workingnomads.com"):
+    """workingnomads.com public remote-jobs feed (no key). Every listing is remote."""
+    out = []
+    try:
+        rows = _get(base + "/api/exposed_jobs/").json()
+    except Exception:
+        return out
+    for j in rows if isinstance(rows, list) else []:
+        if not j.get("title") or not j.get("url"):
+            continue
+        loc = j.get("location") or "Remote"
+        out.append(_job("workingnomads", j.get("company_name"), j.get("url").rstrip("/").split("/")[-1], j["title"],
+                        loc if re.search(r"remote|anywhere", loc, re.I) else "Remote, " + loc, j["url"], j.get("description", ""), j["url"]))
+    return out
+
+
+ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
-            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow}
+            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads}
 
 
 # ---------------------------------------------------------------------------------------------- cache + entry point

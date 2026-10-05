@@ -1217,6 +1217,17 @@ def location_checks():
         got2 = A.arbeitnow({})
     finally:
         A._get = old
+    rows3 = [{"title": "Operations Associate", "company_name": "Acme", "url": "https://www.workingnomads.com/jobs/ops-associate-acme", "location": "USA", "description": "<p>x</p>"},
+             {"title": "", "url": "u"}]
+    class _R3:
+        def json(self): return rows3
+    A._get = lambda *a, **k: _R3()
+    try:
+        got3 = A.workingnomads({})
+    finally:
+        A._get = old
+    check(len(got3) == 1 and "remote" in got3[0].location.lower() and "workingnomads" in A.FETCHERS and "workingnomads" in A.ALWAYS_ON,
+          f"Working Nomads feed not read correctly: {[(j.company, j.location) for j in got3]}")
     check(len(got2) == 1 and got2[0].company == "acme" and "greenhouse.io" in got2[0].apply_url and "arbeitnow" in A.FETCHERS and set(A.ALWAYS_ON) <= set(A.FETCHERS),
           f"Arbeitnow feed not read correctly: {[(j.company, j.apply_url) for j in got2]}")
     print("ok  locations: other countries dropped, on-site only in your cities, remote/US-wide kept; licence/coding titles dropped")
