@@ -5571,3 +5571,68 @@ why: could not find the employer's application page
   text: © Workable Technology Limited 2012-2026
   [button] Cookie Settings
 
+=== 2026-10-05 15:29:14  skipped  Strategic Projects Analyst @ davita
+url: https://davita.wd1.myworkdayjobs.com/DKC_External/job/09518---Casa-CO-Remotes/Strategic-Projects-Analyst_R0480387-1/apply/applyManually
+stage: Application Questions
+why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The field Desired Pay Rate Type: is required and must have a value.', 'Error-Desired Pay Rate Type: The field Desired Pay Rate Type: is required and must have a value.']; fields flagged: ['Desired Pay Rate Type:']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] DaVita {navigationItem-DaVita}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Strategic Projects Analyst
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+# Errors Found
+! Error-Desired Pay Rate Type: The field Desired Pay Rate Type: is required and must have a value. {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-b831311d6f6d1001568f0356d7d40001}
+label: With or without accommodation, can you perform the duties outlined in the job posting on the careers.davita.co
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0356d7d40001
+ {formField-b831311d6f6d1001568f048ac95a0004}
+label: Can you provide legal documentation establishing your identity and eligibility to be legally employed in the U
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0004
+ {formField-b831311d6f6d1001568f048ac95a0001}
+label: Are you legally authorized to work in the United States for DaVita without requiring employment visa sponsorsh
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0001
+ {formField-b831311d6f6d1001568f03f0dbea0002}
+label: Desired Pay Rate Type:*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0002 INVALID
+! Error: The field Desired Pay Rate Type: is required and must have a value. {inputAlert}
+ {formField-b831311d6f6d1001568f03f0dbea0007}
+label: Are you open to relocation?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0007
+ {formField-b831311d6f6d1001568f048ac95a0007}
+label: Do you have clinical dialysis experience?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0007
+ {formField-b831311d6f6d1001568f0524b6ec0002}
+label: What qualifications did we not ask you about that you wish we had in considering you for this role?*
+  <textarea #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0002 required filled>
+ {formField-b831311d6f6d1001568f0524b6ec0003}
+label: What best describes your current or most recent place of work?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0003
+ {formField-b831311d6f6d1001568f06f285cb0007}
+label: Select one:*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f06f285cb0007
+ {formField-b831311d6f6d1001568f082676780000}
+label: If Other please specify:*
+  <textarea #primaryQuestionnaire--b831311d6f6d1001568f082676780000 required filled>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
