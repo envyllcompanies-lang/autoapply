@@ -527,6 +527,113 @@ class Brain:
                     or next((o for o in opts if re.search(r"bachelor", o, re.I)), None)
         return None
 
+    _START_RX = re.compile(r"when (can|could|would) you (start|begin)|(available|earliest|desired|expected|preferred|anticipated)\W+(\w+\W+){0,3}(start|begin)|"
+                           r"\bstart date\b|date (you )?(are |is )?available|available to start", re.I)
+
+    def _confirmed(self, f, text, low, kind, opts, has_opts):
+        """Answers the applicant confirmed in chat (config.yaml `confirmed:`): start date, availability, shifts, licences, languages, phone type,
+        relocation, export-control status, previous employers, restrictive agreements, and skill-level yes/no questions taken from the résumé.
+        Returns _UNSET when the question is none of these, so every other rule still applies."""
+        from datetime import date, timedelta
+        c = self.cfg.get("confirmed") or {}
+        if not c:
+            return _UNSET
+        q = low[:240]
+        real = [o for o in opts if not re.match(r"\W*(select|choose|--)", o, re.I)]
+        yn = bool(real) and {_norm(o) for o in real} <= {"yes", "no"}
+
+        def pick(*pats, avoid=None):
+            for pat in pats:
+                for o in real:
+                    if re.search(pat, o, re.I) and not (avoid and re.search(avoid, o, re.I)):
+                        return o
+            return None
+
+        def out(val):
+            if val is None:
+                return _UNSET
+            return [val] if kind == "checkbox_group" else val
+
+        if not has_opts and self._START_RX.search(q) and kind in ("wddate", "date", "text"):
+            d = date.today() + timedelta(days=int(c.get("start_in_days", 7)))        # a week after the day the application is sent
+            return d.strftime("%m/%d/%Y") if kind in ("wddate", "date") else f"{d.strftime('%B')} {d.day}, {d.year}"
+        if kind in ("text", "textarea") and c.get("llm_proficiency") and re.search(
+                r"(llm|ai[- ]native|generative ai).{0,70}(tools?|apis?|proficien)|proficien.{0,40}(llm|ai tools)", q):
+            return str(c["llm_proficiency"])
+        if kind == "checkbox_single":
+            lab = low.strip(" *:✱")
+            if re.fullmatch(r"full[- ]?time", lab):
+                return True if c.get("job_type") == "full-time" else ""
+            if re.fullmatch(r"part[- ]?time", lab):
+                return "" if c.get("job_type") == "full-time" else True
+            if re.fullmatch(r"available to work overtime", lab):
+                return True if c.get("overtime") else ""
+            if re.fullmatch(r"available to work weekends", lab):
+                return True if c.get("weekends") else ""
+            if re.match(r"looking to relocate to|willing to relocate to", lab):
+                return True if c.get("willing_to_relocate_anywhere") else ""
+            if re.match(r"based in .{2,40}$|based elsewhere", lab):
+                return ""
+            return _UNSET
+        if not (has_opts and real):
+            return _UNSET
+        if re.search(r"\bshifts?\b", q) and not yn and c.get("shift"):
+            return out(pick(r"morning", r"first", r"\bday\b", r"open to (any|either)"))
+        if yn and re.search(r"finra|series (6|7|63|65)|national provider|\bnpi\b|(active|expired|current|hold).{0,20}licen[sc]e|licen[sc]es? (or|and) certif|"
+                            r"professional (licen|certif)", q) and c.get("licenses") == "none":
+            return out(pick(r"^no\b"))
+        if yn and re.search(r"non-?compet|non-?solicit|restrictive covenant|obligat(ed|ions?)\W+(\w+\W+){0,12}(previous|former|prior|current)\W+(\w+\W+){0,3}employer|"
+                            r"agreement with (a |any )?(current|former|previous)", q) and not re.search(r"\bsign\b|willing to|will you", q) \
+                and c.get("non_compete") == "none":
+            return out(pick(r"^no\b"))
+        who = re.search(r"(?:employee|employed|worked|work|contractor|employment)\s+(?:for|at|by|with|of)\s+(?:the\s+)?([A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,3})", text)
+        if who and re.search(r"(ever|previously|formerly|past)|have you (worked|been)", q):
+            name = _norm(who.group(1))
+            mine = [e.get("company", "") for e in (self.profile.get("experience") or [])] + list(c.get("prior_employers") or [])
+            yes = any(name and (name in _norm(m) or _norm(m) in name) for m in mine if m)
+            got = pick(r"previous employee|former employee|^yes\b") if yes else pick(r"^no\b|never|not (a |an )?(previous|former)|have not")
+            return out(got)
+        if re.search(r"itar|export (control|compliance)|u\.?s\.? person", q) and c.get("us_person"):
+            if yn:
+                return out(pick(r"^yes\b"))
+            return out(pick(r"permanent resident|lawful permanent", r"currently a .{0,3}u\.?s\.? person", r"^u\.?s\.? person", avoid=r"\bnot\b|foreign"))
+        if re.search(r"phone (device )?type|device type", q) and c.get("phone_type"):
+            return out(pick(r"mobile|cell"))
+        if re.search(r"time ?zone", q) and c.get("timezone"):
+            tz = str(c["timezone"])
+            return out(pick(r"\b" + re.escape(tz) + r"\b", {"MST": r"mountain"}.get(tz, r"$^")))
+        if re.search(r"languages?\W+(\w+\W+){0,6}(speak|fluent|proficien)|^\W*language\W*$", q) and c.get("languages_fluent"):
+            langs = [str(x) for x in c["languages_fluent"]]
+            if kind == "checkbox_group":
+                got = [o for o in real if any(re.fullmatch(r"\W*" + re.escape(l) + r"\W*", o, re.I) for l in langs)]
+                return got or _UNSET
+            return out(pick(r"^english$"))
+        if yn and re.search(r"gpa", q):
+            m = re.search(r"(\d(?:\.\d+)?)\s*(or higher|or above|\+|or better)", q)
+            try:
+                gpa = float(self._fact(("gpa",)))
+            except (TypeError, ValueError):
+                gpa = None
+            if m and gpa is not None:
+                return out(pick(r"^yes\b") if gpa >= float(m.group(1)) else pick(r"^no\b"))
+        if re.search(r"graduat\w*\W+(\w+\W+){0,4}year|year\W+(\w+\W+){0,4}graduat", q):
+            y = re.search(r"(20\d\d)", str(self.facts.get("graduation_date") or ""))
+            if y:
+                return out(pick(r"^" + y.group(1) + r"$", r"^other"))
+        if re.search(r"first[- ]generation", q) and not yn:
+            v = str(self.facts.get("first_generation") or "").strip().lower()
+            if v in ("yes", "no"):
+                return out(pick(r"^" + v + r"\b"))
+        if re.search(r"years of (relevant|professional|related)\W+(\w+\W+){0,3}experience", q) and not yn:
+            for rx, ans, _ in self.answers:
+                if rx.search("years of relevant experience") and re.fullmatch(r"\d+(?:\.\d+)?", str(ans).strip()):
+                    return out(self._years_option(low, real, float(ans), kind))
+        if yn and re.search(r"\b(advanced|expert|strong)\b.{0,25}(expertise|proficien|skills?|knowledge|experience)", q):
+            lvl = self._skill_level(q)
+            if lvl:
+                return out(pick(r"^yes\b") if lvl >= 3 else pick(r"^no\b"))
+        return _UNSET
+
     def _grad_date(self) -> str | None:
         """facts.graduation_date ('May 2025') as MM/DD/YYYY for a date box (the 15th when only the month is known)."""
         raw = str(self.facts.get("graduation_date_value") or self.facts.get("graduation_date") or "").strip()
@@ -690,6 +797,9 @@ class Brain:
                 got = pick_option(opts, "No")
                 if got:
                     return [got] if kind == "checkbox_group" else got
+        ua = self._confirmed(f, text, low, kind, opts, has_opts)
+        if ua is not _UNSET:
+            return ua
         # 1) user's own canned answers win
         for rx, ans, only_opts in self.answers:
             if rx.search(low) and (has_opts or not only_opts):

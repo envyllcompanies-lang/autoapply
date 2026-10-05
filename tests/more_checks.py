@@ -84,6 +84,37 @@ def question_checks():
     for q in ("2) Are you currently released from custody for a criminal offense on bail, bond, probation, parole or on your own recognizance? Please read the notice below regarding applicants in Los Angeles, San Francisco and New York, including legal requirements about background checks and what you agree to by answering.",
               "1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the following prior to answering: you may authorize a background check, waive nothing, and applicants are not required to disclose sealed records."):
         check(ask(q, "combobox", ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", f"criminal/custody question with long notice text: {q[:50]}")
+    from datetime import date as _d, timedelta as _td
+    wk = _d.today() + _td(days=7)
+    check(ask("When can you start?*", "wddate", []) == wk.strftime("%m/%d/%Y"), "start date: one week from the application date (Workday date box)")
+    check(ask("What date are you available to start?", "wddate", []) == wk.strftime("%m/%d/%Y"), "available-to-start date box")
+    check(str(wk.year) in str(ask("When can you start?", "text", [])), "start date typed into a text box")
+    check("Claude" in str(ask("Do you have hands-on, AI-native proficiency with LLM tools and APIs (OpenAI API, Anthropic API, etc.)?", "text", [])), "LLM proficiency answer")
+    for lab, want in (("Full-Time", True), ("Part-Time", ""), ("Available to work overtime", True), ("Available to work weekends", True),
+                      ("Looking to relocate to Denver, CO", True), ("Based in Denver, CO", ""), ("Based elsewhere & not looking to relocate", "")):
+        check(ask(lab, "checkbox_single", []) == want, f"availability/location checkbox {lab!r} -> {ask(lab, 'checkbox_single', [])!r}")
+    SH = ["Morning shifts: Start times between 5am and 9am", "Afternoon/evening shifts: Start times between 12pm and 4pm"]
+    check(ask("Please select the shift(s) you prefer to work", "checkbox_group", SH) == [SH[0]], "shift preference: morning")
+    check(ask("Preferred shift?", "checkbox_group", ["First Shift", "Second Shift", "Open to any"]) == ["First Shift"], "shift preference: first")
+    for q in ("Do you hold any active or expired FINRA licenses (i.e. series 6, 7, 63, 65, etc.)?", "Do you have a National Provider Identifer (NPI) Number?"):
+        check(ask(q, "combobox", ["Select One", "Yes", "No"]) == "No", f"licence question: {q[:40]}")
+    for q in ("Do you have any obligations to any previous employer relating to the following; non-compete, non-solicitation, confidentiality",
+              "Are you obligated under any contract, agreement or understanding of a previous employer or other party that would restrict your work here?",
+              "Do you have any agreement with a current or former employer (such as a non-compete, non-solicit)?"):
+        check(ask(q, "combobox", ["Select One", "Yes", "No"]) == "No", f"restrictive-agreement question: {q[:40]}")
+    check(ask("Have you worked at DoorDash?*", "combobox", ["I am a previous employee", "I am a previous contractor", "No, I have not worked at DoorDash"]) == "I am a previous employee", "DoorDash previous employee")
+    check(ask("Have you ever been an employee of Denver Health in the past? (Do not include contract work)", "combobox", ["Select One", "Yes", "No"]) == "No", "Denver Health: never employed")
+    check(ask("ITAR Compliance", "combobox", ["U.S. person. This ITAR/EAR status applies to me", "Foreign person. This ITAR/EAR status applies to me"]).startswith("U.S. person"), "ITAR U.S. person")
+    check(ask("This position requires access to information and technology that is subject to US export controls. Please select the option that applies to you",
+              "combobox", ["US citizen or national", 'US permanent resident (i.e., "green card" holder)', "Person admitted as a refugee"]).startswith("US permanent resident"), "export control: permanent resident")
+    check(ask("EXPORT COMPLIANCE", "combobox", ["I am currently a “U.S. Person”", "I am not a “U.S. Person\""]) == "I am currently a “U.S. Person”", "export compliance U.S. Person")
+    check(ask("Phone Device Type", "combobox", ["Select One", "Mobile", "Office (Work)", "Other"]) == "Mobile", "phone device type")
+    check(ask("What timezone are you located in?*", "combobox", ["EST", "PST", "MST", "CT"]) == "MST", "timezone MST")
+    check(ask("Language", "combobox", ["Select One", "Afrikaans", "English", "Spanish"]) == "English", "language dropdown")
+    check(ask("Please select all the languages you speak fluently.", "checkbox_group", ["Arabic", "English", "French", "Spanish"]) == ["English", "Spanish"], "fluent languages")
+    check(ask("What is your expected graduation year?", "combobox", ["2027", "2028", "2029", "2030", "Other"]) == "Other", "graduation year outside the list")
+    check(ask("Do you have advanced SQL expertise?", "combobox", ["Yes", "No"]) == "No", "advanced SQL: résumé lists it as intermediate")
+    check(ask("How many years of relevant, full-time experience do you have?", "combobox", ["0-3", "4-7", "8-12", "13+"]) in ("0-3", "4-7"), "years of relevant experience bucket")
     check(ask("Do you have a valid driver's license?", "combobox", ["Select One", "Yes", "No"]) == "Yes", "driver's license")
     for q in ("I am/was a political appointee.", "I am/was a public financial disclosure report filer.", "I am/was a covered DoD official as defined by DFARS 252.203-7000.",
               "Personally made a decision on behalf of the government to award a contract, subcontract, or grant."):
