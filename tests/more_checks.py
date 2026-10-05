@@ -104,6 +104,23 @@ def question_checks():
     check(ask("Are you able to complete the essential job duties for the position to which you are applying?", "radio", YN) == "Yes", "essential job duties")
     check(ask("State ✱", "select", ["AK", "AL", "AZ", "AR", "CA", "CO", "CT"]) == "CO", "state abbreviation")
     check(ask("If you answered no to the question above, please describe the full functions that cannot be performed", "textarea", [], req=False) == "N/A", "functions that cannot be performed")
+    from autoapply import prescreen as _PS
+    class _Resp:
+        def __init__(self, c): self.status_code = c
+        def close(self): pass
+    _old_get = _PS.requests.get
+    try:
+        _PS.requests.get = lambda *a, **k: _Resp(410)
+        check(_PS.gone("https://jobs.workable.com/view/x") is True, "a 410 page is a closed posting")
+        _PS.requests.get = lambda *a, **k: _Resp(404)
+        check(_PS.gone("https://www.themuse.com/jobs/x") is True, "a 404 page is a closed posting")
+        _PS.requests.get = lambda *a, **k: _Resp(200)
+        check(_PS.gone("https://jobs.workable.com/view/y") is False, "a 200 page is open")
+        def _boom(*a, **k): raise RuntimeError("net")
+        _PS.requests.get = _boom
+        check(_PS.gone("https://example.com/z") is False, "a network error must not mark a posting closed")
+    finally:
+        _PS.requests.get = _old_get
     from datetime import date as _d, timedelta as _td
     wk = _d.today() + _td(days=7)
     check(ask("When can you start?*", "wddate", []) == wk.strftime("%m/%d/%Y"), "start date: one week from the application date (Workday date box)")

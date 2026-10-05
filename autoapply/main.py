@@ -26,7 +26,7 @@ from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-05-j"
+REQUEUE_VERSION = "2026-10-05-k"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -569,6 +569,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 db.update(job.key, status="filtered", reason=why_lv)
                 log(f"  ✗ {job.title} @ {job.company}: {why_lv[:120]}")
                 return "drop", None
+        if not direct and s.get("preflight", True) and url0.startswith("http") and prescreen.gone(url0):
+            db.update(job.key, status="skipped", reason="posting closed: its address no longer exists (HTTP 404/410)")
+            log(f"  ✗ {job.title} @ {job.company}: the posting is closed (its page is gone; no time spent on it)")
+            return "drop", None
         verdict, fit, why = prescreen.gate(db, brain, job, row, s, log)
         if why:
             log(f"  match {fit:3d}%  {job.title} @ {job.company} — {why[:100]}")

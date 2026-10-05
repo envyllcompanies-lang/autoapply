@@ -34,6 +34,17 @@ def _text(h: str) -> str:
     return re.sub(r"[ \t]+", " ", html.unescape(h)).strip()
 
 
+def gone(url: str) -> bool:
+    """True when the posting's own address answers 404 or 410: the listing was taken down (aggregator links go stale)."""
+    try:
+        r = requests.get(url, headers=UA, timeout=12, allow_redirects=True, stream=True)
+        code = r.status_code
+        r.close()
+        return code in (404, 410)
+    except Exception:
+        return False
+
+
 def preflight(url: str, deep: bool = True) -> dict:
     """Before a browser is opened: is the posting still up, and what does it say? Read from the employer's own public feed
     (Workday, Greenhouse, Lever), which answers in a fraction of a second. Returns {'closed': bool, 'description': str};
