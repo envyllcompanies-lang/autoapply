@@ -16,6 +16,7 @@ Tenants (first part of the path) switch behaviours on:
   acme       plain flow; the new account is signed in straight away
   verifyco   the new account must be verified from an emailed link before it can sign in
   resetco    an account already exists with another password (use ?seed=1 once): 'forgot password' is needed
+  slowco     the application page shows only its progress bar for 25 seconds (counted from the first visit, reloads do not help) before the form is drawn (seen on real employers)
   quietco    like resetco (use ?seed=1), but a refused sign-in shows NO message at all, as several real employers do
   emailfirst the sign-in page first shows 'Sign in with email'
   brock      as one real employer did on 2026-10-01: the 'Sign in with Google / Apple / email' page comes back after every
@@ -325,6 +326,11 @@ function render() {
       root.innerHTML = chrome('<p>Your password has been changed.</p>'); } else $('rmsg').innerText = 'ERROR: The passwords do not match.'; };
     return; }
   if (GJ('submitted')) { root.innerHTML = chrome(`<div data-automation-id="applyFlowPage"><h2>Application Submitted</h2><p>Congratulations! Your application has been submitted.</p></div>`); return; }
+  if (T === 'slowco' && parts[4] === 'apply' && G('signed')) {
+    const t0 = +(sessionStorage.getItem('slow0') || Date.now()); sessionStorage.setItem('slow0', t0);
+    if (Date.now() - t0 < 25000) {
+      setTimeout(render, 3000);
+      root.innerHTML = chrome('<div data-automation-id="applyFlowPage"><div data-automation-id="progressBar"><div data-automation-id="progressBarActiveStep">current step 1 of 7 My Information</div></div></div>'); return; } }
   if (parts[4] !== 'apply') {          // the job posting
     root.innerHTML = chrome(`<div data-automation-id="jobPostingPage"><h2 data-automation-id="jobPostingHeader">Operations Analyst</h2>` +
       (T === 'applied' ? `<div data-automation-id="alreadyApplied">You applied for this job on 09/30/2026.</div>` : `<a data-automation-id="adventureButton" role="button" href="${base}/apply">Apply</a>`) +

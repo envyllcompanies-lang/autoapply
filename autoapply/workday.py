@@ -220,8 +220,12 @@ def _toward_form(page, st: dict, k: str, manual: str, moves: int, log) -> None:
             if manual:
                 page.goto(manual, wait_until="domcontentloaded", timeout=45000)
         return
-    if k == "flow" and moves < 3:
-        page.wait_for_timeout(2000)                     # the form is still being drawn
+    if k == "flow" and moves < 4:
+        try:                                            # the form is still being drawn: wait for its fields, not a fixed moment
+            page.wait_for_selector('[data-automation-id^="formField"], [data-automation-id="applyFlowPage"] input:not([type=hidden]), '
+                                   '[data-automation-id="applyFlowPage"] textarea', state="visible", timeout=20000)
+        except Exception:
+            page.wait_for_timeout(1000)
         return
     if manual and (k != "job" or moves > 1 or "/apply" not in page.url):
         if moves == 1:
