@@ -18,7 +18,7 @@ from .sources import Job, _strip_html, prefilter, discover as discover_boards
 UA = {"User-Agent": "Mozilla/5.0 (compatible; autoapply/1.0; personal job search)"}
 TIMEOUT = 25
 TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3,
-             "workablejobs": 3}
+             "workablejobs": 3, "arbeitnow": 3}
 
 ATS_RX = {
     "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
@@ -316,8 +316,27 @@ def workablejobs(cfg, base="https://jobs.workable.com"):
     return out
 
 
+def arbeitnow(cfg, base="https://www.arbeitnow.com"):
+    """arbeitnow.com public job-board API (no key). Each listing's url leads to the employer's own application page."""
+    out = []
+    for page in (1, 2, 3):
+        try:
+            data = _get(base + "/api/job-board-api", params={"page": page}).json()
+        except Exception:
+            break
+        for j in data.get("data", []) or []:
+            if not j.get("title"):
+                continue
+            loc = j.get("location") or ("Remote" if j.get("remote") else "")
+            out.append(_job("arbeitnow", j.get("company_name"), j.get("slug"), j["title"], loc, j.get("url") or "", j.get("description", ""),
+                            j.get("url", "")))
+        if not (data.get("links") or {}).get("next"):
+            break
+    return out
+
+
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
-            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs}
+            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow}
 
 
 # ---------------------------------------------------------------------------------------------- cache + entry point

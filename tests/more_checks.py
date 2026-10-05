@@ -1158,6 +1158,19 @@ def location_checks():
     finally:
         A._get = old
     check([j.job_id for j in got] == ["b"], f"Workable job board: only US-based remote jobs should stay, got {[j.job_id for j in got]}")
+    api2 = {"data": [{"slug": "ops-1", "company_name": "Acme", "title": "Operations Coordinator", "location": "Austin, TX", "remote": False,
+                      "url": "https://boards.greenhouse.io/acme/jobs/9", "description": "<p>Coordinate vendors.</p>"}, {"slug": "x", "title": ""}],
+            "links": {"next": None}}
+    class _R2:
+        def json(self): return api2
+    old = A._get
+    A._get = lambda *a, **k: _R2()
+    try:
+        got2 = A.arbeitnow({})
+    finally:
+        A._get = old
+    check(len(got2) == 1 and got2[0].company == "acme" and "greenhouse.io" in got2[0].apply_url and "arbeitnow" in A.FETCHERS,
+          f"Arbeitnow feed not read correctly: {[(j.company, j.apply_url) for j in got2]}")
     print("ok  locations: other countries dropped, on-site only in your cities, remote/US-wide kept; licence/coding titles dropped")
 
 
