@@ -88,6 +88,16 @@ class DB:
         self.conn.commit()
         return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9))
 
+    def reset_title_filter(self, token: str) -> int:
+        """When the list of allowed job titles changes, postings that were dropped only because of their title are looked at
+        again (once per list). Anything that still does not fit is filtered again right away."""
+        if self.meta_get("title_filter", "") == token:
+            return 0
+        n = self.conn.execute("DELETE FROM jobs WHERE status='filtered' AND reason LIKE 'title not in include list%'").rowcount
+        self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('title_filter', ?)", (token,))
+        self.conn.commit()
+        return n
+
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
         return row[0] if row else default

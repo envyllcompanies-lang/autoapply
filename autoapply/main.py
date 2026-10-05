@@ -26,7 +26,7 @@ from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-05-d"
+REQUEUE_VERSION = "2026-10-05-e"
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -377,6 +377,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     open_run(base)
 
     db = DB(str(base / cfg.get("db", "applications.db")))
+    import hashlib
+    tok = hashlib.md5(json.dumps(sorted(str(x).lower() for x in (cfg.get("search", {}) or {}).get("titles_include", []))).encode()).hexdigest()[:12]
+    n_titles = db.reset_title_filter(tok)
+    if n_titles:
+        log(f"Job titles you accept changed: looking again at {n_titles:,} postings that were dropped only for their title")
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")

@@ -981,6 +981,11 @@ def match_checks():
         f = wd(35, "blocked", "account: Workday refused the sign-in")
         g = wd(36, "blocked", "after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself", clicked=True, url="https://boards.greenhouse.io/x/jobs/36")
         h = wd(37, "failed", "after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent", url="https://boards.greenhouse.io/x/jobs/37")
+        t1, _ = job(41, 80); t2, _ = job(42, 80)
+        db.update(t1.key, status="filtered", reason="title not in include list"); db.update(t2.key, status="filtered", reason="location 'x' not allowed")
+        check(db.reset_title_filter("tok1") >= 1 and db.get(t1.key) is None and db.get(t2.key)["status"] == "filtered",
+              "changing the allowed titles should free only postings dropped for their title")
+        check(db.reset_title_filter("tok1") == 0, "the title reset runs once per list")
         n = db.requeue_if_new_version("test-build-1")
         check(db.get(h)["status"] == "queued" and db.get(h)["attempts"] == 0, "a Greenhouse job whose emailed code did not arrive (failed, attempts used up) should be tried again")
         check(db.get(g)["status"] == "queued" and not db.get(g)["submitted_at"], f"a job held at the emailed security code (nothing sent) should be tried again now that the bot types the code: {db.get(g)['status']}")
