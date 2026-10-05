@@ -939,11 +939,13 @@ def match_checks():
         e = wd(34, "skipped", "stuck on step 3", url="https://jobs.lever.co/x/34")
         f = wd(35, "blocked", "account: Workday refused the sign-in")
         g = wd(36, "blocked", "after Submit the site asked for a security code it emailed; the bot does not enter that one, so nothing was sent: apply to this one yourself", clicked=True, url="https://boards.greenhouse.io/x/jobs/36")
+        h = wd(37, "failed", "after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent", url="https://boards.greenhouse.io/x/jobs/37")
         n = db.requeue_if_new_version("test-build-1")
+        check(db.get(h)["status"] == "queued" and db.get(h)["attempts"] == 0, "a Greenhouse job whose emailed code did not arrive (failed, attempts used up) should be tried again")
         check(db.get(g)["status"] == "queued" and not db.get(g)["submitted_at"], f"a job held at the emailed security code (nothing sent) should be tried again now that the bot types the code: {db.get(g)['status']}")
         st = {k: (db.get(k)["status"], db.get(k)["attempts"]) for k in (a, b, c, d, e, f)}
         check(st[a] == ("queued", 0) and st[b] == ("queued", 0) and st[f] == ("queued", 0), f"old Workday failures should be tried again: {st}")
-        check(st[c][0] == "unconfirmed" and st[d][0] == "blocked" and st[e][0] == "skipped", f"these must stay as they are: {st}")
+        check(st[c][0] == "unconfirmed" and st[d][0] == "queued" and st[e][0] == "skipped", f"these must stay as they are (the emailed-code job d now comes back): {st}")
         check(n >= 3 and db.requeue_if_new_version("test-build-1") == 0, "the requeue runs once per build")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
@@ -1169,7 +1171,7 @@ def location_checks():
         got2 = A.arbeitnow({})
     finally:
         A._get = old
-    check(len(got2) == 1 and got2[0].company == "acme" and "greenhouse.io" in got2[0].apply_url and "arbeitnow" in A.FETCHERS,
+    check(len(got2) == 1 and got2[0].company == "acme" and "greenhouse.io" in got2[0].apply_url and "arbeitnow" in A.FETCHERS and set(A.ALWAYS_ON) <= set(A.FETCHERS),
           f"Arbeitnow feed not read correctly: {[(j.company, j.apply_url) for j in got2]}")
     print("ok  locations: other countries dropped, on-site only in your cities, remote/US-wide kept; licence/coding titles dropped")
 

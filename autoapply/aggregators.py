@@ -335,6 +335,7 @@ def arbeitnow(cfg, base="https://www.arbeitnow.com"):
     return out
 
 
+ALWAYS_ON = ("workablejobs", "arbeitnow")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
             "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow}
 
@@ -355,7 +356,7 @@ def discover_aggregators(cfg: dict, base: Path, log=print) -> list[Job]:
     urls = a.get("base_urls", {}) or {}
     cap = int(a.get("max_jobs_per_source", 400))
     jobs: list[Job] = []
-    for name in a.get("sources", list(FETCHERS)):
+    for name in list(dict.fromkeys(list(a.get("sources", list(FETCHERS))) + list(ALWAYS_ON))):
         fn = FETCHERS.get(name)
         if not fn:
             log(f"  ! unknown aggregator '{name}'")
