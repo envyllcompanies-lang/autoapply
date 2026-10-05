@@ -79,7 +79,7 @@ def question_checks():
     check(ask("Do you have experience with Excel?", "radio", YN) == "Yes", "Excel experience (skill listed as 'Excel (advanced)')")
     check(ask("Do you require accommodation to complete the application process?", "radio", YN) == "No", "application accommodation")
     check(ask("Phone type", "select", ["Mobile", "Home", "Work"]) == "Mobile", "phone type")
-    check(ask("1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the notice below for your area.", "combobox",
+    check(ask("1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the notice below. We will consider for employment qualified applicants with arrest and conviction records pursuant to the San Francisco Fair Chance Ordinance and the New York City Fair Chance Act. Applicants who are not in San Francisco or New York, select the appropriate answer. A conviction will not necessarily disqualify you.", "combobox",
               ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", "criminal-record question with a city-notice option")
     check(ask("Do you have a valid driver's license?", "combobox", ["Select One", "Yes", "No"]) == "Yes", "driver's license")
     for q in ("I am/was a political appointee.", "I am/was a public financial disclosure report filer.", "I am/was a covered DoD official as defined by DFARS 252.203-7000.",
@@ -605,6 +605,11 @@ def mail_checks():
         check(set(found) == {"k1", "k3"}, f"scan_confirmations: {found}")
     finally:
         mailbox._recent = old
+    old_code = {"subject": "Security code for your application to SeatGeek", "from": "no-reply@us.greenhouse-mail.io", "body": "code", "ts": now - 40,
+                "hint": True, "code": "AAAA1111", "link": None, "folder": "INBOX"}
+    mailbox._recent = lambda since, n=12, folders=("INBOX",): iter([old_code])
+    check(mailbox.wait_for_verification(since_ts=now, host_hint="", timeout=1, require_code=True) is None,
+          "a security code mailed before the request (another employer's) must never be used")
     check(not hasattr(mailbox, "security_code") and not hasattr(mailbox, "wait_for_security_code"), "the inbox reader must not read employers' security codes")
     print("ok  summary email, daily check-in, exceptions list, confirmation-email matching")
 

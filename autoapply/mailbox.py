@@ -237,6 +237,8 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                     continue
                 if require_code and not info.get("code"):
                     continue
+                if require_code and info["ts"] < since_ts - 5:
+                    continue                  # a code mailed before this request is an older application's, never this one's
                 if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):
                     continue
                 if kind == "verify" and _is_reset(info):
