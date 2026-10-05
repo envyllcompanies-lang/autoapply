@@ -564,7 +564,7 @@ class Brain:
                 r"(llm|ai[- ]native|generative ai).{0,70}(tools?|apis?|proficien)|proficien.{0,40}(llm|ai tools)", q):
             return str(c["llm_proficiency"])
         if kind == "checkbox_single":
-            lab = low.strip(" *:✱")
+            lab = (f.get("label") or "").lower().strip(" *:✱")        # the box's own label (Workday adds the group's question to `low`)
             if re.fullmatch(r"full[- ]?time", lab):
                 return True if c.get("job_type") == "full-time" else ""
             if re.fullmatch(r"part[- ]?time", lab):

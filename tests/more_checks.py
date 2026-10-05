@@ -109,6 +109,10 @@ def question_checks():
     for lab, want in (("Full-Time", True), ("Part-Time", ""), ("Available to work overtime", True), ("Available to work weekends", True),
                       ("Looking to relocate to Denver, CO", True), ("Based in Denver, CO", ""), ("Based elsewhere & not looking to relocate", "")):
         check(ask(lab, "checkbox_single", []) == want, f"availability/location checkbox {lab!r} -> {ask(lab, 'checkbox_single', [])!r}")
+    for lab, want in (("Full-Time", True), ("Part-Time", ""), ("Available to work overtime", True), ("Available to work weekends", True)):
+        got_g = b._answer({"id": "x", "kind": "checkbox_single", "label": lab, "question": "What is your preferred schedule? (Select all that apply)*",
+                           "options": [], "required": True}, "", dict(company="Acme", role="x"))
+        check(got_g == want, f"schedule checkbox {lab!r} inside its group question -> {got_g!r}")
     SH = ["Morning shifts: Start times between 5am and 9am", "Afternoon/evening shifts: Start times between 12pm and 4pm"]
     check(ask("Please select the shift(s) you prefer to work", "checkbox_group", SH) == [SH[0]], "shift preference: morning")
     check(ask("Preferred shift?", "checkbox_group", ["First Shift", "Second Shift", "Open to any"]) == ["First Shift"], "shift preference: first")
