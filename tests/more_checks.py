@@ -84,6 +84,16 @@ def question_checks():
     for q in ("2) Are you currently released from custody for a criminal offense on bail, bond, probation, parole or on your own recognizance? Please read the notice below regarding applicants in Los Angeles, San Francisco and New York, including legal requirements about background checks and what you agree to by answering.",
               "1) Have you ever been convicted of a crime (felony, misdemeanor or other)? Please read the following prior to answering: you may authorize a background check, waive nothing, and applicants are not required to disclose sealed records."):
         check(ask(q, "combobox", ["Select One", "I am San Francisco or New York", "No", "Yes"]) == "No", f"criminal/custody question with long notice text: {q[:50]}")
+    check(ask("Do you live in the Hudson Valley or New York City, or within a one-hour commute to these areas?", "combobox",
+              ["Hudson Valley", "New York City", "Within a one-hour commute of Hudson Valley or NYC", "No, but I am willing to relocate"]) == "Within a one-hour commute of Hudson Valley or NYC", "commute question: yes")
+    check(ask("Are you able to commute to our Denver office?", "radio", YN) == "Yes", "commute yes/no")
+    class _WA:
+        def ready(self): return True
+        def answer(self, job, company, question, limits, log=print): return "WRITTEN ANSWER"
+    _old_w = b.writer; b.writer = _WA()
+    check(ask("Why are you excited about joining the team at Hungryroot? *", "text", []) == "WRITTEN ANSWER", "short open-ended text question goes to the writer")
+    check(ask("What is your date of birth? Tell us about it", "text", []) is None, "personal fields are never written")
+    b.writer = _old_w
     from datetime import date as _d, timedelta as _td
     wk = _d.today() + _td(days=7)
     check(ask("When can you start?*", "wddate", []) == wk.strftime("%m/%d/%Y"), "start date: one week from the application date (Workday date box)")

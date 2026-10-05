@@ -797,6 +797,15 @@ class Brain:
                 got = pick_option(opts, "No")
                 if got:
                     return [got] if kind == "checkbox_group" else got
+        if has_opts and opts and re.search(r"commut", low[:240]):
+            real_c = [o for o in opts if not re.match(r"\W*(select|choose|--)", o, re.I)]
+            if real_c and {_norm(o) for o in real_c} <= {"yes", "no"}:
+                got = pick_option(real_c, "Yes")
+            else:                          # you said every commute question is answered Yes
+                got = next((o for pat in (r"within .{0,50}commut", r"live within|commut", r"^\W*yes\b", r"willing")
+                            for o in real_c if re.search(pat, o, re.I) and not re.match(r"\W*no\b", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got
         ua = self._confirmed(f, text, low, kind, opts, has_opts)
         if ua is not _UNSET:
             return ua
@@ -1351,8 +1360,10 @@ class Brain:
         return None
 
     def _write(self, f, low, kind):
-        open_prompt = kind == "textarea" or (kind == "text" and len(f.get("label", "")) > 60 and PROMPT_RX.search(low))
-        if not open_prompt:
+        lab = f.get("label", "")
+        open_prompt = kind == "textarea" or (kind == "text" and (
+            (len(lab) >= 25 and PROMPT_RX.search(low)) or (len(lab) >= 40 and "?" in lab and len(lab.split()) >= 7)))
+        if not open_prompt or self._NEVER_GUESS.search(low):
             return None
         if not f.get("required") and not (self.cfg.get("writer", {}) or {}).get("answer_optional", False):
             return None
