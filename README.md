@@ -89,8 +89,8 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
   after the bot stopped waiting was never used, and a new one was asked for on every try. The bot now looks in the inbox
   first for an email **that site** already sent (a reset email up to 12 hours old, a verify-your-account email up to 7 days
   old) and uses its link; only when there is none does it ask for a new one. (3) A site that refuses the sign-in is left
-  alone for 45 minutes, then 6 hours, a day, three days, instead of being tried on every job (repeated failed sign-ins lock
-  an account). Its jobs stay queued. After two refusals the email tells you which site it is, so you can open it once
+  alone for 45 minutes, then 6 hours, then a day, instead of being tried on every job (repeated failed sign-ins lock
+  an account); after three refusals no more reset emails are asked for there. Its jobs stay queued. After two refusals the email tells you which site it is, so you can open it once
   yourself (make the account or use "Forgot your password?" with your `ACCOUNT_PASSWORD`); from then on the bot gets in.
 - Workday boxes that used to stop an application and are now filled: a school's From / To asked as bare years, pay boxes
   that take only a number (also when they look like ordinary text boxes: Workday's "number entered is too large" is the
@@ -177,12 +177,13 @@ and per-minute limits are waited out. Ollama is only for running on your own Mac
 Only résumé-style facts are sent (never your address, phone or EEO answers).
 
 The match check is what limits how many jobs can be applied to in a day, so the allowance is split on purpose
-(`writer` in `settings.yaml`): the best model (`gpt-oss-120b`) only writes your answers; `qwen3.6-27b` does nothing but match
-checks; `gpt-oss-20b` and `qwen3.8-27b` do both, with at most 60% of their day going to match checks (`match_share`).
+(`writer` in `settings.yaml`): the best model (`gpt-oss-120b`) only writes your answers; `gpt-oss-20b` and `qwen3.8-27b` do both, with at most 60% of their day going to match checks (`match_share`).
 **The one thing that raises the number of jobs checked per day is another free key:** add a `GEMINI_API_KEY` secret (free
-at aistudio.google.com, no card) and the two Gemini entries in `settings.yaml`, idle until then, do match checks only. (On
-Google's free tier, what is sent may be used to improve their products: for the match check that is your résumé summary
-without name or contact details, and the public posting.)
+at aistudio.google.com, no card) and the two Gemini entries in `settings.yaml`, idle until then, do match checks only:
+about 500 requests a day on Flash-Lite, five postings to a request, several times what Groq's free allowance covers. A key
+that Google rejects is named in the run log and, once a day, in the email under NEEDS YOU. (On Google's free tier, what is
+sent may be used to improve their products: for the match check that is your résumé summary without name or contact
+details, and the public posting.)
 - **Truth first.** The writer is told to use only your facts. An answer that mentions a number or tool not in your facts is sent back once
   for a fix; it is never thrown away and a job is never skipped because of it.
 - **Your voice.** `voice.md` sets the style (answer first, 75 to 200 words, no buzzwords, no em dashes); `about_me.md` and `profile.yaml`

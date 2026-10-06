@@ -270,12 +270,14 @@ if "--dry" not in sys.argv:
     if len(wd) != 1 or wd[0]["data"].get("name--legalName--firstName") != "Brian" or wd[0]["data"].get("files") != ["briandelgado_resume.pdf"]:
         problems.append(f"the Workday application was not sent once with your details: {[ (s['job'], s['data'].get('name--legalName--firstName'), s['data'].get('files')) for s in wd ]}")
     if not any(n > 1 for n in BATCHES): problems.append(f"match checks were not asked several postings at a time: {BATCHES}")
+    if any(t.startswith("Program Coordinator at capco") for t in MATCHED): problems.append("a match check was spent on a posting over its employer's limit of applications")
     if not MAILS: problems.append("no summary email was sent")
     else:
         subj, body = MAILS[-1]
         for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "BEST MATCHES CHECKED", "match 86%"):
             if want.lower() not in body.lower(): problems.append(f"summary email lacks {want!r}")
         if "applied" not in subj: problems.append(f"summary subject: {subj!r}")
+        if "TESTKEY: the provider does not accept the key" not in body: problems.append("the summary email does not say that a provider rejected its key")
         print("\nSUMMARY EMAIL SUBJECT:", subj)
 
 if "--dry" not in sys.argv:

@@ -135,13 +135,21 @@ class Accounts:
 
     # How long a site is left alone after its 1st, 2nd, 3rd and later refused sign-ins, in hours. The first rest is short:
     # an email the site was slow to send is in the inbox by then, and the next try uses it without asking for another.
-    REST_HOURS = (0.75, 6, 24, 72)
+    REST_HOURS = (0.75, 6, 24)
+    # After this many refused sign-ins in a row the bot stops asking the site for emails (password resets, another
+    # verification email): three did not get it in, a fourth will not, and they only fill your inbox. It still tries to
+    # sign in once a day, so an account you open or repair yourself is picked up within a day.
+    MAIL_ASKS = 3
+
+    def asks_left(self, host: str) -> bool:
+        """May the bot still ask this site to send an email (see MAIL_ASKS)?"""
+        return self.noted(host, "refused") < self.MAIL_ASKS
 
     def refused(self, host: str, why: str = "") -> tuple[int, float]:
         """Note that this site would not let the bot sign in. Trying again on every job only piles up failed sign-ins (a
         site locks an account after enough of them), so the site is left alone for a while: 45 minutes after the first
-        time, 6 hours after the second, a day after the third, three days after that. Returns (how many times in a row,
-        hours until the next try)."""
+        time, 6 hours after the second, a day after every later one. Returns (how many times in a row, hours until the
+        next try)."""
         rec = self.known.get(host) if isinstance(self.known.get(host), dict) else {"email": self.email, "state": "refused"}
         n = int(rec.get("refused") or 0) + 1
         rec = {**rec, "refused": n, "refused_at": int(time.time()), "at": time.strftime("%Y-%m-%d")}
@@ -588,9 +596,11 @@ def _wd_set_new_password(page, acc: Accounts, link: str, log) -> bool | None:
     # ('must not match a previous password', 'link expired'): say what it said instead of signing in with a wrong password.
     errs = _wd_errors(page)
     still = page.locator("input[type=password]").locator("visible=true").count()
-    if errs and still >= max(2, n_new):
-        log(f"      account: Workday did not accept the new password: {'; '.join(errs)[:180]}")
+    if still >= max(2, n_new):
+        # the new-password boxes are still there: Workday did not take the password, whether or not it said why
+        log(f"      account: Workday did not accept the new password: {'; '.join(errs)[:180] or 'it said nothing; page: ' + ' '.join(_body(page).split())[:160]}")
         return False
+    log(f"      account: after the reset Workday shows: {' '.join(_body(page).split())[:170]}")
     return True
 
 
@@ -655,6 +665,9 @@ def _wd_reset_password(page, acc: Accounts, log, url_after: str | None) -> bool:
             if not _wd(page, "forgotPasswordLink").count() and _wd(page, "signInLink").count():
                 _wd(page, "signInLink").first.click(force=True)      # (the page came back on its sign-up form)
                 _settle(page, 2000)
+        if not acc.asks_left(host):
+            log(f"      account: sign-in refused on {host} again; no more reset emails are asked for there (the summary email says how to let the bot in)")
+            return False
         log(f"      account: sign-in refused on {host}; resetting the password through your email")
         link = _wd(page, "forgotPasswordLink")
         if link.count():
@@ -757,11 +770,17 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 if _wd_old_verify(page, acc, host, log, url_after):      # the email is already there (new, or from an earlier run)
                     acc.remember(host, "verified")
                     continue
-                _verify_email(page, acc, t0, log)
-                acc.remember(host, "verified")
-                if url_after and (is_auth_page(page) or "/apply" not in page.url):
-                    page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
-                    _settle(page, 2000)
+                try:
+                    _verify_email(page, acc, t0, log, 90)
+                    acc.remember(host, "verified")
+                    if url_after and (is_auth_page(page) or "/apply" not in page.url):
+                        page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
+                        _settle(page, 2000)
+                except AuthBlocked as e:
+                    # no email came (Workday sends none when the account was already there): the sign-in below, and the
+                    # password reset behind it, are still worth trying before giving up on the site
+                    log(f"      account: {e}: trying to sign in all the same")
+                    acc.__dict__.setdefault("_wd_verify_tried", {})[host] = True
                 continue
             if EXISTS_MSG.search(body):
                 acc.remember(host, "exists")
@@ -823,6 +842,9 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             acc.remember(host, "signed_in")
             return
         if UNVERIFIED_MSG.search(body):
+            if not acc.asks_left(host):
+                raise AuthBlocked("Workday says this account's email was never verified, and the verification emails it sent did not "
+                                  "get the bot in: open the newest one from this site in your inbox once yourself")
             log("      account: it exists but was never verified; asking Workday to send the email again")
             _click_named(page, re.compile(r"resend|send (it |the email )?again|verify", re.I))
             _settle(page, 1500)
@@ -832,6 +854,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 page.goto(url_after, wait_until="domcontentloaded", timeout=45000)
                 _settle(page, 2000)
             continue
+        said = "; ".join(_wd_errors(page))[:200]
+        log(f"      account: sign-in refused; Workday says: {said or 'nothing'}")
         state = (acc.known.get(host) or {}).get("state") if isinstance(acc.known.get(host), dict) else acc.known.get(host)
         # Several employers refuse a sign-in without saying anything at all: the page simply stays on Sign In. That is a refusal
         # too (wrong password, or an account not verified yet), so the same recovery runs: the verify link, then a reset.

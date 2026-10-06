@@ -67,7 +67,7 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
                by_site: list | None = None, needs: list | None = None) -> str:
     lines = [f"autoapply {today}: {counts}", ""]
     if needs:
-        lines.append(f"NEEDS YOU ({len(needs)}): the employer asked for something the bot cannot do")
+        lines.append(f"NEEDS YOU ({len(needs)}): things only you can do")
         lines += [f"  - {x}" for x in needs] + [""]
     applied = groups.get("applied", [])
     if applied:

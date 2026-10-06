@@ -88,6 +88,8 @@ def _save_usage(u: dict):
 
 
 DEADLINE = [0.0]     # set per application by the form filler: the writer never waits past it
+BAD_KEYS: dict = {}  # name of a secret -> what the provider answered about the key in it (told to you in the summary email)
+KEY_RX = re.compile(r"api.?key|unauthori[sz]ed|authenticat|invalid.{0,20}(key|token|credential)", re.I)
 
 
 class _Limiter:
@@ -437,24 +439,18 @@ class Writer:
                     time.sleep(min(short) + 0.5)
                     continue
                 break
-            # prefer providers with quota available right now, otherwise the one that frees up soonest. A match check goes
-            # to the match-only providers first: their allowance has no other use, the shared models' has.
-            def tier(q):
-                if match:
-                    return 0 if q.get("role") == "match" else 1
-                return 0 if q["name"] in prefer else 1
-            order = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, tier(live[i]), i))
-            for i in order:
-                p = live[i]
+            for p in self._order(live, est, match, prefer):
                 try:
                     out = self._chat(p, messages, max_tokens, temperature)
                     self.calls += 1
                     return re.sub(r"<think>.*?</think>", "", out, flags=re.S).strip()
                 except (WriterUnavailable, requests.RequestException) as e:
-                    errors.append(str(e))
-                    msg = str(e)
+                    msg = " ".join(str(e).split())
+                    errors.append(msg)
                     if "not set" in msg or re.search(r"HTTP 40[0-4]\b", msg) or isinstance(e, requests.ConnectionError):
                         self.dead.add(p["name"])          # bad key / model gone / not running: not again this run
+                        if p.get("api_key_env") and (re.search(r"HTTP 401\b", msg) or re.search(r"HTTP 40[03]\b", msg) and KEY_RX.search(msg)):
+                            BAD_KEYS[p["api_key_env"]] = re.sub(r'[\[\]{}"]+', " ", msg.split(":", 1)[-1]).strip()[:120]
                     elif "empty reply" in msg:
                         self.strikes[p["name"]] = self.strikes.get(p["name"], 0) + 1
                         if self.strikes[p["name"]] >= 3:
@@ -463,9 +459,32 @@ class Writer:
             break
         raise WriterUnavailable("; ".join(errors) or "no provider with a working key")
 
+    def _order(self, live: list, est: int, match: bool = False, prefer: tuple = ()) -> list:
+        """The order in which the usable providers are tried: those with allowance right now before one that has to wait
+        out its per-minute limit. A match check goes to the match-only providers first (their allowance has no other
+        use, the shared models' has); an answer goes to the preferred models first."""
+        def tier(q):
+            if match:
+                return 0 if q.get("role") == "match" else 1
+            return 0 if q["name"] in prefer else 1
+        idx = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, tier(live[i]), i))
+        return [live[i] for i in idx]
+
     def ready(self, match: bool = False) -> bool:
         """Is there a provider with allowance left (for an application answer, or with match=True for a match check)?"""
         return any(self._usable(p, match) for p in self.providers)
+
+    def match_batch(self, default: int) -> int:
+        """How many postings the next match check should hold: the 'batch' of the model that will take it, else the
+        default. A model whose free limit is counted in requests a day (Gemini's) does more per request; one counted in
+        tokens (Groq's) gains nothing from a longer request."""
+        live = [p for p in self.providers if self._usable(p, True)]
+        if not live:
+            return default
+        try:
+            return max(1, int(self._order(live, 4000, True)[0].get("batch") or default))
+        except (TypeError, ValueError):
+            return default
 
     def allowance_line(self) -> str:
         """Today's use of each model's free allowance, for the run log."""

@@ -266,6 +266,16 @@ def match_ready(brain) -> bool:
     return bool(w.ready(match=True) if _takes(w.ready, "match") else w.ready())
 
 
+def batch_size(brain, default: int = BATCH) -> int:
+    """Postings to rate in the next call: the default, or what the model that will take that call is set to (a model
+    whose free limit is counted in requests a day does more per request)."""
+    fn = getattr(getattr(brain, "writer", None), "match_batch", None)
+    try:
+        return max(1, min(8, int(fn(default)))) if fn else default
+    except Exception:
+        return default
+
+
 def _system(profile: dict) -> str:
     """The fixed opening of every match check: the rules and the candidate's side. It is the same in every call, and goes
     first, so a provider that caches repeated prompt openings (Groq does) counts it once."""

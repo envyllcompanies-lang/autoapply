@@ -22,6 +22,7 @@ from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
+from . import writer as writer_mod
 from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -707,8 +708,16 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         match_out = [False]     # the free allowance for match checks is used up (for now): unchecked jobs wait, untouched
         failed_checks = [0]     # match checks in a row that could not be done although allowance was shown as left
         applied_n: dict = {}    # employer -> applications already sent there (all time), kept current during the run
-        for r in db.conn.execute("SELECT company FROM jobs WHERE status IN ('applied','unconfirmed')"):
+        applied_roles: set = set()     # (employer, title) already applied to
+        for r in db.conn.execute("SELECT company, title FROM jobs WHERE status IN ('applied','unconfirmed')"):
             applied_n[norm_co(r["company"])] = applied_n.get(norm_co(r["company"]), 0) + 1
+            applied_roles.add((norm_co(r["company"]), (r["title"] or "").strip().lower()))
+
+        def capped(row) -> bool:
+            """This employer already has all the applications it gets, or this very role has one. The loop sets such a job
+            aside when it reaches it; until then no match check is spent on it."""
+            co = norm_co(row["company"] or "")
+            return bool(per_company and applied_n.get(co, 0) >= per_company) or (co, (row["title"] or "").strip().lower()) in applied_roles
 
         def waits(row) -> bool:
             """Cheap reasons a queued job is not looked at in this run. It stays queued and nothing is recorded or fetched."""
@@ -743,12 +752,17 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             pending = [(row, v[1])]
             roles = {(norm_co(row["company"] or ""), (row["title"] or "").strip().lower())}
             looked = 0
+            n_call = prescreen.batch_size(brain, batch_n)      # (the model that takes this call may be set to rate more at once)
             for r in queue[i + 1:i + 1 + 120]:
-                if len(pending) >= batch_n or looked >= 2 * batch_n or time.time() > deadline:
+                if len(pending) >= n_call or looked >= 2 * n_call or time.time() > deadline:
                     break
                 role = (norm_co(r["company"] or ""), (r["title"] or "").strip().lower())
-                if r["key"] in verdicts or _fit(r) > 0 or waits(r) or ((r["company"] or "").lower(), role[1]) in dead or role in roles:
+                if (r["key"] in verdicts or _fit(r) > 0 or waits(r) or capped(r) or ((r["company"] or "").lower(), role[1]) in dead
+                        or role in roles):
                     continue          # (the same role twice in one call would be paid for twice: the second reuses the first's result later)
+                if per_company and (applied_n.get(role[0], 0) + co_waiting.get(role[0], 0)
+                                    + sum(1 for pr, _j in pending if norm_co(pr["company"] or "") == role[0])) >= per_company:
+                    continue          # with the ones already in this call, its employer has as many in line as it will get
                 roles.add(role)
                 looked += 1
                 v2 = judge(r, defer=True)
@@ -774,7 +788,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 r = queue[i]
                 if ready >= 2 or time.time() >= until:
                     break
-                if waits(r) or ((r["company"] or "").lower(), (r["title"] or "").strip().lower()) in dead:
+                if waits(r) or capped(r) or ((r["company"] or "").lower(), (r["title"] or "").strip().lower()) in dead:
                     continue
                 v = verdicts.get(r["key"])
                 if v is None:
@@ -941,6 +955,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 if status == "applied":
                     brain.applied_before.add(job.company)
                     applied_n[co_n] = applied_n.get(co_n, 0) + 1
+                    applied_roles.add((co_n, ck[1]))
                 log(f"    ✓ {status} ({took})")
                 done += 1
             except sub.Blocked as e:
@@ -979,6 +994,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 got = None
                 if mailbox.configured():
                     got = mailbox.find_confirmation(brain._company_name(job), getattr(e, "t0", 0) or time.time() - 120, 75, log)
+                applied_n[co_n] = applied_n.get(co_n, 0) + 1          # (confirmed or not, the application counts for its employer)
+                applied_roles.add((co_n, ck[1]))
                 if got:
                     db.update(job.key, status="applied", reason=f"confirmed by email: {got[:100]}", attempts=row["attempts"] + 1)
                     brain.applied_before.add(job.company)
@@ -1110,6 +1127,13 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     log(f"Summary: {counts}. Report: {rp}")
     for line in site_summary(rows):
         log(f"  by site{line}")
+    key_notes = []
+    for env, why in sorted(writer_mod.BAD_KEYS.items()):
+        note = (f"{env}: the provider does not accept the key in this secret (it answered: {why}). Its models are not used "
+                f"until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)")
+        log(f"  ! {note}")
+        if db.meta_get("key_note:" + env) != today:       # in the email once a day, not with every run
+            key_notes.append(note)
 
     run_url = ""
     if os.environ.get("GITHUB_RUN_ID") and os.environ.get("GITHUB_REPOSITORY"):
@@ -1126,7 +1150,7 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
         top = [line for _fit, line in sorted(TOP_MATCHES, key=lambda x: -x[0])[:6]]
         footer = "BEST MATCHES CHECKED THIS RUN\n" + "\n".join("- " + x for x in top) + "\n\n" + footer
     text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site,
-                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES))
+                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES) + key_notes)
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
@@ -1136,6 +1160,8 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
                    + (f", {len(manual)} not sent" if manual else "") + ("" if applied_n or manual or FOLLOWUPS else " (running, nothing new to send)"))
         if notify.send_email(cfg, subject, text, log):
             db.meta_set("last_email_day", today)
+            for env in writer_mod.BAD_KEYS:
+                db.meta_set("key_note:" + env, today)
     notify.send_webhook(cfg, text, log)
     if t_start is not None and os.environ.get("GITHUB_ACTIONS"):
         add_usage(base, (time.time() - t_start) / 60 + ACTIONS_OVERHEAD_MIN)

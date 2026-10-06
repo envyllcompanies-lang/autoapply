@@ -11,6 +11,7 @@ Run on its own:  python tests/funnel_checks.py      (also run by tests/unit_chec
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 import time
@@ -231,6 +232,37 @@ def allowance_checks():
     w3 = W.Writer({"writer": {"enabled": True, "providers": [{"name": "one", "base_url": "http://x/v1", "model": "a", "rpd": 2},
                                                                {"name": "two", "base_url": "http://x/v1", "model": "b"}]}}, {"name": "Jordan Sample"}, ROOT)
     check(w3.ready(match=True) and w3.match_share == 1.0 and set(w3.match_names) == {"one", "two"}, f"no match models named: {w3.match_names}, share {w3.match_share}")
+    check(w3.match_batch(3) == 3 and PS.batch_size(SimpleNamespace(writer=w3), 3) == 3 and PS.batch_size(SimpleNamespace(writer=None), 3) == 3,
+          "postings per match check: the default when no model says otherwise")
+
+    # a model whose free limit is counted in requests rates more postings per request; a key its provider rejects is noted
+    # for the summary email, and the model is left alone for the rest of the run
+    W._USAGE_FILE = TMP / "usage_batch.json"
+    os.environ["FUNNEL_TEST_KEY"] = "k"
+    w4 = W.Writer({"writer": {"enabled": True, "match_providers": ["shared"], "providers": [
+        {"name": "shared", "base_url": "http://x/v1", "model": "a", "tpd": 100000},
+        {"name": "wide", "base_url": "http://x/v1", "model": "b", "role": "match", "rpd": 20, "batch": 5, "api_key_env": "FUNNEL_TEST_KEY"}]}},
+        {"name": "Jordan Sample"}, ROOT)
+    check(w4.match_batch(3) == 5 and PS.batch_size(SimpleNamespace(writer=w4), 3) == 5, f"the model that takes the next match check sets how many postings it holds: {w4.match_batch(3)}")
+
+    def refuse(p, messages, max_tokens, temperature=None):
+        if p["name"] == "wide":
+            raise W.WriterUnavailable('wide: HTTP 400 [{\n  "error": {\n    "code": 400,\n    "message": "Please pass a valid API key",\n    "stat')
+        return "ok"
+    w4._chat = refuse
+    said: list = []
+    W.BAD_KEYS.clear()
+    out = w4._complete([{"role": "user", "content": "q"}], 50, log=said.append, match=True)
+    check(out == "ok" and "wide" in w4.dead and "valid API key" in W.BAD_KEYS.get("FUNNEL_TEST_KEY", ""), f"a rejected key: {out!r}, off {w4.dead}, noted {W.BAD_KEYS}")
+    check(len(said) == 1 and "\n" not in said[0] and "Please pass a valid API key" in said[0], f"the log line about it is one line: {said}")
+    check(w4.match_batch(3) == 3, "with that model off, the next match check holds the default number of postings")
+    w4._chat = lambda p, messages, max_tokens, temperature=None: (_ for _ in ()).throw(W.WriterUnavailable("shared: HTTP 404 model gone"))
+    W.BAD_KEYS.clear()
+    try:
+        w4._complete([{"role": "user", "content": "q"}], 50, log=said.append)
+    except W.WriterUnavailable:
+        pass
+    check(W.BAD_KEYS == {}, f"a model that is gone is not a rejected key: {W.BAD_KEYS}")
     W._USAGE_FILE = TMP / "usage.json"
 
     # the match check sends the candidate's side first and unchanged (so a provider that caches repeated openings can), and
@@ -415,7 +447,10 @@ def account_record_checks():
     check((n, hours) == (1, 0.75) and a.resting(host) and not a.has_account(host), f"first refusal: a short rest, and still no account on record: {(n, hours)}")
     a.known[host]["refused_at"] = time.time() - 50 * 60
     check(not a.resting(host), "after 45 minutes the site is tried again")
-    check(a.refused(host)[1] == 6 and a.refused(host)[1] == 24 and a.refused(host)[1] == 72 and a.refused(host)[1] == 72, "the rests grow: 6 hours, a day, three days")
+    check(a.asks_left(host), "after one refusal the bot may still ask the site for a reset email")
+    check(a.refused(host)[1] == 6 and a.asks_left(host), "second refusal: 6 hours, and one more email may be asked for")
+    check(a.refused(host)[1] == 24 and not a.asks_left(host), "third refusal: a day, and no more emails are asked for from that site")
+    check(a.refused(host)[1] == 24 and a.refused(host)[1] == 24 and not a.asks_left(host), "later refusals: still one try a day (an account you repaired is picked up within a day), no emails")
     a.note(host, reset_mail=123.0, verify_mail=456.0)
     a.remember(host, "exists")
     rec = json.loads((d / "accounts.json").read_text())[host]
