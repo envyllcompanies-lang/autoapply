@@ -401,6 +401,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     if n_up:
         log(f"Dropped {n_up} queued jobs whose titles are above entry level or not open to you")
 
+    try:
+        if os.environ.get("IMAP_USER") and not dry_run:
+            from .recover import recover
+            recover(db, base, log)
+    except Exception as e:
+        log(f"Code recovery skipped: {str(e)[:80]}")
+
     # 1. discover
     log("Discovering jobs…")
     skip_src = {x.lower() for x in (s.get("skip_sources") or [])}

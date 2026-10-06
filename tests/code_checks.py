@@ -83,4 +83,17 @@ with sync_playwright() as p:
         print("OK " if ok else "BAD", len(boxes), "boxes ->", got, "| middle initial untouched:", mi == "")
         bad += not ok
     b.close()
+# --- recovery of applications that were submitted but left at the emailed code
+import tempfile, pathlib
+from autoapply import recover as R
+from autoapply.db import DB
+_d = pathlib.Path(tempfile.mkdtemp()); _db = DB(str(_d / "t.db"))
+_db.conn.execute("INSERT INTO jobs (key,company,status) VALUES ('k1','doordashusa','applied')"); _db.conn.commit()
+_log = []
+_n = R.recover(_db, _d, _log.append, lister=lambda: [{"subject": "Security code for your application to The Trade Desk"},
+        {"subject": "Security code for your application to DoorDash USA"}, {"subject": "Welcome"}],
+        exists=lambda slug: slug == "thetradedesk")
+_ok = _n == 1 and "thetradedesk" in R.load_boards(_d).get("greenhouse", [])
+print("OK " if _ok else "BAD", "recovery adds the unfinished company's board only ->", _n, R.slugs("Prolific Academic Ltd")[:3])
+bad += not _ok
 sys.exit(bad + bad_mail)
