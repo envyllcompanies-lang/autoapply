@@ -3864,3 +3864,48 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [22:09:12] Summary: 2 skipped, 3 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
 [22:09:12]   by site  workday: 2 skipped
 [22:09:12]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[22:31:57] === autoapply run (LIVE) build 2026-10-06-f ===
+[22:31:58] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[22:31:59] mail: logged in to delgado@alumni.usc.edu OK
+[22:32:14] Discovering jobs…
+[22:32:14] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[22:32:15]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[22:32:15] 0 open roles, 0 new
+[22:32:15] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
+[22:32:16] 6250 jobs queued: 2 already matched to your résumé, 6248 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 234 now
+[22:32:16] Time for this run: 50 min in all (2602 of 1850 free Actions minutes used this month)
+[22:32:17] Accounts: ON (delgado@alumni.usc.edu)
+[22:32:19]   ✗ Analyst, Practice Engagement @ davita: the posting is closed (no time spent on it)
+[22:32:20]   ✗ Financial Analyst @ davita: the posting is closed (no time spent on it)
+[22:32:20]   ✗ Change Management and Deployment Analyst @ davita: the posting is closed (no time spent on it)
+[22:32:21]   ✗ Client Services Associate @ spsnorthamerica: the posting is closed (no time spent on it)
+[22:32:22]   ✗ Program Administration & Logistics Coordinator (Remote - US) @ resolvetosavelives: the posting is closed (no time spent on it)
+[22:32:23]   ✗ Compensation Analytics & Technology Coordinator @ southstatebank: above entry level: mid (pay starts at $116,153)
+[22:32:23]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[22:32:23]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[22:32:24]   match  78%  Change Management and Deployment Analyst @ davita — Candidate's strong background in process improvement, SOP development, and data analytics aligns wel
+[22:32:24]   match  35%  Client Services Associate @ tbkbank — The role is a bank teller position focused on financial transactions and customer service, which is 
+[22:32:24]   match  40%  Associate Payment Strategist - Los Angeles @ fifththird — The role requires 2+ years of specific experience in Treasury Management or Commercial Banking, whic
+[22:32:24]   match  30%  AV Tech Support Analyst - NYC @ accenture — The position is a hands-on IT/AV support role requiring specific technical certifications and hardwa
+[22:32:24]   match  25%  Client Services Associate (Law firm) @ spsnorthamerica — The job is a mailroom and copy/print support role with physical requirements for lifting, which is n
+[22:32:24] → Change Management and Deployment Analyst @ davita (score 34, match 78%)
+[22:32:27]       (opening Workday's application form directly)
+[22:32:32]       (account page: creating the account / signing in)
+[22:32:34]       account: signing in on davita.wd1.myworkdayjobs.com
+[22:32:41]       1/5 My Information: 14 fields (12 required)
+[22:32:48]       2/5 My Experience: 2 fields (0 required)
+[22:33:23]       writer: groq-qwen: free daily limit reached (back in 6 min)
+[22:33:23]       writer unavailable: groq-qwen: free daily limit reached (back in 6 min)
+[22:33:23]       ? unanswered: 'What qualifications did we not ask you about that you wish we had in considering you for t' kind=textarea options=[]
+[22:33:23]       ? unanswered: 'With or without accommodation, can you perform the duties outlined in the job posting on t' kind=combobox options=['Select One', 'Yes', 'No']
+[22:33:23]       ? unanswered: 'Can you provide legal documentation establishing your identity and eligibility to be legal' kind=combobox options=['Select One', 'Yes', 'No']
+[22:33:23]       ? unanswered: 'Do you have clinical dialysis experience?*' kind=combobox options=['Select One', 'Yes', 'No']
+[22:33:23]       ? unanswered: 'What best describes your current or most recent place of work?*' kind=combobox options=['Select One', 'Healthcare', 'Non Healthcare', 'Other (e.g. student, unemploye']
+[22:33:23]     ✗ skipped: can't truthfully answer required: What qualifications did we not ask you about that you wish w; With or without accommodation, can you perform the duties ou; Can you provide legal documentation establishing your identi; Do you have clinical dialysis experience?*; What best describes your current or most recent place of wor
+[22:33:28]   (the free allowance for résumé-match checks is used up for now
+[22:33:28]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[22:33:34] Résumé checks this run: 5 (1 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 185k/480k tokens (resting); gemini-lite 8/480 requests (off this run); gemini-flash 8/18 requests (off this run)
+[22:33:34] Summary: 9 skipped, 4 low_score, 1 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[22:33:34]   by site  workday: 7 skipped
+[22:33:34]   by site  greenhouse: 2 skipped
+[22:33:34]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
