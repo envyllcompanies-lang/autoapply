@@ -3909,3 +3909,48 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [22:33:34]   by site  workday: 7 skipped
 [22:33:34]   by site  greenhouse: 2 skipped
 [22:33:34]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[22:57:08] === autoapply run (LIVE) build 2026-10-06-f ===
+[22:57:09] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[22:57:09] mail: logged in to delgado@alumni.usc.edu OK
+[22:57:23] Discovering jobs…
+[22:57:23] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[22:57:24]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[22:57:24] 0 open roles, 0 new
+[22:57:24] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
+[22:57:25] 6236 jobs queued: 2 already matched to your résumé, 6234 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 234 now
+[22:57:25] Time for this run: 50 min in all (2606 of 1850 free Actions minutes used this month)
+[22:57:26] Accounts: ON (delgado@alumni.usc.edu)
+[22:57:26]   ✗ Revenue Specialist I (Patient Outreach)- Remote @ davita: the posting is closed (no time spent on it)
+[22:57:26]   ✗ Revenue Specialist I (appeals/denials)- Remote/Hybrid @ davita: pays too little: tops out near $47,840 a year (your floor is $65,000)
+[22:57:26]   ✗ Revenue Specialist I (Collections) Remote/Hybrid @ davita: the posting is closed (no time spent on it)
+[22:57:27]   ✗ Specialist, Publicly Reported Data @ davita: the posting is closed (no time spent on it)
+[22:57:31]   ✗ Revenue Specialist I (ROPS) @ davita: the posting is closed (no time spent on it)
+[22:57:31]   ✗ Revenue Specialist I (Patient Outreach)- Remote @ davita: the posting is closed (no time spent on it)
+[22:57:31]   ✗ Revenue Specialist I (Collections) Remote/Hybrid @ davita: the posting is closed (no time spent on it)
+[22:57:32]   ✗ Revenue Specialist I (appeals/denials)- Remote/Hybrid @ davita: pays too little: tops out near $47,840 a year (your floor is $65,000)
+[22:57:32]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[22:57:32]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[22:57:33]   match  45%  GP Strategic Capital, Value Creation Group - Analyst @ blueowl — Candidate lacks the required 1-2 years of experience in investment banking, asset management, or man
+[22:57:33]   match  20%  Account Associate – US GWM Growth Markets (Sales) @ pimco — Candidate does not possess the required FINRA SIE, Series 7, and 63 licenses, which are mandatory fo
+[22:57:33]   match  55%  Order Coordinator @ apparatus — Candidate has relevant operations and order management experience but falls short of the minimum 3 y
+[22:57:33]   match  85%  Business Strategy Analyst @ colabsoftware — Candidate's background in market analysis, competitive intelligence, and data analysis aligns well w
+[22:57:33]   match  30%  Legal Administrative Coordinator - Labor & Employment @ morganlewis — Candidate lacks specific legal administrative experience, such as e-filing and litigation support, w
+[22:57:33] → Portfolio Analytics & Strategy Specialist (Fraud Model Analyst) @ pnc (score 24)
+[22:57:36]     ✗ skipped: the posting is closed
+[22:57:36] → Business Strategy Analyst @ colabsoftware (score 32, match 85%)
+[22:57:43]       step 1: 19 fields (12 required)
+[22:58:32]       writer: groq-qwen: free daily limit reached (back in 7 min)
+[22:58:32]       writer unavailable: groq-qwen: free daily limit reached (back in 7 min)
+[22:58:32]       ? unanswered: 'Why are you interested in joining CoLab Software?*' kind=textarea options=[]
+[22:58:32]       ? unanswered: 'What is the thing you are most proud of? *' kind=textarea options=[]
+[22:58:32]       ? unanswered: 'If you were to land your dream job, how soon could you start?*' kind=text options=[]
+[22:58:32]     ✗ skipped: can't truthfully answer required: Why are you interested in joining CoLab Software?*; What is the thing you are most proud of? *; If you were to land your dream job, how soon could you start
+[22:58:42] → Analyst, Business Operations @ paypal (score 50)
+[22:58:45]     ✗ skipped: the posting is closed
+[22:58:45]   (the free allowance for résumé-match checks is used up for now
+[22:58:45]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[22:58:52] Résumé checks this run: 5 (1 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 188k/480k tokens (resting); gemini-lite 9/480 requests (off this run); gemini-flash 9/18 requests (off this run)
+[22:58:52] Summary: 11 skipped, 4 low_score, 2 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[22:58:52]   by site  workday: 8 skipped
+[22:58:52]   by site  greenhouse: 3 skipped
+[22:58:52]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
