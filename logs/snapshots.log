@@ -1,144 +1,3 @@
-=== 2026-10-06 03:09:23  skipped  Work Planning and Control Program Integrator @ nrel
-url: https://nrel.wd5.myworkdayjobs.com/NLR/job/Golden-CO/Work-Planning-and-Control-Program-Integrator_R14546/apply/applyManually
-stage: My Experience
-why: can't truthfully answer required: Cover Letter and Additional Documents *
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button] Sign In {utilityButtonSignIn}
-  [button] Careers Home {navigationItem-Careers Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Work Planning and Control Program Integrator
-label: completed step 1 of 6
-label: My Information
-{progressBarActiveStep} current step 2 of 6 My Experience
-label: current step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions 1 of 2
-label: step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# My Experience
-{applyFlowMyExpPage}
-# Work Experience
-  [button] Add {add-button}
-# Education
-  text: Providing dates of attendance or dates of graduation from an educational institution is optional. NLR verifies that candidates for postdocto
-# Education 1
- {formField-schoolName}
-label: School or University*
-  <input:text #education-4--schoolName required empty>
- {formField-degree}
-label: Degree*
-  [dropdown] nothing chosen #education-4--degree
- {formField-fieldOfStudy}
-label: Field of Study
-{multiSelectContainer}
-  <input #education-4--fieldOfStudy empty>
-  [button] 
- {formField-gradeAverage}
-label: Overall Result (GPA)
-  <input:text #education-4--gradeAverage empty>
- {formField-firstYearAttended}
-label: From
-  <input #education-4--firstYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
- {formField-lastYearAttended}
-label: To (Actual or Expected)
-  <input #education-4--lastYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
-  [button] Add Another {add-button}
-# Skills
- {formField-skills}
-label: Type to Add Skills
-{multiSelectContainer}
-  <input #skills--skills empty>
-# Cover Letter and Additional Documents
-  text: Upload Cover Letter for your Application here.
-  text: If you are submitting an application for Intern Position, you will upload your School Transcript on another page.
- {formField-}
-label: Upload a file (5MB max)*
-  [button] Select files {select-files}
-  <input:file {file-upload-input-ref} no-file>
-# Websites
-  text: Add any relevant websites.
-  [button] Add {add-button}
-  [button] Back {pageFooterBackButton}
-  [button] Next {pageFooterNextButton}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-06 03:09:54  unconfirmed  Events Coordinator @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/8686227002/
-stage: page 1
-why: no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Str
-  <input empty>
-# Events Coordinator
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  [button] +1
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile INVALID filled>
-label: Please enter a valid LinkedIn profile URL.
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-  [button] Select an option
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  [button] Select an option
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  <input:text empty>
-  [button] Select an option
-  text: Secondary Major / Field of study
-  [button] Select an option
-label: Month
-  <input:text empty>
-label: Year
-  <input:text empty>
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
 === 2026-10-06 03:12:03  skipped  Speakers - Coordinator @ caa
 url: https://caa.wd1.myworkdayjobs.com/Careers/job/Los-Angeles-CA/Speakers---Coordinator_JR9262/apply
 stage: Application Questions
@@ -5248,4 +5107,76 @@ label: Are you located in St. John's, NL? *
   <input required empty>
   [button] Submit application
 <iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-06 23:24:32  skipped  CX Operations Analyst @ olipop
+url: https://job-boards.greenhouse.io/olipop/jobs/8008182003
+stage: page 1
+why: can't truthfully answer required: Do you have hands-on experience with a help-desk platform? I
+# CX Operations Analyst
+  [button] Apply
+  text: At OLIPOP, we’re on a mission to positively impact consumer health at scale. And we’re doing it through something simple: soda. But not just
+  text: This mission is deeply personal for our CEO, Co-Founder, and Formulator, Ben Goodwin. Like many of us, Ben grew up consuming the Standard Am
+  text: Those changes sparked a deep curiosity about the connection between nutrition and health. Ben became a relentless student of the gut microbi
+  text: The mission was clear. The vehicle? Less so. After exploring the possibilities, Ben landed on an unexpected yet familiar choice: soda. It wa
+  text: In 2018, the first OLIPOP cans hit the shelves, bringing Ben’s vision to life with a functional soda that anyone could enjoy. And by reimagi
+  text: So join us, and let’s write a new American soda story together. One we can all feel good about. One OLIPOP at a time.
+  text: OLIPOP is hiring a CX Operations Analyst to serve as the operational backbone of our Omnichannel Customer Experience organization. This is a
+  text: The ideal candidate will balance meaningful project work, including AI-enabled customer service tooling and subscription experience enhancem
+  text: Manage cross-functional CX initiatives from planning through execution, including:
+  text: efforts tied to new product launches and new market expansion
+  text: Own documentation, deliverables, and stakeholder alignment across each initiative working with partners internally and externally
+  text: Systems and Tooling Ownership
+  text: Own the configuration, maintenance, and continued evolution of our backend CX tools, including:
+  text: Rule sets, routing rules, and workflow updates as business needs evolve
+  text: New tooling set up and maintenance
+  text: Technology includes but is not limited to Gorgias, Digital Genius, Guru, Shopify, NetSuite, Stay.ai, Rediem, Redo/Malomo, and Klaviyo.
+  text: Logistics and Order Operations
+  text: Serve as the primary point of contact for our third-party logistics partner on B2B and DTC order management and fulfillment strategy within 
+  text: Own the relationship with our 3PL, Amazon partner, retail.com partners, internal Supply Chain team, and others, end to end
+  text: Partner closely with the supply chain team to maintain a comprehensive, end-to-end understanding of the order lifecycle, proactively identif
+  text: Partner with CX Manager and third party software provider to enhance
+  text: Fraud and Chargeback Strategy
+  text: Manage payment operations, including payment issues, failures, and escalations
+  text: Execute fraud detection, monitoring, and resolution, including Fraud review workflows anf customer communication related to fraud decisions
+  text: Track and report scams and impersonator trends, escalating to Legal and internal stakeholders as needed
+  text: Partner with CX Manager to ensure fraud decisions are communicated clearly and consistently to customers
+  text: Customer Journey and Subscription Experience
+  text: Partner with cross-functional internal and external (Stay.ai) teams to enhance the customer journey on our website.
+  text: Particular focus on improving the subscription experience and contact pages
+  text: Ecommerce Fulfillment Operations
+  text: Own communication and strategy with fulfillment partners to ensure timely, accurate order delivery and rapid resolution of issues as they ar
+  text: AI Enablement and Automation
+  text: Lead the development and ongoing refinement of AI-powered tools for the CX organization.
+  text: Report on tool performance and business impact, identify new automation opportunities, and serve as the primary strategic partner to our thi
+  text: Voice of Customer (VoC) Reporting
+  text: Contribute to Voice of Customer reporting for the CX organization
+  text: Synthesize recurring themes and customer feedback into clear, actionable insights for cross-functional partners using helpdesk (Gorgias) and
+  text: Work closely with CX Manager on ticket tagging/tracking strategy and reporting optimization
+  text: 5-8 years of applicable experience in customer experience, ecommerce operations, or a related operational function, ideally within a DTC and
+  text: Hands-on experience with a helpdesk platform (Gorgias experience strongly preferred), an ERP system (Netsuite), an ecommerce platform (Shopi
+  text: Required: hands-on experience building, implementing, or managing conversational customer service automation tools and workflows (e.g., tick
+  text: Proven experience leading or supporting cross-functional projects with competing deadlines and multiple stakeholders
+  text: Working knowledge of ecommerce fraud and chargeback processes, or the demonstrated ability to build this expertise quickly
+  text: Excellent written communication skills, with the ability to represent CX policy and process clearly to both internal and external audiences
+  text: Demonstrated ability to move fluidly between high-level strategy and hands-on execution
+  text: Experience supporting large-scale, cross-functional operational rollouts
+  text: Familiarity with ecommerce platforms (Shopify), ERP Systems (NetSuite), and their unique support considerations
+  text: Experience partnering directly with supply chain or fulfillment functions
+  text: Experiencing working with helpdesk data and tools
+  text: Experience working with conversational AI tools
+  text: Sr. Manager, CX & Loyalty Marketing
+  text: We may be fully remote, but we’re anything but disconnected. OLIPOP has grown from a few passionate people around a table to a nationwide te
+  text: Connection here is intentional. From cross-functional projects and IRL offsites to thoughtful Slack threads and spontaneous gifs, we make th
+  text: We value thoughtful debate. We give feedback with care and receive it with curiosity, knowing that real growth, both personal and collective
+  text: At OLIPOP, our values aren’t just posters on a wall. They shape how we show up: for each other, for our customers, and for the mission we’re
+  text: Success at OLIPOP doesn’t come from checking boxes; it comes from living our values, staying curious, and finding energy in both the pace an
+  text: Think big, move fast, and take thoughtful risks
+  text: Thrive in a high-performance, feedback-rich environment
+  text: Value real human connection and honest collaboration
+  text: Are fired up by building something new, and making it better every day
+  text: Startup life at OLIPOP is equally fun and fast-paced. If you’re energized by a dynamic environment, eager to grow, and excited to help shape
+  text: We are committed to providing reasonable accommodations to qualified individuals with disabilities or other needs during the application pro
+  text: We are proud to be an Equal Opportunity Employer. OLIPOP will consider all qualified applicants without regard to race, religion, gender (in
+  text: Submission of Application Materials
+  text: Unsolicited materials may include, but are not li
 

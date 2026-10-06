@@ -3954,3 +3954,43 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [22:58:52]   by site  workday: 8 skipped
 [22:58:52]   by site  greenhouse: 3 skipped
 [22:58:52]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[23:22:13] === autoapply run (LIVE) build 2026-10-06-f ===
+[23:22:14] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[23:22:14] mail: logged in to delgado@alumni.usc.edu OK
+[23:23:25] Discovering jobs…
+[23:23:25] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[23:23:25]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[23:23:25] 0 open roles, 0 new
+[23:23:25] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.2 min)
+[23:23:27] 6219 jobs queued: 2 already matched to your résumé, 6217 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 234 now
+[23:23:27] Time for this run: 50 min in all (2611 of 1850 free Actions minutes used this month)
+[23:23:28] Accounts: ON (delgado@alumni.usc.edu)
+[23:23:28]   ✗ Associate, Enterprise Strategy & Planning @ guardianlife: above entry level: mid (requires 3+ yrs)
+[23:23:28]   ✗ Revenue Specialist I (ROPS) @ davita: the posting is closed (no time spent on it)
+[23:23:29]   ✗ Revenue Specialist I (ROPS) @ davita: the posting is closed (no time spent on it)
+[23:23:29]   ✗ Revenue Specialist I (ROPS) @ davita: the posting is closed (no time spent on it)
+[23:23:29]   ✗ Revenue Specialist I (ROPS) @ davita: the posting is closed (no time spent on it)
+[23:23:29]   ✗ Strategy & Operations @ versemedical: above entry level: senior (requires 4+ yrs; pay starts at $130,000)
+[23:23:29]   ✗ Project Coordinator, Ogilvy Health @ ogilvyhealthusa: the posting is closed (no time spent on it)
+[23:23:31]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[23:23:31]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[23:23:32]   match  40%  Sales Operations Analyst @ hostanalytics — The posting text is corrupted website navigation content rather than a valid job description, making
+[23:23:32]   match  55%  Sales Operations Analyst @ univision — Candidate lacks the preferred 2+ years of media/advertising sales operations experience and specific
+[23:23:32]   match  30%  Detection & Investigation Associate: FDO SELF SERVICE WIRE: 9:00 am - 6:00 pm EST @ pnc — Role requires specific fraud/AML investigation experience and mainframe skills (BlueZone) that the c
+[23:23:32]   match  45%  Recruiting Coordinator - Contract @ openai — Candidate lacks the required 2+ years of recruiting coordination experience and familiarity with ATS
+[23:23:32]   match  75%  CX Operations Analyst @ olipop — Candidate's strong background in process improvement, vendor coordination, and data analysis aligns 
+[23:23:32] → Sales Operations Analyst @ irhythmtech (score 60)
+[23:23:35]     ✗ skipped: the posting is closed
+[23:23:35] → CX Operations Analyst @ olipop (score 60, match 75%)
+[23:23:45]       step 1: 17 fields (15 required)
+[23:24:32]       writer: groq-qwen: free daily limit reached (back in 13 min)
+[23:24:32]       writer unavailable: groq-qwen: free daily limit reached (back in 13 min)
+[23:24:32]       ? unanswered: 'Do you have hands-on experience with a help-desk platform? If so, please share systems bel' kind=text options=[]
+[23:24:32]     ✗ skipped: can't truthfully answer required: Do you have hands-on experience with a help-desk platform? I
+[23:24:41]   (the free allowance for résumé-match checks is used up for now
+[23:24:41]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[23:24:48] Résumé checks this run: 5 (1 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 192k/480k tokens (resting); gemini-lite 10/480 requests (off this run); gemini-flash 10/18 requests (off this run)
+[23:24:48] Summary: 8 skipped, 4 low_score, 2 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[23:24:48]   by site  workday: 5 skipped
+[23:24:48]   by site  greenhouse: 3 skipped
+[23:24:48]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
