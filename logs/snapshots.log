@@ -5553,3 +5553,31 @@ label: Enter website. This input is for robots only, do not enter if you're huma
   [button]  {SOCIAL_MEDIA_X_charm}
   text: © 2026 Workday, Inc. All rights reserved.
 
+=== 2026-10-06 02:07:26  blocked  IFM and Procurement Strategic Analyst @ cw
+url: https://cw.wd1.myworkdayjobs.com/en-US/External/login
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email (Workday says: You may have entered the wrong email address or password or your account might be locked.): reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button]  {logoButton}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{signInContent}
+# Sign In
+! You may have entered the wrong email address or password or your account might be locked. {errorMessage}
+ {formField-email}
+label: Email Address*
+  <input:text #input-2 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-3 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #84f16e6c-d052-4c22-bd5c-7226098cfd1c {beecatcher} empty>
+  [button]  {LINKED_IN_charm}
+  [button]  {GLASSDOOR_charm}
+  [button]  {SOCIAL_MEDIA_X_charm}
+  text: © 2026 Workday, Inc. All rights reserved.
+
