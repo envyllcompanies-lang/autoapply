@@ -231,20 +231,24 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     # ninety seconds old, was taken for this one's and the bot ended up on the other employer's application.)
     start = time.time()
     fresh = since_ts - 5 if since_ts > start - 600 else start - 20
+    why = {}                                  # subject -> why it was passed over (logged if nothing is accepted)
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
                     continue
                 if require_code and not info.get("code"):
+                    why.setdefault(info["subject"][:50], "no code read from it")
                     continue
                 if require_code and names:
                     said = re.search(r"application (?:to|for|at|with)\s+(.+?)\s*$", info["subject"], re.I)
                     if said:
                         other = re.sub(r"[^a-z0-9]", "", said.group(1).lower())
                         if other and not any(n and (n in other or other in n) for n in names):
+                            why.setdefault(info["subject"][:50], "other company")
                             continue          # this code was sent for a different company's application: never typed into this one
                 if require_code and info["ts"] < since_ts - 5:
+                    why.setdefault(info["subject"][:50], "arrived before the request")
                     continue                  # a code mailed before this request is an older application's, never this one's
                 if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):
                     continue
@@ -262,6 +266,8 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
         except Exception as e:
             log(f"      mail: {str(e)[:80]}")
         time.sleep(6)
+    if why:
+        log("      mail: passed over: " + "; ".join(f"'{k}' ({v})" for k, v in list(why.items())[:4]))
     return None
 
 
