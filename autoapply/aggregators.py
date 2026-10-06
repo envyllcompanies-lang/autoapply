@@ -13,12 +13,12 @@ from pathlib import Path
 
 import requests
 
-from .sources import Job, _strip_html, prefilter, discover as discover_boards
+from .sources import Job, _strip_html, prefilter, discover as discover_boards, norm_location, foreign_place, _remote_ish
 
 UA = {"User-Agent": "Mozilla/5.0 (compatible; autoapply/1.0; personal job search)"}
 TIMEOUT = 25
 TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3,
-             "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3}
+             "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3, "githublists": 3, "builtin": 3, "careerjet": 3, "localfeed": 1}
 
 ATS_RX = {
     "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
@@ -28,6 +28,7 @@ ATS_RX = {
     "bamboohr": re.compile(r"([A-Za-z0-9-]+)\.bamboohr\.com/(?:careers|jobs)"),
     "recruitee": re.compile(r"([A-Za-z0-9-]+)\.recruitee\.com/(?:o|l)/"),
     "breezy": re.compile(r"([A-Za-z0-9-]+)\.breezy\.hr/p/"),
+    "smartrecruiters": re.compile(r"(?:jobs|careers)\.smartrecruiters\.com/(?!oneclick)([A-Za-z0-9_-]+)/\d"),
 }
 _NOT_A_BOARD = ("embed", "jobs", "www", "careers", "apply", "app", "api", "j", "static", "assets")
 
@@ -351,9 +352,172 @@ def workingnomads(cfg, base="https://www.workingnomads.com"):
     return out
 
 
-ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads")      # keyless feeds that run whatever the config's own source list says
+DEFAULT_CITIES = ("denver", "boulder", "colorado", "los angeles", "pasadena", "santa monica", "culver city", "burbank", "glendale", "long beach",
+                  "irvine", "el segundo", "orange county", "southern california", "new york", "nyc", "brooklyn", "manhattan")
+GITHUB_LISTS = [{"repo": "SimplifyJobs/New-Grad-Positions", "branch": "dev", "path": ".github/scripts/listings.json"}]
+
+
+def githublists(cfg, base="https://raw.githubusercontent.com"):
+    """Public GitHub repos that publish new-grad / entry-level postings as JSON (Simplify's format: active, is_visible, url, locations).
+    Keeps open postings in Denver, Los Angeles, New York or remote (US) whose apply link goes straight to an application system the bot
+    completes. Government employers are dropped later by prefilter, for every source."""
+    a = (cfg.get("aggregators", {}) or {}).get("github_lists") or {}
+    if a.get("enabled", True) is False:
+        return []
+    only_ats = a.get("only_supported_ats", True)
+    cities = [c.lower() for c in (a.get("locations") or DEFAULT_CITIES)]
+    out = []
+    for r in a.get("repos") or GITHUB_LISTS:
+        try:
+            rows = _get(f"{base}/{r['repo']}/{r.get('branch', 'dev')}/{r.get('path', '.github/scripts/listings.json')}").json()
+        except Exception:
+            continue
+        for j in rows if isinstance(rows, list) else []:
+            url = (j.get("url") or "").strip()
+            if not j.get("active") or j.get("is_visible") is False or not j.get("title") or not url.startswith("http"):
+                continue
+            if only_ats and not (board_of(url) or "myworkdayjobs.com" in url or "smartrecruiters.com" in url):
+                continue
+            locs = [str(x) for x in (j.get("locations") or [])]
+            keep = None
+            for loc in locs:
+                low = norm_location(loc)
+                if any(c in low for c in cities) or (_remote_ish(loc) and not foreign_place(loc)):
+                    keep = loc
+                    break
+            if keep is None:
+                continue
+            company = j.get("company_name") or ""
+            out.append(_job("githublist", company, j.get("id") or url, j["title"], "; ".join(locs), url,
+                            f"{j['title']} at {company}. Entry level. {j.get('category', '')}.", url))
+    return out
+
+
+BUILTIN_SITES = {"colorado": "https://www.builtincolorado.com", "nyc": "https://www.builtinnyc.com", "la": "https://www.builtinla.com"}
+_BUILTIN_LEVEL = re.compile(r"\|(Entry level|Junior|Mid level|Senior level|Expert/Leader|Internship)\|", re.I)
+
+
+def builtin(cfg, base=None):
+    """Built In's regional job boards (Colorado, NYC, LA): public listing pages, no login. Reads the plain page only; a page that
+    fails or is blocked gives no jobs (nothing is done to get around a block). Keeps entry-level and junior cards. Each job's
+    Apply link is Built In's own redirect to the employer's application page."""
+    a = (cfg.get("aggregators", {}) or {}).get("builtin") or {}
+    if a.get("enabled", True) is False:
+        return []
+    regions = a.get("regions") or list(BUILTIN_SITES)
+    cats = a.get("categories") or ["operations", "project-management"]
+    pages = int(a.get("pages", 2))
+    out, seen = [], set()
+    for region in regions:
+        site = BUILTIN_SITES.get(region)
+        if not site:
+            continue
+        for cat in cats:
+            for pg in range(1, pages + 1):
+                try:
+                    page = _get(f"{site}/jobs/{cat}", params={"page": pg}).text
+                except Exception:
+                    break                                   # failing or blocked: stop for this board, no workaround
+                got = 0
+                for chunk in re.split(r'(?=<div id="job-card-\d+")', page)[1:]:
+                    m = re.match(r'<div id="job-card-(\d+)"', chunk)
+                    href = re.search(r'href="(/job/[^"]+/\d+)"', chunk)
+                    title = re.search(r'data-id="job-card-title"[^>]*>(.*?)</a>', chunk, re.S)
+                    comp = re.search(r'data-id="company-title"[^>]*><span>(.*?)</span>', chunk, re.S)
+                    if not (m and href and title and comp) or m.group(1) in seen:
+                        continue
+                    got += 1
+                    seen.add(m.group(1))
+                    text = html_unescape(re.sub(r"\s+", " ", re.sub(r"(\|\s*)+", "|", re.sub(r"<[^>]+>", "|", re.sub(r"<script.*?</script>", "", chunk, flags=re.S)))))
+                    lv = _BUILTIN_LEVEL.search(text)
+                    if lv and lv.group(1).lower() not in ("entry level", "junior"):
+                        continue
+                    parts = [x.strip() for x in text.split("|") if x.strip()]
+                    work = next((x for x in parts if re.fullmatch(r"(In-Office|Hybrid|Remote( or Hybrid)?)", x, re.I)), "")
+                    where = next((x for x in parts[parts.index(work) + 1:] if work and not re.search(r"\d|Annually|level", x)), "") if work in parts else ""
+                    loc = f"{where} ({work})".strip() if where else (work or region)
+                    url = site + href.group(1)
+                    out.append(_job("builtin", html_unescape(comp.group(1)), m.group(1), html_unescape(re.sub(r"<[^>]+>", "", title.group(1))).strip(),
+                                    loc, url + "?handler=ApplyRedirect", "", url))
+                if not got:
+                    break
+    return out
+
+
+def careerjet(cfg, base="https://search.api.careerjet.net"):
+    """Careerjet's free job-search API (v4): Basic auth with CAREERJET_API_KEY from a free publisher account. Idle without the key.
+    Their rules ask for the user's IP and user agent on every call; set aggregators.careerjet.user_ip, else this machine's address is used."""
+    key = os.environ.get("CAREERJET_API_KEY")
+    if not key:
+        return []
+    a = cfg.get("aggregators", {}) or {}
+    c = a.get("careerjet") or {}
+    if c.get("enabled", True) is False:
+        return []
+    import base64
+    ip = c.get("user_ip")
+    if not ip:
+        try:
+            ip = requests.get("https://api.ipify.org", timeout=8).text.strip()
+        except Exception:
+            ip = "127.0.0.1"
+    hdr = {"Authorization": "Basic " + base64.b64encode(f"{key}:".encode()).decode(), **UA}
+    qs = (a.get("queries") or [])[: int(c.get("max_queries", 6))]
+    locs = (a.get("locations") or []) + ["Remote"]
+    out, seen = [], set()
+    for q in qs:
+        for loc in locs:
+            try:
+                r = requests.get(base + "/v4/query", headers=hdr, timeout=TIMEOUT,
+                                 params={"locale_code": "en_US", "keywords": q, "location": loc, "page_size": 50, "page": 1,
+                                         "sort": "date", "user_ip": ip, "user_agent": UA["User-Agent"]})
+                r.raise_for_status()
+                data = r.json()
+            except Exception:
+                continue
+            for j in data.get("jobs", []) if isinstance(data, dict) else []:
+                url = j.get("url") or ""
+                if not url or url in seen or not j.get("title"):
+                    continue
+                seen.add(url)
+                out.append(_job("careerjet", j.get("company"), url.rstrip("/").split("/")[-1], j["title"], j.get("locations") or loc, url,
+                                (j.get("description") or "") + (f"\nSalary: {j['salary']}" if j.get("salary") else ""), url))
+    return out
+
+
+def localfeed(cfg, base=None):
+    """Jobs saved as JSON files in the repo's feeds/ folder: written by autoapply.exporter on a home computer, which can read
+    LinkedIn's public no-login search where GitHub's servers are refused. Entries older than max_age_days (default 10) are dropped."""
+    from datetime import date, datetime, timedelta
+    a = (cfg.get("aggregators", {}) or {}).get("localfeed") or {}
+    if a.get("enabled", True) is False:
+        return []
+    folder = Path(a.get("dir") or (Path(__file__).resolve().parent.parent / "feeds"))
+    if not folder.is_dir():
+        return []
+    oldest = date.today() - timedelta(days=int(a.get("max_age_days", 10)))
+    out = []
+    for f in sorted(folder.glob("*.json")):
+        try:
+            data = json.loads(f.read_text())
+        except Exception:
+            continue
+        for j in data.get("jobs", []) if isinstance(data, dict) else []:
+            if not (j.get("title") and j.get("apply_url")):
+                continue
+            try:
+                if datetime.fromisoformat(str(j.get("posted") or "")[:10]).date() < oldest:
+                    continue
+            except Exception:
+                pass
+            out.append(_job("localfeed", j.get("company"), j.get("id") or j["apply_url"], j["title"], j.get("location"), j["apply_url"],
+                            j.get("description", ""), j.get("url") or j["apply_url"]))
+    return out
+
+
+ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
-            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads}
+            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads, "githublists": githublists, "builtin": builtin, "careerjet": careerjet, "localfeed": localfeed}
 
 
 # ---------------------------------------------------------------------------------------------- cache + entry point
@@ -403,10 +567,11 @@ def discover_aggregators(cfg: dict, base: Path, log=print) -> list[Job]:
 # ---------------------------------------------------------------------------------------------- growing the company list
 _SUFFIX = {"inc", "llc", "corp", "corporation", "co", "company", "group", "holdings", "technologies", "technology", "labs", "ltd",
            "the", "and", "usa", "us", "services", "solutions", "systems", "international", "global"}
-_PROBE_ATS = ("greenhouse", "lever", "workable")
+_PROBE_ATS = ("greenhouse", "lever", "workable", "smartrecruiters")
 _PROBE_URL = {"greenhouse": "https://boards-api.greenhouse.io/v1/boards/{}/jobs",
               "lever": "https://api.lever.co/v0/postings/{}?mode=json&limit=1",
-              "workable": "https://apply.workable.com/api/v1/widget/accounts/{}"}
+              "workable": "https://apply.workable.com/api/v1/widget/accounts/{}",
+              "smartrecruiters": "https://api.smartrecruiters.com/v1/companies/{}/postings?limit=1&country=us"}
 
 
 def slug_variants(name: str) -> list[str]:
@@ -454,6 +619,8 @@ def _probe(ats: str, token: str) -> bool:
         if r.status_code != 200:
             return False
         d = r.json()
+        if ats == "smartrecruiters":
+            return bool(isinstance(d, dict) and d.get("totalFound"))
         return bool(d.get("jobs") if ats in ("greenhouse", "workable") and isinstance(d, dict) else d)
     except Exception:
         return False
@@ -550,6 +717,7 @@ def canon_key(url: str):
                      (r"jobs\.ashbyhq\.com/([\w.%-]+)/([0-9a-f-]{36})", "ashby"),
                      (r"apply\.workable\.com/([\w-]+)/j/(\w+)", "workable"),
                      (r"([\w-]+)\.bamboohr\.com/careers/(\d+)", "bamboohr"),
+                     (r"jobs\.smartrecruiters\.com/([\w-]+)/(\d+)", "smartrecruiters"),
                      (r"([\w-]+)\.wd\d+\.myworkdayjobs\.com/[^?#]*/job/[^?#]*_([^/?#_]+)(?:[?#]|$)", "workday")):
         m = re.search(pat, url or "")
         if m:

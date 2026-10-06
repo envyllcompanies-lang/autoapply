@@ -1810,7 +1810,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                 log("      email: application requested a verification code; checking the inbox")
                 res = auth.mailbox.wait_for_verification(
                     since_ts=mail_since,
-                    host_hint=(getattr(job, "company", "") or ""),
+                    host_hint="|".join(x for x in (getattr(job, "company", ""), (getattr(job, "extra", None) or {}).get("company_name", "")) if x),
                     timeout=min(120, max(30, int(limit_at - time.time()))),
                     log=log,
                     require_code=True,
@@ -1936,7 +1936,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             try:
                 mail_since = time.time() - 5
                 try:
-                    result = submit(page, btn=btn, on_click=on_click, mail_hint=getattr(job, "company", "") or "", log=log)
+                    result = submit(page, btn=btn, on_click=on_click, mail_hint="|".join(x for x in (getattr(job, "company", ""), (getattr(job, "extra", None) or {}).get("company_name", "")) if x), log=log)
                 except NotSubmitted as e:
                     res_fields = [f for f in fields if plan["answers"].get(f["id"]) == "RESUME"]
                     if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|\bfiles?\b", str(e), re.I)):
@@ -1950,7 +1950,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                     btn2, kind2 = _find_advance(page)
                     if kind2 != "submit":
                         raise
-                    result = submit(page, btn=btn2, on_click=on_click, mail_hint=getattr(job, "company", "") or "", log=log)
+                    result = submit(page, btn=btn2, on_click=on_click, mail_hint="|".join(x for x in (getattr(job, "company", ""), (getattr(job, "extra", None) or {}).get("company_name", "")) if x), log=log)
             except (Unconfirmed, NotSubmitted):
                 page.screenshot(path=str(shot.with_name("after_submit.png")), full_page=True)
                 raise

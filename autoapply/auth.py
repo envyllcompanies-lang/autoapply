@@ -517,6 +517,15 @@ def _wd_reset_password(page, acc: Accounts, log, url_after: str | None) -> bool:
         return False
 
 
+def _wd_proven(acc: "Accounts", host: str) -> bool:
+    """True only for an employer where a sign-in has actually worked. Every other record (created, exists, verified, reset) may be
+    stale (an old password, an account never verified), so there the bot starts by creating the account: Workday answers
+    'already exists', and the reset-password path then makes the sign-in work."""
+    rec = acc.known.get(host)
+    state = rec.get("state") if isinstance(rec, dict) else rec
+    return state == "signed_in"
+
+
 def _workday(page, acc: Accounts, log, url_after: str | None):
     """Workday's own sign-up / sign-in: email + password + verify password + privacy box, or the Sign In pop-up."""
     host = acc.host(page.url)
@@ -528,7 +537,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             return
         scope = _wd_scope(page)
         n_pw = scope.locator("input[type=password]").locator("visible=true").count()
-        if n_pw >= 2 and host not in acc.known and not tried_create:
+        if n_pw >= 2 and not _wd_proven(acc, host) and not tried_create:
             tried_create = True
             log(f"      account: creating one on {host} with {acc.email}")
             for aid, val in (("email", acc.email), ("password", acc.password), ("verifyPassword", acc.password)):
@@ -542,7 +551,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 ck.first.check(force=True)
             _tick_agreements(page)
             before = _body(page)
-            acc.__dict__.setdefault("_made_at", {})[host] = time.time()       # its verification email can only come after this
+            prev_made = acc.__dict__.setdefault("_made_at", {}).get(host)      # (kept if Workday says the account was already there)
+            acc.__dict__["_made_at"][host] = time.time()                      # its verification email can only come after this
             if not _wd_press(page, scope, "createAccountSubmitButton", re.compile(r"^\s*create account\s*$", re.I)):
                 raise AuthBlocked("could not find Workday's Create Account button")
             _settle(page, 2500)
@@ -561,6 +571,10 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 continue
             if EXISTS_MSG.search(body):
                 acc.remember(host, "exists")
+                if prev_made:                                      # made earlier in this run: its verify link may still be needed
+                    acc.__dict__["_made_at"][host] = prev_made
+                else:                                              # it was not made now: no verify-link wait, the reset path handles it
+                    acc.__dict__["_made_at"].pop(host, None)
                 log("      account: Workday says one already exists for this email: signing in")
                 continue
             errs = _wd_errors(page)
@@ -574,7 +588,7 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             if errs:
                 raise AuthBlocked(f"Workday did not accept the new account: {'; '.join(errs)[:200]}")
             continue
-        if n_pw == 1 and host not in acc.known and not tried_create:
+        if n_pw == 1 and not _wd_proven(acc, host) and not tried_create:
             # a Sign In page first (no account here yet): go to Create Account
             link = _wd(page, "createAccountLink")
             if link.count():
@@ -622,7 +636,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
         state = (acc.known.get(host) or {}).get("state") if isinstance(acc.known.get(host), dict) else acc.known.get(host)
         # Several employers refuse a sign-in without saying anything at all: the page simply stays on Sign In. That is a refusal
         # too (wrong password, or an account not verified yet), so the same recovery runs: the verify link, then a reset.
-        if state in ("created", "exists") and not getattr(acc, "_wd_verify_tried", {}).get(host):
+        made_now = bool(getattr(acc, "_made_at", {}).get(host))        # created by this run, so its verify-your-email link may still be needed
+        if (state == "created" or made_now) and not getattr(acc, "_wd_verify_tried", {}).get(host):      # (an account that already existed goes straight to the reset)
             # a new Workday account often can't sign in until its 'verify your email' link is opened: open it, then try again
             acc.__dict__.setdefault("_wd_verify_tried", {})[host] = True
             log("      account: sign-in refused; checking the inbox for this site's verify-your-email link")

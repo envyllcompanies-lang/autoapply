@@ -321,8 +321,44 @@ def breezy(slug: str) -> list[Job]:
     return out
 
 
+def smartrecruiters(slug: str) -> list[Job]:
+    """api.smartrecruiters.com public postings feed (no key): US postings at entry-level / associate experience, 100 per page.
+    The posting page is jobs.smartrecruiters.com/<company>/<id>-<title>; the application form opens from there."""
+    out, offset = [], 0
+    while offset < 500:
+        r = requests.get(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings",
+                         params={"limit": 100, "offset": offset, "country": "us"}, headers=UA, timeout=TIMEOUT)
+        r.raise_for_status()
+        data = r.json()
+        items = data.get("content") or []
+        for o in items:
+            loc = o.get("location") or {}
+            if (loc.get("country") or "us").lower() != "us" or not o.get("name"):
+                continue
+            lvl = ((o.get("experienceLevel") or {}).get("id") or "").lower()
+            if lvl and lvl not in ("entry_level", "associate"):
+                continue                                    # mid-senior, director, executive: above your level
+            place = loc.get("fullLocation") or _place(loc.get("city"), loc.get("region"), loc.get("country"))
+            if loc.get("remote"):
+                place = f"{place} (Remote)".strip()
+            co = (o.get("company") or {}).get("identifier") or slug
+            pid = str(o.get("id") or "")
+            if not pid:
+                continue
+            url = f"https://jobs.smartrecruiters.com/{co}/{pid}-" + (re.sub(r"[^a-z0-9]+", "-", o["name"].lower()).strip("-") or "job")
+            desc = ". ".join(x for x in (o["name"], (o.get("function") or {}).get("label"), (o.get("industry") or {}).get("label"),
+                                         (o.get("typeOfEmployment") or {}).get("label"),
+                                         "Experience: " + (o.get("experienceLevel") or {}).get("label", "") if o.get("experienceLevel") else "") if x)
+            out.append(Job(source="smartrecruiters", company=co, job_id=pid, title=o["name"], location=place, url=url, apply_url=url,
+                           description=desc, extra={"company_name": (o.get("company") or {}).get("name") or co}))
+        offset += 100
+        if not items or offset >= int(data.get("totalFound") or 0):
+            break
+    return out
+
+
 FETCHERS = {"greenhouse": greenhouse, "lever": lever, "ashby": ashby, "workday": workday, "workable": workable,
-            "bamboohr": bamboohr, "recruitee": recruitee, "breezy": breezy}
+            "bamboohr": bamboohr, "recruitee": recruitee, "breezy": breezy, "smartrecruiters": smartrecruiters}
 
 STATE_FILE = "boards_state.json"
 DEAD_AFTER = 2                 # consecutive 'no such board' answers before a board is left alone
@@ -531,11 +567,32 @@ def level_title(title: str) -> str:
     return _ALT_SENIOR.sub("", title or "")
 
 
+GOV_NAME_RX = re.compile(
+    r"^(the )?(state|city|county|town|village|borough|commonwealth|territory|port|parish) of\b|"
+    r"\b(city|county|town|village) government\b|"
+    r"\b(department|dept\.?|bureau|agency|commission) of\b|"
+    r"\bu\.?s\.? (army|navy|air force|marine|coast guard|government|federal|department|dept|forest service|postal)|"
+    r"\bfederal (reserve|government|agency|bureau|aviation|emergency)\b|"
+    r"\b(school district|unified school|public schools?|board of education|housing authority|transit authority|transportation district|"
+    r"water (district|authority)|port authority|sheriff|police department|fire (department|protection district)|municipal|metropolitan district|"
+    r"national (laboratory|guard)|veterans affairs|nasa|noaa)\b", re.I)
+GOV_URL_RX = re.compile(r"\.gov(?:[/:?#]|$)|\.mil(?:[/:?#]|$)|\.(?:co|ny|ca|tx)\.us/|governmentjobs\.com|usajobs\.gov|schoolspring|edjoin\.org|neogov|"
+                        r"[a-z0-9]gov\.(?:org|com|net|us)\b|//[a-z0-9-]+gov\.wd\d+\.myworkdayjobs\.com", re.I)
+
+
+def government_employer(job: Job) -> bool:
+    """Federal, state, county, city and public-agency employers (by their name or their posting's address). Universities are not dropped."""
+    name = re.sub(r"[-_]+", " ", job.company or "")
+    return bool(GOV_NAME_RX.search(name) or GOV_URL_RX.search(job.apply_url or "") or GOV_URL_RX.search(job.url or ""))
+
+
 def prefilter(job: Job, search: dict) -> str | None:
     """Cheap keyword gate before spending tokens. Returns a rejection reason or None."""
     title = level_title(job.title)
     t = title.lower()
     loc = norm_location(job.location)
+    if search.get("exclude_government", True) and government_employer(job):
+        return "government employer (federal, state, county, city or public agency)"
     inc = [s.lower() for s in search.get("titles_include", [])]
     exc = [s.lower() for s in search.get("titles_exclude", [])]
     locs = [s.lower() for s in search.get("locations_include", [])]

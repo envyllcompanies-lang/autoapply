@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Runs the public-listings export on this Mac every 2 hours (only while the Mac is awake).
+     Install:   cp tools/com.autoapply.linkedin-export.plist ~/Library/LaunchAgents/
+                launchctl load ~/Library/LaunchAgents/com.autoapply.linkedin-export.plist
+     Stop:      launchctl unload ~/Library/LaunchAgents/com.autoapply.linkedin-export.plist
+     Edit WorkingDirectory and the python path below to match your folder first. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.autoapply.linkedin-export</string>
+  <key>WorkingDirectory</key><string>/Users/briandelgado/autoapply-live</string>
+  <key>ProgramArguments</key>
+  <array><string>/usr/bin/env</string><string>python3</string><string>-m</string><string>autoapply.exporter</string><string>--push</string></array>
+  <key>StartInterval</key><integer>7200</integer>
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/tmp/autoapply-linkedin-export.log</string>
+  <key>StandardErrorPath</key><string>/tmp/autoapply-linkedin-export.log</string>
+</dict>
+</plist>

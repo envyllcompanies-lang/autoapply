@@ -224,7 +224,8 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     site_host: the site being used; another employer's Workday email is never taken for this one's.
     An email that does not name the site at all is only accepted when it has just arrived."""
     deadline = time.time() + timeout
-    hint = (host_hint or "").lower()
+    names = [re.sub(r"[^a-z0-9]", "", x.lower()) for x in (host_hint or "").split("|") if x.strip()]    # company names this application could be called
+    hint = (host_hint or "").split("|")[0].lower()
     # An email that does not name the site is only this site's if it arrived because of what was just done here: after
     # since_ts when that is moments ago, else during this wait. (On 2026-10-02 another employer's verification email,
     # ninety seconds old, was taken for this one's and the bot ended up on the other employer's application.)
@@ -237,6 +238,12 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                     continue
                 if require_code and not info.get("code"):
                     continue
+                if require_code and names:
+                    said = re.search(r"application (?:to|for|at|with)\s+(.+?)\s*$", info["subject"], re.I)
+                    if said:
+                        other = re.sub(r"[^a-z0-9]", "", said.group(1).lower())
+                        if other and not any(n and (n in other or other in n) for n in names):
+                            continue          # this code was sent for a different company's application: never typed into this one
                 if require_code and info["ts"] < since_ts - 5:
                     continue                  # a code mailed before this request is an older application's, never this one's
                 if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):

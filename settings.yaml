@@ -9,9 +9,10 @@ search:
   min_score: 35               # keyword score needed to be looked at at all (a rough first sieve; the match check below decides)
   prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
   min_fit: 60                 # ...and only jobs with a match of 60% or more are applied to (was 70 until 2026-10-03)
-  min_score_without_match: 80 # when the free match check has no allowance left: only jobs whose keyword score is this
+  min_score_without_match: 70 # when the free match check has no allowance left: only jobs whose keyword score is this (was 80 until 2026-10-06)
                               # high go ahead, the rest wait for a later run (they are not dropped)
   max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
+  exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
 
 scoring:
   pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
@@ -26,3 +27,17 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+
+aggregators:
+  github_lists:             # public GitHub repos that publish new-grad / entry-level postings as JSON
+    enabled: true           # false switches the source off
+    only_supported_ats: true   # keep only apply links that go straight to a system the bot completes
+    repos:
+      - {repo: SimplifyJobs/New-Grad-Positions, branch: dev, path: .github/scripts/listings.json}
+  builtin:                  # Built In's regional boards: public pages, no login (a blocked page gives no jobs; nothing is done to get around it)
+    enabled: true
+    regions: [colorado, nyc, la]
+    categories: [operations, project-management]
+    pages: 2
+  careerjet:                # free API; idle until the CAREERJET_API_KEY secret exists
+    enabled: true

@@ -185,3 +185,17 @@ script, the Workday driver, and a check of the bot's own code (no name used with
 
 These prove the logic. They cannot prove a real employer's site behaves like the stand-ins; that only shows in a real run, and
 `logs/snapshots.log` is there so that whatever a real site does differently can be seen and fixed.
+
+## More job sources (all free, no login)
+- **GitHub entry-level lists** (`aggregators.github_lists` in settings.yaml): public repos such as SimplifyJobs/New-Grad-Positions; open US postings in Denver,
+  Los Angeles, New York or remote whose apply link goes straight to a system the bot completes.
+- **SmartRecruiters**: a company list like the other employer systems (`smartrecruiters:` in boards.yaml; found boards are added automatically).
+- **Built In** Colorado, NYC and LA (`aggregators.builtin`): public listing pages; a blocked page gives no jobs and nothing is done to get around it.
+- **Careerjet** (`aggregators.careerjet`): free API, idle until you add the `CAREERJET_API_KEY` secret (free publisher account at careerjet.com/partners).
+- **Adzuna / Jooble**: idle until the `ADZUNA_APP_ID`, `ADZUNA_APP_KEY` and `JOOBLE_API_KEY` secrets exist.
+- **Home-computer feed** (`feeds/*.json`): LinkedIn refuses GitHub's servers, so `python -m autoapply.exporter --push` reads LinkedIn's public no-login
+  search from your own connection at a low rate and saves `feeds/linkedin.json`; the bot reads it. `tools/com.autoapply.linkedin-export.plist` runs it
+  every 2 hours on a Mac. It stops when LinkedIn blocks or asks for a login, and never overwrites a good feed with an empty one.
+- **No government employers**: `search.exclude_government: true` drops federal, state, county, city and public-agency employers from every source.
+- Not used, on purpose: Indeed, Glassdoor, Handshake, ZipRecruiter (logins and bot checks).
+- Tests for all of these: `python tests/source_checks.py`.

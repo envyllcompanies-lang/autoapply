@@ -54,8 +54,10 @@ class DB:
             " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%')")
         # submits the site bounced back with 'X is required' (e.g. the résumé upload didn't register): nothing was sent
         cur2 = self.conn.execute(
-            "UPDATE jobs SET status='queued', attempts=0 WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
-            " AND lower(reason) LIKE '%required%' AND lower(reason) NOT LIKE '%thank%'")
+            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
+            " AND (lower(reason) LIKE '%required%' OR lower(reason) LIKE '%please enter a valid%' OR lower(reason) LIKE '%couldn''t submit%'"
+            " OR lower(reason) LIKE '%could not submit%' OR lower(reason) LIKE '%must be%' OR lower(reason) LIKE '%invalid%')"
+            " AND lower(reason) NOT LIKE '%thank%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared)
         # Workable submits that sat on the form (a YES/NO question the bot could not see, or 'Submitting…' held by a hidden
         # check) and got no confirmation email: almost certainly never sent. One more try; the inbox is checked first.
         cur3 = self.conn.execute(
@@ -64,7 +66,8 @@ class DB:
         # jobs listed 'by hand' only because their whole site or employer was paused: the bot tries them itself now
         cur4 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status='manual' AND (reason LIKE 'apply by hand: % stopped the bot at a human check on its last%'"
-            " OR reason LIKE 'apply by hand: %application already stopped at a human check%')")
+            " OR reason LIKE 'apply by hand: %application already stopped at a human check%'"
+            " OR reason LIKE 'apply by hand: %emailed code%')")      # parked when emailed codes could not be handled: the bot types them now
         cur5 = self.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND reason LIKE '%Password must include%'")
         # parked only because their site was paused, or stopped by things the bot now handles (Workday accounts, start
         # pages, footer buttons): the bot does them itself. Real human checks (hCaptcha, emailed codes) stay as they are.

@@ -9,10 +9,22 @@
 #   <slug>.bamboohr.com/careers                   -> bamboohr: <slug>
 #   <slug>.recruitee.com                          -> recruitee: <slug>
 #   <slug>.breezy.hr                              -> breezy: <slug>
+#   jobs.smartrecruiters.com/<Company>/<id>       -> smartrecruiters: <Company>
 # A token that does not exist is harmless: the run log says "not found" and the bot stops asking after two misses
 # (it retries every three weeks). Boards found through the job-board aggregators are added automatically as well.
 
 greenhouse:
+  - guild
+  - holderconstruction
+  - rocketlab
+  - archer
+  - shipmonk
+  - knock
+  - orchard
+  - homeward
+  - wrike
+  - airtable
+  - remote
   - zendesk
   - carvana
   - grubhub
@@ -383,6 +395,8 @@ greenhouse:
   - deepintent
 
 lever:
+  - tala
+  - fundrise
   - kickstarter
   - outreach
   - veeva
@@ -651,6 +665,7 @@ bamboohr:
   - apaveinc
 
 recruitee:
+  - lvmh
   - bunq
   - mollie
   - catawiki
@@ -671,6 +686,16 @@ breezy:
 # Only read when `search.manual_sources` in config.yaml lists ashby (Ashby flags automated submissions as spam, so these
 # postings go on the "finish by hand" list instead of being submitted by the bot).
 ashby:
+  - ibotta
+  - guild
+  - clark
+  - hex
+  - fullstory
+  - knock
+  - orchard
+  - expensify
+  - oyster
+  - angi
   - notion
   - ramp
   - linear
@@ -868,3 +893,18 @@ names:
   thepeoplebrand: The People Brand
   willowhealth.com: Willow Health
   avalerehealth: Avalere Health
+
+smartrecruiters:
+  - ibotta
+  - servicetitan
+  - renttherunway
+  - justworks
+  - namely
+  - turnerconstruction
+  - wayfair
+  - equinox
+  - servicenow
+  - experian
+  - boschgroup
+  - uber
+  - bigcommerce

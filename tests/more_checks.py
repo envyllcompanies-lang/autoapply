@@ -1017,7 +1017,14 @@ def match_checks():
         check(db.reset_title_filter("tok1") >= 1 and db.get(t1.key) is None and db.get(t2.key)["status"] == "filtered",
               "changing the allowed titles should free only postings dropped for their title")
         check(db.reset_title_filter("tok1") == 0, "the title reset runs once per list")
+        u1 = wd(44, "unconfirmed", "no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.']", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/44")
+        u2 = wd(45, "unconfirmed", "no confirmation after submit; page errors: [\"We couldn't submit your application\"]", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/45")
+        u3 = wd(46, "unconfirmed", "no confirmation after submit; page ends: 'sexual orientation, gender identity or any other reason'", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/46")
+        m1 = wd(43, "manual", "apply by hand: greenhouse stopped the bot at a human check (CAPTCHA or emailed code) on it", url="https://boards.greenhouse.io/x/jobs/43")
         n = db.requeue_if_new_version("test-build-1")
+        check(all(db.get(k)["status"] == "queued" and not db.get(k)["submitted_at"] for k in (u1, u2)), "a submit the page rejected with an error must come back (submitted_at cleared), or the safety rule keeps it unconfirmed")
+        check(db.get(u3)["status"] == "unconfirmed", "a submit with no error shown stays unconfirmed (it may have gone through)")
+        check(db.get(m1)["status"] == "queued" and db.get(m1)["attempts"] == 0, "jobs parked for 'apply by hand' because of an emailed code must come back")
         check(db.get(h)["status"] == "queued" and db.get(h)["attempts"] == 0, "a Greenhouse job whose emailed code did not arrive (failed, attempts used up) should be tried again")
         check(db.get(g)["status"] == "queued" and not db.get(g)["submitted_at"], f"a job held at the emailed security code (nothing sent) should be tried again now that the bot types the code: {db.get(g)['status']}")
         st = {k: (db.get(k)["status"], db.get(k)["attempts"]) for k in (a, b, c, d, e, f)}
