@@ -32,12 +32,28 @@ Tenants (first part of the path) switch behaviours on:
   closed     the posting is gone
   applied    the job page says you already applied
   nophone    the phone country code is not preselected
+  extras     three things seen on real employers on 2026-10-06: the Education block asks 'From' and 'To (Actual or
+             Expected)' as bare years (no month box); pay questions are number boxes that keep only the digits typed
+             into them and refuse a number that is too large (one is marked as a number box, the other looks like any
+             text box); and a required 'Desired Pay Rate Type' list. Work Experience and Education are required, as on
+             'strict'
+  flashco    'Create Account' takes the form away for a moment, then draws it again with 'An account already exists'
+             (an account exists with another password; 'Forgot password' works)
+  unverco    an account was made on an earlier visit and never verified (use ?seed=unverified&pw=<its password> once; the
+             verification email of that visit is 'sent' then). As on several real employers: 'Create Account' takes the
+             form away and then shows Sign In without a word, the sign-in is refused with 'wrong email or password or your
+             account might be locked', and 'Forgot password' sends nothing. Only the old verification link helps
+  lateco     plain 'another password' employer like resetco (use ?seed=1); the test's mailbox delivers its reset email late
+  usedco     like resetco (use ?seed=1), and only the newest reset link works: an older one says it has expired
+  fbco       an optional box the employer labelled 'Please enter your LinkedIn Information' that Workday checks as a Facebook
+             address (seen on a real employer): no LinkedIn address is ever accepted in it
 """
 from __future__ import annotations
 
 import http.server
 import json
 import threading
+import time
 import urllib.parse
 
 APP_HTML = r"""<!doctype html><html lang="en-US"><head><meta charset="utf-8"><title>Mock Workday</title>
@@ -66,6 +82,9 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;
 const $ = id => document.getElementById(id);
 const mail = (kind, link) => fetch('/outbox?' + new URLSearchParams({tenant: T, kind, link}));
 if (location.search.includes('seed=1') && !G('acct')) P('acct', {email: 'delgado@alumni.usc.edu', pw: 'Some-Old-Pw-9!', verified: true});
+if (location.search.includes('seed=unverified') && !G('acct')) {
+  P('acct', {email: 'delgado@alumni.usc.edu', pw: new URLSearchParams(location.search).get('pw') || '', verified: false});
+  mail('verify', location.origin + '/' + T + '/verify'); }
 if (location.search.includes('reset=1')) { localStorage.clear(); }
 
 const STEPS = ['Create Account/Sign In', 'My Information', 'My Experience', 'Application Questions', 'Voluntary Disclosures', 'Self Identify', 'Review'];
@@ -118,6 +137,12 @@ const date = (key, label, req, withDay) => { const v = data[key] || {}; return `
   (withDay ? `<input data-automation-id="dateSectionDay-input" id="${key}-dateSectionDay-input" role="spinbutton" aria-label="Day" placeholder="DD" maxlength="2" size="2" value="${esc(v.d)}">/` : '') +
   `<input data-automation-id="dateSectionYear-input" id="${key}-dateSectionYear-input" role="spinbutton" aria-label="Year" placeholder="YYYY" maxlength="4" size="4" value="${esc(v.y)}">` +
   `</div></fieldset></div>`; };
+const year = (key, akey, label, req) => { const v = data[key] || {}; return `<div data-automation-id="formField-${akey}"><fieldset><legend>${label}${star(req)}</legend>` +
+  `<div data-automation-id="dateInputWrapper">` +
+  `<input data-automation-id="dateSectionYear-input" id="${key}-dateSectionYear-input" role="spinbutton" aria-label="Year" placeholder="YYYY" maxlength="4" size="4" value="${esc(v.y)}">` +
+  `</div></fieldset></div>`; };
+const num = (id, key, q, req, plain) => `<div data-automation-id="formField-${key}"><fieldset><legend><div data-automation-id="richText"><b>${q}</b>${star(req)}</div></legend>` +
+  `<input id="${id}" type="text" ${plain ? '' : 'data-automation-id="numericInput"'} data-num="1" aria-required="${!!req}" value="${esc(data[id])}"></fieldset></div>`;
 const group = (name, inner) => `<div role="group" aria-labelledby="${name.replace(/ /g, '-')}-section"><h4 id="${name.replace(/ /g, '-')}-section">${name}</h4>${inner}</div><div data-automation-id="smartDivider"></div>`;
 
 function upload() {
@@ -132,7 +157,7 @@ function upload() {
       `<button data-automation-id="delete-file" type="button" aria-label="Delete ${esc(n)}">x</button></div>`).join('') + `</div></div></div><div data-automation-id="smartDivider"></div>`;
 }
 function section(name, key, rows) {
-  const req = T === 'strict' || T === 'strict3';
+  const req = T === 'strict' || T === 'strict3' || T === 'extras';
   return `<div role="group" aria-labelledby="${name.replace(/ /g, '-')}-section"><h4 id="${name.replace(/ /g, '-')}-section">${name}${req ? ' ' + star(true) : ''}</h4>${rows}` +
     `<div><button data-automation-id="add-button" data-sec="${key}" type="button">Add${rows ? ' Another' : ''}</button></div></div><div data-automation-id="smartDivider"></div>`;
 }
@@ -144,7 +169,8 @@ const workRow = n => { const p = 'workExperience-' + n; const cur = !!data[p + '
 const eduRow = n => { const p = 'education-' + n;
   return `<div data-automation-id="${p}"><h5>Education ${n}</h5>` + prompt(p + '--school', 'schoolName', 'School or University', true, 'school') +
     dd(p + '--degree', 'degree', 'Degree', true, ["Associate's Degree", "Bachelor's Degree", "Master's Degree", 'Doctorate']) +
-    prompt(p + '--fieldOfStudy', 'fieldOfStudy', 'Field of Study', false, 'fieldOfStudy') + text(p + '--gradeAverage', 'gradeAverage', 'Overall Result (GPA)', false) + '</div>'; };
+    prompt(p + '--fieldOfStudy', 'fieldOfStudy', 'Field of Study', false, 'fieldOfStudy') + text(p + '--gradeAverage', 'gradeAverage', 'Overall Result (GPA)', false) +
+    (T === 'extras' ? year(p + '--firstYearAttended', 'firstYearAttended', 'From', true) + year(p + '--lastYearAttended', 'lastYearAttended', 'To (Actual or Expected)', true) : '') + '</div>'; };
 
 const STEP_HTML = {
   1: () => group('source', prompt('source--source', 'source', 'How Did You Hear About Us?', true, 'source')) +
@@ -158,13 +184,17 @@ const STEP_HTML = {
              `<div><input data-automation-id="phone-sms-opt-in" id="${rid()}" type="checkbox" aria-checked="false"> <a data-automation-id="phone-terms-and-condition-link" href="#">Terms and Conditions</a></div>`),
   2: () => section('Work Experience', 'work', (data.workRows || []).map(workRow).join('')) + section('Education', 'edu', (data.eduRows || []).map(eduRow).join('')) +
        group('Skills', prompt('skills--skills', 'skills', 'Type to Add Skills', false, 'skills')) + upload() +
-       group('Social Network URLs', text('socialNetworkAccounts--linkedInAccount', 'linkedInAccount', 'LinkedIn URL', false)),
+       group('Social Network URLs', text('socialNetworkAccounts--linkedInAccount', 'linkedInAccount', 'LinkedIn URL', false) +
+             (T === 'fbco' ? text('socialNetworkAccounts--facebookAccount', 'facebookAccount', 'Please enter your LinkedIn Information', false) : '')),
   3: () => `<div role="group" aria-labelledby="primaryQuestionnaire-section">` +
        dd('primaryQuestionnaire--q1', 'q1', '', true, ['Yes', 'No'], 'Are you legally able to work in the U.S. for any employer?') +
        dd('primaryQuestionnaire--q2', 'q2', '', true, ['Yes', 'No'], 'Will you now or in the future require visa sponsorship for employment at Acme?') +
        dd('primaryQuestionnaire--q3', 'q3', '', true, ['High School Diploma or GED', "Associate's Degree", "Bachelor's Degree", "Master's Degree"], 'What is your highest level of education attained?') +
        dd('primaryQuestionnaire--q4', 'q4', '', true, ['Yes', 'No'], 'Are you subject to any post-employment restrictions (e.g. non-compete or restrictive covenant agreement) that would prevent you from working at Acme?') +
-       area('primaryQuestionnaire--q5', 'q5', 'What are your salary expectations?', true) + '</div>',
+       area('primaryQuestionnaire--q5', 'q5', 'What are your salary expectations?', true) +
+       (T === 'extras' ? num('primaryQuestionnaire--pay', 'pay', 'What are your salary expectations for this role? (Optional)', false, true) +
+                         num('primaryQuestionnaire--annual', 'annual', 'Desired Annual Pay:', true) +
+                         dd('primaryQuestionnaire--paytype', 'paytype', '', true, ['Hourly', 'Salary'], 'Desired Pay Rate Type:') : '') + '</div>',
   4: () => group('Voluntary Disclosures', dd('personalInfoUS--gender', 'gender', 'Gender', false, ['Female', 'Male', 'I do not wish to answer']) +
        dd('personalInfoUS--veteranStatus', 'veteranStatus', 'Veteran Status', true, ['I am a protected veteran', 'I am not a protected veteran', 'I do not wish to self-identify'])) +
        group('Terms and Conditions', check('termsAndConditions--acceptTermsAndAgreements', 'acceptTermsAndAgreements', 'Yes, I have read and consent to the terms and conditions', true, 'agreementCheckbox')),
@@ -231,6 +261,7 @@ function bind(scope) {
         else { data[i.id] = i.checked; i.setAttribute('aria-checked', String(i.checked)); if (/currentlyWorkHere/.test(i.id)) { keep(); render(); } }
         save(); }, 0); });
   });
+  scope.querySelectorAll('input[data-num]').forEach(i => i.oninput = () => { i.value = i.value.replace(/\D/g, ''); data[i.id] = i.value; save(); });
   scope.querySelectorAll('[data-automation-id="dateInputWrapper"] input').forEach(i => i.oninput = () => {
     const key = i.id.replace(/-dateSection(Month|Day|Year)-input$/, ''), part = /Month/.test(i.id) ? 'm' : /Day/.test(i.id) ? 'd' : 'y';
     i.value = i.value.replace(/\D/g, ''); (data[key] = data[key] || {})[part] = i.value; save();
@@ -255,16 +286,25 @@ function validate(step) {
      ['phoneNumber--countryPhoneCode', 'Country Phone Code'], ['phoneNumber--phoneNumber', 'Phone Number']].forEach(([i, l]) => need(i, l));
   }
   if (step === 2) {
-    if (T === 'strict' || T === 'strict2' || T === 'strict3') {
+    if (T === 'strict' || T === 'strict2' || T === 'strict3' || T === 'extras') {
       if (!(data.workRows || []).length) bad.push('Error: Work Experience is required. Add at least one entry.');
       if (!(data.eduRows || []).length) bad.push('Error: Education is required. Add at least one entry.');
     }
     (data.workRows || []).forEach(n => { const p = 'workExperience-' + n; need(p + '--jobTitle', 'Job Title'); need(p + '--companyName', 'Company'); dateOk(p + '--startDate', 'From');
       if (!data[p + '--currentlyWorkHere']) dateOk(p + '--endDate', 'To'); });
-    (data.eduRows || []).forEach(n => { const p = 'education-' + n; need(p + '--school', 'School or University'); need(p + '--degree', 'Degree'); });
+    (data.eduRows || []).forEach(n => { const p = 'education-' + n; need(p + '--school', 'School or University'); need(p + '--degree', 'Degree');
+      if (T === 'extras') [['--firstYearAttended', 'From'], ['--lastYearAttended', 'To (Actual or Expected)']].forEach(([k, l]) => { const el = $(p + k + '-dateSectionYear-input');
+        if (!/^(19|20)\d{2}$/.test((data[p + k] || {}).y || '')) { el.setAttribute('aria-invalid', 'true'); bad.push(`Error: The field ${l} is required and must have a value.`); } else el.removeAttribute('aria-invalid'); }); });
     if (!(data.files || []).length) bad.push('Error: Resume/CV is required.');
+    const fe = $('socialNetworkAccounts--facebookAccount');
+    if (fe && fe.value && !/facebook\.com/i.test(fe.value)) { fe.setAttribute('aria-invalid', 'true');
+      bad.push('Error: Invalid Facebook URL'); bad.push('Error-Please enter your LinkedIn Information Invalid Facebook URL'); } else if (fe) fe.removeAttribute('aria-invalid');
   }
   if (step === 3) { ['q1', 'q2', 'q3', 'q4', 'q5'].forEach((q, i) => need('primaryQuestionnaire--' + q, 'question ' + (i + 1)));
+    if (T === 'extras') { need('primaryQuestionnaire--paytype', 'Desired Pay Rate Type:'); need('primaryQuestionnaire--annual', 'Desired Annual Pay:');
+      [['primaryQuestionnaire--pay', 'What are your salary expectations for this role? (Optional)'], ['primaryQuestionnaire--annual', 'Desired Annual Pay:']].forEach(([id, l]) => {
+        const pe = $(id); if (pe && pe.value && +pe.value > 9999999) { pe.setAttribute('aria-invalid', 'true');
+          bad.push('Error: The number entered is too large.'); bad.push(`Error-${l} The number entered is too large.`); } else if (pe && pe.value) pe.removeAttribute('aria-invalid'); }); }
     if (T === 'bounce' && !bounced && !bad.length) { bounced = true; PJ('bounced', true); root.querySelectorAll('[aria-invalid]').forEach(x => x.removeAttribute('aria-invalid')); return ['Something went wrong. Please review your answers and try again.']; } }
   if (step === 4) { need('personalInfoUS--veteranStatus', 'Veteran Status');
     if (!data['termsAndConditions--acceptTermsAndAgreements']) { $('termsAndConditions--acceptTermsAndAgreements').setAttribute('aria-invalid', 'true'); bad.push('Error: You must accept the terms and conditions.'); } }
@@ -300,6 +340,12 @@ function authPage() {
   on('SignInWithEmailButton', () => { P('emailclicked', true); go('signin'); });
   on('signInLink', () => go('signin')); on('createAccountLink', () => go('create')); on('forgotPasswordLink', () => go('forgot'));
   on('createAccountSubmitButton', () => { const e = $('ce').value, p = $('cp').value;
+    if (T === 'unverco' && acct && acct.email === e) {          // an unverified account is there: the form goes, Sign In comes, no message
+      root.querySelector('[data-automation-id="signInContent"]').innerHTML = ''; setTimeout(() => { if (!G('signed')) go('signin'); }, 1500); return; }
+    if (T === 'flashco' && acct && acct.email === e) {          // the form is taken down while Workday thinks, then comes back with its answer
+      root.querySelector('[data-automation-id="signInContent"]').innerHTML = '';
+      setTimeout(() => { if (G('signed')) return; P('authmode', 'create'); authPage(); $('autherr').innerText = 'ERROR: An account already exists for this email address.'; }, 5000);
+      return; }
     if (acct && acct.email === e) { $('autherr').innerText = 'ERROR: An account already exists for this email address.'; return; }
     if (!e || p !== $('cv').value || !$('cc').checked) { $('autherr').innerText = 'ERROR: Enter your email, matching passwords, and accept the terms.'; return; }
     if (!(p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /\d/.test(p) && /[^A-Za-z0-9]/.test(p))) { $('autherr').innerText = 'ERROR: Password must include an uppercase character, a numeric character and a special character.'; return; }
@@ -310,10 +356,13 @@ function authPage() {
   on('signInSubmitButton', () => { const e = $('se').value, p = $('sp').value;
     if (T === 'quietco' && (!acct || acct.email !== e || acct.pw !== p)) return;
     if (acct && acct.email === e && acct.pw === p && !acct.verified && T === 'brock') { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
+    if (acct && acct.email === e && !acct.verified && T === 'unverco') { $('autherr').innerText = 'You may have entered the wrong email address or password or your account might be locked.'; return; }
     if (acct && acct.email === e && acct.pw === p && !acct.verified) { $('autherr').innerText = 'Your account has not been verified. Verify your email before signing in.'; mail('verify', location.origin + '/' + T + '/verify'); return; }
     if (!acct || acct.email !== e || acct.pw !== p) { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
     P('signed', true); if (!GJ('step')) PJ('step', 1); render(); });
-  on('resetPasswordSubmitButton', () => { if (T === 'ghostco' && !acct) { go('forgot-sent'); return; } mail('reset', location.origin + '/' + T + '/passwordreset'); go('forgot-sent'); });
+  on('resetPasswordSubmitButton', () => { if ((T === 'ghostco' && !acct) || (T === 'unverco' && acct && !acct.verified)) { go('forgot-sent'); return; }
+    const tok = String(Date.now()); P('resettoken', tok);       // (each reset email has its own link, as on the real thing)
+    mail('reset', location.origin + '/' + T + '/passwordreset?t=' + tok); go('forgot-sent'); });
 }
 function render() {
   if (!window.__r0) { window.__r0 = 1; if (/^forgot/.test(G('authmode') || '')) P('authmode', 'signin'); }     // a reload shows the sign-in page again
@@ -323,6 +372,8 @@ function render() {
     const back = new URLSearchParams(location.search).get('redirect');
     if (back) { location.replace(back); return; }                       // Workday's link leads on to the application (signed out)
     root.innerHTML = '<p>Thank you. Your email address has been verified.</p>'; return; }
+  if (parts[1] === 'passwordreset' && T === 'usedco' && new URLSearchParams(location.search).get('t') !== G('resettoken')) {
+    root.innerHTML = chrome('<h2>Reset Password</h2><p>This link has expired or has already been used.</p>'); return; }
   if (parts[1] === 'passwordreset') { root.innerHTML = chrome(`<h2>Reset Password</h2><label for="np">New Password</label><input id="np" type="password" data-automation-id="password">` +
       `<label for="nv">Verify New Password</label><input id="nv" type="password" data-automation-id="verifyPassword"><div id="rmsg" class="err" role="alert"></div><button data-automation-id="resetPasswordSubmitButton" type="button">Change Password</button>`);
     root.querySelector('[data-automation-id="resetPasswordSubmitButton"]').onclick = () => { if ($('np').value && $('np').value === $('nv').value) { const a = G('acct') || {email: 'delgado@alumni.usc.edu'}; a.pw = $('np').value; a.verified = true; P('acct', a); P('authmode', 'signin');
@@ -370,7 +421,7 @@ render();
 
 class State:
     def __init__(self):
-        self.outbox: list[dict] = []          # emails the mock 'sent': {'tenant', 'kind', 'link'}
+        self.outbox: list[dict] = []          # emails the mock 'sent': {'tenant', 'kind', 'link', 'ts'}
         self.submitted: list[dict] = []       # {'tenant', 'data'}
 
 
@@ -386,7 +437,7 @@ def serve() -> tuple:
             u = urllib.parse.urlparse(self.path)
             q = {k: v[0] for k, v in urllib.parse.parse_qs(u.query).items()}
             if u.path == "/outbox":
-                st.outbox.append(q)
+                st.outbox.append({**q, "ts": time.time()})
                 body, ctype = b"ok", "text/plain"
             elif u.path == "/submitted":
                 st.submitted.append({"tenant": q.get("tenant"), "job": q.get("job"), "data": json.loads(q.get("data") or "{}")})

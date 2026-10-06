@@ -21,12 +21,13 @@ from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter, Job
 from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
-from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, __version__
+from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
 from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
 REQUEUE_VERSION = "2026-10-06-b"
+FIXED_FLAG = "2026-10-06-f"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -61,6 +62,16 @@ def merge_board_file(cfg: dict, base: Path) -> int:
 
 TOP_MATCHES: list = []      # (fit, line) for the match checks of this run, for the summary email
 FOLLOWUPS: list = []        # employers that emailed asking for something more ('incomplete application', an assessment)
+ACCOUNT_NOTES: list = []    # career sites that keep refusing the bot's sign-in (told to you so you can reset that password once)
+RUN_STATS: dict = {}        # match checks done in this run, how many passed, and today's use of the free allowance (for the log)
+REPORT_ROWS = 40            # rows listed per section of the daily report (the queue can hold thousands of candidates)
+
+
+def human_check_tries_today(db) -> int:
+    """How many of today's tries ended at a human check (CAPTCHA and the like)."""
+    today = date.today().isoformat()
+    return sum(1 for r in db.conn.execute("SELECT reason FROM jobs WHERE status='blocked' AND updated LIKE ?", (today + "%",))
+               if HUMAN_CHECK.search(r["reason"] or ""))
 
 
 def merge_settings(cfg: dict, base: Path) -> dict:
@@ -101,6 +112,12 @@ def level_out(job, s: dict) -> str | None:
     if hi and floor and hi < float(floor):
         return f"pays too little: tops out near ${hi:,.0f} a year (your floor is ${float(floor):,.0f})"
     return None
+
+
+# Boards whose feed is the employer's whole list of openings: a posting missing from it has been taken down. (Workday and
+# the aggregators only return the newest results of a search, and postings from the daily snapshot come from boards the bot
+# does not read itself: for those, the employer's own page decides.)
+FULL_LIST_SOURCES = {"greenhouse", "lever", "ashby", "workable", "bamboohr", "recruitee", "breezy", "smartrecruiters"}
 
 
 def norm_co(name: str) -> str:
@@ -385,6 +402,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
+    fixed = db.requeue_fixed(FIXED_FLAG)
+    if fixed:
+        log(f"Trying {sum(fixed.values())} jobs again that were set aside by faults fixed in this build: "
+            + ", ".join(f"{n} × {name}" for name, n in fixed.items()))
+    if db.once("2026-10-06-refilter"):
+        n_loc = db.forget_unresolved_locations()
+        n_con = db.conn.execute("DELETE FROM jobs WHERE status='filtered' AND attempts = 0 AND reason LIKE '%hourly retail%'"
+                                " AND lower(title) LIKE '%construction%'").rowcount
+        db.conn.commit()
+        if n_loc or n_con:
+            log(f"Looking again at {n_loc} Workday postings listed under several locations (their cities were never read) and "
+                f"{n_con} office roles in construction that an older rule dropped as trades jobs")
     profile = yaml.safe_load((base / cfg.get("profile_file", "profile.yaml")).read_text())
     brain = Brain(cfg, profile, base, log)
     mailbox.preflight(log)
@@ -437,14 +466,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     else:
         searched = True
         jobs = discover(companies, log, base=base)
+        listed_boards = {(j.source.lower(), str(j.company).lower()) for j in jobs if j.source.lower() in FULL_LIST_SOURCES}
         jobs += discover_aggregators(cfg, base, log)
         if len(jobs) > 1000:
             db.meta_set("discovered_at", datetime.now().isoformat(timespec="seconds"))
-    try:                       # the daily snapshot of 1M+ postings: cheap (seconds), so every run looks at it
+    if not searched:
+        listed_boards = set()
+    jb_state = {"version": db.meta_get("jobboard_version", "")}
+    try:                       # the daily snapshot of 1M+ postings: read whenever it has changed (once a day)
         from .jobboard import discover_jobboard
         have = {r[0] for r in db.conn.execute("SELECT apply_url FROM jobs WHERE apply_url != ''")} | \
                {r[0] for r in db.conn.execute("SELECT url FROM jobs WHERE url != ''")} | {j.apply_url for j in jobs}
-        jobs += discover_jobboard(cfg, base, log, have)
+        jobs += discover_jobboard(cfg, base, log, have, set(sources.KNOWN) | {j.key for j in jobs}, jb_state)
     except Exception as e:
         log(f"  agg/jobboard failed: {e}")
     by_key = {j.key: j for j in jobs}
@@ -455,12 +488,17 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     scored = n_ok = n_low = n_filt = 0
     max_score = s.get("max_scored_per_run", 100000)
     min_score = s.get("min_score", 70)
+    all_seen = True
+    new_ok: list = []          # (keyword score, line) of the new candidates, for the log
     for j in fresh:
         if (why := prefilter(j, s) or level_out(j, s)):
+            if why.startswith("location") and sources.unresolved_location(j.location):
+                continue          # '3 Locations' whose cities could not be read this time: not recorded, so the next search looks again
             db.add(j, "filtered", reason=why)
             n_filt += 1
             continue
         if scored >= max_score:
+            all_seen = False
             break  # leave the rest unseen; they'll be scored next run
         try:
             score, reason = brain.score(j)
@@ -470,15 +508,23 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         scored += 1
         ok = score >= min_score
         by_hand = j.source.lower() in manual_src
+        posted = (j.extra or {}).get("posted") or None
         db.add(j, ("manual" if by_hand else "queued") if ok else "low_score", score=score,
-               reason=("apply by hand: this site blocks automated submissions. " if by_hand and ok else "") + reason)
+               reason=("apply by hand: this site blocks automated submissions. " if by_hand and ok else "") + reason,
+               **({"posted": posted} if posted else {}))
         if ok:
             n_ok += 1
-            log(f"  ✓ {score:3d}  {j.title} @ {j.company} ({j.location[:30]}) — {reason[:150]}")
+            new_ok.append((score, f"{j.title} @ {j.company} ({j.location[:30]}) — {reason[:150]}"))
         else:
             n_low += 1
-    log(f"Scored {scored} new roles: {n_ok} good fits, {n_low} below the bar, {n_filt} filtered out by title/location "
-        f"(finding and scoring took {(time.time() - t_start) / 60:.1f} min)")
+    for sc_, line in sorted(new_ok, key=lambda x: -x[0])[:40]:
+        log(f"  ✓ {sc_:3d}  {line}")
+    if len(new_ok) > 40:
+        log(f"  ✓ … and {len(new_ok) - 40:,} more new candidates (the 40 with the highest keyword score are listed)")
+    if all_seen and jb_state.get("version") and jb_state["version"] != db.meta_get("jobboard_version", ""):
+        db.meta_set("jobboard_version", jb_state["version"])       # the snapshot is in the history: no need to read it again until it changes
+    log(f"Scored {scored} new roles: {n_ok} candidates for the résumé check, {n_low} with nothing going for them, {n_filt} filtered out "
+        f"by title/location (finding and scoring took {(time.time() - t_start) / 60:.1f} min)")
 
     # 3. apply, best matches first, within today's cap
     cap = s.get("daily_cap", 25) - db.applied_today()
@@ -488,6 +534,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         cap = min(cap, int(s["per_run_cap"]))
     if limit is not None:
         cap = min(cap, limit)
+
+    match_on = bool(s.get("prescreen", True))
+    min_fit = int(s.get("min_fit", 70))
+    no_match_bar = int(s.get("min_score_without_match", 80))
+    if match_on:      # the bar may have moved since these were checked: set aside what is now under it, bring back what is now over it
+        db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))
+        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'", (min_fit,))
+        # the keyword bar is only a first sieve (the résumé match decides): when it is lowered, jobs that were under the old
+        # one and were never match-checked come back to be checked
+        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND (fit IS NULL OR fit <= 0) AND attempts = 0"
+                        " AND score >= ? AND (submitted_at IS NULL OR submitted_at = '')", (int(s.get("min_score", 70)),))
+        db.conn.commit()
 
     # re-check every queued title against the current rules (rules get stricter over time)
     n_sw = 0
@@ -508,17 +566,6 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         log(f"Queue clean-up: {n_sw} queued jobs no longer meet the rules and were removed")
 
     health = site_health(db)
-    match_on = bool(s.get("prescreen", True))
-    min_fit = int(s.get("min_fit", 70))
-    no_match_bar = int(s.get("min_score_without_match", 80))
-    if match_on:      # the bar may have moved since these were checked: set aside what is now under it, bring back what is now over it
-        db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))
-        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'", (min_fit,))
-        # the keyword bar is only a first sieve (the résumé match decides): when it is lowered, jobs that were under the old
-        # one and were never match-checked come back to be checked
-        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND (fit IS NULL OR fit <= 0) AND attempts = 0"
-                        " AND score >= ? AND (submitted_at IS NULL OR submitted_at = '')", (int(s.get("min_score", 70)),))
-        db.conn.commit()
 
     def _fit(r) -> int:
         try:
@@ -526,16 +573,30 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         except (IndexError, KeyError):
             return 0
 
+    prior = rank.build(db, min_fit)          # which title words and employers passed the match check before
+    now_dt = datetime.now()
+
     def _rank(r):
+        """The order of the queue. First the jobs whose match is already known, on sites where applications have been going
+        through (best match first). Then the ones still waiting for a match check, the most promising first (rank.py): the
+        free allowance only covers a few hundred checks a day, so they go to the best prospects. Sites where every recent
+        try ended at a human check come last."""
         fit = _fit(r)
-        return (site_rank(r, health), -(fit if fit > 0 else 0.8 * (r["score"] or 0)))
+        sr = site_rank(r, health)
+        if fit > 0:
+            return (0 if sr < 3 else 2, sr, -fit)
+        return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt) - 8 * sr))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
     skip_sites = [x.lower() for x in s.get("skip_sites", []) or []]
     if skip_sites:
         queue = [r for r in queue if not any(x in ((r["source"] or "") + " " + (r["apply_url"] or r["url"] or "")).lower()
                                              for x in skip_sites)]
-    log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now"
-        + (f" (each is first checked against your résumé: the bar is a {min_fit}% match)" if match_on and brain.writer else ""))
+    n_matched = sum(1 for r in queue if _fit(r) > 0)
+    if match_on and brain.writer:
+        log(f"{len(queue)} jobs queued: {n_matched} already matched to your résumé, {len(queue) - n_matched} waiting for that check "
+            f"(best prospects first; the bar is a {min_fit}% match). Applying to up to {max(cap, 0)} now")
+    else:
+        log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
         return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
@@ -549,13 +610,46 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     sub.MAX_APPLY_SECONDS = int(float(s.get("max_minutes_per_job", 8)) * 60)
     facts = cfg.get("facts") or {}
     heartbeat(base)
+    tally = {"checks": 0, "passed": 0, "calls": 0}        # match checks done in this run, how many passed, and the calls they took
+    co_checks: dict = {}                      # employer -> match checks spent on it in this run
+    co_waiting: dict = {}                     # employer -> matched jobs of its waiting in the queue
+    for r in queue:
+        if _fit(r) > 0:
+            co_waiting[norm_co(r["company"] or "")] = co_waiting.get(norm_co(r["company"] or ""), 0) + 1
+    co_check_cap = int(s.get("max_checks_per_company_per_run", 6))
+    batch_n = max(1, min(6, int(s.get("match_batch", prescreen.BATCH))))      # postings per match-check call
+    hc_cap = int(s.get("max_human_check_tries_per_day", 6))
+    hc_tries = [human_check_tries_today(db)]   # tries today on sites that stop every application at a human check
 
-    def judge(row):
+    def settle(row, job, v, unchecked: bool):
+        """Log and count the outcome of one job's match check and turn it into the verdict the apply loop uses."""
+        verdict, fit, why = v
+        if why:
+            log(f"  match {fit:3d}%  {job.title} @ {job.company} — {why[:100]}")
+            TOP_MATCHES.append((fit, f"{fit}% {job.title} @ {job.company}: {why}"))
+            if unchecked:
+                tally["checks"] += 1
+                tally["passed"] += 1 if verdict == "go" else 0
+                co_k = norm_co(row["company"] or "")
+                co_checks[co_k] = co_checks.get(co_k, 0) + 1
+                if verdict == "go":
+                    co_waiting[co_k] = co_waiting.get(co_k, 0) + 1
+        return ("drop" if verdict == "low" else verdict), job
+
+    def judge(row, defer: bool = False):
         """Everything that can be decided about a queued job without opening a browser: still listed, still within today's
         rules, posting still up (the employer's own feed says so in a fraction of a second), your level and pay once the
         full text is known, and the résumé match. Returns (verdict, job): 'go', 'page' (judge again once its page is
-        open), 'later' (cannot be judged now, stays queued) or 'drop' (already recorded why)."""
-        job = by_key.get(row["key"]) or (stub_job(row) if searched else row_job(row))
+        open), 'later' (cannot be judged now, stays queued) or 'drop' (already recorded why). With defer=True a job that
+        needs the model's opinion comes back as ('check', job) instead, so several can be asked about in one call."""
+        job = by_key.get(row["key"])
+        if job is None:
+            src = (row["source"] or "").lower()
+            if searched and src in FULL_LIST_SOURCES and (src, str(row["company"] or "").lower()) in listed_boards:
+                # this run read that employer's whole list of openings and the posting is not in it any more
+                db.update(row["key"], status="skipped", reason="posting no longer listed")
+                return "drop", None
+            job = row_job(row)          # from a search result, the daily snapshot or an earlier run: its own page decides
         if job is None:
             db.update(row["key"], status="skipped", reason="posting no longer listed")
             return "drop", None
@@ -563,6 +657,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         if why_out:
             db.update(job.key, status="filtered", reason=why_out)
             return "drop", None
+        unchecked = match_on and _fit(row) <= 0
+        if unchecked and (row["score"] or 0) < no_match_bar and brain.writer and not prescreen.match_ready(brain):
+            return "later", job          # no allowance for a match check right now: nothing is fetched for it either
         url0 = job.apply_url or job.url or ""
         direct = not job.source.startswith("agg-") or bool(board_of(url0)) or "myworkdayjobs.com" in url0
         if direct and s.get("preflight", True):
@@ -573,6 +670,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 return "drop", None
             if len(pre["description"]) > len(job.description or ""):
                 job.description = pre["description"]
+            if pre.get("company_name") and not (job.extra or {}).get("company_name"):
+                job.extra = {**(job.extra or {}), "company_name": pre["company_name"]}      # the employer's own name for itself
             if len(job.description or "") >= 300 and (why_lv := level_out(job, s)):
                 db.update(job.key, status="filtered", reason=why_lv)
                 log(f"  ✗ {job.title} @ {job.company}: {why_lv[:120]}")
@@ -581,11 +680,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             db.update(job.key, status="skipped", reason="posting closed: its address no longer exists (HTTP 404/410)")
             log(f"  ✗ {job.title} @ {job.company}: the posting is closed (its page is gone; no time spent on it)")
             return "drop", None
-        verdict, fit, why = prescreen.gate(db, brain, job, row, s, log)
-        if why:
-            log(f"  match {fit:3d}%  {job.title} @ {job.company} — {why[:100]}")
-            TOP_MATCHES.append((fit, f"{fit}% {job.title} @ {job.company}: {why}"))
-        return ("drop" if verdict == "low" else verdict), job
+        v = prescreen.gate_pre(db, brain, job, row, s)
+        if v[0] == "check":
+            if defer:
+                return "check", job
+            tally["calls"] += 1
+            fit, why = prescreen.screen(brain, job, log)
+            v = prescreen.gate_store(db, job, row, s, fit, why)
+        return settle(row, job, v, unchecked)
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=cfg.get("headless", True))
@@ -602,15 +704,81 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         bad_hosts: set = set()   # career sites that would not let the bot sign in this run: their other jobs wait, untouched
         verdicts: dict = {}   # job key -> judge() result worked out ahead of time (during the pause after an application)
 
+        match_out = [False]     # the free allowance for match checks is used up (for now): unchecked jobs wait, untouched
+        failed_checks = [0]     # match checks in a row that could not be done although allowance was shown as left
+        applied_n: dict = {}    # employer -> applications already sent there (all time), kept current during the run
+        for r in db.conn.execute("SELECT company FROM jobs WHERE status IN ('applied','unconfirmed')"):
+            applied_n[norm_co(r["company"])] = applied_n.get(norm_co(r["company"]), 0) + 1
+
+        def waits(row) -> bool:
+            """Cheap reasons a queued job is not looked at in this run. It stays queued and nothing is recorded or fetched."""
+            if nofind.get(row["source"] or "", 0) >= 2:
+                return True       # this board keeps handing out listings with no real form: don't burn minutes on more of them now
+            host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
+            if host and (host in bad_hosts or acc.resting(host)):
+                return True       # the bot could not sign in to this career site (a moment ago, or on its last tries): its jobs stay queued
+            if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
+                return True
+            if site_rank(row, health) >= 3 and hc_tries[0] >= hc_cap:
+                return True       # a site where every recent try ended at a human check: only a few tries a day are spent there
+            if match_on and _fit(row) <= 0:                    # still waiting for its match check
+                if match_out[0] and (row["score"] or 0) < no_match_bar:
+                    return True
+                co = norm_co(row["company"] or "")
+                if co_checks.get(co, 0) >= co_check_cap:
+                    return True   # enough checks spent on one employer for one run: the others get their turn
+                if per_company and applied_n.get(co, 0) < per_company <= applied_n.get(co, 0) + co_waiting.get(co, 0):
+                    return True   # this employer already has as many matched jobs waiting as will be applied to: no check is
+                                  # spent on more of its postings until those are done (if one fails, the next gets its turn)
+            return False
+
+        def judge_now(i: int):
+            """The verdict for queue[i]. When it needs the model's opinion, the next candidates that need it too are asked
+            about in the same call (up to search.match_batch postings): the candidate's side of the prompt, half the cost of
+            a single check, is then paid for once. Their verdicts are kept for when the loop reaches them."""
+            row = queue[i]
+            v = judge(row, defer=batch_n > 1)
+            if v[0] != "check":
+                return v
+            pending = [(row, v[1])]
+            roles = {(norm_co(row["company"] or ""), (row["title"] or "").strip().lower())}
+            looked = 0
+            for r in queue[i + 1:i + 1 + 120]:
+                if len(pending) >= batch_n or looked >= 2 * batch_n or time.time() > deadline:
+                    break
+                role = (norm_co(r["company"] or ""), (r["title"] or "").strip().lower())
+                if r["key"] in verdicts or _fit(r) > 0 or waits(r) or ((r["company"] or "").lower(), role[1]) in dead or role in roles:
+                    continue          # (the same role twice in one call would be paid for twice: the second reuses the first's result later)
+                roles.add(role)
+                looked += 1
+                v2 = judge(r, defer=True)
+                if v2[0] == "check":
+                    pending.append((r, v2[1]))
+                else:
+                    verdicts[r["key"]] = v2
+            tally["calls"] += 1
+            results = prescreen.screen_many(brain, [j for _r, j in pending], log)
+            out = None
+            for (r, j), (fit, why) in zip(pending, results):
+                done_v = settle(r, j, prescreen.gate_store(db, j, r, s, fit, why), True)
+                if r["key"] == row["key"]:
+                    out = done_v
+                else:
+                    verdicts[r["key"]] = done_v
+            return out
+
         def lookahead(start: int, until: float):
             """Use the pause between two applications to check the next jobs in line, so the next one is ready to go."""
             ready = 0
-            for r in queue[start:start + 60]:
+            for i in range(start, min(len(queue), start + 400)):
+                r = queue[i]
                 if ready >= 2 or time.time() >= until:
                     break
+                if waits(r) or ((r["company"] or "").lower(), (r["title"] or "").strip().lower()) in dead:
+                    continue
                 v = verdicts.get(r["key"])
                 if v is None:
-                    v = verdicts[r["key"]] = judge(r)
+                    v = verdicts[r["key"]] = judge_now(i)
                 if v[0] in ("go", "page"):
                     ready += 1
 
@@ -620,21 +788,33 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if time.time() > deadline:
                 log(f"Run time limit reached ({(deadline - t_start) / 60:.0f} min): the rest waits for the next run")
                 break
-            ck = ((row["company"] or "").lower(), (row["title"] or "").strip().lower())
-            if nofind.get(row["source"] or "", 0) >= 2:
-                continue          # this board keeps handing out listings with no real form: don't burn minutes on more of them now
-            if ck in dead:
-                db.update(row["key"], status="skipped", reason="same role at same company already skipped this run")
+            if row["key"] not in verdicts and waits(row):
+                if match_out[0] and match_on and _fit(row) <= 0:
+                    laters += 1
                 continue
+            if verdicts.get(row["key"], ("",))[0] == "drop":      # settled ahead of time (and recorded why): nothing more to do
+                verdicts.pop(row["key"])
+                failed_checks[0] = 0
+                continue
+            ck = ((row["company"] or "").lower(), (row["title"] or "").strip().lower())
             co_n = norm_co(row["company"] or "")
+
+            def set_aside(why: str, _row=row, _co=co_n):
+                db.update(_row["key"], status="skipped", reason=why)
+                if _fit(_row) > 0:                     # it was one of its employer's matched jobs waiting: no longer
+                    co_waiting[_co] = max(0, co_waiting.get(_co, 0) - 1)
+            if ck in dead:
+                set_aside("same role at same company already skipped this run")
+                continue
             hist = [r for r in db.conn.execute("SELECT key, company, title FROM jobs WHERE status IN ('applied','unconfirmed') AND key != ?",
                                                (row["key"],)) if norm_co(r["company"]) == co_n]
             if any(r["title"].strip().lower() == ck[1] for r in hist):
-                db.update(row["key"], status="skipped", reason="already applied to this role at this company")
+                set_aside("already applied to this role at this company")
                 continue
             n_co = len(hist)
+            applied_n[co_n] = n_co
             if per_company and n_co >= per_company:
-                db.update(row["key"], status="skipped", reason=f"already applied to {n_co} roles at this company")
+                set_aside(f"already applied to {n_co} roles at this company")
                 continue
             if str(row["reason"] or "").startswith("recheck-inbox"):
                 # an earlier submit that never reached the employer's server: one more try, but only after looking in the
@@ -648,21 +828,30 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log(f"    ✓ {row['title']} @ {row['company']}: the earlier submit did go through ({got[:60]})")
                     continue
             host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
-            if host and host in bad_hosts:
-                continue          # the bot could not sign in to this career site a moment ago: its other jobs stay queued
+            if host and (host in bad_hosts or acc.resting(host)):
+                continue          # the bot could not sign in to this career site (just now, or on its last tries): its other jobs stay queued
             if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
                 continue
 
-            verdict, job = verdicts.pop(row["key"], None) or judge(row)
+            verdict, job = verdicts.pop(row["key"], None) or judge_now(idx)
             if verdict == "drop":
+                failed_checks[0] = 0
                 continue
             if verdict == "later":
                 laters += 1
-                if laters == 1:
-                    log(f"  (the match check has no free allowance left right now: jobs with a keyword score under {no_match_bar} wait for a later run)")
+                if match_on and _fit(row) <= 0 and brain.writer and not match_out[0]:
+                    out_now = not prescreen.match_ready(brain)
+                    failed_checks[0] = 0 if out_now else failed_checks[0] + 1
+                    if out_now or failed_checks[0] >= 5:
+                        match_out[0] = True
+                        log("  (the free allowance for résumé-match checks is used up for now" if out_now else
+                            "  (the résumé-match check keeps failing in this run")
+                        log(f"   so jobs not checked yet wait, untouched, for a later run; only a keyword score of {no_match_bar}+ goes ahead without it)")
                 continue
+            failed_checks[0] = 0
 
             fit_now = _fit(db.get(job.key) or row)
+            was_waiting = fit_now > 0          # counted among its employer's matched jobs waiting: whatever happens now, it no longer is
             log(f"→ {job.title} @ {job.company} (score {row['score']}" + (f", match {fit_now}%" if fit_now > 0 else "") + ")")
             d = out_root / f"{slug(job.company)}-{slug(job.title)}"
             d.mkdir(parents=True, exist_ok=True)
@@ -751,6 +940,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                           attempts=row["attempts"] + (0 if dry_run else 1))
                 if status == "applied":
                     brain.applied_before.add(job.company)
+                    applied_n[co_n] = applied_n.get(co_n, 0) + 1
                 log(f"    ✓ {status} ({took})")
                 done += 1
             except sub.Blocked as e:
@@ -773,6 +963,16 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     nofind[job.source] = nofind.get(job.source, 0) + 1
                 if blocked_text.startswith("account:") and host:
                     bad_hosts.add(host)
+                    if "accounts are off" not in blocked_text:
+                        n_ref, rest_h = acc.refused(host, blocked_text)
+                        rest_txt = f"{rest_h:.0f} hours" if rest_h >= 1 else f"{rest_h * 60:.0f} minutes"
+                        log(f"    (sign-in at {host} did not work; its jobs stay queued and it is tried again in about {rest_txt})")
+                        if n_ref >= 2:
+                            ACCOUNT_NOTES.append(f"{host}: the bot could not sign in on {n_ref} separate tries. To let it in, open that "
+                                                 f"site yourself with your application email: make the account (or choose 'Forgot your "
+                                                 f"password?') and set the password to your ACCOUNT_PASSWORD")
+                if HUMAN_CHECK.search(blocked_text):
+                    hc_tries[0] += 1
                 log(f"    ✗ blocked: {e}")
             except sub.Unconfirmed as e:
                 snap("unconfirmed", str(e))
@@ -815,6 +1015,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     except Exception:
                         pass
             finally:
+                if was_waiting:
+                    co_waiting[co_n] = max(0, co_waiting.get(co_n, 0) - 1)
                 if page:
                     try:
                         page.close()
@@ -830,6 +1032,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 if rest > 0:
                     time.sleep(rest)
         browser.close()
+    RUN_STATS.update(checks=tally["checks"], passed=tally["passed"], calls=tally["calls"], waiting=laters,
+                     allowance=(brain.writer.allowance_line() if brain.writer and hasattr(brain.writer, "allowance_line") else ""))
     return finish(cfg, db, run_start, log, base, today, t_start, dry_run)
 
 
@@ -889,14 +1093,20 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
             continue
         lines += [f"## {k.replace('_', ' ').title()} ({len(groups[k])})", "",
                   "| Score | Role | Company | Note |", "|---:|---|---|---|"]
-        for r in groups[k]:
+        shown = groups[k] if k != "queued" else groups[k][:REPORT_ROWS]      # 'queued' = candidates waiting for their match check
+        for r in shown:
             note = (r["reason"] or "").replace("|", "/")[:140]
             lines.append(f"| {r['score'] or ''} | [{r['title']}]({r['url']}) | {r['company']} | {note} |")
+        if len(shown) < len(groups[k]):
+            lines.append(f"| | …and {len(groups[k]) - len(shown):,} more waiting for their résumé check | | |")
         lines.append("")
     rp = base / "reports" / f"{today}.md"
     rp.parent.mkdir(exist_ok=True)
     prior = rp.read_text() + "\n\n---\n\n" if rp.exists() else ""
     rp.write_text(prior + "\n".join(lines))
+    if RUN_STATS.get("checks") or RUN_STATS.get("allowance"):
+        log(f"Résumé checks this run: {RUN_STATS.get('checks', 0)} ({RUN_STATS.get('passed', 0)} passed) in {RUN_STATS.get('calls', 0)} calls. "
+            f"Free writer allowance used today: {RUN_STATS.get('allowance') or 'n/a'}")
     log(f"Summary: {counts}. Report: {rp}")
     for line in site_summary(rows):
         log(f"  by site{line}")
@@ -905,14 +1115,18 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     if os.environ.get("GITHUB_RUN_ID") and os.environ.get("GITHUB_REPOSITORY"):
         run_url = f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
     s = cfg.get("search") or {}
-    footer = f"build {__version__} · {len(db.retryable(s.get('max_attempts', 2)))} good fits still waiting for a later run"
+    waiting = db.retryable(s.get("max_attempts", 2))
+    n_m = sum(1 for r in waiting if (r["fit"] or 0) > 0)
+    footer = (f"build {__version__} · {n_m} matched jobs still waiting to be applied to · {len(waiting) - n_m:,} more candidates waiting for "
+              f"their résumé check (a few hundred are checked a day, best prospects first)")
     if os.environ.get("GITHUB_ACTIONS"):
         footer += f" · {month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month (before this run)"
     by_site = site_summary(rows)
     if TOP_MATCHES:
         top = [line for _fit, line in sorted(TOP_MATCHES, key=lambda x: -x[0])[:6]]
         footer = "BEST MATCHES CHECKED THIS RUN\n" + "\n".join("- " + x for x in top) + "\n\n" + footer
-    text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site, needs=list(FOLLOWUPS))
+    text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site,
+                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES))
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".

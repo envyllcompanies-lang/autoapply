@@ -39,15 +39,29 @@ hand (tick "dry run" to fill forms without submitting anything).
    own form, and any company board found that way is remembered for later runs. Optional, free and worth adding: **Adzuna**
    (developer.adzuna.com, secrets `ADZUNA_APP_ID` + `ADZUNA_APP_KEY`) and **Jooble** (jooble.org/api/about, secret `JOOBLE_API_KEY`).
 
-Every posting is filtered (titles, seniority, licences, years asked, location, pay, security clearance and citizenship-only wording) and
-given a keyword score of 0–100; postings at or above `min_score` are queued.
+3. **A daily snapshot of about 1.4 million open postings** on 20,000+ company career sites (`aggregators.jobboard` in
+   `settings.yaml`; the open-source job-board-aggregator project). The bot reads it whenever it has changed (once a day) and
+   keeps the rows on sites it can fill (Workday, Greenhouse, Lever, BambooHR, Ashby) that pass your title and location filters.
+   The snapshot's own level guess calls most coordinator / analyst / associate postings "mid", so both its "entry" and "mid"
+   rows are read; the bot's own level rules and the posting's real text still drop anything above early career.
 
-**The match check.** Right before a queued job would be applied to, the bot reads the full posting from the employer's own
-feed (which also says in a fraction of a second whether the job is still open) and has the free writer compare it with your
-résumé, the way LinkedIn's match score does. Only jobs at **60% or more** (`search.min_fit` in `settings.yaml`) are applied
-to; the rest are set aside with the reason. Each job is checked once and the result is remembered. When the free writer has
-no allowance left, only jobs with a keyword score of 80+ go ahead and the rest wait for a later run. The email lists the best
-matches it checked.
+Every posting is filtered (titles, seniority, licences, years asked, location, pay, security clearance and citizenship-only wording) and
+given a keyword score of 0–100. The keyword score is only a first sieve: anything at or above `min_score` (10) becomes a
+**candidate**. On the first 713 postings that were match-checked, a keyword score of 30–39 passed the résumé check about as
+often as one of 60–79, so a high bar there threw away real matches.
+
+**The match check.** Before a candidate is applied to, the bot reads the full posting from the employer's own feed (which
+also says in a fraction of a second whether the job is still open) and has the free writer compare it with your résumé, the
+way LinkedIn's match score does. Only jobs at **60% or more** (`search.min_fit` in `settings.yaml`) are applied to; the rest
+are set aside with the reason. Each job is checked once and the result is remembered; the same title at the same employer
+(posted in another city, or again) reuses the result. The email lists the best matches it checked.
+
+**Which candidate is checked next.** The free writer allows a few hundred match checks a day and thousands of candidates
+wait for one, so the order matters. `autoapply/rank.py` learns from the bot's own history which title words and which
+employers passed the check before, takes a little off for title words it has never seen and for old postings, and checks the
+best prospects first. It needs no setting and gets sharper every day. Jobs already matched are always applied to before new
+candidates are checked. When the day's allowance for checks is used up, the unchecked candidates simply wait (only a keyword
+score of 90+ goes ahead without a check). The log says each run how many were checked and how many passed.
 
 Location rules: remote and US-wide roles anywhere in the US;
 on-site and hybrid roles only in the places in `relocation_ok_locations` (the same list that answers "are you willing to relocate");
@@ -68,6 +82,19 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
   box per digit; numbers like `482913`, `731 204` or letter-number codes like `X7K2QF`) or opens the verification link, then
   carries on with the application. It only ever takes the email of the site it is on (never another employer's, and never
   a reset email for a verify email).
+- **Workday accounts that will not open.** Three things used to go wrong, and filled your inbox with reset emails without
+  an application at the end: (1) some employers answer "Create Account" by taking the form away and then showing Sign In
+  with no message; that gap was read as "account created" and the form was sent again and again. The bot now waits for
+  Workday's real answer and sends the sign-up form once per site and run. (2) A reset or verification email that arrived
+  after the bot stopped waiting was never used, and a new one was asked for on every try. The bot now looks in the inbox
+  first for an email **that site** already sent (a reset email up to 12 hours old, a verify-your-account email up to 7 days
+  old) and uses its link; only when there is none does it ask for a new one. (3) A site that refuses the sign-in is left
+  alone for 45 minutes, then 6 hours, a day, three days, instead of being tried on every job (repeated failed sign-ins lock
+  an account). Its jobs stay queued. After two refusals the email tells you which site it is, so you can open it once
+  yourself (make the account or use "Forgot your password?" with your `ACCOUNT_PASSWORD`); from then on the bot gets in.
+- Workday boxes that used to stop an application and are now filled: a school's From / To asked as bare years, pay boxes
+  that take only a number (also when they look like ordinary text boxes: Workday's "number entered is too large" is the
+  cue), and a "Desired Pay Rate Type" list (Salary).
 - Other sites: multi-page forms (Next / Save and Continue) and one-page forms are read field by field and filled the same way.
 - Uploads **your own résumé file** (`briandelgado_resume.pdf`, set by `resume_file` in `config.yaml`) unchanged on every application. No résumé is generated.
 - **Cover letters:** when a form has a cover-letter upload or box, the bot writes a full one-page letter (about 320 to 380 words, four paragraphs, letterhead, date, signed with your name) from your real background only. If the writer can't: an optional letter is left out and it applies with the résumé alone; a **required** one gets `cover_letter_template` from `config.yaml` (a full, true one-page letter with the company and role filled in).
@@ -117,8 +144,10 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 | `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`, `JOOBLE_API_KEY` | free job-board keys | optional |
 
 ## Tuning (`config.yaml`)
-- More applications: lower `min_score`, add boards to `boards.yaml`, add title keywords; `daily_cap` / `per_run_cap` are ceilings.
-- Better matches: raise `min_score`, add `negative_keywords`, lower `max_years_hard`.
+- More applications: the limit is the number of résumé checks the free writer allows per day (see "The free writer"), then
+  how many of the matched jobs' sites let an application through. Add a free `GEMINI_API_KEY`, add title keywords and cities,
+  add boards to `boards.yaml`; `daily_cap` / `per_run_cap` are ceilings.
+- Stricter matches: raise `search.min_fit` in `settings.yaml`, add `negative_keywords`, lower `max_years_hard`.
 - Many `skipped`? The report lists each question it couldn't answer truthfully. Add a `facts` value, an `answers:` regex or a story in `profile.yaml`.
 - Pay: target $75K; postings whose top pay is under `salary_floor` ($65K) lose 40 points. Locations: Denver / Colorado, Los Angeles area, NYC and
   remote score higher and are approved for relocation answers; add cities to `relocation_ok_locations`.
@@ -126,8 +155,9 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 
 ## `settings.yaml` (public tuning, in the repository)
 Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 60),
-the entry-level setting (`search.max_level`: 0 entry only, 1 entry + early career), the senior-pay cutoff and the writer's model
-list, so they can be tuned without re-sending secrets.
+the candidate bar (`search.min_score`, 10), the day's ceiling while running non-stop (`search.daily_cap_unlimited`, 300), the
+entry-level setting (`search.max_level`: 0 entry only, 1 entry + early career), the senior-pay cutoff, the daily snapshot's
+settings and the writer's model list, so they can be tuned without re-sending secrets.
 
 ## Entry-level check
 Every posting is rated entry / early / mid / senior from the years it *requires* (preferred years are ignored), whether it manages
@@ -140,11 +170,19 @@ Pushing a change to `probe/request.yaml` on the `probe` branch runs `.github/wor
 fills them exactly like a live run and **never submits**, then saves what it found on each form (fields, answers, what stayed empty,
 screenshots) to `probe/out/<id>/` on that branch. Live runs on `main` are not affected.
 
-## The free writer (essays and cover letters)
-Only providers with a key are used (the log's first lines list them). With just `GROQ_API_KEY`: Groq `gpt-oss-120b` → `llama-3.3-70b` →
+## The free writer (essays, cover letters and the match check)
+Only providers with a key are used (the log's first lines list them). With just `GROQ_API_KEY`: Groq `gpt-oss-120b` →
 `gpt-oss-20b` → `qwen3.8-27b`, each with its own free daily allowance; a model whose daily limit is used up is set aside until it resets,
-and per-minute limits are waited out. A Gemini key (aistudio.google.com) adds Gemini in front. Ollama is only for running on your own Mac.
+and per-minute limits are waited out. Ollama is only for running on your own Mac.
 Only résumé-style facts are sent (never your address, phone or EEO answers).
+
+The match check is what limits how many jobs can be applied to in a day, so the allowance is split on purpose
+(`writer` in `settings.yaml`): the best model (`gpt-oss-120b`) only writes your answers; `qwen3.6-27b` does nothing but match
+checks; `gpt-oss-20b` and `qwen3.8-27b` do both, with at most 60% of their day going to match checks (`match_share`).
+**The one thing that raises the number of jobs checked per day is another free key:** add a `GEMINI_API_KEY` secret (free
+at aistudio.google.com, no card) and the two Gemini entries in `settings.yaml`, idle until then, do match checks only. (On
+Google's free tier, what is sent may be used to improve their products: for the match check that is your résumé summary
+without name or contact details, and the public posting.)
 - **Truth first.** The writer is told to use only your facts. An answer that mentions a number or tool not in your facts is sent back once
   for a fix; it is never thrown away and a job is never skipped because of it.
 - **Your voice.** `voice.md` sets the style (answer first, 75 to 200 words, no buzzwords, no em dashes); `about_me.md` and `profile.yaml`
@@ -179,6 +217,8 @@ script, the Workday driver, and a check of the bot's own code (no name used with
   personal details replaced) and against `tests/wd_mock.py`, a stand-in Workday site that behaves like the real one where it is
   hard: pop-up lists, boxes that are redrawn while you type, checkboxes that only react to their label, verify-your-email,
   forgot-password, required blocks behind "Add", pages sent back with complaints.
+- `python tests/funnel_checks.py`: what decides how many good-fit jobs are found and checked: the daily snapshot, the order of
+  the match checks, the split of the writer's allowance, second tries after a fix, account records and emails already in the inbox.
 - `python tests/run_mock.py`: the real pipeline, live, through local mock forms and a mock writer: the match check, a multi-page
   wizard with account creation, emailed-confirmation handling, CAPTCHA and security-code stops, the per-employer cap and more.
 - `python tests/captcha_boundary.py`: fails if code for a CAPTCHA-solving service ever appears in the bot.

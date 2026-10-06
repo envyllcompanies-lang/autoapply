@@ -61,7 +61,10 @@ TITLE_NOT_ELIGIBLE = [
     (re.compile(r"\b(retail|store|restaurant|hotel|hospitality|front desk|cashier|crew|barista|server|host(ess)?|"
                 r"warehouse associate|picker|packer|forklift|material handler|call center|customer service representative|"
                 r"stocker|merchandiser|brand ambassador|sales associate|plant operations|custodian|janitor|maintenance technician|"
-                r"construction|superintendent|foreman|tradesman|carpenter|plumber|hvac)\b", re.I),
+                # (a construction TRADE, not every title with the word in it: 'Construction Project Coordinator', 'Project
+                #  Engineer - Construction' and 'FP&A Coordinator, Construction Services' are office roles you are looking for)
+                r"construction (labou?rer|worker|helper|crew|technician|tech|apprentice|installer|operator|foreman|carpenter|electrician)|"
+                r"labou?rer|superintendent|foreman|tradesman|carpenter|plumber|hvac)\b", re.I),
      "hourly retail / hospitality / warehouse / trades role"),
     (re.compile(r"\bassistant (store|plant|general|restaurant|branch|shift) manager\b|\bshift (lead|supervisor)\b|\bsupervisor\b", re.I),
      "shift / store supervisor role"),

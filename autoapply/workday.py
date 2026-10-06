@@ -207,6 +207,22 @@ def _click(page, selector: str, timeout: int = 5000) -> bool:
         return False
 
 
+def _wait_drawn(page, max_s: float = 25.0) -> str:
+    """The application frame is up but its page has not been drawn yet (Workday is still loading the step, often for half a
+    minute right after signing in). Wait until it draws the step, a sign-in form or an error. Returns the kind of page."""
+    t_end = time.time() + max_s
+    k = "flow"
+    while time.time() < t_end:
+        page.wait_for_timeout(700)
+        try:
+            k = kind(page.evaluate(STATE_JS))
+        except Exception:
+            continue                                    # navigating
+        if k != "flow":
+            break
+    return k
+
+
 def _toward_form(page, st: dict, k: str, manual: str, moves: int, log) -> None:
     """One move from a job page / start page / half-drawn page toward the application form."""
     if k == "start":
@@ -221,11 +237,7 @@ def _toward_form(page, st: dict, k: str, manual: str, moves: int, log) -> None:
                 page.goto(manual, wait_until="domcontentloaded", timeout=45000)
         return
     if k == "flow" and moves < 4:
-        try:                                            # the form is still being drawn: wait for its fields, not a fixed moment
-            page.wait_for_selector('[data-automation-id^="formField"], [data-automation-id="applyFlowPage"] input:not([type=hidden]), '
-                                   '[data-automation-id="applyFlowPage"] textarea', state="visible", timeout=20000)
-        except Exception:
-            page.wait_for_timeout(1000)
+        _wait_drawn(page, 20)                           # the form is still being drawn: wait for it, not a fixed moment
         return
     if manual and (k != "job" or moves > 1 or "/apply" not in page.url):
         if moves == 1:
@@ -249,6 +261,29 @@ def _match_flagged(fields: list[dict], errs: dict) -> set:
             out.add(f["id"])
         elif lab and (any(lab == x or (len(lab) > 6 and (lab in x or x in lab)) for x in labels) or (len(lab) > 6 and lab in text)):
             out.add(f["id"])
+    return out
+
+
+NUMBER_MSG = re.compile(r"number entered is too (large|long|big)|must be (a |an )?(whole )?number|not a valid number|"
+                        r"enter a (valid )?(whole )?number|numeric (values?|characters?) only|only (contain )?numbers", re.I)
+
+
+def _number_fields(fields: list[dict], errs: dict) -> set:
+    """Ids of the text boxes that Workday reads as numbers, going by its complaint. A pay box that looks like any other
+    text box keeps only the digits typed into it, so '$70,000 - $80,000' becomes 7000080000 and Workday answers 'The number
+    entered is too large'. Its complaint names the question; with no name, a single flagged text box is the one."""
+    from .submit import _norm
+    msgs = [m for m in errs.get("messages", []) if NUMBER_MSG.search(m)]
+    if not msgs:
+        return set()
+    text = _norm(" ".join(msgs))
+    cands = [f for f in fields if f.get("kind") in ("text", "textarea")]
+    labs = {f["id"]: _norm(re.sub(r"[*✱]", "", f.get("label", ""))) for f in cands}
+    out = {i for i, lab in labs.items() if len(lab) > 6 and lab in text}
+    if not out:
+        flagged = _match_flagged(cands, {"fields": errs.get("fields", []), "messages": []})
+        if len(flagged) == 1:
+            out = flagged
     return out
 
 
@@ -320,7 +355,7 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
     email_last = False                                 # the last thing done was pressing 'Sign in with email'
     blank_auth = strays = 0
     visits: dict[tuple, int] = {}            # step -> how many times it has been filled in
-    moves = auth_tries = email_clicks = total = 0
+    moves = auth_tries = email_clicks = total = flow_waits = 0
     flagged: dict[tuple, dict] = {}          # step -> Workday's complaints from the last try
     known: dict[tuple, set] = {}             # step -> the fields that were there on the last try
     stage = ""
@@ -392,6 +427,18 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
                 raise S.Blocked(f"account: {e}")
             continue
 
+        if k == "flow":
+            # Signed in and inside the application, but the step itself has not been drawn. That is Workday being slow (it
+            # has taken half a minute), not a wrong page: wait for it, load the form afresh once, wait again, then give up.
+            flow_waits += 1
+            if flow_waits > 5:
+                raise S.Blocked(f"not a real application form: Workday's application page stayed empty for about two minutes; page shows: {S._visible_buttons(page)}")
+            if flow_waits == 4 and manual:
+                log("      (Workday has not drawn the form yet: loading it again)")
+                page.goto(manual, wait_until="domcontentloaded", timeout=45000)
+                continue
+            _wait_drawn(page, 20)
+            continue
         if k != "form":
             moves += 1
             if moves > 5:
@@ -473,18 +520,36 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
             redo = _match_flagged(fields, errs)
             redo |= {f["id"] for f in fields if f.get("required") and not S._already_answered(f)}
             redo |= {f["id"] for f in fields if _ident(f) not in known.get(sid, set())}       # a block that was just added
+            numeric = _number_fields(fields, errs)
+            if numeric:
+                # a box Workday reads as a number got words or a range: answer it again as the number box it is
+                for f in fields:
+                    if f["id"] in numeric:
+                        f["kind"] = "number"
+                again = brain.map_fields(job, fields, cover_letter)["answers"]
+                for i in numeric:
+                    plan["answers"][i] = answers[i] = again.get(i)
+                redo |= numeric
             log(f"      {name} (try {visits[sid]}): Workday said {errs.get('messages') or 'nothing'}; "
                 f"redoing {[f['label'][:30] for f in fields if f['id'] in redo][:8] or 'the required fields'}")
             if redo:
                 answers = {i: v for i, v in answers.items() if i in redo}
-            # an optional box Workday calls invalid and the bot has no answer for (a leftover value): empty it
+            # An optional box Workday calls invalid: empty it when the bot has no answer for it (a leftover value), and also
+            # when Workday has now refused the bot's answer twice (an employer's 'LinkedIn' box that Workday checks as a
+            # Facebook address accepts no LinkedIn address, and an empty optional box is always accepted).
+            refused_txt = S._norm(" ".join(m for m in errs.get("messages", []) if re.search(r"\binvalid\b|not (a )?valid|valid (url|link|username|address)", m, re.I)))
             for f in fields:
-                if f["id"] in redo and not f.get("required") and f["kind"] in ("text", "url", "tel", "email", "number") \
-                        and f.get("has_value") and plan["answers"].get(f["id"]) in (None, ""):
-                    try:
-                        S._loc(page, f).fill("", timeout=3000)
-                    except Exception:
-                        pass
+                if f["id"] in redo and not f.get("required") and f["kind"] in ("text", "url", "tel", "email", "number") and f.get("has_value"):
+                    lab = S._norm(re.sub(r"[*✱]", "", f.get("label", "")))
+                    twice = visits[sid] >= 3 and bool(refused_txt) and len(lab) > 6 and lab in refused_txt
+                    if plan["answers"].get(f["id"]) in (None, "") or twice:
+                        try:
+                            S._loc(page, f).fill("", timeout=3000)
+                        except Exception:
+                            pass
+                        if twice:
+                            answers.pop(f["id"], None)
+                            log(f"      (Workday refused the answer in the optional box '{f.get('label', '')[:50]}' twice: left empty)")
         known[sid] = {_ident(f) for f in fields}
         # lists first: picking a country or state makes Workday redraw (and empty) the name and address boxes
         kinds = {f["id"]: f["kind"] for f in fields}

@@ -1,6 +1,6 @@
 """End-to-end test of the real pipeline (scoring, résumé assembly, form answering, free-LLM writer, submit)
 against local mock application forms and a mock OpenAI-compatible LLM server. No internet, no keys, no cost."""
-import copy, functools, http.server, json, os, shutil, sqlite3, sys, threading, urllib.parse
+import copy, functools, http.server, json, os, re, shutil, sqlite3, sys, threading, urllib.parse
 from pathlib import Path
 import yaml
 
@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT.parent))
 work = ROOT / "work"; shutil.rmtree(work, ignore_errors=True); (work / "site").mkdir(parents=True)
 
-SUBS, CALLS, HITS, MATCHED = [], {}, {}, []
+SUBS, CALLS, HITS, MATCHED, BATCHES = [], {}, {}, [], []
 CLEAN = ("Capitol Edge is the clearest example: I built it alone, about 6,000 lines of production code, and I keep it "
          "running. I like ops work where the process is the product, and this role looks like that.")
 FAB = "I raised revenue 45% at Otto's and ran it all in Rippling. This role is the same kind of work."
@@ -18,9 +18,12 @@ LETTER = ("Dear Acme team,\n\nCapitol Edge started as a solo build and now runs 
 
 def reply(msgs):
     first, last = msgs[1]["content"], msgs[-1]["content"]
-    if msgs[0]["content"].startswith("You screen job postings"):          # the résumé-vs-posting match check
-        MATCHED.append(first.split("POSTING\n")[1].split("\n")[0])
-        return '{"fit": 40, "why": "needs a nursing licence the candidate does not have"}' if "MARK_LOW" in first else '{"fit": 86, "why": "operations and analysis background fits"}'
+    if msgs[0]["content"].startswith("You screen job postings"):          # the résumé-vs-posting match check (one or several postings per call)
+        posts = re.findall(r"POSTING (\d+)\n([^\n]*)\n(.*?)(?=\n\nPOSTING \d+\n|\Z)", first, re.S)
+        MATCHED.extend(t for _n, t, _b in posts)
+        BATCHES.append(len(posts))
+        return json.dumps([{"n": int(n), "fit": 40, "why": "needs a nursing licence the candidate does not have"} if "MARK_LOW" in body else
+                           {"n": int(n), "fit": 86, "why": "operations and analysis background fits"} for n, _t, body in posts])
 
     if "Multiple-choice question on the application form" in first: return "1"
     if "Application form field (short text)" in first: return "N/A"
@@ -266,6 +269,7 @@ if "--dry" not in sys.argv:
     wd = [s for s in WD_STATE.submitted if s["job"].endswith("R-200")]
     if len(wd) != 1 or wd[0]["data"].get("name--legalName--firstName") != "Brian" or wd[0]["data"].get("files") != ["briandelgado_resume.pdf"]:
         problems.append(f"the Workday application was not sent once with your details: {[ (s['job'], s['data'].get('name--legalName--firstName'), s['data'].get('files')) for s in wd ]}")
+    if not any(n > 1 for n in BATCHES): problems.append(f"match checks were not asked several postings at a time: {BATCHES}")
     if not MAILS: problems.append("no summary email was sent")
     else:
         subj, body = MAILS[-1]

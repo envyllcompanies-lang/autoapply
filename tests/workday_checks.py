@@ -10,6 +10,7 @@ Run on its own:  python tests/workday_checks.py      (also run by tests/unit_che
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 import time
@@ -214,13 +215,27 @@ def flow_checks(p):
     brain.writer = None
     srv, base, state = wd_mock.serve()
     now = {"tenant": ""}
-    olds = (MB.configured, MB.wait_for_verification)
+    olds = (MB.configured, MB.wait_for_verification, MB.site_mail)
     MB.configured = lambda: True
+    slow_mail: set = set()         # employers whose emails are not there yet when the bot waits for them (they 'arrive late')
+    inbox: dict = {}               # employer -> emails of earlier runs that sit in the inbox: [{'kind', 'link', 'ts'}]
+    read_inbox: set = set()        # employers whose earlier emails the bot may find (the mock's own outbox counts too)
 
     def wait(**k):
+        if now["tenant"] in slow_mail:
+            return None
         box = [m for m in state.outbox if m["tenant"] == now["tenant"]]
         return {"link": box[-1]["link"], "code": None} if box else None
+
+    def site_mail(site_host, kind, max_age_s=86400, limit=3):
+        t = now["tenant"]
+        if t not in read_inbox:
+            return []
+        mails = [m for m in state.outbox if m["tenant"] == t and m["kind"] == kind] + [m for m in inbox.get(t, []) if m["kind"] == kind]
+        mails = [{"link": m["link"], "ts": m["ts"], "subject": kind, "folder": "INBOX"} for m in mails if m["ts"] > time.time() - max_age_s]
+        return sorted(mails, key=lambda m: -m["ts"])[:limit]
     MB.wait_for_verification = wait
+    MB.site_mail = site_mail
     pdf = ROOT / "briandelgado_resume.pdf"
     b = p.chromium.launch()
 
@@ -240,7 +255,7 @@ def flow_checks(p):
         t0 = time.time()
         try:
             if seed:
-                page.goto(url + "?seed=1")
+                page.goto(url + ("?seed=1" if seed is True else "?" + seed))
             S.open_form(page, url) if "myworkdayjobs.com" in url else WD.open_posting(page, url)
             got = S.apply(page, job, brain, "", {"RESUME": pdf, "_LETTER_MAKER": lambda t: None}, TMP / f"{tenant}.png", dry, logs.append, acc,
                           on_click=lambda: clicks.append(1), on_stage=stages.append)
@@ -318,6 +333,57 @@ def flow_checks(p):
         r = run("quietco", seed=True)
         check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]),
               f"sign-in refused with no message at all: the password must still be reset: {r['got']}; log: {tail(r)}")
+        # 'Create Account' takes the form away for a few seconds and then answers 'already exists': that gap must not be
+        # read as a new account (on real employers it was, and the form was sent again on every job: 200+ refused sign-ins)
+        r = run("flashco", seed=True)
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and "account: created" not in lg and "already exists" in lg and "password reset" in lg,
+              f"a late 'already exists' answer was taken for a new account: {r['got']}; log: {tail(r)}")
+        check(lg.count("creating one on") == 1, f"the sign-up form was sent {lg.count('creating one on')} times on one application (once is enough)")
+
+        # -- an account made on an earlier run and never verified: 'Create Account' is answered with the Sign In form and
+        #    no message, the sign-in is refused, no reset email is ever sent. Its old verification email is what opens it.
+        read_inbox.add("unverco")
+        r = run("unverco", seed="seed=unverified&pw=Pw-123456!x")
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and "verify-your-account email" in lg and "account: created" not in lg,
+              f"an account that was never verified: its verification email from the earlier run should be used: {r['got']}; log: {tail(r)}")
+        check(lg.count("creating one on") == 1 and not any(m["tenant"] == "unverco" and m["kind"] == "reset" for m in state.outbox),
+              f"unverified account: the sign-up form should be sent once and no reset email asked for; log: {tail(r)}")
+
+        # -- the reset email arrives after the bot stopped waiting: this try ends, and the next one uses the email that is
+        #    in the inbox by then instead of asking for another (which is what filled the inbox with reset emails)
+        slow_mail.add("lateco")
+        read_inbox.add("lateco")
+        acc_dir = Path(tempfile.mkdtemp())
+
+        def late_acc():
+            a = A.Accounts({"accounts": {"email": "delgado@alumni.usc.edu"}}, acc_dir)
+            a.password, a.enabled = "Pw-123456!x", True
+            return a
+        ctx_l = b.new_context(viewport={"width": 1280, "height": 1800})      # (one browser for both tries: the mock keeps its accounts there)
+        ctx_l.set_default_timeout(10000)
+        r = run("lateco", seed=True, acc=late_acc(), ctx=ctx_l)
+        n_reset = sum(1 for m in state.outbox if m["tenant"] == "lateco" and m["kind"] == "reset")
+        check(r["got"].startswith("Blocked: account:") and "did not arrive in time" in " | ".join(r["logs"]) and n_reset == 1,
+              f"late reset email, first try: should stop at the account after asking for one reset email ({n_reset} asked): {r['got']}; log: {tail(r)}")
+        slow_mail.discard("lateco")
+        r = run("lateco", req="R-101", acc=late_acc(), ctx=ctx_l)
+        ctx_l.close()
+        lg = " | ".join(r["logs"])
+        n_reset = sum(1 for m in state.outbox if m["tenant"] == "lateco" and m["kind"] == "reset")
+        check(r["got"] == "confirmed" and "is in the inbox: using its link" in lg and n_reset == 1,
+              f"late reset email, next try: the email that came in the meantime should be used, without asking for another ({n_reset} asked in all): {r['got']}; log: {tail(r)}")
+        check(A.Accounts.host(wd_mock.job_url(base, "lateco")) in late_acc().known and late_acc().noted(A.Accounts.host(wd_mock.job_url(base, "lateco")), "reset_mail") > 0,
+              "the time of the reset email that was used should be remembered, so it is never tried twice")
+
+        # -- a reset email from an earlier day whose link no longer works: say so, then ask for a new one
+        read_inbox.add("usedco")
+        inbox["usedco"] = [{"kind": "reset", "link": f"{base}/usedco/passwordreset?t=1", "ts": time.time() - 3600}]
+        r = run("usedco", seed=True)
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and "no longer works" in lg and "password reset; signing in" in lg and lg.index("no longer works") < lg.index("password reset; signing in"),
+              f"a reset link that has expired: a new one should be asked for and used: {r['got']}; log: {tail(r)}")
 
         # -- required blocks behind 'Add' (marked in the heading, or only said after Next)
         for tenant in ("strict", "strict2"):
@@ -332,6 +398,32 @@ def flow_checks(p):
                   f"{tenant}: education: {d.get('education-1--school')} / {d.get('education-1--degree')}")
             check(d.get("education-1--fieldOfStudy") == ["Industrial Engineering"], f"{tenant}: field of study should fall back to the closest listed one: {d.get('education-1--fieldOfStudy')}")
             check(not d.get("education-1--gradeAverage"), f"{tenant}: an optional GPA box should be left empty")
+
+        # -- school years asked as bare years, pay asked in boxes that only take a number, a 'pay rate type' list
+        r = run("extras")
+        d = r["data"] or {}
+        check(r["got"] == "confirmed", f"extras: {r['got']}; log: {tail(r)}")
+        edu = (PROFILE.get("education") or [{}])[0]
+        yrs = re.findall(r"(?:19|20)\d{2}", str(edu.get("date") or edu.get("dates") or ""))
+        if len(yrs) > 1:
+            got_y = ((d.get("education-1--firstYearAttended") or {}).get("y"), (d.get("education-1--lastYearAttended") or {}).get("y"))
+            check(got_y == (yrs[0], yrs[-1]), f"extras: the school's From / To years should be your degree's first and last year, got {got_y}")
+        pay = S._number_text(CFG["facts"].get("salary_number") or "")
+        if pay:
+            check(d.get("primaryQuestionnaire--annual") == pay, f"extras: a number box for pay should get your pay as a plain number, got {d.get('primaryQuestionnaire--annual')!r}")
+            check(d.get("primaryQuestionnaire--pay") == pay and any("(try 2)" in x and "too large" in x for x in r["logs"]),
+                  f"extras: a pay box that turned out to take only a number should be answered again with the plain number, got {d.get('primaryQuestionnaire--pay')!r}; log: {tail(r)}")
+        check(d.get("primaryQuestionnaire--paytype") == "Salary", f"extras: 'Desired Pay Rate Type' should be Salary, got {d.get('primaryQuestionnaire--paytype')!r}")
+        check(S._number_text("$75,000") == "75000" and S._number_text(75000.0) == "75000" and S._number_text("62500.50") == "62500.50"
+              and S._number_text("3+") == "3+", "what is typed into a number box")
+
+        # -- an optional box that Workday refuses whatever the bot answers: after two refusals it is left empty
+        r = run("fbco")
+        d = r["data"] or {}
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and not d.get("socialNetworkAccounts--facebookAccount"), f"fbco: {r['got']}; box holds {d.get('socialNetworkAccounts--facebookAccount')!r}; log: {tail(r)}")
+        if "Invalid Facebook URL" in lg:
+            check("twice: left empty" in lg, f"fbco: an optional box refused twice should be emptied, and said so; log: {tail(r)}")
 
         # -- your school is not in the employer's list: 'Other', never a school with a similar name
         r = run("strict3")
@@ -363,11 +455,12 @@ def flow_checks(p):
         finally:
             S.MAX_APPLY_SECONDS = old
     finally:
-        MB.configured, MB.wait_for_verification = olds
+        MB.configured, MB.wait_for_verification, MB.site_mail = olds
         b.close()
         srv.shutdown()
-    print("ok  Workday applications end to end: accounts (new, verify by email, forgot password), pop-up lists, redrawn pages, "
-          "required blocks, pages sent back, second job at one employer, closed / already applied / dry run / time cap")
+    print("ok  Workday applications end to end: accounts (new, verify by email, forgot password, a late 'already exists', an old "
+          "unverified account, a reset email that comes late or has expired), pop-up lists, redrawn pages, required blocks, "
+          "year-only and number-only boxes, pages sent back, second job at one employer, closed / already applied / dry run / time cap")
 
 
 def run_all() -> list[str]:

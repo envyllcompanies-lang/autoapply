@@ -138,7 +138,17 @@ EXTRACT_JS = r"""
     const f = { id: tag(el), required, label: lab0, maxlength: (el.maxLength > 0 && el.maxLength < 100000) ? el.maxLength : null,
                 sel: selOf(el), key: keyOf(el), has_value: !!(el.value && type !== 'file') };
     const dsec = el.getAttribute('data-automation-id') || '';
-    if (/^dateSection(Day|Year)-input$/.test(dsec)) continue;                 // Workday date: handled as one field (the month box)
+    if (/^dateSection(Day|Year)-input$/.test(dsec)) {                         // Workday date: handled as one field (the month box)
+      // ...except a date that is only a year (a school's 'From' / 'To (Actual or Expected)'): it has no month box, so its
+      // year box is the field. (Skipping it left those required boxes empty and the application stuck on that page.)
+      const wrapY = el.closest('[data-automation-id="dateInputWrapper"]') || el.parentElement;
+      if (dsec === 'dateSectionYear-input' && !(wrapY && wrapY.querySelector('[data-automation-id="dateSectionMonth-input"]'))) {
+        const yq = fieldQuestion(el) || labelOf(el) || 'Year';
+        fields.push({ id: tag(el), kind: 'wddate', label: yq, required: /[*\u2731]/.test(yq) || required, sel: selOf(el), key: keyOf(el),
+                      maxlength: null, hasDay: false, yearOnly: true, has_value: !!el.value });
+      }
+      continue;
+    }
     if (dsec === 'dateSectionMonth-input') {
       const dq = fieldQuestion(el) || 'Date';
       const wrap = el.closest('[data-automation-id="dateInputWrapper"]') || el.parentElement;
@@ -172,6 +182,9 @@ EXTRACT_JS = r"""
       f.elid = el.id || '';
     }
     else f.kind = ['email', 'tel', 'url', 'number', 'date', 'password'].includes(type) ? type : 'text';
+    // Workday's number box is a text input that keeps only the digits typed into it: 'USD 70,000 - 80,000' becomes
+    // 7000080000 and the page is sent back with 'The number entered is too large'. It is a number field.
+    if (f.kind === 'text' && /^numericInput$/i.test(el.getAttribute('data-automation-id') || '')) f.kind = 'number';
     if (/[*\u2731]/.test(f.label)) f.required = true;
     fields.push(f);
   }
@@ -1014,6 +1027,22 @@ def _set_date(page, f: dict, el, val):
     """Workday's MM / DD / YYYY boxes. Typing the digits into the month box moves along by itself; if the boxes do not
     show the date afterwards, each box is typed on its own."""
     sv = str(val).strip()
+    if f.get("yearOnly"):                             # a box that holds only a year (a school's From / To)
+        m_y = re.search(r"(?:19|20)\d{2}", sv)
+        if not m_y:
+            raise RuntimeError(f"not a year: {val!r}")
+        try:
+            if (el.input_value(timeout=1500) or "").strip() == m_y.group(0):
+                return
+        except Exception:
+            pass
+        el.focus(timeout=3000)
+        page.keyboard.press("Control+a")
+        page.keyboard.press("Backspace")
+        page.keyboard.type(m_y.group(0), delay=60)
+        page.keyboard.press("Tab")
+        page.wait_for_timeout(200)
+        return
     m_iso = re.match(r"^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?$", sv)                # 2026-11-01, 2026-11
     m_us = re.match(r"^(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})$", sv)             # 11/1/2026
     m_my = re.match(r"^(\d{1,2})[/.\-](\d{4})$", sv)                           # 11/2026
@@ -1136,6 +1165,16 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     return True
 
 
+def _number_text(val) -> str:
+    """What goes into a number box: the plain number ('$75,000' -> '75000', 75000.0 -> '75000'). Such boxes keep only
+    the digits typed into them, so a comma is harmless but '75000.0' would be read as 750000. A real fraction is kept."""
+    s = str(val).strip().replace(",", "").replace("$", "").strip()
+    m = re.fullmatch(r"(-?\d+)(?:\.(\d+))?", s)
+    if not m:
+        return str(val)
+    return m.group(1) if not m.group(2) or not int(m.group(2)) else f"{m.group(1)}.{m.group(2)}"
+
+
 def _fill_one(page, f: dict, val, files: dict, log):
     kind, fid = f["kind"], f["id"]
     el = _loc(page, f) if not fid.startswith("g_") else None
@@ -1148,7 +1187,7 @@ def _fill_one(page, f: dict, val, files: dict, log):
     elif kind == "wdprompt":
         _wd_prompt(page, f, el, str(val), log)
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
-        _set_text(el, str(val))
+        _set_text(el, _number_text(val) if kind == "number" else str(val))
     elif kind == "select":
         try:
             el.select_option(label=str(val), timeout=4000)

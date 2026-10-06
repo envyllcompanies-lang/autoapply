@@ -62,6 +62,8 @@ _UNSET = object()
 #   mode: None = normal | "choice" = only for option fields (select/radio/checkbox group) | "demo" = voluntary self-ID
 _AI_Q = (r"\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b.{0,60}\b(use[ds]?|using|assist\w*|generat\w*|tools?|help\w*)\b|"
          r"\b(use[ds]?|using|assist\w*|help\w*)\b.{0,60}\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b")
+PLACEHOLDER_OPT = re.compile(r"\W*(select( one| an option|\.\.\.)?|choose( one)?|please select.*|none selected|--+)\W*$", re.I)      # the unanswered state of a list
+
 FIELD_RULES = [
     (r"first.?generation", ("first_generation",), "choice"),
     (_AI_Q, ("ai_use_disclosure",), "choice"),
@@ -103,7 +105,8 @@ FIELD_RULES = [
     (r"hybrid|on-?site|in-?office|in the office|in-?person|our offices?|anchor days?|days? ?(a|per|/) ?week|commut", ("open_to_onsite",), "loc"),
     (r"remote", ("open_to_remote",), "choice"),
     (r"start date|earliest.*start|available to start|notice period|when (can|could) you start|availability|next career move|when are you looking", ("earliest_start_date",), None),
-    (r"salary|compensation|pay expectation|desired pay|expected pay|pay range", ("salary_expectation",), "salary"),
+    (r"salary|compensation|pay expectation|(desired|expected|target) (annual |yearly |base |hourly )?(pay|wage)|pay range|pay requirement|"
+     r"annual pay|rate of pay|wage expectation", ("salary_expectation",), "salary"),
     (r"(related|relative|friend|family).{0,60}(work|employ)|family members?|\brelatives?\b|know (anyone|someone|any)|current(ly)? employees?.{0,40}(know|refer)|have you been referred|were you referred", ("know_employee",), "choice"),
     (r"\bsms\b|text messag|text you|contact (you )?(by|via) text|consent to (receive )?texts?\b|\btexts? from", ("sms_consent",), "choice"),
     (r"referred by|referrer|referral (name|employee|code|email)|employee referral|name of (the )?(employee|person)", ("referral_name",), None),
@@ -481,6 +484,7 @@ class Brain:
         answers, missing = {}, []
         ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
         exp_vals = self._experience_answers(fields)          # Workday 'My Experience': your real jobs, never the one applied to
+        exp_vals.update(self._education_years(fields))       # ...and the first and last year of your degree
         # Workday lists the boxes of one question one by one ('None of the above.'): each box can see what its group is about
         self._siblings = {}
         for fld in fields:
@@ -918,7 +922,6 @@ class Brain:
             return True if CONSENT.search(low) else None
         if kind == "number" and re.search(r"salary|compensation|pay", low):
             return self.facts.get("salary_number") or None
-
         if kind == "checkbox_group" and re.search(r"language", low):
             got = [o for o in opts if re.search(r"\b(english|spanish|espa[nñ]ol)\b", o, re.I)]
             if got:
@@ -1050,6 +1053,8 @@ class Brain:
         seen: dict = {}
         out = {}
         for f, l in labs:
+            if f.get("yearOnly") or re.search(r"YearAttended", str(f.get("key") or ""), re.I):
+                continue                                   # a school's From / To years (see _education_years), not a job's dates
             key = {"job title": "title", "title": "title", "company": "company", "company name": "company", "employer": "company",
                    "location": "location", "from": "from", "start date": "from", "to": "to", "end date": "to",
                    "role description": "desc", "description": "desc", "i currently work here": "current"}.get(l)
@@ -1078,6 +1083,31 @@ class Brain:
                 out[f["id"]] = (" ".join((b.get("text", "") if isinstance(b, dict) else str(b)) for b in (j.get("bullets") or []))[:1900]) or None
             elif key == "current":
                 out[f["id"]] = True if now else ""
+        return out
+
+    def _education_years(self, fields) -> dict:
+        """Workday's Education block asks 'From' and 'To (Actual or Expected)' as bare years. They are the first and last
+        year of your degree in profile.yaml (Education 1 = your first entry, and so on). Returns {field id: year or None};
+        a year the profile does not give is left for you, never made up."""
+        out: dict = {}
+        seen = {"first": 0, "last": 0}
+        edus = list(self.profile.get("education") or [])
+        for f in fields:
+            key = str(f.get("key") or "")
+            which = "first" if re.search(r"firstYearAttended", key, re.I) else "last" if re.search(r"lastYearAttended", key, re.I) else None
+            if which is None and f.get("yearOnly") and re.search(r"education|school|degree", str(f.get("sel") or "") + " " + key, re.I):
+                lab = _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))
+                which = "first" if lab in ("from", "start year", "first year attended") else \
+                    "last" if (lab == "to" or lab.startswith("to ") or "last year" in lab or "end year" in lab) else None
+            if which is None:
+                continue
+            n = seen[which]
+            seen[which] += 1
+            years = re.findall(r"(?:19|20)\d{2}", str((edus[n].get("date") or edus[n].get("dates") or "") if n < len(edus) else ""))
+            if which == "first":
+                out[f["id"]] = years[0] if len(years) > 1 else None     # one year alone is the graduation year, not the start
+            else:
+                out[f["id"]] = years[-1] if years else None
         return out
 
     def _meets_minimums(self) -> bool:
@@ -1192,10 +1222,17 @@ class Brain:
             return self._reside(low, opts, kind)
         if kind == "checkbox_group" and opts and re.search(r"availab|which (days|shifts)|days? (can|are|do) you|shifts? (can|are|do) you|when (can|are) you", low):
             return list(opts)                # open availability: every day / shift offered
-        if has_opts and kind in ("select", "radio", "combobox") and re.search(
+        pay_words = re.search(r"pay rate|rate type|rate of pay|pay (type|basis|frequency)|(hourly|salary|compensation|wage)", low[:160])
+        if has_opts and re.search(r"pay (rate )?type|rate type|pay basis|(salary|compensation|pay) (type|basis)", low[:120]) \
+                and not re.search(r"current|previous|history", low[:120]):
+            # 'Desired Pay Rate Type: Hourly / Salary': your pay expectation is a yearly salary
+            got = next((o for o in opts if not PLACEHOLDER_OPT.match(o) and re.search(r"salar|annual|year", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got
+        if has_opts and not pay_words and kind in ("select", "radio", "combobox") and re.search(
                 r"\brate\b|rating|proficien(cy|t) (level|in|with)|(level|degree) of (proficiency|expertise|experience|knowledge|skill|familiarity)|how (proficient|skilled|experienced|comfortable|familiar)|skill level|experience level|familiarity (with|level)|self.?assess|expertise", low) \
                 and not re.search(r"years?|language|spanish|english|fluen|verbal|written|speaking|reading|writing", low):
-            got = self._rate(low, opts)
+            got = self._rate(low, [o for o in opts if not PLACEHOLDER_OPT.match(o)])      # ('pay rate' is not a rating; 'Select One' is not a level)
             if got:
                 return got
         if has_opts and re.search(r"age (range|group|bracket)|how old|your age\b", low):

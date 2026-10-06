@@ -284,6 +284,78 @@ def _other_employer(site_host: str, info: dict) -> bool:
     return lh.endswith("myworkdayjobs.com") and lh != site
 
 
+def _link_host(url: str) -> str:
+    try:
+        from urllib.parse import urlparse
+        return (urlparse(url or "").hostname or "").lower()
+    except Exception:
+        return ""
+
+
+def _site_link(info: dict, site: str, kind: str) -> str | None:
+    """The link in this email that leads to the given site: the one that reads like a password reset (kind 'reset') or an
+    account activation (kind 'verify') when there is one, else the first link to that site."""
+    want = re.compile(r"reset|password", re.I) if kind == "reset" else re.compile(r"activat|verif|confirm", re.I)
+    links = ([info["link"]] if info.get("link") else []) + \
+        [u.rstrip(".,;") for u in LINK_RX.findall(str(info.get("body") or "")) if not BAD_LINK.search(u)]
+    on_site = [u for u in links if _link_host(u) == site]
+    return next((u for u in on_site if want.search(u)), on_site[0] if on_site else None)
+
+
+def site_mail(site_host: str, kind: str, max_age_s: float = 86400, limit: int = 3) -> list[dict]:
+    """Account emails this very site sent earlier that are still in the inbox, newest first: its password-reset emails
+    (kind 'reset') or its verify-your-account emails (kind 'verify'). An email is the site's when a link in it leads to
+    the site itself. Such an email is as good as a new one: a career site's email sometimes arrives minutes after the bot
+    stopped waiting for it, and a verification email from an earlier run may never have been opened. Using it beats asking
+    for another (which only fills the inbox). Each returned email carries 'link' (the link to use) and 'ts' (when it came).
+    Only emails whose subject says password / reset / verify / activate are looked at."""
+    site = (site_host or "").split(":")[0].lower()
+    user, pw = os.environ.get("IMAP_USER"), os.environ.get("IMAP_PASS")
+    if not site or not user or not pw or not configured():
+        return []
+    words = ("password", "reset") if kind == "reset" else ("verify", "activate")
+    since = time.strftime("%d-%b-%Y", time.gmtime(time.time() - max_age_s - 86400))      # IMAP's SINCE counts in whole days
+    out: list[dict] = []
+    try:
+        imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+        imap.login(user, pw)
+    except Exception:
+        return []
+    try:
+        for folder in ("INBOX", "[Gmail]/Spam"):
+            try:
+                typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
+                if typ != "OK":
+                    continue
+                validity = (imap.response("UIDVALIDITY")[1] or [None])[0]
+                _, data = imap.uid("search", None, "SINCE", since, "OR", "SUBJECT", f'"{words[0]}"', "SUBJECT", f'"{words[1]}"')
+                uids = (data[0] or b"").split()[-30:]
+            except Exception:
+                continue
+            for u in reversed(uids):
+                info = _SEEN.get((folder, validity, u))
+                if info is None:
+                    try:
+                        _, d = imap.uid("fetch", u, "(RFC822)")
+                        info = parse_message(next(part[1] for part in d if isinstance(part, tuple)))
+                    except Exception:
+                        continue
+                    if len(_SEEN) >= 400:
+                        _SEEN.clear()
+                    _SEEN[(folder, validity, u)] = info
+                if info["ts"] < time.time() - max_age_s or (kind == "reset") != _is_reset(info):
+                    continue
+                link = _site_link(info, site, kind)
+                if link:
+                    out.append({"link": link, "ts": info["ts"], "subject": info["subject"], "folder": folder})
+    finally:
+        try:
+            imap.logout()
+        except Exception:
+            pass
+    return sorted(out, key=lambda m: -m["ts"])[:limit]
+
+
 def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False,
                           kind: str = "", site_host: str = "") -> dict | None:
     """Poll the inbox until the email this site just sent arrives: {'link', 'code'} or None.

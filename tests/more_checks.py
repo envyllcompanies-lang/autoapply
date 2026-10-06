@@ -536,7 +536,8 @@ def source_checks():
         shutil.rmtree(tmp, ignore_errors=True)
     check(sources.dedupe_boards("workday", ["a/wd1/X", "A/wd1/x/Acme", "b/wd5/Y"]) == ["A/wd1/x/Acme", "b/wd5/Y"], "dedupe_boards(workday)")
     check(sources.dedupe_boards("greenhouse", ["Acme", "acme", "beta"]) == ["Acme", "beta"], "dedupe_boards(greenhouse)")
-    # jobs the database already decided do not get their detail page read again; titles with no wanted word are not read at all
+    # jobs the database already decided do not get their detail page read again; titles with no wanted word are not read
+    # unless the list left their location open
     first_run_calls = len(detail_calls)
     check(first_run_calls == len(jobs) - 1, f"first run should read every wanted posting's detail page: {first_run_calls} of {len(jobs) - 1}")
     sources.KNOWN = {jobs[1].key: "applied", jobs[2].key: "skipped", jobs[3].key: "queued"}
@@ -550,7 +551,10 @@ def source_checks():
         sources.KNOWN = {}
         with Patch(get=get_multi, post=post_big):
             sources.workday("big/wd1/Careers")
-        check(not detail_calls, "detail pages were read for titles with no wanted keyword")
+        # (a posting listed under '2 Locations' is the exception: its page is the only place its cities are named, and without
+        #  them it was dropped for its location however good its title)
+        check(detail_calls and not any("shared" in u or "Whs" in u for u in detail_calls),
+              f"with no wanted keyword in the title, only postings whose list does not say where they are should have their page read: {detail_calls[:3]}")
     finally:
         sources.KNOWN = {}
         sources.SEARCH = CFG["search"]
@@ -791,8 +795,8 @@ def workflow_checks():
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     job_if = wf["jobs"]["apply"].get("if", "")
-    check(trig["schedule"][1]["cron"] == "37 * * * *" and "github.event.schedule == '7 1,13,17,21 * * *'" in job_if
-          and "visibility == 'public'" in job_if, f"the hourly starts must be skipped unless the repository is public: {job_if!r}")
+    check(trig["schedule"][1]["cron"] in ("37 * * * *", "7,22,37,52 * * * *") and "github.event.schedule == '7 1,13,17,21 * * *'" in job_if
+          and "visibility == 'public'" in job_if, f"the extra starts within each hour must be skipped unless the repository is public: {job_if!r}")
     up = [st for st in wf["jobs"]["apply"]["steps"] if "upload-artifact" in str(st.get("uses", ""))][0]
     check("visibility != 'public'" in up.get("if", ""), "filled-in forms must never be uploaded from a public repository")
     os.environ["AUTOAPPLY_UNLIMITED"] = "1"

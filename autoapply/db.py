@@ -33,7 +33,8 @@ class DB:
         for col, kind in (("fit", "INTEGER"),          # match % of your résumé against the posting (prescreen.py)
                           ("stage", "TEXT"),           # how far the last attempt got: 'account', 'My Information', 'Review' ...
                           ("submitted_at", "TEXT"),    # when Submit was clicked; set BEFORE the click, never cleared by a retry rule
-                          ("followup", "TEXT")):       # an email from the employer asking for something more
+                          ("followup", "TEXT"),        # an email from the employer asking for something more
+                          ("posted", "TEXT")):         # when the posting went up, where the source says so (newer ones are checked first)
             try:
                 self.conn.execute(f"ALTER TABLE jobs ADD COLUMN {col} {kind}")
             except sqlite3.OperationalError:
@@ -90,6 +91,59 @@ class DB:
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
         return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9))
+
+    def requeue_fixed(self, flag: str) -> dict:
+        """Jobs that were set aside by a fault that has since been fixed get one more try, once per flag. Each rule names
+        the fault; none of them brings back a job whose Submit button was ever clicked. Returns how many each rule found."""
+        if not self.once("requeue:" + flag):
+            return {}
+        never_sent = " AND (submitted_at IS NULL OR submitted_at = '')"
+        wd = " AND apply_url LIKE '%myworkdayjobs.com%'"
+        rules = {
+            # Workday pages the driver could not get past: a school's From / To asked as bare years, a pay box that only
+            # takes a number, a 'pay rate type' list. The driver fills those now.
+            "stuck on a Workday page": "status='skipped' AND reason LIKE 'stuck on Workday%'" + wd,
+            # required questions the answer rules had nothing for and now do (a pay-rate-type list, race boxes drawn one
+            # per choice, a 'None of the above' box)
+            "a question the bot can answer now": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND ("
+                "reason LIKE '%Pay Rate%' OR reason LIKE '%Rate Type%' OR reason LIKE '%None of the above%' OR reason LIKE '%(United States%'"
+                " OR reason LIKE '%Annual Pay%' OR reason LIKE '%Year Attended%')",
+            # Workday drew its form later than the bot waited, and the page was written off as 'not a real form'
+            "Workday's form came up late": "status IN ('blocked','skipped') AND (reason LIKE '%could not reach Workday''s form%'"
+                " OR reason LIKE '%Workday''s sign-in page stayed empty%')" + wd,
+            # sign-ins that went round in circles because a late 'already exists' answer was read as a new account
+            "a Workday sign-in that went in circles": "status='blocked' AND (reason LIKE 'account: still at Workday''s sign-in%'"
+                " OR reason LIKE 'account: still on Workday''s sign-in%' OR reason LIKE 'account: Workday keeps returning%')" + wd,
+            # set aside only because the same title at the same employer had just failed in that run
+            "same role as one that had just failed": "status='skipped' AND reason = 'same role at same company already skipped this run'"
+                " AND COALESCE(attempts, 0) = 0",
+            # called 'no longer listed' only because one search did not return them, although their employer's list of
+            # openings was never read (postings from the daily snapshot and from aggregators): their own page decides now
+            "wrongly called no longer listed": "status='skipped' AND reason = 'posting no longer listed' AND COALESCE(attempts, 0) = 0",
+        }
+        found = {}
+        for name, where in rules.items():
+            n = self.conn.execute(f"UPDATE jobs SET status='queued', attempts=0 WHERE {where}{never_sent}").rowcount
+            if n:
+                found[name] = n
+        self.conn.commit()
+        return found
+
+    def once(self, flag: str) -> bool:
+        """True the first time it is asked about this flag, False ever after (one-off clean-ups of the history)."""
+        if self.meta_get("once:" + flag, ""):
+            return False
+        self.meta_set("once:" + flag, datetime.now().isoformat(timespec="seconds"))
+        return True
+
+    def forget_unresolved_locations(self) -> int:
+        """Workday lists a posting open in several cities as '2 Locations'. Those used to be dropped for their location
+        without their cities ever being looked up. Forget them (once), so the next search reads their detail page."""
+        n = self.conn.execute(
+            "DELETE FROM jobs WHERE status='filtered' AND attempts = 0 AND (reason LIKE 'location ''% Locations'' not allowed'"
+            " OR reason LIKE 'location '''' not allowed') AND apply_url LIKE '%myworkdayjobs.com%'").rowcount
+        self.conn.commit()
+        return n
 
     def reset_title_filter(self, token: str) -> int:
         """When the list of allowed job titles changes, postings that were dropped only because of their title are looked at

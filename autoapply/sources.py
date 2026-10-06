@@ -34,6 +34,38 @@ class Job:
         return f"{self.source}:{self.company}:{self.job_id}"
 
 
+def _iso(v) -> str:
+    """A posting date from a job feed (ISO text, or milliseconds since 1970) as a plain UTC date-time; '' when unreadable."""
+    from datetime import datetime, timezone
+    try:
+        if isinstance(v, (int, float)) or str(v).isdigit():
+            n = float(v)
+            t = datetime.fromtimestamp(n / 1000 if n > 1e11 else n, timezone.utc)
+        else:
+            t = datetime.fromisoformat(str(v).strip().replace("Z", "+00:00"))
+            if t.tzinfo is None:
+                t = t.replace(tzinfo=timezone.utc)
+        return t.astimezone(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
+    except Exception:
+        return ""
+
+
+def _wd_posted(text: str) -> str:
+    """Workday's 'Posted Today' / 'Posted Yesterday' / 'Posted 5 Days Ago' / 'Posted 30+ Days Ago' as a date."""
+    from datetime import datetime, timedelta
+    low = (text or "").lower()
+    if "today" in low:
+        days = 0
+    elif "yesterday" in low:
+        days = 1
+    else:
+        m = re.search(r"(\d+)\s*\+?\s*day", low)
+        if not m:
+            return ""
+        days = int(m.group(1)) + (1 if "+" in low else 0)
+    return (datetime.utcnow() - timedelta(days=days)).replace(microsecond=0).isoformat(timespec="seconds")
+
+
 def _strip_html(s: str) -> str:
     s = html.unescape(s or "")
     s = re.sub(r"<(br|/p|/li|/h\d)[^>]*>", "\n", s, flags=re.I)
@@ -55,7 +87,8 @@ def greenhouse(token: str) -> list[Job]:
             title=j.get("title", ""), location=(j.get("location") or {}).get("name", ""),
             url=url, apply_url=f"https://job-boards.greenhouse.io/{token}/jobs/{j['id']}",
             description=_strip_html(j.get("content", "")),
-            extra={"company_name": j["company_name"]} if j.get("company_name") else {}))
+            extra={**({"company_name": j["company_name"]} if j.get("company_name") else {}),
+                   **({"posted": _iso(j.get("first_published") or j.get("updated_at"))} if (j.get("first_published") or j.get("updated_at")) else {})}))
     return out
 
 
@@ -74,7 +107,8 @@ def lever(company: str) -> list[Job]:
             source="lever", company=company, job_id=j["id"], title=j.get("text", ""),
             location=cats.get("location", "") or ", ".join(cats.get("allLocations", []) or []),
             url=j.get("hostedUrl", ""), apply_url=j.get("applyUrl") or j.get("hostedUrl", "") + "/apply",
-            description=desc.strip(), extra={"workplace": j.get("workplaceType")}))
+            description=desc.strip(), extra={"workplace": j.get("workplaceType"),
+                                             **({"posted": _iso(j["createdAt"])} if j.get("createdAt") else {})}))
     return out
 
 
@@ -95,7 +129,8 @@ def ashby(org: str) -> list[Job]:
             location=loc, url=job_url,
             apply_url=j.get("applyUrl") or (job_url.rstrip("/") + "/application"),
             description=j.get("descriptionPlain") or _strip_html(j.get("descriptionHtml", "")),
-            extra={"comp": (j.get("compensation") or {}).get("compensationTierSummary")}))
+            extra={"comp": (j.get("compensation") or {}).get("compensationTierSummary"),
+                   **({"posted": _iso(j["publishedAt"])} if j.get("publishedAt") else {})}))
     return out
 
 
@@ -104,19 +139,28 @@ KNOWN: dict = {}           # set by main: job key -> status for jobs already in 
 DETAIL_CAP = 80            # detail pages read per big board per run
 
 
-def _needs_detail(job: "Job", gate: dict) -> bool:
-    """Only postings that could still be wanted, and that the database has not already decided, get their detail page read."""
+def _needs_detail(job: "Job", gate: dict, any_title: bool = False) -> bool:
+    """Only postings that could still be wanted, and that the database has not already decided, get their detail page read.
+    any_title: the list did not say where the job is ('2 Locations', or nothing), so every posting that passes the title
+    filters is read: its detail page is the only place its cities are named."""
     st = KNOWN.get(job.key)
     if st and st not in ("queued", "new"):
         return False
     if SEARCH and prefilter(job, gate):
         return False
+    if any_title:
+        return True
     keys = (SEARCH or {}).get("_title_keys")
     return not keys or any(k in job.title.lower() for k in keys)
 
 WD_ROLES = ["operations", "coordinator", "analyst", "associate", "supply chain"]
 WD_PLACES = ["Denver", "Los Angeles", "New York", "Remote"]
 _MANY_LOCS = re.compile(r"^\s*(\d+|multiple|various)\s+locations?\s*$", re.I)
+
+
+def unresolved_location(loc: str) -> bool:
+    """'3 Locations' / 'Multiple Locations' / nothing at all: the job list did not say where the job is."""
+    return bool(_MANY_LOCS.match(loc or "")) or not (loc or "").strip()
 
 
 _WD_GATES: dict = {}
@@ -210,10 +254,11 @@ def workday(spec: str) -> list[Job]:
         path = p.get("externalPath", "")
         job = Job(source="workday", company=tenant, job_id=path.rsplit("_", 1)[-1] or path, title=p.get("title", ""),
                   location=p.get("locationsText", "") or "", url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
-                  description=p.get("title", ""), extra={"company_name": display} if display else {})
-        many = bool(_MANY_LOCS.match(job.location))
-        gate = {**s, "locations_include": [], "_onsite_ok": []} if many else s      # '2 Locations': the real cities are in the detail page
-        if details < DETAIL_CAP and _needs_detail(job, gate):
+                  description=p.get("title", ""), extra={**({"company_name": display} if display else {}),
+                                                         **({"posted": _wd_posted(p.get("postedOn", ""))} if p.get("postedOn") else {})})
+        many = unresolved_location(job.location)
+        gate = {**s, "locations_include": [], "_onsite_ok": []} if many else s      # '2 Locations' (or none given): the real cities are in the detail page
+        if details < DETAIL_CAP and _needs_detail(job, gate, any_title=many):
             try:
                 d = _wd_request("GET", f"{api}{path}", headers=UA).json().get("jobPostingInfo", {})
                 job.description = _strip_html(d.get("jobDescription", "")) or job.description

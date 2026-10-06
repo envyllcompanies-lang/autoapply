@@ -150,7 +150,7 @@ print(r.stdout.rstrip())
 if r.returncode != 0:
     problems.append("more_checks.py failed" + (": " + r.stderr[-300:] if r.stderr.strip() else ""))
 
-for _name in ("fix_checks.py", "workday_checks.py", "source_checks.py", "code_checks.py", "captcha_boundary.py"):
+for _name in ("fix_checks.py", "workday_checks.py", "source_checks.py", "funnel_checks.py", "code_checks.py", "captcha_boundary.py"):
     r = subprocess.run([sys.executable, str(ROOT / "tests" / _name)], capture_output=True, text=True)
     print(r.stdout.rstrip())
     if r.returncode != 0:

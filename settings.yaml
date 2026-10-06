@@ -6,11 +6,19 @@ search:
   skip_sites: []              # no application system is skipped: they are tried in the order of what has actually been
                               # going through lately (Workday first; sites that keep ending at a human check last)
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
-  min_score: 35               # keyword score needed to be looked at at all (a rough first sieve; the match check below decides)
+  min_score: 10               # keyword score needed to be a candidate at all. Low on purpose (was 35 until 2026-10-06): the
+                              # keyword score turned out to say little about the real match (postings scoring 30-39 passed the
+                              # résumé check as often as those scoring 60-79), so it only removes postings with nothing going
+                              # for them. The résumé check below decides, and the candidates are checked best prospects first.
   prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
   min_fit: 60                 # ...and only jobs with a match of 60% or more are applied to (was 70 until 2026-10-03)
-  min_score_without_match: 70 # when the free match check has no allowance left: only jobs whose keyword score is this (was 80 until 2026-10-06)
-                              # high go ahead, the rest wait for a later run (they are not dropped)
+  min_score_without_match: 90 # when the free match check has no allowance left: only jobs whose keyword score is this high go
+                              # ahead without it, the rest wait for a later run (they are not dropped). Kept high because the
+                              # allowance now runs out every day by design, and unchecked jobs should not slip through then.
+  daily_cap_unlimited: 300    # most applications in one day while the bot runs non-stop (was 120): with thousands of candidates
+                              # the limit should be the résumé check, not this number
+  max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
+  max_human_check_tries_per_day: 6      # tries per day on sites where every recent try ended at a human check (CAPTCHA)
   max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
   exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
 
@@ -19,7 +27,17 @@ scoring:
 
 writer:
   # Groq's free models, best first. Each has its own daily allowance, so when one runs out the next takes over.
-  # Gemini has no valid key; a model Groq no longer offers is skipped automatically after one try.
+  # A model Groq no longer offers is skipped automatically after one try.
+  #
+  # The résumé-match check is what limits how many jobs can be applied to in a day (each check costs about as much as a
+  # short answer, and thousands of postings are waiting for one). So:
+  #   * providers marked 'role: match' do nothing but match checks;
+  #   * the models named in match_providers share their allowance: at most match_share of it goes to match checks, the
+  #     rest is kept for the application answers;
+  #   * the best model (groq) never does match checks: its whole allowance is for your answers.
+  # The Gemini entries cost nothing and stay idle until a valid GEMINI_API_KEY secret exists (free at aistudio.google.com).
+  match_providers: [groq-20b, groq-qwen]
+  match_share: 0.6
   providers:
     - {name: groq, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-120b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
@@ -27,8 +45,24 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+    - {name: groq-qwen36, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.6-27b", role: match,
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 195000, extra: {reasoning_format: hidden}}
+    - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
+       model: [gemini-flash-lite-latest, gemini-2.5-flash-lite], discover: lite,
+       api_key_env: GEMINI_API_KEY, rpm: 12, rpd: 900, tpm: 200000, extra: {reasoning_effort: low}}
+    - {name: gemini-flash, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
+       model: [gemini-flash-latest, gemini-2.5-flash], discover: flash,
+       api_key_env: GEMINI_API_KEY, rpm: 8, rpd: 200, tpm: 200000, extra: {reasoning_effort: low}}
 
 aggregators:
+  jobboard:                 # a public daily snapshot of ~1.4 million open postings on 20,000+ company career sites
+    enabled: true
+    levels: [entry, mid]    # the snapshot's own level guess. 'mid' is where it puts most coordinator / analyst / associate
+                            # postings, so reading only 'entry' missed about 95% of what passes your filters. The bot's own
+                            # level rules and the posting's real text still drop anything above early career.
+    sites: [Workday, Greenhouse, Lever, BambooHR, Ashby]
+    max_age_days: 30        # postings first seen longer ago than this are left out
+    max_jobs: 6000          # new candidates taken from one snapshot
   github_lists:             # public GitHub repos that publish new-grad / entry-level postings as JSON
     enabled: true           # false switches the source off
     only_supported_ats: true   # keep only apply links that go straight to a system the bot completes
