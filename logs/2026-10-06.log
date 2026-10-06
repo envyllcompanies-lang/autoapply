@@ -3791,3 +3791,29 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [21:20:59]   by site  greenhouse: 1 skipped
 [21:20:59]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
 [21:21:01] Summary emailed to delgado@alumni.usc.edu
+[21:41:39] === autoapply run (LIVE) build 2026-10-06-f ===
+[21:41:39] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[21:41:40] mail: logged in to delgado@alumni.usc.edu OK
+[21:42:25] Discovering jobs…
+[21:42:26] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[21:42:26]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[21:42:26] 0 open roles, 0 new
+[21:42:26] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.8 min)
+[21:42:27] 6259 jobs queued: 2 already matched to your résumé, 6257 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 234 now
+[21:42:28] Time for this run: 50 min in all (2592 of 1850 free Actions minutes used this month)
+[21:42:28] Accounts: ON (delgado@alumni.usc.edu)
+[21:42:29]   ✗ Redwoods Analyst @ davita: the posting is closed (no time spent on it)
+[21:42:30]   ✗ Assistant Project Manager (Mission Critical) @ veitusa: above entry level: mid (requires 3+ yrs)
+[21:42:31]   ✗ Coordinator, Client Programs & Events @ skadden: above entry level: mid (requires 3+ yrs)
+[21:42:31]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[21:42:32]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[21:42:32]       writer: groq-qwen: rate limited for 30s
+[21:42:32]       match check unavailable: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid
+[21:42:32]   (the free allowance for résumé-match checks is used up for now
+[21:42:32]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[21:42:32] → Business Operations Specialist @ zillow (score 60)
+[21:42:34]     ✗ skipped: the posting is closed
+[21:42:34] Résumé checks this run: 0 (0 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 177k/480k tokens (resting); gemini-lite 6/480 requests (off this run); gemini-flash 6/18 requests (off this run)
+[21:42:34] Summary: 2 skipped, 2 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[21:42:34]   by site  workday: 2 skipped
+[21:42:34]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
