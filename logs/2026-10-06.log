@@ -3727,3 +3727,67 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [20:51:57]   by site  workday: 2 skipped
 [20:51:57]   by site  greenhouse: 1 skipped
 [20:51:57]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[21:16:19] === autoapply run (LIVE) build 2026-10-06-f ===
+[21:16:20] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[21:16:21] mail: logged in to delgado@alumni.usc.edu OK
+[21:17:40] Discovering jobs…
+[21:17:40] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[21:17:40]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[21:17:40] 0 open roles, 0 new
+[21:17:40] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.4 min)
+[21:17:42] 6265 jobs queued: 2 already matched to your résumé, 6263 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 235 now
+[21:17:42] Time for this run: 50 min in all (2585 of 1850 free Actions minutes used this month)
+[21:17:43] Accounts: ON (delgado@alumni.usc.edu)
+[21:17:44]   ✗ Client Technical Operations I @ dentalxchange: the posting is closed (no time spent on it)
+[21:17:45]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[21:17:45]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[21:17:46]   match  88%  Strategic Sourcing Analyst @ davita — Strong match for an entry-level sourcing role given the candidate's supply chain planning skills, su
+[21:17:46]   match  72%  Assistant Project Manager @ ameresco — Good fit for a construction project coordination role due to relevant engineering degree and constru
+[21:17:46]   match  45%  2027 Early Talent Rotational Program: Digital & Client Experience @ tiaa — Weak fit as the role requires specific UX/UI design skills and tools (Figma, prototyping) that are n
+[21:17:46]   match  68%  Client Solutions Associate - Los Angeles, CA (February 2027) @ factset — Good fit for a client-facing solutions role given the candidate's strong communication skills, analy
+[21:17:46]   match  35%  Technology - Entry Level @ cannondesign — Poor fit due to the hourly pay rate (approx. $55k-$69k, with lower end under $60k) and the specific 
+[21:17:46] → Strategic Sourcing Analyst @ davita (score 30, match 88%)
+[21:17:49]       (opening Workday's application form directly)
+[21:17:54]       (account page: creating the account / signing in)
+[21:17:57]       account: signing in on davita.wd1.myworkdayjobs.com
+[21:18:02]       1/5 My Information: 14 fields (12 required)
+[21:18:09]       2/5 My Experience: 2 fields (0 required)
+[21:18:45]       writer: groq-qwen: free daily limit reached (back in 23 min)
+[21:18:45]       writer unavailable: groq-qwen: free daily limit reached (back in 23 min)
+[21:18:45]       ? unanswered: 'What qualifications did we not ask you about that you wish we had in considering you for t' kind=textarea options=[]
+[21:18:45]       ? unanswered: 'With or without accommodation, can you perform the duties outlined in the job posting on t' kind=combobox options=['Select One', 'Yes', 'No']
+[21:18:45]       ? unanswered: 'Can you provide legal documentation establishing your identity and eligibility to be legal' kind=combobox options=['Select One', 'Yes', 'No']
+[21:18:45]       ? unanswered: 'Do you have clinical dialysis experience?*' kind=combobox options=['Select One', 'Yes', 'No']
+[21:18:45]       ? unanswered: 'What best describes your current or most recent place of work?*' kind=combobox options=['Select One', 'Healthcare', 'Non Healthcare', 'Other (e.g. student, unemploye']
+[21:18:45]     ✗ skipped: can't truthfully answer required: What qualifications did we not ask you about that you wish w; With or without accommodation, can you perform the duties ou; Can you provide legal documentation establishing your identi; Do you have clinical dialysis experience?*; What best describes your current or most recent place of wor
+[21:18:50]   (the free allowance for résumé-match checks is used up for now
+[21:18:50]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[21:18:50] → Assistant Project Manager @ ameresco (score 40, match 72%)
+[21:18:54]       (opening Workday's application form directly)
+[21:18:59]       (account page: creating the account / signing in)
+[21:18:59]       account: creating one on ameresco.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[21:19:02]       account: created
+[21:19:05]       1/6 My Information: 14 fields (11 required)
+[21:19:10]       2/6 My Experience: 2 fields (1 required)
+[21:19:17]       3/6 Application Questions: 5 fields (5 required)
+[21:19:24]       Application Questions (try 2): Workday said ['Error: The field If yes, what are some locations of interest? is required and must have a value.', 'Error-If yes, what are some locations of interest? The field If yes, what are some locations of interest? is required and must have a value.']; redoing ['If yes, what are some location', 'What is your desired start dat']
+[21:19:45]       Application Questions (try 3): Workday said ['the page did not move on after Next']; redoing ['What is your desired start dat']
+[21:19:52]       4/6 Voluntary Disclosures: 5 fields (4 required)
+[21:19:58]       5/6 Self Identify: 7 fields (6 required)
+[21:20:05]       Review: submitting
+[21:20:09]     ✓ applied (1.3 min)
+[21:20:13] → Client Solutions Associate - Los Angeles, CA (February 2027) @ factset (score 24, match 68%)
+[21:20:17]       (opening Workday's application form directly)
+[21:20:20]       (account page: creating the account / signing in)
+[21:20:20]       account: creating one on factset.wd108.myworkdayjobs.com with delgado@alumni.usc.edu
+[21:20:24]       account: created
+[21:20:26]       1/6 My Information: 13 fields (12 required)
+[21:20:33]       2/6 My Experience: 8 fields (3 required)
+[21:20:51]       ? unanswered: 'Are you currently a citizen of the European Union?*' kind=combobox options=['Select One', 'Yes, I am a citizen of the EU', 'No, I am not an EU Citizen']
+[21:20:51]     ✗ skipped: can't truthfully answer required: Are you currently a citizen of the European Union?*
+[21:20:59] Résumé checks this run: 5 (3 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 177k/480k tokens (resting); gemini-lite 5/480 requests (off this run); gemini-flash 5/18 requests (off this run)
+[21:20:59] Summary: 1 applied, 3 skipped, 2 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[21:20:59]   by site  workday: 2 skipped, 1 applied
+[21:20:59]   by site  greenhouse: 1 skipped
+[21:20:59]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[21:21:01] Summary emailed to delgado@alumni.usc.edu

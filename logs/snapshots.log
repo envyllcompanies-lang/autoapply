@@ -1,91 +1,3 @@
-=== 2026-10-06 02:58:03  not sent  GTM Strategy/Operations Associate - New York @ datadog
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
-# Apply for this job
-  text: indicates a required field
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name*
-  <input:text #preferred_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-  text: <file>
-  [button] 
-label: LinkedIn Profile
-  <input:text #question_68992548 filled>
-label: Website
-  <input:text #question_68992549 filled>
-label: I certify that the information provided in this application is true and correct to the best of my knowledge. I
-  <input:text #question_68992550 required empty>
-  [button] 
-  [button] 
-label: I understand my application will be processed in accordance with Datadog’s Candidate Privacy Policy.*
-  <input:text #question_68992551 required empty>
-  [button] 
-  [button] 
-  text: Applicant and Candidate Privacy Policy
-label: Are you legally authorised to work full-time in the country where this job is based?*
-  <input:text #question_68992552 required empty>
-  [button] 
-  [button] 
-label: In what cities are you available to work?*
-  [button] 
-  <input:text #question_68992553[] required empty>
-  [button] 
-  [button] 
-label: Please select all the languages you speak fluently.*
-  [button] 
-  <input:text #question_68992554[] required empty>
-  [button] 
-  [button] 
-  text: Select all the languages in which you have business-level fluency, both in verbal and written communication.
-label: How did you hear about this opportunity?*
-  <input:text #question_68992555 required empty>
-  [button] 
-  [button] 
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Datadog’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any a
-label: Gender
-  <input:text #gender empty>
-  [button] 
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  text: I am not a protected veteran
-  <input:text #veteran_status empty>
-  [button] 
-  [button] 
-label: A verification code was sent to <email>. To submit your application, enter the 8-character code
-label: Security code
-  <input:text #security-input-0 required empty>
-  <input:text #security-input-1 required empty>
-  <input:text #security-input-2 required empty>
-  <input:text #security-input-3 required empty>
-  <input:text #security-input-4 required empty>
-  <input:text #security-input-5 required empty>
-  <input:text #security-input-6 required empty>
-  <input:text #security-input-7 required empty>
-  [button] Submit application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
 === 2026-10-06 02:59:06  blocked  Due Diligence Analyst @ prologis
 url: https://prologis.wd5.myworkdayjobs.com/Prologis_External_Careers/job/Boston-Massachusetts/Due-Diligence-Analyst_R6712/apply
 stage: account
@@ -5280,5 +5192,108 @@ label: Phone Number*
 label: Phone Extension
   <input:text #phoneNumber--extension empty>
   [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-06 21:18:45  skipped  Strategic Sourcing Analyst @ davita
+url: https://davita.wd1.myworkdayjobs.com/DKC_External/job/05555---Casa-del-Mundo-Office-Denver-HQ/Strategic-Sourcing-Analyst_R0469340/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: What qualifications did we not ask you about that you wish w; With or without accommodation, can you perform the duties ou; Can you provide legal documentation establishing your identi; Do you have clinical dialysis experience?*; What best describes your current or most recent place of wor
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] DaVita {navigationItem-DaVita}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Strategic Sourcing Analyst
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-b831311d6f6d1001568f0356d7d40001}
+label: With or without accommodation, can you perform the duties outlined in the job posting on the careers.davita.co
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f0356d7d40001
+ {formField-b831311d6f6d1001568f048ac95a0004}
+label: Can you provide legal documentation establishing your identity and eligibility to be legally employed in the U
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0004
+ {formField-b831311d6f6d1001568f048ac95a0001}
+label: Are you legally authorized to work in the United States for DaVita without requiring employment visa sponsorsh
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0001
+ {formField-b831311d6f6d1001568f03f0dbea0002}
+label: Desired Pay Rate Type:*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0002
+ {formField-b831311d6f6d1001568f03f0dbea0007}
+label: Are you open to relocation?*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0007
+ {formField-b831311d6f6d1001568f048ac95a0007}
+label: Do you have clinical dialysis experience?*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0007
+ {formField-b831311d6f6d1001568f0524b6ec0002}
+label: What qualifications did we not ask you about that you wish we had in considering you for this role?*
+  <textarea #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0002 required empty>
+ {formField-b831311d6f6d1001568f0524b6ec0003}
+label: What best describes your current or most recent place of work?*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-06 21:20:51  skipped  Client Solutions Associate - Los Angeles, CA (February 2027) @ factset
+url: https://factset.wd108.myworkdayjobs.com/factsetcareers/job/United-States-Los-Angeles-Temporary-Remote-Los-Angeles/Client-Solutions-Associate---Los-Angeles--CA--February-2027-_R33275/apply/applyManuall
+stage: Application Questions
+why: can't truthfully answer required: Are you currently a citizen of the European Union?*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# FactSet Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Client Solutions Associate - Los Angeles, CA (February 2027)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-b54ff9b529c81001ca088fb1eb8a0000}
+label: Are you legally authorized to work in the U.S.?*
+  [dropdown] nothing chosen #primaryQuestionnaire--b54ff9b529c81001ca088fb1eb8a0000
+ {formField-b54ff9b529c81001ca08904bc9500001}
+label: Do you currently need, or will you need in the future, any immigration related support or sponsorship from Fac
+  text: For the purpose of this question, FactSet immigration related support or sponsorship includes, but is not limited to: F-1 CPT Letters, STEM 
+  [dropdown] nothing chosen #primaryQuestionnaire--b54ff9b529c81001ca08904bc9500001
+ {formField-b54ff9b529c81001c9860a312e630000}
+label: Are you currently a citizen of the European Union?*
+  [dropdown] nothing chosen #primaryQuestionnaire--b54ff9b529c81001c9860a312e630000
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
 
