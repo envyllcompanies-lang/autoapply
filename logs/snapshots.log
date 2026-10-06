@@ -1,265 +1,3 @@
-=== 2026-10-05 23:46:30  skipped  Analyst, Business Applications @ brookfield
-url: https://brookfield.wd5.myworkdayjobs.com/brookfield/job/New-York-New-York/Analyst--Investor-Applications_R2049135/apply/applyManually
-stage: My Experience
-why: stuck on Workday's 'My Experience' page; Workday says: ['Error-To (Actual or Expected) The field To (Actual or Expected) is required and must have a value.', 'Error: The field To (Actual or Expected) is required and must have a value.']; fields flagged: ['To (Actual or Expected)']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Brookfield Careers {navigationItem-Brookfield Careers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Analyst, Business Applications
-label: completed step 1 of 6
-label: My Information
-{progressBarActiveStep} current step 2 of 6 My Experience
-label: current step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions 1 of 2
-label: step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# My Experience
-# Errors Found
-! Error-To (Actual or Expected) The field To (Actual or Expected) is required and must have a value. {errorHeading}
-{applyFlowMyExpPage}
-# Work Experience
-  text: Please enter at least one work experience. Location and role description are not required.
-# Work Experience 1
- {formField-jobTitle}
-label: Job Title*
-  <input:text #workExperience-4--jobTitle required filled>
- {formField-companyName}
-label: Company*
-  <input:text #workExperience-4--companyName required filled>
- {formField-currentlyWorkHere}
-label: I currently work here
-  <input:checkbox #workExperience-4--currentlyWorkHere question-unanswered>
- {formField-startDate}
-label: From*
-  <input #workExperience-4--startDate-dateSectionMonth-input {dateSectionMonth-input} filled>
-  <input #workExperience-4--startDate-dateSectionYear-input {dateSectionYear-input} filled>
-  [button]  {dateIcon}
- {formField-endDate}
-label: To*
-  <input #workExperience-4--endDate-dateSectionMonth-input {dateSectionMonth-input} filled>
-  <input #workExperience-4--endDate-dateSectionYear-input {dateSectionYear-input} filled>
-  [button]  {dateIcon}
-  [button] Add Another {add-button}
-# Education
-  text: In the "To (Actual or Expected)" field, please enter your graduation year or expected graduation year.
-# Education 1
- {formField-schoolName}
-label: School or University*
-  <input:text #education-5--schoolName required filled>
- {formField-degree}
-label: Degree*
-  [dropdown] chosen #education-5--degree
- {formField-fieldOfStudy}
-label: Field of Study*
-{multiSelectContainer}
-  <input #education-5--fieldOfStudy required empty>
-    (a choice is selected)
-  [button] 
- {formField-lastYearAttended}
-label: To (Actual or Expected)*
-  <input #education-5--lastYearAttended-dateSectionYear-input {dateSectionYear-input} INVALID empty>
-! Error: The field To (Actual or Expected) is required and must have a value. {inputAlert}
-  [button] Add Another {add-button}
-# Resume/CV
- {formField-}
-label: Upload a file (5MB max)*
-  [button] Select files {select-files}
-  <input:file {file-upload-input-ref} no-file>
-! <file> successfully uploaded {ariaLiveMessage}
-  text: <file>
-  [button]  {delete-file}
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-05 23:52:34  skipped  Global Operations - Event Ticketing Coordinator @ caa
-url: https://caa.wd1.myworkdayjobs.com/Careers/job/Los-Angeles-CA/Global-Operations---Event-Ticketing-Coordinator_JR9184/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: I have disclosed all information that is relevant and should; I expressly understand and agree that, if employed, my emplo; I understand that no representation, whether oral or written; I certify, under penalty of perjury, that all of the above i; I agree that to the extent permitted by law, any legal claim
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Global Operations - Event Ticketing Coordinator
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-04bedb0b88b3100209baeb9e38790001}
-label: Have you previously worked for CAA or any of its affiliate companies?*
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baeb9e38790001
- {formField-04bedb0b88b3100209baecd277b60001}
-label: Are you legally authorized to work in the United States? (If hired, verification will be required consistent w
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baecd277b60001
- {formField-04bedb0b88b3100209baecd277b60004}
-label: Are you 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baecd277b60004
- {formField-04bedb0b88b3100209baed6c5ab80001}
-label: Individuals who now or in the future will require visa sponsorship are not eligible for our internships and en
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baed6c5ab80001
- {formField-04bedb0b88b3100209baed6c5ab80007}
-label: What pay range are you seeking?*
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baed6c5ab80007
- {formField-04bedb0b88b3100209baef399d810001}
-label: Do you have any family members who currently work at CAA?*
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baef399d810001
- {formField-04bedb0b88b3100209baef399d810005}
-label: Date available to start:*
-  text: current value is MM/DD/YYYY
-  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionMonth-input} empty>
-  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionDay-input} empty>
-  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-04bedb0b88b3100209baef399d810006}
-label: I have disclosed all information that is relevant and should be considered applicable to my candidacy for empl
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baef399d810006
- {formField-04bedb0b88b3100209baefd375aa0001}
-label: I hereby certify that the information given by me is true in all respects.*
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baefd375aa0001
- {formField-04bedb0b88b3100209baefd375aa0004}
-label: I understand employment with the Company is contingent on my providing sufficient documentation necessary to e
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baefd375aa0004
- {formField-04bedb0b88b3100209baf06d7cc40001}
-label: I expressly understand and agree that, if employed, my employment, having no specified term, is based upon mut
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40001
- {formField-04bedb0b88b3100209baf06d7cc40004}
-label: I understand that no representation, whether oral or written, by any representative or agent of the Company, a
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40004
- {formField-04bedb0b88b3100209baf06d7cc40007}
-label: I certify, under penalty of perjury, that all of the above information is true and complete, and I understand 
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40007
- {formField-04bedb0b88b3100209baf10788d70001}
-label: I agree that to the extent permitted by law, any legal claims that I may have concerning my application for em
-  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf10788d70001
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-05 23:53:22  skipped  Analyst, Media Planning @ mastercard
-url: https://mastercard.wd1.myworkdayjobs.com/CorporateCareers/job/Purchase-New-York/Analyst--Media-Planning_R-291052/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Prefer Not To Self Identify (United States of America)
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Analyst, Media Planning
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-label: completed step 3 of 6
-label: Application Questions 1 of 2
-label: completed step 4 of 6
-label: Application Questions 2 of 2
-{progressBarActiveStep} current step 5 of 6 Voluntary Disclosures
-label: current step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Personal Information, VERAA and Section 503 Invitation to Self-Identify
-  text: Mastercard is an equal opportunity employer that is committed to building and maintaining a workplace in which all employees feel valued.
-  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
-  text: a person who was discharged or released from active duty because of a service-connected disability.
-  text: A “recently separated veteran” means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An “active duty wartime or campaign badge veteran” means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: If you believe you belong to any of the categories of protected veterans listed above, please indicate by checking the appropriate box below
- {formField-gender}
-label: What is your Gender?*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Are you Hispanic or Latino?
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicityMulti}
-label: What is your ethnicity?*
-  <input:checkbox #40a306eb2fa04253bc03cdd73e66f6b4-ethnicityMulti required question-unanswered>
-label: American Indian or Alaska Native (Not Hispanic or Latino) (United States of America)
-  <input:checkbox #9d68a3a2bba1478899f43da4ea9aa976-ethnicityMulti required question-unanswered>
-label: Asian (Not Hispanic or Latino) (United States of America)
-  <input:checkbox #00b90f77d1234faeb3c26da1c54ea692-ethnicityMulti required question-unanswered>
-label: Black or African American (Not Hispanic or Latino) (United States of America)
-  <input:checkbox #cd9a04db864a47d5a3f1bfb6f3e77e9f-ethnicityMulti required question-unanswered>
-label: Hispanic or Latino (United States of America)
-  <input:checkbox #987be35785bf4b6795b10ee90c73afc9-ethnicityMulti required question-unanswered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino) (United States of America)
-  <input:checkbox #866c0ed135ff106f0f0c284de630cd7f-ethnicityMulti required question-unanswered>
-label: Prefer Not To Self Identify (United States of America)
-  <input:checkbox #ee82d204e0f34e45b1f09f9cb358dd2e-ethnicityMulti required question-unanswered>
-label: Two or More Races (Not Hispanic or Latino) (United States of America)
-  <input:checkbox #047b6a6ed15f42fc9ca0a696e5bbb7b6-ethnicityMulti required question-unanswered>
-label: White (Not Hispanic or Latino) (United States of America)
- {formField-veteranStatus}
-label: Have you ever served in the military?*
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: Additional Disclosures; Terms and Conditions
-  text: Pay Transparency Non-Discrimination Disclosure
-  text: Mastercard will not discharge or otherwise discriminate against employees or applicants because they have inquired about, discussed, or disc
-  text: Mastercard Global Applicant Privacy Notice
-  text: (the “Privacy Notice”) for information on how Mastercard International Inc. and its affiliates (“Mastercard”) process your personal informat
-  text: By checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as described
-  text: For candidates in South Korea only
-  text: : by checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as describ
-  text: Collect and process your personal information as set out in the Privacy Notice;
-  text: Disclose your personal information as described in the Privacy Notice; and
-  text: Transfer your personal information cross-border from the country you reside in to the country in which the job you are applying for is locat
-  text: For candidates in the People’s Republic of China (excluding Hong Kong, Macao and Taiwan) only:
-  text: by checking the box below, you acknowledge that you have read and understand how Mastercard processes your personal information as described
-  text: Collect and process your personal information (including but not limited to sensitive personal information) as set out in the Privacy Notice
-  text: Disclose your personal information to relevant Mastercard group companies, members of Mastercard’s HR and/or Legal department, and third-par
-  text: Transfer and store your personal information cross-border to the countries/regions (other than the one you reside) to the extent the relevan
-  text: I understand that this application will be fully considered, but its receipt does not imply that I will be offered employment. I also unders
-  text: Pre-Employment Inquiry Release
-  text: All information provided by you will be verified. Therefore, complete accuracy is required and expected. In connection with my application f
-  text: Mastercard is an equal opportunity employer. At Mastercard, we recruit, hire, train, promote, and provide all other privileges of employment
-  text: Mastercard neither charges any fee, nor requires any money deposits from jobseekers at any stage of recruitment nor collects any fees from e
-  text: Any person dealing with unauthorized parties for seeking job opportunities with Mastercard in lieu of money is doing so at his/her own risk.
-  text: In case you come across any person or organization demanding money in lieu of an offer letter for a job opportunity in Mastercard, you are e
- {formField-acceptTermsAndAgreements}
-label: Except where consent is not required by applicable privacy law, I consent to the above terms*.*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-05 23:53:59  skipped  Source-to-Contract Operations Advocate @ greystar
 url: https://greystar.wd1.myworkdayjobs.com/External/job/Remote-United-States/Source-to-Contract-Operations-Advocate_R0200827/apply/applyManually
 stage: Application Questions
@@ -5321,6 +5059,181 @@ why: could not find the employer's application page
 # Editor
   [button] 
 # Senior Integrated Producer
+  [button] 
+# What you need to know about the NYC Tech Scene
+# Key Facts About NYC Tech
+  text: Number of Tech Workers: 549,200; 6% of overall workforce (2024 CompTIA survey)
+  text: Major Tech Employers: Capgemini, Bloomberg, IBM, Spotify
+  text: Funding Landscape: $25.5 billion in venture capital funding in 2024 (Pitchbook)
+  text: Notable Investors: Greycroft, Thrive Capital, Union Square Ventures, FirstMark Capital, Tiger Global Management, Tribeca Venture Partners, I
+  text: Research Centers and Universities: Columbia University, New York University, Fordham University, CUNY, AI Now Institute, Flatiron Institute,
+  <input:text #first-name required empty>
+  <input:text #last-name required empty>
+  <input:text #user-email required empty>
+  [button] CONTINUE disabled
+  text: share your profile information
+  text: Become an Expert Contributor
+  text: © 2026 Built In. All rights reserved.
+  text: Learning Lab User Agreement
+  text: Your Privacy Choices/Cookie Settings
+
+=== 2026-10-06 04:16:18  blocked  Tenant Services Coordinator (CRE) @ cw
+url: https://cw.wd1.myworkdayjobs.com/en-US/External/userHome
+stage: account
+why: account: still at Workday's sign-in after 5 tries; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Sign In
+Search for Job; logoButton:; logo:; headerTitle:; navigationContainer:English
+Sign In
+Search for Job; utilityButtonBar:English
+Sign In; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-button-bar-divi
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button]  {logoButton}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-82 {email} required empty>
+ {formField-password}
+label: Password*
+  <input:password #input-83 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #4a159727-4db5-458a-98f6-17e459386c16 {beecatcher} empty>
+  [button]  {LINKED_IN_charm}
+  [button]  {GLASSDOOR_charm}
+  [button]  {SOCIAL_MEDIA_X_charm}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-06 04:16:27  blocked  Branch Operations Coordinator Park Slope 5th DeNovo @ wells-fargo
+url: https://www.builtinnyc.com/job/branch-operations-coordinator-park-slope-5th-denovo/11455112
+why: could not find the employer's application page
+  [button] NYC
+  [button] 
+  [button] FOR EMPLOYERS
+  text: Branch Operations Coordinator Park Slope 5th DeNovo
+# Wells Fargo
+# Branch Operations Coordinator Park Slope 5th DeNovo
+  text: Supports branch operations by processing and approving teller transactions, resolving customer and employee concerns, managing teller-line a
+  text: The summary above was generated by AI
+  text: Support customer experience by accurately processing and approving teller transactions, sharing digital solutions, and making appropriate in
+  text: Complete operational activities while minimizing risks under established policies
+  text: Perform routine to moderately complex transactional, operational, and customer support tasks efficiently through knowledge of bank procedure
+  text: Support the Branch manager in operational tasks and scheduling
+  text: Resolve issues related to daily operations of the teller line, under direction of regional banking management
+  text: Support customers and employees in resolving or escalating concerns or complaints
+  text: Receive guidance from managers and exercise judgment within defined policies and procedures
+  text: Provide excellent service to customers and individuals by demonstrating care, building relationships, and completing requested transactions
+  text: Identify information and services to meet customers financial needs
+  text: Motivate a diverse team to achieve full potential and meet established business objectives
+  text: 1+ year of customer service and issue resolution support experience, or equivalent demonstrated through one or a combination of the followin
+  text: Ability to provide strong customer service while listening, eliciting information and comprehending customer issues
+  text: Ability to educate and connect customers to technology and share the value of mobile banking options
+  text: Ability to interact with integrity and professionalism with customers and employees
+  text: Ability to identify potential fraud/risky accounts and take appropriate action to prevent loss
+  text: Well-organized, independent and able to prioritize in a fast-paced environment
+  text: Ability to exercise judgment, raise questions to management, and adhere to policy guidelines
+  text: Relevant military experience including working in personnel benefits management, processing military personnel orders or transitions, wartim
+  text: Knowledge and understanding of retail compliance controls, risk management, and loss prevention
+  text: Motivate others to achieve full potential and meet established business objectives
+  text: Ability to work a schedule that may include most Saturdays
+  text: This position is not eligible for Visa sponsorship
+  text: 126 5th AVENUE, BROOKLYN, NY 11217
+  text: Life insurance, critical illness insurance, and accident insurance
+  text: Scholarships for dependent children
+  text: * Job posting may come down early due to volume of applicants.
+  text: We Value Equal Opportunity
+  text: Applicants with Disabilities
+  text: Wells Fargo Recruitment and Hiring Requirements:
+  [button] Read Full Description
+# Wells Fargo New York, New York, USA Office
+  text: 150 E 42nd Street, New York, NY, United States, 10017
+<iframe https://www.google.com/maps/embed/v1/search>
+# Wells Fargo New York, New York, USA Office
+  text: 500 West 33rd Street Manhattan, New York, NY, United States, 10001
+<iframe https://www.google.com/maps/embed/v1/search>
+# Similar Jobs at Wells Fargo
+# Senior Premier Banker-Armonk, NY
+  [button] 
+# Senior Premier Banker Syosset
+  [button] 
+# Senior Premier Banker-Armonk, NY
+  [button] 
+# What you need to know about the NYC Tech Scene
+# Key Facts About NYC Tech
+  text: Number of Tech Workers: 549,200; 6% of overall workforce (2024 CompTIA survey)
+  text: Major Tech Employers: Capgemini, Bloomberg, IBM, Spotify
+  text: Funding Landscape: $25.5 billion in venture capital funding in 2024 (Pitchbook)
+  text: Notable Investors: Greycroft, Thrive Capital, Union Square Ventures, FirstMark Capital, Tiger Global Management, Tribeca Venture Partners, I
+  text: Research Centers and Universities: Columbia University, New York University, Fordham University, CUNY, AI Now Institute, Flatiron Institute,
+  <input:text #first-name required empty>
+  <input:text #last-name required empty>
+  <input:text #user-email required empty>
+  [button] CONTINUE disabled
+  text: share your profile information
+  text: Become an Expert Contributor
+  text: © 2026 Built In. All rights reserved.
+  text: Learning Lab User Agreement
+  text: Your Privacy Choices/Cookie Settings
+
+=== 2026-10-06 04:16:37  blocked  Branch Operations Coordinator Borough Park DeNovo @ wells-fargo
+url: https://www.builtinnyc.com/job/branch-operations-coordinator-borough-park-denovo/11346649
+why: could not find the employer's application page
+  [button] NYC
+  [button] 
+  [button] FOR EMPLOYERS
+  text: Branch Operations Coordinator Borough Park DeNovo
+# Wells Fargo
+# Branch Operations Coordinator Borough Park DeNovo
+  text: Supports branch operations by processing and approving teller transactions, assisting customers, identifying financial needs, managing opera
+  text: The summary above was generated by AI
+  text: Support customer experience by accurately processing and approving teller transactions, sharing digital solutions, and making appropriate in
+  text: Complete operational activities while minimizing risks under established policies
+  text: Perform routine to moderately complex transactional, operational, and customer support tasks efficiently through knowledge of bank procedure
+  text: Support the Branch manager in operational tasks and scheduling
+  text: Resolve issues related to daily operations of the teller line, under direction of regional banking management
+  text: Support customers and employees in resolving or escalating concerns or complaints
+  text: Receive guidance from managers and exercise judgment within defined policies and procedures
+  text: Provide excellent service to customers and individuals by demonstrating care, building relationships, and completing requested transactions
+  text: Identify information and services to meet customers financial needs
+  text: Motivate a diverse team to achieve full potential and meet established business objectives
+  text: 1+ year of customer service and issue resolution support experience, or equivalent demonstrated through one or a combination of the followin
+  text: Ability to provide strong customer service while listening, eliciting information and comprehending customer issues
+  text: Ability to educate and connect customers to technology and share the value of mobile banking options
+  text: Ability to interact with integrity and professionalism with customers and employees
+  text: Ability to identify potential fraud/risky accounts and take appropriate action to prevent loss
+  text: Well-organized, independent and able to prioritize in a fast-paced environment
+  text: Ability to exercise judgment, raise questions to management, and adhere to policy guidelines
+  text: Relevant military experience including working in personnel benefits management, processing military personnel orders or transitions, wartim
+  text: Knowledge and understanding of retail compliance controls, risk management, and loss prevention
+  text: Motivate others to achieve full potential and meet established business objectives
+  text: Ability to work a schedule that may include most Saturdays
+  text: This position is not eligible for Visa sponsorship
+  text: 5101 13TH AVENUE, BROOKLYN, NY 11219
+  text: Life insurance, critical illness insurance, and accident insurance
+  text: Scholarships for dependent children
+  text: * Job posting may come down early due to volume of applicants.
+  text: We Value Equal Opportunity
+  text: Applicants with Disabilities
+  text: Wells Fargo Recruitment and Hiring Requirements:
+  [button] Read Full Description
+# Wells Fargo New York, New York, USA Office
+  text: 150 E 42nd Street, New York, NY, United States, 10017
+<iframe https://www.google.com/maps/embed/v1/search>
+# Wells Fargo New York, New York, USA Office
+  text: 500 West 33rd Street Manhattan, New York, NY, United States, 10001
+<iframe https://www.google.com/maps/embed/v1/search>
+# Similar Jobs at Wells Fargo
+# Senior Premier Banker-Armonk, NY
+  [button] 
+# Senior Premier Banker Syosset
+  [button] 
+# Senior Premier Banker-Armonk, NY
   [button] 
 # What you need to know about the NYC Tech Scene
 # Key Facts About NYC Tech
