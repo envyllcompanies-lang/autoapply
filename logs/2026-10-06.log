@@ -3817,3 +3817,50 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [21:42:34] Summary: 2 skipped, 2 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
 [21:42:34]   by site  workday: 2 skipped
 [21:42:34]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
+[22:06:45] === autoapply run (LIVE) build 2026-10-06-f ===
+[22:06:46] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen (free tiers, in that order); résumé-match checks use gemini-lite, gemini-flash, groq-20b, groq-qwen (at most 60% of the day's allowance of groq-20b, groq-qwen)
+[22:06:48] mail: logged in to delgado@alumni.usc.edu OK
+[22:07:18] Discovering jobs…
+[22:07:18] Job search already ran at 20:31 (searches run every 3 h): this run only applies
+[22:07:19]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[22:07:19] 0 open roles, 0 new
+[22:07:19] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.6 min)
+[22:07:20] 6255 jobs queued: 2 already matched to your résumé, 6253 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 234 now
+[22:07:21] Time for this run: 50 min in all (2596 of 1850 free Actions minutes used this month)
+[22:07:21] Accounts: ON (delgado@alumni.usc.edu)
+[22:07:23]       writer: gemini-lite: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID_
+[22:07:23]       writer: gemini-flash: HTTP 400 [{ "error": { "code": 400, "message": "Please pass a valid API key", "status": "INVALID
+[22:07:24]   match  72%  Product Analyst (Systems) Remote/Hybrid @ davita — Candidate has strong analytical and process improvement skills but lacks the specific 2+ years of pr
+[22:07:24]   match  68%  Assistant Project Manager @ revantage — Candidate has relevant construction and financial tracking experience but lacks specific affordable 
+[22:07:24]   match  35%  Assistant Media Planner @ rpa — The role is a non-exempt position paying $20/hour (approx. $41,600/year), which is below the $60,000
+[22:07:24]   match  55%  Product Operations, Analyst @ ripple — Candidate lacks the specific hands-on experience in financial settlement, reconciliation, and crypto
+[22:07:24]   match  40%  Project Coordinator, Ogilvy Health @ ogilvy — The posting text contains only website navigation and footer content, providing no job description o
+[22:07:24] → Product Analyst (Systems) Remote/Hybrid @ davita (score 32, match 72%)
+[22:07:29]       (opening Workday's application form directly)
+[22:07:35]       (account page: creating the account / signing in)
+[22:07:37]       account: signing in on davita.wd1.myworkdayjobs.com
+[22:07:43]       1/5 My Information: 14 fields (12 required)
+[22:07:50]       2/5 My Experience: 2 fields (0 required)
+[22:08:24]       writer: groq-qwen: free daily limit reached (back in 6 min)
+[22:08:24]       writer unavailable: groq-qwen: free daily limit reached (back in 6 min)
+[22:08:24]       ? unanswered: 'What qualifications did we not ask you about that you wish we had in considering you for t' kind=textarea options=[]
+[22:08:24]       ? unanswered: 'With or without accommodation, can you perform the duties outlined in the job posting on t' kind=combobox options=['Select One', 'Yes', 'No']
+[22:08:24]       ? unanswered: 'Can you provide legal documentation establishing your identity and eligibility to be legal' kind=combobox options=['Select One', 'Yes', 'No']
+[22:08:24]       ? unanswered: 'Do you have clinical dialysis experience?*' kind=combobox options=['Select One', 'Yes', 'No']
+[22:08:24]       ? unanswered: 'What best describes your current or most recent place of work?*' kind=combobox options=['Select One', 'Healthcare', 'Non Healthcare', 'Other (e.g. student, unemploye']
+[22:08:24]     ✗ skipped: can't truthfully answer required: What qualifications did we not ask you about that you wish w; With or without accommodation, can you perform the duties ou; Can you provide legal documentation establishing your identi; Do you have clinical dialysis experience?*; What best describes your current or most recent place of wor
+[22:08:31]   (the free allowance for résumé-match checks is used up for now
+[22:08:31]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[22:08:31] → Assistant Project Manager @ revantage (score 40, match 68%)
+[22:08:36]       (opening Workday's application form directly)
+[22:08:41]       (account page: creating the account / signing in)
+[22:08:41]       account: creating one on revantage.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[22:08:45]       account: created
+[22:08:48]       1/6 My Information: 14 fields (12 required)
+[22:08:53]       2/6 My Experience: 3 fields (1 required)
+[22:09:00]       ? unanswered: 'Are you in a family or romantic relationship with anyone at the Company? **' kind=combobox options=['Select One', 'Yes', 'No']
+[22:09:00]     ✗ skipped: can't truthfully answer required: Are you in a family or romantic relationship with anyone at 
+[22:09:12] Résumé checks this run: 5 (2 passed) in 1 calls. Free writer allowance used today: groq 198k/195k tokens (+4k served from its cache, not counted); groq-20b 197k/195k tokens (+0k served from its cache, not counted); groq-qwen 181k/480k tokens (resting); gemini-lite 7/480 requests (off this run); gemini-flash 7/18 requests (off this run)
+[22:09:12] Summary: 2 skipped, 3 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-06.md
+[22:09:12]   by site  workday: 2 skipped
+[22:09:12]   ! GEMINI_API_KEY: the provider does not accept the key in this secret (it answered: HTTP 400    error :    code : 400,  message :  Please pass a valid API key ,  status :  INVALID_ARGUMENT). Its models are not used until the secret holds a valid key (GitHub: Settings, Secrets and variables, Actions)
