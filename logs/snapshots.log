@@ -1,185 +1,3 @@
-=== 2026-10-05 22:08:31  blocked  Resident Services Coordinator - Brooklyn, NY @ greystar
-url: https://greystar.wd1.myworkdayjobs.com/External/job/City-Office-New-York-New-York-NY/Resident-Services-Coordinator---Brooklyn--NY_R0202740/apply/applyManually
-stage: account
-why: account: Workday refused the sign-in and the password could not be reset through your email: reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Careers Home {navigationItem-Careers Home}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Resident Services Coordinator - Brooklyn, NY
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# My Information
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-{multiSelectContainer}
-  <input #source--source required empty>
- {formField-candidateIsPreviousWorker}
-label: Have you previously been employed directly by Greystar? Not through a Temp Agency or at a company prior to Gre
-  <input:radio #kfoq15 question-unanswered>
-label: Yes
-  <input:radio #kfoq16 question-unanswered>
-label: No
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Name
- {formField-legalName--title}
-label: Prefix
-  [dropdown] nothing chosen #name--legalName--title
- {formField-legalName--firstName}
-label: First Name*
-  <input:text #name--legalName--firstName required empty>
- {formField-legalName--middleName}
-label: Middle Name
-  <input:text #name--legalName--middleName empty>
- {formField-legalName--lastName}
-label: Last Name*
-  <input:text #name--legalName--lastName required empty>
- {formField-legalName--social}
-label: Suffix
-  [dropdown] nothing chosen #name--legalName--social
-# Address
- {formField-addressLine1}
-label: Address Line 1*
-  <input:text #address--addressLine1 required empty>
- {formField-city}
-label: City*
-  <input:text #address--city required empty>
- {formField-countryRegion}
-label: State*
-  [dropdown] nothing chosen #address--countryRegion
- {formField-postalCode}
-label: Postal Code*
-  <input:text #address--postalCode required empty>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] nothing chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required empty>
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-05 22:12:28  blocked  Coordinator, Property Tax @ brookfield
-url: https://brookfield.wd5.myworkdayjobs.com/brookfieldproperties/job/Denver-Colorado/Coordinator--Property-Tax_R2052283/apply/applyManually
-stage: account
-why: account: Workday refused the sign-in and the password could not be reset through your email: reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Coordinator, Property Tax
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# My Information
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-{multiSelectContainer}
-  <input #source--source required empty>
- {formField-candidateIsPreviousWorker}
-label: Have you ever been employed with Brookfield before?*
-  <input:radio #wt96k question-unanswered>
-label: Yes
-  <input:radio #wt96l question-unanswered>
-label: No
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Legal Name
- {formField-legalName--firstName}
-label: First Name*
-  <input:text #name--legalName--firstName required empty>
- {formField-legalName--lastName}
-label: Last Name*
-  <input:text #name--legalName--lastName required empty>
- {formField-preferredCheck}
-label: I have a preferred name
-  <input:checkbox #name--preferredCheck question-unanswered>
-# Address
- {formField-addressLine1}
-label: Address Line 1
-  <input:text #address--addressLine1 empty>
- {formField-city}
-label: City
-  <input:text #address--city empty>
- {formField-countryRegion}
-label: State
-  [dropdown] nothing chosen #address--countryRegion
- {formField-postalCode}
-label: Postal Code
-  <input:text #address--postalCode empty>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required empty>
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-05 22:14:12  skipped  CAM Analyst I @ mtb
 url: https://mtb.wd5.myworkdayjobs.com/mtb/job/Getzville-NY/CAM-Analyst-I_R90499/apply
 stage: Application Questions
@@ -5609,4 +5427,109 @@ why: could not find the employer's application page
   [button] Decline all
   text: © Workable Technology Limited 2012-2026
   [button] Cookie Settings
+
+=== 2026-10-06 00:51:32  blocked  Property Administrator (CRE) @ cw
+url: https://cw.wd1.myworkdayjobs.com/en-US/External/login
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email (Workday says: You may have entered the wrong email address or password or your account might be locked.): reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button]  {logoButton}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{signInContent}
+# Sign In
+! You may have entered the wrong email address or password or your account might be locked. {errorMessage}
+ {formField-email}
+label: Email Address*
+  <input:text #input-2 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-3 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #c067c7d0-2a0c-4303-b64c-3341626bf8f3 {beecatcher} empty>
+  [button]  {LINKED_IN_charm}
+  [button]  {GLASSDOOR_charm}
+  [button]  {SOCIAL_MEDIA_X_charm}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-06 00:56:24  blocked  BlackRock Active Investment Stewardship Operations - Associate @ blackrock
+url: https://blackrock.wd1.myworkdayjobs.com/en-US/BlackRock_Professional/login
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email (Workday says: You may have entered the wrong email address or password or your account might be locked.): reset that site's password to your ACCOUNT_PASSWORD once and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button]  {logoButton}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{signInContent}
+# Sign In
+! You may have entered the wrong email address or password or your account might be locked. {errorMessage}
+ {formField-email}
+label: Email Address*
+  <input:text #input-2 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-3 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #51a43da4-a611-4e21-b7c9-493535c534cd {beecatcher} empty>
+  [button]  {LINKED_IN_charm}
+  [button]  {SOCIAL_MEDIA_X_charm}
+  [button]  {FACEBOOK_charm}
+  [button] 
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-06 00:56:34  blocked  Quality Assurance Rater - German (DE) @ telus-digital
+url: https://www.workingnomads.com/job/confirm-location/quality-assurance-rater-german-de-telus-digital-1873579/
+why: could not find the employer's application page
+# Quality Assurance Rater - German (DE)
+  text: jobs with no location restrictions
+# Working Nomads
+# Jobs by Category
+  text: Remote Administration jobs
+  text: Remote Customer Success jobs
+  text: Remote Human Resources jobs
+  text: Remote System Administration jobs
+# Jobs by Position Type
+# Jobs by Region
+# Jobs by Skill
+  text: Remote Cyber Security jobs
+  text: Remote Project Management jobs
+# Jobs by Country
+  text: Working Nomads curates remote digital jobs from around the web.
+
+=== 2026-10-06 00:57:07  blocked  Administrative & Bookkeeping Assistant @ pavago
+url: https://apply.workable.com/pavago/j/57C8CB74FA/apply
+stage: page 1
+why: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+# Administrative & Bookkeeping Assistant
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+# Profile
+  [link] Clear
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_KuBVriKUanNJ7JQ9 has-file>
+# Details
+  [link] Clear
+label: * Please share your LinkedIn Profile URL.
+label: * What is your salary expectations per month in USD for this role?
+label: * Can you walk us through your experience managing day-to-day bookkeeping, payroll, and reconciliations? Which
+label: * Tell us about a time you managed inventory and vendors simultaneously. How did you track stock levels, contr
+  [button] Submitting… disabled
+  [button] Cookie settings
 
