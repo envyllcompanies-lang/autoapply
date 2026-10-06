@@ -401,12 +401,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     if n_up:
         log(f"Dropped {n_up} queued jobs whose titles are above entry level or not open to you")
 
-    try:
-        if os.environ.get("IMAP_USER") and not dry_run:
+    # applications left at an emailed security code: search those companies' boards again (reads the inbox)
+    if mailbox.configured() and not dry_run:
+        try:
             from .recover import recover
-            recover(db, base, log)
-    except Exception as e:
-        log(f"Code recovery skipped: {str(e)[:80]}")
+            recover(db, base, log, known=(cfg.get("companies") or {}).get("greenhouse") or [])
+        except Exception as e:
+            log(f"Code recovery skipped: {str(e)[:80]}")
 
     # 1. discover
     log("Discovering jobs…")

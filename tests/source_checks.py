@@ -48,11 +48,13 @@ def J(company, title="Operations Analyst", loc="Denver, CO", url="https://boards
 
 SEARCH = {"titles_include": ["operations", "analyst", "coordinator"], "locations_include": ["denver", "new york", "remote"]}
 for gov in ("City of Denver", "State of Colorado", "County of Los Angeles", "Colorado Department of Transportation", "U.S. Army Corps of Engineers",
-            "Denver Public Schools", "Denver Housing Authority", "Regional Transportation District (RTD)", "Federal Reserve Bank of Kansas City"):
+            "Denver Public Schools", "Denver Housing Authority", "Regional Transportation District (RTD)", "Federal Reserve Bank of Kansas City",
+            "nyc-parks-arsenal-west", "NYC Health + Hospitals", "Denver Parks and Recreation", "Los Angeles County Fire"):
     check(S.prefilter(J(gov), SEARCH) is not None and "government" in str(S.prefilter(J(gov), SEARCH)), f"government employer not dropped: {gov}")
 check("government" in str(S.prefilter(J("Acme Corp", url="https://acme.wd5.myworkdayjobs.com/x", loc="Denver, CO") if False else J("Parks", url="https://careers.denvergov.org/job/1"), SEARCH)),
       "a .gov-style address should be dropped")
-for ok in ("FedEx", "Federal Express", "Stateline Capital", "Countyline Logistics", "Cityscape Properties", "Department Store Co", "Acme Corp", "Unitedhealth Group"):
+for ok in ("FedEx", "Federal Express", "Stateline Capital", "Countyline Logistics", "Cityscape Properties", "Department Store Co", "Acme Corp", "Unitedhealth Group",
+           "Parks Pharmacy", "NYC Hospitality Group", "Denver Water Sports Inc"):
     check(S.prefilter(J(ok), SEARCH) is None, f"private employer wrongly dropped as government: {ok}")
 check(S.prefilter(J("City of Denver"), {**SEARCH, "exclude_government": False}) is None, "the government filter must be switchable off")
 

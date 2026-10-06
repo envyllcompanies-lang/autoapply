@@ -160,6 +160,42 @@ def question_checks():
     for q in ("I am/was a political appointee.", "I am/was a public financial disclosure report filer.", "I am/was a covered DoD official as defined by DFARS 252.203-7000.",
               "Personally made a decision on behalf of the government to award a contract, subcontract, or grant."):
         check(ask(q, "checkbox_single", []) == "", f"government-role statement must stay unticked and count as answered: {q}")
+
+    def box(label, question):
+        return b._answer({"id": "x", "kind": "checkbox_single", "label": label, "question": question, "options": [], "required": True},
+                         "", dict(company="Acme", role="x"))
+    for gq in ("The following statements are intended to preliminarily identify whether you may have post-government employment restrictions. Check all that apply.*",
+               "Within the last two years, did you serve in any of the following roles for the U.S. Government?*"):
+        check(box("None of the above.", gq) is True, f"government group: 'None of the above' must be ticked (no government roles): {gq[:50]}")
+    check(box("None of the above", "Which of these tools have you used?*") is not True, "'None of the above' outside a government group is not ticked blindly")
+    check(box("None of the above", "Do any of the following apply to you? (federal assistance such as SNAP or TANF)*") is not True,
+          "'None of the above' in a tax-credit (WOTC) group is not ticked: those facts are not known")
+    GQ = "Did you do any of the following activities or serve in the following roles? (Select all that apply)*"     # Sierra Space, 2026-10-06
+    grp = [{"id": f"g{i}", "kind": "checkbox_single", "label": lab, "question": GQ, "options": [], "required": True} for i, lab in enumerate((
+        "Served as procuring contracting officer, source selection authority, a member of the source selection evaluation board",
+        "Personally made a decision on behalf of the government to award a contract, subcontract, modification of a contract",
+        "None of the above."))]
+    got = b.map_fields(Job("workday", "sierraspace", "1", "Logistics Specialist I", "Louisville, CO", "", "", ""), grp, "")
+    check(got["answers"].get("g2") is True and not got["answers"].get("g0") and not got["answers"].get("g1") and not got["unanswerable_required"],
+          f"government roles listed box by box: only 'None of the above.' ticked -> {got}")
+    RACE_Q = "What is your ethnicity?*"
+    saved = b.facts.get("race_ethnicity")
+    try:                                                 # synthetic answers: Workday draws one box per choice, '(Not Hispanic or Latino)' on most
+        for want, ticks in (("Hispanic or Latino", {"Hispanic or Latino (United States of America)"}),
+                            ("White", {"White (Not Hispanic or Latino) (United States of America)"}),
+                            ("American Indian or Alaska Native", {"American Indian or Alaska Native (Not Hispanic or Latino) (United States of America)"}),
+                            ("", {"Prefer Not To Self Identify (United States of America)", "I do not wish to self-identify (United States of America)"})):
+            b.facts["race_ethnicity"] = want
+            for lab in ("Asian (Not Hispanic or Latino) (United States of America)", "Hispanic or Latino (United States of America)",
+                        "Prefer Not To Self Identify (United States of America)", "White (Not Hispanic or Latino) (United States of America)",
+                        "Two or More Races (Not Hispanic or Latino) (United States of America)",
+                        "Black or African American (Not Hispanic or Latino) (United States of America)",
+                        "American Indian or Alaska Native (Not Hispanic or Latino) (United States of America)",
+                        "I do not wish to self-identify (United States of America)"):
+                got = box(lab, RACE_Q)
+                check(got == (True if lab in ticks else ""), f"race box {lab[:40]!r} with answer {want or '(none)'!r} -> {got!r}")
+    finally:
+        b.facts["race_ethnicity"] = saved
     for q, want in (("Are you a government official or public official?", "No"), ("Are you related to a government official or politically exposed person (PEP)?", "No"),
                     ("Is any member of your immediate family a public official?", "No"), ("Are you subject to a non-compete agreement with a current or former employer?", "No"),
                     ("Are you bound by any restrictive covenants?", "No"), ("Do you currently have any other employment?", "No"), ("Do you have any conflicts of interest?", "No"),

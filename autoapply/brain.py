@@ -197,6 +197,18 @@ NEG_Q_RX = re.compile(r"\b(are|do|does|did|is|will|would|can|could|have|has)\s+(
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
 
 
+# a race/ethnicity box names the applicant's answer: one pattern per answer, so 'American Indian' never ticks 'Black or African American'
+RACE_KEYS = (r"hispanic|latin[oax]", r"american indian|alaska", r"black|african", r"hawaiian|pacific islander", r"\basian\b",
+             r"\bwhite\b|caucasian", r"two or more|multi.?racial")
+NOT_HISPANIC = re.compile(r"\(?\b(?:not|non)[- ](?:hispanic|latin[oax]+)(?: or (?:hispanic|latin[oax]+))?\)?")
+# a group of post-government-service statements ('I am/was a political appointee', 'Served as contracting officer'…)
+GOV_ROLE_RX = re.compile(
+    r"post-?government|(prior|former|previous) government|government (official|employee|employment|position|service|role)s?|"
+    r"for the (u\.?s\.? |federal )?government|on behalf of the government|federal (employee|employment|official|service)|"
+    r"public official|appointee|procuring|contracting officer|source selection|senior employee|disclosure report|dod official|"
+    r"military officer", re.I)
+
+
 class Brain:
     def __init__(self, cfg: dict, profile: dict, base: Path | None = None, log=print):
         self.cfg, self.profile, self._log, self._job = cfg, profile, log, None
@@ -469,6 +481,11 @@ class Brain:
         answers, missing = {}, []
         ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
         exp_vals = self._experience_answers(fields)          # Workday 'My Experience': your real jobs, never the one applied to
+        # Workday lists the boxes of one question one by one ('None of the above.'): each box can see what its group is about
+        self._siblings = {}
+        for fld in fields:
+            if fld.get("kind") == "checkbox_single" and fld.get("question"):
+                self._siblings[fld["question"]] = self._siblings.get(fld["question"], "") + " " + str(fld.get("label", "")).lower()
         for fld in fields:
             if fld["id"] in exp_vals:
                 if exp_vals[fld["id"]] is not None:
@@ -871,14 +888,14 @@ class Brain:
                 return v or None
             return None
         if kind == "checkbox_single" and re.search(r"\(united states( of america)?\)\s*\*?\s*$", lab) and \
-                re.search(r"american indian|asian|black|hispanic|latino|pacific islander|white|two or more|not specified|decline", lab):
-            low = lab
+                re.search(r"american indian|alaska|asian|black|african|hispanic|latin|pacific islander|hawaiian|white|two or more|"
+                          r"not specified|decline|prefer not|self.?identify|wish to", lab):
+            low = NOT_HISPANIC.sub(" ", lab)           # 'Asian (Not Hispanic or Latino)' is not a Hispanic choice
             want = str(self.facts.get("race_ethnicity") or "")      # Workday draws race/ethnicity as one box per choice
-            if want and re.search(r"hispanic|latino", want, re.I):
-                return True if re.search(r"hispanic|latino", low) else ""
-            if want and _norm(want).split()[0] in low:
-                return True
-            return True if (not want and re.search(r"not specified|decline", low)) else ""
+            if re.search(r"not specified|decline|prefer not|(do not|don.t) wish|not to (self.?identify|answer|disclose)", low):
+                return "" if want else True
+            key = next((rx for rx in RACE_KEYS if re.search(rx, want, re.I)), None) or (re.escape(_norm(want).split()[0]) if _norm(want) else None)
+            return True if key and re.search(key, low) else ""
         if kind == "checkbox_single" and re.match(r"\W*(yes, i have a disability|no, i (do not|don.t) have a disability|"
                                                   r"i (do not|don.t) (want|wish) to (answer|self.identify))", lab):
             d = str(self.facts.get("disability_status") or "").lower()      # Workday's disability form: one box per choice
@@ -891,7 +908,7 @@ class Brain:
             if re.search(r"\bsms\b|text messag|texts? (you|me)|via text", low) and not AI_WORDS.search(low) \
                     and re.match(r"y", str(self.facts.get("sms_consent", "")), re.I):
                 return True          # you allowed SMS contact
-            stmt = self._statement_box(low)
+            stmt = self._statement_box(low, getattr(self, "_siblings", {}).get(f.get("question") or "", ""))
             if stmt is not _UNSET:
                 return stmt
             if OPTIONAL_CHECK.search(low) or AI_WORDS.search(low):
@@ -1263,8 +1280,9 @@ class Brain:
             return opts[round({0: 0.0, 1: 0.25, 2: 0.5, 3: 0.75}[lvl] * (len(opts) - 1))]
         return None
 
-    def _statement_box(self, low):
-        """A tick-box that states something about the applicant. True only when the statement is true for them."""
+    def _statement_box(self, low, siblings=""):
+        """A tick-box that states something about the applicant. True only when the statement is true for them.
+        siblings: the labels of the other boxes of the same question, when the form lists them one by one."""
         if re.search(r"authori[sz]ed to work|eligible to work|legally (authorized|permitted|eligible)|right to work|work authori", low):
             if re.search(r"\bnot (authori|eligible|permitted)|unauthori", low):
                 return None
@@ -1278,6 +1296,8 @@ class Brain:
                      r"federal employee|elected)|personally (and substantially )?(made a decision|participated|served) .{0,60}(government|contracting officer|"
                      r"source selection|program manager)|served as .{0,60}(contracting officer|source selection|program manager)", low):
             return ""                # post-government-service disclosures: you confirmed none of them is true, so the box stays unticked
+        if re.match(r"\W*none of the (above|following)\b", low) and GOV_ROLE_RX.search(low + " " + siblings):
+            return True              # ...so in such a group 'None of the above' is the true box, and the group needs one ticked
         if re.search(r"\b(at least|over|older than)\W+18\b|18 years", low) and re.match(r"y", str(self.facts.get("over_18", "")), re.I):
             return True
         return _UNSET

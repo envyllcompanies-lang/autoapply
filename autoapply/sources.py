@@ -575,7 +575,11 @@ GOV_NAME_RX = re.compile(
     r"\bfederal (reserve|government|agency|bureau|aviation|emergency)\b|"
     r"\b(school district|unified school|public schools?|board of education|housing authority|transit authority|transportation district|"
     r"water (district|authority)|port authority|sheriff|police department|fire (department|protection district)|municipal|metropolitan district|"
-    r"national (laboratory|guard)|veterans affairs|nasa|noaa)\b", re.I)
+    r"national (laboratory|guard)|veterans affairs|nasa|noaa)\b|"
+    # city and county agencies named by their place ('NYC Parks', 'NYC Health + Hospitals', 'Los Angeles County Fire')
+    r"\b(nyc|new york city|los angeles( county)?|la county|denver|colorado) (parks|health|housing|police|fire|sanitation|"
+    r"department|dept|office|agency|administration)\b|"
+    r"\bparks (and|&) rec(reation)?\b", re.I)
 GOV_URL_RX = re.compile(r"\.gov(?:[/:?#]|$)|\.mil(?:[/:?#]|$)|\.(?:co|ny|ca|tx)\.us/|governmentjobs\.com|usajobs\.gov|schoolspring|edjoin\.org|neogov|"
                         r"[a-z0-9]gov\.(?:org|com|net|us)\b|//[a-z0-9-]+gov\.wd\d+\.myworkdayjobs\.com", re.I)
 
