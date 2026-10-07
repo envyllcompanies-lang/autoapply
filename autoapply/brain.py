@@ -11,7 +11,7 @@ import re
 from datetime import date
 from pathlib import Path
 
-from .sources import norm_location, level_title
+from .sources import norm_location, level_title, remote_in_text
 from .writer import Writer, WriterUnavailable, limits_from_question
 
 STOP = set("""a an and are as at be but by for from has have in into is it its of on or our that the their this to
@@ -270,12 +270,21 @@ class Brain:
             parts.append(f"keywords [{names}] +{d}")
 
         bonus = 0
-        remote_job = "remote" in loc or str(job.extra.get("workplace", "")).lower() == "remote"
-        for pref in sc.get("preferred_locations", []) or []:
-            if pref.lower() in loc or (pref.lower() == "remote" and remote_job):
-                bonus = sc.get("location_bonus", 10)
-                parts.append(f"location '{pref}' +{bonus}")
-                break
+        remote_job = ("remote" in loc or str(job.extra.get("workplace", "")).lower() == "remote"
+                      or remote_in_text(desc))
+        tiers = sc.get("location_tiers") or {}
+        if tiers:                                      # places in order of preference (settings.yaml scoring.location_tiers)
+            hits = [(int(v), k) for k, v in tiers.items()
+                    if (remote_job if k.lower() == "remote" else k.lower() in loc)]
+            if hits:
+                bonus, where = max(hits)
+                parts.append(f"location '{where}' +{bonus}")
+        else:
+            for pref in sc.get("preferred_locations", []) or []:
+                if pref.lower() in loc or (pref.lower() == "remote" and remote_job):
+                    bonus = sc.get("location_bonus", 10)
+                    parts.append(f"location '{pref}' +{bonus}")
+                    break
 
         pen = 0
         for k, v in (sc.get("negative_keywords") or {}).items():
@@ -1025,8 +1034,10 @@ class Brain:
             if re.search(r"(experience|proficien|familiar|knowledge|skilled|worked|used|trained|certified|certification|licen[sc]e[ds]?)\b", low) \
                     and not re.search(r"driver|drivers", low):
                 return pick_option(opts, "No")       # a tool / skill / credential that is not in the résumé: the truthful answer is No
-            if re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you|are you)\b", low):
-                return pick_option(opts, "Yes")      # ordinary willingness / ability questions
+            if re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you)\b", low):
+                return pick_option(opts, "Yes")      # ordinary willingness / ability questions ('are you' alone is not one:
+                                                     # 'Are you married / a government official / on an F-1 visa?' must
+                                                     # get its truthful answer from your facts, never a guessed Yes)
         if has_opts and kind in ("select", "radio", "combobox") and f.get("required"):
             got = next((o for o in opts if re.search(r"decline|prefer not|choose not|do not wish|don'?t wish|not (to )?(say|answer|disclose|specify)|n/?a\b|not applicable", o, re.I)), None)
             if got:

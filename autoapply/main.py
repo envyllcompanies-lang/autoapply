@@ -575,6 +575,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             return 0
 
     prior = rank.build(db, min_fit)          # which title words and employers passed the match check before
+    tiers = (cfg.get("scoring") or {}).get("location_tiers") or {}          # remote, New York and Denver ahead of Los Angeles
     now_dt = datetime.now()
 
     def _rank(r):
@@ -585,8 +586,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         fit = _fit(r)
         sr = site_rank(r, health)
         if fit > 0:
-            return (0 if sr < 3 else 2, sr, -fit)
-        return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt) - 8 * sr))
+            return (0 if sr < 3 else 2, sr, -(fit + rank.location_boost(r, tiers)))
+        return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt, tiers) - 8 * sr))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
     skip_sites = [x.lower() for x in s.get("skip_sites", []) or []]
     if skip_sites:

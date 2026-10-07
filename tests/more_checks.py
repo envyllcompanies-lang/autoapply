@@ -24,7 +24,7 @@ from autoapply import main as M                                          # noqa:
 from autoapply.brain import Brain                                        # noqa: E402
 from autoapply.sources import Job, prefilter                             # noqa: E402
 
-CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
+CFG = M.merge_settings(yaml.safe_load((ROOT / "config.yaml").read_text()), ROOT)      # exactly what a run uses: settings.yaml over config.yaml
 PROFILE = yaml.safe_load((ROOT / "profile.yaml").read_text())
 YN = ["Yes", "No"]
 problems: list[str] = []
@@ -47,6 +47,9 @@ def question_checks():
         f = {"id": "x", "kind": kind, "label": label, "question": "", "options": opts or [], "required": req}
         return b._answer(f, "", dict(company=company.title(), role=title))
 
+    for q in ("Are you married?", "Are you a government official or public official?", "Are you currently on an F-1 visa?",
+              "Are you a registered lobbyist?", "Are you related to anyone who works here?"):
+        check(ask(q, "radio", YN) != "Yes", f"a fact about you was guessed 'Yes' only because the question starts 'Are you': {q}")
     for q in ("Do you NOT require sponsorship?", "Are you not currently authorized to work in the United States?",
               "Is there any reason you cannot work on-site?"):
         check(ask(q, "radio", YN) is None, f"negated question answered instead of skipped: {q}")
@@ -367,10 +370,10 @@ def fit_checks():
     check(sc >= s["min_score"], f"a good fit scored {sc}, under the bar {s['min_score']}")
     sc, _ = b.score(J("Operations Manager", "Denver, CO", "Requires 8+ years of experience in operations."))
     check(sc < s["min_score"], f"an 8+ years posting scored {sc}")
-    sc, _ = b.score(J("Operations Associate", "Denver, CO", "Pay range: $130,000 - $160,000 per year. 2 years experience."))
-    check(sc < s["min_score"], f"a $130K+ posting scored {sc}")
-    sc, _ = b.score(J("Operations Associate", "Denver, CO", "Security clearance required. US citizens only. Pay $70,000."))
-    check(sc < s["min_score"], f"a clearance posting scored {sc}")
+    hi = J("Operations Associate", "Denver, CO", "Pay range: $130,000 - $160,000 per year. 2 years experience.")
+    check(M.level_out(hi, s) is not None, "a $130K+ posting must be dropped as above your level")      # (the keyword bar is only a sieve now)
+    cl = J("Operations Associate", "Denver, CO", "Active Secret security clearance required. US citizens only. Pay $70,000.")
+    check(M.level_out(cl, s) is not None, "a posting that needs a security clearance must be dropped")
     b._job = J("Operations Coordinator", "Westminster, CO")
     check(b._location_ok(), "relocation questions should be answered for 'Westminster, CO' (Colorado)")
     b._job = J("Operations Coordinator", "Houston, TX")
@@ -1240,6 +1243,36 @@ def direct_link_checks():
         sources.FETCHERS.clear(); sources.FETCHERS.update(old)
 
 
+def remote_checks():
+    """Remote roles found from the posting's own words, and the order of places: remote, New York and Denver first, Los Angeles after."""
+    from autoapply import sources as SRC, rank as R
+    yes = ["This role is fully remote within the United States.", "We are a remote-first company; you can work from anywhere in the US.",
+           "This is a 100% remote position open to candidates across the United States.", "Position is remote (US-based candidates only)."]
+    no = ["This is a hybrid role: three days a week in our Austin office.", "This role is not remote.", "Remote work is not available for this position.",
+          "Fully remote within Canada.", "This is a non-remote role based in Austin.", "We offer flexible hours and a great office.", "Fully remote is possible for senior staff; this role is in-office."]
+    for t in yes:
+        check(SRC.remote_in_text(t), f"US-remote wording not seen: {t}")
+    for t in no:
+        check(not SRC.remote_in_text(t), f"wording wrongly read as US-remote: {t}")
+    s = {**CFG["search"], "_onsite_ok": CFG["facts"]["relocation_ok_locations"]}
+    far = Job("greenhouse", "acme", "1", "Operations Coordinator", "Austin, TX", "", "", "Operations Coordinator. " + yes[0])
+    check(prefilter(far, s) is None, f"a US-remote posting listed under another city must be kept: {prefilter(far, s)}")
+    stay = Job("greenhouse", "acme", "2", "Operations Coordinator", "Austin, TX", "", "", "Operations Coordinator. " + no[0])
+    check(prefilter(stay, s) is not None, "an on-site posting in a city you did not pick must still be dropped")
+    b = Brain({**CFG, "writer": {"enabled": False}}, PROFILE, ROOT, lambda *a: None)
+    sc = {loc: b.score(Job("greenhouse", "acme", "3", "Operations Coordinator", loc, "", "", desc))[0]
+          for loc, desc in (("Remote - US", ""), ("New York, NY", ""), ("Denver, CO", ""), ("Los Angeles, CA", ""), ("Austin, TX", yes[0]))}
+    check(min(sc["Remote - US"], sc["New York, NY"], sc["Denver, CO"]) > sc["Los Angeles, CA"],
+          f"remote / New York / Denver must score above Los Angeles: {sc}")
+    check(sc["Austin, TX"] == sc["Remote - US"], f"remote stated in the description must count as remote: {sc}")
+    tiers = CFG["scoring"].get("location_tiers") or {}
+    rows = [{"title": "Operations Coordinator", "company": "acme", "score": 40, "location": loc, "reason": ""} for loc in
+            ("Los Angeles, CA", "Denver, CO", "New York, NY", "Remote")]
+    order = sorted(rows, key=lambda r: -R.value(R.Prior([]), r, tiers=tiers))
+    check(order[-1]["location"] == "Los Angeles, CA", f"Los Angeles must be checked after remote / New York / Denver: {[r['location'] for r in order]}")
+    print("ok  remote roles read from the description; remote, New York and Denver ranked ahead of Los Angeles")
+
+
 def location_checks():
     import yaml as _y
     from autoapply.sources import Job, prefilter
@@ -1352,7 +1385,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, submit_guard_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
+    for fn in (question_checks, remote_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, submit_guard_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others

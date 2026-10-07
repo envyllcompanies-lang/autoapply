@@ -23,6 +23,21 @@ search:
   exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
 
 scoring:
+  location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).
+    remote: 12              # 'remote' includes postings whose description says they are remote in the US
+    new york: 12            # (also 'NY' towns: Brooklyn, Rye Brook, Long Island City…)
+    nyc: 12
+    denver: 12
+    colorado: 12            # Denver suburbs (Westminster, Aurora, Lakewood…) read as Colorado
+    los angeles: 6          # considered, but after the three above
+    santa monica: 6
+    culver city: 6
+    el segundo: 6
+    long beach: 6
+    pasadena: 6
+    burbank: 6
+    glendale: 6
+    torrance: 6
   pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
 
 writer:
@@ -47,11 +62,18 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+    # GitHub Models: free with the GitHub account, reached with the run's own token (workflow permission 'models: read').
+    # Small daily allowances (about 50 requests for gpt-4.1, 150 for gpt-4.1-mini): they write answers when Groq's are used up.
+    - {name: github-gpt41, base_url: "https://models.github.ai/inference", model: "openai/gpt-4.1",
+       api_key_env: GITHUB_TOKEN, rpm: 10, rpd: 45, tpm: 30000, temperature: 0.7}
+    - {name: github-mini, base_url: "https://models.github.ai/inference", model: "openai/gpt-4.1-mini",
+       api_key_env: GITHUB_TOKEN, rpm: 15, rpd: 140, tpm: 30000, temperature: 0.7}
+    # Gemini: new keys (made after mid-2026) only get the 3.x models, so those are named first.
     - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
-       model: [gemini-flash-lite-latest, gemini-2.5-flash-lite], discover: lite,
+       model: [gemini-3.5-flash-lite, gemini-3.1-flash-lite-preview, gemini-flash-lite-latest], discover: lite,
        api_key_env: GEMINI_API_KEY, rpm: 10, rpd: 480, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
     - {name: gemini-flash, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
-       model: [gemini-flash-latest, gemini-2.5-flash], discover: flash,
+       model: [gemini-3.5-flash, gemini-3-flash-preview, gemini-flash-latest], discover: flash,
        api_key_env: GEMINI_API_KEY, rpm: 4, rpd: 18, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
 
 aggregators:

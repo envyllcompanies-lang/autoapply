@@ -567,6 +567,29 @@ def foreign_place(text: str) -> bool:
     return bool(FOREIGN.search(text or "")) and not us_place(text)
 
 
+# The posting's own words saying the role is remote in the US ('fully remote within the United States', 'remote-first',
+# 'work from anywhere in the US'), whatever city its location field names. Any hybrid / in-office / not-remote wording, or
+# remote only in another country, means it is not read as remote: a wrongly kept posting costs a match check, a wrongly
+# dropped one costs nothing it did not already cost.
+REMOTE_TEXT = re.compile(
+    r"\b(fully|100%|completely|entirely|permanently) remote\b|\bremote[- ]first\b|\bwork (from )?anywhere\b|"
+    r"\b(this|the) (role|position|job|opportunity) is (a )?(fully |100% )?remote\b|\b(position|role|job) is remote\b|"
+    r"\bremote (position|role|opportunity|job)\b|\bremote (within|in|across|anywhere in) the (u\.?s\.?a?|united states)\b", re.I)
+NOT_REMOTE_TEXT = re.compile(
+    r"\bhybrid\b|\bin[- ]office\b|\bon[- ]?site (role|position|required|\d)|\b(days?|times?) a week in\b|"
+    r"\b(not|isn.t|is not|no) (a )?(fully )?remote\b|\bnon[- ]remote\b|\bremote work is not\b|\bnot eligible for remote\b", re.I)
+
+
+def remote_in_text(text: str) -> bool:
+    """True when a posting's description says it is a remote role open in the US."""
+    t = " ".join((text or "").split())[:9000]
+    m = REMOTE_TEXT.search(t)
+    if not m or NOT_REMOTE_TEXT.search(t):
+        return False
+    near = t[max(0, m.start() - 120): m.end() + 160]
+    return not foreign_place(near)
+
+
 def _remote_ish(loc: str) -> bool:
     low = (loc or "").lower().strip()
     return bool(REMOTE_RX.search(low)) or bool(re.fullmatch(r"(united states( of america)?|usa|u\.s\.a?\.?|us)(\s*\(.*\))?", low))
@@ -658,10 +681,12 @@ def prefilter(job: Job, search: dict) -> str | None:
             return "talent-pool posting or student program, not an open role"
         if foreign_place(title):
             return "role is based in another country"
-    if locs and not any(k in loc for k in locs):
-        return f"location '{job.location}' not allowed"
     if search.get("us_remote_only", True) and foreign_place(job.location):
         return "role is tied to another country"
+    if remote_in_text(job.description) and not foreign_place(job.location):
+        return None          # the posting says it is remote in the US: where its location field puts it does not matter
+    if locs and not any(k in loc for k in locs):
+        return f"location '{job.location}' not allowed"
     # On-site / hybrid roles only in the places you said you'd live (facts.relocation_ok_locations, passed in by main);
     # remote and US-wide roles are always fine.
     onsite_ok = [str(x).lower() for x in (search.get("_onsite_ok") or [])]

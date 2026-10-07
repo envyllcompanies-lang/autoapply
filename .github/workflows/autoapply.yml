@@ -20,6 +20,7 @@ on:
 permissions:
   contents: write
   actions: write            # lets a finished run start the next one (non-stop mode)
+  models: read              # GitHub Models (free answer writers) with the run's own token
 
 concurrency:
   group: autoapply         # never two runs at once
@@ -73,6 +74,7 @@ jobs:
           AUTOAPPLY_UNLIMITED: ${{ github.event.repository.visibility == 'public' && '1' || '' }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}

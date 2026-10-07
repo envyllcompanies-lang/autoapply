@@ -142,7 +142,21 @@ def freshness(row, now: datetime | None = None) -> float:
     return -8.0
 
 
-def value(prior: Prior, row, now: datetime | None = None) -> float:
+def location_boost(row, tiers: dict | None) -> float:
+    """A few points for the places you want most (settings.yaml scoring.location_tiers: remote, New York and Denver ahead of
+    Los Angeles). A posting the score found remote from its description says so in its reason ("location 'remote'")."""
+    if not tiers:
+        return 0.0
+    try:
+        loc, why = (row["location"] or "").lower(), (row["reason"] or "").lower()
+    except (KeyError, IndexError):
+        return 0.0
+    remote = "remote" in loc or "location 'remote'" in why
+    hits = [float(v) for k, v in tiers.items() if (remote if k.lower() == "remote" else k.lower() in loc)]
+    return max(hits) / 2 if hits else 0.0
+
+
+def value(prior: Prior, row, now: datetime | None = None, tiers: dict | None = None) -> float:
     """0-100 for a posting that has not been match-checked yet: higher = check it sooner."""
     try:
         score = float(row["score"] or 0)
@@ -150,4 +164,5 @@ def value(prior: Prior, row, now: datetime | None = None) -> float:
         score = 0.0
     p = prior.p(row["title"] or "", row["company"] or "")
     low = max(0.0, LOW_SCORE - score) * LOW_SCORE_STEP
-    return max(0.0, min(100.0, 100 * ((1 - W_SCORE) * p + W_SCORE * 0.6 * min(score, 100) / 100) + freshness(row, now) - low))
+    return max(0.0, min(100.0, 100 * ((1 - W_SCORE) * p + W_SCORE * 0.6 * min(score, 100) / 100) + freshness(row, now) - low
+                        + location_boost(row, tiers)))
