@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -360,6 +361,9 @@ def fit_checks():
         "still senior": J("Senior Associate, Accounting & Finance", "Denver"), "canada": J("Operations Coordinator", "Toronto, ON, CA"),
         "hyphenated co": J("Operations Coordinator", "Co-Working Hub, Boston, MA"), "other state": J("Office Coordinator", "Houston, TX"),
     }
+    raw = yaml.safe_load((ROOT / "config.yaml").read_text())["search"].get("titles_include") or []
+    check(set(map(str.lower, raw)) <= set(map(str.lower, s["titles_include"])) and "project engineer" in s["titles_include"],
+          "settings.yaml titles_include_add must add to the private title list, never replace it")
     for j in keep:
         check(prefilter(j, s) is None, f"prefilter dropped a wanted posting: {j.title} / {j.location}: {prefilter(j, s)}")
     for why, j in drop.items():
@@ -1248,6 +1252,36 @@ def direct_link_checks():
         sources.FETCHERS.clear(); sources.FETCHERS.update(old)
 
 
+def link_checks():
+    """Profile links are given as forms check them: a LinkedIn profile is https://www.linkedin.com/in/<name>, whatever was
+    saved after the name (Jane Street refused the longer form three times on 2026-10-06)."""
+    for saved, want in (("https://www.linkedin.com/in/jane-doe-12ab34/details/experience/", "https://www.linkedin.com/in/jane-doe-12ab34"),
+                        ("linkedin.com/in/jane-doe?utm_source=share", "https://www.linkedin.com/in/jane-doe"),
+                        ("https://www.linkedin.com/in/jane-doe", "https://www.linkedin.com/in/jane-doe"),
+                        ("https://janedoe.com", "https://janedoe.com")):
+        b = Brain({**CFG, "writer": {"enabled": False}, "facts": {**CFG["facts"], "linkedin": saved}}, PROFILE, ROOT, lambda *a: None)
+        check(b.facts["linkedin"] == want, f"LinkedIn link {saved!r} should be given as {want!r}, got {b.facts['linkedin']!r}")
+    print("ok  profile links in the form sites accept")
+
+
+def field_checks():
+    """Workday boxes seen unanswered on 2026-10-06/07: the skills search box, and languages listed one box per language."""
+    b = Brain({**CFG, "writer": {"enabled": False}}, PROFILE, ROOT, lambda *a: None)
+    b._job = Job("workday", "acme", "1", "Operations Analyst", "Denver, CO", "", "", "")
+    ctx = dict(company="Acme", role="Operations Analyst")
+    got = b._answer({"id": "s", "kind": "wdprompt", "label": "Type to Add Skills*", "question": "", "options": [], "required": True}, "", ctx)
+    mine = {re.sub(r"\s*\(.*?\)", "", x).strip().lower() for g in PROFILE.get("skills") or [] for x in g["items"]}
+    check(isinstance(got, list) and got and all(str(x).lower() in mine for x in got),
+          f"the skills box must get skills from your résumé (tried in turn), got {got!r}")
+    langs = [str(x).lower() for x in (CFG.get("confirmed") or {}).get("languages_fluent") or []]
+    q = "Please select all languages you are fluent in*"
+    for lab in ("Arabic", "English", "Spanish", "Mandarin"):
+        a = b._answer({"id": lab, "kind": "checkbox_single", "label": lab, "question": q, "options": [], "required": True}, "", ctx)
+        want = True if lab.lower() in langs else ""
+        check(a == want, f"language box {lab!r}: got {a!r}, want {want!r} (from your confirmed languages)")
+    print("ok  Workday skills box and one-box-per-language lists answered from your résumé and confirmed languages")
+
+
 def remote_checks():
     """Remote roles found from the posting's own words, and the order of places: remote, New York and Denver first, Los Angeles after."""
     from autoapply import sources as SRC, rank as R
@@ -1390,7 +1424,7 @@ def safety_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (question_checks, remote_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, submit_guard_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
+    for fn in (question_checks, link_checks, field_checks, remote_checks, fit_checks, source_checks, board_and_budget_checks, mail_checks, aggregator_checks, workflow_checks, script_checks, gate_checks, match_checks, submit_guard_checks, safety_checks, direct_link_checks, open_form_checks, location_checks):
         try:
             fn()
         except Exception as e:                                        # a crash in one group must not hide the others

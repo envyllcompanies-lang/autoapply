@@ -219,6 +219,43 @@ finally:
     A.linkedin = old_li
 check(n0 == 0 and len(A.localfeed({"aggregators": {"localfeed": {"dir": str(tmp)}}})) == 1, "exporter: an empty or blocked read must never overwrite a good feed")
 
+# ---- Built In: its apply link needs a Built In account, so a listing is applied to on the employer's own board instead
+bi = A._job("builtin", "Wells Fargo", "11413249", "Branch Operations Coordinator Wheat Ridge CO", "Wheat Ridge, CO (Hybrid)",
+            "https://www.builtincolorado.com/job/branch-operations-coordinator-wheat-ridge-co/11433651?handler=ApplyRedirect", "",
+            "https://www.builtincolorado.com/job/branch-operations-coordinator-wheat-ridge-co/11433651")
+check(A.account_gated(bi.apply_url) and not A.account_gated("https://boards.greenhouse.io/acme/jobs/1"),
+      "Built In's ApplyRedirect link must be known as account-only")
+WF = "https://wf.wd1.myworkdayjobs.com/WellsFargoJobs/job/WHEAT-RIDGE-CO/Branch-Operations-Coordinator-Wheat-Ridge-CO_R-480101"
+asked = []
+
+
+def _wd_search(spec, text):
+    asked.append((spec, text))
+    if spec.startswith("wf/"):
+        return [S.Job("workday", "wf", "R-480101", "Branch Operations Coordinator - Wheat Ridge, CO", "Wheat Ridge, CO", WF, WF, ""),
+                S.Job("workday", "wf", "R-480102", "Branch Operations Coordinator - Mankato, MN", "Mankato, MN", WF + "2", WF + "2", "")]
+    return []
+
+
+old_search, old_fetch = getattr(S, "workday_search", None), dict(S.FETCHERS)
+S.workday_search = _wd_search
+for k in list(S.FETCHERS):
+    if k != "workday":
+        S.FETCHERS[k] = lambda *a, **kw: []                       # no network: no board on any public feed
+try:
+    got = A.direct_apply_url(bi, log=lambda *a: None, workday_boards=["blackrock/wd1/BlackRock_Professional/BlackRock", "wf/wd1/WellsFargoJobs/Wells Fargo"])
+    check(got == WF, f"Built In listing should resolve to the employer's own Workday posting (title punctuation aside): {got}")
+    check(all(sp.startswith("wf/") for sp, _ in asked), f"only the employer's own Workday board may be searched: {asked}")
+    none = A.direct_apply_url(A._job("builtin", "Tiny Startup LLC", "1", "Operations Coordinator", "Denver, CO", bi.apply_url, ""),
+                              log=lambda *a: None, workday_boards=["wf/wd1/WellsFargoJobs/Wells Fargo"])
+    check(none is None, f"a company with no board found must give no link: {none}")
+except Exception as e:
+    check(False, f"Built In resolution crashed: {type(e).__name__}: {e}")
+finally:
+    if old_search:
+        S.workday_search = old_search
+    S.FETCHERS.clear(); S.FETCHERS.update(old_fetch)
+
 if __name__ == "__main__":
     if problems:
         print("RESULT: PROBLEMS:\n  - " + "\n  - ".join(problems))

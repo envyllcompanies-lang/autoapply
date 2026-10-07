@@ -20,7 +20,7 @@ import yaml
 from .db import DB
 from .brain import Brain
 from .sources import discover, prefilter, Job
-from .aggregators import direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
+from .aggregators import account_gated, direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
 from . import writer as writer_mod
 from .ats import detect as detect_ats
@@ -95,7 +95,11 @@ def merge_settings(cfg: dict, base: Path) -> dict:
             else:
                 a[k] = v
     drop = set(((over.get("writer") or {}).pop("drop_providers", None)) or [])
+    add = ((over.get("search") or {}).pop("titles_include_add", None)) or []
     deep(cfg, over)
+    if add:          # titles added to the private list, never replacing it
+        se = cfg.setdefault("search", {})
+        se["titles_include"] = list(dict.fromkeys([*(se.get("titles_include") or []), *(str(x) for x in add)]))
     w = cfg.get("writer") or {}
     if drop and isinstance(w.get("providers"), list):
         w["providers"] = [x for x in w["providers"] if x.get("name") not in drop]
@@ -932,15 +936,25 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             try:
                 page = ctx.new_page()
                 if job.source.startswith("agg-"):          # follow the aggregator link to the employer's own form
-                    try:
-                        job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
-                    except sub.Blocked as e:
-                        if "could not find the employer" not in str(e):
-                            raise
-                        direct = direct_apply_url(job, log)     # the listing page gave no link: find the company's own posting by name
+                    wd_boards = companies.get("workday") or []
+                    if account_gated(job.apply_url):       # the listing site's link needs an account there: go to the employer directly
+                        direct = direct_apply_url(job, log, workday_boards=wd_boards)
                         if not direct:
-                            raise
+                            db.update(job.key, status="skipped", attempts=row["attempts"] + 1,
+                                      reason="listed only on a site whose apply link needs an account there; the employer's own posting was not found")
+                            log("    ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found")
+                            continue
                         job.apply_url = direct
+                    else:
+                        try:
+                            job.apply_url = sub.resolve_apply_url(page, job.apply_url, log)
+                        except sub.Blocked as e:
+                            if "could not find the employer" not in str(e):
+                                raise
+                            direct = direct_apply_url(job, log, workday_boards=wd_boards)   # no link on the listing page: the company's own posting
+                            if not direct:
+                                raise
+                            job.apply_url = direct
                     remember_board(base, job.apply_url)
                     dup = db.conn.execute(
                         "SELECT 1 FROM jobs WHERE key != ? AND status IN ('applied','unconfirmed','dry_run') AND (apply_url=? OR key=?)",

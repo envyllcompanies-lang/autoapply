@@ -22,6 +22,19 @@ search:
   max_human_check_tries_per_day: 6      # tries per day on sites where every recent try ended at a human check (CAPTCHA)
   max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
   exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
+  titles_include_add:         # added to your private list of accepted titles (not replacing it): entry roles an Industrial &
+    - manufacturing engineer  # Systems Engineering graduate with construction-finance and operations work is hired for
+    - project engineer
+    - field engineer
+    - site engineer
+    - lean engineer
+    - value stream engineer
+    - cost engineer
+    - estimating engineer
+    - scheduling engineer
+    - material handling engineer
+    - warehouse engineer
+    - project accountant
 
 scoring:
   location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).

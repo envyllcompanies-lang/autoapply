@@ -588,28 +588,62 @@ def _tnorm(t: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (t or "").lower()).strip()
 
 
-def direct_apply_url(job, log=print) -> str | None:
-    """When an aggregator listing has no usable link (JS-only pages), look the company up on the Workable / Greenhouse / Lever
-    feeds by name and take the application link of the posting with the same title."""
+# a listing whose apply link leads to the listing site's own sign-in, never to the employer's form (Built In: '?handler=ApplyRedirect'
+# answers 302 to '?applyRequired=true', checked 2026-10-06): the bot makes no accounts there, so it goes to the employer directly
+ACCOUNT_GATED = re.compile(r"builtin\w*\.com/job/.*[?&]handler=ApplyRedirect", re.I)
+
+
+def account_gated(url: str) -> bool:
+    return bool(ACCOUNT_GATED.search(url or ""))
+
+
+def _same_company(name: str, display: str) -> bool:
+    a, b = _tnorm(name).replace(" ", ""), _tnorm(display).replace(" ", "")
+    return bool(a and b) and (a == b or (min(len(a), len(b)) >= 5 and (a.startswith(b) or b.startswith(a))))
+
+
+def direct_apply_url(job, log=print, workday_boards=()) -> str | None:
+    """When an aggregator listing has no usable link (JS-only pages, or a link behind the listing site's sign-in), find the same
+    posting on the employer's own board: a Workday career site the bot already knows for that company (searched by the title),
+    else the Workable / Greenhouse / Lever / Ashby / SmartRecruiters feeds looked up by the company's name."""
     from . import sources
     name = (job.extra or {}).get("company_name") or job.company
     want = _tnorm(job.title)
+    loc = (job.location or "").lower().split(",")[0].split("(")[0].strip()
+
+    def pick(found):
+        same = [j for j in found if _tnorm(j.title) == want]
+        if not same:                       # Workday often writes the place into the title: compare without it
+            short = re.sub(r"\s+\b(" + re.escape(loc) + r")\b.*$", "", want) if loc else want
+            same = [j for j in found if _tnorm(j.title).startswith(short) and len(short) >= 12
+                    and (not loc or loc in (_tnorm(j.title) + " " + (j.location or "").lower()))]
+        same.sort(key=lambda j: 0 if loc and loc in (j.location or "").lower() else 1)
+        return same[0] if same else None
+
+    for spec in workday_boards or ():
+        parts = str(spec).split("/")
+        if len(parts) < 3 or not any(_same_company(name, x) for x in (parts[3] if len(parts) > 3 else "", parts[0])):
+            continue
+        try:
+            hit = pick(sources.workday_search(str(spec), job.title))
+        except Exception:
+            hit = None
+        if hit:
+            log(f"    found the employer's own posting on workday/{parts[0]}")
+            return hit.apply_url
     tried = set()
     for slug in slug_variants(name) + [job.company]:
-        for ats in ("workable", "greenhouse", "lever"):
-            if (ats, slug) in tried or not slug:
+        for ats in ("workable", "greenhouse", "lever", "ashby", "smartrecruiters"):
+            if (ats, slug) in tried or not slug or ats not in sources.FETCHERS:
                 continue
             tried.add((ats, slug))
             try:
-                found = sources.FETCHERS[ats](slug)
+                hit = pick(sources.FETCHERS[ats](slug))
             except Exception:
                 continue
-            same = [j for j in found if _tnorm(j.title) == want]
-            if same:
-                loc = (job.location or "").lower()
-                same.sort(key=lambda j: 0 if loc and loc.split(",")[0] in (j.location or "").lower() else 1)
+            if hit:
                 log(f"    found the employer's own posting on {ats}/{slug}")
-                return same[0].apply_url
+                return hit.apply_url
     return None
 
 

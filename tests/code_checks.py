@@ -146,4 +146,32 @@ finally:
 _ok = first == second == ["XkAbQwRt", "XkAbQwRt"] and len(_fetches) == 2
 print("OK " if _ok else "BAD", "inbox poll downloads each email once ->", len(_fetches), "downloads for two polls")
 bad += not _ok
+# --- the inbox login at the start of a run: a timeout is retried and never switches mail off; only a refused login does
+import imaplib as _imaplib
+_calls = {"n": 0}
+class _Flaky:
+    def __init__(self, *a, **k):
+        _calls["n"] += 1
+        if _calls["n"] <= _calls.get("fail", 0):
+            raise TimeoutError("The read operation timed out")
+    def login(self, u, p):
+        if _calls.get("refuse"):
+            raise _imaplib.IMAP4.error("[AUTHENTICATIONFAILED] Invalid credentials")
+    def logout(self): pass
+_real, M.imaplib.IMAP4_SSL = M.imaplib.IMAP4_SSL, _Flaky
+_sleep, M.time.sleep = M.time.sleep, (lambda s: None)
+os.environ.setdefault("IMAP_USER", "x"); os.environ.setdefault("IMAP_PASS", "y")
+try:
+    M._DISABLED = ""; _calls.update(n=0, fail=2, refuse=False)
+    a = M.preflight(lambda *x: None) and not M._DISABLED
+    M._DISABLED = ""; _calls.update(n=0, fail=99, refuse=False)
+    b_ = (not M.preflight(lambda *x: None)) and not M._DISABLED
+    M._DISABLED = ""; _calls.update(n=0, fail=0, refuse=True)
+    c = (not M.preflight(lambda *x: None)) and bool(M._DISABLED)
+finally:
+    M.imaplib.IMAP4_SSL, M.time.sleep = _real, _sleep
+    M._DISABLED = ""
+_ok = a and b_ and c
+print("OK " if _ok else "BAD", "inbox login: timeouts retried and never switch mail off; a refused login does ->", a, b_, c)
+bad += not _ok
 sys.exit(bad + bad_mail)

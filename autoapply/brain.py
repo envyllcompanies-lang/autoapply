@@ -217,6 +217,11 @@ GOV_ROLE_RX = re.compile(
     r"military officer", re.I)
 
 
+LANGUAGE_RX = re.compile(r"(arabic|bengali|cantonese|chinese|czech|danish|dutch|english|farsi|finnish|french|german|greek|hebrew|hindi|"
+                         r"hungarian|indonesian|italian|japanese|korean|malay|mandarin|norwegian|persian|polish|portuguese|punjabi|"
+                         r"romanian|russian|spanish|swahili|swedish|tagalog|thai|turkish|ukrainian|urdu|vietnamese)", re.I)
+
+
 class Brain:
     def __init__(self, cfg: dict, profile: dict, base: Path | None = None, log=print):
         self.writer_out = False         # a question went unanswered only because the writer had no allowance (see main)
@@ -229,6 +234,9 @@ class Brain:
         f.setdefault("last_name", " ".join(parts[1:]))
         if not f.get("location_text") and f.get("city"):
             f["location_text"] = ", ".join(x for x in (f.get("city"), f.get("state")) if x)
+        li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", str(f.get("linkedin") or ""), re.I)
+        if li:           # forms accept the plain profile address only, not one with a page or tracking after the name
+            f["linkedin"] = f"https://www.linkedin.com/in/{li.group(1)}"
         self.facts = f
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))
@@ -603,6 +611,9 @@ class Brain:
             return str(c["llm_proficiency"])
         if kind == "checkbox_single":
             lab = (f.get("label") or "").lower().strip(" *:✱")        # the box's own label (Workday adds the group's question to `low`)
+            fluent = [str(x).lower() for x in c.get("languages_fluent") or []]
+            if fluent and LANGUAGE_RX.fullmatch(lab) and re.search(r"\blanguages?\b", q):
+                return True if lab in fluent else ""     # one box per language: tick the ones you speak fluently
             if re.fullmatch(r"full[- ]?time", lab):
                 return True if c.get("job_type") == "full-time" else ""
             if re.fullmatch(r"part[- ]?time", lab):
@@ -954,6 +965,9 @@ class Brain:
         if kind in ("text", "textarea") and len(low) < 40 and (re.search(r"(address|street)( line)? ?2\b|\bline 2\b", low) or
                                                                re.match(r"\W*(apt\.?|apartment|suite|unit)\b(?!.*(street|address))", low)):
             return ""                                 # no second address line
+        if kind == "wdprompt" and re.match(r"\W*(type to add |add (your )?)?skills?\W*$", str(f.get("label", "")).lower()):
+            sk = [re.sub(r"\s*\(.*?\)", "", x).strip() for g in self.profile.get("skills") or [] for x in g["items"]]
+            return [x for x in sk if x][:6] or None     # skills from your résumé, tried in turn until the site's list has one
         if kind in ("text", "tel", "combobox", "wdprompt", "select") and re.search(r"country (phone )?code|phone (country )?code|dial(l?ing)? code", low) and len(low) < 40:
             if has_opts and opts:
                 got = next((o for o in opts if re.search(r"united states|\busa?\b", o, re.I) and "+1" in o), None)

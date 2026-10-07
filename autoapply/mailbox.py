@@ -44,17 +44,25 @@ def preflight(log=print) -> bool:
         _DISABLED = "IMAP_USER / IMAP_PASS are not set"
         log("MAIL OFF: IMAP_USER / IMAP_PASS are not set. No confirmation reading, no summary emails, no email-verified sign-ups.")
         return False
-    try:
-        imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
-        imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
-        imap.logout()
-        log(f"mail: logged in to {os.environ['IMAP_USER']} OK")
-        return True
-    except Exception as e:
-        _DISABLED = str(e)[:120]
-        log(f"MAIL OFF: the inbox login for {os.environ['IMAP_USER']} was refused ({_DISABLED}). Use a Google APP PASSWORD "
-            "(myaccount.google.com/apppasswords) as IMAP_PASS, and make sure IMAP is enabled in Gmail settings.")
-        return False
+    last = None
+    for attempt in range(3):                       # a timeout or a dropped connection is tried again, a little later
+        try:
+            imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+            imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
+            imap.logout()
+            log(f"mail: logged in to {os.environ['IMAP_USER']} OK")
+            return True
+        except imaplib.IMAP4.error as e:           # the login itself was refused: retrying will not change that
+            _DISABLED = str(e)[:120]
+            log(f"MAIL OFF: the inbox login for {os.environ['IMAP_USER']} was refused ({_DISABLED}). Use a Google APP PASSWORD "
+                "(myaccount.google.com/apppasswords) as IMAP_PASS, and make sure IMAP is enabled in Gmail settings.")
+            return False
+        except Exception as e:
+            last = e
+            time.sleep(5 * (attempt + 1))
+    # the mail server could not be reached just now: mail stays on, and each later look at the inbox simply tries again
+    log(f"mail: the inbox could not be reached at the start of this run ({str(last)[:80]}); it is tried again when needed")
+    return False
 
 
 def _body(msg) -> str:

@@ -1191,7 +1191,9 @@ def _fill_one(page, f: dict, val, files: dict, log):
     elif kind == "wddate":
         _set_date(page, f, el, val)
     elif kind == "wdprompt":
-        _wd_prompt(page, f, el, str(val), log)
+        for v in (val if isinstance(val, list) else [val]):       # several answers (your skills): the first the site's list has
+            if _wd_prompt(page, f, el, str(v), log):
+                break
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
         _set_text(el, _number_text(val) if kind == "number" else str(val))
     elif kind == "select":

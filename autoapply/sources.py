@@ -198,6 +198,26 @@ def _wd_post(api: str, offset: int, text: str):
                        headers={**UA, "Content-Type": "application/json"}).json()
 
 
+def workday_search(spec: str, text: str, limit_pages: int = 1) -> list[Job]:
+    """Postings on one Workday career site that match a search text (a job title): used to find one posting on a big board."""
+    parts = spec.split("/")
+    tenant, wd, site = parts[0], parts[1], parts[2]
+    base = f"https://{tenant}.{wd}.myworkdayjobs.com"
+    api = f"{base}/wday/cxs/{tenant}/{site}"
+    out = []
+    for page in range(limit_pages):
+        data = _wd_post(api, page * 20, text)
+        for p in data.get("jobPostings") or []:
+            path = p.get("externalPath", "")
+            if path:
+                out.append(Job(source="workday", company=tenant, job_id=path.rsplit("_", 1)[-1] or path, title=p.get("title", ""),
+                               location=p.get("locationsText", "") or "", url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
+                               description=p.get("title", "")))
+        if len(data.get("jobPostings") or []) < 20:
+            break
+    return out
+
+
 def workday(spec: str) -> list[Job]:
     """spec = 'tenant/wd5/SiteName' (optionally '/Display Name'). Uses Workday's public career-site JSON.
 
