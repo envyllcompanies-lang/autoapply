@@ -18,6 +18,21 @@ class AuthBlocked(Exception):
     pass
 
 
+# Parking (set by main for a live run): a new Workday account's verify email often comes minutes later. Instead of waiting
+# for it, the application is set aside ('awaiting-email (host)') and the bot applies to other jobs; main brings it back
+# when the email should be in, and unpark() lets the verify step run again with a long wait.
+PARK_VERIFY = False
+VERIFY_WAIT_NEW = 240        # seconds to wait for a new account's verify email when the job is not parked (or is resumed)
+VERIFY_WAIT_PARK = 25        # ...and before parking it
+
+
+def unpark(acc: "Accounts", host: str):
+    """A parked application is being resumed: look for this site's verify email again, waiting as long as it takes."""
+    for k in ("_wd_verify_tried", "_wd_old_verify"):
+        getattr(acc, k, {}).pop(host, None)
+    acc.__dict__.setdefault("_resumed", set()).add(host)
+
+
 VERIFY_MSG = re.compile(r"verify your (e-?mail|account)|check your (e-?mail|inbox)|confirmation (e-?mail|link)|"
                         r"(sent|sending) (you )?(an )?e-?mail|activate your account|verification (code|link|e-?mail)|"
                         r"(sent|emailed) (you )?(a|an|the) (\d[- ]digit )?(one.?time )?(code|passcode)|enter the (\d[- ]digit |one.?time )?code", re.I)
@@ -874,8 +889,15 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 # (made a moment ago: its email may still be on its way. Found already there: only an email that is
                 #  already in the inbox can help, so one look is enough)
                 made = getattr(acc, "_made_at", {}).get(host)
-                if made and time.time() - made < 600:      # made a moment ago in this run: only an email from after that
-                    _verify_email(page, acc, made, log, 30)
+                if made and time.time() - made < 1800:     # made earlier in this run: only an email from after that
+                    if PARK_VERIFY and host not in getattr(acc, "_resumed", set()):
+                        try:
+                            _verify_email(page, acc, made, log, VERIFY_WAIT_PARK)
+                        except AuthBlocked:
+                            raise AuthBlocked(f"awaiting-email ({host}): the new account's verify email is still on its way; "
+                                              "this application is set aside and finished later in this run")
+                    else:
+                        _verify_email(page, acc, made, log, VERIFY_WAIT_NEW)
                 else:
                     _verify_email(page, acc, t0 - 2 * 86400, log, 10)
                 acc.remember(host, "verified")
@@ -884,6 +906,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                     _settle(page, 2500)
                 continue
             except AuthBlocked as e:
+                if str(e).startswith("awaiting-email"):
+                    raise                                      # set aside by main, not a failure
                 log(f"      account: {e}")
         if not getattr(acc, "_wd_reset_tried", {}).get(host):
             # the account exists with some other password: reset it to ACCOUNT_PASSWORD through your own inbox, then sign in

@@ -221,7 +221,10 @@ def flow_checks(p):
     inbox: dict = {}               # employer -> emails of earlier runs that sit in the inbox: [{'kind', 'link', 'ts'}]
     read_inbox: set = set()        # employers whose earlier emails the bot may find (the mock's own outbox counts too)
 
+    waits = []
+
     def wait(**k):
+        waits.append((now["tenant"], k.get("kind"), k.get("timeout")))
         if now["tenant"] in slow_mail:
             return None
         box = [m for m in state.outbox if m["tenant"] == now["tenant"]]
@@ -309,7 +312,11 @@ def flow_checks(p):
         check(r["got"] == "confirmed" and any("verification" in x for x in r["logs"]), f"verify-your-email account: {r['got']}; log: {tail(r)}")
         r = run("emailfirst")
         check(r["got"] == "confirmed", f"'Sign in with email' landing: {r['got']}; log: {tail(r)}")
+        waits.clear()
         r = run("brock")
+        vw = [t for tn, kind, t in waits if tn == "brock" and kind == "verify"]
+        check(vw and max(vw) >= 180, f"a new account's verify email often takes minutes: the wait must allow that, not {vw} s "
+                                     "(on 2026-10-06 cw, BlackRock and CVS sent theirs after the bot had given up)")
         check(r["got"] == "confirmed" and any("verify link" in x for x in r["logs"]),
               f"account that must be verified, with the sign-in choice page coming back after every step: {r['got']}; log: {tail(r)}")
         check((r["data"] or {}).get("files") == ["briandelgado_resume.pdf"], f"a résumé box headed 'Resume/Cover Letter' did not get the résumé: {(r['data'] or {}).get('files')}")
@@ -376,6 +383,32 @@ def flow_checks(p):
               f"late reset email, next try: the email that came in the meantime should be used, without asking for another ({n_reset} asked in all): {r['got']}; log: {tail(r)}")
         check(A.Accounts.host(wd_mock.job_url(base, "lateco")) in late_acc().known and late_acc().noted(A.Accounts.host(wd_mock.job_url(base, "lateco")), "reset_mail") > 0,
               "the time of the reset email that was used should be remembered, so it is never tried twice")
+
+        # -- parking (live runs): a new account's verify email that is late sets the application aside instead of ending it;
+        #    another application goes through meanwhile, untouched; then the parked one is finished with the email that has
+        #    come in by then (as on 2026-10-06, when cw, BlackRock and CVS sent theirs minutes after the bot gave up)
+        A.PARK_VERIFY = True
+        ctx_p = b.new_context(viewport={"width": 1280, "height": 1800})
+        ctx_p.set_default_timeout(10000)
+        acc_p = A.Accounts({"accounts": {"email": "delgado@alumni.usc.edu"}}, Path(tempfile.mkdtemp()))
+        acc_p.password, acc_p.enabled = "Pw-123456!x", True
+        try:
+            slow_mail.add("brock")
+            r1 = run("brock", req="R-120", ctx=ctx_p, acc=acc_p)
+            check("awaiting-email" in str(r1["got"]), f"a late verify email should set the application aside, not end it: {r1['got']}; log: {tail(r1)}")
+            r_mid = run("acme", req="R-121", ctx=ctx_p, acc=acc_p)
+            check(r_mid["got"] == "confirmed", f"the application done meanwhile must go through untouched: {r_mid['got']}; log: {tail(r_mid)}")
+            slow_mail.discard("brock")
+            read_inbox.add("brock")
+            A.unpark(acc_p, A.Accounts.host(wd_mock.job_url(base, "brock")))
+            r2 = run("brock", req="R-120", ctx=ctx_p, acc=acc_p)
+            check(r2["got"] == "confirmed" and " ".join(r2["logs"]).count("creating one on") == 0,
+                  f"the parked application should be finished with the verify email now in the inbox, without a second account: {r2['got']}; log: {tail(r2)}")
+        finally:
+            A.PARK_VERIFY = False
+            slow_mail.discard("brock")
+            read_inbox.discard("brock")
+            ctx_p.close()
 
         # -- a reset email from an earlier day whose link no longer works: say so, then ask for a new one
         read_inbox.add("usedco")

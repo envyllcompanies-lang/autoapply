@@ -27,7 +27,7 @@ from .ats import detect as detect_ats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
-REQUEUE_VERSION = "2026-10-06-b"
+REQUEUE_VERSION = __version__      # every new build retries, once, the jobs that earlier bugs set aside
 FIXED_FLAG = "2026-10-06-f"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
@@ -797,7 +797,29 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 if v[0] in ("go", "page"):
                     ready += 1
 
-        for idx, row in enumerate(queue):
+        parked: list = []     # (when to come back, row, site): applications waiting for a new account's verify email
+        auth.PARK_VERIFY = not dry_run
+
+        def next_rows():
+            """The queue in order, with each parked application slotted back in once its verify email should be in. When the
+            queue is done, what is still parked is waited for (within the run's time)."""
+            i = 0
+            while True:
+                due = next((x for x in parked if x[0] <= time.time()), None)
+                if due:
+                    parked.remove(due)
+                    auth.unpark(acc, due[2])
+                    log(f"→ back to {due[1]['title']} @ {due[1]['company']}: its account's verify email should be in now")
+                    yield i, db.get(due[1]["key"]) or due[1]
+                elif i < len(queue):
+                    i += 1
+                    yield i - 1, queue[i - 1]
+                elif parked and (soonest := min(x[0] for x in parked)) < deadline:
+                    time.sleep(max(1.0, min(15.0, soonest - time.time())))
+                else:
+                    return
+
+        for idx, row in next_rows():
             if done >= cap:
                 break
             if time.time() > deadline:
@@ -845,6 +867,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
             if host and (host in bad_hosts or acc.resting(host)):
                 continue          # the bot could not sign in to this career site (just now, or on its last tries): its other jobs stay queued
+            if host and any(x[2] == host for x in parked):
+                continue          # this site's new account is still waiting for its verify email: its other jobs stay queued for now
             if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
                 continue
 
@@ -961,6 +985,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 done += 1
             except sub.Blocked as e:
                 blocked_text = str(e)
+                awaiting = re.search(r"awaiting-email \(([^)]+)\)", blocked_text)
+                if awaiting and not any(x[1]["key"] == job.key for x in parked):
+                    parked.append((time.time() + 75, row, awaiting.group(1)))
+                    db.update(job.key, status="queued", reason="set aside this run: waiting for the new account's verify email")
+                    log("    … set aside: the new account's verify email is on its way; the next jobs go first and this one is finished after")
+                    continue
                 if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
                     # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
                     # for the run after the password is updated, and no more time is spent on that site this run

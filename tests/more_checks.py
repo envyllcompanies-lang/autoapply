@@ -1064,7 +1064,9 @@ def match_checks():
         u2 = wd(45, "unconfirmed", "no confirmation after submit; page errors: [\"We couldn't submit your application\"]", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/45")
         u3 = wd(46, "unconfirmed", "no confirmation after submit; page ends: 'sexual orientation, gender identity or any other reason'", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/46")
         m1 = wd(43, "manual", "apply by hand: greenhouse stopped the bot at a human check (CAPTCHA or emailed code) on it", url="https://boards.greenhouse.io/x/jobs/43")
+        capped = wd(47, "skipped", "already applied to 3 roles at this company", url="https://boards.greenhouse.io/x/jobs/47")
         n = db.requeue_if_new_version("test-build-1")
+        check(db.get(capped)["status"] == "queued", "a job skipped only because of the old 3-per-employer limit must come back")
         check(all(db.get(k)["status"] == "queued" and not db.get(k)["submitted_at"] for k in (u1, u2)), "a submit the page rejected with an error must come back (submitted_at cleared), or the safety rule keeps it unconfirmed")
         check(db.get(u3)["status"] == "unconfirmed", "a submit with no error shown stays unconfirmed (it may have gone through)")
         check(db.get(m1)["status"] == "queued" and db.get(m1)["attempts"] == 0, "jobs parked for 'apply by hand' because of an emailed code must come back")
@@ -1074,6 +1076,9 @@ def match_checks():
         check(st[a] == ("queued", 0) and st[b] == ("queued", 0) and st[f] == ("queued", 0), f"old Workday failures should be tried again: {st}")
         check(st[c][0] == "unconfirmed" and st[d][0] == "queued" and st[e][0] == "skipped", f"these must stay as they are (the emailed-code job d now comes back): {st}")
         check(n >= 3 and db.requeue_if_new_version("test-build-1") == 0, "the requeue runs once per build")
+        from autoapply import __version__ as _ver
+        check(M.REQUEUE_VERSION == _ver, f"the requeue must follow the build number, or a new build never retries what it fixed "
+                                          f"(REQUEUE_VERSION {M.REQUEUE_VERSION!r}, build {_ver!r})")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     print("ok  match check: 70% bar, checked once, waits when the writer is out, never lets a job through or drops it by mistake; "

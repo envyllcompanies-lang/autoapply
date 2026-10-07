@@ -85,12 +85,16 @@ class DB:
         # held at the emailed security code after Submit: nothing was sent, and the bot now reads that code from the inbox
         cur9 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status IN ('blocked','failed','manual') AND (reason LIKE '%asked for a security code%' OR reason LIKE '%asked for an emailed code%' OR reason LIKE '%emailed security code%')")
+        # set aside only because an employer already had 3 applications: there is no such limit any more (2026-10-07)
+        cur10 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='skipped' AND reason LIKE 'already applied to % roles at this company'"
+            " AND (submitted_at IS NULL OR submitted_at = '')")
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9))
+        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10))
 
     def requeue_fixed(self, flag: str) -> dict:
         """Jobs that were set aside by a fault that has since been fixed get one more try, once per flag. Each rule names

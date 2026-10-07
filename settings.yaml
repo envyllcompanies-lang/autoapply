@@ -17,6 +17,7 @@ search:
                               # allowance now runs out every day by design, and unchecked jobs should not slip through then.
   daily_cap_unlimited: 300    # most applications in one day while the bot runs non-stop (was 120): with thousands of candidates
                               # the limit should be the résumé check, not this number
+  max_per_company: 0          # no limit on applications to one employer: every role that passes your résumé match goes
   max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
   max_human_check_tries_per_day: 6      # tries per day on sites where every recent try ended at a human check (CAPTCHA)
   max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
@@ -62,12 +63,6 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
-    # GitHub Models: free with the GitHub account, reached with the run's own token (workflow permission 'models: read').
-    # Small daily allowances (about 50 requests for gpt-4.1, 150 for gpt-4.1-mini): they write answers when Groq's are used up.
-    - {name: github-gpt41, base_url: "https://models.github.ai/inference", model: "openai/gpt-4.1",
-       api_key_env: GITHUB_TOKEN, rpm: 10, rpd: 45, tpm: 30000, temperature: 0.7}
-    - {name: github-mini, base_url: "https://models.github.ai/inference", model: "openai/gpt-4.1-mini",
-       api_key_env: GITHUB_TOKEN, rpm: 15, rpd: 140, tpm: 30000, temperature: 0.7}
     # Gemini: new keys (made after mid-2026) only get the 3.x models, so those are named first.
     - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
        model: [gemini-3.5-flash-lite, gemini-3.1-flash-lite-preview, gemini-flash-lite-latest], discover: lite,
