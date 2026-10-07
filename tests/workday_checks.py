@@ -340,6 +340,16 @@ def flow_checks(p):
         r = run("quietco", seed=True)
         check(r["got"] == "confirmed" and any("password reset" in x for x in r["logs"]),
               f"sign-in refused with no message at all: the password must still be reset: {r['got']}; log: {tail(r)}")
+        # Sign In pressed and Workday shows nothing: on real employers that was usually NOT a refusal (the sign-in had gone
+        # through and the page had not moved on, or the press was lost). No reset email may be asked for in those cases.
+        r = run("stuckco")
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and "it had gone through" in lg and "resetting the password" not in lg,
+              f"a sign-in that went through without the page moving on was taken for a refusal: {r['got']}; log: {tail(r)}")
+        r = run("deafco")
+        lg = " | ".join(r["logs"])
+        check(r["got"] == "confirmed" and "pressing Sign In once more" in lg and "resetting the password" not in lg,
+              f"a press of Sign In that did not register was taken for a refusal: {r['got']}; log: {tail(r)}")
         # 'Create Account' takes the form away for a few seconds and then answers 'already exists': that gap must not be
         # read as a new account (on real employers it was, and the form was sent again on every job: 200+ refused sign-ins)
         r = run("flashco", seed=True)
@@ -448,7 +458,8 @@ def flow_checks(p):
                   f"extras: a pay box that turned out to take only a number should be answered again with the plain number, got {d.get('primaryQuestionnaire--pay')!r}; log: {tail(r)}")
         check(d.get("primaryQuestionnaire--paytype") == "Salary", f"extras: 'Desired Pay Rate Type' should be Salary, got {d.get('primaryQuestionnaire--paytype')!r}")
         check(S._number_text("$75,000") == "75000" and S._number_text(75000.0) == "75000" and S._number_text("62500.50") == "62500.50"
-              and S._number_text("3+") == "3+", "what is typed into a number box")
+              and S._number_text("3+") == "3" and S._number_text("$70,000 to $80,000") == "70000" and S._number_text("75k") == "75000"
+              and S._number_text("soon") == "soon", "what is typed into a number box")
 
         # -- an optional box that Workday refuses whatever the bot answers: after two refusals it is left empty
         r = run("fbco")

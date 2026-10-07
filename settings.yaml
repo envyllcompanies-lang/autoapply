@@ -45,26 +45,30 @@ writer:
   # Groq's free models, best first. Each has its own daily allowance, so when one runs out the next takes over.
   # A model Groq no longer offers is skipped automatically after one try.
   #
-  # The résumé-match check is what limits how many jobs can be applied to in a day (each check costs about as much as a
-  # short answer, and thousands of postings are waiting for one). So:
-  #   * providers marked 'role: match' do nothing but match checks;
-  #   * the models named in match_providers share their allowance: at most match_share of it goes to match checks, the
-  #     rest is kept for the application answers;
-  #   * the best model (groq) never does match checks: its whole allowance is for your answers.
-  # The Gemini entries cost nothing and stay idle until a valid GEMINI_API_KEY secret exists (free at aistudio.google.com).
-  # Google's free limit is counted in requests a day (about 500 for Flash-Lite and 20 for Flash in autumn 2026), not in
-  # tokens, so those models rate more postings per request ('batch'). A key Google rejects is reported in the log and email.
+  # Two things use the free allowance: the résumé-match check of every candidate, and the answers on each application.
+  # On 2026-10-07 the answers ran out by early morning (Groq counts tokens, and every answer carries your background),
+  # and every application after that stopped at its first written question. So:
+  #   * gemini-lite ('match_first') does the match checks first: Google counts requests, not tokens, and five postings
+  #     go into one request. At most match_share of its day goes to match checks; with the rest it writes answers, but
+  #     only when the Groq models have nothing left for the day (it is last in line for answers);
+  #   * the Groq models are for your answers: groq (the best) only writes answers, the two smaller ones give at most a
+  #     quarter of their day to match checks, and only when Gemini cannot take them;
+  #   * providers marked 'role: match' do nothing but match checks.
+  # When no model has allowance left for an answer, a job that needs one is not thrown away: it stays queued.
+  # The Gemini entries need a valid GEMINI_API_KEY secret (free at aistudio.google.com); a key Google rejects is reported
+  # in the log and email. On Google's free tier what is sent may be used to improve its products: to keep your answers
+  # (which carry your name and background) off it, give gemini-lite 'role: match' instead of 'match_first: true'.
   match_providers: [groq-20b, groq-qwen]
   match_share: 0.6
   providers:
     - {name: groq, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-120b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
-    - {name: groq-20b, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-20b",
+    - {name: groq-20b, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-20b", match_share: 0.25,
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
-    - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
-       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+    - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b", match_share: 0.25,
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 195000, extra: {reasoning_format: hidden}}
     # Gemini: new keys (made after mid-2026) only get the 3.x models, so those are named first.
-    - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
+    - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", match_first: true, match_share: 0.6,
        model: [gemini-3.5-flash-lite, gemini-3.1-flash-lite-preview, gemini-flash-lite-latest], discover: lite,
        api_key_env: GEMINI_API_KEY, rpm: 10, rpd: 480, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
     - {name: gemini-flash, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,

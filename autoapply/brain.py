@@ -131,7 +131,8 @@ FIELD_RULES = [
     (r"driver'?s? licen[cs]e|valid driver", ("has_drivers_license",), None),
     (r"reliable transportation", ("reliable_transportation",), None),
     (r"speak spanish|spanish.{0,40}(fluen|proficien|speak|skills|language)|bilingual|language skills", ("speaks_spanish",), None),
-    (r"languages? (do you )?(speak|spoken|proficien)|fluent in", ("languages",), None),
+    (r"languages? (do you )?(speak|spoken|proficien)|fluent in|(primary|native|first|main|preferred) (spoken |written )?language|"
+     r"spoken languages?", ("languages",), None),
     (r"\bgpa\b|grade point", ("gpa",), None),
     (r"highest (level of )?(\w+ )?(education|degree)|level of (\w+ )?education|education level", ("education_level",), None),
     (r"\b(school|university|college|institution)\b", ("school",), None),
@@ -167,6 +168,10 @@ DEMO_TEXT = {"male": "Male", "female": "Female", "no": "No", "heterosexual": "He
 
 def _norm(s) -> str:
     return re.sub(r"\W+", " ", str(s)).strip().lower()
+
+
+_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+_MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 
 def _terms(text: str) -> set[str]:
@@ -214,6 +219,7 @@ GOV_ROLE_RX = re.compile(
 
 class Brain:
     def __init__(self, cfg: dict, profile: dict, base: Path | None = None, log=print):
+        self.writer_out = False         # a question went unanswered only because the writer had no allowance (see main)
         self.cfg, self.profile, self._log, self._job = cfg, profile, log, None
         base = Path(base or ".")
         f = dict(cfg.get("facts", {}))
@@ -748,7 +754,7 @@ class Brain:
         """Last resort for a REQUIRED field no rule could answer: the writer picks the true option (or writes a few words)
         from your facts, so an ordinary question never ends the application. Never used for human checks, legal waivers,
         AI-policy confirmations, negated authorization questions or demographics."""
-        if not (self.writer and self.writer.ready() and self._job is not None):
+        if not (self.writer and self._job is not None):
             return None
         kind = f["kind"]
         text = f"{f.get('label', '')} {f.get('question', '')}".strip()
@@ -761,6 +767,11 @@ class Brain:
         if re.search(r"relocat|commut|on-?site|in[- ]office|in person|hybrid", low) and not self._location_ok(low):
             return None
         opts = f.get("options") or []
+        askable = (kind in ("select", "radio", "combobox", "checkbox_group") and opts) or (kind in ("text", "number") and len(low) < 300)
+        if not self.writer.ready():
+            if askable:
+                self.writer_out = True          # a question the writer would have answered: main keeps the job for later
+            return None
         company = self._company_name(self._job)
         try:
             if kind in ("select", "radio", "combobox") and opts:
@@ -776,6 +787,7 @@ class Brain:
                 return None
         except WriterUnavailable as e:
             self._log(f"      writer unavailable: {str(e)[:100]}")
+            self.writer_out = True
             return None
         if got:
             self._log(f"      (writer answered {text[:60]!r} -> {str(got)[:50]!r})")
@@ -1029,13 +1041,16 @@ class Brain:
                 return [got] if kind == "checkbox_group" else got
 
         # 2c) last resorts so an ordinary question never ends the application
-        yn = has_opts and {_norm(o) for o in opts} <= {"yes", "no", "yes i do", "no i do not"} and len(opts) == 2
+        real = [o for o in opts if not PLACEHOLDER_OPT.search(str(o))]        # (Workday lists 'Select One' among the choices)
+        yn = has_opts and {_norm(o) for o in real} <= {"yes", "no", "yes i do", "no i do not"} and len(real) == 2
         if yn and not (LEGAL_RX.search(low) or AI_WORDS.search(low) or QUALIFY_CERT_RX.search(low) or HUMAN_CHECK_RX.search(low)):
             if re.search(r"(experience|proficien|familiar|knowledge|skilled|worked|used|trained|certified|certification|licen[sc]e[ds]?)\b", low) \
                     and not re.search(r"driver|drivers", low):
-                return pick_option(opts, "No")       # a tool / skill / credential that is not in the résumé: the truthful answer is No
-            if re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you)\b", low):
-                return pick_option(opts, "Yes")      # ordinary willingness / ability questions ('are you' alone is not one:
+                if len(opts) == 2:
+                    return pick_option(opts, "No")   # a tool / skill / credential that is not in the résumé: the truthful answer is No
+                # (a list with more to it than Yes / No: left to the writer, which reads the question against your facts)
+            elif re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you)\b", low):
+                return pick_option(real, "Yes")      # ordinary willingness / ability questions ('are you' alone is not one:
                                                      # 'Are you married / a government official / on an F-1 visa?' must
                                                      # get its truthful answer from your facts, never a guessed Yes)
         if has_opts and kind in ("select", "radio", "combobox") and f.get("required"):
@@ -1101,8 +1116,9 @@ class Brain:
         year of your degree in profile.yaml (Education 1 = your first entry, and so on). Returns {field id: year or None};
         a year the profile does not give is left for you, never made up."""
         out: dict = {}
-        seen = {"first": 0, "last": 0}
+        seen: dict = {}
         edus = list(self.profile.get("education") or [])
+        has_school = any(re.match(r"(school|degree|discipline|university|college|field of study)\b", _norm(x.get("label", ""))) for x in fields)
         for f in fields:
             key = str(f.get("key") or "")
             which = "first" if re.search(r"firstYearAttended", key, re.I) else "last" if re.search(r"lastYearAttended", key, re.I) else None
@@ -1110,12 +1126,35 @@ class Brain:
                 lab = _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))
                 which = "first" if lab in ("from", "start year", "first year attended") else \
                     "last" if (lab == "to" or lab.startswith("to ") or "last year" in lab or "end year" in lab) else None
+            part = "year"
+            if which is None:
+                # other sites' Education block (Greenhouse): 'Start date month', 'Start date year', 'End date month',
+                # 'End date year'. They are your degree's dates. (Read as a job's start date, 'Start date year' was
+                # answered 'Two weeks after an offer', and the writer made up an end year.)
+                m = re.fullmatch(r"(start|end) (date )?(month|year)", _norm(re.sub(r"[*\u2731]", "", f.get("label", ""))))
+                if m and not has_school:
+                    out[f["id"]] = None                    # such a box with no school next to it: not guessed (it is not 'when can you start')
+                    continue
+                if m:
+                    which, part = ("first" if m.group(1) == "start" else "last"), m.group(3)
             if which is None:
                 continue
-            n = seen[which]
-            seen[which] += 1
-            years = re.findall(r"(?:19|20)\d{2}", str((edus[n].get("date") or edus[n].get("dates") or "") if n < len(edus) else ""))
-            if which == "first":
+            n = seen.get((which, part), 0)
+            seen[(which, part)] = n + 1
+            when = str((edus[n].get("date") or edus[n].get("dates") or "") if n < len(edus) else "")
+            years = re.findall(r"(?:19|20)\d{2}", when)
+            if part == "month":
+                months = [x.lower()[:3] for x in re.findall(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\b", when, re.I)]
+                mon = (months[0] if which == "first" else months[-1]) if len(months) > 1 or (months and which == "last") else None
+                val = None
+                if mon:
+                    i_m = _MONTHS.index(mon)
+                    opts = [str(o) for o in (f.get("options") or [])]
+                    val = next((o for o in opts if o.strip().lower()[:3] == mon), None) or \
+                        next((o for o in opts if re.fullmatch(r"0?%d" % (i_m + 1), o.strip())), None) or \
+                        (None if opts else _MONTH_NAMES[i_m])
+                out[f["id"]] = val
+            elif which == "first":
                 out[f["id"]] = years[0] if len(years) > 1 else None     # one year alone is the graduation year, not the start
             else:
                 out[f["id"]] = years[-1] if years else None
@@ -1479,6 +1518,9 @@ class Brain:
                                          limits_from_question(question, f.get("maxlength")), self._log)
             except WriterUnavailable as e:
                 self._log(f"      writer unavailable: {str(e)[:100]}")
+                self.writer_out = True
+        elif self.writer and f.get("required"):
+            self.writer_out = True              # an essay question and no allowance left for it today
         if not got and f.get("required"):
             got = self._fallback_text(f)
         return got

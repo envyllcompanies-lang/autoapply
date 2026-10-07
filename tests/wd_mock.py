@@ -20,6 +20,10 @@ Tenants (first part of the path) switch behaviours on:
              'Forgot password' sends no email at all; only creating the account works
   slowco     the application page shows only its progress bar for 25 seconds (counted from the first visit, reloads do not help) before the form is drawn (seen on real employers)
   quietco    like resetco (use ?seed=1), but a refused sign-in shows NO message at all, as several real employers do
+  stuckco    seen on about one real employer in four on 2026-10-07: the new account is made but must sign in, the sign-in
+             goes through, and the page does not move on (the Sign In form stays, no message). Loading the application
+             again shows it
+  deafco     the new account must sign in, and the first press of 'Sign In' does nothing at all; the second one works
   emailfirst the sign-in page first shows 'Sign in with email'
   brock      as one real employer did on 2026-10-01: the 'Sign in with Google / Apple / email' page comes back after every
              account step, the new account cannot sign in until its emailed link is opened (the refusal only says
@@ -352,9 +356,13 @@ function authPage() {
     if (T === 'verifyco') { P('acct', {email: e, pw: p, verified: false}); mail('verify', location.origin + '/' + T + '/verify'); go('wait'); }
     else if (T === 'brock') { P('acct', {email: e, pw: p, verified: false});
       mail('verify', location.origin + '/' + T + '/verify?redirect=' + encodeURIComponent(base + '/apply/applyManually')); go('social'); }
+    else if (T === 'stuckco' || T === 'deafco') { P('acct', {email: e, pw: p, verified: true}); go('signin'); }
     else { P('acct', {email: e, pw: p, verified: true}); P('signed', true); PJ('step', 1); P('authmode', 'signin'); render(); } });
+  const sp = $('sp'); if (sp) sp.onkeydown = ev => { if (ev.key === 'Enter') root.querySelector('[data-automation-id="signInSubmitButton"]').onclick(); };
   on('signInSubmitButton', () => { const e = $('se').value, p = $('sp').value;
     if (T === 'quietco' && (!acct || acct.email !== e || acct.pw !== p)) return;
+    if (T === 'deafco' && !G('deaf')) { P('deaf', 1); return; }                // the first press is lost
+    if (T === 'stuckco' && acct && acct.email === e && acct.pw === p) { P('signed', true); if (!GJ('step')) PJ('step', 1); return; }   // signed in; the page stays
     if (acct && acct.email === e && acct.pw === p && !acct.verified && T === 'brock') { $('autherr').innerText = 'ERROR: Invalid Username/Password. Your account may be locked after too many incorrect attempts.'; return; }
     if (acct && acct.email === e && !acct.verified && T === 'unverco') { $('autherr').innerText = 'You may have entered the wrong email address or password or your account might be locked.'; return; }
     if (acct && acct.email === e && acct.pw === p && !acct.verified) { $('autherr').innerText = 'Your account has not been verified. Verify your email before signing in.'; mail('verify', location.origin + '/' + T + '/verify'); return; }

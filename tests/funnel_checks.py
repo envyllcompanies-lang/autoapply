@@ -263,6 +263,32 @@ def allowance_checks():
     except W.WriterUnavailable:
         pass
     check(W.BAD_KEYS == {}, f"a model that is gone is not a rejected key: {W.BAD_KEYS}")
+    # a model marked 'match_first' (Gemini: counted in requests) takes the match checks before the shared models and
+    # writes answers only when the others have nothing left; each shared model may have its own share for match checks
+    W._USAGE_FILE = TMP / "usage_first.json"
+    w5 = W.Writer({"writer": {"enabled": True, "match_providers": ["small"], "match_share": 0.6, "providers": [
+        {"name": "best", "base_url": "http://x/v1", "model": "a", "tpd": 1000},
+        {"name": "small", "base_url": "http://x/v1", "model": "b", "tpd": 1000, "match_share": 0.25},
+        {"name": "wide", "base_url": "http://x/v1", "model": "c", "rpd": 10, "match_first": True, "match_share": 0.6, "batch": 5}]}},
+        {"name": "Jordan Sample"}, ROOT)
+    by5 = {p["name"]: p for p in w5.providers}
+    asked5: list = []
+    w5._chat = lambda p, messages, max_tokens, temperature=None: asked5.append(p["name"]) or "ok"
+    w5._complete([{"role": "user", "content": "q"}], 50, log=lambda *a: None, match=True)
+    w5._complete([{"role": "user", "content": "q"}], 50, log=lambda *a: None)
+    check(asked5 == ["wide", "best"] and w5.match_batch(3) == 5, f"a match check goes to the match-first model, an answer to the best one: {asked5}")
+    w5.limiters["best"].add_tokens(1000); w5.limiters["small"].add_tokens(1000)
+    check(w5.ready() and not w5._usable(by5["small"]), "with the answer models used up, the match-first model can still write answers")
+    w5._complete([{"role": "user", "content": "q"}], 50, log=lambda *a: None)
+    check(asked5[-1] == "wide", f"...and it does: {asked5}")
+    for _ in range(6):
+        w5.limiters["wide"].wait(1)
+    check(not w5._usable(by5["wide"], match=True) and w5._usable(by5["wide"]), "the match-first model keeps the rest of its day for answers once its share for match checks is used")
+    W._USAGE_FILE = TMP / "usage_share.json"
+    w6 = W.Writer({"writer": {"enabled": True, "match_providers": ["small"], "match_share": 0.6, "providers": [
+        {"name": "small", "base_url": "http://x/v1", "model": "b", "tpd": 1000, "match_share": 0.25}]}}, {"name": "Jordan Sample"}, ROOT)
+    w6.limiters["small"].add_tokens(300)
+    check(not w6.ready(match=True) and w6.ready() and "small 25%" in w6.status_line(), f"a model's own share for match checks: {w6.status_line()}")
     W._USAGE_FILE = TMP / "usage.json"
 
     # the match check sends the candidate's side first and unchanged (so a provider that caches repeated openings can), and

@@ -176,14 +176,16 @@ Only providers with a key are used (the log's first lines list them). With just 
 and per-minute limits are waited out. Ollama is only for running on your own Mac.
 Only résumé-style facts are sent (never your address, phone or EEO answers).
 
-The match check is what limits how many jobs can be applied to in a day, so the allowance is split on purpose
-(`writer` in `settings.yaml`): the best model (`gpt-oss-120b`) only writes your answers; `gpt-oss-20b` and `qwen3.8-27b` do both, with at most 60% of their day going to match checks (`match_share`).
-**The one thing that raises the number of jobs checked per day is another free key:** add a `GEMINI_API_KEY` secret (free
-at aistudio.google.com, no card) and the two Gemini entries in `settings.yaml`, idle until then, do match checks only:
-about 500 requests a day on Flash-Lite, five postings to a request, several times what Groq's free allowance covers. A key
-that Google rejects is named in the run log and, once a day, in the email under NEEDS YOU. (On Google's free tier, what is
-sent may be used to improve their products: for the match check that is your résumé summary without name or contact
-details, and the public posting.)
+Two things use the free allowance: the résumé-match check of every candidate, and the answers on each application
+(`writer` in `settings.yaml`). Groq counts tokens, and every answer carries your background, so the Groq models are kept
+for answers: the best one (`gpt-oss-120b`) only writes answers, and the two smaller ones give at most a quarter of their
+day to match checks. With a valid `GEMINI_API_KEY` secret (free at aistudio.google.com, no card) Gemini Flash-Lite does the
+match checks first (Google counts requests: about 500 a day, five postings to a request) and, with what is left of its
+day, writes answers when the Groq models have nothing left. A key that Google rejects is named in the run log and, once a
+day, in the email under NEEDS YOU. On Google's free tier what is sent may be used to improve its products; to keep your
+answers off it, give `gemini-lite` `role: match` in `settings.yaml` (it then only sees your résumé summary without name or
+contact details, and the public posting). When no model has allowance left for an answer, a job that needs one is not
+thrown away: it stays queued and is tried again when there is allowance.
 - **Truth first.** The writer is told to use only your facts. An answer that mentions a number or tool not in your facts is sent back once
   for a fix; it is never thrown away and a job is never skipped because of it.
 - **Your voice.** `voice.md` sets the style (answer first, 75 to 200 words, no buzzwords, no em dashes); `about_me.md` and `profile.yaml`

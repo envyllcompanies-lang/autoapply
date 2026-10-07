@@ -1171,7 +1171,13 @@ def _number_text(val) -> str:
     s = str(val).strip().replace(",", "").replace("$", "").strip()
     m = re.fullmatch(r"(-?\d+)(?:\.(\d+))?", s)
     if not m:
-        return str(val)
+        # words or a range in a number box ('70000 to 80000', '75k'): the box keeps every digit typed, so a range becomes
+        # one huge number. The first figure of it is typed instead.
+        m2 = re.search(r"(\d+(?:\.\d+)?)\s*(k\b)?", s, re.I)
+        if not m2:
+            return str(val)
+        num = float(m2.group(1)) * (1000 if m2.group(2) else 1)
+        return str(int(num)) if num == int(num) else str(num)
     return m.group(1) if not m.group(2) or not int(m.group(2)) else f"{m.group(1)}.{m.group(2)}"
 
 

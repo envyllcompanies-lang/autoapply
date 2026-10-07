@@ -569,7 +569,8 @@ def _wd_scope(page):
 
 RESET_MAIL_HOURS = 12        # a reset email this old may still work; older ones are not tried
 VERIFY_MAIL_DAYS = 7         # the same for a verify-your-account email
-RESET_WAIT_S = 150           # how long a new reset email is waited for
+RESET_WAIT_S = 80            # how long a new reset email is waited for (they come within half a minute, or much later:
+                             # a late one is used on the next try without asking for another)
 
 
 def _ago(ts: float) -> str:
@@ -585,10 +586,70 @@ def _wd_back(page, url_after: str | None):
     _settle(page, 2500)
     if not re.search(r"/apply|/login|/userHome", url_after):
         return                                          # a posting page: the driver walks on to the form from there
-    try:
-        page.wait_for_selector("input[type=password]", state="visible", timeout=15000)
+    try:                                                # the sign-in form, or the application itself when already signed in
+        page.wait_for_selector("input[type=password], " + SIGNED_IN, state="visible", timeout=15000)
     except Exception:
-        pass                                            # no sign-in form: already signed in, or the page is something else
+        pass                                            # neither: the page is something else
+
+
+SIGN_IN_RX = re.compile(r"^\s*sign in\s*$", re.I)
+
+
+def _wd_quiet_sign_in(page, acc: "Accounts", host: str, log, url_after: str | None) -> str:
+    """Sign In was pressed and Workday showed nothing: no message, the same form. On 2026-10-06/07 that happened on about
+    one site in four and was read as a refused sign-in, so a password-reset email was asked for and waited for; then the
+    application was loaded again and was simply there (signed in), or the same sign-in worked on the next run. So before
+    calling it a refusal: give Workday a little longer, load the application again to see whether the sign-in went
+    through, and press Sign In once more. At most twice per site and run. Returns the page text."""
+    quiet = acc.__dict__.setdefault("_wd_quiet", {})
+    if quiet.get(host, 0) >= 2:
+        return _body(page)
+    quiet[host] = quiet.get(host, 0) + 1
+    for _ in range(6):                                  # 1. a slow answer
+        page.wait_for_timeout(1000)
+        if not is_auth_page(page) or _wd_errors(page):
+            return _body(page)
+    # 2. signed in already, only the page did not move on? Load the application (or this sign-in page) again and look.
+    again = url_after if "/apply" in (url_after or "") else page.url if re.search(r"/apply|/login|/userHome", page.url or "") else None
+    if again:
+        log("      account: Workday showed nothing after Sign In: loading the application again to see whether it went through")
+        try:
+            _wd_back(page, again)
+        except Exception:
+            pass
+        if not is_auth_page(page):
+            try:
+                there = "/apply" in page.url or page.locator(SIGNED_IN).locator("visible=true").count() > 0
+            except Exception:
+                there = False
+            if there:
+                log("      account: it had gone through")
+            return _body(page)                          # (a posting page: the driver walks on from it and signs in there if asked)
+    scope = _wd_scope(page)                             # 3. the press may not have registered: once more
+    if scope.locator("input[type=password]").locator("visible=true").count() >= 2:
+        link = _wd(page, "signInLink")
+        if link.count():
+            link.first.click(force=True)
+            _settle(page, 2000)
+            scope = _wd_scope(page)
+    em, pw = _wd(scope, "email"), _wd(scope, "password")
+    if em.count() and pw.count():
+        em.first.fill(acc.email)
+        pw.first.fill(acc.password)
+    else:
+        _fill_credentials(page, acc, scope)
+    before = _body(page)
+    n_before = page.locator("input[type=password]").locator("visible=true").count()
+    log("      account: pressing Sign In once more")
+    try:
+        (pw.first if pw.count() else page.locator("input[type=password]").locator("visible=true").first).press("Enter")
+    except Exception:
+        pass
+    page.wait_for_timeout(2500)
+    if is_auth_page(page) and not _wd_errors(page) and " ".join(_body(page).split()) == " ".join(before.split()):
+        _wd_press(page, scope, "signInSubmitButton", SIGN_IN_RX)
+        _settle(page, 2500)
+    return _wd_wait_answer(page, before, n_before, 9000)
 
 
 def _wd_set_new_password(page, acc: Accounts, link: str, log) -> bool | None:
@@ -853,6 +914,8 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
             raise AuthBlocked("could not find Workday's Sign In button")
         _settle(page, 2500)
         body = _wd_wait_answer(page, before, n_before)
+        if is_auth_page(page) and not _wd_errors(page) and not UNVERIFIED_MSG.search(body) and not VERIFY_MSG.search(body):
+            body = _wd_quiet_sign_in(page, acc, host, log, url_after)        # Workday showed nothing at all: make sure first
         if not is_auth_page(page):
             acc.remember(host, "signed_in")
             return

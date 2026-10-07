@@ -278,7 +278,7 @@ class Writer:
         # checks, so the application answers always have allowance left.
         self.match_names = tuple(w.get("match_providers") or ("groq-qwen", "groq-20b"))
         self.match_share = float(w.get("match_share", 0.6))
-        if not any(p.get("role") == "match" or p["name"] in self.match_names for p in self.providers):
+        if not any(p.get("role") == "match" or p.get("match_first") or p["name"] in self.match_names for p in self.providers):
             # a configuration that sets no model aside for match checks: any model may do them, as before
             self.match_names = tuple(p["name"] for p in self.providers)
             self.match_share = 1.0
@@ -399,21 +399,23 @@ class Writer:
 
     def _usable(self, p: dict, match: bool = False) -> bool:
         """May this provider take a call of this kind right now? A provider marked 'role: match' only ever does match
-        checks. A match check only goes to those and to the models in writer.match_providers, and takes at most
-        match_share of a shared model's daily allowance (the rest is for the application answers)."""
+        checks. A match check only goes to those, to the ones marked 'match_first' and to the models in
+        writer.match_providers, and takes at most match_share of a shared model's daily allowance (its own 'match_share'
+        if it has one, else writer.match_share); the rest is for the application answers."""
         if p["name"] in self.dead:
             return False
         dedicated = p.get("role") == "match"
         if not match:
             if dedicated:
                 return False
-        elif not dedicated and p["name"] not in self.match_names:
+        elif not dedicated and not p.get("match_first") and p["name"] not in self.match_names:
             return False
         lim = self.limiters[p["name"]]
         if lim.exhausted():
             return False
-        if match and not dedicated and self.match_share < 1:
-            if (lim.tpd and lim.tokens_today() >= self.match_share * lim.tpd) or (lim.rpd and lim.total >= self.match_share * lim.rpd):
+        share = float(p.get("match_share", self.match_share))
+        if match and not dedicated and share < 1:
+            if (lim.tpd and lim.tokens_today() >= share * lim.tpd) or (lim.rpd and lim.total >= share * lim.rpd):
                 return False
         return True
 
@@ -430,7 +432,8 @@ class Writer:
             if not live:
                 # everything is briefly cooling down after a per-minute limit: wait once rather than give up
                 short = [self.limiters[p["name"]].cooling() for p in self.providers
-                         if p["name"] not in self.dead and (not match or p.get("role") == "match" or p["name"] in self.match_names)
+                         if p["name"] not in self.dead
+                         and (not match or p.get("role") == "match" or p.get("match_first") or p["name"] in self.match_names)
                          and (match or p.get("role") != "match")]
                 short = [w for w in short if 0 < w <= 75]
                 if round_ == 0 and short:
@@ -461,12 +464,13 @@ class Writer:
 
     def _order(self, live: list, est: int, match: bool = False, prefer: tuple = ()) -> list:
         """The order in which the usable providers are tried: those with allowance right now before one that has to wait
-        out its per-minute limit. A match check goes to the match-only providers first (their allowance has no other
-        use, the shared models' has); an answer goes to the preferred models first."""
+        out its per-minute limit. A match check goes first to the match-only providers and those marked 'match_first'
+        (their allowance has no better use; the other shared models' has). An answer goes to the preferred models first
+        and to a 'match_first' model last: it writes answers only when the others have nothing left for the day."""
         def tier(q):
             if match:
-                return 0 if q.get("role") == "match" else 1
-            return 0 if q["name"] in prefer else 1
+                return 0 if (q.get("role") == "match" or q.get("match_first")) else 1
+            return 2 if q.get("match_first") else 0 if q["name"] in prefer else 1
         idx = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, tier(live[i]), i))
         return [live[i] for i in idx]
 
@@ -504,10 +508,13 @@ class Writer:
         if names:
             out = "Writer: essays, cover letters and unusual multiple-choice questions use " + ", ".join(names) + " (free tiers, in that order)"
             only = [p["name"] for p in self.providers if p.get("role") == "match"]
-            shared = [n for n in names if n in self.match_names]
-            if only or shared:
-                out += ("; résumé-match checks use " + ", ".join(only + shared)
-                        + (f" (at most {self.match_share:.0%} of the day's allowance of {', '.join(shared)})" if shared and self.match_share < 1 else ""))
+            first = [p["name"] for p in self.providers if p.get("match_first") and p.get("role") != "match"]
+            shared = [n for n in names if n in self.match_names and n not in first]
+            if only or shared or first:
+                share = {p["name"]: float(p.get("match_share", self.match_share)) for p in self.providers}
+                part = [f"{n} {share[n]:.0%}" for n in first + shared if share[n] < 1]
+                out += ("; résumé-match checks use " + ", ".join(only + first + shared)
+                        + (f" (at most this part of a shared model's day: {', '.join(part)})" if part else ""))
         elif self.providers:
             out = ("Writer: OFF for answers (no working key). Résumé-match checks use " + ", ".join(p["name"] for p in self.providers))
         else:

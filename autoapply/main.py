@@ -63,6 +63,7 @@ def merge_board_file(cfg: dict, base: Path) -> int:
 
 TOP_MATCHES: list = []      # (fit, line) for the match checks of this run, for the summary email
 FOLLOWUPS: list = []        # employers that emailed asking for something more ('incomplete application', an assessment)
+WRITER_WAIT = "waiting for the free writer"      # start of the reason of a job that only lacks an answer from the writer
 ACCOUNT_NOTES: list = []    # career sites that keep refusing the bot's sign-in (told to you so you can reset that password once)
 RUN_STATS: dict = {}        # match checks done in this run, how many passed, and today's use of the free allowance (for the log)
 REPORT_ROWS = 40            # rows listed per section of the daily report (the queue can hold thousands of candidates)
@@ -71,7 +72,7 @@ REPORT_ROWS = 40            # rows listed per section of the daily report (the q
 def human_check_tries_today(db) -> int:
     """How many of today's tries ended at a human check (CAPTCHA and the like)."""
     today = date.today().isoformat()
-    return sum(1 for r in db.conn.execute("SELECT reason FROM jobs WHERE status='blocked' AND updated LIKE ?", (today + "%",))
+    return sum(1 for r in db.conn.execute("SELECT reason FROM jobs WHERE status IN ('blocked','unconfirmed') AND updated LIKE ?", (today + "%",))
                if HUMAN_CHECK.search(r["reason"] or ""))
 
 
@@ -150,7 +151,8 @@ def row_job(row):
 # 2 = submits are often held by a human check when they come from a data-centre address.
 SITE_PRIOR = {"workday": 0, "bamboohr": 1, "breezy": 1, "recruitee": 1, "smartrecruiters": 1, "icims": 1, "jobvite": 1,
               "ashby": 2, "workable": 2, "greenhouse": 2, "lever": 2}
-HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verification|are you a robot|anti-bot", re.I)
+HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verification|are you a robot|anti-bot|"
+                         r"submission was flagged|flagged as (possible |potential )?(spam|suspicious)", re.I)
 
 
 def ats_of(job) -> str:
@@ -197,15 +199,15 @@ def site_rank(row, health: dict | None = None) -> int:
     if h:
         if h["ok"] and h["ok"] * 3 >= h["human"]:
             return 0
-        if h["human"] >= 3 and not h["ok"]:
-            return 3
+        if h["human"] >= 3 and h["human"] > 3 * h["ok"]:
+            return 3              # (almost) every recent try ended at a human check or was flagged by the site's spam screen
     return SITE_PRIOR.get(ats, 1)
 
 
 def health_lines(health: dict) -> list[str]:
     """One line per application system that keeps ending at a human check (for the summary email)."""
-    return [f"{ats}: stopped by a human check on {h['human']} recent tries, none went through (tried last, after the sites that finish)"
-            for ats, h in sorted(health.items()) if h["human"] >= 3 and not h["ok"]]
+    return [f"{ats}: stopped by a human check or spam screen on {h['human']} recent tries, {h['ok'] or 'none'} went through (tried last, a few a day)"
+            for ats, h in sorted(health.items()) if h["human"] >= 3 and h["human"] > 3 * h["ok"]]
 
 
 def site_summary(rows) -> list[str]:
@@ -501,6 +503,10 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         if scored >= max_score:
             all_seen = False
             break  # leave the rest unseen; they'll be scored next run
+        if "remote" not in (j.location or "").lower() and sources.remote_in_text(j.description):
+            # kept because its own text says it is remote in the US: say so in its location, which is what later runs go by
+            # (they no longer have the text, and dropped such a posting the next day for its city)
+            j.location = f"{j.location or ''} (Remote)".strip()
         try:
             score, reason = brain.score(j)
         except Exception as e:
@@ -720,10 +726,25 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             co = norm_co(row["company"] or "")
             return bool(per_company and applied_n.get(co, 0) >= per_company) or (co, (row["title"] or "").strip().lower()) in applied_roles
 
+        co_fail: dict = {}      # employer -> applications in a row in this run that its form stopped (a question, a rejected form)
+        writer_wait = [0.0, True]      # (when the writer's allowance was last looked at, whether it had any)
+
+        def answers_out() -> bool:
+            """True while the free writer has no allowance left for answers (looked at every few seconds at most)."""
+            if not brain.writer:
+                return False
+            if time.time() - writer_wait[0] > 5:
+                writer_wait[0], writer_wait[1] = time.time(), bool(brain.writer.ready())
+            return not writer_wait[1]
+
         def waits(row) -> bool:
             """Cheap reasons a queued job is not looked at in this run. It stays queued and nothing is recorded or fetched."""
             if nofind.get(row["source"] or "", 0) >= 2:
                 return True       # this board keeps handing out listings with no real form: don't burn minutes on more of them now
+            if co_fail.get(norm_co(row["company"] or ""), 0) >= 2:
+                return True       # this employer's form stopped the bot twice in a row in this run: its other jobs wait for a later run
+            if str(row["reason"] or "").startswith(WRITER_WAIT) and answers_out():
+                return True       # it needs an answer from the free writer, whose allowance for today is used up
             host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
             if host and (host in bad_hosts or acc.resting(host)):
                 return True       # the bot could not sign in to this career site (a moment ago, or on its last tries): its jobs stay queued
@@ -810,7 +831,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     parked.remove(due)
                     auth.unpark(acc, due[2])
                     log(f"→ back to {due[1]['title']} @ {due[1]['company']}: its account's verify email should be in now")
-                    yield i, db.get(due[1]["key"]) or due[1]
+                    back = db.get(due[1]["key"]) or due[1]
+                    verdicts[back["key"]] = ("go", due[3])      # judged before it was set aside: straight to its application
+                    yield max(0, i - 1), back
                 elif i < len(queue):
                     i += 1
                     yield i - 1, queue[i - 1]
@@ -898,6 +921,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             clicked: list = []
             stage = [""]
             t_job = time.time()
+            brain.writer_out = False        # set by the brain when a question had to go unanswered only because the writer was out
 
             def note_stage(name, _k=job.key, _st=stage):
                 _st[0] = str(name)[:60]
@@ -981,13 +1005,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     brain.applied_before.add(job.company)
                     applied_n[co_n] = applied_n.get(co_n, 0) + 1
                     applied_roles.add((co_n, ck[1]))
+                co_fail.pop(co_n, None)                  # this employer's form goes through
                 log(f"    ✓ {status} ({took})")
                 done += 1
             except sub.Blocked as e:
                 blocked_text = str(e)
                 awaiting = re.search(r"awaiting-email \(([^)]+)\)", blocked_text)
                 if awaiting and not any(x[1]["key"] == job.key for x in parked):
-                    parked.append((time.time() + 75, row, awaiting.group(1)))
+                    parked.append((time.time() + 75, row, awaiting.group(1), job))
                     db.update(job.key, status="queued", reason="set aside this run: waiting for the new account's verify email")
                     log("    … set aside: the new account's verify email is on its way; the next jobs go first and this one is finished after")
                     continue
@@ -1035,16 +1060,28 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 else:
                     db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
                     dead.add(ck)
+                    co_fail[co_n] = co_fail.get(co_n, 0) + 1
+                    if HUMAN_CHECK.search(str(e)):
+                        hc_tries[0] += 1
                     log(f"    ? submitted but NOT confirmed (will not retry; checked the inbox too): {str(e)[:260]}")
             except sub.NotSubmitted as e:
                 snap("not sent", str(e))
                 # the site bounced the submit with its own error: nothing was sent, so this one may be tried again
                 db.update(job.key, status="failed", reason=str(e)[:300], attempts=row["attempts"] + 1, submitted_at="")
+                co_fail[co_n] = co_fail.get(co_n, 0) + 1
                 log(f"    ✗ not sent (the form rejected it): {str(e)[:220]}")
             except sub.Unanswerable as e:
+                if getattr(brain, "writer_out", False) and not clicked:
+                    # the question was one for the free writer, and its allowance for today is used up: nothing is wrong with
+                    # the job, so it is not set aside. It stays queued and is tried again when the writer has allowance.
+                    db.update(job.key, status="queued", reason=f"{WRITER_WAIT}: its allowance for today is used up ({str(e)[:120]})")
+                    writer_wait[0] = 0.0
+                    log("    … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued")
+                    continue
                 snap("skipped", str(e))
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
+                co_fail[co_n] = co_fail.get(co_n, 0) + 1
                 log(f"    ✗ skipped: {e}")
             except Exception as e:
                 snap("failed", str(e).splitlines()[0] if str(e) else type(e).__name__)
