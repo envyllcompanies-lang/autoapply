@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     source TEXT, company TEXT, title TEXT, location TEXT,
     url TEXT, apply_url TEXT,
     first_seen TEXT,
-    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed
+    status TEXT,          -- filtered | low_score | queued | applied | dry_run | blocked | skipped | failed | unconfirmed
     score INTEGER,
     reason TEXT,
     resume_path TEXT, cover_path TEXT, screenshot TEXT,
@@ -19,7 +19,9 @@ CREATE TABLE IF NOT EXISTS jobs (
 );
 """
 
-FINAL = ("applied", "filtered", "low_score", "blocked", "skipped")
+# Statuses that end a job's life in the queue. 'unconfirmed' = Submit was clicked and no confirmation was seen: it is never
+# submitted again; later runs only look in the inbox for the employer's confirmation email.
+FINAL = ("applied", "filtered", "low_score", "blocked", "skipped", "unconfirmed")
 
 
 class DB:
@@ -28,6 +30,15 @@ class DB:
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
         self.conn.execute("CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)")
+        for col, kind in (("fit", "INTEGER"),          # match % of your résumé against the posting (prescreen.py)
+                          ("stage", "TEXT"),           # how far the last attempt got: 'account', 'My Information', 'Review' ...
+                          ("submitted_at", "TEXT"),    # when Submit was clicked; set BEFORE the click, never cleared by a retry rule
+                          ("followup", "TEXT"),        # an email from the employer asking for something more
+                          ("posted", "TEXT")):         # when the posting went up, where the source says so (newer ones are checked first)
+            try:
+                self.conn.execute(f"ALTER TABLE jobs ADD COLUMN {col} {kind}")
+            except sqlite3.OperationalError:
+                pass
         # a submit that showed no confirmation may still have gone through: never retry it automatically
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='failed' AND reason LIKE 'no confirmation after submit%'")
         self.conn.commit()
@@ -44,8 +55,10 @@ class DB:
             " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%')")
         # submits the site bounced back with 'X is required' (e.g. the résumé upload didn't register): nothing was sent
         cur2 = self.conn.execute(
-            "UPDATE jobs SET status='queued', attempts=0 WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
-            " AND lower(reason) LIKE '%required%' AND lower(reason) NOT LIKE '%thank%'")
+            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
+            " AND (lower(reason) LIKE '%required%' OR lower(reason) LIKE '%please enter a valid%' OR lower(reason) LIKE '%couldn''t submit%'"
+            " OR lower(reason) LIKE '%could not submit%' OR lower(reason) LIKE '%must be%' OR lower(reason) LIKE '%invalid%')"
+            " AND lower(reason) NOT LIKE '%thank%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared)
         # Workable submits that sat on the form (a YES/NO question the bot could not see, or 'Submitting…' held by a hidden
         # check) and got no confirmation email: almost certainly never sent. One more try; the inbox is checked first.
         cur3 = self.conn.execute(
@@ -54,11 +67,97 @@ class DB:
         # jobs listed 'by hand' only because their whole site or employer was paused: the bot tries them itself now
         cur4 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0 WHERE status='manual' AND (reason LIKE 'apply by hand: % stopped the bot at a human check on its last%'"
-            " OR reason LIKE 'apply by hand: %application already stopped at a human check%')")
+            " OR reason LIKE 'apply by hand: %application already stopped at a human check%'"
+            " OR reason LIKE 'apply by hand: %emailed code%')")      # parked when emailed codes could not be handled: the bot types them now
         cur5 = self.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND reason LIKE '%Password must include%'")
+        # parked only because their site was paused, or stopped by things the bot now handles (Workday accounts, start
+        # pages, footer buttons): the bot does them itself. Real human checks (hCaptcha, emailed codes) stay as they are.
+        cur6 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND (reason LIKE 'account:%' OR reason LIKE 'not a real application form%' OR reason LIKE 'no Next or Submit%'"
+            " OR reason LIKE 'no application form found%')")
+        # set aside only because their posting text could not be read ahead of time: it is now read from the page itself
+        cur7 = self.conn.execute("UPDATE jobs SET status='queued', fit=NULL WHERE status='low_score' AND fit = -1")
+        # Workday applications that got stuck part-way under the old page-by-page guessing (a date box, a pop-up list, a
+        # block behind 'Add') or ran out of time. The Workday driver handles those pages now, and Submit was never clicked.
+        cur8 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','failed') AND apply_url LIKE '%myworkdayjobs.com%'"
+            " AND (submitted_at IS NULL OR submitted_at = '') AND (status='failed' OR reason LIKE 'stuck on step%')")
+        # held at the emailed security code after Submit: nothing was sent, and the bot now reads that code from the inbox
+        cur9 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status IN ('blocked','failed','manual') AND (reason LIKE '%asked for a security code%' OR reason LIKE '%asked for an emailed code%' OR reason LIKE '%emailed security code%')")
+        # set aside only because an employer already had 3 applications: there is no such limit any more (2026-10-07)
+        cur10 = self.conn.execute(
+            "UPDATE jobs SET status='queued', attempts=0 WHERE status='skipped' AND reason LIKE 'already applied to % roles at this company'"
+            " AND (submitted_at IS NULL OR submitted_at = '')")
+        # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
+        self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
+                          " AND reason NOT LIKE 'recheck-inbox%'")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
-        return cur.rowcount + cur2.rowcount + cur3.rowcount + cur4.rowcount + cur5.rowcount
+        return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10))
+
+    def requeue_fixed(self, flag: str) -> dict:
+        """Jobs that were set aside by a fault that has since been fixed get one more try, once per flag. Each rule names
+        the fault; none of them brings back a job whose Submit button was ever clicked. Returns how many each rule found."""
+        if not self.once("requeue:" + flag):
+            return {}
+        never_sent = " AND (submitted_at IS NULL OR submitted_at = '')"
+        wd = " AND apply_url LIKE '%myworkdayjobs.com%'"
+        rules = {
+            # Workday pages the driver could not get past: a school's From / To asked as bare years, a pay box that only
+            # takes a number, a 'pay rate type' list. The driver fills those now.
+            "stuck on a Workday page": "status='skipped' AND reason LIKE 'stuck on Workday%'" + wd,
+            # required questions the answer rules had nothing for and now do (a pay-rate-type list, race boxes drawn one
+            # per choice, a 'None of the above' box)
+            "a question the bot can answer now": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND ("
+                "reason LIKE '%Pay Rate%' OR reason LIKE '%Rate Type%' OR reason LIKE '%None of the above%' OR reason LIKE '%(United States%'"
+                " OR reason LIKE '%Annual Pay%' OR reason LIKE '%Year Attended%')",
+            # Workday drew its form later than the bot waited, and the page was written off as 'not a real form'
+            "Workday's form came up late": "status IN ('blocked','skipped') AND (reason LIKE '%could not reach Workday''s form%'"
+                " OR reason LIKE '%Workday''s sign-in page stayed empty%')" + wd,
+            # sign-ins that went round in circles because a late 'already exists' answer was read as a new account
+            "a Workday sign-in that went in circles": "status='blocked' AND (reason LIKE 'account: still at Workday''s sign-in%'"
+                " OR reason LIKE 'account: still on Workday''s sign-in%' OR reason LIKE 'account: Workday keeps returning%')" + wd,
+            # set aside only because the same title at the same employer had just failed in that run
+            "same role as one that had just failed": "status='skipped' AND reason = 'same role at same company already skipped this run'"
+                " AND COALESCE(attempts, 0) = 0",
+            # called 'no longer listed' only because one search did not return them, although their employer's list of
+            # openings was never read (postings from the daily snapshot and from aggregators): their own page decides now
+            "wrongly called no longer listed": "status='skipped' AND reason = 'posting no longer listed' AND COALESCE(attempts, 0) = 0",
+        }
+        found = {}
+        for name, where in rules.items():
+            n = self.conn.execute(f"UPDATE jobs SET status='queued', attempts=0 WHERE {where}{never_sent}").rowcount
+            if n:
+                found[name] = n
+        self.conn.commit()
+        return found
+
+    def once(self, flag: str) -> bool:
+        """True the first time it is asked about this flag, False ever after (one-off clean-ups of the history)."""
+        if self.meta_get("once:" + flag, ""):
+            return False
+        self.meta_set("once:" + flag, datetime.now().isoformat(timespec="seconds"))
+        return True
+
+    def forget_unresolved_locations(self) -> int:
+        """Workday lists a posting open in several cities as '2 Locations'. Those used to be dropped for their location
+        without their cities ever being looked up. Forget them (once), so the next search reads their detail page."""
+        n = self.conn.execute(
+            "DELETE FROM jobs WHERE status='filtered' AND attempts = 0 AND (reason LIKE 'location ''% Locations'' not allowed'"
+            " OR reason LIKE 'location '''' not allowed') AND apply_url LIKE '%myworkdayjobs.com%'").rowcount
+        self.conn.commit()
+        return n
+
+    def reset_title_filter(self, token: str) -> int:
+        """When the list of allowed job titles changes, postings that were dropped only because of their title are looked at
+        again (once per list). Anything that still does not fit is filtered again right away."""
+        if self.meta_get("title_filter", "") == token:
+            return 0
+        n = self.conn.execute("DELETE FROM jobs WHERE status='filtered' AND reason LIKE 'title not in include list%'").rowcount
+        self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('title_filter', ?)", (token,))
+        self.conn.commit()
+        return n
 
     def meta_get(self, k: str, default: str = "") -> str:
         row = self.conn.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
@@ -94,10 +193,19 @@ class DB:
             (date.today().isoformat() + "%",)).fetchone()[0]
 
     def retryable(self, max_attempts: int):
-        """Scored-high jobs that failed transiently and deserve another go."""
+        """Scored-high jobs that failed transiently and deserve another go. A job whose Submit button was ever clicked is
+        never among them, whatever its status says: the only way back in is the inbox re-check of a submit that provably
+        never reached the employer (reason 'recheck-inbox: ...')."""
         return self.conn.execute(
-            "SELECT * FROM jobs WHERE status IN ('queued','failed','dry_run') AND attempts < ? ORDER BY score DESC",
+            "SELECT * FROM jobs WHERE status IN ('queued','failed','dry_run') AND attempts < ?"
+            " AND (submitted_at IS NULL OR submitted_at = '' OR reason LIKE 'recheck-inbox%') ORDER BY score DESC",
             (max_attempts,)).fetchall()
+
+    def mark_submit(self, key: str, attempts: int):
+        """Write-ahead record of a Submit click: from here on a crash, a timeout or a cancelled run must never lead to a
+        second submit of the same application."""
+        self.update(key, status="unconfirmed", reason="submit clicked; outcome not yet known", attempts=attempts,
+                    submitted_at=datetime.now().isoformat(timespec="seconds"))
 
     def since(self, iso_ts: str):
         return self.conn.execute(

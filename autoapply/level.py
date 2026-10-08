@@ -52,9 +52,22 @@ NOT_ELIGIBLE = [
 ]
 TITLE_NOT_ELIGIBLE = [
     (re.compile(r"\bpart[- ]time\b", re.I), "part-time"),
+    (re.compile(r"\b(seasonal|temporary|temp)\b|\bper diem\b", re.I), "seasonal / temporary"),
     (re.compile(r"\b(intern|internship|co-?op|summer associate|summer analyst)\b", re.I), "internship / summer program"),
     (re.compile(r"\bveterans?\b|\bmilitary\b|skillbridge", re.I), "veterans / military program"),
     (re.compile(r"\b(mba|phd|ph\.d|doctoral)\b", re.I), "MBA / PhD program"),
+    (re.compile(r"\bfreelance\b|\bgig\b|\(contract\)|\bcontract (position|role|assignment)\b|\b1099\b|\bcontractor\b", re.I),
+     "freelance / contract gig"),
+    (re.compile(r"\b(retail|store|restaurant|hotel|hospitality|front desk|cashier|crew|barista|server|host(ess)?|"
+                r"warehouse associate|picker|packer|forklift|material handler|call center|customer service representative|"
+                r"stocker|merchandiser|brand ambassador|sales associate|plant operations|custodian|janitor|maintenance technician|"
+                # (a construction TRADE, not every title with the word in it: 'Construction Project Coordinator', 'Project
+                #  Engineer - Construction' and 'FP&A Coordinator, Construction Services' are office roles you are looking for)
+                r"construction (labou?rer|worker|helper|crew|technician|tech|apprentice|installer|operator|foreman|carpenter|electrician)|"
+                r"labou?rer|superintendent|foreman|tradesman|carpenter|plumber|hvac)\b", re.I),
+     "hourly retail / hospitality / warehouse / trades role"),
+    (re.compile(r"\bassistant (store|plant|general|restaurant|branch|shift) manager\b|\bshift (lead|supervisor)\b|\bsupervisor\b", re.I),
+     "shift / store supervisor role"),
 ]
 
 # -------------------------------------------------------------------------------------------------------- description
@@ -144,6 +157,8 @@ def classify(title: str, desc: str = "", pay_low: float | None = None, pay_high:
     reasons = lv.reasons
 
     for rx, why in TITLE_NOT_ELIGIBLE:
+        if why.startswith("hourly retail") and re.search(r"\b(analyst|planner|planning|strategy|buyer)\b", t, re.I):
+            continue                                   # corporate retail roles (store operations analyst, retail planner)
         if rx.search(t):
             lv.eligible = False
             reasons.append(why)

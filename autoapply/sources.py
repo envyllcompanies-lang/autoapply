@@ -34,6 +34,38 @@ class Job:
         return f"{self.source}:{self.company}:{self.job_id}"
 
 
+def _iso(v) -> str:
+    """A posting date from a job feed (ISO text, or milliseconds since 1970) as a plain UTC date-time; '' when unreadable."""
+    from datetime import datetime, timezone
+    try:
+        if isinstance(v, (int, float)) or str(v).isdigit():
+            n = float(v)
+            t = datetime.fromtimestamp(n / 1000 if n > 1e11 else n, timezone.utc)
+        else:
+            t = datetime.fromisoformat(str(v).strip().replace("Z", "+00:00"))
+            if t.tzinfo is None:
+                t = t.replace(tzinfo=timezone.utc)
+        return t.astimezone(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
+    except Exception:
+        return ""
+
+
+def _wd_posted(text: str) -> str:
+    """Workday's 'Posted Today' / 'Posted Yesterday' / 'Posted 5 Days Ago' / 'Posted 30+ Days Ago' as a date."""
+    from datetime import datetime, timedelta
+    low = (text or "").lower()
+    if "today" in low:
+        days = 0
+    elif "yesterday" in low:
+        days = 1
+    else:
+        m = re.search(r"(\d+)\s*\+?\s*day", low)
+        if not m:
+            return ""
+        days = int(m.group(1)) + (1 if "+" in low else 0)
+    return (datetime.utcnow() - timedelta(days=days)).replace(microsecond=0).isoformat(timespec="seconds")
+
+
 def _strip_html(s: str) -> str:
     s = html.unescape(s or "")
     s = re.sub(r"<(br|/p|/li|/h\d)[^>]*>", "\n", s, flags=re.I)
@@ -55,7 +87,8 @@ def greenhouse(token: str) -> list[Job]:
             title=j.get("title", ""), location=(j.get("location") or {}).get("name", ""),
             url=url, apply_url=f"https://job-boards.greenhouse.io/{token}/jobs/{j['id']}",
             description=_strip_html(j.get("content", "")),
-            extra={"company_name": j["company_name"]} if j.get("company_name") else {}))
+            extra={**({"company_name": j["company_name"]} if j.get("company_name") else {}),
+                   **({"posted": _iso(j.get("first_published") or j.get("updated_at"))} if (j.get("first_published") or j.get("updated_at")) else {})}))
     return out
 
 
@@ -74,7 +107,8 @@ def lever(company: str) -> list[Job]:
             source="lever", company=company, job_id=j["id"], title=j.get("text", ""),
             location=cats.get("location", "") or ", ".join(cats.get("allLocations", []) or []),
             url=j.get("hostedUrl", ""), apply_url=j.get("applyUrl") or j.get("hostedUrl", "") + "/apply",
-            description=desc.strip(), extra={"workplace": j.get("workplaceType")}))
+            description=desc.strip(), extra={"workplace": j.get("workplaceType"),
+                                             **({"posted": _iso(j["createdAt"])} if j.get("createdAt") else {})}))
     return out
 
 
@@ -95,7 +129,8 @@ def ashby(org: str) -> list[Job]:
             location=loc, url=job_url,
             apply_url=j.get("applyUrl") or (job_url.rstrip("/") + "/application"),
             description=j.get("descriptionPlain") or _strip_html(j.get("descriptionHtml", "")),
-            extra={"comp": (j.get("compensation") or {}).get("compensationTierSummary")}))
+            extra={"comp": (j.get("compensation") or {}).get("compensationTierSummary"),
+                   **({"posted": _iso(j["publishedAt"])} if j.get("publishedAt") else {})}))
     return out
 
 
@@ -104,19 +139,28 @@ KNOWN: dict = {}           # set by main: job key -> status for jobs already in 
 DETAIL_CAP = 80            # detail pages read per big board per run
 
 
-def _needs_detail(job: "Job", gate: dict) -> bool:
-    """Only postings that could still be wanted, and that the database has not already decided, get their detail page read."""
+def _needs_detail(job: "Job", gate: dict, any_title: bool = False) -> bool:
+    """Only postings that could still be wanted, and that the database has not already decided, get their detail page read.
+    any_title: the list did not say where the job is ('2 Locations', or nothing), so every posting that passes the title
+    filters is read: its detail page is the only place its cities are named."""
     st = KNOWN.get(job.key)
     if st and st not in ("queued", "new"):
         return False
     if SEARCH and prefilter(job, gate):
         return False
+    if any_title:
+        return True
     keys = (SEARCH or {}).get("_title_keys")
     return not keys or any(k in job.title.lower() for k in keys)
 
 WD_ROLES = ["operations", "coordinator", "analyst", "associate", "supply chain"]
 WD_PLACES = ["Denver", "Los Angeles", "New York", "Remote"]
 _MANY_LOCS = re.compile(r"^\s*(\d+|multiple|various)\s+locations?\s*$", re.I)
+
+
+def unresolved_location(loc: str) -> bool:
+    """'3 Locations' / 'Multiple Locations' / nothing at all: the job list did not say where the job is."""
+    return bool(_MANY_LOCS.match(loc or "")) or not (loc or "").strip()
 
 
 _WD_GATES: dict = {}
@@ -154,6 +198,26 @@ def _wd_post(api: str, offset: int, text: str):
                        headers={**UA, "Content-Type": "application/json"}).json()
 
 
+def workday_search(spec: str, text: str, limit_pages: int = 1) -> list[Job]:
+    """Postings on one Workday career site that match a search text (a job title): used to find one posting on a big board."""
+    parts = spec.split("/")
+    tenant, wd, site = parts[0], parts[1], parts[2]
+    base = f"https://{tenant}.{wd}.myworkdayjobs.com"
+    api = f"{base}/wday/cxs/{tenant}/{site}"
+    out = []
+    for page in range(limit_pages):
+        data = _wd_post(api, page * 20, text)
+        for p in data.get("jobPostings") or []:
+            path = p.get("externalPath", "")
+            if path:
+                out.append(Job(source="workday", company=tenant, job_id=path.rsplit("_", 1)[-1] or path, title=p.get("title", ""),
+                               location=p.get("locationsText", "") or "", url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
+                               description=p.get("title", "")))
+        if len(data.get("jobPostings") or []) < 20:
+            break
+    return out
+
+
 def workday(spec: str) -> list[Job]:
     """spec = 'tenant/wd5/SiteName' (optionally '/Display Name'). Uses Workday's public career-site JSON.
 
@@ -172,8 +236,10 @@ def workday(spec: str) -> list[Job]:
         n = 0
         for p in data.get("jobPostings") or []:
             path = p.get("externalPath", "")
-            if path and path not in seen:
+            req = path.rsplit("_", 1)[-1] if "_" in path else path      # the same requisition listed under two cities
+            if path and path not in seen and req not in seen:
                 seen.add(path)
+                seen.add(req)
                 posts.append(p)
                 n += 1
         return n
@@ -208,10 +274,11 @@ def workday(spec: str) -> list[Job]:
         path = p.get("externalPath", "")
         job = Job(source="workday", company=tenant, job_id=path.rsplit("_", 1)[-1] or path, title=p.get("title", ""),
                   location=p.get("locationsText", "") or "", url=f"{base}/{site}{path}", apply_url=f"{base}/{site}{path}",
-                  description=p.get("title", ""), extra={"company_name": display} if display else {})
-        many = bool(_MANY_LOCS.match(job.location))
-        gate = {**s, "locations_include": [], "_onsite_ok": []} if many else s      # '2 Locations': the real cities are in the detail page
-        if details < DETAIL_CAP and _needs_detail(job, gate):
+                  description=p.get("title", ""), extra={**({"company_name": display} if display else {}),
+                                                         **({"posted": _wd_posted(p.get("postedOn", ""))} if p.get("postedOn") else {})})
+        many = unresolved_location(job.location)
+        gate = {**s, "locations_include": [], "_onsite_ok": []} if many else s      # '2 Locations' (or none given): the real cities are in the detail page
+        if details < DETAIL_CAP and _needs_detail(job, gate, any_title=many):
             try:
                 d = _wd_request("GET", f"{api}{path}", headers=UA).json().get("jobPostingInfo", {})
                 job.description = _strip_html(d.get("jobDescription", "")) or job.description
@@ -319,8 +386,44 @@ def breezy(slug: str) -> list[Job]:
     return out
 
 
+def smartrecruiters(slug: str) -> list[Job]:
+    """api.smartrecruiters.com public postings feed (no key): US postings at entry-level / associate experience, 100 per page.
+    The posting page is jobs.smartrecruiters.com/<company>/<id>-<title>; the application form opens from there."""
+    out, offset = [], 0
+    while offset < 500:
+        r = requests.get(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings",
+                         params={"limit": 100, "offset": offset, "country": "us"}, headers=UA, timeout=TIMEOUT)
+        r.raise_for_status()
+        data = r.json()
+        items = data.get("content") or []
+        for o in items:
+            loc = o.get("location") or {}
+            if (loc.get("country") or "us").lower() != "us" or not o.get("name"):
+                continue
+            lvl = ((o.get("experienceLevel") or {}).get("id") or "").lower()
+            if lvl and lvl not in ("entry_level", "associate"):
+                continue                                    # mid-senior, director, executive: above your level
+            place = loc.get("fullLocation") or _place(loc.get("city"), loc.get("region"), loc.get("country"))
+            if loc.get("remote"):
+                place = f"{place} (Remote)".strip()
+            co = (o.get("company") or {}).get("identifier") or slug
+            pid = str(o.get("id") or "")
+            if not pid:
+                continue
+            url = f"https://jobs.smartrecruiters.com/{co}/{pid}-" + (re.sub(r"[^a-z0-9]+", "-", o["name"].lower()).strip("-") or "job")
+            desc = ". ".join(x for x in (o["name"], (o.get("function") or {}).get("label"), (o.get("industry") or {}).get("label"),
+                                         (o.get("typeOfEmployment") or {}).get("label"),
+                                         "Experience: " + (o.get("experienceLevel") or {}).get("label", "") if o.get("experienceLevel") else "") if x)
+            out.append(Job(source="smartrecruiters", company=co, job_id=pid, title=o["name"], location=place, url=url, apply_url=url,
+                           description=desc, extra={"company_name": (o.get("company") or {}).get("name") or co}))
+        offset += 100
+        if not items or offset >= int(data.get("totalFound") or 0):
+            break
+    return out
+
+
 FETCHERS = {"greenhouse": greenhouse, "lever": lever, "ashby": ashby, "workday": workday, "workable": workable,
-            "bamboohr": bamboohr, "recruitee": recruitee, "breezy": breezy}
+            "bamboohr": bamboohr, "recruitee": recruitee, "breezy": breezy, "smartrecruiters": smartrecruiters}
 
 STATE_FILE = "boards_state.json"
 DEAD_AFTER = 2                 # consecutive 'no such board' answers before a board is left alone
@@ -484,6 +587,29 @@ def foreign_place(text: str) -> bool:
     return bool(FOREIGN.search(text or "")) and not us_place(text)
 
 
+# The posting's own words saying the role is remote in the US ('fully remote within the United States', 'remote-first',
+# 'work from anywhere in the US'), whatever city its location field names. Any hybrid / in-office / not-remote wording, or
+# remote only in another country, means it is not read as remote: a wrongly kept posting costs a match check, a wrongly
+# dropped one costs nothing it did not already cost.
+REMOTE_TEXT = re.compile(
+    r"\b(fully|100%|completely|entirely|permanently) remote\b|\bremote[- ]first\b|\bwork (from )?anywhere\b|"
+    r"\b(this|the) (role|position|job|opportunity) is (a )?(fully |100% )?remote\b|\b(position|role|job) is remote\b|"
+    r"\bremote (position|role|opportunity|job)\b|\bremote (within|in|across|anywhere in) the (u\.?s\.?a?|united states)\b", re.I)
+NOT_REMOTE_TEXT = re.compile(
+    r"\bhybrid\b|\bin[- ]office\b|\bon[- ]?site (role|position|required|\d)|\b(days?|times?) a week in\b|"
+    r"\b(not|isn.t|is not|no) (a )?(fully )?remote\b|\bnon[- ]remote\b|\bremote work is not\b|\bnot eligible for remote\b", re.I)
+
+
+def remote_in_text(text: str) -> bool:
+    """True when a posting's description says it is a remote role open in the US."""
+    t = " ".join((text or "").split())[:9000]
+    m = REMOTE_TEXT.search(t)
+    if not m or NOT_REMOTE_TEXT.search(t):
+        return False
+    near = t[max(0, m.start() - 120): m.end() + 160]
+    return not foreign_place(near)
+
+
 def _remote_ish(loc: str) -> bool:
     low = (loc or "").lower().strip()
     return bool(REMOTE_RX.search(low)) or bool(re.fullmatch(r"(united states( of america)?|usa|u\.s\.a?\.?|us)(\s*\(.*\))?", low))
@@ -529,11 +655,36 @@ def level_title(title: str) -> str:
     return _ALT_SENIOR.sub("", title or "")
 
 
+GOV_NAME_RX = re.compile(
+    r"^(the )?(state|city|county|town|village|borough|commonwealth|territory|port|parish) of\b|"
+    r"\b(city|county|town|village) government\b|"
+    r"\b(department|dept\.?|bureau|agency|commission) of\b|"
+    r"\bu\.?s\.? (army|navy|air force|marine|coast guard|government|federal|department|dept|forest service|postal)|"
+    r"\bfederal (reserve|government|agency|bureau|aviation|emergency)\b|"
+    r"\b(school district|unified school|public schools?|board of education|housing authority|transit authority|transportation district|"
+    r"water (district|authority)|port authority|sheriff|police department|fire (department|protection district)|municipal|metropolitan district|"
+    r"national (laboratory|guard)|veterans affairs|nasa|noaa)\b|"
+    # city and county agencies named by their place ('NYC Parks', 'NYC Health + Hospitals', 'Los Angeles County Fire')
+    r"\b(nyc|new york city|los angeles( county)?|la county|denver|colorado) (parks|health|housing|police|fire|sanitation|"
+    r"department|dept|office|agency|administration)\b|"
+    r"\bparks (and|&) rec(reation)?\b", re.I)
+GOV_URL_RX = re.compile(r"\.gov(?:[/:?#]|$)|\.mil(?:[/:?#]|$)|\.(?:co|ny|ca|tx)\.us/|governmentjobs\.com|usajobs\.gov|schoolspring|edjoin\.org|neogov|"
+                        r"[a-z0-9]gov\.(?:org|com|net|us)\b|//[a-z0-9-]+gov\.wd\d+\.myworkdayjobs\.com", re.I)
+
+
+def government_employer(job: Job) -> bool:
+    """Federal, state, county, city and public-agency employers (by their name or their posting's address). Universities are not dropped."""
+    name = re.sub(r"[-_]+", " ", job.company or "")
+    return bool(GOV_NAME_RX.search(name) or GOV_URL_RX.search(job.apply_url or "") or GOV_URL_RX.search(job.url or ""))
+
+
 def prefilter(job: Job, search: dict) -> str | None:
     """Cheap keyword gate before spending tokens. Returns a rejection reason or None."""
     title = level_title(job.title)
     t = title.lower()
     loc = norm_location(job.location)
+    if search.get("exclude_government", True) and government_employer(job):
+        return "government employer (federal, state, county, city or public agency)"
     inc = [s.lower() for s in search.get("titles_include", [])]
     exc = [s.lower() for s in search.get("titles_exclude", [])]
     locs = [s.lower() for s in search.get("locations_include", [])]
@@ -550,10 +701,12 @@ def prefilter(job: Job, search: dict) -> str | None:
             return "talent-pool posting or student program, not an open role"
         if foreign_place(title):
             return "role is based in another country"
-    if locs and not any(k in loc for k in locs):
-        return f"location '{job.location}' not allowed"
     if search.get("us_remote_only", True) and foreign_place(job.location):
         return "role is tied to another country"
+    if remote_in_text(job.description) and not foreign_place(job.location):
+        return None          # the posting says it is remote in the US: where its location field puts it does not matter
+    if locs and not any(k in loc for k in locs):
+        return f"location '{job.location}' not allowed"
     # On-site / hybrid roles only in the places you said you'd live (facts.relocation_ok_locations, passed in by main);
     # remote and US-wide roles are always fine.
     onsite_ok = [str(x).lower() for x in (search.get("_onsite_ok") or [])]

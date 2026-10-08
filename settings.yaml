@@ -2,21 +2,110 @@
 # Sections merge; a list or a single value here replaces the one in config.yaml.
 
 search:
-  pause_sites: false          # never stop trying a whole site because some of its forms showed a human check
-  skip_blocked_employers: false
+  skip_sources: []            # no job source is skipped
+  skip_sites: []              # no application system is skipped: they are tried in the order of what has actually been
+                              # going through lately (Workday first; sites that keep ending at a human check last)
   discover_every_hours: 20    # search for new jobs about once a day; the other runs spend all their time applying
-  max_level: 1              # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
+  min_score: 10               # keyword score needed to be a candidate at all. Low on purpose (was 35 until 2026-10-06): the
+                              # keyword score turned out to say little about the real match (postings scoring 30-39 passed the
+                              # résumé check as often as those scoring 60-79), so it only removes postings with nothing going
+                              # for them. The résumé check below decides, and the candidates are checked best prospects first.
+  prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
+  min_fit: 60                 # ...and only jobs with a match of 60% or more are applied to (was 70 until 2026-10-03)
+  min_score_without_match: 90 # when the free match check has no allowance left: only jobs whose keyword score is this high go
+                              # ahead without it, the rest wait for a later run (they are not dropped). Kept high because the
+                              # allowance now runs out every day by design, and unchecked jobs should not slip through then.
+  daily_cap_unlimited: 300    # most applications in one day while the bot runs non-stop (was 120): with thousands of candidates
+                              # the limit should be the résumé check, not this number
+  max_per_company: 0          # no limit on applications to one employer: every role that passes your résumé match goes
+  max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
+  max_human_check_tries_per_day: 6      # tries per day on sites where every recent try ended at a human check (CAPTCHA)
+  max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
+  exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
+  titles_include_add:         # added to your private list of accepted titles (not replacing it): entry roles an Industrial &
+    - manufacturing engineer  # Systems Engineering graduate with construction-finance and operations work is hired for
+    - project engineer
+    - field engineer
+    - site engineer
+    - lean engineer
+    - value stream engineer
+    - cost engineer
+    - estimating engineer
+    - scheduling engineer
+    - material handling engineer
+    - warehouse engineer
+    - project accountant
 
 scoring:
+  location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).
+    remote: 12              # 'remote' includes postings whose description says they are remote in the US
+    new york: 12            # (also 'NY' towns: Brooklyn, Rye Brook, Long Island City…)
+    nyc: 12
+    denver: 12
+    colorado: 12            # Denver suburbs (Westminster, Aurora, Lakewood…) read as Colorado
+    los angeles: 6          # considered, but after the three above
+    santa monica: 6
+    culver city: 6
+    el segundo: 6
+    long beach: 6
+    pasadena: 6
+    burbank: 6
+    glendale: 6
+    torrance: 6
   pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
 
 writer:
   # Groq's free models, best first. Each has its own daily allowance, so when one runs out the next takes over.
-  # Gemini has no valid key; a model Groq no longer offers is skipped automatically after one try.
+  # A model Groq no longer offers is skipped automatically after one try.
+  #
+  # Two things use the free allowance: the résumé-match check of every candidate, and the answers on each application.
+  # On 2026-10-07 the answers ran out by early morning (Groq counts tokens, and every answer carries your background),
+  # and every application after that stopped at its first written question. So:
+  #   * gemini-lite ('match_first') does the match checks first: Google counts requests, not tokens, and five postings
+  #     go into one request. At most match_share of its day goes to match checks; with the rest it writes answers, but
+  #     only when the Groq models have nothing left for the day (it is last in line for answers);
+  #   * the Groq models are for your answers: groq (the best) only writes answers, the two smaller ones give at most a
+  #     quarter of their day to match checks, and only when Gemini cannot take them;
+  #   * providers marked 'role: match' do nothing but match checks.
+  # When no model has allowance left for an answer, a job that needs one is not thrown away: it stays queued.
+  # The Gemini entries need a valid GEMINI_API_KEY secret (free at aistudio.google.com); a key Google rejects is reported
+  # in the log and email. On Google's free tier what is sent may be used to improve its products: to keep your answers
+  # (which carry your name and background) off it, give gemini-lite 'role: match' instead of 'match_first: true'.
+  match_providers: [groq-20b, groq-qwen]
+  match_share: 0.6
   providers:
     - {name: groq, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-120b",
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
-    - {name: groq-20b, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-20b",
+    - {name: groq-20b, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-20b", match_share: 0.25,
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
-    - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b",
-       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 480000, extra: {reasoning_format: hidden}}
+    - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b", match_share: 0.25,
+       api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 195000, extra: {reasoning_format: hidden}}
+    # Gemini: new keys (made after mid-2026) only get the 3.x models, so those are named first.
+    - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", match_first: true, match_share: 0.6,
+       model: [gemini-3.5-flash-lite, gemini-3.1-flash-lite-preview, gemini-flash-lite-latest], discover: lite,
+       api_key_env: GEMINI_API_KEY, rpm: 10, rpd: 480, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
+    - {name: gemini-flash, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
+       model: [gemini-3.5-flash, gemini-3-flash-preview, gemini-flash-latest], discover: flash,
+       api_key_env: GEMINI_API_KEY, rpm: 4, rpd: 18, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
+
+aggregators:
+  jobboard:                 # a public daily snapshot of ~1.4 million open postings on 20,000+ company career sites
+    enabled: true
+    levels: [entry, mid]    # the snapshot's own level guess. 'mid' is where it puts most coordinator / analyst / associate
+                            # postings, so reading only 'entry' missed about 95% of what passes your filters. The bot's own
+                            # level rules and the posting's real text still drop anything above early career.
+    sites: [Workday, Greenhouse, Lever, BambooHR, Ashby]
+    max_age_days: 30        # postings first seen longer ago than this are left out
+    max_jobs: 6000          # new candidates taken from one snapshot
+  github_lists:             # public GitHub repos that publish new-grad / entry-level postings as JSON
+    enabled: true           # false switches the source off
+    only_supported_ats: true   # keep only apply links that go straight to a system the bot completes
+    repos:
+      - {repo: SimplifyJobs/New-Grad-Positions, branch: dev, path: .github/scripts/listings.json}
+  builtin:                  # Built In's regional boards: public pages, no login (a blocked page gives no jobs; nothing is done to get around it)
+    enabled: true
+    regions: [colorado, nyc, la]
+    categories: [operations, project-management]
+    pages: 2
+  careerjet:                # free API; idle until the CAREERJET_API_KEY secret exists
+    enabled: true

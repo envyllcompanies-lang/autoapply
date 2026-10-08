@@ -16,9 +16,10 @@ from email.header import decode_header, make_header
 from email.utils import parsedate_to_datetime
 
 LINK_RX = re.compile(r"https?://[^\s\"'<>)\]]+", re.I)
-GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account", re.I)
+GOOD_LINK = re.compile(r"verif|confirm|activate|validate|registration|token|account|reset|password|passwordreset", re.I)
 BAD_LINK = re.compile(r"unsubscribe|privacy|terms|facebook|twitter|linkedin\.com/company|instagram|\.(png|jpg|gif)\b", re.I)
-HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration", re.I)
+HINT = re.compile(r"verif|confirm|activate|validate|welcome|one.?time|passcode|security code|your code|registration|"
+                  r"reset (your )?password|password reset|forgot(ten)? password", re.I)
 CODE_RX = re.compile(r"(?<!\d)(\d{4,8})(?!\d)")
 CONFIRM_SUBJECT = re.compile(r"thank(s| you) for (applying|your (application|interest))|application (received|submitted|confirmation)|"
                              r"(we(?:'ve|\u2019ve| have)? |successfully )received your (application|resume|r\u00e9sum\u00e9)|your application (to|for|with|at)\b|"
@@ -43,17 +44,25 @@ def preflight(log=print) -> bool:
         _DISABLED = "IMAP_USER / IMAP_PASS are not set"
         log("MAIL OFF: IMAP_USER / IMAP_PASS are not set. No confirmation reading, no summary emails, no email-verified sign-ups.")
         return False
-    try:
-        imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
-        imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
-        imap.logout()
-        log(f"mail: logged in to {os.environ['IMAP_USER']} OK")
-        return True
-    except Exception as e:
-        _DISABLED = str(e)[:120]
-        log(f"MAIL OFF: the inbox login for {os.environ['IMAP_USER']} was refused ({_DISABLED}). Use a Google APP PASSWORD "
-            "(myaccount.google.com/apppasswords) as IMAP_PASS, and make sure IMAP is enabled in Gmail settings.")
-        return False
+    last = None
+    for attempt in range(3):                       # a timeout or a dropped connection is tried again, a little later
+        try:
+            imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+            imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
+            imap.logout()
+            log(f"mail: logged in to {os.environ['IMAP_USER']} OK")
+            return True
+        except imaplib.IMAP4.error as e:           # the login itself was refused: retrying will not change that
+            _DISABLED = str(e)[:120]
+            log(f"MAIL OFF: the inbox login for {os.environ['IMAP_USER']} was refused ({_DISABLED}). Use a Google APP PASSWORD "
+                "(myaccount.google.com/apppasswords) as IMAP_PASS, and make sure IMAP is enabled in Gmail settings.")
+            return False
+        except Exception as e:
+            last = e
+            time.sleep(5 * (attempt + 1))
+    # the mail server could not be reached just now: mail stays on, and each later look at the inbox simply tries again
+    log(f"mail: the inbox could not be reached at the start of this run ({str(last)[:80]}); it is tried again when needed")
+    return False
 
 
 def _body(msg) -> str:
@@ -73,6 +82,79 @@ def _plain_lines(body: str) -> list[str]:
     txt = re.sub(r"(?i)<br\s*/?>|</(p|div|tr|td|li|h\d|strong|b|span)>", "\n", txt)
     txt = html.unescape(re.sub(r"<[^>]+>", " ", txt))
     return [ln.strip() for ln in txt.splitlines() if ln.strip()]
+
+
+CODE_WORD = re.compile(r"\b(code|passcode|pass code|otp|one.?time (pass)?(code|password|pin)|pin|verification|security)\b", re.I)
+# a code token: 4-8 digits, or 5-10 letters/digits that mix both (e.g. 'X7K2QF'); 'ABC-123' style is joined
+ALNUM_RX = re.compile(r"(?<![A-Za-z0-9])([A-Z0-9]{2,5}[- ]?[A-Z0-9]{2,5})(?![A-Za-z0-9])")
+NOT_CODE = re.compile(r"^(19|20)\d\d$")          # a year
+JOB_MAIL = re.compile(r"application|apply|applying|career|job|candida|hiring|recruit|talent", re.I)
+# a line that introduces the code ('Copy and paste this code…', 'Your code is:')
+PASTE_LINE = re.compile(r"\b(paste|enter|use|type) (this|the following) (security |verification |one.?time )?code\b"
+                        r"|security code field"
+                        r"|\byour (security |verification |one.?time )?code is\b", re.I)
+
+
+def _token(s: str) -> str | None:
+    sp = re.search(r"(?<![\d-])(\d{3,4})[ -](\d{3,4})(?![\d-])", s)      # '731 204' / '731-204'
+    if sp and not CODE_RX.search(s[:sp.start()]):
+        return sp.group(1) + sp.group(2)
+    for m in CODE_RX.finditer(s):
+        if not NOT_CODE.match(m.group(1)):
+            return m.group(1)
+    for m in ALNUM_RX.finditer(s):
+        t = re.sub(r"[- ]", "", m.group(1))
+        if 5 <= len(t) <= 10 and re.search(r"\d", t) and re.search(r"[A-Z]", t):
+            return t
+    return None
+
+
+def _looks_like_code(s: str) -> bool:
+    """4-12 letters or digits that read as a code, not a word: with a digit, or small letters mixed with a capital after
+    the first ('XkAbQwRt'). A word in capitals ('VERIFY', a button) is not taken: the rules after this one still look."""
+    if not re.fullmatch(r"[A-Za-z0-9]{4,12}", s):
+        return False
+    return bool(re.search(r"\d", s)) or (any(c.isupper() for c in s[1:]) and any(c.islower() for c in s))
+
+
+def find_code(subj: str, body: str) -> str | None:
+    """The one-time code in a verification email, or None. Looks next to the word 'code' (same line or the line after)
+    first, so a zip code, year or order number elsewhere in the email is not picked up."""
+    lines = _plain_lines(body)
+    # 'Copy and paste this code into the security code field…' (Greenhouse): the code follows on the same line after ':' or
+    # on the next line, and may be letters only ('XkAbQwRt'), which the rules below never read (about one code in four).
+    for i, ln in enumerate(lines[:80]):
+        if PASTE_LINE.search(ln):
+            after_colon = ln.rsplit(":", 1)[1] if ":" in ln else ""
+            next_line = lines[i + 1] if i + 1 < len(lines) else ""
+            for cand in (after_colon, next_line):
+                # the first word, when a sentence or a full stop follows it ('XkAbQwRt After you enter…'); '4829-13' is left to the rules below
+                tok = re.match(r"\s*([A-Za-z0-9]{4,12})(?=\s*$|\s+[A-Za-z(]|[.,;!)])", cand)
+                if tok and _looks_like_code(tok.group(1)):
+                    return tok.group(1)
+    if CODE_WORD.search(subj):
+        hit = re.search(r"(?:code|passcode|pin)\s*(?:is)?\s*[:\-]?\s*([A-Z0-9][A-Z0-9 -]{3,11})", subj, re.I)
+        if hit and (t := _token(hit.group(1).upper())):
+            return t
+    for i, ln in enumerate(lines[:80]):
+        if CODE_WORD.search(ln):
+            for cand in (ln[CODE_WORD.search(ln).end():], lines[i + 1] if i + 1 < len(lines) else ""):
+                t = _token(cand.strip())
+                if t:
+                    return t
+    mixed = re.compile(r"(?=[A-Za-z0-9]*\d)(?=[A-Za-z0-9]*[A-Za-z])[A-Za-z0-9]{6,10}")     # a mixed-case code such as 'Xk3A9bQ2'
+    for i, ln in enumerate(lines[:80]):
+        if CODE_WORD.search(ln):
+            hit = re.search(r":\s*(" + mixed.pattern + r")\s*$", ln)
+            nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+            if hit:
+                return hit.group(1)
+            if mixed.fullmatch(nxt):
+                return nxt
+    for ln in lines[:40]:                             # the code alone on its own line, as most templates show it
+        if re.fullmatch(r"\d{4,8}|[A-Z0-9]{5,10}", ln) and _token(ln):
+            return _token(ln)
+    return None
 
 
 def parse_message(raw: bytes) -> dict:
@@ -95,16 +177,17 @@ def parse_message(raw: bytes) -> dict:
             break
     if not link and links and HINT.search(subj):
         link = links[0]
-    code = None
-    if re.search(r"code|passcode|otp|one.?time|pin", subj + " " + body[:1500], re.I):
-        m = CODE_RX.search(re.sub(r"<[^>]+>", " ", body))
-        code = m.group(1) if m else None
+    code = find_code(subj, body)
     return {"subject": subj, "from": msg.get("From", ""), "to": msg.get("To", ""), "ts": ts, "link": link, "code": code,
             "hint": bool(HINT.search(subj)) or bool(link) or bool(code), "body": body[:6000]}
 
 
+_SEEN: dict = {}      # (folder, uidvalidity, uid) -> parsed email: a poll every few seconds downloads only the new ones
+
+
 def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
-    """Yield parsed messages (newest first) that arrived shortly before since_ts or later."""
+    """Yield parsed messages (newest first) that arrived shortly before since_ts or later. Each email is downloaded once a
+    run: waiting for a code polls every few seconds, and used to fetch the same two dozen full emails each time."""
     user, pw = os.environ["IMAP_USER"], os.environ["IMAP_PASS"]
     host = os.environ.get("IMAP_HOST", "imap.gmail.com")
     global _DISABLED
@@ -120,20 +203,25 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
                 typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
                 if typ != "OK":
                     continue
-                _, data = imap.search(None, "ALL")
-                ids = data[0].split()[-n:]
+                validity = (imap.response("UIDVALIDITY")[1] or [None])[0]
+                _, data = imap.uid("search", None, "ALL")
+                uids = data[0].split()[-n:]
             except Exception:
                 continue
-            for i in reversed(ids):
-                try:
-                    _, d = imap.fetch(i, "(RFC822)")
-                    info = parse_message(d[0][1])
-                except Exception:
-                    continue
+            for u in reversed(uids):
+                info = _SEEN.get((folder, validity, u))
+                if info is None:
+                    try:
+                        _, d = imap.uid("fetch", u, "(RFC822)")
+                        info = parse_message(next(part[1] for part in d if isinstance(part, tuple)))
+                    except Exception:
+                        continue
+                    if len(_SEEN) >= 400:
+                        _SEEN.clear()
+                    _SEEN[(folder, validity, u)] = info
                 if info["ts"] < since_ts - 120:
                     continue
-                info["folder"] = folder
-                yield info
+                yield dict(info, folder=folder)
     finally:
         try:
             imap.logout()
@@ -141,24 +229,200 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
             pass
 
 
-def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print) -> dict | None:
-    """Poll the inbox until a fresh verification email arrives. Returns {'link':..., 'code':...} or None."""
+def recent_subjects(since_ts: float, n: int = 150, folders=("INBOX", "[Gmail]/Spam")) -> list[str]:
+    """Subjects of the newest n emails in each folder that arrived after since_ts. Reads headers only."""
+    out = []
+    imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+    try:
+        imap.login(os.environ["IMAP_USER"], os.environ["IMAP_PASS"])
+        for folder in folders:
+            typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
+            if typ != "OK":
+                continue
+            ids = imap.search(None, "ALL")[1][0].split()[-n:]
+            if not ids:
+                continue
+            _, data = imap.fetch(b",".join(ids), "(BODY.PEEK[HEADER.FIELDS (SUBJECT DATE)])")
+            for part in data:
+                if not isinstance(part, tuple):
+                    continue
+                msg = email.message_from_bytes(part[1])
+                try:
+                    if parsedate_to_datetime(msg.get("Date")).timestamp() < since_ts:
+                        continue
+                except Exception:
+                    pass
+                try:
+                    out.append(str(make_header(decode_header(msg.get("Subject", "")))))
+                except Exception:
+                    out.append(msg.get("Subject", "") or "")
+    finally:
+        try:
+            imap.logout()
+        except Exception:
+            pass
+    return out
+
+
+def _mentions(hint: str, info: dict) -> bool:
+    """The email names the site it is expected from (in its sender, subject or link). A short name ('ms', 'wf') has to
+    stand on its own, so it is not found inside ordinary words."""
+    if not hint:
+        return True
+    text = (info["from"] + " " + info["subject"] + " " + (info["link"] or "") + " " + str(info.get("body") or "")[:4000]).lower()
+    if len(hint) >= 4:
+        return hint in text
+    return bool(re.search(r"(?<![a-z0-9])" + re.escape(hint) + r"(?![a-z0-9])", text))
+
+
+def _is_reset(info: dict) -> bool:
+    return bool(re.search(r"reset|forgot", info["subject"], re.I) or re.search(r"reset", info["link"] or "", re.I))
+
+
+def _other_employer(site_host: str, info: dict) -> bool:
+    """A Workday email whose link belongs to a different employer's Workday site than the one being used right now."""
+    site = (site_host or "").split(":")[0].lower()
+    if not site.endswith("myworkdayjobs.com") or not info.get("link"):
+        return False
+    try:
+        from urllib.parse import urlparse
+        lh = (urlparse(info["link"]).hostname or "").lower()
+    except Exception:
+        return False
+    return lh.endswith("myworkdayjobs.com") and lh != site
+
+
+def _link_host(url: str) -> str:
+    try:
+        from urllib.parse import urlparse
+        return (urlparse(url or "").hostname or "").lower()
+    except Exception:
+        return ""
+
+
+def _site_link(info: dict, site: str, kind: str) -> str | None:
+    """The link in this email that leads to the given site: the one that reads like a password reset (kind 'reset') or an
+    account activation (kind 'verify') when there is one, else the first link to that site."""
+    want = re.compile(r"reset|password", re.I) if kind == "reset" else re.compile(r"activat|verif|confirm", re.I)
+    links = ([info["link"]] if info.get("link") else []) + \
+        [u.rstrip(".,;") for u in LINK_RX.findall(str(info.get("body") or "")) if not BAD_LINK.search(u)]
+    on_site = [u for u in links if _link_host(u) == site]
+    return next((u for u in on_site if want.search(u)), on_site[0] if on_site else None)
+
+
+def site_mail(site_host: str, kind: str, max_age_s: float = 86400, limit: int = 3) -> list[dict]:
+    """Account emails this very site sent earlier that are still in the inbox, newest first: its password-reset emails
+    (kind 'reset') or its verify-your-account emails (kind 'verify'). An email is the site's when a link in it leads to
+    the site itself. Such an email is as good as a new one: a career site's email sometimes arrives minutes after the bot
+    stopped waiting for it, and a verification email from an earlier run may never have been opened. Using it beats asking
+    for another (which only fills the inbox). Each returned email carries 'link' (the link to use) and 'ts' (when it came).
+    Only emails whose subject says password / reset / verify / activate are looked at."""
+    site = (site_host or "").split(":")[0].lower()
+    user, pw = os.environ.get("IMAP_USER"), os.environ.get("IMAP_PASS")
+    if not site or not user or not pw or not configured():
+        return []
+    words = ("password", "reset") if kind == "reset" else ("verify", "activate")
+    since = time.strftime("%d-%b-%Y", time.gmtime(time.time() - max_age_s - 86400))      # IMAP's SINCE counts in whole days
+    out: list[dict] = []
+    try:
+        imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+        imap.login(user, pw)
+    except Exception:
+        return []
+    try:
+        for folder in ("INBOX", "[Gmail]/Spam"):
+            try:
+                typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
+                if typ != "OK":
+                    continue
+                validity = (imap.response("UIDVALIDITY")[1] or [None])[0]
+                _, data = imap.uid("search", None, "SINCE", since, "OR", "SUBJECT", f'"{words[0]}"', "SUBJECT", f'"{words[1]}"')
+                uids = (data[0] or b"").split()[-30:]
+            except Exception:
+                continue
+            for u in reversed(uids):
+                info = _SEEN.get((folder, validity, u))
+                if info is None:
+                    try:
+                        _, d = imap.uid("fetch", u, "(RFC822)")
+                        info = parse_message(next(part[1] for part in d if isinstance(part, tuple)))
+                    except Exception:
+                        continue
+                    if len(_SEEN) >= 400:
+                        _SEEN.clear()
+                    _SEEN[(folder, validity, u)] = info
+                if info["ts"] < time.time() - max_age_s or (kind == "reset") != _is_reset(info):
+                    continue
+                link = _site_link(info, site, kind)
+                if link:
+                    out.append({"link": link, "ts": info["ts"], "subject": info["subject"], "folder": folder})
+    finally:
+        try:
+            imap.logout()
+        except Exception:
+            pass
+    return sorted(out, key=lambda m: -m["ts"])[:limit]
+
+
+def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False,
+                          kind: str = "", site_host: str = "") -> dict | None:
+    """Poll the inbox until the email this site just sent arrives: {'link', 'code'} or None.
+    require_code: only messages with a one-time code in them.
+    kind: 'verify' never returns a password-reset email, 'reset' only returns one (both can sit in the inbox together).
+    site_host: the site being used; another employer's Workday email is never taken for this one's.
+    An email that does not name the site at all is only accepted when it has just arrived."""
     deadline = time.time() + timeout
-    hint = (host_hint or "").lower()
+    names = [re.sub(r"[^a-z0-9]", "", x.lower()) for x in (host_hint or "").split("|") if x.strip()]    # company names this application could be called
+    hint = (host_hint or "").split("|")[0].lower()
+    # An email that does not name the site is only this site's if it arrived because of what was just done here: after
+    # since_ts when that is moments ago, else during this wait. (On 2026-10-02 another employer's verification email,
+    # ninety seconds old, was taken for this one's and the bot ended up on the other employer's application.)
+    start = time.time()
+    fresh = since_ts - 5 if since_ts > start - 600 else start - 20
+    why = {}                                  # subject -> why it was passed over (logged if nothing is accepted)
+
+    def passed_over(info, reason):
+        if JOB_MAIL.search(info["subject"]):          # the logs are public: only job-site emails are named in them
+            why.setdefault(info["subject"][:60], reason)
     while time.time() < deadline and not _DISABLED:
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
                     continue
-                if hint and hint not in (info["from"] + info["subject"]).lower() and hint not in (info["link"] or "").lower():
-                    # sender/link do not mention the site: still accept a clear verification message
-                    if not re.search(r"verif|confirm|activate", info["subject"], re.I):
+                if require_code and not info.get("code"):
+                    if CODE_WORD.search(info["subject"]):          # worth reporting only for an email about a code
+                        passed_over(info, "no code read from it")
+                    continue
+                if require_code and names:
+                    said = re.search(r"application (?:to|for|at|with)\s+(.+?)\s*$", info["subject"], re.I)
+                    if said:
+                        other = re.sub(r"[^a-z0-9]", "", said.group(1).lower())
+                        if other and not any(n and (n in other or other in n) for n in names):
+                            passed_over(info, "other company")
+                            continue          # this code was sent for a different company's application: never typed into this one
+                if require_code and info["ts"] < since_ts - 5:
+                    passed_over(info, "arrived before the request")
+                    continue                  # a code mailed before this request is an older application's, never this one's
+                if kind == "reset" and not (_is_reset(info) or re.search(r"password", info["subject"], re.I)):
+                    continue
+                if kind == "verify" and _is_reset(info):
+                    continue
+                if _other_employer(site_host, info):
+                    continue
+                if hint and not _mentions(hint, info):
+                    # sender/link do not mention the site: still accept a clear message of the wanted kind, if it is new
+                    clear = r"reset|password" if kind == "reset" else (r"verif|confirm|activate|security code|code" if require_code else r"verif|confirm|activate")
+                    if info["ts"] < fresh or not re.search(clear, info["subject"], re.I):
+                        if require_code:
+                            passed_over(info, "does not name the site and " + ("arrived before the request" if info["ts"] < fresh else "is not about a code"))
                         continue
                 log(f"      mail: found '{info['subject'][:60]}'")
                 return {"link": info["link"], "code": info["code"]}
         except Exception as e:
             log(f"      mail: {str(e)[:80]}")
         time.sleep(6)
+    if why:
+        log("      mail: passed over: " + "; ".join(f"'{k}' ({v})" for k, v in list(why.items())[:4]))
     return None
 
 
@@ -201,6 +465,32 @@ def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:
             text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
             flat = re.sub(r"[^a-z0-9]", "", text)
             if (flat_key and flat_key in flat) or (words and all(w in text for w in words[:2])):
+                found[key] = m["subject"]
+                break
+    return found
+
+
+FOLLOWUP_SUBJECT = re.compile(r"incomplete application|complete your application|finish your application|additional information|"
+                              r"action (required|needed)|assessment|questionnaire|more information (is )?(needed|required)", re.I)
+
+
+def scan_followups(companies: dict, since_ts: float, n: int = 80) -> dict:
+    """{key: subject} for each company (key -> display name) that has emailed asking for something more since since_ts:
+    'incomplete application', 'please complete the assessment', 'additional information needed'. These are applications
+    the site accepted but the employer does not treat as finished, so you are told about them."""
+    found = {}
+    try:
+        msgs = [m for m in _recent(since_ts, n, ("INBOX",)) if FOLLOWUP_SUBJECT.search(m["subject"])
+                and not re.search(r"verify your|security code|verification code|password|job alert|newsletter", m["subject"], re.I)]
+    except Exception:
+        return found
+    for key, name in companies.items():
+        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
+        if len(flat_key) < 3:
+            continue
+        for m in msgs:
+            flat = re.sub(r"[^a-z0-9]", "", (m["subject"] + " " + m["from"]).lower())
+            if flat_key in flat:
                 found[key] = m["subject"]
                 break
     return found

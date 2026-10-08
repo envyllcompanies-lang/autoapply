@@ -11,7 +11,7 @@ import re
 from datetime import date
 from pathlib import Path
 
-from .sources import norm_location, level_title
+from .sources import norm_location, level_title, remote_in_text
 from .writer import Writer, WriterUnavailable, limits_from_question
 
 STOP = set("""a an and are as at be but by for from has have in into is it its of on or our that the their this to
@@ -62,6 +62,8 @@ _UNSET = object()
 #   mode: None = normal | "choice" = only for option fields (select/radio/checkbox group) | "demo" = voluntary self-ID
 _AI_Q = (r"\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b.{0,60}\b(use[ds]?|using|assist\w*|generat\w*|tools?|help\w*)\b|"
          r"\b(use[ds]?|using|assist\w*|help\w*)\b.{0,60}\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b")
+PLACEHOLDER_OPT = re.compile(r"\W*(select( one| an option|\.\.\.)?|choose( one)?|please select.*|none selected|--+)\W*$", re.I)      # the unanswered state of a list
+
 FIELD_RULES = [
     (r"first.?generation", ("first_generation",), "choice"),
     (_AI_Q, ("ai_use_disclosure",), "choice"),
@@ -103,7 +105,8 @@ FIELD_RULES = [
     (r"hybrid|on-?site|in-?office|in the office|in-?person|our offices?|anchor days?|days? ?(a|per|/) ?week|commut", ("open_to_onsite",), "loc"),
     (r"remote", ("open_to_remote",), "choice"),
     (r"start date|earliest.*start|available to start|notice period|when (can|could) you start|availability|next career move|when are you looking", ("earliest_start_date",), None),
-    (r"salary|compensation|pay expectation|desired pay|expected pay|pay range", ("salary_expectation",), "salary"),
+    (r"salary|compensation|pay expectation|(desired|expected|target) (annual |yearly |base |hourly )?(pay|wage)|pay range|pay requirement|"
+     r"annual pay|rate of pay|wage expectation", ("salary_expectation",), "salary"),
     (r"(related|relative|friend|family).{0,60}(work|employ)|family members?|\brelatives?\b|know (anyone|someone|any)|current(ly)? employees?.{0,40}(know|refer)|have you been referred|were you referred", ("know_employee",), "choice"),
     (r"\bsms\b|text messag|text you|contact (you )?(by|via) text|consent to (receive )?texts?\b|\btexts? from", ("sms_consent",), "choice"),
     (r"referred by|referrer|referral (name|employee|code|email)|employee referral|name of (the )?(employee|person)", ("referral_name",), None),
@@ -128,7 +131,8 @@ FIELD_RULES = [
     (r"driver'?s? licen[cs]e|valid driver", ("has_drivers_license",), None),
     (r"reliable transportation", ("reliable_transportation",), None),
     (r"speak spanish|spanish.{0,40}(fluen|proficien|speak|skills|language)|bilingual|language skills", ("speaks_spanish",), None),
-    (r"languages? (do you )?(speak|spoken|proficien)|fluent in", ("languages",), None),
+    (r"languages? (do you )?(speak|spoken|proficien)|fluent in|(primary|native|first|main|preferred) (spoken |written )?language|"
+     r"spoken languages?", ("languages",), None),
     (r"\bgpa\b|grade point", ("gpa",), None),
     (r"highest (level of )?(\w+ )?(education|degree)|level of (\w+ )?education|education level", ("education_level",), None),
     (r"\b(school|university|college|institution)\b", ("school",), None),
@@ -166,6 +170,10 @@ def _norm(s) -> str:
     return re.sub(r"\W+", " ", str(s)).strip().lower()
 
 
+_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+_MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
 def _terms(text: str) -> set[str]:
     return {w for w in re.findall(r"[a-z][a-z0-9+#.\-]{2,}", text.lower()) if w not in STOP}
 
@@ -197,8 +205,26 @@ NEG_Q_RX = re.compile(r"\b(are|do|does|did|is|will|would|can|could|have|has)\s+(
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
 
 
+# a race/ethnicity box names the applicant's answer: one pattern per answer, so 'American Indian' never ticks 'Black or African American'
+RACE_KEYS = (r"hispanic|latin[oax]", r"american indian|alaska", r"black|african", r"hawaiian|pacific islander", r"\basian\b",
+             r"\bwhite\b|caucasian", r"two or more|multi.?racial")
+NOT_HISPANIC = re.compile(r"\(?\b(?:not|non)[- ](?:hispanic|latin[oax]+)(?: or (?:hispanic|latin[oax]+))?\)?")
+# a group of post-government-service statements ('I am/was a political appointee', 'Served as contracting officer'…)
+GOV_ROLE_RX = re.compile(
+    r"post-?government|(prior|former|previous) government|government (official|employee|employment|position|service|role)s?|"
+    r"for the (u\.?s\.? |federal )?government|on behalf of the government|federal (employee|employment|official|service)|"
+    r"public official|appointee|procuring|contracting officer|source selection|senior employee|disclosure report|dod official|"
+    r"military officer", re.I)
+
+
+LANGUAGE_RX = re.compile(r"(arabic|bengali|cantonese|chinese|czech|danish|dutch|english|farsi|finnish|french|german|greek|hebrew|hindi|"
+                         r"hungarian|indonesian|italian|japanese|korean|malay|mandarin|norwegian|persian|polish|portuguese|punjabi|"
+                         r"romanian|russian|spanish|swahili|swedish|tagalog|thai|turkish|ukrainian|urdu|vietnamese)", re.I)
+
+
 class Brain:
     def __init__(self, cfg: dict, profile: dict, base: Path | None = None, log=print):
+        self.writer_out = False         # a question went unanswered only because the writer had no allowance (see main)
         self.cfg, self.profile, self._log, self._job = cfg, profile, log, None
         base = Path(base or ".")
         f = dict(cfg.get("facts", {}))
@@ -208,6 +234,9 @@ class Brain:
         f.setdefault("last_name", " ".join(parts[1:]))
         if not f.get("location_text") and f.get("city"):
             f["location_text"] = ", ".join(x for x in (f.get("city"), f.get("state")) if x)
+        li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", str(f.get("linkedin") or ""), re.I)
+        if li:           # forms accept the plain profile address only, not one with a page or tracking after the name
+            f["linkedin"] = f"https://www.linkedin.com/in/{li.group(1)}"
         self.facts = f
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))
@@ -255,12 +284,21 @@ class Brain:
             parts.append(f"keywords [{names}] +{d}")
 
         bonus = 0
-        remote_job = "remote" in loc or str(job.extra.get("workplace", "")).lower() == "remote"
-        for pref in sc.get("preferred_locations", []) or []:
-            if pref.lower() in loc or (pref.lower() == "remote" and remote_job):
-                bonus = sc.get("location_bonus", 10)
-                parts.append(f"location '{pref}' +{bonus}")
-                break
+        remote_job = ("remote" in loc or str(job.extra.get("workplace", "")).lower() == "remote"
+                      or remote_in_text(desc))
+        tiers = sc.get("location_tiers") or {}
+        if tiers:                                      # places in order of preference (settings.yaml scoring.location_tiers)
+            hits = [(int(v), k) for k, v in tiers.items()
+                    if (remote_job if k.lower() == "remote" else k.lower() in loc)]
+            if hits:
+                bonus, where = max(hits)
+                parts.append(f"location '{where}' +{bonus}")
+        else:
+            for pref in sc.get("preferred_locations", []) or []:
+                if pref.lower() in loc or (pref.lower() == "remote" and remote_job):
+                    bonus = sc.get("location_bonus", 10)
+                    parts.append(f"location '{pref}' +{bonus}")
+                    break
 
         pen = 0
         for k, v in (sc.get("negative_keywords") or {}).items():
@@ -469,12 +507,20 @@ class Brain:
         answers, missing = {}, []
         ctx = dict(company=self._company_name(job), role=job.title, today=date.today().strftime("%m/%d/%Y"))
         exp_vals = self._experience_answers(fields)          # Workday 'My Experience': your real jobs, never the one applied to
+        exp_vals.update(self._education_years(fields))       # ...and the first and last year of your degree
+        # Workday lists the boxes of one question one by one ('None of the above.'): each box can see what its group is about
+        self._siblings = {}
+        for fld in fields:
+            if fld.get("kind") == "checkbox_single" and fld.get("question"):
+                self._siblings[fld["question"]] = self._siblings.get(fld["question"], "") + " " + str(fld.get("label", "")).lower()
         for fld in fields:
             if fld["id"] in exp_vals:
                 if exp_vals[fld["id"]] is not None:
                     answers[fld["id"]] = exp_vals[fld["id"]]
                 continue
             val = self._answer(fld, cover_letter, ctx)
+            if val is None and fld.get("required"):
+                val = self._plain(fld)
             if val is None and fld.get("required"):
                 val = self._llm_fill(fld)
             if val is None:
@@ -484,6 +530,207 @@ class Brain:
                 answers[fld["id"]] = val
         self._place_resume(fields, answers, missing)
         return {"answers": answers, "unanswerable_required": missing}
+
+    # Things an employer asks every applicant to rule out. None of them is true of you (a recent graduate with no public
+    # office, no ties to the employer and no military programme), so a required Yes/No question about one is answered No.
+    _NOT_ME = re.compile(
+        r"\belected\b|appointed (position|official|office)|public (office|official)|government (official|entity|position|employee|agency)|"
+        r"politically exposed|skillbridge|conflict of interest|"
+        r"interaction with .{1,60} in your (current|previous|prior|most recent) (role|position|job)|"
+        r"contracts? with your (organi[sz]ation|employer|company)|"
+        r"(relatives?|family members?|related to|spouse|domestic partner).{0,80}(work|employ)|"
+        r"(debarred|excluded|sanctioned|suspended).{0,80}(federal|government|program|health ?care)", re.I)
+
+    def _plain(self, f: dict):
+        """Required questions with one plain true answer that the rules above did not reach (seen on real Workday forms).
+        Only for a Yes/No list, a relocation list or a date; never a waiver, a certification or a demographic question."""
+        kind = f["kind"]
+        low = f"{f.get('label', '')} {f.get('question', '')}".strip().lower()
+        opts = [o for o in (f.get("options") or []) if not re.match(r"\s*(select|choose|--)", o, re.I)]
+        if not low or HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
+                or self._NEVER_GUESS.search(low):
+            return None
+        if kind == "wddate" and re.search(r"graduat", low):
+            return self._grad_date()                   # 'anticipated graduation date': the date you did graduate
+        if kind not in ("select", "radio", "combobox") or not opts:
+            return None
+        yes_no = {_norm(o) for o in opts} <= {"yes", "no"} and len(opts) == 2
+        if re.search(r"relocat", low):
+            if self._location_ok(low):                 # the job is in a place you said yes to (or remote)
+                return pick_option(opts, "Yes")
+            return pick_option(opts, "No")
+        if re.search(r"(able|willing) to (meet|work|commute|comply with).{0,60}(location|on-?site|in[- ]office|hybrid|schedule) requirement|"
+                     r"meet the location requirement", low) and yes_no:
+            return pick_option(opts, "Yes") if self._location_ok(low) else None
+        if yes_no and self._NOT_ME.search(low):
+            return pick_option(opts, "No")
+        if re.match(r"\W*(degree|degree type|level of degree)\W*\*?\W*$", low):
+            deg = str(self.facts.get("degree") or "")
+            if re.search(r"b\.?\s?s\.?\b|bachelor of science", deg, re.I):
+                return next((o for o in opts if re.match(r"\W*(b\.?s\.?|bachelor of science|bachelor.?s( degree)?)\W*$", o, re.I)), None) \
+                    or next((o for o in opts if re.search(r"bachelor", o, re.I)), None)
+        return None
+
+    _START_RX = re.compile(r"when (can|could|would) you (start|begin)|(available|earliest|desired|expected|preferred|anticipated)\W+(\w+\W+){0,3}(start|begin)|"
+                           r"\bstart date\b|date (you )?(are |is )?available|available to start", re.I)
+
+    def _confirmed(self, f, text, low, kind, opts, has_opts):
+        """Answers the applicant confirmed in chat (config.yaml `confirmed:`): start date, availability, shifts, licences, languages, phone type,
+        relocation, export-control status, previous employers, restrictive agreements, and skill-level yes/no questions taken from the résumé.
+        Returns _UNSET when the question is none of these, so every other rule still applies."""
+        from datetime import date, timedelta
+        c = self.cfg.get("confirmed") or {}
+        if not c:
+            return _UNSET
+        q = low[:240]
+        real = [o for o in opts if not re.match(r"\W*(select|choose|--)", o, re.I)]
+        yn = bool(real) and {_norm(o) for o in real} <= {"yes", "no"}
+
+        def pick(*pats, avoid=None):
+            for pat in pats:
+                for o in real:
+                    if re.search(pat, o, re.I) and not (avoid and re.search(avoid, o, re.I)):
+                        return o
+            return None
+
+        def out(val):
+            if val is None:
+                return _UNSET
+            return [val] if kind == "checkbox_group" else val
+
+        if kind in ("text", "textarea") and re.search(r"(if you answered no|if no).{0,80}(describe|explain).{0,60}functions that cannot", q):
+            return "N/A"
+        if kind in ("text", "textarea") and re.search(r"if yes.{0,60}(describe|explain|nature|details)|nature of the restriction", q) \
+                and re.search(r"restriction|non-?compet|agreement|obligation|contract", q) and c.get("non_compete") == "none":
+            return "N/A"
+        if not has_opts and self._START_RX.search(q) and kind in ("wddate", "date", "text"):
+            d = date.today() + timedelta(days=int(c.get("start_in_days", 7)))        # a week after the day the application is sent
+            return d.strftime("%m/%d/%Y") if kind in ("wddate", "date") else f"{d.strftime('%B')} {d.day}, {d.year}"
+        if kind in ("text", "textarea") and c.get("llm_proficiency") and re.search(
+                r"(llm|ai[- ]native|generative ai).{0,70}(tools?|apis?|proficien)|proficien.{0,40}(llm|ai tools)", q):
+            return str(c["llm_proficiency"])
+        if kind == "checkbox_single":
+            lab = (f.get("label") or "").lower().strip(" *:✱")        # the box's own label (Workday adds the group's question to `low`)
+            fluent = [str(x).lower() for x in c.get("languages_fluent") or []]
+            if fluent and LANGUAGE_RX.fullmatch(lab) and re.search(r"\blanguages?\b", q):
+                return True if lab in fluent else ""     # one box per language: tick the ones you speak fluently
+            if re.fullmatch(r"full[- ]?time", lab):
+                return True if c.get("job_type") == "full-time" else ""
+            if re.fullmatch(r"part[- ]?time", lab):
+                return "" if c.get("job_type") == "full-time" else True
+            if re.fullmatch(r"available to work overtime", lab):
+                return True if c.get("overtime") else ""
+            if re.fullmatch(r"available to work weekends", lab):
+                return True if c.get("weekends") else ""
+            if re.match(r"looking to relocate to|willing to relocate to", lab):
+                return True if c.get("willing_to_relocate_anywhere") else ""
+            if re.match(r"based in .{2,40}$|based elsewhere", lab):
+                return ""
+            return _UNSET
+        if not (has_opts and real):
+            return _UNSET
+        if re.search(r"\bshifts?\b", q) and not yn and c.get("shift"):
+            return out(pick(r"morning", r"first", r"\bday\b", r"open to (any|either)"))
+        if yn and re.search(r"finra|series (6|7|63|65)|national provider|\bnpi\b|(active|expired|current|hold).{0,20}licen[sc]e|licen[sc]es? (or|and) certif|"
+                            r"professional (licen|certif)", q) and c.get("licenses") == "none":
+            return out(pick(r"^no\b"))
+        if yn and re.search(r"non-?compet|non-?solicit|restrictive covenant|obligat(ed|ions?)\W+(\w+\W+){0,12}(previous|former|prior|current)\W+(\w+\W+){0,3}employer|"
+                            r"agreement with (a |any )?(current|former|previous)", q) and not re.search(r"\bsign\b|willing to|will you", q) \
+                and c.get("non_compete") == "none":
+            return out(pick(r"^no\b"))
+        who = re.search(r"(?:employee|employed|worked|work|contractor|employment)\s+(?:for|at|by|with|of)\s+(?:the\s+)?([A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,3})", text)
+        if who and re.search(r"(ever|previously|formerly|past)|have you (worked|been)", q):
+            name = _norm(who.group(1))
+            mine = [e.get("company", "") for e in (self.profile.get("experience") or [])] + list(c.get("prior_employers") or [])
+            yes = any(name and (name in _norm(m) or _norm(m) in name) for m in mine if m)
+            got = pick(r"previous employee|former employee|^yes\b") if yes else pick(r"^no\b|never|not (a |an )?(previous|former)|have not")
+            return out(got)
+        if re.search(r"itar|export (control|compliance)|u\.?s\.? person", q) and c.get("us_person"):
+            if yn:
+                return out(pick(r"^yes\b"))
+            return out(pick(r"permanent resident|lawful permanent", r"currently a .{0,3}u\.?s\.? person", r"^u\.?s\.? person", avoid=r"\bnot\b|foreign"))
+        if re.search(r"phone (device )?type|device type", q) and c.get("phone_type"):
+            return out(pick(r"mobile|cell"))
+        if re.search(r"time ?zone", q) and c.get("timezone"):
+            tz = str(c["timezone"])
+            return out(pick(r"\b" + re.escape(tz) + r"\b", {"MST": r"mountain"}.get(tz, r"$^")))
+        if re.search(r"languages?\W+(\w+\W+){0,6}(speak|fluent|proficien)|^\W*language\W*$", q) and c.get("languages_fluent"):
+            langs = [str(x) for x in c["languages_fluent"]]
+            if kind == "checkbox_group":
+                got = [o for o in real if any(re.fullmatch(r"\W*" + re.escape(l) + r"\W*", o, re.I) for l in langs)]
+                return got or _UNSET
+            return out(pick(r"^english$"))
+        if yn and re.search(r"gpa", q):
+            m = re.search(r"(\d(?:\.\d+)?)\s*(or higher|or above|\+|or better)", q)
+            try:
+                gpa = float(self._fact(("gpa",)))
+            except (TypeError, ValueError):
+                gpa = None
+            if m and gpa is not None:
+                return out(pick(r"^yes\b") if gpa >= float(m.group(1)) else pick(r"^no\b"))
+        if re.search(r"graduat\w*\W+(\w+\W+){0,4}year|year\W+(\w+\W+){0,4}graduat", q):
+            y = re.search(r"(20\d\d)", str(self.facts.get("graduation_date") or ""))
+            if y:
+                return out(pick(r"^" + y.group(1) + r"$", r"^other"))
+        if re.search(r"first[- ]generation", q) and not yn:
+            v = str(self.facts.get("first_generation") or "").strip().lower()
+            if v in ("yes", "no"):
+                return out(pick(r"^" + v + r"\b"))
+        if re.search(r"years of (relevant|professional|related)\W+(\w+\W+){0,3}experience", q) and not yn:
+            for rx, ans, _ in self.answers:
+                if rx.search("years of relevant experience") and re.fullmatch(r"\d+(?:\.\d+)?", str(ans).strip()):
+                    return out(self._years_option(low, real, float(ans), kind))
+        if yn and re.search(r"(will you|do you|would you)\W+(\w+\W+){0,10}(require|need)\W+(\w+\W+){0,6}(visa |immigration )?sponsorship", q) \
+                and str(self.facts.get("requires_sponsorship_now_or_future", "")).strip().lower().startswith("n"):
+            return out(pick(r"^no\b"))
+        if yn and re.search(r"able to (perform|complete)\W+(\w+\W+){0,6}essential (job )?(functions|duties)", q):
+            return out(pick(r"^yes\b"))
+        if kind == "select" or kind == "combobox":
+            _ST = {"alabama": "AL", "alaska": "AK", "arizona": "AZ", "arkansas": "AR", "california": "CA", "colorado": "CO", "connecticut": "CT", "delaware": "DE",
+                   "florida": "FL", "georgia": "GA", "hawaii": "HI", "idaho": "ID", "illinois": "IL", "indiana": "IN", "iowa": "IA", "kansas": "KS", "kentucky": "KY",
+                   "louisiana": "LA", "maine": "ME", "maryland": "MD", "massachusetts": "MA", "michigan": "MI", "minnesota": "MN", "mississippi": "MS", "missouri": "MO",
+                   "montana": "MT", "nebraska": "NE", "nevada": "NV", "new hampshire": "NH", "new jersey": "NJ", "new mexico": "NM", "new york": "NY",
+                   "north carolina": "NC", "north dakota": "ND", "ohio": "OH", "oklahoma": "OK", "oregon": "OR", "pennsylvania": "PA", "rhode island": "RI",
+                   "south carolina": "SC", "south dakota": "SD", "tennessee": "TN", "texas": "TX", "utah": "UT", "vermont": "VT", "virginia": "VA",
+                   "washington": "WA", "west virginia": "WV", "wisconsin": "WI", "wyoming": "WY"}
+            if re.fullmatch(r"state( of residence| / province)?", (f.get("label") or "").lower().strip(" *:✱")) and self.facts.get("state"):
+                stn = str(self.facts["state"]).strip().lower()
+                ab = _ST.get(stn) or (stn.upper() if len(stn) == 2 else None)
+                if ab:
+                    return out(pick(r"^" + ab + r"$", r"^" + re.escape(stn) + r"$"))
+        if re.search(r"educational background|highest (level|degree)|level of education", q) and not yn:
+            got = pick(r"bachelor")
+            if got:
+                return out(got)
+        if yn and re.search(r"(compensation|salary|pay|rate|wage|range).{0,220}(comfortable|acceptable|agree|okay|accept|aligned?|works? for you)|"
+                            r"(comfortable|accept).{0,80}(compensation|salary|pay|rate|range)", q):
+            nums = []
+            for m in re.finditer(r"\$\s*([\d,]+(?:\.\d+)?)\s*(k\b)?", text, re.I):
+                v = float(m.group(1).replace(",", "")) * (1000 if m.group(2) else 1)
+                nums.append(v * 2080 if (v < 500 and re.search(r"hour|/hr|hourly", low)) else v)
+            floor = float((self.cfg.get("scoring") or {}).get("salary_floor") or 0)
+            if nums and floor:
+                return out(pick(r"^yes\b")) if max(nums) >= floor else _UNSET     # below your floor: left for you, not accepted
+        if yn and re.search(r"\b(advanced|expert|strong)\b.{0,25}(expertise|proficien|skills?|knowledge|experience)", q):
+            lvl = self._skill_level(q)
+            if lvl:
+                return out(pick(r"^yes\b") if lvl >= 3 else pick(r"^no\b"))
+        return _UNSET
+
+    def _grad_date(self) -> str | None:
+        """facts.graduation_date ('May 2025') as MM/DD/YYYY for a date box (the 15th when only the month is known)."""
+        raw = str(self.facts.get("graduation_date_value") or self.facts.get("graduation_date") or "").strip()
+        m = re.match(r"^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$", raw)
+        if m:
+            return f"{int(m.group(1)):02d}/{int(m.group(2)):02d}/{m.group(3)}"
+        months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+        m = re.search(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{4})", raw)
+        if m and m.group(1).lower() in months:
+            return f"{months.index(m.group(1).lower()) + 1:02d}/15/{m.group(2)}"
+        m = re.match(r"^(\d{1,2})[/-](\d{4})$", raw)
+        if m:
+            return f"{int(m.group(1)):02d}/15/{m.group(2)}"
+        return None
 
     _NOT_RESUME_FILE = re.compile(r"cover|transcript|portfolio|writing sample|photo|headshot|picture|certificat|licen[cs]e|passport|"
                                   r"\bid\b|identification|reference|recommendation|additional|other|supporting|work sample", re.I)
@@ -518,7 +765,7 @@ class Brain:
         """Last resort for a REQUIRED field no rule could answer: the writer picks the true option (or writes a few words)
         from your facts, so an ordinary question never ends the application. Never used for human checks, legal waivers,
         AI-policy confirmations, negated authorization questions or demographics."""
-        if not (self.writer and self.writer.ready() and self._job is not None):
+        if not (self.writer and self._job is not None):
             return None
         kind = f["kind"]
         text = f"{f.get('label', '')} {f.get('question', '')}".strip()
@@ -531,6 +778,11 @@ class Brain:
         if re.search(r"relocat|commut|on-?site|in[- ]office|in person|hybrid", low) and not self._location_ok(low):
             return None
         opts = f.get("options") or []
+        askable = (kind in ("select", "radio", "combobox", "checkbox_group") and opts) or (kind in ("text", "number") and len(low) < 300)
+        if not self.writer.ready():
+            if askable:
+                self.writer_out = True          # a question the writer would have answered: main keeps the job for later
+            return None
         company = self._company_name(self._job)
         try:
             if kind in ("select", "radio", "combobox") and opts:
@@ -546,6 +798,7 @@ class Brain:
                 return None
         except WriterUnavailable as e:
             self._log(f"      writer unavailable: {str(e)[:100]}")
+            self.writer_out = True
             return None
         if got:
             self._log(f"      (writer answered {text[:60]!r} -> {str(got)[:50]!r})")
@@ -610,18 +863,41 @@ class Brain:
         has_opts = kind in ("select", "radio", "combobox", "checkbox_group")
         opts = f.get("options") or []
 
+        if kind in ("text", "url", "textarea") and re.search(r"facebook|twitter|\bx\b.{0,25}(url|username|handle|profile)|\(formerly twitter\)|"
+                                                             r"instagram|tiktok|snapchat|youtube|pinterest", low) \
+                and not re.search(r"linkedin|github|portfolio", low):
+            return None          # a Facebook / X / Instagram box never gets your website or LinkedIn address (sites reject it)
         if kind == "file":
             both = low + " " + str(f.get("hint") or "").lower().replace("_", " ").replace("-", " ")
+            if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
+                return "RESUME"          # also a combined 'Resume/Cover Letter' box (Workday names it so): the résumé goes there
             if re.search(r"cover", both):
                 return "COVER_LETTER" if self.cfg.get("cover_letters", False) else None   # optional ones too: a full letter helps
-            if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
-                return "RESUME"
             return None
         if kind == "textarea" and re.search(r"cover letter", low):
             if not self.cfg.get("cover_letters", False):
                 return None          # cover letters are switched off: a form that requires one is skipped
             return letter or self.lazy_letter(self._job, required=bool(f.get("required"))) or None   # optional + no letter: left empty
 
+        if has_opts and opts and re.search(r"\bconvicted\b.{0,40}\b(crime|felony|misdemeanou?r|offen[sc]e)|"
+                                           r"released from custody|\bon (bail|probation|parole)\b|pending (criminal )?charges", low[:240]):
+            fact = str(self._fact(("criminal_conviction",)) or "").strip().lower()
+            if fact in ("no", "none", "false"):          # you confirmed there is no record: answered before any notice text can get in the way
+                got = pick_option(opts, "No")
+                if got:
+                    return [got] if kind == "checkbox_group" else got
+        if has_opts and opts and re.search(r"commut", low[:240]):
+            real_c = [o for o in opts if not re.match(r"\W*(select|choose|--)", o, re.I)]
+            if real_c and {_norm(o) for o in real_c} <= {"yes", "no"}:
+                got = pick_option(real_c, "Yes")
+            else:                          # you said every commute question is answered Yes
+                got = next((o for pat in (r"within .{0,50}commut", r"live within|commut", r"^\W*yes\b", r"willing")
+                            for o in real_c if re.search(pat, o, re.I) and not re.match(r"\W*no\b", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got
+        ua = self._confirmed(f, text, low, kind, opts, has_opts)
+        if ua is not _UNSET:
+            return ua
         # 1) user's own canned answers win
         for rx, ans, only_opts in self.answers:
             if rx.search(low) and (has_opts or not only_opts):
@@ -648,14 +924,14 @@ class Brain:
                 return v or None
             return None
         if kind == "checkbox_single" and re.search(r"\(united states( of america)?\)\s*\*?\s*$", lab) and \
-                re.search(r"american indian|asian|black|hispanic|latino|pacific islander|white|two or more|not specified|decline", lab):
-            low = lab
+                re.search(r"american indian|alaska|asian|black|african|hispanic|latin|pacific islander|hawaiian|white|two or more|"
+                          r"not specified|decline|prefer not|self.?identify|wish to", lab):
+            low = NOT_HISPANIC.sub(" ", lab)           # 'Asian (Not Hispanic or Latino)' is not a Hispanic choice
             want = str(self.facts.get("race_ethnicity") or "")      # Workday draws race/ethnicity as one box per choice
-            if want and re.search(r"hispanic|latino", want, re.I):
-                return True if re.search(r"hispanic|latino", low) else ""
-            if want and _norm(want).split()[0] in low:
-                return True
-            return True if (not want and re.search(r"not specified|decline", low)) else ""
+            if re.search(r"not specified|decline|prefer not|(do not|don.t) wish|not to (self.?identify|answer|disclose)", low):
+                return "" if want else True
+            key = next((rx for rx in RACE_KEYS if re.search(rx, want, re.I)), None) or (re.escape(_norm(want).split()[0]) if _norm(want) else None)
+            return True if key and re.search(key, low) else ""
         if kind == "checkbox_single" and re.match(r"\W*(yes, i have a disability|no, i (do not|don.t) have a disability|"
                                                   r"i (do not|don.t) (want|wish) to (answer|self.identify))", lab):
             d = str(self.facts.get("disability_status") or "").lower()      # Workday's disability form: one box per choice
@@ -668,7 +944,7 @@ class Brain:
             if re.search(r"\bsms\b|text messag|texts? (you|me)|via text", low) and not AI_WORDS.search(low) \
                     and re.match(r"y", str(self.facts.get("sms_consent", "")), re.I):
                 return True          # you allowed SMS contact
-            stmt = self._statement_box(low)
+            stmt = self._statement_box(low, getattr(self, "_siblings", {}).get(f.get("question") or "", ""))
             if stmt is not _UNSET:
                 return stmt
             if OPTIONAL_CHECK.search(low) or AI_WORDS.search(low):
@@ -678,7 +954,6 @@ class Brain:
             return True if CONSENT.search(low) else None
         if kind == "number" and re.search(r"salary|compensation|pay", low):
             return self.facts.get("salary_number") or None
-
         if kind == "checkbox_group" and re.search(r"language", low):
             got = [o for o in opts if re.search(r"\b(english|spanish|espa[nñ]ol)\b", o, re.I)]
             if got:
@@ -690,11 +965,16 @@ class Brain:
         if kind in ("text", "textarea") and len(low) < 40 and (re.search(r"(address|street)( line)? ?2\b|\bline 2\b", low) or
                                                                re.match(r"\W*(apt\.?|apartment|suite|unit)\b(?!.*(street|address))", low)):
             return ""                                 # no second address line
+        if kind == "wdprompt" and re.match(r"\W*(type to add |add (your )?)?skills?\W*$", str(f.get("label", "")).lower()):
+            sk = [re.sub(r"\s*\(.*?\)", "", x).strip() for g in self.profile.get("skills") or [] for x in g["items"]]
+            return [x for x in sk if x][:6] or None     # skills from your résumé, tried in turn until the site's list has one
         if kind in ("text", "tel", "combobox", "wdprompt", "select") and re.search(r"country (phone )?code|phone (country )?code|dial(l?ing)? code", low) and len(low) < 40:
             if has_opts and opts:
                 got = next((o for o in opts if re.search(r"united states|\busa?\b", o, re.I) and "+1" in o), None)
                 if got:
                     return got
+            if kind == "wdprompt" and not f.get("selected"):
+                return "United States of America (+1)"  # Workday left it empty: search for it and pick it
             return ""                                 # already set to United States (+1) by the country choice: leave it
         if kind == "combobox" and re.match(r"\W*(overall|speaking|writing|reading|listening|comprehension|verbal|written)\W*\*?\W*$", lab) \
                 and not any(re.search(r"fluent|native|advanced|expert|proficient", o, re.I) for o in (opts or [])):
@@ -722,6 +1002,8 @@ class Brain:
                     continue
                 if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
+                if keys[0] == "gpa" and not f.get("required"):
+                    return None      # a grade average is only given when the form insists on one
                 val = self._fact(keys)
                 if mode == "travel" and has_opts:
                     return self._travel_option(opts, kind)
@@ -773,13 +1055,18 @@ class Brain:
                 return [got] if kind == "checkbox_group" else got
 
         # 2c) last resorts so an ordinary question never ends the application
-        yn = has_opts and {_norm(o) for o in opts} <= {"yes", "no", "yes i do", "no i do not"} and len(opts) == 2
+        real = [o for o in opts if not PLACEHOLDER_OPT.search(str(o))]        # (Workday lists 'Select One' among the choices)
+        yn = has_opts and {_norm(o) for o in real} <= {"yes", "no", "yes i do", "no i do not"} and len(real) == 2
         if yn and not (LEGAL_RX.search(low) or AI_WORDS.search(low) or QUALIFY_CERT_RX.search(low) or HUMAN_CHECK_RX.search(low)):
             if re.search(r"(experience|proficien|familiar|knowledge|skilled|worked|used|trained|certified|certification|licen[sc]e[ds]?)\b", low) \
                     and not re.search(r"driver|drivers", low):
-                return pick_option(opts, "No")       # a tool / skill / credential that is not in the résumé: the truthful answer is No
-            if re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you|are you)\b", low):
-                return pick_option(opts, "Yes")      # ordinary willingness / ability questions
+                if len(opts) == 2:
+                    return pick_option(opts, "No")   # a tool / skill / credential that is not in the résumé: the truthful answer is No
+                # (a list with more to it than Yes / No: left to the writer, which reads the question against your facts)
+            elif re.search(r"\b(willing|able|comfortable|available|open|okay|ok|prepared|can you|will you)\b", low):
+                return pick_option(real, "Yes")      # ordinary willingness / ability questions ('are you' alone is not one:
+                                                     # 'Are you married / a government official / on an F-1 visa?' must
+                                                     # get its truthful answer from your facts, never a guessed Yes)
         if has_opts and kind in ("select", "radio", "combobox") and f.get("required"):
             got = next((o for o in opts if re.search(r"decline|prefer not|choose not|do not wish|don'?t wish|not (to )?(say|answer|disclose|specify)|n/?a\b|not applicable", o, re.I)), None)
             if got:
@@ -806,6 +1093,8 @@ class Brain:
         seen: dict = {}
         out = {}
         for f, l in labs:
+            if f.get("yearOnly") or re.search(r"YearAttended", str(f.get("key") or ""), re.I):
+                continue                                   # a school's From / To years (see _education_years), not a job's dates
             key = {"job title": "title", "title": "title", "company": "company", "company name": "company", "employer": "company",
                    "location": "location", "from": "from", "start date": "from", "to": "to", "end date": "to",
                    "role description": "desc", "description": "desc", "i currently work here": "current"}.get(l)
@@ -836,6 +1125,55 @@ class Brain:
                 out[f["id"]] = True if now else ""
         return out
 
+    def _education_years(self, fields) -> dict:
+        """Workday's Education block asks 'From' and 'To (Actual or Expected)' as bare years. They are the first and last
+        year of your degree in profile.yaml (Education 1 = your first entry, and so on). Returns {field id: year or None};
+        a year the profile does not give is left for you, never made up."""
+        out: dict = {}
+        seen: dict = {}
+        edus = list(self.profile.get("education") or [])
+        has_school = any(re.match(r"(school|degree|discipline|university|college|field of study)\b", _norm(x.get("label", ""))) for x in fields)
+        for f in fields:
+            key = str(f.get("key") or "")
+            which = "first" if re.search(r"firstYearAttended", key, re.I) else "last" if re.search(r"lastYearAttended", key, re.I) else None
+            if which is None and f.get("yearOnly") and re.search(r"education|school|degree", str(f.get("sel") or "") + " " + key, re.I):
+                lab = _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))
+                which = "first" if lab in ("from", "start year", "first year attended") else \
+                    "last" if (lab == "to" or lab.startswith("to ") or "last year" in lab or "end year" in lab) else None
+            part = "year"
+            if which is None:
+                # other sites' Education block (Greenhouse): 'Start date month', 'Start date year', 'End date month',
+                # 'End date year'. They are your degree's dates. (Read as a job's start date, 'Start date year' was
+                # answered 'Two weeks after an offer', and the writer made up an end year.)
+                m = re.fullmatch(r"(start|end) (date )?(month|year)", _norm(re.sub(r"[*\u2731]", "", f.get("label", ""))))
+                if m and not has_school:
+                    out[f["id"]] = None                    # such a box with no school next to it: not guessed (it is not 'when can you start')
+                    continue
+                if m:
+                    which, part = ("first" if m.group(1) == "start" else "last"), m.group(3)
+            if which is None:
+                continue
+            n = seen.get((which, part), 0)
+            seen[(which, part)] = n + 1
+            when = str((edus[n].get("date") or edus[n].get("dates") or "") if n < len(edus) else "")
+            years = re.findall(r"(?:19|20)\d{2}", when)
+            if part == "month":
+                months = [x.lower()[:3] for x in re.findall(r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\b", when, re.I)]
+                mon = (months[0] if which == "first" else months[-1]) if len(months) > 1 or (months and which == "last") else None
+                val = None
+                if mon:
+                    i_m = _MONTHS.index(mon)
+                    opts = [str(o) for o in (f.get("options") or [])]
+                    val = next((o for o in opts if o.strip().lower()[:3] == mon), None) or \
+                        next((o for o in opts if re.fullmatch(r"0?%d" % (i_m + 1), o.strip())), None) or \
+                        (None if opts else _MONTH_NAMES[i_m])
+                out[f["id"]] = val
+            elif which == "first":
+                out[f["id"]] = years[0] if len(years) > 1 else None     # one year alone is the graduation year, not the start
+            else:
+                out[f["id"]] = years[-1] if years else None
+        return out
+
     def _meets_minimums(self) -> bool:
         """True when the posting being applied to asks for no more than you have: entry/early level (at most 2 required years;
         you have 3+ years of work), a bachelor's at most, no professional license and no security clearance."""
@@ -864,6 +1202,11 @@ class Brain:
             got = pick_option(opts, "No")
             if got:
                 return got                             # you hold no professional license and have never been sanctioned
+        if has_opts and re.search(r"(do|does) you (have|maintain|use) (a |an )?(personal |public |active )?linkedin|"
+                                  r"linkedin (profile|account)\W*$", low) and self.facts.get("linkedin"):
+            got = pick_option(opts, "Yes")
+            if got:
+                return got                             # you have a LinkedIn profile
         if (has_opts or kind in ("text", "textarea")) and re.search(
                 r"are you (currently )?(subject to|bound by|a party to|under)\b.{0,80}(agreement|restriction|non-?compete|non-?solicit|covenant|contract)|"
                 r"(do|does) (you|your).{0,30}(have|hold).{0,30}(non-?compete|non-?solicit|contractual restriction)", low):
@@ -943,10 +1286,17 @@ class Brain:
             return self._reside(low, opts, kind)
         if kind == "checkbox_group" and opts and re.search(r"availab|which (days|shifts)|days? (can|are|do) you|shifts? (can|are|do) you|when (can|are) you", low):
             return list(opts)                # open availability: every day / shift offered
-        if has_opts and kind in ("select", "radio", "combobox") and re.search(
+        pay_words = re.search(r"pay rate|rate type|rate of pay|pay (type|basis|frequency)|(hourly|salary|compensation|wage)", low[:160])
+        if has_opts and re.search(r"pay (rate )?type|rate type|pay basis|(salary|compensation|pay) (type|basis)", low[:120]) \
+                and not re.search(r"current|previous|history", low[:120]):
+            # 'Desired Pay Rate Type: Hourly / Salary': your pay expectation is a yearly salary
+            got = next((o for o in opts if not PLACEHOLDER_OPT.match(o) and re.search(r"salar|annual|year", o, re.I)), None)
+            if got:
+                return [got] if kind == "checkbox_group" else got
+        if has_opts and not pay_words and kind in ("select", "radio", "combobox") and re.search(
                 r"\brate\b|rating|proficien(cy|t) (level|in|with)|(level|degree) of (proficiency|expertise|experience|knowledge|skill|familiarity)|how (proficient|skilled|experienced|comfortable|familiar)|skill level|experience level|familiarity (with|level)|self.?assess|expertise", low) \
                 and not re.search(r"years?|language|spanish|english|fluen|verbal|written|speaking|reading|writing", low):
-            got = self._rate(low, opts)
+            got = self._rate(low, [o for o in opts if not PLACEHOLDER_OPT.match(o)])      # ('pay rate' is not a rating; 'Select One' is not a level)
             if got:
                 return got
         if has_opts and re.search(r"age (range|group|bracket)|how old|your age\b", low):
@@ -1031,8 +1381,9 @@ class Brain:
             return opts[round({0: 0.0, 1: 0.25, 2: 0.5, 3: 0.75}[lvl] * (len(opts) - 1))]
         return None
 
-    def _statement_box(self, low):
-        """A tick-box that states something about the applicant. True only when the statement is true for them."""
+    def _statement_box(self, low, siblings=""):
+        """A tick-box that states something about the applicant. True only when the statement is true for them.
+        siblings: the labels of the other boxes of the same question, when the form lists them one by one."""
         if re.search(r"authori[sz]ed to work|eligible to work|legally (authorized|permitted|eligible)|right to work|work authori", low):
             if re.search(r"\bnot (authori|eligible|permitted)|unauthori", low):
                 return None
@@ -1042,6 +1393,12 @@ class Brain:
             return True if re.match(r"y", str(self.facts.get("authorized_to_work_in_us", "")), re.I) else None
         if re.search(r"(do|will|does)\W+not\W+(now\W+or\W+in\W+the\W+future\W+)?require\W+(\w+\W+)?sponsor|without (visa )?sponsorship", low):
             return True if re.match(r"n", str(self.facts.get("requires_sponsorship_now_or_future", "")), re.I) else None
+        if re.search(r"i am/was an? .{0,40}(appointee|senior employee|disclosure report filer|dod official|military officer|government official|"
+                     r"federal employee|elected)|personally (and substantially )?(made a decision|participated|served) .{0,60}(government|contracting officer|"
+                     r"source selection|program manager)|served as .{0,60}(contracting officer|source selection|program manager)", low):
+            return ""                # post-government-service disclosures: you confirmed none of them is true, so the box stays unticked
+        if re.match(r"\W*none of the (above|following)\b", low) and GOV_ROLE_RX.search(low + " " + siblings):
+            return True              # ...so in such a group 'None of the above' is the true box, and the group needs one ticked
         if re.search(r"\b(at least|over|older than)\W+18\b|18 years", low) and re.match(r"y", str(self.facts.get("over_18", "")), re.I):
             return True
         return _UNSET
@@ -1160,8 +1517,10 @@ class Brain:
         return None
 
     def _write(self, f, low, kind):
-        open_prompt = kind == "textarea" or (kind == "text" and len(f.get("label", "")) > 60 and PROMPT_RX.search(low))
-        if not open_prompt:
+        lab = f.get("label", "")
+        open_prompt = kind == "textarea" or (kind == "text" and (
+            (len(lab) >= 25 and PROMPT_RX.search(low)) or (len(lab) >= 40 and "?" in lab and len(lab.split()) >= 7)))
+        if not open_prompt or self._NEVER_GUESS.search(low):
             return None
         if not f.get("required") and not (self.cfg.get("writer", {}) or {}).get("answer_optional", False):
             return None
@@ -1173,6 +1532,9 @@ class Brain:
                                          limits_from_question(question, f.get("maxlength")), self._log)
             except WriterUnavailable as e:
                 self._log(f"      writer unavailable: {str(e)[:100]}")
+                self.writer_out = True
+        elif self.writer and f.get("required"):
+            self.writer_out = True              # an essay question and no allowance left for it today
         if not got and f.get("required"):
             got = self._fallback_text(f)
         return got

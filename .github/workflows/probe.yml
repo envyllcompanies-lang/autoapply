@@ -58,6 +58,7 @@ jobs:
         timeout-minutes: 50
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
           IMAP_USER: ${{ secrets.IMAP_USER }}
           IMAP_PASS: ${{ secrets.IMAP_PASS }}

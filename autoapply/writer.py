@@ -88,6 +88,8 @@ def _save_usage(u: dict):
 
 
 DEADLINE = [0.0]     # set per application by the form filler: the writer never waits past it
+BAD_KEYS: dict = {}  # name of a secret -> what the provider answered about the key in it (told to you in the summary email)
+KEY_RX = re.compile(r"api.?key|unauthori[sz]ed|authenticat|invalid.{0,20}(key|token|credential)", re.I)
 
 
 class _Limiter:
@@ -105,11 +107,35 @@ class _Limiter:
     def tokens_today(self) -> int:
         return _usage().get(self.name + ":tok", 0) if self.name else getattr(self, "_tok", 0)
 
-    def add_tokens(self, n: int):
+    def add_tokens(self, n: int, cached: int = 0):
+        """Count n tokens against today's allowance. cached: tokens of the same reply that the provider served from its
+        cache (kept only for the log: they are not counted against the limits)."""
         if self.name:
-            u = _usage(); k = self.name + ":tok"; u[k] = u.get(k, 0) + int(n or 0); _save_usage(u)
+            u = _usage(); k = self.name + ":tok"; u[k] = u.get(k, 0) + int(n or 0)
+            if cached:
+                u[self.name + ":cached"] = u.get(self.name + ":cached", 0) + int(cached)
+            _save_usage(u)
         else:
             self._tok = getattr(self, "_tok", 0) + int(n or 0)
+
+    def add_match(self, tokens: int):
+        """Count one résumé-match request (and its tokens) separately: match_share limits these, not the answers."""
+        if self.name:
+            u = _usage(); u[self.name + ":mreq"] = u.get(self.name + ":mreq", 0) + 1
+            u[self.name + ":mtok"] = u.get(self.name + ":mtok", 0) + int(tokens or 0); _save_usage(u)
+        else:
+            self._mreq = getattr(self, "_mreq", 0) + 1
+            self._mtok = getattr(self, "_mtok", 0) + int(tokens or 0)
+
+    def match_today(self) -> tuple[int, int]:
+        """(requests, tokens) spent on résumé-match checks today."""
+        if self.name:
+            u = _usage()
+            return u.get(self.name + ":mreq", 0), u.get(self.name + ":mtok", 0)
+        return getattr(self, "_mreq", 0), getattr(self, "_mtok", 0)
+
+    def cached_today(self) -> int:
+        return _usage().get(self.name + ":cached", 0) if self.name else 0
 
     def cooling(self) -> float:
         """Seconds until this provider may be used again after a rate-limit answer (0 = usable now)."""
@@ -237,6 +263,17 @@ def resume_digest(p: dict) -> str:
     return "\n".join(L)
 
 
+def billed_tokens(usage: dict, fallback: int) -> int:
+    """Tokens of one reply that count against the free allowance. A repeated prompt prefix that the provider served from
+    its cache is reported as 'cached_tokens' and is not counted against the limits, so it is not counted here either."""
+    total = usage.get("total_tokens") or fallback
+    try:
+        cached = int(((usage.get("prompt_tokens_details") or {}).get("cached_tokens")) or 0)
+    except (TypeError, ValueError):
+        cached = 0
+    return max(0, int(total) - max(0, cached))
+
+
 class Writer:
     def __init__(self, cfg: dict, profile: dict, base: Path):
         w = cfg.get("writer", {}) or {}
@@ -252,6 +289,15 @@ class Writer:
                 self.skipped.append((p["name"], "runs only on your own computer"))
             else:
                 self.providers.append(p)
+        # which providers do the résumé-match check: the ones marked 'role: match' (they do nothing else) and the smaller
+        # models named in writer.match_providers. At most match_share of a shared model's daily allowance goes to match
+        # checks, so the application answers always have allowance left.
+        self.match_names = tuple(w.get("match_providers") or ("groq-qwen", "groq-20b"))
+        self.match_share = float(w.get("match_share", 0.6))
+        if not any(p.get("role") == "match" or p.get("match_first") or p["name"] in self.match_names for p in self.providers):
+            # a configuration that sets no model aside for match checks: any model may do them, as before
+            self.match_names = tuple(p["name"] for p in self.providers)
+            self.match_share = 1.0
         self._cands = {}
         self.limiters = {p["name"]: _Limiter(p.get("rpm"), p.get("tpm"), p.get("rpd"), p["name"], p.get("tpd")) for p in self.providers}
         self.dead: set[str] = set()
@@ -294,7 +340,7 @@ class Writer:
             key = os.environ.get(p["api_key_env"])
             if not key:
                 raise WriterUnavailable(f"{p['name']}: ${p['api_key_env']} not set")
-        headers = {"Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json", **(p.get("headers") or {})}
         if key:
             headers["Authorization"] = f"Bearer {key}"
         est = sum(len(m["content"]) for m in messages) // 4 + max_tokens
@@ -337,7 +383,11 @@ class Writer:
             attempt += 1
             if r.status_code == 200:
                 data = r.json()
-                lim.add_tokens((data.get("usage") or {}).get("total_tokens") or est)
+                usage = data.get("usage") or {}
+                billed = billed_tokens(usage, est)
+                lim.add_tokens(billed, max(0, int(usage.get("total_tokens") or billed) - billed))
+                if getattr(self, "_match_call", False):
+                    lim.add_match(billed)
                 choice = data["choices"][0]
                 text = (choice["message"].get("content") or "").strip()
                 if choice.get("finish_reason") == "length" and max_tokens < 3000:
@@ -365,16 +415,47 @@ class Writer:
         ver = lambda i: [float(x) for x in re.findall(r"\d+(?:\.\d+)?", i)] or [0]
         return sorted(ids, key=lambda i: ("preview" in i, [-v for v in ver(i)]))[:4]
 
-    def _complete(self, messages: list[dict], max_tokens: int = 900, log=print, temperature: float | None = None) -> str:
-        if DEADLINE[0] and time.time() > DEADLINE[0] - 20:
+    def _usable(self, p: dict, match: bool = False) -> bool:
+        """May this provider take a call of this kind right now? A provider marked 'role: match' only ever does match
+        checks. A match check only goes to those, to the ones marked 'match_first' and to the models in
+        writer.match_providers, and takes at most match_share of a shared model's daily allowance (its own 'match_share'
+        if it has one, else writer.match_share); the rest is for the application answers."""
+        if p["name"] in self.dead:
+            return False
+        dedicated = p.get("role") == "match"
+        if not match:
+            if dedicated:
+                return False
+        elif not dedicated and not p.get("match_first") and p["name"] not in self.match_names:
+            return False
+        lim = self.limiters[p["name"]]
+        if lim.exhausted():
+            return False
+        share = float(p.get("match_share", self.match_share))
+        if match and not dedicated and share < 1:
+            # only what match checks themselves have used counts against their share (counting the answers too stopped
+            # all match checks by mid-afternoon on 2026-10-08 while a third of Gemini's day was left)
+            mreq, mtok = lim.match_today()
+            if (lim.tpd and mtok >= share * lim.tpd) or (lim.rpd and mreq >= share * lim.rpd):
+                return False
+        return True
+
+    def _complete(self, messages: list[dict], max_tokens: int = 900, log=print, temperature: float | None = None,
+                  prefer: tuple = (), match: bool = False) -> str:
+        """prefer: provider names to try first. match=True: this is a résumé-match check (see _usable): it never spends
+        the best model's allowance, which is kept for the application answers themselves."""
+        if DEADLINE[0] and time.time() > DEADLINE[0] - (5 if match else 20):
             raise WriterUnavailable("no time left for this application")
         est = sum(len(m["content"]) for m in messages) // 4 + max_tokens
         errors = []
         for round_ in range(2):
-            live = [p for p in self.providers if p["name"] not in self.dead and not self.limiters[p["name"]].exhausted()]
+            live = [p for p in self.providers if self._usable(p, match)]
             if not live:
                 # everything is briefly cooling down after a per-minute limit: wait once rather than give up
-                short = [self.limiters[p["name"]].cooling() for p in self.providers if p["name"] not in self.dead]
+                short = [self.limiters[p["name"]].cooling() for p in self.providers
+                         if p["name"] not in self.dead
+                         and (not match or p.get("role") == "match" or p.get("match_first") or p["name"] in self.match_names)
+                         and (match or p.get("role") != "match")]
                 short = [w for w in short if 0 < w <= 75]
                 if round_ == 0 and short:
                     if DEADLINE[0] and time.time() + min(short) > DEADLINE[0] - 20:
@@ -382,19 +463,19 @@ class Writer:
                     time.sleep(min(short) + 0.5)
                     continue
                 break
-            # prefer providers with quota available right now, otherwise the one that frees up soonest
-            order = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, i))
-            for i in order:
-                p = live[i]
+            for p in self._order(live, est, match, prefer):
                 try:
+                    self._match_call = match
                     out = self._chat(p, messages, max_tokens, temperature)
                     self.calls += 1
                     return re.sub(r"<think>.*?</think>", "", out, flags=re.S).strip()
                 except (WriterUnavailable, requests.RequestException) as e:
-                    errors.append(str(e))
-                    msg = str(e)
+                    msg = " ".join(str(e).split())
+                    errors.append(msg)
                     if "not set" in msg or re.search(r"HTTP 40[0-4]\b", msg) or isinstance(e, requests.ConnectionError):
                         self.dead.add(p["name"])          # bad key / model gone / not running: not again this run
+                        if p.get("api_key_env") and (re.search(r"HTTP 401\b", msg) or re.search(r"HTTP 40[03]\b", msg) and KEY_RX.search(msg)):
+                            BAD_KEYS[p["api_key_env"]] = re.sub(r'[\[\]{}"]+', " ", msg.split(":", 1)[-1]).strip()[:120]
                     elif "empty reply" in msg:
                         self.strikes[p["name"]] = self.strikes.get(p["name"], 0) + 1
                         if self.strikes[p["name"]] >= 3:
@@ -403,13 +484,61 @@ class Writer:
             break
         raise WriterUnavailable("; ".join(errors) or "no provider with a working key")
 
-    def ready(self) -> bool:
-        return any(p["name"] not in self.dead and not self.limiters[p["name"]].exhausted() for p in self.providers)
+    def _order(self, live: list, est: int, match: bool = False, prefer: tuple = ()) -> list:
+        """The order in which the usable providers are tried: those with allowance right now before one that has to wait
+        out its per-minute limit. A match check goes first to the match-only providers and those marked 'match_first'
+        (their allowance has no better use; the other shared models' has). An answer goes to the preferred models first
+        and to a 'match_first' model last: it writes answers only when the others have nothing left for the day."""
+        def tier(q):
+            if match:
+                return 0 if (q.get("role") == "match" or q.get("match_first")) else 1
+            return 2 if q.get("match_first") else 0 if q["name"] in prefer else 1
+        idx = sorted(range(len(live)), key=lambda i: (self.limiters[live[i]["name"]].delay(est) > 5, tier(live[i]), i))
+        return [live[i] for i in idx]
+
+    def ready(self, match: bool = False) -> bool:
+        """Is there a provider with allowance left (for an application answer, or with match=True for a match check)?"""
+        return any(self._usable(p, match) for p in self.providers)
+
+    def match_batch(self, default: int) -> int:
+        """How many postings the next match check should hold: the 'batch' of the model that will take it, else the
+        default. A model whose free limit is counted in requests a day (Gemini's) does more per request; one counted in
+        tokens (Groq's) gains nothing from a longer request."""
+        live = [p for p in self.providers if self._usable(p, True)]
+        if not live:
+            return default
+        try:
+            return max(1, int(self._order(live, 4000, True)[0].get("batch") or default))
+        except (TypeError, ValueError):
+            return default
+
+    def allowance_line(self) -> str:
+        """Today's use of each model's free allowance, for the run log."""
+        out = []
+        for p in self.providers:
+            lim = self.limiters[p["name"]]
+            used = f"{lim.tokens_today() // 1000}k" + (f"/{lim.tpd // 1000}k tokens" if lim.tpd else " tokens")
+            if lim.rpd:
+                used = f"{lim.total}/{lim.rpd} requests"
+            if lim.cached_today():
+                used += f" (+{lim.cached_today() // 1000}k served from its cache, not counted)"
+            out.append(f"{p['name']} {used}" + (" (resting)" if lim.cooling() > 0 else "") + (" (off this run)" if p["name"] in self.dead else ""))
+        return "; ".join(out)
 
     def status_line(self) -> str:
-        names = [p["name"] for p in self.providers]
+        names = [p["name"] for p in self.providers if p.get("role") != "match"]
         if names:
             out = "Writer: essays, cover letters and unusual multiple-choice questions use " + ", ".join(names) + " (free tiers, in that order)"
+            only = [p["name"] for p in self.providers if p.get("role") == "match"]
+            first = [p["name"] for p in self.providers if p.get("match_first") and p.get("role") != "match"]
+            shared = [n for n in names if n in self.match_names and n not in first]
+            if only or shared or first:
+                share = {p["name"]: float(p.get("match_share", self.match_share)) for p in self.providers}
+                part = [f"{n} {share[n]:.0%}" for n in first + shared if share[n] < 1]
+                out += ("; résumé-match checks use " + ", ".join(only + first + shared)
+                        + (f" (at most this part of a shared model's day: {', '.join(part)})" if part else ""))
+        elif self.providers:
+            out = ("Writer: OFF for answers (no working key). Résumé-match checks use " + ", ".join(p["name"] for p in self.providers))
         else:
             out = "Writer: OFF (no working key). Required essay questions get your standard answer from config.yaml; optional ones are left blank"
         if self.skipped:
@@ -546,7 +675,10 @@ class Writer:
         how = ("Reply with the numbers of ALL options that are true for me, separated by commas." if multi else
                "Reply with the number of the single option that is true for me (the closest fit if several could be).")
         user = (f"Role: {job.title} at {company}\nMultiple-choice question on the application form:\n{question}\n\nOptions:\n{numbered}\n\n"
-                f"{how} Use only my FACTS and LOGISTICS. Reply 0 if none can be answered from them. Reply with numbers only.")
+                f"{how} Use only my FACTS and LOGISTICS. If the question asks whether something unusual applies to me (a tie to this "
+                f"employer, a relative who works there, a public office, a military programme, a past dispute, a restriction) and "
+                f"my facts say nothing of the kind, it does not apply to me: pick the 'No' option. Reply 0 only if no option can "
+                f"honestly be chosen. Reply with numbers only.")
         msgs = [{"role": "system", "content": self.system_small}, {"role": "user", "content": user}]
         out = self._complete(msgs, 600, log, temperature=0.0)
         nums = [int(n) for n in re.findall(r"\d+", out.split("\n")[-1] if out.strip() else "")] or [int(n) for n in re.findall(r"\d+", out)]
