@@ -2282,3 +2282,340 @@ delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; 
 [06:06:14]   by site  ashby: 8 unconfirmed, 1 skipped
 [06:06:14]   by site  workday: 1 applied
 [06:06:15] Summary emailed to delgado@alumni.usc.edu
+[06:06:56] === autoapply run (LIVE) build 2026-10-07-b ===
+[06:06:56] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[06:06:57] mail: logged in to delgado@alumni.usc.edu OK
+[06:07:42] Discovering jobs…
+[06:07:42] Job search already ran at 05:20 (searches run every 3 h): this run only applies
+[06:07:43]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[06:07:43] 0 open roles, 0 new
+[06:07:43] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.8 min)
+[06:07:44] 4382 jobs queued: 70 already matched to your résumé, 4312 waiting for that check (best prospects first; the bar is a 60% match). Applying to up to 228 now
+[06:07:44] Time for this run: 50 min in all (4450 of 1850 free Actions minutes used this month)
+[06:07:45] Accounts: ON (delgado@alumni.usc.edu)
+[06:07:46] → Business Support Specialist @ stewart (score 10, match 68%)
+[06:07:49]       (opening Workday's application form directly)
+[06:07:53]       (account page: creating the account / signing in)
+[06:07:53]       account: creating one on stewart.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[06:08:02]       account: Workday did not create it; page says: Error: Password must include: - A minimum of 16 characters
+[06:08:02]     ✗ workday rejected the saved account password as too weak: its jobs wait until it is updated
+[06:08:03] → Facility Maintenance Coordinator, Operations @ bseglobal (score 40, match 72%)
+[06:08:15]       step 1: 18 fields (10 required)
+[06:08:25]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:12:29]       mail: passed over: 'Security code for your application to Brooklyn Sports & Ente' (other company)
+[06:12:29]     ✗ not sent (the form rejected it): after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+[06:12:34] → Technical Release Coordinator @ horacemannservicecorporation (score 32, match 60%)
+[06:12:47]       step 1: 23 fields (17 required)
+[06:12:47]       ? unanswered: 'Are you currently a Full-Time/Part-Time employee or appointee of Horace Mann Inc or any of' kind=combobox options=['Yes', 'No']
+[06:12:47]     ✗ skipped: can't truthfully answer required: Are you currently a Full-Time/Part-Time employee or appointe
+[06:12:53] → Benefits Analyst @ legora (score 32, match 60%)
+[06:13:01]       step 1: 31 fields (4 required)
+[06:14:46]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://477d23952d23e5cb4681bb356b7ce5e6.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:14:56] → Resolution Response Specialist   @ mavenclinic (score 29, match 60%)
+[06:15:09]       step 1: 23 fields (12 required)
+[06:15:32]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:15:44]       mail: found 'Security code for your application to Maven Clinic'
+[06:15:49]     ✓ applied (0.9 min)
+[06:15:55] → Associate, Strategic Finance @ ramp (score 25, match 60%)
+[06:16:01]       step 1: 10 fields (6 required)
+[06:18:13]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://70549f194c6b38c16626bf5b2621ea20.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:18:17] → Associate, Retirement Plan Services @ vestwell (score 24, match 60%)
+[06:18:26]       step 1: 19 fields (14 required)
+[06:18:26]       (writer answered 'Where are you currently located?*' -> 'N/A')
+[06:18:44]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:18:52]       mail: found 'Security code for your application to Vestwell'
+[06:18:57]     ✓ applied (0.7 min)
+[06:19:03] → Annuity New Business Specialist I @ fidelityguarantylife (score 19, match 60%)
+[06:19:22]       step 1: 33 fields (25 required)
+[06:19:26]       writer: groq-qwen: free daily limit reached (back in 24 min)
+[06:19:57]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:20:03]       mail: found 'Security code for your application to Fidelity & Guaranty Li'
+[06:20:09]     ✓ applied (1.1 min)
+[06:20:16] → Junior Generalist Engineer (Video Games) @ atariinc (score 16, match 60%)
+[06:20:23]       step 1: 15 fields (11 required)
+[06:20:23]       ? unanswered: 'Cover Letter*' kind=file options=[]
+[06:20:23]     ✗ skipped: can't truthfully answer required: Cover Letter*
+[06:20:32] → Finance Associate @ flaglerhealth (score 16, match 60%)
+[06:20:39]       step 1: 14 fields (4 required)
+[06:22:25]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://14f8548b34427a856ffa1f9bc8a26d07.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:22:31] → Junior QA Engineer - US Remote @ perfectserve (score 16, match 60%)
+[06:22:40]       step 1: 19 fields (14 required)
+[06:23:04]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:23:12]       mail: found 'Security code for your application to PerfectServe'
+[06:23:17]     ✓ applied (0.8 min)
+[06:23:22] → Associate, Studio Experience @ peloton (score 13, match 60%)
+[06:23:54]     ✗ blocked: no application form found on page
+[06:24:00] → Administrative Support @ dhpace (score 10, match 60%)
+[06:24:14]       step 1: 39 fields (30 required)
+[06:24:15]       (writer answered 'Do you have at least a High School Diploma or equivalent (i.' -> 'Yes')
+[06:24:15]       (writer answered 'Your Job Title:*' -> 'Property Management Crew')
+[06:24:24]       (writer answered 'Were you discharged or asked to resign?*' -> 'No')
+[06:24:25]       (writer answered 'Were you discharged or asked to resign from your second most' -> 'No')
+[06:24:45]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:24:48]       mail: found 'Security code for your application to DH Pace'
+[06:24:54]     ✓ applied (0.9 min)
+[06:25:00] → Client Enablement Specialist @ pactfi (score 10, match 60%)
+[06:25:07]       step 1: 8 fields (7 required)
+[06:27:01]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://2061ce8030c020cdea94b9930c8e691a.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:27:08] → Retirement Plan Administrator, (UBP) @ strongpointpartners (score 10, match 60%)
+[06:27:26]       step 1: 36 fields (16 required)
+[06:28:05]       (writer answered 'Have you ever been dismissed or forced to resign from any em' -> 'No')
+[06:28:06]       (writer answered 'Applicant Acknowledgement*' -> 'I acknowledge that I am authorized to work in the ')
+[06:28:27]       (writer answered 'Date of Acknowledgement*' -> 'N/A')
+[06:28:49]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:28:58]       mail: found 'Security code for your application to Strongpoint Partners'
+[06:29:03]     ✓ applied (1.9 min)
+[06:29:08] → Product Operations Technical Specialist, Counter Intrusion @ andurilindustries (score 55, match 65%)
+[06:29:21]       step 1: 22 fields (15 required)
+[06:29:22]       (writer answered 'EXPORT CONTROLS - This position requires access to informati' -> 'A United States citizen or national')
+[06:29:22]       (writer answered 'HISTORY WITH ANDURIL*' -> 'No')
+[06:29:37]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:29:47]       mail: found 'Security code for your application to Anduril Industries'
+[06:29:52]     ✓ applied (0.7 min)
+[06:29:56] → Quality Investigator  @ Transperfect (score 46, match 80%)
+[06:30:05]     ✗ blocked: no application form found on page
+[06:30:15] → BlackRock Active Investment Stewardship Operations - Associate @ blackrock (score 35, match 78%)
+[06:30:15]     found the employer's own posting on workday/blackrock
+[06:30:19]       (opening Workday's application form directly)
+[06:30:25]       (account page: creating the account / signing in)
+[06:30:27]       account: creating one on blackrock.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[06:30:31]       account: created
+[06:30:34]       account: signing in on blackrock.wd1.myworkdayjobs.com
+[06:30:41]       1/5 My Information: 13 fields (7 required)
+[06:30:46]       2/5 My Experience: 2 fields (1 required)
+[06:30:54]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[06:31:02]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[06:31:11]       ! could not pick an option in 'Type to Add Skills' (wanted 'Word'): left as it was
+[06:31:19]       ! could not pick an option in 'Type to Add Skills' (wanted 'Google Workspace'): left as it was
+[06:31:27]       ! could not pick an option in 'Type to Add Skills' (wanted 'SQL'): left as it was
+[06:31:35]       ! could not pick an option in 'Type to Add Skills' (wanted 'Python'): left as it was
+[06:31:37]       (My Experience took 51s)
+[06:31:46]       3/5 Application Questions: 4 fields (4 required)
+[06:31:58]       ? unanswered: 'Yes*' kind=checkbox_single options=[]
+[06:31:58]     ✗ skipped: can't truthfully answer required: Yes*
+[06:32:03] → Business Development Representative @ ServiceTitan (score 16, match 75%)
+[06:32:12]     ✗ blocked: no application form found on page
+[06:32:16] → Junior Digital Assets Operations Analyst @ omega-enterprises (score 75, match 70%)
+[06:32:21]     ✗ blocked: could not find the employer's application page
+[06:32:21]   ✗ Product Operations, Brand Partnerships @ substack: above entry level: senior (pay starts at $250,000)
+[06:32:23]   ✗ Associate Project Manager, Innovation @ olipop: above entry level: senior (manages people)
+[06:32:23]   ✗ Financial Analyst @ thepacgroup: the posting is closed (no time spent on it)
+[06:32:23]   ✗ Associate Project Manager, Civil Engineering @ atwellgroup: above entry level: mid (requires 3+ yrs)
+[06:32:23]   ✗ Data Analyst @ versemedical: above entry level: mid (requires 3+ yrs)
+[06:32:33]   match  85%  Financial Analyst  @ midihealth — Strong alignment with financial analysis, budgeting, and analytical requirements using Excel and dat
+[06:32:33]   match  88%  Associate Project Manager (Corporate Event Planner) @ firstglobalmanagementservicesinc — Excellent match for project management, vendor coordination, and financial tracking experience gaine
+[06:32:33]   match  90%  Data Analyst, Reporting @ meridianlink — Direct match for technical data analysis, SQL/Python skills, and systems engineering background.
+[06:32:33]   match  88%  Analyst, Marketing Financial Planning @ sonymusicentertainment — Strong fit for financial planning, budgeting, and purchase order administration based on previous bo
+[06:32:33]   match  55%  Assistant Buyer @ ruelala — While the role is relevant, the salary range starting below $60,000 triggers a lower score per instr
+[06:32:33] → Junior Crypto Analyst & Trader @ empire-assets (score 37, match 70%)
+[06:32:38]     ✗ blocked: could not find the employer's application page
+[06:32:45] → Financial Analyst  @ midihealth (score 56, match 85%)
+[06:33:01]       step 1: 27 fields (13 required)
+[06:33:25]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:33:40]       mail: found 'Security code for your application to Midi Health'
+[06:33:49]     ✓ applied (1.1 min)
+[06:33:56] → Associate Project Manager (Corporate Event Planner) @ firstglobalmanagementservicesinc (score 42, match 88%)
+[06:34:01]       step 1: 2 fields (0 required)
+[06:34:08]       (that 'Apply' button opens the form; clicking it)
+[06:34:12]       step 2: 13 fields (9 required)
+[06:34:16]     ✓ applied (0.3 min)
+[06:34:21] → Data Analyst, Reporting @ meridianlink (score 34, match 90%)
+[06:34:30]       step 1: 30 fields (4 required)
+[06:36:24]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://c4700a679065e7a50f0c243168955188.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:36:37]   match  88%  Operations Analyst @ tremendous — Strong alignment with operations and analytical requirements, leveraging the candidate's systems eng
+[06:36:37]   match  75%  Tier 1 Production Support Analyst - Analyst @ icapitalnetwork — Good fit for a technical support role, though it leans more toward IT support than the candidate's p
+[06:36:37]   match  50%  Recruiting Coordinator - AMER @ notion — Weak fit as the role is administrative/recruiting-focused and does not utilize the candidate's engin
+[06:36:37]   match   0%  RCM Project Analyst @ genedx — Poor fit as the provided text contains no job description or requirements to evaluate.
+[06:36:37]   match  60%  Compliance Operations Analyst @ fin — Weak fit due to a lack of specific compliance/AML experience, despite the candidate's relevant finan
+[06:36:37] → Analyst, Marketing Financial Planning @ sonymusicentertainment (score 54, match 88%)
+[06:36:48]       step 1: 18 fields (8 required)
+[06:36:58]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:37:01]       mail: found 'Security code for your application to Sony Music Global Job '
+[06:37:06]     ✓ applied (0.5 min)
+[06:37:15] → Operations Analyst @ tremendous (score 62, match 88%)
+[06:37:23]       step 1: 5 fields (4 required)
+[06:37:29]     ✓ applied (0.2 min)
+[06:37:39] → Tier 1 Production Support Analyst - Analyst @ icapitalnetwork (score 41, match 75%)
+[06:37:51]       step 1: 29 fields (20 required)
+[06:38:12]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:38:22]       mail: found 'Security code for your application to iCapital'
+[06:38:28]     ✓ applied (0.8 min)
+[06:38:29]   ✗ 1160 - Scheduler @ gofasti: above entry level: senior (requires 1+ yrs; manages people)
+[06:38:40]   match  60%  Recruiting Coordinator @ blacksmith — This is a professional office role, but recruiting is a pivot away from the candidate's engineering 
+[06:38:40]   match  90%  PMO & Portfolio Analyst @ rithumliboard — Strong match for the candidate's Industrial Engineering degree, project management experience, and a
+[06:38:40]   match  40%  Trading Operations Associate @ ninjatrader — The role is a pivot away from engineering, and the salary is at the lower end of the candidate's tar
+[06:38:40]   match  55%  Coordinator, Office Services @ excelsportsmanagement — This is primarily an administrative support role that does not fully utilize the candidate's enginee
+[06:38:40]   match  65%  Office Coordinator @ gigaenergy — The industrial setting aligns well with the candidate's construction and operations background, thou
+[06:38:40] → Compliance Operations Analyst @ fin (score 62, match 60%)
+[06:38:47]       step 1: 4 fields (3 required)
+[06:38:50]     ✓ applied (0.2 min)
+[06:38:54] → Recruiting Coordinator @ blacksmith (score 34, match 60%)
+[06:39:01]       step 1: 12 fields (5 required)
+[06:39:09]     ✗ not sent (the form rejected it): the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Do you require US', 'Missing entry for required field: Do you require US visa sponsorship?\n\nMissing e', '
+[06:39:15] → PMO & Portfolio Analyst @ rithumliboard (score 34, match 90%)
+[06:39:34]       step 1: 41 fields (36 required)
+[06:40:44]       (writer answered 'Do you require immigration support either now OR in the futu' -> 'No')
+[06:40:52]       (writer answered 'For this position, the expected base pay range is: $65,000-$' -> 'Yes')
+[06:41:24]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:41:28]       mail: found 'Security code for your application to Rithum LinkedIn Board'
+[06:41:33]     ✓ applied (2.3 min)
+[06:41:36]   ✗ Operations Associate @ hebrewpublic: pays too little: tops out near $60,000 a year (your floor is $65,000)
+[06:41:36]   match  68%  Revenue Operations Specialist - Boulder, Colorado @ sumup — same role at this employer, checked before: no application form found on page
+[06:41:36]   ✗ Contract Recruiting Coordinator Admin Support @ tenstorrent: above entry level: mid (pay starts at $100,000)
+[06:41:36]   ✗ Field Enablement Specialist | Housing (Bilingual Spanish Speaking) @ eliseai: the posting is closed (no time spent on it)
+[06:41:36]   ✗ ServiceNow Business Analyst @ lightfeatheriollc: above entry level: mid (requires 3+ yrs; pay starts at $110,000)
+[06:41:56]   match  60%  Finance & Strategy Associate @ lolablankets — The candidate possesses the required analytical and Excel skills but lacks the 2+ years of professio
+[06:41:56]   match  30%  Compensation Analyst @ iovancebiotherapeutics — The role requires 6-8 years of specialized compensation experience, which the candidate does not pos
+[06:41:56]   match  75%  Operations: Key Accounts @ codes-health — The candidate's operations and technical background align well with the role, though they are slight
+[06:41:56]   match  50%  Compliance Specialist - Operations & Risk @ eqtcorporation — While the candidate's skills are a strong match for the entry-level requirements, the role explicitl
+[06:41:56] → Office Coordinator @ gigaenergy (score 28, match 65%)
+[06:42:03]       step 1: 12 fields (9 required)
+[06:42:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:42:11]       mail: found 'Security code for your application to Giga Energy'
+[06:42:17]     ✓ applied (0.3 min)
+[06:42:21] → Finance & Strategy Associate @ lolablankets (score 18, match 60%)
+[06:42:26]       step 1: 10 fields (4 required)
+[06:42:30]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:42:43]       mail: found 'Security code for your application to Lola Blankets'
+[06:42:50]     ✓ applied (0.5 min)
+[06:42:55] → Jr. Project Manager, Operations & Product @ immortals (score 45)
+[06:42:56]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:42:56] → Operations: Key Accounts @ codes-health (score 37, match 75%)
+[06:43:02]     ✗ skipped: above entry level: mid (requires 2+ yrs; pay starts at $120,000)
+[06:43:02] → Business Operations Analyst 1 @ public-consulting-group (score 62)
+[06:43:07]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:43:07] → Revenue Operations Specialist - Boulder, Colorado @ sumup (score 35, match 68%)
+[06:43:11]     found the employer's own posting on greenhouse/sumup
+[06:43:43]     ✗ blocked: no application form found on page
+[06:43:57]   match  55%  Business Development Representative - West @ gitlab — This is a sales role, which is a significant pivot from the candidate's engineering and operations b
+[06:43:57]   match  90%  Associate, Legal Operations @ falconx — The role's focus on process improvement, workflow design, and automation aligns perfectly with the c
+[06:43:57]   match  88%  Supply Chain Associate @ radiant-industries — The candidate's engineering degree and experience in supply chain and vendor coordination make them 
+[06:43:57]   match  30%  Mid-Band Radar Systems Analyst @ shinvestmentsllc — The job posting contains no description or requirements, making it impossible to assess fit.
+[06:43:57]   match  40%  People Experience Coordinator @ internaljobsatlush — The role requires specific HR experience, which the candidate lacks despite their general operations
+[06:43:57] → Data Operations & Development Junior Project Manager @ civhc-center-for-improving-value-in-heal (score 45)
+[06:43:59]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:43:59] → Associate, Legal Operations @ falconx (score 43, match 90%)
+[06:44:12]       step 1: 24 fields (12 required)
+[06:44:32]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:44:42]       mail: found 'Security code for your application to FalconX'
+[06:44:47]     ✓ applied (0.8 min)
+[06:44:47]   ✗ Industry Analyst, Robotics @ wirescreen: above entry level: mid (requires 3+ yrs)
+[06:44:48]   match  70%  Account Coordinator, Paid Social @ dept — same role at this employer, checked before: pays too little: tops out near $60,000 a year (your floo
+[06:44:58]   match  35%  People Experience Coordinator @ lush — Lacks the required 1+ years of HR experience and the mandatory French language fluency.
+[06:44:58]   match  55%  People Analyst @ fanaticsfbg — Candidate has the necessary technical skills but lacks the 3+ years of experience required for this 
+[06:44:58]   match  85%  Data Analyst @ wilsonelser — Strong alignment with the required data analysis skills, project management background, and technica
+[06:44:58]   match  90%  Indirect Procurement Associate @ radiant-industries — Excellent fit due to the Industrial Engineering degree, supply chain experience, and technical aptit
+[06:44:58]   match  75%  Commercial Excellence Coordinator @ heartflowinc — Strong operational and financial background, though the candidate is slightly below the preferred 2-
+[06:44:58] → Supply Chain Associate @ radiant-industries (score 54, match 88%)
+[06:45:06]       step 1: 12 fields (3 required)
+[06:46:45]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://e0b77910c6b922ec5552510c92062ede.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:46:48] → Account Coordinator, Paid Social @ dept (score 34, match 70%)
+[06:46:51]     ✗ skipped: pays too little: tops out near $60,000 a year (your floor is $65,000)
+[06:46:51] → Associate, Business Operations & Systems, Events @ people-inc (score 60)
+[06:46:54]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:46:54] → Data Analyst @ wilsonelser (score 34, match 85%)
+[06:47:03]       step 1: 15 fields (11 required)
+[06:47:11]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:47:24]       mail: found 'Security code for your application to Wilson Elser - Busines'
+[06:47:30]     ✓ applied (0.6 min)
+[06:47:38] → Indirect Procurement Associate @ radiant-industries (score 49, match 90%)
+[06:47:45]       step 1: 12 fields (3 required)
+[06:49:29]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://8bce6be62661eea23244c6371f3b5252.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/a
+[06:49:38] → Commercial Excellence Coordinator @ heartflowinc (score 25, match 75%)
+[06:49:53]       step 1: 31 fields (18 required)
+[06:50:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:50:26]       mail: found 'Security code for your application to Heartflow'
+[06:50:33]     ✓ applied (0.9 min)
+[06:50:42] → CTS Operations Analyst 6PM-6AM CST @ cdw (score 62)
+[06:50:44]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:50:44] → Assistant Operations Manager @ sp-sp-plus (score 35)
+[06:50:46]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:50:56]   match  55%  Administrative Assistant @ rebecca-school — The role is an administrative position that is significantly below the candidate's engineering degre
+[06:50:56]   match  40%  Customer Success Specialist @ lightningai — The candidate is a new graduate, while the role requires 5-7 years of specific customer success expe
+[06:50:56]   match   0%  HR Operations Generalist @ fidelityguarantylife — The provided text contains no job description or requirements to evaluate.
+[06:50:56]   match   0%  Coordinator, Operations - Brooklyn Basketball Training Center @ bseglobal — The provided text contains no job description or requirements to evaluate.
+[06:50:56]   match  90%  Manufacturing Engineer, Thermal Controls Systems @ vast — The candidate's Industrial Engineering degree and hands-on construction/maintenance experience align
+[06:50:56] → Manufacturing Engineer, Thermal Controls Systems @ vast (score 42, match 90%)
+[06:51:04]       step 1: 17 fields (6 required)
+[06:51:05]       (writer answered 'ITAR Compliance*' -> 'U.S. person. This ITAR/EAR status includes U.S. ci')
+[06:51:14]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:51:26]       mail: found 'Security code for your application to Vast'
+[06:51:31]     ✓ applied (0.6 min)
+[06:51:32]   ✗ AVP, Revenue Operations @ sentinellabs: above entry level: senior (requires 12+ yrs; manages people)
+[06:51:35]   ✗ Executive Administrative Assistant @ sphereentertainment: above entry level: mid (pay starts at $125,000)
+[06:51:46]   match  80%  Mission Operations Specialist @ chaosindustries — Your background in systems engineering and hands-on operations aligns well with this technical field
+[06:51:46]   match  55%  Associate Account Manager | Luma | Central US @ dotmatics — The posting lacks a clear job description, making it difficult to assess fit, though it is a profess
+[06:51:46]   match  50%  AI Agent Operations Specialist, Support @ vanta — You lack the required 3+ years of technical support experience specified for this role.
+[06:51:46]   match  80%  Field Operations Specialist @ chaosindustries — Your background in systems engineering and hands-on operations aligns well with this technical field
+[06:51:46] → Mission Operations Specialist @ chaosindustries (score 31, match 80%)
+[06:51:58]       step 1: 20 fields (14 required)
+[06:51:58]       (writer answered 'Are you any of the following “protected individual(s)” as de' -> 'A United States citizen or national')
+[06:51:58]       (writer answered 'Have you ever been an IT Administrator?*' -> 'No')
+[06:52:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:52:24]       mail: found 'Security code for your application to CHAOS Industries'
+[06:52:29]     ✓ applied (0.7 min)
+[06:52:35] → Contract Operations Support Specialist @ ge-healthcare (score 35)
+[06:52:38]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:52:38] → AVP, Investment Operations @ fortitudegroupholdingsllc (score 35)
+[06:53:10]     ✗ blocked: no application form found on page
+[06:53:18] → Associate, Treasury @ gersonlehrmangroup (score 24)
+[06:53:53]     ✗ blocked: no application form found on page
+[06:53:58] → Field Operations Specialist @ chaosindustries (score 31, match 80%)
+[06:54:10]       step 1: 20 fields (14 required)
+[06:54:11]       (writer answered 'Are you any of the following “protected individual(s)” as de' -> 'A United States citizen or national')
+[06:54:11]       (writer answered 'Have you ever been an IT Administrator?*' -> 'No')
+[06:54:27]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:54:36]       mail: found 'Security code for your application to CHAOS Industries'
+[06:54:41]     ✓ applied (0.7 min)
+[06:54:47] → Branch Operations Associate Manager -Applewood CO @ wells-fargo (score 60)
+[06:54:49]     found the employer's own posting on workday/wf
+[06:54:53]     ✗ skipped: above entry level: senior (requires 2+ yrs; manages people)
+[06:54:53] → Client Happiness Servicing, Associate @ earnest (score 18)
+[06:54:58]     ✗ skipped: pays too little: tops out near $60,000 a year (your floor is $65,000)
+[06:54:58]   ✗ Product Designer - Future Contract Opportunities @ method: above entry level: senior (pay starts at $174,720)
+[06:54:59] → Associate Veterinarian - Encino, Los Angeles, CA @ modernanimal (score 24)
+[06:55:30]     ✗ blocked: no application form found on page
+[06:55:30]   ✗ Group Facility Administrator @ unitedveincenters: above entry level: senior (manages people)
+[06:55:32]   ✗ Pricing Specialist @ dhpace: the posting is closed (no time spent on it)
+[06:55:35]   match  85%  Associate Broker - Commercial Real Estate @ northmarq — The candidate's background in property operations, financial tracking, and business development alig
+[06:55:35]   match  30%  Referral Program & Talent Pipeline @ careerteam — This posting is a generic talent pipeline/referral page rather than a specific job opening, making i
+[06:55:35]   match  40%  Facilities Technician I @ relativity — This is a hands-on facilities maintenance role, which is below the professional office-based operati
+[06:55:35]   match  30%  Project Managers: Feedback on a Resource Organization Prototype @ terac — This is a one-time paid research study/gig, not a salaried professional employment opportunity.
+[06:55:35]   match  40%  Associate Account Manager | Luma | Material Science @ dotmatics — The posting is a company landing page/marketing overview rather than a specific job description, pro
+[06:55:40] → Associate Broker - Commercial Real Estate @ northmarq (score 12, match 85%)
+[06:55:43]     ✗ skipped: pays too little: tops out near $50,000 a year (your floor is $65,000)
+[06:55:43] → Treatment Coordinator @ hellotend (score 34)
+[06:55:49]     match 40% — This is a front-desk/patient-facing administrative role that does not utilize the candidate's engineering degr
+[06:55:49]     ✗ set aside: under the 60% match bar
+[06:55:49] → Transaction Coordinator @ urbancompass (score 32)
+[06:55:52]     ✗ blocked: no application form found on page
+[06:55:57] → Business Systems Analyst, IT Vendor Operations @ cash-app (score 40)
+[06:56:01]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[06:56:01] → Associate, Marketing & Digital (NYC Based) @ clintonfoundation (score 24)
+[06:56:07]     match 55% — The role is an office-based professional position, but the candidate's background is heavily focused on indust
+[06:56:07]     ✗ set aside: under the 60% match bar
+[06:56:07]   ✗ Industry Analyst, AI @ wirescreen: above entry level: mid (requires 3+ yrs)
+[06:56:08]   ✗ Field Operations Specialist (Port Chester, NY) @ airgarage: not open to you: part-time
+[06:56:08]   ✗ Combo Retirement Plan Administrator @ strongpointpartners: above entry level: mid (requires 5+ yrs)
+[06:56:34]   match  75%  Manufacturing Engineer I, Structures @ relativity — The candidate's Industrial Engineering degree and hands-on operational experience align well with th
+[06:56:34]   match  50%  Associate Manager, Client Services @ kargo22 — The candidate has transferable client-facing experience but lacks the specific 1+ years of experienc
+[06:56:34]   match  60%  Implementation Strategist @ thedutchie — The candidate has strong technical and project management skills, though they fall short of the 2+ y
+[06:56:34]   match  35%  SAM Pro / SaaS License Management Specialist @ phizenix — This role requires specialized ServiceNow platform expertise and specific certifications that the ca
+[06:56:34]   match  78%  Manufacturing Engineer 1, Unpressurized Structures @ relativity — The candidate's engineering degree and background in process improvement and shop-floor operations m
+[06:56:34] → Manufacturing Engineer I, Structures @ relativity (score 58, match 75%)
+[06:56:43]       step 1: 19 fields (9 required)
+[06:56:59]       email: the site asked for a security code after Submit; reading it from the application inbox
+[06:57:05]       mail: found 'Security code for your application to Relativity Space'
+[06:57:11]     ✓ applied (0.6 min)
+[06:57:19] Run time limit reached (50 min): the rest waits for the next run
+[06:57:19] Résumé checks this run: 50 (26 passed) in 10 calls. Free writer allowance used today: groq 198k/195k tokens (+33k served from its cache, not counted); groq-20b 197k/195k tokens (+25k served from its cache, not counted); groq-qwen 69k/195k tokens; gemini-lite 170/480 requests (+24k served from its cache, not counted); gemini-flash 0/18 requests
+[06:57:19] Summary: 23 applied, 7 unconfirmed, 10 blocked, 15 skipped, 2 failed, 3 queued, 26 low_score, 21 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-08.md
+[06:57:19]   by site  greenhouse: 21 applied, 6 blocked, 4 skipped, 1 failed
+[06:57:19]   by site  ashby: 7 unconfirmed, 2 applied, 1 failed, 1 skipped
+[06:57:19]   by site  www.builtincolorado.com: 6 skipped
+[06:57:19]   by site  remoteok.com: 2 blocked
+[06:57:19]   by site  smartrecruiters: 2 blocked
+[06:57:19]   by site  www.builtinla.com: 2 skipped
+[06:57:19]   by site  www.builtinnyc.com: 1 skipped
+[06:57:19]   by site  workday: 1 skipped
+[06:57:22] Summary emailed to delgado@alumni.usc.edu
