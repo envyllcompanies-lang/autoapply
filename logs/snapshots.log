@@ -1,1304 +1,3 @@
-=== 2026-10-08 02:13:03  unconfirmed  Financial Resource Management Specialist @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/7921972002/
-stage: page 1
-why: no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Str
-  <input empty>
-# Financial Resource Management Specialist
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  [button] +1
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile INVALID filled>
-label: Please enter a valid LinkedIn profile URL.
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-  [button] Select an option
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  [button] Select an option
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  <input:text empty>
-  [button] Select an option
-  text: Secondary Major / Field of study
-  [button] Select an option
-label: Month
-  <input:text empty>
-label: Year
-  <input:text empty>
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
-=== 2026-10-08 02:15:18  skipped  Associate Buyer @ idexcorp
-url: https://idexcorp.wd5.myworkdayjobs.com/idex_careers/job/Rochester-New-York/Associate-Buyer_R-09858/apply
-stage: Application Questions
-why: can't truthfully answer required: Do you have a copy of any of the following agreements with y
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# IDEX Careers | North America
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] The IDEX Story {navigationItem-The IDEX Story}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Associate Buyer
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-00fb683ea8341001b8758ead38500000}
-label: Are you legally authorized to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758ead38500000
- {formField-00fb683ea8341001b8758fe05cb90001}
-label: Will you now, or in the future, require sponsorship for employment Visa status (e.g., H-1B, visa status)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758fe05cb90001
- {formField-00fb683ea8341001b8758fe05cb90004}
-label: IDEX Requires that you are 18 years of age. Will you meet this requirement?*
-  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758fe05cb90004
- {formField-00fb683ea8341001b8759079daea0000}
-label: As a condition of employment, IDEX requires that all new hires pass pre-employment screenings, background chec
-  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8759079daea0000
- {formField-ee93f9f954b11001b8a0585aefc60000}
-label: Have you entered into, or are you otherwise bound by, any of the following agreements with your current or any
-  [dropdown] nothing chosen #primaryQuestionnaire--ee93f9f954b11001b8a0585aefc60000
- {formField-b6e6897222d310010b1d1e8a72df0000}
-label: Do you have a copy of any of the following agreements with your current or any former employer that remains in
-  [dropdown] nothing chosen #primaryQuestionnaire--b6e6897222d310010b1d1e8a72df0000
- {formField-b6e6897222d310010ad04af64c460000}
-label: What are your salary expectations for this role? (Optional)
-  <input:text #primaryQuestionnaire--b6e6897222d310010ad04af64c460000 empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] IDEX Job Applicant Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:15:48  unconfirmed  Strategy and Product Specialist @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/8056116002/
-stage: page 1
-why: no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Str
-  <input empty>
-# Strategy and Product Specialist
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  [button] +1
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile INVALID filled>
-label: Please enter a valid LinkedIn profile URL.
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-  [button] Select an option
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  [button] Select an option
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  <input:text empty>
-  [button] Select an option
-  text: Secondary Major / Field of study
-  [button] Select an option
-label: Month
-  <input:text empty>
-label: Year
-  <input:text empty>
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
-=== 2026-10-08 02:19:05  skipped  Credit Trainee @ ferguson
-url: https://ferguson.wd1.myworkdayjobs.com/ferguson_experienced/job/Brooklyn-NY/Credit-Trainee_R-141108/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Protected Veterans are defined as follows: Disabled Veteran:
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Credit Trainee
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# APPLICANT VOLUNTARY SELF-IDENTIFICATION ETHNICITY/RACE, GENDER, AND PROTECTED VETERAN STATUS SURVEY
-  text: The Company is Federal contractor and is subject to certain governmental record keeping and reporting requirements. In order to help it comp
-  text: The Company and its subsidiaries and divisions are government contractors and equal opportunity employers. As such, we are committed to ensu
-  text: The Company will use the information in accordance with the provisions of applicable laws, executive orders, and regulations, including thos
-  text: Please check the appropriate box which applies to you for each section below:
- {formField-gender}
-label: Gender:*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish cult
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicity}
-label: Select Race: DEFINITIONS: White (not Hispanic or Latino): A person having origins in any of the original peopl
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-veteranStatus}
-label: Protected Veterans are defined as follows: Disabled Veteran: a veteran of the U.S. military, ground, naval or 
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: Ferguson and its subsidiaries and divisions (the “Company”) are equal opportunity employers dedicated to a policy of non-discrimination in e
-  text: I HAVE READ AND UNDERSTAND THE FOLLOWING:
-  text: I understand that an offer of employment with the Company does not constitute a contract of employment for any definite duration. If I becom
-  text: I authorize investigation of all information contained in this application, including my qualifications, character and/or ability from forme
-  text: I understand that any conditional offer of employment is subject to verification of all information contained in this Application or other p
-  text: I understand that if I am offered a position at the Company, I will be required to take a drug test and receive a negative result on the dru
-  text: I understand and agree that any false, misleading or incomplete information given in my Application, resumé, interview(s) or other pre-emplo
-  text: I hereby certify that I am able to perform, with or without reasonable accommodations, the essential job functions of the position for which
-  text: I understand that I am required to abide by all policies, rules and regulations of the Company including, but not limited to, all applicable
-  text: I hereby acknowledge that I have read and understand all of the information written above and agree to the terms therein. I certify that the
-  text: Attention Massachusetts Applicants
-  text: Attention Maryland Applicants:
-  text: Attention California Applicants
-  text: Attention Colorado Applicants:
-  text: Colorado candidates are not required to list dates of attendance, graduation from an educational institution, or other information about the
-  text: This certifies that this Application was completed by me and that all entries on it, and information in it, are true and complete to the bes
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Applicant Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:21:36  skipped  Operations Analyst @ starrcompanies
-url: https://starrcompanies.wd1.myworkdayjobs.com/careers/job/399-Park-Avenue-New-York-NY/Operations-Analyst_JR4473/apply
-stage: Application Questions
-why: can't truthfully answer required: 399 Park Avenue-New York, NY; Atlanta, GA; Boston, MA; Canada; Carpinteria, CA; Charlotte, NC; Chicago, IL; Dallas, TX; Denver, CO; Ft. Lauderdale, FL; Houston, TX; Kansas City, Missouri; Los Angeles, CA; Mansfield, OH; Miami, FL; Nashville, TN; Philadelphia, PA; Puerto Rico; San Francisco, CA; Scottsdale, AZ; Wilmington, DE
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Operations Analyst
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-# Errors Found
-! Error-Work Authorization The field Work Authorization is required and must have a value. Error-Please select locations you are willing to relocate to. The field Please select locations you are willing {errorHeading}
-{applyFlowPrimaryQuestionsPage}
- {formField-41473f2b41e61001f709ae2d4f1b0001}
-label: Are you a current Starr employee?*
-  [dropdown] chosen #primaryQuestionnaire--41473f2b41e61001f709ae2d4f1b0001
- {formField-41473f2b41e61001f709aec72cc50003}
-label: Are you legally eligible to work in the country to which you are applying?*
-  [dropdown] chosen #primaryQuestionnaire--41473f2b41e61001f709aec72cc50003
- {formField-41473f2b41e61001f709af621cbb0001}
-label: Work Authorization*
-  [dropdown] nothing chosen #primaryQuestionnaire--41473f2b41e61001f709af621cbb0001 INVALID
-! Error: The field Work Authorization is required and must have a value. {inputAlert}
- {formField-41473f2b41e61001f709affc1b340001}
-label: Are you at least 18 years of age? Or if under age 18, can you provide work permits?*
-  [dropdown] chosen #primaryQuestionnaire--41473f2b41e61001f709affc1b340001
- {formField-41473f2b41e61001f709affc1b340004}
-label: Are you willing to relocate?*
-  [dropdown] chosen #primaryQuestionnaire--41473f2b41e61001f709affc1b340004
- {formField-41473f2b41e61001f709b095f9f40002}
-label: Please select locations you are willing to relocate to.*
-  <input:checkbox #f8fb32c5ae761000c3039058b7a10002-41473f2b41e61001f709b095f9f required question-unanswered>
-label: 399 Park Avenue-New York, NY
-  <input:checkbox #f8fb32c5ae761000c30390f3650e0000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Atlanta, GA
-  <input:checkbox #f8fb32c5ae761000c30390f3650e0001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Boston, MA
-  <input:checkbox #f8fb32c5ae761000c303918da8a60000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Canada
-  <input:checkbox #f8fb32c5ae761000c303918da8a60001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Carpinteria, CA
-  <input:checkbox #f8fb32c5ae761000c303918da8a60002-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Charlotte, NC
-  <input:checkbox #f8fb32c5ae761000c303918da8a60003-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Chicago, IL
-  <input:checkbox #f8fb32c5ae761000c3039227d69b0000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Dallas, TX
-  <input:checkbox #f8fb32c5ae761000c3039227d69b0001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Denver, CO
-  <input:checkbox #f8fb32c5ae761000c3039227d69b0002-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Ft. Lauderdale, FL
-  <input:checkbox #f8fb32c5ae761000c3039227d69b0003-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Houston, TX
-  <input:checkbox #f8fb32c5ae761000c30392c223710000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Kansas City, Missouri
-  <input:checkbox #f8fb32c5ae761000c30392c223710001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Los Angeles, CA
-  <input:checkbox #f8fb32c5ae761000c30392c223710002-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Mansfield, OH
-  <input:checkbox #f8fb32c5ae761000c30392c223710003-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Miami, FL
-  <input:checkbox #f8fb32c5ae761000c303935c00c10000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Nashville, TN
-  <input:checkbox #f8fb32c5ae761000c303935c00c10001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Philadelphia, PA
-  <input:checkbox #f8fb32c5ae761000c303935c00c10002-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Puerto Rico
-  <input:checkbox #f8fb32c5ae761000c303935c00c10003-41473f2b41e61001f709b095f9f required question-unanswered>
-label: San Francisco, CA
-  <input:checkbox #f8fb32c5ae761000c30393f70bca0000-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Scottsdale, AZ
-  <input:checkbox #f8fb32c5ae761000c30393f70bca0001-41473f2b41e61001f709b095f9f required question-unanswered>
-label: Wilmington, DE
-! Error: The field Please select locations you are willing to relocate to. is required and must have a value. {inputAlert}
- {formField-41473f2b41e61001f709b26492e50004}
-label: What is your minimum annual salary requirement?*
-  <input:text #primaryQuestionnaire--41473f2b41e61001f709b26492e50004 required INVALID filled>
-! Error: The number entered is too large. {inputAlert}
- {formField-41473f2b41e61001f70e17287f590000}
-label: Please list any specialty skills that are not included in your resume*
-  <textarea #primaryQuestionnaire--41473f2b41e61001f70e17287f590000 required filled>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:21:47  skipped  Donor Organizing - Program Associate @ northstarfund
-url: https://job-boards.greenhouse.io/northstarfund/jobs/6161903004
-stage: page 1
-why: can't truthfully answer required: Cover Letter*
-# Donor Organizing - Program Associate
-  text: Hudson Valley or New York City
-  [button] Apply
-  text: North Star Fund is hiring a Donor Organizing Program Associate. We’re seeking a highly-organized person committed to community building acro
-  text: The Donor Organizing Program Associate will help donors deepen their political education, strengthen their giving practices and stay connect
-  text: This team member will grow and nurture North Star Fund’s network of people committed to transformative action through giving.
-  text: Programming will support donors in developing giving practices that are
-  text: aligned with the priorities and needs of grassroots movements
-  text: North Star Fund is a social justice fund. We support grassroots organizing led by communities of color building power in New York City and t
-  text: North Star Fund was founded over 45 years ago by a group of New Yorkers who wanted to disrupt traditional philanthropic practices. They buil
-  text: This position is full-time. The Program Associate will report to the Donor Organizing Director and will regularly partner with other staff.
-# Primary Responsibilities
-  text: Work in close coordination with North Star Fund’s Development and Grantmaking teams to create public programming.
-  text: Support the program development process for workshops aligned with North Star Fund’s mission.
-  text: Coordinate logistics for workshops, trainings and webinars.
-  text: Share feedback and insights from donors and program participants with relevant teams.
-  text: Track and manage data pertaining to program participants.
-  text: Draft clear, engaging content about North Star Fund’s donor education and training programs.
-  text: Keep current participants and alumni informed and connected to new engagement opportunities.
-  text: Build relationships with North Star Fund’s donor community.
-# Required Skills
-  text: Deep social justice values and a demonstrated commitment to the practice of racial justice, inclusion, and community-driven change
-  text: Fluency with related concepts around intersectionality, structural, institutional, and internalized racism
-  text: Knowledge of and commitment to grassroots organizing led by communities of color
-  text: Resilience, flexibility, humility, self-awareness, and a sense of humor
-  text: Excellent collaboration and communication skills
-  text: Excellent writing, reading comprehension and analytical skills
-  text: Highly organized project manager, able to coordinate multiple moving parts, manage timelines and maintain accurate data systems
-  text: Ability to collaborate across teams to implement cohesive donor programming
-  text: Adaptability and problem solving skills with the ability to adjust plans based on donor needs, team priorities, or shifting movement conditi
-  text: Ability to quickly connect, build trust and develop authentic relationships with people from diverse backgrounds
-  text: Commitment to engage in ongoing political education and skill development
-  text: Proficiency with standard office software (such as Word, Excel or Google Worksuite), video conferencing platforms (Zoom or Meet), and intern
-  text: Familiarity with presentation software (such as PowerPoint, Canva or Google Slides)
-  text: Familiarity with data management systems such as Airtable or Salesforce
-# Desired Skills
-  text: Experience managing volunteers
-  text: Community organizing or movement building experience
-  text: Experience with organizing and handling administrative tasks/multitasking, project planning and execution
-  text: Familiarity with grassroots fundraising, individual giving and/or family philanthropy
-  text: Comfort facilitating groups, designing agendas and supporting collective learning
-# Physical Requirements
-  text: Must be able to work at a computer screen for several hours a day. Must be able to attend events, including some travel in the region and be
-  text: The salary for this position is $73,337 depending on experience and in accordance with North Star Fund’s compensation structure. North Star 
-  text: 100% premium paid for medical, dental, and vision insurance
-  text: monthly transportation, cell phone and internet allowance
-  text: flex-time, vacation and holidays
-  text: North Star Fund operates within a 32-hour full-time work week.
-# Additional Information
-  text: North Star Fund uses a 32-hour work week for full-time employees. Our work days run Monday through Thursday with periodic evening and weeken
-# Residency Requirement
-  text: Applicants must live in the Hudson Valley or New York City or be within a one-hour commute to these areas.
-# How to Apply
-  text: www.northstarfund.org/jobs
-  text: We appreciate all submissions, but please be advised that our capacity allows us to only respond to those best qualified for the position.
-  text: Position will remain open until filled but first review of applications will be October 12, 2026.
-  text: North Star Fund is an Equal Opportunity Employer. We do not discriminate against applicants based on race, religion, color, disability, medi
-  text: North Star Fund is firmly committed to equity and diversity. We’re committed to the recruitment and retention of people from backgrounds tra
-  text: Give us feedback on this job posting using this form.
-  text: Interested in building your career at North Star Fund? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Do you live in the Hudson Valley or New York City, or within a one-hour commute to these areas?*
-  <input:text #question_19658953004 required empty>
-  [button] 
-  <input required empty>
-  text: (Please note that we do not pay relocation expenses.)
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-08 02:22:29  unconfirmed  Workplace Experience Coordinator @ topline-pro
-url: https://jobs.ashbyhq.com/topline-pro/6958fb1b-d417-4d68-8920-b08365f8b56f/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; page ends: 'Combinator Job Board Indeed Other If "other" please specify: If you were referred, please let us know by who! Tell us briefly what makes you excited about being a Workplace Coordinator for Topline Pro! Submit Application'
-# Workplace Experience Coordinator
-# Location
-# Employment Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Full Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #87ece3d7-979f-4696-9e99-fe228e644d58 required filled>
-label: LinkedIn
-  <input:text #571c4000-6e9e-4f43-9d5d-cf4c48755f1d required filled>
-label: What are your preferred pronouns?
-  <input:text #68d37e0a-5b45-45d8-8869-cbd3ef7729c7 filled>
-label: Are you legally authorized to work in the United States for Topline Pro?
-  [button] Yes
-  [button] No
-  <input:checkbox name=c42bc918-999c-4915-bd55-262d38b99819 question-answered>
-label: Do you now, or will you in the future, require sponsorship for employment visa status (e.g., OPT, H-1B, O-1, J
-  [button] Yes
-  [button] No
-  <input:checkbox name=3f2e7f4f-c8d1-45eb-b907-9eb025c160ca question-unanswered>
-label: Are you able and excited to work from our Brooklyn office (300 Kent Ave, Brooklyn NY 11249) 5x a week?
-  [button] Yes
-  [button] No
-  <input:checkbox name=1b3f37e0-dab3-4eaf-99f1-5a517f110b80 question-answered>
-label: Are you within a 45 minute commute to Williamsburg, Brooklyn?
-  [button] Yes
-  [button] No
-  <input:checkbox name=6b8247fa-8244-4c85-8f04-37ed26d52643 question-answered>
-label: If no to the prior question, are you willing to relocate to within a 45 minute commute?
-  [button] Yes
-  [button] No
-  <input:checkbox name=321d5af1-220f-40bc-80e2-28d22baad98a question-unanswered>
-label: How did you hear about this opportunity?
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Topline Pro careers page
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Glassdoor
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Handshake
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: BuiltIn
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: VentureFizz
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Topline Pro Employee
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Professional Network
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: YCombinator Job Board
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Indeed
-  <input:checkbox #fbd49f17-76cf-4328-94d8-d177b8620a83_728136ae-d0b1-4dc5-b8f4 question-unanswered>
-label: Other
-label: If "other" please specify:
-  <input:text #cc62d468-4e5a-4380-8d83-78d244ce19ad empty>
-label: If you were referred, please let us know by who!
-  <input:text #bcd85537-aa9e-48e5-9202-8904405503fc filled>
-label: Tell us briefly what makes you excited about being a Workplace Coordinator for Topline Pro!
-  <textarea #ff428d40-a71d-4f98-b495-b89b6d8fdbf9 required filled>
-  [button] Submit Application
-
-=== 2026-10-08 02:24:32  unconfirmed  Financial Analyst @ vynca
-url: https://jobs.ashbyhq.com/vynca/96224a0a-092d-475c-97f7-c4d204981218/application
-stage: page 1
-why: no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://www.recaptcha.net/recaptcha/api2/clr -> 200; POST https://bd6c562668d82901b999366b76ef7a22.seondnsresolve.com/ -> 200; POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; page ends: 'e of the classifications of protected veteran listed 
-# Financial Analyst
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: We offer competitive compensation based on factors such as experience, skills, location, company needs, and market demands.
-! We couldn't submit your application Your application submission was flagged as possible spam. If you believe this was a mistake, please submit your application again.
-# Try these steps
-  text: Legitimate applications are occasionally flagged by mistake. Try these in order:
-  text: Turn off your VPN or proxy
-  text: Use your regular network connection instead.
-  text: Temporarily pause ad blockers and privacy tools.
-  text: Try another browser or device
-  text: Make sure the browser is up to date.
-  text: Mobile data often works better than public Wi-Fi.
-  text: Wait a few minutes and retry. As a last resort, enable JavaScript if it’s disabled, or clear this site’s cookies and cache in your browser s
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #3166e63e-9b05-4780-be3b-b1759a8dec7c required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Are you legally authorized to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=0b21fc27-8cb3-4453-a6ec-6d9406d048cb question-answered>
-label: Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)?
-  [button] Yes
-  [button] No
-  <input:checkbox name=b356dcfa-02e3-4840-babb-11bd27079158 question-unanswered>
-label: Please list your salary expectations.
-  <input:text #288b0127-27b1-42c8-9a8a-5dda34bb2217 required filled>
-label: Please rate your Excel knowledge.
-  <input:radio #fd235993-44c6-4953-8b58-7f123606c2c4_322d2f89-a29e-4cfa-adef question-answered>
-label: Beginner
-  <input:radio #fd235993-44c6-4953-8b58-7f123606c2c4_322d2f89-a29e-4cfa-adef question-answered>
-label: Intermediate
-  <input:radio #fd235993-44c6-4953-8b58-7f123606c2c4_322d2f89-a29e-4cfa-adef question-answered>
-label: Advanced
-  <input:radio #fd235993-44c6-4953-8b58-7f123606c2c4_322d2f89-a29e-4cfa-adef question-answered>
-label: Expert
-label: Are you comfortable meeting on-site in Denver, CO when needed? (i.e trainings, team on-sites etc.)
-  [button] Yes
-  [button] No
-  <input:checkbox name=a083f8fe-c73b-4ad2-950b-6f6f36ada653 question-answered>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Vynca provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation, 
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_race- question-answered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_veter question-answered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_veter question-answered>
-label: I am not a protected veteran
-  <input:radio #747ff4b0-cfb1-4463-9c53-6486d738d02a__systemfield_eeoc_veter question-answered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application
-
-=== 2026-10-08 02:28:16  skipped  Assistant Manager, Inventory Planning & Management @ kissusa
-url: https://kissusa.wd12.myworkdayjobs.com/kiss_careers_external/job/USA-NY-Port-Washington-HQ/Assistant-Manager--Inventory-Planning---Management_R4250/apply
-stage: Application Questions
-why: can't truthfully answer required: Did you sign a Non-Compete Agreement with your previous/curr
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Assistant Manager, Inventory Planning & Management
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-761d64f4eedd100129aaef6bae800000}
-label: Are you legally authorized to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100129aaef6bae800000
- {formField-761d64f4eedd100208ee2fc54e180000}
-label: Do you now, or will you any time in the future, require Visa sponsorship to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100208ee2fc54e180000
- {formField-541e7016257b1002093021113ca60000}
-label: What are your salary expectations for this position?*
-  <input:text #primaryQuestionnaire--541e7016257b1002093021113ca60000 required empty>
- {formField-761d64f4eedd100129aaf00569200004}
-label: Have you ever been employed at KISS or any affiliates before?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100129aaf00569200004
- {formField-761d64f4eedd100129aaf09f033f0003}
-label: Can you commute to work without any concerns or difficulties?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100129aaf09f033f0003
- {formField-761d64f4eedd100129aaf1389b2f0002}
-label: Do you have any family member(s)/friend(s) who work(ed) at KISS or any affiliates before/now?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100129aaf1389b2f0002
- {formField-761d64f4eedd100129aaf26bda550002}
-label: Did you sign a Non-Compete Agreement with your previous/current employer?*
-  [dropdown] nothing chosen #primaryQuestionnaire--761d64f4eedd100129aaf26bda550002
- {formField-761d64f4eedd100129aaf3059a270002}
-label: If you are a third-party recruiter referring a candidate, please specify the name of your Agency.
-  <textarea #primaryQuestionnaire--761d64f4eedd100129aaf3059a270002 empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] KISS Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:30:27  skipped  Financial Analyst 1 - Controller @ mtb
-url: https://mtb.wd5.myworkdayjobs.com/mtb/job/Buffalo-NY/Financial-Analyst-1---Controller_R90566/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Please select the ethnicity which most accurately describes 
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Financial Analyst 1 - Controller
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Personal Data Statement
-  text: (Note: On January 21, 2025, Executive Order 14173 revoked Executive Order 11246. In accordance with Executive Order 14173, M&T has ceased al
-  text: Completion of the form is entirely voluntary. Whatever your decision, it will not be considered in the hiring process or thereafter. Any inf
-  text: , and subsidiaries including Wilmington Trust are
-  text: Recently Separated Veteran:
-  text: Active Duty Wartime or Campaign Badge Veteran:
-  text: Armed Forces Service Medal Veteran:
-  text: Protected veterans may have additional rights under USERRA—the Uniformed Services Employment and Reemployment Rights Act. In particular, if 
- {formField-gender}
-label: Please select your gender.*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-ethnicity}
-label: Please select the ethnicity which most accurately describes how you identify yourself.*
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-hispanicOrLatino}
-label: Hispanic or Latino?
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-veteranStatus}
-label: Please select your veteran status.*
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: We appreciate your interest in employment with M&T Bank. By submitting your application, I hereby understand and agree to the use of an elec
-  text: 1. I certify that all answers and information given by me (including any materials such as resumes) are true, correct and complete
-  text: 2. I understand that any misrepresentation, false statement or omission in any answers, information or materials I provide may be reason for
-  text: 3. I acknowledge and agree to receive information presented in this on-line "pre" and "post" employment process electronically. The informat
-  text: <email>.
-  text: If you are applying for a job that will require you to possess FINRA licensures, please click on the disclosure below:
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:34:12  skipped  Associate Professional, Financial Solutions Rep @ ingrammicro
-url: https://ingrammicro.wd5.myworkdayjobs.com/ingrammicro/job/Buffalo-NY-United-States-of-America/Associate-Professional--Financial-Solutions-Rep_R-117770/apply
-stage: Application Questions
-why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.', 'Error-What is your desired compensation (USD)? The number entered is too large.']; fields flagged: ['What is your desired compensation (USD)?']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Associate Professional, Financial Solutions Rep
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-# Errors Found
-! Error-What is your desired compensation (USD)? The number entered is too large. {errorHeading}
-{applyFlowPrimaryQuestionsPage}
-  text: In accordance with your communication preferences, which may be by SMS or other mobile device messaging platforms, messaging and data rates 
- {formField-38c9e71adf221001fddeddc5409f0000}
-label: Are you comfortable with Ingram Micro using Artificial Intelligence to evaluate your profile for future job op
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fddeddc5409f0000
- {formField-38c9e71adf221001fddedef8a9cf0000}
-label: Do you consent to the use of automated tools to analyze and rank your application against the specific require
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fddedef8a9cf0000
- {formField-38c9e71adf221001fdba9cbd70ca0000}
-label: What is your desired compensation (USD)?*
-  <input:text #primaryQuestionnaire--38c9e71adf221001fdba9cbd70ca0000 required INVALID filled>
-! Error: The number entered is too large. {inputAlert}
- {formField-38c9e71adf221001fdba9cbd70ca0001}
-label: What is your highest level of completed education?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9cbd70ca0001
- {formField-38c9e71adf221001fdba9d57221d0005}
-label: Are you a party to any non-compete agreement?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9d57221d0005
- {formField-38c9e71adf221001fdba9df0d6980002}
-label: Have you worked for Ingram Micro before?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9df0d6980002
- {formField-38c9e71adf221001fdba9df0d6980005}
-label: Are you authorized to work lawfully in the United States?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9df0d6980005
- {formField-38c9e71adf221001fdba9df0d6980008}
-label: Will you now or in the future require sponsorship for an immigration-related employment benefit (i.e.: H-1B vi
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9df0d6980008
- {formField-38c9e71adf221001fdba9e8a90ea0002}
-label: What is your Preferred Language?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9e8a90ea0002
- {formField-38c9e71adf221001fdba9e8a90ea0008}
-label: What is your Preferred Contact method?*
-  [dropdown] chosen #primaryQuestionnaire--38c9e71adf221001fdba9e8a90ea0008
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Ingram Micro Privacy Statement and Notice at Collection For  {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:34:25  blocked  Operations Associate @ testendouble
-url: https://careers.actgroup.com/v/8770718002
-why: no application form found on page
-# Bad gateway Error code 502
-# Browser
-# Cloudflare
-# Host
-# What happened?
-  text: The web server reported a bad gateway error.
-# What can I do?
-  text: Please try again in a few minutes.
-  [button] Click to reveal
-
-=== 2026-10-08 02:35:32  skipped  Product Operations Associate, Aladdin Platform Engineering @ blackrock
-url: https://blackrock.wd1.myworkdayjobs.com/blackrock_professional/job/New-York-NY/Product-Operations-Associate--Aladdin-Platform-Engineering_R266544/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Product Operations Associate, Aladdin Platform Engineering
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Equal Opportunity
-  text: EEO and Veteran Information
-  text: <email>
-  text: https://www.blackrock.com/corporate/compliance/privacy-policy
-  text: Voluntary Self Identification of Veteran Status
-  text: As a federal contractor, the firm is subject to Section 4212 of the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended (V
-  text: How Do You Know if You Are a Protected Veteran under VEVRAA?
-  text: which is defined as occurring from August 2, 1990 to the present.
-  text: What Categories of Veterans Are “Protected” by VEVRAA?
-  text: “Protected” veterans include the following categories: (1) disabled veterans; (2) recently separated veterans; (3) active duty wartime or ca
-  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
-  text: a person who was discharged or released from active duty because of a service-connected disability.
-  text: recently separated veteran
-  text: active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
- {formField-gender}
-label: What is your gender?*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-ethnicity}
-label: Please select the race/ethnicity option with which you most self-identify.*
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-hispanicOrLatino}
-label: Are you Hispanic or Latino?*
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-veteranStatus}
-label: Do you identify as a veteran?*
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: You acknowledge that when you submit your resume or an employment application, BlackRock will be collecting, retaining, disclosing and using
-  text: BlackRock’s Privacy Policy
-  text: 4. You acknowledge that you are 18 years or older.​
-  text: 5. You certify that the information contained in this application is true and complete to the best of your knowledge and understand that any
- {formField-acceptTermsAndAgreements}
-label: Yes*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:37:36  skipped  Analyst, Business Development & Innovation @ disney
-url: https://disney.wd5.myworkdayjobs.com/disneycareer/job/New-York-NY-USA/Analyst--Business-Development---Innovation_10160018-1/apply
-stage: Application Questions
-why: can't truthfully answer required: Company's social responsibility; Company invests in education; Company reputation; Company values its employees; Friends/Family work at Disney; Opportunity for career advancement; Park admission and discounts; Other
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Careers Homepage {navigationItem-Careers Homepage}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Analyst, Business Development & Innovation
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-80e74446762e100116719d186ff30000}
-label: If on a previous page, you linked to a website or portfolio that requires a password, please list the credenti
-  <textarea #primaryQuestionnaire--80e74446762e100116719d186ff30000 empty>
- {formField-80e74446762e100116719d186ff30001}
-label: Are you legally authorized to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719d186ff30001
- {formField-80e74446762e100116719db255220000}
-label: Will you now or in the future require sponsorship for employment visa status such as H-1B, H-1B1, E-3, O-1, TN
-  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719db255220000
- {formField-80e74446762e100116719db255220003}
-label: Do you consent to the use of your personal information for consideration for future job and career opportuniti
-  text: Walt Disney Family of Companies
-  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719db255220003
- {formField-80e74446762e100116719db255220006}
-label: Which of these potential reasons were important to your decision to apply for a position with The Walt Disney 
-  <input:checkbox #e87adc98d492100165cd169453b00000-80e74446762e100116719db2552 required question-unanswered>
-label: Company's social responsibility
-  <input:checkbox #e87adc98d492100165cd169453b00002-80e74446762e100116719db2552 required question-unanswered>
-label: Company invests in education
-  <input:checkbox #e87adc98d492100165cd172ebad90001-80e74446762e100116719db2552 required question-unanswered>
-label: Company reputation
-  <input:checkbox #e87adc98d492100165cd172ebad90003-80e74446762e100116719db2552 required question-unanswered>
-label: Company values its employees
-  <input:checkbox #e87adc98d492100165cd172ebad90005-80e74446762e100116719db2552 required question-unanswered>
-label: Friends/Family work at Disney
-  <input:checkbox #e87adc98d492100165cd17c8fb4b0001-80e74446762e100116719db2552 required question-unanswered>
-label: Opportunity for career advancement
-  <input:checkbox #e87adc98d492100165cd17c8fb4b0003-80e74446762e100116719db2552 required question-unanswered>
-label: Park admission and discounts
-  <input:checkbox #e87adc98d492100165cd17c8fb4b0005-80e74446762e100116719db2552 required question-unanswered>
-label: Other
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:38:33  skipped  Business Analyst @ vsp
-url: https://vsp.wd1.myworkdayjobs.com/vspvisioncareers/job/Remote-US/Business-Analyst_R-10014/apply
-stage: Application Questions
-why: can't truthfully answer required: Authorization to Use Image, Name, Identifying Information an
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# VSP Vision
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Business Analyst
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-8ce4d04d21b810015ce5451d97cf0000}
-label: Will you now or in the future require sponsorship for employment Visa status (e.g. H1-B visa status)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--8ce4d04d21b810015ce5451d97cf0000
- {formField-8ce4d04d21b810015ce545b8589f0001}
-label: Are you eligible to work in the country in which this position is located?*
-  [dropdown] nothing chosen #primaryQuestionnaire--8ce4d04d21b810015ce545b8589f0001
- {formField-8ce4d04d21b810015ce545b8589f0004}
-label: What are your salary expectations?
-  <input:text #primaryQuestionnaire--8ce4d04d21b810015ce545b8589f0004 empty>
- {formField-8ce4d04d21b810015ce5465312290000}
-label: If required, are you able to work overtime including weekends?
-  [dropdown] nothing chosen #primaryQuestionnaire--8ce4d04d21b810015ce5465312290000
- {formField-8ce4d04d21b810015ce5465312290003}
-label: Do you meet the years of experience required for this position?*
-  [dropdown] nothing chosen #primaryQuestionnaire--8ce4d04d21b810015ce5465312290003
- {formField-8ce4d04d21b810015ce5465312290006}
-label: Are you able to perform the essential functions of the job for which you are applying either with or without r
-  [dropdown] nothing chosen #primaryQuestionnaire--8ce4d04d21b810015ce5465312290006
- {formField-ef9542525e7f10015cc71b38c2750000}
-label: Authorization to Use Image, Name, Identifying Information and/or Voice By choosing "Yes" below, I agree to all
-  text: Authorization to Use Image, Name, Identifying Information and/or Voice
-  text: By choosing "Yes" below, I agree to allow Vision Service Plan and its affiliates and subsidiaries (the “Company”) to capture, retain, and us
-  text: By choosing "Yes" below, I affirm that I am over the age of 18 and that I have read, understand, and agree to this Authorization.
-  [dropdown] nothing chosen #primaryQuestionnaire--ef9542525e7f10015cc71b38c2750000
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] VSP Vision Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:40:36  skipped  BlackRock Active Investment Stewardship Operations - Associate @ blackrock
-url: https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional/job/New-York-NY/BlackRock-Active-Investment-Stewardship-Operations---Associate_R266656/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# BlackRock Active Investment Stewardship Operations - Associate
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Equal Opportunity
-  text: EEO and Veteran Information
-  text: <email>
-  text: https://www.blackrock.com/corporate/compliance/privacy-policy
-  text: Voluntary Self Identification of Veteran Status
-  text: As a federal contractor, the firm is subject to Section 4212 of the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended (V
-  text: How Do You Know if You Are a Protected Veteran under VEVRAA?
-  text: which is defined as occurring from August 2, 1990 to the present.
-  text: What Categories of Veterans Are “Protected” by VEVRAA?
-  text: “Protected” veterans include the following categories: (1) disabled veterans; (2) recently separated veterans; (3) active duty wartime or ca
-  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
-  text: a person who was discharged or released from active duty because of a service-connected disability.
-  text: recently separated veteran
-  text: active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
- {formField-gender}
-label: What is your gender?*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-ethnicity}
-label: Please select the race/ethnicity option with which you most self-identify.*
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-hispanicOrLatino}
-label: Are you Hispanic or Latino?*
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-veteranStatus}
-label: Do you identify as a veteran?*
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: You acknowledge that when you submit your resume or an employment application, BlackRock will be collecting, retaining, disclosing and using
-  text: BlackRock’s Privacy Policy
-  text: 4. You acknowledge that you are 18 years or older.​
-  text: 5. You certify that the information contained in this application is true and complete to the best of your knowledge and understand that any
- {formField-acceptTermsAndAgreements}
-label: Yes*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-08 02:42:10  unconfirmed  Accounting Coordinator @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/8631912002/
-stage: page 1
-why: no confirmation after submit; page errors: ['Please enter a valid LinkedIn profile URL.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Str
-  <input empty>
-# Accounting Coordinator
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  [button] +1
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile INVALID filled>
-label: Please enter a valid LinkedIn profile URL.
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-  [button] Select an option
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  [button] Select an option
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  <input:text empty>
-  [button] Select an option
-  text: Secondary Major / Field of study
-  [button] Select an option
-label: Month
-  <input:text empty>
-label: Year
-  <input:text empty>
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
-=== 2026-10-08 02:44:09  blocked  Associate Sales Engineer, SE Desk - Northeast @ samsara
-url: https://www.samsara.com/company/careers/roles/7311741
-why: no application form found on page
-# Associate Sales Engineer, SE Desk - Northeast
-  [button] Apply Now
-  text: Samsara (NYSE: IOT) is the pioneer of the Connected Operations™ Cloud, which is a platform that enables organizations that depend on physica
-  text: Working at Samsara means you’ll help define the future of physical operations and be on a team that’s shaping an exciting array of product s
-  text: As a Sales Engineer (SE) at Samsara, you’d be part of a diverse group of technically-minded folks working together to bring our unique conne
-  text: This is a remote position open to candidates residing in the Northeast region within the US except Alaska, California (non-Bay Area), Connec
-  text: Relocation expenses will not be provided for this role.
-  text: You want to impact the industries that run our world:
-  text: You have an innate curiosity about how businesses work:
-  text: You build genuine relationships with your customers:
-  text: You want to be with the best:
-# In this role, you will:
-  text: Become an expert on Samsara products: where the rubber of cutting-edge tech (IoT, AI, computer vision) meets the road of driving digital tra
-  text: Demonstrate quick and efficient discovery to understand customer needs and answer any tech questions with the goal of doing so on a single c
-  text: Be highly available for standard demo/account coverage and temporary technical expertise across the entire Samsara Sales Team.
-  text: Understand how our devices are installed (enough to explain to a prospect over the phone).
-  text: Educate customers on technical aspects of APIs, and be able to deploy scripts leveraging the Samsara API to a testing environment on demand.
-  text: Be an advocate for your AE's, prospects, and customers when it comes to internal tech conversations.
-  text: Act as a liaison between Samsara’s product and sales teams, translating technical feedback and enrolling the right customers in our beta pro
-  text: Champion, role model, and embed Samsara’s values and operating principles as we scale globally and across new offices
-  text: BS in Electrical Engineering, Computer Science, Mechanical Engineering, Industrial Engineering, or related discipline
-  text: Preferred 1+ years experience working with customers in a pre-sales or support capacity
-  text: Ability to explain complex technical concepts to non-technical audiences
-  text: Basic understanding of electronics and electrical systems
-  text: Well-versed in one of the following: cloud software, networking, automation and control systems
-  text: Experience tinkering with hardware gadgets, sensors, or vehicles is a plus
-  text: The range of annual on-target earnings (OTE) range for full-time employees for this position is below. Please note that OTE pay may vary dep
-  text: Beyond compensation, we provide the foundations that enable long-term success: a flexible, employee-led remote model, a professional develop
-  text: At Samsara, we embrace a flexible working model that caters to the diverse needs of our teams. Our offices are open for those who prefer to 
-  text: At Samsara, we welcome everyone regardless of their background. All qualified applicants will receive consideration for employment without r
-  text: <email>
-  text: Our Commitment to Authenticity
-  text: Fraudulent Employment Offers
-# Samsara's Mission
-  text: Improve the safety, efficiency, and sustainability of the operations that power the global economy.
-# Why Samsara?
-# Account Executives at Samsara
-# Announcing Samsara Intelligence: AI to keep the world running
-# Associate Sales Engineer, SE Desk - Northeast
-<iframe https://job-boards.greenhouse.io/embed/job_app>
-  text: Safety Reporting & Insights
-  text: Transportation & Logistics
-  [button] English (CA) Français (CA) Deutsch (DE,AT,CH) Français (FR) 
-  [button] Your Privacy Choices
-  text: © 2026 Samsara Inc. All rights reserved.
-
-=== 2026-10-08 02:44:47  blocked  Associate Sales Engineer, SE Desk - Southeast @ samsara
-url: https://www.samsara.com/company/careers/roles/7848351
-why: no application form found on page
-# Associate Sales Engineer, SE Desk - Southeast
-  [button] Apply Now
-  text: Samsara (NYSE: IOT) is the pioneer of the Connected Operations™ Cloud, which is a platform that enables organizations that depend on physica
-  text: Working at Samsara means you’ll help define the future of physical operations and be on a team that’s shaping an exciting array of product s
-  text: As a Sales Engineer (SE) at Samsara, you’d be part of a diverse group of technically-minded folks working together to bring our unique conne
-  text: This is a remote position open to candidates residing in the Southeast region within the US except Alaska, California (non-Bay Area), Connec
-  text: Relocation expenses will not be provided for this role.
-  text: You want to impact the industries that run our world:
-  text: You have an innate curiosity about how businesses work:
-  text: You build genuine relationships with your customers:
-  text: You want to be with the best:
-# In this role, you will:
-  text: Become an expert on Samsara products: where the rubber of cutting-edge tech (IoT, AI, computer vision) meets the road of driving digital tra
-  text: Demonstrate quick and efficient discovery to understand customer needs and answer any tech questions with the goal of doing so on a single c
-  text: Be highly available for standard demo/account coverage and temporary technical expertise across the entire Samsara Sales Team.
-  text: Understand how our devices are installed (enough to explain to a prospect over the phone).
-  text: Educate customers on technical aspects of APIs, and be able to deploy scripts leveraging the Samsara API to a testing environment on demand.
-  text: Be an advocate for your AE's, prospects, and customers when it comes to internal tech conversations.
-  text: Act as a liaison between Samsara’s product and sales teams, translating technical feedback and enrolling the right customers in our beta pro
-  text: Champion, role model, and embed Samsara’s values and operating principles as we scale globally and across new offices
-  text: BS in Electrical Engineering, Computer Science, Mechanical Engineering, Industrial Engineering, or related discipline
-  text: Preferred 1+ years experience working with customers in a pre-sales or support capacity
-  text: Ability to explain complex technical concepts to non-technical audiences
-  text: Basic understanding of electronics and electrical systems
-  text: Well-versed in one of the following: cloud software, networking, automation and control systems
-  text: Experience tinkering with hardware gadgets, sensors, or vehicles is a plus
-  text: The range of annual on-target earnings (OTE) range for full-time employees for this position is below. Please note that OTE pay may vary dep
-  text: Beyond compensation, we provide the foundations that enable long-term success: a flexible, employee-led remote model, a professional develop
-  text: At Samsara, we embrace a flexible working model that caters to the diverse needs of our teams. Our offices are open for those who prefer to 
-  text: At Samsara, we welcome everyone regardless of their background. All qualified applicants will receive consideration for employment without r
-  text: <email>
-  text: Our Commitment to Authenticity
-  text: Fraudulent Employment Offers
-# Samsara's Mission
-  text: Improve the safety, efficiency, and sustainability of the operations that power the global economy.
-# Why Samsara?
-# Account Executives at Samsara
-# Announcing Samsara Intelligence: AI to keep the world running
-# Associate Sales Engineer, SE Desk - Southeast
-<iframe https://job-boards.greenhouse.io/embed/job_app>
-  text: Safety Reporting & Insights
-  text: Transportation & Logistics
-  [button] English (CA) Français (CA) Deutsch (DE,AT,CH) Français (FR) 
-  [button] Your Privacy Choices
-  text: © 2026 Samsara Inc. All rights reserved.
-
 === 2026-10-08 02:45:29  blocked  Associate Sales Engineer, SE Desk - TOLA @ samsara
 url: https://www.samsara.com/company/careers/roles/7848363
 why: no application form found on page
@@ -5214,4 +3913,1273 @@ label: Upload your resume as a PDF file *
   text: Jane Street is an Equal Opportunity Employer
   text: Fraud and Impersonation Warnings
   text: Autoriteit Financiële Markten
+
+=== 2026-10-08 04:26:35  skipped  2027 Management Development Program - Wilmington Advisors (Buffalo, NY) @ mtb
+url: https://mtb.wd5.myworkdayjobs.com/campus/job/Buffalo-NY/XMLNAME-2027-Management-Development-Program---Wilmington-Advisors--Buffalo--NY-_R89084/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Please select the ethnicity which most accurately describes 
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# 2027 Management Development Program - Wilmington Advisors (Buffalo, NY)
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data Statement
+  text: (Note: On January 21, 2025, Executive Order 14173 revoked Executive Order 11246. In accordance with Executive Order 14173, M&T has ceased al
+  text: Completion of the form is entirely voluntary. Whatever your decision, it will not be considered in the hiring process or thereafter. Any inf
+  text: , and subsidiaries including Wilmington Trust are
+  text: Recently Separated Veteran:
+  text: Active Duty Wartime or Campaign Badge Veteran:
+  text: Armed Forces Service Medal Veteran:
+  text: Protected veterans may have additional rights under USERRA—the Uniformed Services Employment and Reemployment Rights Act. In particular, if 
+ {formField-gender}
+label: Please select your gender.*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-hispanicOrLatino}
+label: Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Please select your veteran status.*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: We appreciate your interest in employment with M&T Bank. By submitting your application, I hereby understand and agree to the use of an elec
+  text: 1. I certify that all answers and information given by me (including any materials such as resumes) are true, correct and complete
+  text: 2. I understand that any misrepresentation, false statement or omission in any answers, information or materials I provide may be reason for
+  text: 3. I acknowledge and agree to receive information presented in this on-line "pre" and "post" employment process electronically. The informat
+  text: <email>.
+  text: If you are applying for a job that will require you to possess FINRA licensures, please click on the disclosure below:
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:30:41  skipped  Admin Business Coordinator - BlackRock Capital Markets, BGM @ blackrock
+url: https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional/job/New-York-NY/Admin-Business-Coordinator---BlackRock-Capital-Markets--BGM_R266628/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Yes*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Admin Business Coordinator - BlackRock Capital Markets, BGM
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Equal Opportunity
+  text: EEO and Veteran Information
+  text: <email>
+  text: https://www.blackrock.com/corporate/compliance/privacy-policy
+  text: Voluntary Self Identification of Veteran Status
+  text: As a federal contractor, the firm is subject to Section 4212 of the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended (V
+  text: How Do You Know if You Are a Protected Veteran under VEVRAA?
+  text: which is defined as occurring from August 2, 1990 to the present.
+  text: What Categories of Veterans Are “Protected” by VEVRAA?
+  text: “Protected” veterans include the following categories: (1) disabled veterans; (2) recently separated veterans; (3) active duty wartime or ca
+  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
+  text: a person who was discharged or released from active duty because of a service-connected disability.
+  text: recently separated veteran
+  text: active duty wartime or campaign badge veteran
+  text: Armed forces service medal veteran
+ {formField-gender}
+label: What is your gender?*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-ethnicity}
+label: Please select the race/ethnicity option with which you most self-identify.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?*
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Do you identify as a veteran?*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: You acknowledge that when you submit your resume or an employment application, BlackRock will be collecting, retaining, disclosing and using
+  text: BlackRock’s Privacy Policy
+  text: 4. You acknowledge that you are 18 years or older.​
+  text: 5. You certify that the information contained in this application is true and complete to the best of your knowledge and understand that any
+ {formField-acceptTermsAndAgreements}
+label: Yes*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:31:24  blocked  Data & Technology Track Associate - Rotational Program @ capital-group
+url: https://capgroup.wd1.myworkdayjobs.com/en-US/capitalgroupcareers/job/New-York/CAMPUS--Capital-Group-Rotational-Program---Data---Tech-Track-Associate---US---New-York_JR7427-1/apply/applyManually
+stage: account
+why: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Settings
+delgado@alumn; logoLink:; logo:; headerTitle:; navigationContainer:English
+Settings
+delgado@alumn; utilityButtonBar:English
+Settings
+delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-bu
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] CG Careers Home {navigationItem-CG Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{alreadyAppliedPage}
+# CAMPUS: Capital Group Rotational Program - Data & Tech Track Associate - US - New York
+  text: You've already applied for this job.
+  [button] View My Applications
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:34:52  skipped  Financial Analyst @ exactcare
+url: https://exactcare.wd1.myworkdayjobs.com/anewhealth_career_site/job/OH---Remote/Financial-Analyst_R-108782/apply
+stage: Application Questions
+why: can't truthfully answer required: We also offer all applicants the opportunity to opt-out of u
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers at AnewHealth
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Financial Analyst
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+  text: Please complete all required sections of the application. Fields marked as required must be completed before submission.
+ {formField-3bac844e48ef1002064e92e7cf1e0001}
+label: Have you previously applied to AnewHealth or any of its subsidiaries?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e92e7cf1e0001
+ {formField-3bac844e48ef1002064e9381d8160005}
+label: What is your earliest available start date?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--3bac844e48ef1002064e9381d8160005-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--3bac844e48ef1002064e9381d8160005-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--3bac844e48ef1002064e9381d8160005-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-3bac844e48ef1002064e9381d8160006}
+label: What is the highest level of education you have completed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e9381d8160006
+ {formField-3bac844e48ef1002064e941b904c0003}
+label: Are you legally authorized to work in the United States? (Proof of eligibility will be required upon hire.)*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e941b904c0003
+ {formField-3bac844e48ef1002064e941b904c0006}
+label: Do you now or in the future require immigration-related support or sponsorship to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e941b904c0006
+ {formField-3bac844e48ef1002064e94b5b2540002}
+label: I attest that I have reviewed the job description, understand the scope of the role, and meet the qualificatio
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e94b5b2540002
+ {formField-3bac844e48ef1002064e94b5b2540005}
+label: Are you able to meet the attendance requirements listed in the job description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e94b5b2540005
+ {formField-3bac844e48ef1002064e94b5b2540008}
+label: What languages are you comfortable conducting business in?*
+  <textarea #primaryQuestionnaire--3bac844e48ef1002064e94b5b2540008 required empty>
+ {formField-3bac844e48ef1002064e94b5b2540009}
+label: Do you have any relatives currently employed by this organization?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e94b5b2540009
+ {formField-3bac844e48ef1002064e954fc1f00003}
+label: Are you currently eligible to work with federal healthcare programs (e.g., Medicare, Medicaid, or other govern
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e954fc1f00003
+ {formField-3bac844e48ef1002064e954fc1f00006}
+label: Are you currently bound by any non-compete or non-disclosure agreements?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e954fc1f00006
+ {formField-3bac844e48ef1002064e95ea0e3d0002}
+label: What do you expect the minimum Annual Salary for this position to be? Please note the following important deta
+  text: Annual Salary for this position to be?
+  text: Please note the following important details:
+  text: Special characters such as commas, decimals, or symbols
+  <input:text #primaryQuestionnaire--3bac844e48ef1002064e95ea0e3d0002 required empty>
+ {formField-3bac844e48ef1002064e95ea0e3d0003}
+label: What do you expect the maximum Annual Salary for this position to be? Please note the following important deta
+  <input:text #primaryQuestionnaire--3bac844e48ef1002064e95ea0e3d0003 required empty>
+ {formField-3bac844e48ef1002064e95ea0e3d0004}
+label: Please list any upcoming time off you have planned.
+  <textarea #primaryQuestionnaire--3bac844e48ef1002064e95ea0e3d0004 empty>
+ {formField-3bac844e48ef1002064e95ea0e3d0005}
+label: We utilize advanced Artificial Intelligence (AI) technologies to enhance our recruitment process. This include
+  text: As a best practice, we offer all applicants the option to opt-out of utilizing AI to assess their applicability for this position.
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e95ea0e3d0005
+ {formField-3bac844e48ef1002064e968456790002}
+label: We also offer all applicants the opportunity to opt-out of utilizing AI to rediscover your application for fut
+  [dropdown] nothing chosen #primaryQuestionnaire--3bac844e48ef1002064e968456790002
+ {formField-3bac844e48ef1002064e968456790005}
+label: Please provide the following information for your first professional reference: Name Job Title Company Profess
+  text: Please provide the following information for your first professional reference:
+  <textarea #primaryQuestionnaire--3bac844e48ef1002064e968456790005 required empty>
+ {formField-3bac844e48ef1002064e968456790006}
+  <textarea #primaryQuestionnaire--3bac844e48ef1002064e968456790006 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:38:22  skipped  Financial Analyst @ stcharles
+url: https://stcharles.wd1.myworkdayjobs.com/external/job/Remote/Financial-Analyst_R1023322/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Please select your gender.*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] More about Careers {navigationItem-More about Careers}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Financial Analyst
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 7 Voluntary Disclosures
+label: current step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data Statement
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-gender}
+label: Please select your gender.*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Please indicate whether you are Hispanic or Latino.*
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Please indicate your U.S. veterans status.*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: PRE-EMPLOYMENT STATEMENT (Please read before signing)
+  text: I will freely and voluntarily agree to take a urine drug screen as part of the pre-employment process. I also understand that refusal to tak
+  text: I understand that a physical assessment or examination and evidence of required immunity may be required after a conditional offer of employ
+  text: I understand that this Employment Application is not an offer of employment. I understand that nothing contained in this Employment Applicat
+  text: I understand that if I am hired, I will be an employee "at will," meaning I am not hired for any definite length of time and either I or the
+  text: We are an equal opportunity employer and we welcome veterans and those who have served our country through military or volunteer service to 
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:43:04  not sent  Client Success Associate @ noomgrowth
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+# Client Success Associate
+  text: New York, New York, United States; Princeton, New Jersey, United States
+  [button] Apply
+  text: Noom is on a mission to help people live better, longer. We’re a consumer-led digital health company, connecting people to content, coaching
+  text: Noom’s Client Success team partners with employers to deliver meaningful health outcomes for their employees. We support clients throughout 
+  text: We’re looking for a Client Success Associate to support Noom’s Employer partnerships. This role is ideal for someone early in their client-f
+  text: You’ll support day-to-day account management, client launches, engagement, and renewals while learning the full client success lifecycle. Wo
+  text: Support client retention and engagement across a high-volume portfolio of Employer accounts.
+  text: Track account health, renewal dates, launch timelines, and key milestones across your portfolio.
+  text: Monitor accounts for early warning signs and proactively flag potential risks to your manager.
+  text: Maintain accurate, up-to-date client information in CRM and account-tracking tools.
+  text: Support new client implementations, launches, and ongoing account-management activities.
+  text: Respond to routine client questions and requests in a timely, professional manner.
+  text: Help drive post-launch enrollment and engagement activities.
+  text: Prepare agendas, materials, and follow-up communications for client meetings.
+  text: Manage multiple tasks, deadlines, and competing priorities across several accounts simultaneously.
+  text: Help document and maintain scalable processes as the Client Success organization grows.
+  text: 3+ years of experience in a client-facing role, such as account management, client services, customer success, implementation, or a similar 
+  text: Strong organizational skills and attention to detail, with a demonstrated ability to manage a high volume of accounts and competing prioriti
+  text: Excellent written and verbal communication skills.
+  text: Comfort working with data and basic reporting to monitor account status, milestones, and performance.
+  text: Experience using CRM platforms and account-management or project-tracking tools.
+  text: Comfort using AI tools to work more efficiently and enthusiasm for adopting new tools as our technology stack evolves.
+  text: A proactive, collaborative mindset and eagerness to learn the full client success lifecycle.
+  text: Willingness to travel occasionally, up to 20%.
+  text: What Makes This Job Amazing
+  text: Build a strong Client Success foundation.
+  text: Learn from experienced teammates.
+  text: What You’ll Earn and Enjoy
+  text: Pay that reflects your impact.
+  text: Investment in your future.
+  text: Support for growing families.
+  text: And more to help you thrive.
+  text: The expected base salary for this position is $80,000 - $100,000/year plus variable compensation - with on target earnings of ~$105,000 - $1
+  text: This role is eligible for our NYC or Princeton office locations, operating on a hybrid schedule (2 days per week on-site).
+  text: Noom is a leading whole-person health platform on a mission to help people live better, longer. We combine personalized medication with the 
+  text: We're more than a health tech company—we're a movement. This belief extends to our culture: we empower our people to think big, act boldly, 
+  text: Join us in shaping the future of health.
+  text: To help protect against potential hiring scams, please be aware that all email communications from the Noom Talent team and/or hiring manage
+  text: Interested in building your career at Noom US? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  text: <file>
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: LinkedIn Profile
+  <input:text #question_69234382 filled>
+label: Website
+  <input:text #question_69234383 filled>
+label: Are you legally authorized to work in the United States?*
+  <input:text #question_69234384 required empty>
+  [button] 
+  [button] 
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?*
+  <input:text #question_69234385 required empty>
+  [button] 
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Noom US’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any a
+label: Gender
+  <input:text #gender empty>
+  [button] 
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  text: I am not a protected veteran
+  <input:text #veteran_status empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-08 04:43:22  skipped  Strategy Associate @ oklo
+url: https://job-boards.greenhouse.io/oklo/jobs/5997237004
+stage: page 1
+why: can't truthfully answer required: Cover Letter*
+# Strategy Associate
+  text: Remote; Los Angeles or Washington, D.C. preferred
+  [button] Apply
+  text: Thanks for your interest in Oklo! We are searching for a Strategy Associate to join our team.
+  text: Oklo is seeking a Strategy Associate to support the corporate Strategy team on research, analysis, materials, and project execution. This is
+  text: You will work under the direction of the Head of Corporate Strategy and senior team members. You will own clearly defined analyses and deliv
+  text: Assignments may cover markets, customers, competitors, partnerships, business models, international opportunities, and strategic initiatives
+  text: Specific responsibilities include:
+  text: Prepare important engagements.
+  text: Support project execution.
+  text: Develop core strategy skills.
+  text: Clear writing and presentation skills.
+  text: Curiosity and learning agility.
+  text: Relevant early experience.
+  text: You are early in your career and want to learn strategy by doing substantive work inside a company. You enjoy research and analysis, care ab
+  text: About Oklo travel requirements:
+  text: Oklo requires remote employees to travel to headquarters (Santa Clara, CA) twice a quarter annually, based on business or team needs, includ
+  text: Oklo offers flexible time off, equity, bonuses, competitive pay, 401(k), health insurance (with employer contribution), HSA, FSA, flexible w
+  text: This position may involve access to information subject to U.S. export control laws. Only applicants who meet the definition of a U.S. perso
+  text: Candidates should be aware that employment may be contingent upon successful completion of a drug screening, and employees may be subject to
+# Recruitment Fraud Disclaimer
+  text: If you receive suspicious outreach or have concerns about the authenticity of any communication claiming to be from Oklo, please contact us 
+  text: Interested in building your career at Oklo? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: What are your preferred pronouns?
+  <input:text #question_17829217004[] empty>
+  [button] 
+label: LinkedIn Profile
+  <input:text #question_17829218004 empty>
+label: Website
+  <input:text #question_17829219004 empty>
+label: Are you legally authorized to work in the United States? *
+  <input:text #question_17829220004 required empty>
+  [button] 
+  <input required empty>
+label: Will you now or in the future require sponsorship for employment visa status?*
+  <input:text #question_17829221004 required empty>
+  [button] 
+  <input required empty>
+label: Export Control Question:*
+  <input:text #question_17829222004 required empty>
+  [button] 
+  <input required empty>
+  text: The questions in this section are for the sole purpose of ensuring compliance with U.S. regulations concerning the export of controlled or p
+  text: Please identify yourself as one of the following A, B, or C as described below: *
+  text: ________________________________________________________________________
+  text: a U.S. national (one born in American Samoa or the Commonwealth of the Northern Mariana Islands)
+  text: a U.S. lawful permanent resident (commonly referred to as a “green card holder”), or
+  text: a protected person under the Immigration and Nationality Act (such as an individual who the U.S. government has granted asylum or refugee st
+  text: Please identify yourself as one of the following A, B, or C as described above: *
+label: Oklo requires employees to travel twice a quarter annually to either headquarters or another designated locati
+  <input:text #question_17829223004 required empty>
+  [button] 
+  <input required empty>
+label: Are you open to relocating now or in the near future?*
+  <input:text #question_17829224004 required empty>
+  [button] 
+  <input required empty>
+label: What is your desired base compensation for this role? Note that Oklo also leverages equity as part of its comp
+  <input:text #question_17829226004 required empty>
+# 
+label: If you selected "Other," please specify:*
+  <input:text #question_20161817004 required empty>
+label: How did you hear about us?*
+  <input:text #question_20189886004[] required empty>
+  [button] 
+  <input required empty>
+label: If selected for a preliminary interview, you may be asked to work through a Python coding problem. Do you ackn
+  <input:text #question_20190014004 required empty>
+  [button] 
+  <input required empty>
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-08 04:44:00  skipped  Project Officer Associate @ stvinc
+url: https://stvinc.wd5.myworkdayjobs.com/stv/job/Empire-State-Building-New-York-New-York/Project-Officer-Associate_JR5404/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: I hereby certify that the information provided in my respons
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers
+  [button] Sign In {utilityButtonSignIn}
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Project Officer Associate
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-6f16a40cb6df10015333ed63abcb0000}
+label: What is your desired Start Date?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--6f16a40cb6df10015333ed63abcb0000-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--6f16a40cb6df10015333ed63abcb0000-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--6f16a40cb6df10015333ed63abcb0000-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-6f16a40cb6df10015333ed63abcb0001}
+label: Why are you looking to leave your current job/organization?*
+  <textarea #primaryQuestionnaire--6f16a40cb6df10015333ed63abcb0001 required empty>
+ {formField-6f16a40cb6df10015333ed63abcb0002}
+label: Please provide the preferred work location based on locations provided in the job posting*
+  <textarea #primaryQuestionnaire--6f16a40cb6df10015333ed63abcb0002 required empty>
+ {formField-6f16a40cb6df10015333edfd50f00000}
+label: Are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333edfd50f00000
+ {formField-6f16a40cb6df10015333edfd50f00004}
+label: What are your salary expectations? Please be specific.*
+  <input:text #primaryQuestionnaire--6f16a40cb6df10015333edfd50f00004 required empty>
+ {formField-6f16a40cb6df10015333edfd50f00005}
+label: Have you worked for or applied for work at STV in the past? If yes, please provide the positions(s) and the da
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333edfd50f00005
+ {formField-6f16a40cb6df10015333ee96d8660001}
+label: Are you eligible to legally work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333ee96d8660001
+ {formField-6f16a40cb6df10015333ee96d8660007}
+label: Do you have any post-employment restrictions that could impact the services that you can provide for STV such 
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333ee96d8660007
+ {formField-6f16a40cb6df10015333ef309a6e0002}
+label: Are you currently or have you in the past 2 years been a federal, state, or local government official or emplo
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333ef309a6e0002
+ {formField-6f16a40cb6df10015333ef309a6e0006}
+label: Do you have one or more active and current professional license(s)? If Yes, please provide the license name an
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333ef309a6e0006
+ {formField-6f16a40cb6df10015333efca78a60001}
+label: If you are a licensed professional, have you ever been disciplined by, entered into a settlement agreement or 
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333efca78a60001
+ {formField-6f16a40cb6df10015333efca78a60005}
+label: Do you have family members who are currently employed by STV? If Yes, please identify their name, their relati
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df10015333efca78a60005
+ {formField-6f16a40cb6df1001533bb38274af0000}
+label: Were you referred for this position by a current STV employee?*
+  [dropdown] nothing chosen #primaryQuestionnaire--6f16a40cb6df1001533bb38274af0000
+ {formField-6f16a40cb6df10015333f06427190004}
+label: I hereby certify that the information provided in my responses and attached resume is true and accurate to the
+  <input #primaryQuestionnaire--6f16a40cb6df10015333f06427190004-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--6f16a40cb6df10015333f06427190004-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--6f16a40cb6df10015333f06427190004-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+  [button] Back {pageFooterBackButton}
+  [button] Next {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:44:22  skipped  Analytics Specialist, Strategic Insights @ orchestra
+url: https://job-boards.greenhouse.io/orchestra/jobs/8842314002
+stage: page 1
+why: can't truthfully answer required: Cover Letter*
+# Analytics Specialist, Strategic Insights
+  text: New York, N.Y. or Washington, D.C.
+  [button] Apply
+  text: Civitas Public Affairs Group
+  text: People of all backgrounds and abilities are strongly encouraged to apply. Orchestra is committed to building and maintaining a diverse staff
+  text: Orchestra is looking for an Analytics Specialist to play a key role in the growth and evolution of our Strategic Insights team. We want some
+  text: This person should bring a strong foundation in analytics tools and a passion for creating compelling reports that support the agency’s insi
+  text: ACCOUNTABILITIES & QUALIFICATIONS
+  text: As an Analytics Specialist, you will:
+  text: Join a growing team of innovative analytics professionals, delivering interesting and impactful data-driven insights to a vast range of clie
+  text: Work collaboratively with various teams across the agency network to support analytics & insights needs, applying data-driven best practices
+  text: Support the execution of research projects including: desk research, designing Boolean search taxonomies, media and social media analysis, w
+  text: Support the production of reports and analysis for clients & interagency stakeholders to support data-backed findings and strategic recommen
+  text: Execute comprehensive measurement plans for analyzing owned, social, and earned properties
+  text: Assist in business development and growth by working with an interagency team to inform our proposal strategy through insights deliverables
+  text: Work closely with colleagues across the Strategic Insights team to execute research strategies (e.g., methodology selection, data capture, d
+  text: Keep up to date on best practices, tools and news in the analytics industry
+  text: Have an interest in working with cutting-edge tools and research methodologies, leveraging powerful new mediums like AI to make analysis mor
+  text: 1–3 years of full-time workplace experience; relevant internships in media monitoring and media analysis will be considered on a case-by-cas
+  text: Strong technical research methodology skills and a solid understanding of data collection best practices and tools
+  text: Self-starter mindset with a strong sense of ownership, independence, and accountability
+  text: Proficiency in Excel or Google Sheets
+  text: Familiarity with deck production, data visualization, and presentation tools
+  text: Proven ability to manage multiple analysis projects simultaneously within a fast-paced, detail-oriented environment
+  text: Strong data collection, interpretation, and analytical skills
+  text: Experience supporting integrated marketing, communications or digital campaigns in an agency, consultancy or in-house environment
+  text: Experience leveraging media monitoring and social listening tools (e.g., Hootsuite, Brandwatch, Meltwater)
+  text: Experience with audience intelligence tools (e.g., GWI, MRI Simmons, Stat Social, YouGov, Statista)
+  text: Experience with data visualization tools such as Tableau and Looker
+  text: Curiosity and engagement when analyzing complex or technical datasets
+  text: Strong digital storytelling abilities
+  text: To ensure that applicants are matched with the job that best suits their qualifications and interests, information that you submit may be sh
+  text: By providing your information, you are consenting to allow us and our subsidiaries to keep your information on file and to contact you regar
+  text: Interested in building your career at Orchestra? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name*
+  <input:text #preferred_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: LinkedIn Profile*
+  <input:text #question_38511742002 required empty>
+label: Website
+  <input:text #question_38511743002 empty>
+label: Are you authorized to work in the U.S.?*
+  <input:text #question_38511744002 required empty>
+  [button] 
+  <input required empty>
+label: Will you now, or in the future, require sponsorship for employment visa status (e.g., H-1B visa status)?*
+  <input:text #question_38511745002 required empty>
+  [button] 
+  <input required empty>
+label: What is your expected salary range?*
+  <input:text #question_38511746002 required empty>
+label: How did you hear about this role?*
+  <input:text #question_38511747002 required empty>
+  [button] 
+  <input required empty>
+label: If you were referred by an Orchestra employee, please share their name below:
+  <input:text #question_38511748002 empty>
+label: Do you currently reside within a commutable distance to an Orchestra office?*
+  <input:text #question_38511749002 required empty>
+  [button] 
+  <input required empty>
+label: How many years of relevant, full-time experience do you have?*
+  <input:text #question_38511750002 required empty>
+  [button] 
+  <input required empty>
+label: Do you have prior experience working in a communications or marketing agency?*
+  <input:text #question_38511751002 required empty>
+  [button] 
+  <input required empty>
+# Voluntary & Anonymous Custom Demographics Survey
+label: I currently identify my gender as:
+  <input:text #<phone> empty>
+  [button] 
+label: I identify my ethnicity as (mark all that apply):
+  <input:text #<phone> empty>
+  [button] 
+label: Veteran Status:
+  <input:text #<phone> empty>
+  [button] 
+label: I have a disability.
+  <input:text #<phone> empty>
+  [button] 
+label: I identify as currently living with the following disabilities:
+  <input:text #<phone> empty>
+  [button] 
+label: I identify as a first-generation college graduate.
+  <input:text #<phone> empty>
+  [button] 
+label: I identify as LGBTQIA+.
+  <input:text #<phone> empty>
+  [button] 
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-08 04:46:41  blocked  Strategic Implementation Engineer - US @ fingerprint
+url: https://fingerprint.com/careers/jobs/apply/
+why: no application form found on page
+  [button] Product
+  [button] Use Cases
+  [button] Resources
+# Strategic Implementation Engineer - US
+  [button] Apply for this job
+  text: Fingerprint is a globally dispersed, 100% remote company.
+  text: Location Preference: Remote anywhere in the US
+  text: Strategic Implementation Engineer
+  text: 10+ years of experience in a customer success, professional services, or solutions engineering role, preferably within a SaaS or enterprise 
+  text: Strong hands-on JavaScript experience in a professional environment, especially in debugging or building integrations
+  text: Experience working with RESTful APIs and other web services
+  text: Strong SQL skills; PostgreSQL experience preferred. It's used regularly to debug issues and to surface insights into customer usage and inte
+  text: Familiarity with software development lifecycles and modern API architectures
+  text: Experience with at least one of our supported SDK languages (Go, Node.js, Python, PHP, C#, Java) is preferred
+  text: Bonus: experience deploying serverless functions or working with cloud platforms like Cloudflare Workers or AWS Lambda, especially in the co
+  text: Exceptional troubleshooting skills with the ability to diagnose and resolve complex technical issues independently.
+  text: Excellent communication skills, both verbal and written, with the ability to convey technical concepts to non-technical stakeholders.
+  text: Track record of thriving in highly ambiguous, fast-paced environments.
+  text: Demonstrated ability to understand customer needs and deliver solutions that drive success.
+  text: Proven ability to work cross-functionally with sales, product, and engineering teams to achieve common goals.
+  text: Bachelor’s degree in Computer Science, Engineering, or a related field is preferred.
+  text: Role requires proficiency with macOS and comfort working fully remotely using tools such as Slack, Google Workspace, and Zoom.
+  text: At Fingerprint, we believe in pay transparency — it's part of how we operate as a distributed, remote-first team. Salaries are based on func
+  text: Some example salaries for specific locations are below:
+  text: New York City: $165,000 - $190,000 USD (OTE $198,000 - $228,000)
+  text: Chicago: $140,000 - $162,000 USD (OTE $168,000 - $194,000)
+  text: Final offer amounts are determined by multiple factors, including the successful candidate's location, experience, and expertise, and may va
+  text: Due to regulatory and security reasons, there’s a small number of countries where we cannot have Fingerprint teammates based. Additionally, 
+  text: We are dedicated to creating an inclusive work environment for everyone. We embrace and celebrate the unique experiences, perspectives and c
+  text: **We have noticed a rise in recruiting impersonations across the industry, where scammers attempt to access candidates' personal and financi
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+  <input:email name=email required empty>
+  [button] 
+# Product
+  text: Device Intelligence Platform
+# Use Cases
+  text: Account Sharing Prevention
+# Resources
+# Developers
+# Company
+  [button] 
+
+=== 2026-10-08 04:51:22  not sent  Associate Account Manager @ tripactions
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+  text: Interested in building your career at Navan? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application disabled
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Preferred First Name
+  <input:text #preferred_name filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  text: <file>
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: Website
+  <input:text #question_68847307 filled>
+label: How did you hear about this job?*
+  <input:text #question_68847308 required filled>
+label: Are you currently eligible to work in the country outlined for this position, and authorized to work for Navan
+  <input:text #question_68847309 required empty>
+  [button] 
+  [button] 
+label: Will you now or in the future require sponsorship by Navan to attain or maintain your employment eligibility?*
+  <input:text #question_68847310 required empty>
+  [button] 
+  [button] 
+label: LinkedIn Profile*
+  <input:text #question_68847311 required filled>
+label: This role operates on a hybrid work model, requiring you to work from one of our global offices 4 days per wee
+  <input:text #question_68847312 required empty>
+  [button] 
+  [button] 
+label: Have you ever been employed by, applied to, or are you currently employed by Navan or any of its affiliated or
+  <input:text #question_68847313 required empty>
+  [button] 
+  [button] 
+# Demographic Questions
+  text: At Navan Group, we’re committed to ensuring a diverse pipeline of candidates is considered throughout our interview process for our open rol
+label: Gender
+  [button] 
+  <input:text #593 empty>
+  [button] 
+  [button] 
+label: Ethnicity
+  [button] 
+  <input:text #594 empty>
+  [button] 
+  [button] 
+label: Veteran Status
+  [button] 
+  <input:text #595 empty>
+  [button] 
+  [button] 
+label: A verification code was sent to <email>. To submit your application, enter the 8-character code
+label: Security code
+  <input:text #security-input-0 required empty>
+  <input:text #security-input-1 required empty>
+  <input:text #security-input-2 required empty>
+  <input:text #security-input-3 required empty>
+  <input:text #security-input-4 required empty>
+  <input:text #security-input-5 required empty>
+  <input:text #security-input-6 required empty>
+  <input:text #security-input-7 required empty>
+  [button] Submit application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-08 04:52:18  skipped  Leasing Professional - Lowry Park @ greystar
+url: https://greystar.wd1.myworkdayjobs.com/External/job/Lowry-Park-Denver-CO/Leasing-Professional---Lowry-Park_R0200026/apply
+stage: Application Questions
+why: can't truthfully answer required: Please provide your Birth Month and Birth Day (e.g. 11/18). ; Please provide the last four digits of your Social Security 
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Leasing Professional - Lowry Park
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-f35f0aebbd0f100970576ab9f21a0000}
+label: Are you currently employed by Greystar?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0000
+ {formField-f35f0aebbd0f100970576ab9f21a0003}
+label: Are you a Former Greystar Team Member?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0003
+ {formField-f35f0aebbd0f100970576ab9f21a0007}
+label: Are you legally eligible to work in the country to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0007
+ {formField-f35f0aebbd0f100970576b5393f10002}
+label: Will you now or in the future require sponsorship by Greystar in order for us to employ (or continue to employ
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10002
+ {formField-f35f0aebbd0f100970576b5393f10006}
+label: Do you meet the minimum requirements for the job, as outlined in the Job Description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10006
+ {formField-f35f0aebbd0f100970576b5393f10009}
+label: Are you able to perform all essential functions of the position you are applying to with or without reasonable
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10009
+ {formField-f35f0aebbd0f100970576bed2afa0001}
+label: If hired, will you be at least 18 years old when you start work with Greystar?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0001
+ {formField-f35f0aebbd0f100970576bed2afa0004}
+label: Will you have reliable transportation to get to work on time?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0004
+ {formField-f35f0aebbd0f100970576bed2afa0007}
+label: Are you available to work overtime if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0007
+ {formField-f35f0aebbd0f100970576c86ec220000}
+label: Are you available to work weekends if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220000
+ {formField-f35f0aebbd0f100970576c86ec220003}
+label: Are you available to work on-call, if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220003
+ {formField-f35f0aebbd0f100970576c86ec220006}
+label: Are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220006
+ {formField-f35f0aebbd0f100970576c86ec220009}
+label: Salary Expectations:*
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220009 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0000}
+label: What is your primary spoken language?*
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0000 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0001}
+label: What other languages are you fluent in, if any?
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0001 empty>
+ {formField-f35f0aebbd0f100970576d209a7b0002}
+label: Please provide your Birth Month and Birth Day (e.g. 11/18). DO NOT provide the year. This information is used 
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0002 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0003}
+label: Please provide the last four digits of your Social Security Number. This information is used along with your M
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0003 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:54:23  skipped  Content Planning Coordinator @ disney
+url: https://disney.wd5.myworkdayjobs.com/disneycareer/job/Glendale-CA-USA/Content-Planning-Coordinator_10160779-2/apply
+stage: Application Questions
+why: can't truthfully answer required: Company's social responsibility; Company invests in education; Company reputation; Company values its employees; Friends/Family work at Disney; Opportunity for career advancement; Park admission and discounts; Other
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Homepage {navigationItem-Careers Homepage}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Content Planning Coordinator
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-80e74446762e100116719d186ff30000}
+label: If on a previous page, you linked to a website or portfolio that requires a password, please list the credenti
+  <textarea #primaryQuestionnaire--80e74446762e100116719d186ff30000 empty>
+ {formField-80e74446762e100116719d186ff30001}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719d186ff30001
+ {formField-80e74446762e100116719db255220000}
+label: Will you now or in the future require sponsorship for employment visa status such as H-1B, H-1B1, E-3, O-1, TN
+  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719db255220000
+ {formField-80e74446762e100116719db255220003}
+label: Do you consent to the use of your personal information for consideration for future job and career opportuniti
+  text: Walt Disney Family of Companies
+  [dropdown] nothing chosen #primaryQuestionnaire--80e74446762e100116719db255220003
+ {formField-80e74446762e100116719db255220006}
+label: Which of these potential reasons were important to your decision to apply for a position with The Walt Disney 
+  <input:checkbox #e87adc98d492100165cd169453b00000-80e74446762e100116719db2552 required question-unanswered>
+label: Company's social responsibility
+  <input:checkbox #e87adc98d492100165cd169453b00002-80e74446762e100116719db2552 required question-unanswered>
+label: Company invests in education
+  <input:checkbox #e87adc98d492100165cd172ebad90001-80e74446762e100116719db2552 required question-unanswered>
+label: Company reputation
+  <input:checkbox #e87adc98d492100165cd172ebad90003-80e74446762e100116719db2552 required question-unanswered>
+label: Company values its employees
+  <input:checkbox #e87adc98d492100165cd172ebad90005-80e74446762e100116719db2552 required question-unanswered>
+label: Friends/Family work at Disney
+  <input:checkbox #e87adc98d492100165cd17c8fb4b0001-80e74446762e100116719db2552 required question-unanswered>
+label: Opportunity for career advancement
+  <input:checkbox #e87adc98d492100165cd17c8fb4b0003-80e74446762e100116719db2552 required question-unanswered>
+label: Park admission and discounts
+  <input:checkbox #e87adc98d492100165cd17c8fb4b0005-80e74446762e100116719db2552 required question-unanswered>
+label: Other
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-08 04:55:16  unconfirmed  Financial Analyst @ cantina
+url: https://jobs.ashbyhq.com/cantina/2b1c117d-1c45-493e-b8df-81d6b675af9d/application
+stage: page 1
+why: no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://43a2a9fdf9df6e0dc9bc1b50e5e4369a.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/api2/clr -> 200; POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; page ends: 'till blocked? Wait a few minutes and retry. As a last
+# Financial Analyst
+# Location
+# Employment Type
+# Location Type
+# Department
+! We couldn't submit your application Your application submission was flagged as possible spam. If you believe this was a mistake, please submit your application again.
+# Try these steps
+  text: Legitimate applications are occasionally flagged by mistake. Try these in order:
+  text: Turn off your VPN or proxy
+  text: Use your regular network connection instead.
+  text: Temporarily pause ad blockers and privacy tools.
+  text: Try another browser or device
+  text: Make sure the browser is up to date.
+  text: Mobile data often works better than public Wi-Fi.
+  text: Wait a few minutes and retry. As a last resort, enable JavaScript if it’s disabled, or clear this site’s cookies and cache in your browser s
+
+=== 2026-10-08 04:57:22  unconfirmed  Growth Finance Associate @ hadrian-automation
+url: https://jobs.ashbyhq.com/hadrian-automation/de7e624b-351b-48ed-8f60-8df8b7031a3c/application
+stage: page 1
+why: no confirmation after submit; page errors: ["We couldn't submit your application\n\nYour application submission was flagged as "]; server said: POST https://640339b9b655a8aa8fff93714c019dc0.seondnsresolve.com/ -> 200; POST https://www.recaptcha.net/recaptcha/api2/clr -> 200; POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; page ends: 'till blocked? Wait a few minutes and retry. As a last
+# Growth Finance Associate
+# Location
+  text: Los Angeles, CA; San Francisco Bay Area, CA; Washington, DC
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: Los Angeles, CA, San Francisco, CA & Washington DC
+  text: $130K – $190K • Offers Equity
+  text: We provide the lowest to highest salary we reasonably and in good faith believe we would pay for this role at the time of this posting. We m
+! We couldn't submit your application Your application submission was flagged as possible spam. If you believe this was a mistake, please submit your application again.
+# Try these steps
+  text: Legitimate applications are occasionally flagged by mistake. Try these in order:
+  text: Turn off your VPN or proxy
+  text: Use your regular network connection instead.
+  text: Temporarily pause ad blockers and privacy tools.
+  text: Try another browser or device
+  text: Make sure the browser is up to date.
+  text: Mobile data often works better than public Wi-Fi.
+  text: Wait a few minutes and retry. As a last resort, enable JavaScript if it’s disabled, or clear this site’s cookies and cache in your browser s
+
+=== 2026-10-08 04:59:06  blocked  Strategic Finance Analyst, Operations @ sofi
+url: https://www.sofi.com/careers/job/
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: :Back to top
+  [button] 
+(dialog)
+(dialog)
+(dialog)
+(dialog)
+# Strategic Finance Analyst, Operations
+# Description
+  text: Employee Applicant Privacy Notice
+  text: Shape a brighter financial future with us.
+  text: Together with our members, we’re changing the way people think about and interact with personal finance.
+  text: Join us to invest in yourself, your career, and the financial world.
+  text: Strategic Finance enables SoFi to develop and execute on its growth strategy by driving financial visibility and accountability, built on st
+  text: SoFi’s Global Operations is responsible for delivering SoFi’s end-to-end member servicing and operational support across products, including
+  text: A finance partner supporting Global Operations helps translate these operational drivers into forecasts, budgets, KPI insights, and investme
+  text: Facilitate annual, quarterly, and intra-quarter financial forecasting for SoFi’s Operations Function
+  text: Support the monthly close and budget vs. actuals analysis in partnership with accounting and strategic finance partners to drive clarity and
+  text: Make decisions on whether the firm should deviate from the forecasted quarterly plan by weighing financial and strategic trade-offs
+  text: Work with key stakeholders within Operations and the FP&A team to create and communicate regular guidance on forward-looking financial perfo
+  text: Enable the Operations teams to prioritize initiatives and make real-time decisions by evaluating and sizing impacts on volumes, revenues, an
+  text: In partnership with the Data team, identify and monitor key performance metrics and develop actionable insights
+  text: Prepare internal and external materials to facilitate management discussion and analysis of key financial and business performance indicator
+  text: 6+ years of experience, ideally in financial services, operations, private equity, FP&A, consulting or corporate finance
+  text: Experience preparing and presenting information to key decision-makers
+  text: Excellent verbal and written communication skills
+  text: Advanced technical proficiency with the capacity to leverage tools like Excel, Workday, Google Suite, SQL, and emerging AI technologies to s
+  text: Collaborative working style and demonstrated ability to build strong cross-functional relationships
+  text: Inquisitive nature, attention to detail, diligence, and a flexible attitude
+  text: Willingness to embrace unstructured environments and problems
+  text: Time and project management skills
+  text: Bachelor’s degree in Economics, Finance, Accounting, or a related field
+  text: The base pay range for this role is listed below. Final base pay offer will be determined based on individual factors such as the candidate’
+# Pay range: $89,600.00 - $168,000.00 Payment frequency: Annual This role is also eligible for a bonus and compe
+# The Company hires the best qualified candidate for the job, without regard to protected characteristics.
+# Pursuant to the San Francisco Fair Chance Ordinance, we will consider for employment qualified applicants with
+# New York applicants: Notice of Employee Rights
+# SoFi is committed to an inclusive culture. As part of this commitment, SoFi offers reasonable accommodations t
+# We are unable to accommodate remote work from Hawaii, Alaska or Puerto Rico at this time.
+  text: If you are a current employee, do not apply here - please navigate to our Internal Job Board in Greenhouse to apply to our open roles.
+# Apply for this position
+  text: Strategic Finance Analyst, Operations
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+# SoFi Products
+# Financial Resources
+# Also of Interest
+  text: Mortgage Down Payment Calculator
+  text: Compound Interest Calculator
+  text: Savings Account Calculator
+  text: IRA Contribution Calculator
+  text: First-Time Homebuyer Guide
+# About SoFi
+# Legal
+  [button] Back to top
+  text: Intel, insights, and inspo for this financial moment, delivered straight to your inbox.
+  <input:email #otm-email-footer required empty>
+  [button] →
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: SoFi refinance loans are private loans and do not have the same repayment options that the federal loan program offers, or may become availa
+  text: www.nmlsconsumeraccess.org
+  text: SoFi Lending Corp. NMLS #1121636
+  text: ✝︎ To check the rates and terms you qualify for, SoFi conducts a soft credit pull that will not affect your credit score. However, if you ch
+  text: ©2026 Social Finance, LLC All rights reserved.
+  [button] 
+  [button] 
+
+=== 2026-10-08 05:03:26  blocked  Revenue Operations Specialist - Boulder, Colorado @ sumup
+url: https://www.sumup.com/careers/positions/boulder-colorado-united-states/sales-operations/revenue-operations-specialist-boulder-colorado/8784570002/
+why: no application form found on page
+# Revenue Operations Specialist - Boulder, Colorado
+# Boulder, Colorado, United States · Sales Operations
+  [button] Apply now
+# Revenue Operations Specialist – GTM Data & Commercial Operations
+  text: 📍 Boulder, CO | Full-time | Office-first
+# About the team
+  text: The Revenue Operations team sits at the heart of SumUp's go-to-market engine in the US, keeping the systems, data, and processes that power 
+# What you'll do
+  text: Manage and maintain our core sales tech stack — including Salesforce, LeanData, Gong, Nooks, SMS Magic, Leadbeam, and Chili Piper — optimisi
+  text: Own lead management and distribution end-to-end, ensuring the right leads reach the right reps at the right time
+  text: Build and improve automations and workflows that make our sales teams faster and more effective
+  text: Partner with sales leaders and marketing to design processes for new initiatives as they launch
+  text: Handle ad hoc reporting requests and build custom data outputs that help leaders make informed decisions quickly
+  text: Use AI-powered tools to surface, transform, and organise data into actionable formats for the sales team
+# You'll be great for this role if the following describes you…
+  text: Several years of experience working in a revenue, marketing, or sales operations function within a sales organisation, with hands-on involve
+  text: Strong Salesforce (or similar CRM) competencies; including a solid understanding of data models, building automations/ flows, and sales proc
+  text: Comfort analyzing data and building dashboards or reports that translate raw information into clear insights.
+  text: Ability to manage multiple projects at once, pivot quickly when priorities shift, and stay organised under pressure.
+  text: A naturally curious approach to technology, with a track record of picking up new tools quickly and identifying where processes could be sma
+  text: Salesforce certifications (e.g. Platform Administrator or Platform App Builder) and experience with tools like Gong, LeanData, Nooks, or Chi
+# Why you should join SumUp
+  text: 🌎 Opportunity to work with SumUppers globally on large-scale fintech products used by millions of businesses worldwide, from our Boulder of
+  text: 🏖️ Generous time off: 22 days of paid vacation, plus an extra day each year up to 28 days, public holidays, quarterly Wellness Days, and sp
+  text: 🏥 Health and life coverage: medical coverage via Cigna, plus life insurance
+  text: 🌈 Commitment to Diversity and Inclusion: be part of a workplace that values and promotes diversity, fostering an inclusive environment wher
+  text: 💼 Financial security: 401(k) retirement scheme with SumUp matching
+  text: 🌴 Break4me: 1-month sabbatical after 3 years of service
+  text: 🚀 Enrollment onto our Virtual Stock Option program: you will own a stake in SumUp's future success
+# Compensation
+  text: Salary range: $67,000 – $89,000 base
+  text: Stock Option Plan participation
+  text: Compensation will be finalized based on the candidate’s experience and location
+# About SumUp
+  text: Be empowered to do more that matters.
+  text: At SumUp, we're on a mission to empower small businesses across the globe by providing simple and affordable tools that allow them to thrive
+  text: We recognise that candidates feel they need to meet 100% of the job criteria in order to apply for a job. Please note that this is only a gu
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+  [button] United States opens-true
+  text: ©SumUp Inc. All Rights Reserved | SumUp Inc. 1209 Orange Street Wilmington DE 19801-0801. SumUp is a registered Payment Facilitator of Fifth
+
+=== 2026-10-08 05:07:10  skipped  Buyer @ idexcorp
+url: https://idexcorp.wd5.myworkdayjobs.com/idex_careers/job/Denver-Colorado/Buyer_R-09879-1/apply
+stage: Application Questions
+why: can't truthfully answer required: Do you have a copy of any of the following agreements with y
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# IDEX Careers | North America
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] The IDEX Story {navigationItem-The IDEX Story}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Buyer
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-00fb683ea8341001b8758ead38500000}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758ead38500000
+ {formField-00fb683ea8341001b8758fe05cb90001}
+label: Will you now, or in the future, require sponsorship for employment Visa status (e.g., H-1B, visa status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758fe05cb90001
+ {formField-00fb683ea8341001b8758fe05cb90004}
+label: IDEX Requires that you are 18 years of age. Will you meet this requirement?*
+  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8758fe05cb90004
+ {formField-00fb683ea8341001b8759079daea0000}
+label: As a condition of employment, IDEX requires that all new hires pass pre-employment screenings, background chec
+  [dropdown] nothing chosen #primaryQuestionnaire--00fb683ea8341001b8759079daea0000
+ {formField-ee93f9f954b11001b8a0585aefc60000}
+label: Have you entered into, or are you otherwise bound by, any of the following agreements with your current or any
+  [dropdown] nothing chosen #primaryQuestionnaire--ee93f9f954b11001b8a0585aefc60000
+ {formField-b6e6897222d310010b1d1e8a72df0000}
+label: Do you have a copy of any of the following agreements with your current or any former employer that remains in
+  [dropdown] nothing chosen #primaryQuestionnaire--b6e6897222d310010b1d1e8a72df0000
+ {formField-b6e6897222d310010ad04af64c460000}
+label: What are your salary expectations for this role? (Optional)
+  <input:text #primaryQuestionnaire--b6e6897222d310010ad04af64c460000 empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] IDEX Job Applicant Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
