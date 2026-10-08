@@ -198,10 +198,12 @@ def allowance_checks():
     check(w._usable(by["best"]) and not w._usable(by["best"], match=True), "the best model answers and never does match checks")
     check(w._usable(by["only"], match=True) and not w._usable(by["only"]), "a match-only model never writes answers")
     check(w._usable(by["mid"]) and w._usable(by["mid"], match=True), "a shared model does both")
-    w.limiters["mid"].add_tokens(500)
+    w.limiters["mid"].add_tokens(700)
+    check(w._usable(by["mid"], match=True), "tokens spent on answers do not count against the share for match checks")
+    w.limiters["mid"].add_match(500)
     check(not w._usable(by["mid"], match=True) and w._usable(by["mid"]), "a shared model stops doing match checks at its share of the day's tokens, and still answers")
     for _ in range(5):
-        w.limiters["small"].wait(1)
+        w.limiters["small"].add_match(1)
     check(not w._usable(by["small"], match=True) and w._usable(by["small"]), "the share also applies to a requests-per-day limit")
     w.limiters["only"].add_tokens(999)
     check(w._usable(by["only"], match=True) and w.ready(match=True), "a match-only model may use its whole allowance")
@@ -281,13 +283,16 @@ def allowance_checks():
     check(w5.ready() and not w5._usable(by5["small"]), "with the answer models used up, the match-first model can still write answers")
     w5._complete([{"role": "user", "content": "q"}], 50, log=lambda *a: None)
     check(asked5[-1] == "wide", f"...and it does: {asked5}")
-    for _ in range(6):
+    for _ in range(4):
         w5.limiters["wide"].wait(1)
+    check(w5._usable(by5["wide"], match=True), "answers written by the match-first model do not use up its share for match checks")
+    for _ in range(6):
+        w5.limiters["wide"].add_match(1)
     check(not w5._usable(by5["wide"], match=True) and w5._usable(by5["wide"]), "the match-first model keeps the rest of its day for answers once its share for match checks is used")
     W._USAGE_FILE = TMP / "usage_share.json"
     w6 = W.Writer({"writer": {"enabled": True, "match_providers": ["small"], "match_share": 0.6, "providers": [
         {"name": "small", "base_url": "http://x/v1", "model": "b", "tpd": 1000, "match_share": 0.25}]}}, {"name": "Jordan Sample"}, ROOT)
-    w6.limiters["small"].add_tokens(300)
+    w6.limiters["small"].add_match(300)
     check(not w6.ready(match=True) and w6.ready() and "small 25%" in w6.status_line(), f"a model's own share for match checks: {w6.status_line()}")
     W._USAGE_FILE = TMP / "usage.json"
 
@@ -488,6 +493,22 @@ def account_record_checks():
     b = A.Accounts({"accounts": {"email": "x@example.com", "password": "Pw-123456!x"}}, d)
     check(b.noted(host, "verify_mail") == 456.0 and "password" not in json.dumps(b.known).lower().replace("pw", ""), "the record is read back on the next run and holds no password")
     check(A._ago(time.time() - 10 * 60) == "10 min" and A._ago(time.time() - 5 * 3600) == "5 h" and A._ago(time.time() - 3 * 86400) == "3 days", "how old an email is, in words")
+    # a site that wants a longer password (16 characters on one real employer) gets the longer form, the same one every run
+    c = A.Accounts({"accounts": {"email": "x@example.com", "password": "Pw-123456!x"}}, d)
+    long_host = "stewart.wd1.myworkdayjobs.com"
+    c.use(long_host, long=16)
+    pw16 = c.password
+    c.remember(long_host, "created")
+    c2 = A.Accounts({"accounts": {"email": "x@example.com", "password": "Pw-123456!x"}}, d)
+    c2.use(long_host)
+    c2b = A.Accounts({"accounts": {"email": "x@example.com", "password": "Pw-123456!x"}}, d)
+    c2b.use("other.wd1.myworkdayjobs.com")
+    check(len(pw16) >= 16 and c2.password == pw16 and c2b.password == A.strong_password("Pw-123456!x") and "Pw-123456!x" not in (d / "accounts.json").read_text(),
+          f"a 16-character site: {len(pw16)} characters, the same next run ({c2.password == pw16}), other sites unchanged")
+    c3 = A.Accounts({"accounts": {"email": "x@example.com", "password": "Pw-123456!x"}}, d)
+    c3.known["old.wd1.myworkdayjobs.com"] = {"state": "created", "long_pw": True}
+    c3.use("old.wd1.myworkdayjobs.com")
+    check(c3.password == A.long_password("Pw-123456!x", 14), "an older record of a 12-character site keeps its 14-character form")
     print("ok  account records: growing rests after refused sign-ins, wiped by a sign-in that works; which emails were already used is remembered")
 
 

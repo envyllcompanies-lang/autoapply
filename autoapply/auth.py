@@ -103,16 +103,20 @@ class Accounts:
         u = urlparse(url)
         return ((u.hostname or "") + (f":{u.port}" if u.port and u.port not in (80, 443) else "")).lower()
 
-    def use(self, host: str, long: bool | None = None):
+    def use(self, host: str, long: bool | int | None = None):
         """Set the password for this site: the usual one, or the longer form on a site that demanded 12+ characters
-        (which form a site got is remembered in accounts.json; the password itself never is)."""
+        (long=True: 14 characters; a number: at least that many). Which form a site got is remembered in accounts.json
+        (the length only; the password itself never is), so the same password is made again on every run."""
         rec = self.known.get(host) if isinstance(self.known.get(host), dict) else {}
         if long is None:
-            long = bool(rec.get("long_pw")) or bool(getattr(self, "_long", {}).get(host))
-        if long:
-            self.__dict__.setdefault("_long", {})[host] = True
+            long = rec.get("long_pw") or getattr(self, "_long", {}).get(host)
         base = getattr(self, "_base_pw", "") or self.password
-        self.password = long_password(base) if long else strong_password(base)
+        if long:
+            n = 14 if isinstance(long, bool) else max(14, int(long))
+            self.__dict__.setdefault("_long", {})[host] = n
+            self.password = long_password(base, n)
+        else:
+            self.password = strong_password(base)
 
     NOTES = ("reset_mail", "verify_mail")       # when the newest reset / verify email of a site was used (never its content)
 
@@ -121,7 +125,7 @@ class Accounts:
         keep = {k: old[k] for k in ("refused", "refused_at") if k in old and state != "signed_in"}      # a sign-in that worked wipes the slate
         keep.update({k: old[k] for k in self.NOTES if k in old})
         self.known[host] = {"email": self.email, "state": state, "at": time.strftime("%Y-%m-%d"), **keep,
-                            **({"long_pw": True} if getattr(self, "_long", {}).get(host) else {})}
+                            **({"long_pw": getattr(self, "_long", {}).get(host)} if getattr(self, "_long", {}).get(host) else {})}
         self.path.write_text(json.dumps(self.known, indent=1, sort_keys=True))
 
     def note(self, host: str, **facts):
@@ -874,9 +878,9 @@ def _workday(page, acc: Accounts, log, url_after: str | None):
                 # sign in (some employers want its email verified first), or one was already there. Signing in tells which.
                 log("      account: Workday answered with its sign-in form and no message: signing in")
             need = re.search(r"minimum of (\d+) characters", " ".join(errs), re.I)
-            if need and int(need.group(1)) > len(acc.password) and int(need.group(1)) <= 14:
+            if need and int(need.group(1)) > len(acc.password) and int(need.group(1)) <= 40:
                 log(f"      account: this site wants {need.group(1)}+ characters: using the longer form of your password here")
-                acc.use(host, long=True)
+                acc.use(host, long=int(need.group(1)))
                 tried_create = False
                 continue
             if errs:

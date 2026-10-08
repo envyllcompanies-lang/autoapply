@@ -118,6 +118,22 @@ class _Limiter:
         else:
             self._tok = getattr(self, "_tok", 0) + int(n or 0)
 
+    def add_match(self, tokens: int):
+        """Count one résumé-match request (and its tokens) separately: match_share limits these, not the answers."""
+        if self.name:
+            u = _usage(); u[self.name + ":mreq"] = u.get(self.name + ":mreq", 0) + 1
+            u[self.name + ":mtok"] = u.get(self.name + ":mtok", 0) + int(tokens or 0); _save_usage(u)
+        else:
+            self._mreq = getattr(self, "_mreq", 0) + 1
+            self._mtok = getattr(self, "_mtok", 0) + int(tokens or 0)
+
+    def match_today(self) -> tuple[int, int]:
+        """(requests, tokens) spent on résumé-match checks today."""
+        if self.name:
+            u = _usage()
+            return u.get(self.name + ":mreq", 0), u.get(self.name + ":mtok", 0)
+        return getattr(self, "_mreq", 0), getattr(self, "_mtok", 0)
+
     def cached_today(self) -> int:
         return _usage().get(self.name + ":cached", 0) if self.name else 0
 
@@ -370,6 +386,8 @@ class Writer:
                 usage = data.get("usage") or {}
                 billed = billed_tokens(usage, est)
                 lim.add_tokens(billed, max(0, int(usage.get("total_tokens") or billed) - billed))
+                if getattr(self, "_match_call", False):
+                    lim.add_match(billed)
                 choice = data["choices"][0]
                 text = (choice["message"].get("content") or "").strip()
                 if choice.get("finish_reason") == "length" and max_tokens < 3000:
@@ -415,7 +433,10 @@ class Writer:
             return False
         share = float(p.get("match_share", self.match_share))
         if match and not dedicated and share < 1:
-            if (lim.tpd and lim.tokens_today() >= share * lim.tpd) or (lim.rpd and lim.total >= share * lim.rpd):
+            # only what match checks themselves have used counts against their share (counting the answers too stopped
+            # all match checks by mid-afternoon on 2026-10-08 while a third of Gemini's day was left)
+            mreq, mtok = lim.match_today()
+            if (lim.tpd and mtok >= share * lim.tpd) or (lim.rpd and mreq >= share * lim.rpd):
                 return False
         return True
 
@@ -444,6 +465,7 @@ class Writer:
                 break
             for p in self._order(live, est, match, prefer):
                 try:
+                    self._match_call = match
                     out = self._chat(p, messages, max_tokens, temperature)
                     self.calls += 1
                     return re.sub(r"<think>.*?</think>", "", out, flags=re.S).strip()

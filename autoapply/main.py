@@ -712,7 +712,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         done = laters = 0
         dead = set()          # (company, title) already skipped/blocked this run
         nofind: dict = {}     # job source -> listings whose real application page could not be found this run
-        weak_pw: set = set()  # sites that rejected ACCOUNT_PASSWORD this run
+        weak_pw: set = set()  # career sites (hosts) that rejected the password's form this run
         bad_hosts: set = set()   # career sites that would not let the bot sign in this run: their other jobs wait, untouched
         verdicts: dict = {}   # job key -> judge() result worked out ahead of time (during the pause after an application)
 
@@ -752,8 +752,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             host = (urlparse(row["apply_url"] or row["url"] or "").netloc or "").lower()
             if host and (host in bad_hosts or acc.resting(host)):
                 return True       # the bot could not sign in to this career site (a moment ago, or on its last tries): its jobs stay queued
-            if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
-                return True
+            if host and host in weak_pw:
+                return True       # this one site refused your password's form this run (its own rule): its other jobs wait
             if site_rank(row, health) >= 3 and hc_tries[0] >= hc_cap:
                 return True       # a site where every recent try ended at a human check: only a few tries a day are spent there
             if match_on and _fit(row) <= 0:                    # still waiting for its match check
@@ -896,7 +896,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 continue          # the bot could not sign in to this career site (just now, or on its last tries): its other jobs stay queued
             if host and any(x[2] == host for x in parked):
                 continue          # this site's new account is still waiting for its verify email: its other jobs stay queued for now
-            if weak_pw and "myworkdayjobs" in (row["apply_url"] or "") and "workday" in weak_pw:
+            if host and host in weak_pw:
                 continue
 
             verdict, job = verdicts.pop(row["key"], None) or judge_now(idx)
@@ -1031,11 +1031,15 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log("    … set aside: the new account's verify email is on its way; the next jobs go first and this one is finished after")
                     continue
                 if re.search(r"password must include|password must (contain|have)", blocked_text, re.I):
-                    # the saved ACCOUNT_PASSWORD is too weak for this site: nothing is wrong with the job, so it stays queued
-                    # for the run after the password is updated, and no more time is spent on that site this run
-                    db.update(job.key, status="queued", reason="waiting for a stronger ACCOUNT_PASSWORD (8+ chars, upper, lower, number, symbol)")
-                    weak_pw.add(ats_of(job))
-                    log(f"    ✗ {ats_of(job)} rejected the saved account password as too weak: its jobs wait until it is updated")
+                    # this one site's password rule refused the password: nothing is wrong with the job, so it stays queued.
+                    # Only that site waits (it rests like a site that refused a sign-in); every other employer, on Workday or
+                    # not, goes on. (It used to stop all Workday jobs for the run: one employer wanting 16 characters stopped
+                    # 35 runs out of 41 on 2026-10-08.)
+                    db.update(job.key, status="queued", reason="waiting: this site's password rule refused the password (" + blocked_text[:120] + ")")
+                    if host:
+                        weak_pw.add(host)
+                        acc.refused(host, blocked_text)
+                    log(f"    ✗ {host or ats_of(job)} refused the password's form ({blocked_text[:90]}): only its own jobs wait")
                     continue
                 if blocked_text.startswith("posting closed"):
                     db.update(job.key, status="skipped", reason=blocked_text)
