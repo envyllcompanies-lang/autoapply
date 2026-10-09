@@ -872,10 +872,10 @@ class Brain:
             if re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|curriculum", both):
                 return "RESUME"          # also a combined 'Resume/Cover Letter' box (Workday names it so): the résumé goes there
             if re.search(r"cover", both):
-                return "COVER_LETTER" if self.cfg.get("cover_letters", False) else None   # optional ones too: a full letter helps
+                return "COVER_LETTER" if self._letters_for(f) else None   # optional ones too when letters are on: a full letter helps
             return None
         if kind == "textarea" and re.search(r"cover letter", low):
-            if not self.cfg.get("cover_letters", False):
+            if not self._letters_for(f):
                 return None          # cover letters are switched off: a form that requires one is skipped
             return letter or self.lazy_letter(self._job, required=bool(f.get("required"))) or None   # optional + no letter: left empty
 
@@ -1124,6 +1124,14 @@ class Brain:
             elif key == "current":
                 out[f["id"]] = True if now else ""
         return out
+
+    def _letters_for(self, f: dict) -> bool:
+        """Is a cover letter written for this box? cover_letters: true = every cover-letter box, 'required' = only a box
+        the form requires (an application is no longer dropped for want of one), false = never."""
+        cl = self.cfg.get("cover_letters", False)
+        if isinstance(cl, str):
+            return cl.strip().lower() in ("true", "yes", "all") or (cl.strip().lower() == "required" and bool(f.get("required")))
+        return bool(cl)
 
     def _education_years(self, fields) -> dict:
         """Workday's Education block asks 'From' and 'To (Actual or Expected)' as bare years. They are the first and last

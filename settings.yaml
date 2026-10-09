@@ -11,11 +11,11 @@ search:
                               # résumé check as often as those scoring 60-79), so it only removes postings with nothing going
                               # for them. The résumé check below decides, and the candidates are checked best prospects first.
   prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
-  min_fit: 60                 # ...and only jobs with a match of 60% or more are applied to (was 70 until 2026-10-03)
+  min_fit: 55                 # ...and only jobs with a match of 55% or more are applied to (70 until 2026-10-03, 60 until 2026-10-08)
   min_score_without_match: 90 # when the free match check has no allowance left: only jobs whose keyword score is this high go
                               # ahead without it, the rest wait for a later run (they are not dropped). Kept high because the
                               # allowance now runs out every day by design, and unchecked jobs should not slip through then.
-  daily_cap_unlimited: 300    # most applications in one day while the bot runs non-stop (was 120): with thousands of candidates
+  daily_cap_unlimited: 500    # most applications in one day while the bot runs non-stop (300 until 2026-10-08): with thousands of candidates
                               # the limit should be the résumé check, not this number
   max_per_company: 0          # no limit on applications to one employer: every role that passes your résumé match goes
   max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
@@ -35,6 +35,10 @@ search:
     - material handling engineer
     - warehouse engineer
     - project accountant
+
+# A cover letter only where the form requires one (true: on every form that has a cover-letter box; false: never,
+# and a form that requires one is skipped). Overrides config.yaml.
+cover_letters: required
 
 scoring:
   location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).

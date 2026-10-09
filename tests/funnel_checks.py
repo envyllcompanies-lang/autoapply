@@ -320,6 +320,16 @@ def allowance_checks():
     print("ok  free allowance: the best model only answers, match-only models only check, shared models keep part of their day for answers")
 
 
+def letter_switch_checks():
+    from autoapply.brain import Brain
+    for setting, req, opt in ((True, True, True), (False, False, False), ("required", True, False), ("all", True, True)):
+        b = SimpleNamespace(cfg={"cover_letters": setting})
+        got = (Brain._letters_for(b, {"required": True}), Brain._letters_for(b, {"required": False}))
+        check(got == (req, opt), f"cover_letters: {setting!r} -> required box {got[0]}, optional box {got[1]}")
+    check("city" in W.SAFE_FACTS and "state" in W.SAFE_FACTS, "the writer knows your town and state (a 'current city and state?' box was answered N/A)")
+    print("ok  cover letters only where required ('required'), on every box (true), or never (false); the writer knows your town")
+
+
 def batch_checks():
     """Several postings rated in one call: the prompt, the reading of the reply, and what is recorded."""
     P = PS.parse_fits
@@ -645,7 +655,7 @@ def preflight_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, batch_checks, same_role_checks, second_try_checks,
+    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, batch_checks, same_role_checks, second_try_checks,
                account_record_checks, site_mail_checks, workday_helper_checks, preflight_checks):
         try:
             fn()

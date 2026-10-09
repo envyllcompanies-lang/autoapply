@@ -154,8 +154,8 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 - `search.workday_places` and `search.workday_queries` control how the big Workday employers are searched ("<role> <city>").
 
 ## `settings.yaml` (public tuning, in the repository)
-Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 60),
-the candidate bar (`search.min_score`, 10), the day's ceiling while running non-stop (`search.daily_cap_unlimited`, 300), the
+Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 55),
+the candidate bar (`search.min_score`, 10), the day's ceiling while running non-stop (`search.daily_cap_unlimited`, 500), the
 entry-level setting (`search.max_level`: 0 entry only, 1 entry + early career), the senior-pay cutoff, the daily snapshot's
 settings and the writer's model list, so they can be tuned without re-sending secrets.
 
