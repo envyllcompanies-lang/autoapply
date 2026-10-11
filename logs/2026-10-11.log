@@ -11756,3 +11756,396 @@ delgado@alumni.usc.ed; utilityButtonBarSettingsMenu:Settings; utilityMenuButton:
 [22:45:23] Summary: 1 blocked, 4 skipped, 3 failed, 15 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-11.md
 [22:45:23]   by site  greenhouse: 3 failed, 1 blocked, 1 skipped
 [22:45:23]   by site  workday: 3 skipped
+[22:46:00] === autoapply run (LIVE) build 2026-10-11-b ===
+[22:46:01] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[22:46:01] mail: logged in to delgado@alumni.usc.edu OK
+[22:46:18] Discovering jobs…
+[22:46:18] Job search already ran at 20:17 (searches run every 3 h): this run only applies
+[22:46:18]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[22:46:18] 0 open roles, 0 new
+[22:46:18] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
+[22:46:19] 2210 jobs queued: 282 already matched to your résumé, 1928 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 273 now
+[22:46:19] Time for this run: 50 min in all (8006 of 1850 free Actions minutes used this month)
+[22:46:20] Accounts: ON (delgado@alumni.usc.edu)
+[22:46:20] → Coordinator, Operations - Brooklyn Basketball Training Center @ bseglobal (score 42, match 60%)
+[22:46:32]       step 1: 18 fields (10 required)
+[22:46:42]       email: the site asked for a security code after Submit; reading it from the application inbox
+[22:50:49]       mail: passed over: 'Security code for your application to Brooklyn Sports & Ente' (other company)
+[22:50:50]     ✗ not sent (the form rejected it): after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+[22:50:58]   (the free allowance for résumé-match checks is used up for now
+[22:50:58]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
+[22:51:08] → Mechanical Construction Inspector @ bnl (score 15, match 60%)
+[22:51:12]       (opening Workday's application form directly)
+[22:51:16]       (account page: creating the account / signing in)
+[22:51:16]       account: creating one on bnl.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[22:51:19]       account: Workday answered with its sign-in form and no message: signing in
+[22:51:19]       account: signing in on bnl.wd1.myworkdayjobs.com
+[22:51:34]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[22:51:39]       account: pressing Sign In once more
+[22:51:45]       account: it exists but was never verified; asking Workday to send the email again
+[22:51:46]       account: waiting for the verification email…
+[22:52:03]       mail: found 'Verify your candidate account'
+[22:52:03]       account: opening the verify link (it leads straight to the application)
+[22:52:12]       account: signing in on bnl.wd1.myworkdayjobs.com
+[22:52:17]       1/5 My Information: 16 fields (8 required)
+[22:52:29]       2/5 My Experience: 1 fields (1 required)
+[22:52:39]       ? unanswered: 'Do you wish to be considered for other opportunities?*' kind=combobox options=['Select One', 'Yes', 'No']
+[22:52:39]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[22:52:39] → Retirement Plan Counselor - Spanish @ empower (score 14, match 60%)
+[22:52:42]       (opening Workday's application form directly)
+[22:52:46]       (account page: creating the account / signing in)
+[22:52:48]       account: signing in on empower.wd12.myworkdayjobs.com
+[22:54:11]       (Workday has not drawn the form yet: loading it again)
+[22:54:16]       1/6 My Information: 2 fields (2 required)
+[22:54:18]       2/6 My Experience: 3 fields (1 required)
+[22:54:28]       ? unanswered: 'SIE' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'CFP' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 4' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 6' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 7' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 9/10' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 24' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 26' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 63' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 65' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 66' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'Series 99' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'I do not possess any FINRA licenses' kind=checkbox_single options=[]
+[22:54:28]       ? unanswered: 'In the last 10 years, have you been involuntarily terminated (fired, discharged, etc.) fro' kind=combobox options=['Select One', 'Yes', 'No']
+[22:54:28]       ? unanswered: 'Do you consent to the use of automated tools to analyze and rank your application against ' kind=combobox options=['Select One', 'Yes', 'No']
+[22:54:28]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[22:54:28] → Associate, Studio Experience @ peloton (score 13, match 60%)
+[22:55:01]     ✗ blocked: no application form found on page
+[22:55:11] → Product Sales Specialist @ riskified (score 12, match 60%)
+[22:55:44]     ✗ blocked: no application form found on page
+[22:55:51] → Product Sales Specialist - Policy @ riskified (score 12, match 60%)
+[22:55:53]     ✗ blocked: no application form found on page
+[22:56:02] → Leasing Professional - Indigo 19 (Virginia Beach, VA) @ greystar (score 10, match 60%)
+[22:56:05]       (opening Workday's application form directly)
+[22:56:10]       (account page: creating the account / signing in)
+[22:56:12]       account: creating one on greystar.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[22:56:17]       account: created
+[22:56:19]       account: signing in on greystar.wd1.myworkdayjobs.com
+[22:56:28]       1/6 My Information: 16 fields (12 required)
+[22:56:33]       2/6 My Experience: 5 fields (0 required)
+[22:56:46]       ? unanswered: 'Please provide your Birth Month and Birth Day (e.g. 11/18). DO NOT provide the year. This ' kind=textarea options=[]
+[22:56:46]       ? unanswered: 'Please provide the last four digits of your Social Security Number. This information is us' kind=textarea options=[]
+[22:56:46]     ✗ skipped: can't truthfully answer required: Please provide your Birth Month and Birth Day (e.g. 11/18). ; Please provide the last four digits of your Social Security 
+[22:56:51] → Assistant Property Manager @ colliers (score 10, match 60%)
+[22:56:55]       (opening Workday's application form directly)
+[22:57:03]       1/6 My Information: 15 fields (10 required)
+[22:57:12]       2/6 My Experience: 3 fields (0 required)
+[22:57:21]       ? unanswered: 'Yes' kind=checkbox_single options=[]
+[22:57:21]       ? unanswered: 'No' kind=checkbox_single options=[]
+[22:57:21]     ✗ skipped: can't truthfully answer required: Yes; No
+[22:57:25] → Project Administrator @ hargroveepc (score 10, match 60%)
+[22:57:28]       (opening Workday's application form directly)
+[22:57:35]       (account page: creating the account / signing in)
+[22:57:35]       account: signing in on hargroveepc.wd12.myworkdayjobs.com
+[22:57:44]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[22:58:03]       account: it had gone through
+[22:58:05]       account: signing in on hargroveepc.wd12.myworkdayjobs.com
+[22:58:14]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[22:58:33]       account: it had gone through
+[22:58:35]       account: signing in on hargroveepc.wd12.myworkdayjobs.com
+[22:58:38]       account: sign-in refused; Workday says: nothing
+[22:59:28]       account: sign-in refused on hargroveepc.wd12.myworkdayjobs.com; resetting the password through your email
+[23:00:51]       account: the password-reset email did not arrive in time. If it comes later, the next try uses it
+[23:00:51]       account: no reset email came, so this email probably has no account on hargroveepc.wd12.myworkdayjobs.com: creating one
+[23:01:18]       1/6 My Information: 14 fields (12 required)
+[23:01:26]       2/6 My Experience: 8 fields (5 required)
+[23:01:36]       ? unanswered: 'Are you a current teammate?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:01:36]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:01:36] → RFP Administrator @ keepersecurity (score 10, match 60%)
+[23:01:49]       step 1: 24 fields (17 required)
+[23:01:49]       ? unanswered: 'Will you now or at any time in the future require our company to sponsor, file for or supp' kind=combobox options=['Yes', 'No']
+[23:01:49]       ? unanswered: 'Have you independently managed the full RFP process from intake through final submission?*' kind=combobox options=['Yes', 'No']
+[23:01:49]       ? unanswered: 'Please briefly describe your experience managing RFPs, RFIs, proposals, and security quest' kind=textarea options=[]
+[23:01:49]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:01:50] → Product Strategy Project Coordinator @ healthfirst (score 91, match 55%)
+[23:01:53]       (opening Workday's application form directly)
+[23:01:59]       1/5 My Information: 16 fields (13 required)
+[23:02:05]       2/5 My Experience: 2 fields (1 required)
+[23:02:17]       ? unanswered: 'What is the name(s) of the Healthfirst employee(s) to whom you are related? Enter N/A if n' kind=textarea options=[]
+[23:02:17]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:02:18] → Junior Business Analyst @ kissusa (score 77, match 55%)
+[23:02:21]       (opening Workday's application form directly)
+[23:02:25]       (account page: creating the account / signing in)
+[23:02:27]       account: signing in on kissusa.wd12.myworkdayjobs.com
+[23:03:49]       (Workday has not drawn the form yet: loading it again)
+[23:03:55]       1/6 My Information: 15 fields (12 required)
+[23:04:00]       2/6 My Experience: 15 fields (10 required)
+[23:04:16]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:04:24]       ? unanswered: 'Did you sign a Non-Compete Agreement with your previous/current employer?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:04:24]     ✗ skipped: can't truthfully answer required: Did you sign a Non-Compete Agreement with your previous/curr
+[23:04:29] → Associate Business Analyst - Supplier Programs @ sphera (score 76, match 55%)
+[23:04:32]       (opening Workday's application form directly)
+[23:04:38]       1/5 My Information: 16 fields (13 required)
+[23:04:50]       2/5 My Experience: 1 fields (1 required)
+[23:05:00]       ? unanswered: 'Acknowledgement I acknowledge that I have read, understood and reviewed the questions on t' kind=combobox options=['Select One', 'Yes, I Acknowledge', 'No']
+[23:05:00]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:05:00] → Process Engineer (New Grad December 2026) @ freeformfuturecorp (score 69, match 55%)
+[23:05:16]       step 1: 29 fields (17 required)
+[23:05:16]       ? unanswered: 'SAT Score*' kind=combobox options=['Did not take', '1600 out of 1600', '1590 out of 1600', '1580 out of 1600', '1570 out of 1600', '1560 out of 1600']
+[23:05:16]       ? unanswered: 'ACT Score*' kind=combobox options=['Did not take', '36 out of 36', '35 out of 36', '34 out of 36', '33 out of 36', '32 out of 36']
+[23:05:16]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:05:16] → Assistant Buyer - Tommy Hilfiger @ pvh (score 69, match 55%)
+[23:05:19]       (opening Workday's application form directly)
+[23:05:23]       (account page: creating the account / signing in)
+[23:05:23]       account: creating one on pvh.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:05:27]       account: Workday answered with its sign-in form and no message: signing in
+[23:05:27]       account: signing in on pvh.wd1.myworkdayjobs.com
+[23:05:42]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:05:48]       account: pressing Sign In once more
+[23:07:13]       (Workday has not drawn the form yet: loading it again)
+[23:07:18]       1/6 My Information: 14 fields (12 required)
+[23:07:27]       2/6 My Experience: 1 fields (1 required)
+[23:07:39]       ? unanswered: 'Do you currently have any contractual obligations that would prevent you from starting wor' kind=combobox options=['Select One', 'Yes', 'No', 'Not Sure']
+[23:07:39]       ? unanswered: 'How much notice would you need if you were to receive an offer?*' kind=combobox options=['Select One', 'Flexible to start anytime', '1 – 2 weeks', '2 – 3 weeks', '3 – 4 weeks', '4 – 6 weeks']
+[23:07:39]       ? unanswered: 'ACKNOWLEDGMENTS I hereby certify that all of the information provided on the application a' kind=combobox options=['Select One', 'Yes', 'No']
+[23:07:39]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:07:39] → Project Coordinator @ nbtbancorp (score 62, match 55%)
+[23:07:43]       (opening Workday's application form directly)
+[23:07:47]       (account page: creating the account / signing in)
+[23:07:49]       account: signing in on nbtbancorp.wd12.myworkdayjobs.com
+[23:09:11]       (Workday has not drawn the form yet: loading it again)
+[23:09:18]       1/6 My Information: 17 fields (8 required)
+[23:09:23]       2/6 My Experience: 15 fields (6 required)
+[23:09:41]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:09:47]       ? unanswered: 'Please describe any work hours or location limitations you have.*' kind=textarea options=[]
+[23:09:47]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:09:47] → Recruiting Operations Coordinator (Remote, US) @ sayari (score 62, match 55%)
+[23:09:59]       step 1: 21 fields (14 required)
+[23:09:59]       ? unanswered: 'Our team primarily uses email to ensure all communications are documented and addressed pr' kind=combobox options=['Yes, email is best; text is fi', 'I prefer email only.', 'I prefer phone calls.']
+[23:09:59]       ? unanswered: 'By submitting your application, you agree to our data privacy policy. We may use AI tools ' kind=combobox options=['I acknowledge & consent', 'I do not consent and understan']
+[23:09:59]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:09:59] → Product Operations, Analyst @ ripple (score 60, match 55%)
+[23:10:32]     ✗ blocked: no application form found on page
+[23:10:36] → PBM Operations Associate @ rightwayhealthcare (score 59, match 55%)
+[23:10:44]       step 1: 2 fields (0 required)
+[23:10:44]     ✗ blocked: not a real application form (2 fields, no résumé upload); page shows: 
+[23:10:53] → People Operations & Compliance Analyst @ dowjones (score 57, match 55%)
+[23:10:56]       (opening Workday's application form directly)
+[23:11:00]       (account page: creating the account / signing in)
+[23:11:02]       account: signing in on dowjones.wd1.myworkdayjobs.com
+[23:12:24]       (Workday has not drawn the form yet: loading it again)
+[23:12:30]       1/6 My Information: 15 fields (8 required)
+[23:12:35]       ? unanswered: 'Additional Documents *' kind=file options=[]
+[23:12:35]     ✗ skipped: can't truthfully answer required: Additional Documents *
+[23:12:39] → Analyst, U.S. Merchant Partnerships, Services Vertical @ visa (score 56, match 55%)
+[23:12:42]       (opening Workday's application form directly)
+[23:12:47]       (account page: creating the account / signing in)
+[23:12:49]       account: signing in on visa.wd5.myworkdayjobs.com
+[23:14:11]       (Workday has not drawn the form yet: loading it again)
+[23:14:20]       1/6 My Information: 19 fields (12 required)
+[23:14:30]       ! could not fill 'First Name*': Locator.fill: Timeout 5000ms exceeded.
+[23:14:36]       My Information (try 2): Workday said ['Error: The field State is required and must have a value.', 'Error-State The field State is required and must have a value. Error-Page Error A phone number already exists for this application. Update or delete the phone number.']; redoing ['Phone Number*', 'State*']
+[23:14:41]       My Information (try 3): Workday said ['Error-Page Error A phone number already exists for this application. Update or delete the phone number. Error-Page Error An address already exists for this application. U']; redoing ['Phone Number*']
+[23:14:45]     ✗ skipped: stuck on Workday's 'My Information' page; Workday says: ['Error-Page Error A phone number already exists for this application. Update or delete the phone number. Error-Page Error An address already exists for this application. U']; fields flagged: none
+[23:14:52] → Sales Strategy Analyst/Sr. Analyst @ salesforce (score 55, match 55%)
+[23:14:56]       (opening Workday's application form directly)
+[23:15:00]       (account page: creating the account / signing in)
+[23:15:02]       account: signing in on salesforce.wd12.myworkdayjobs.com
+[23:16:25]       (Workday has not drawn the form yet: loading it again)
+[23:16:30]       1/5 My Information: 14 fields (12 required)
+[23:16:35]       2/5 My Experience: 3 fields (1 required)
+[23:16:46]       ? unanswered: 'I attest/confirm that I have no post-government employment restrictions currently applicab' kind=combobox options=['Select One', 'Yes', 'No']
+[23:16:46]       ? unanswered: 'Regarding future positions at Salesforce, please select one of the following options*' kind=combobox options=['Select One', 'Yes, I would like to receive c', 'No, please do not contact me a']
+[23:16:46]       ? unanswered: 'I acknowledge that I have read, reviewed and answered the above questions truthfully and a' kind=combobox options=['Select One', 'Yes', 'No']
+[23:16:46]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:16:46] → Inventory Technician - Main Campus - 5am - 1:15pm @ hss (score 54, match 55%)
+[23:16:50]       (opening Workday's application form directly)
+[23:16:56]       (account page: creating the account / signing in)
+[23:16:58]       account: signing in on hss.wd1.myworkdayjobs.com
+[23:18:20]       (Workday has not drawn the form yet: loading it again)
+[23:18:26]       1/5 My Information: 15 fields (12 required)
+[23:18:34]       2/5 My Experience: 12 fields (9 required)
+[23:18:51]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:19:02]       ? unanswered: 'Are you authorized to be lawfully employed in the U.S.?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:19:02]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:19:02] → Coordinator, Speaker Representation @ wmeimg (score 53, match 55%)
+[23:19:07]       (opening Workday's application form directly)
+[23:19:13]       1/5 My Information: 13 fields (8 required)
+[23:19:20]       2/5 My Experience: 3 fields (1 required)
+[23:19:32]       ? unanswered: 'If offered a position, what is your availability to start?*' kind=wddate options=[]
+[23:19:32]     ✗ skipped: can't truthfully answer required: If offered a position, what is your availability to start?*
+[23:19:36] → Coordinator, DTC Marketing - Tommy Hilfiger @ pvh (score 53, match 55%)
+[23:19:46]       (opening Workday's application form directly)
+[23:19:51]       1/6 My Information: 14 fields (12 required)
+[23:20:00]       2/6 My Experience: 1 fields (1 required)
+[23:20:12]       ? unanswered: 'Do you currently have any contractual obligations that would prevent you from starting wor' kind=combobox options=['Select One', 'Yes', 'No', 'Not Sure']
+[23:20:12]       ? unanswered: 'How much notice would you need if you were to receive an offer?*' kind=combobox options=['Select One', 'Flexible to start anytime', '1 – 2 weeks', '2 – 3 weeks', '3 – 4 weeks', '4 – 6 weeks']
+[23:20:12]       ? unanswered: 'ACKNOWLEDGMENTS I hereby certify that all of the information provided on the application a' kind=combobox options=['Select One', 'Yes', 'No']
+[23:20:12]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:20:12] → Treasury Analyst @ fanaticscollectibles (score 52, match 55%)
+[23:20:25]       step 1: 25 fields (16 required)
+[23:20:25]       ? unanswered: 'Are you a collector?*' kind=combobox options=['Yes', 'No']
+[23:20:25]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:20:26] → Facilities - Maintenance Clerk @ caa (score 51, match 55%)
+[23:20:30]       (opening Workday's application form directly)
+[23:20:36]       (account page: creating the account / signing in)
+[23:20:38]       account: creating one on caa.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:20:41]       account: created
+[23:20:44]       account: signing in on caa.wd1.myworkdayjobs.com
+[23:20:51]       1/5 My Information: 13 fields (7 required)
+[23:20:58]       2/5 My Experience: 5 fields (1 required)
+[23:21:12]       ? unanswered: 'I have disclosed all information that is relevant and should be considered applicable to m' kind=combobox options=['Select One', 'Yes', 'No']
+[23:21:12]       ? unanswered: 'I expressly understand and agree that, if employed, my employment, having no specified ter' kind=combobox options=['Select One', 'Yes', 'No']
+[23:21:12]       ? unanswered: 'I understand that no representation, whether oral or written, by any representative or age' kind=combobox options=['Select One', 'Yes', 'No']
+[23:21:12]       ? unanswered: 'I certify, under penalty of perjury, that all of the above information is true and complet' kind=combobox options=['Select One', 'Yes', 'No']
+[23:21:12]       ? unanswered: 'I agree that to the extent permitted by law, any legal claims that I may have concerning m' kind=combobox options=['Select One', 'Yes', 'No']
+[23:21:12]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:21:12] → Deal Desk Analyst @ elastic (score 50, match 55%)
+[23:21:37]       step 1: 2 fields (0 required)
+[23:21:41]     ✗ blocked: not a real application form (2 fields, no résumé upload); page shows: :Elasticsearch; :Solutions; :Enterprise; :Resources; :Search; :UNSUBSCRIBE
+[23:21:45] → AI Execution & Prototyping Analyst @ asmglobal (score 49, match 55%)
+[23:21:49]       (opening Workday's application form directly)
+[23:21:52]       (account page: creating the account / signing in)
+[23:21:52]       account: creating one on asmglobal.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:21:56]       account: Workday answered with its sign-in form and no message: signing in
+[23:21:56]       account: signing in on asmglobal.wd1.myworkdayjobs.com
+[23:22:11]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:22:16]       account: pressing Sign In once more
+[23:23:41]       (Workday has not drawn the form yet: loading it again)
+[23:23:47]       1/6 My Information: 16 fields (12 required)
+[23:23:52]       2/6 My Experience: 3 fields (0 required)
+[23:23:56]       3/6 Application Questions: 4 fields (3 required)
+[23:24:01]       Application Questions (try 2): Workday said ['Error: The field Will you now or in the future require sponsorship to work in the country? is required and must have a value.', 'Error-Will you now or in the future require sponsorship to work in the country? The field Will you now or in the future require sponsorship to work in the country? is req']; redoing ['Will you now or in the future ']
+[23:24:09]       4/6 Voluntary Disclosures: 5 fields (5 required)
+[23:24:15]       5/6 Self Identify: 7 fields (6 required)
+[23:24:22]       Review: submitting
+[23:24:24]     ✓ applied (2.7 min)
+[23:24:29] → Associate Deal Desk Analyst @ jamasoftware (score 48, match 55%)
+[23:24:38]       step 1: 0 fields (0 required)
+[23:24:38]     ✗ blocked: not a real application form (0 fields, no résumé upload); page shows: :Use Website In a Screen-Reader
+[23:24:42] → Inventory Planner @ sysco (score 48, match 55%)
+[23:24:46]       (opening Workday's application form directly)
+[23:24:54]       1/6 My Information: 16 fields (13 required)
+[23:25:03]       2/6 My Experience: 7 fields (4 required)
+[23:25:18]       ? unanswered: 'Seasonal' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Contract' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Intern' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Morning (8:00 am to 12:00 pm)' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Afternoon (12:00 pm to 04:00 pm)' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Evening (04:00 pm to 06:00 pm)' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'Anytime' kind=checkbox_single options=[]
+[23:25:18]       ? unanswered: 'What is your salary expectation (USD)? Do not include a dollar sign or a comma.*' kind=combobox options=['Select One', 'Hourly', 'Annual Salary']
+[23:25:18]       ? unanswered: 'Education: In the event this job requires a specific education degree, failure to provide ' kind=combobox options=['Select One', 'Yes', 'No']
+[23:25:18]       ? unanswered: 'Have you ever been discharged or forced to resign from any position?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:25:18]       ? unanswered: 'Are you related to a colleague at any Sysco entity or affiliated company?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:25:18]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:25:18] → Procurement Specialist @ rithum (score 47, match 55%)
+[23:25:36]       step 1: 33 fields (28 required)
+[23:25:36]       ? unanswered: 'Have you run sourcing events or contract renewals through to an award or signature decisio' kind=combobox options=['Yes', 'No']
+[23:25:36]       ? unanswered: 'Describe your experience presenting sourcing recommendations, cost analysis, or commercial' kind=textarea options=[]
+[23:25:36]       ? unanswered: 'Do you require immigration support either now OR in the future?*' kind=combobox options=['Yes', 'No']
+[23:25:36]       ? unanswered: 'If yes, please describe your current visa status. If you answered no, you can answer N/A.*' kind=textarea options=[]
+[23:25:36]       ? unanswered: 'For this position, the expected base pay range is: $60,000-$85,000 per year. Does this mee' kind=combobox options=['Yes', 'No']
+[23:25:36]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:25:36] → Procurement Specialist @ rithumliboard (score 47, match 55%)
+[23:26:00]       step 1: 33 fields (28 required)
+[23:26:00]       ? unanswered: 'Have you run sourcing events or contract renewals through to an award or signature decisio' kind=combobox options=['Yes', 'No']
+[23:26:00]       ? unanswered: 'Describe your experience presenting sourcing recommendations, cost analysis, or commercial' kind=textarea options=[]
+[23:26:00]       ? unanswered: 'Do you require immigration support either now OR in the future?*' kind=combobox options=['Yes', 'No']
+[23:26:00]       ? unanswered: 'If yes, please describe your current visa status. If you answered no, you can answer N/A.*' kind=textarea options=[]
+[23:26:00]       ? unanswered: 'For this position, the expected base pay range is: $60,000-$85,000 per year. Does this mee' kind=combobox options=['Yes', 'No']
+[23:26:00]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:26:01] → Governance, Risk, and Compliance (GRC) Data Analyst | Technology Services @ denver (score 46, match 55%)
+[23:26:04]       (opening Workday's application form directly)
+[23:26:09]       1/6 Create Account/Sign In: 0 fields (0 required)
+[23:26:12]     ✗ blocked: no Next or Submit button found on Workday's 'Create Account/Sign In' page; page shows: accessibilitySkipToMainContent:Skip to main content; header:Sign In
+Search for Jobs
+Connec; logoLink:; logo:; headerTitle:; navigationContainer:Sign In
+Search for Jobs
+Connec; utilityButtonBar:Sign In; utilityButtonSignIn:Sign In; navigationItem-Search for Jobs:Search for Jobs; navigationItem-Connec
+[23:26:21] → Demand Planner @ revelyst (score 46, match 55%)
+[23:26:25]       (opening Workday's application form directly)
+[23:26:31]       (account page: creating the account / signing in)
+[23:26:31]       account: signing in on revelyst.wd1.myworkdayjobs.com
+[23:26:40]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:26:59]       account: it had gone through
+[23:27:01]       account: signing in on revelyst.wd1.myworkdayjobs.com
+[23:27:11]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:27:29]       account: it had gone through
+[23:27:32]       account: signing in on revelyst.wd1.myworkdayjobs.com
+[23:27:35]       account: sign-in refused; Workday says: nothing
+[23:27:37]       account: sign-in refused on revelyst.wd1.myworkdayjobs.com; resetting the password through your email
+[23:27:39]       account: no button to send the reset email was found
+[23:27:39]       account: no reset email came, so this email probably has no account on revelyst.wd1.myworkdayjobs.com: creating one
+[23:28:08]       account: creating one on revelyst.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:28:15]       account: created
+[23:28:17]       account: signing in on revelyst.wd1.myworkdayjobs.com
+[23:28:27]       ? unanswered: 'Are you a previous employee of Revelyst or one of our various brands? *Current Active Empl' kind=radio options=['Yes', 'No']
+[23:28:27]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:28:27] → Quality Improvement Professional @ humana (score 46, match 55%)
+[23:28:29]     ✗ skipped: the posting is closed
+[23:28:30] → Analyst, Finance @ wmg (score 46, match 55%)
+[23:28:33]       (opening Workday's application form directly)
+[23:28:37]       (account page: creating the account / signing in)
+[23:28:37]       account: creating one on wmg.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:28:40]       account: Workday answered with its sign-in form and no message: signing in
+[23:28:40]       account: signing in on wmg.wd1.myworkdayjobs.com
+[23:28:55]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:29:01]       account: pressing Sign In once more
+[23:29:07]       account: sign-in refused; Workday says: You may have entered the wrong email address or password or your account might be locked.
+[23:29:08]       account: sign-in refused; checking the inbox for this site's verify-your-email link
+[23:29:08]       account: waiting for the verification email…
+[23:29:36]     … set aside: the new account's verify email is on its way; the next jobs go first and this one is finished after
+[23:29:37] → Manufacturing Transaction Coordinator @ gorbel (score 43, match 55%)
+[23:29:40]       (opening Workday's application form directly)
+[23:29:45]       (account page: creating the account / signing in)
+[23:29:47]       account: creating one on gorbel.wd501.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:29:51]       account: created
+[23:29:54]       account: signing in on gorbel.wd501.myworkdayjobs.com
+[23:29:57]       account: it exists but was never verified; asking Workday to send the email again
+[23:29:58]       account: waiting for the verification email…
+[23:32:38]     (sign-in at gorbel.wd501.myworkdayjobs.com did not work; its jobs stay queued and it is tried again in about 6 hours)
+[23:32:38]     ✗ blocked: account: verification email did not arrive in time
+[23:32:43] → back to Analyst, Finance @ wmg: its account's verify email should be in now
+[23:32:43] → Analyst, Finance @ wmg (score 46, match 55%)
+[23:32:45]       (opening Workday's application form directly)
+[23:32:49]       (account page: creating the account / signing in)
+[23:32:51]       account: signing in on wmg.wd1.myworkdayjobs.com
+[23:32:54]       account: sign-in refused; Workday says: You may have entered the wrong email address or password or your account might be locked.
+[23:32:55]       account: sign-in refused; checking the inbox for this site's verify-your-email link
+[23:32:55]       account: waiting for the verification email…
+[23:33:18]       mail: found 'Verify your candidate account'
+[23:33:18]       account: opening the verify link (it leads straight to the application)
+[23:33:26]       account: signing in on wmg.wd1.myworkdayjobs.com
+[23:33:30]       account: sign-in refused; Workday says: You may have entered the wrong email address or password or your account might be locked.
+[23:33:31]       account: sign-in refused on wmg.wd1.myworkdayjobs.com; resetting the password through your email
+[23:33:56]       mail: found 'Reset your password for your candidate account'
+[23:34:03]       account: after the reset Workday shows: Skip to main content English Sign In Home Search for Jobs Sign In Password has been reset Email Address* Password* Sign In Don't have an account yet? Create Account Forgo
+[23:34:03]       account: password reset; signing in
+[23:34:08]       account: signing in on wmg.wd1.myworkdayjobs.com
+[23:34:17]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:34:22]       account: pressing Sign In once more
+[23:34:30]       1/5 My Information: 12 fields (9 required)
+[23:34:36]       2/5 My Experience: 3 fields (1 required)
+[23:34:54]       ? unanswered: 'Were you ever a part of WMG’s Student Programs? (i.e. Intern, College Marketing Rep, Emerg' kind=combobox options=['Select One', 'Yes', 'No']
+[23:34:54]       ? unanswered: 'Desired Salary Currency*' kind=combobox options=['Select One', 'USD', 'GBP', 'CAD', 'AUD', 'EUR']
+[23:34:54]       ? unanswered: 'Are you able to perform the essential function of the position for which you are applying,' kind=combobox options=['Select One', 'Yes', 'No']
+[23:34:54]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:34:54] → HR & Site Operations Specialist @ huntsman (score 42, match 55%)
+[23:34:58]       (opening Workday's application form directly)
+[23:35:01]       (account page: creating the account / signing in)
+[23:35:01]       account: creating one on huntsman.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:35:05]       account: Workday answered with its sign-in form and no message: signing in
+[23:35:05]       account: signing in on huntsman.wd1.myworkdayjobs.com
+[23:35:20]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:35:25]       account: pressing Sign In once more
+[23:36:50]       (Workday has not drawn the form yet: loading it again)
+[23:36:58]       1/5 My Information: 8 fields (3 required)
+[23:36:59]       1/5 My Information: 13 fields (7 required)
+[23:37:08]       2/5 My Experience: 1 fields (1 required)
+[23:37:21]       ? unanswered: 'Do you meet the minimum years of experience requirements for this position, as described i' kind=combobox options=['Select One', 'Yes', 'No']
+[23:37:21]       ? unanswered: 'Do you satisfy the minimum education requirements for this position, as described in the j' kind=combobox options=['Select One', 'Yes', 'No']
+[23:37:21]       ? unanswered: 'If you are a Maryland resident, please acknowledge: UNDER MARYLAND LAW, AN EMPLOYER MAY NO' kind=combobox options=['Select One', 'I acknowledge', 'I am not a Maryland resident']
+[23:37:21]       ? unanswered: 'If you are a California resident, please acknowledge: I further understand Huntsman may ob' kind=combobox options=['Select One', 'I acknowledge', 'I am not a California resident']
+[23:37:21]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:37:21] Run time limit reached (50 min): the rest waits for the next run
+[23:37:21] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 195k/195k tokens (+31k served from its cache, not counted); groq-20b 195k/195k tokens (+21k served from its cache, not counted); groq-qwen 195k/195k tokens; gemini-lite 480/480 requests (+77k served from its cache, not counted); gemini-flash 18/18 requests
+[23:37:21] Summary: 1 applied, 9 blocked, 8 skipped, 1 failed, 21 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-11.md
+[23:37:21]   by site  workday: 8 skipped, 2 blocked, 1 applied
+[23:37:21]   by site  greenhouse: 7 blocked, 1 failed
+[23:37:24] Summary emailed to delgado@alumni.usc.edu
