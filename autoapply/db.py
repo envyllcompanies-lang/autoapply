@@ -59,7 +59,7 @@ class DB:
             "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
             " AND (lower(reason) LIKE '%required%' OR lower(reason) LIKE '%please enter a valid%' OR lower(reason) LIKE '%couldn''t submit%'"
             " OR lower(reason) LIKE '%could not submit%' OR lower(reason) LIKE '%must be%' OR lower(reason) LIKE '%invalid%')"
-            " AND lower(reason) NOT LIKE '%thank%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared)
+            " AND lower(reason) NOT LIKE '%thank%' AND lower(reason) NOT LIKE '%flagged%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared); a spam flag would only repeat
         # Workable submits that sat on the form (a YES/NO question the bot could not see, or 'Submitting…' held by a hidden
         # check) and got no confirmation email: almost certainly never sent. One more try; the inbox is checked first.
         cur3 = self.conn.execute(
@@ -93,6 +93,14 @@ class DB:
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")
+        # what came back is marked 'retry: ' so the queue tries it after fresh jobs (it failed once; fresh jobs apply more often)
+        self.conn.execute(
+            "UPDATE jobs SET reason='retry: ' || reason WHERE status='queued' AND reason NOT LIKE 'retry:%' AND reason NOT LIKE 'recheck-inbox%' AND ("
+            " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
+            " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%'"
+            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%' OR reason LIKE 'stuck on%' OR reason LIKE 'no Next or Submit%'"
+            " OR reason LIKE 'no confirmation after submit%' OR reason LIKE 'apply by hand:%' OR reason LIKE '%Password must include%'"
+            " OR reason LIKE 'already applied to % roles at this company' OR reason LIKE '%security code%' OR reason LIKE '%emailed code%')")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
         return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10))

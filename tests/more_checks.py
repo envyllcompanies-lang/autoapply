@@ -1071,7 +1071,11 @@ def match_checks():
         capped = wd(47, "skipped", "already applied to 3 roles at this company", url="https://boards.greenhouse.io/x/jobs/47")
         big = wd(48, "skipped", "stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.']")
         other = wd(49, "skipped", "stuck on Workday's 'Application Questions' page; Workday says: ['Error: Enter a valid date.']")
+        flagged = wd(50, "unconfirmed", "no confirmation after submit; page errors: [\"We couldn't submit your application\\n\\nYour application submission was flagged as possible spam\"]", clicked=True, url="https://jobs.ashbyhq.com/x/50")
         n = db.requeue_if_new_version("test-build-1")
+        check(db.get(flagged)["status"] == "unconfirmed", "a submit the site flagged as spam is not sent again on every new build")
+        check(str(db.get(big)["reason"]).startswith("retry: ") and str(db.get(capped)["reason"]).startswith("retry: "),
+              f"a job brought back by a new build is marked as a retry, so it waits behind fresh jobs: {db.get(big)['reason'][:40]!r}")
         check(db.get(big)["status"] == "queued" and db.get(other)["status"] == "skipped",
               "a Workday job stuck only on the salary box ('number entered is too large') must come back, other stuck pages stay")
         check(db.get(capped)["status"] == "queued", "a job skipped only because of the old 3-per-employer limit must come back")

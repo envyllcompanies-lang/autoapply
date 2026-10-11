@@ -595,6 +595,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         try ended at a human check come last."""
         fit = _fit(r)
         sr = site_rank(r, health)
+        if str(r["reason"] or "").startswith("retry: "):
+            return (2 if sr < 3 else 3, sr, -fit)      # failed before and brought back by a new build: after fresh jobs
         if fit > 0:
             return (0 if sr < 3 else 2, sr, -(fit + rank.location_boost(r, tiers)))
         return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt, tiers) - 8 * sr))
