@@ -52,7 +52,8 @@ class DB:
             "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','blocked') AND ("
             " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
             " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%'"
-            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%')")
+            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%'"
+            " OR reason LIKE 'stuck on Workday%number entered is too large%')")   # the salary box fixed 2026-10-11
         # submits the site bounced back with 'X is required' (e.g. the résumé upload didn't register): nothing was sent
         cur2 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"

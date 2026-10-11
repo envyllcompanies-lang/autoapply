@@ -952,7 +952,13 @@ class Brain:
             if LEGAL_RX.search(low) or QUALIFY_CERT_RX.search(low):
                 return None          # never agree to arbitration / waivers or certify qualifications for the user
             return True if CONSENT.search(low) else None
-        if kind == "number" and re.search(r"salary|compensation|pay", low):
+        # Workday's salary box is often a plain text input that keeps only the digits typed ('$70,000 to $80,000' becomes
+        # 7000080000, 'The number entered is too large'), so on Workday it gets the plain number too.
+        workday = str(f.get("key") or "").startswith("formField")
+        if (kind == "number" and re.search(r"salary|compensation|pay", low)
+                or kind == "text" and workday and re.search(r"\b(salary|compensation)\b|\bpay (expectation|requirement|range)|desired pay", low)
+                and not re.search(r"current salary|salary history|previous|prior|last", low)) \
+                and not re.search(r"per month|monthly|a month|/ ?month", low):
             return self.facts.get("salary_number") or None
         if kind == "checkbox_group" and re.search(r"language", low):
             got = [o for o in opts if re.search(r"\b(english|spanish|espa[nñ]ol)\b", o, re.I)]

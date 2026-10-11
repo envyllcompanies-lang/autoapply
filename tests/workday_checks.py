@@ -454,8 +454,10 @@ def flow_checks(p):
         pay = S._number_text(CFG["facts"].get("salary_number") or "")
         if pay:
             check(d.get("primaryQuestionnaire--annual") == pay, f"extras: a number box for pay should get your pay as a plain number, got {d.get('primaryQuestionnaire--annual')!r}")
-            check(d.get("primaryQuestionnaire--pay") == pay and any("(try 2)" in x and "too large" in x for x in r["logs"]),
-                  f"extras: a pay box that turned out to take only a number should be answered again with the plain number, got {d.get('primaryQuestionnaire--pay')!r}; log: {tail(r)}")
+            # a Workday salary text box that keeps only digits gets the plain number at once (2026-10-11); the retry after
+            # Workday's 'too large' complaint is checked in funnel_checks
+            check(d.get("primaryQuestionnaire--pay") == pay,
+                  f"extras: a Workday pay box that takes only digits should get the plain number, got {d.get('primaryQuestionnaire--pay')!r}; log: {tail(r)}")
         check(d.get("primaryQuestionnaire--paytype") == "Salary", f"extras: 'Desired Pay Rate Type' should be Salary, got {d.get('primaryQuestionnaire--paytype')!r}")
         check(S._number_text("$75,000") == "75000" and S._number_text(75000.0) == "75000" and S._number_text("62500.50") == "62500.50"
               and S._number_text("3+") == "3" and S._number_text("$70,000 to $80,000") == "70000" and S._number_text("75k") == "75000"

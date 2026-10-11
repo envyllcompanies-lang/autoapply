@@ -1069,7 +1069,11 @@ def match_checks():
         u3 = wd(46, "unconfirmed", "no confirmation after submit; page ends: 'sexual orientation, gender identity or any other reason'", clicked=True, url="https://job-boards.greenhouse.io/x/jobs/46")
         m1 = wd(43, "manual", "apply by hand: greenhouse stopped the bot at a human check (CAPTCHA or emailed code) on it", url="https://boards.greenhouse.io/x/jobs/43")
         capped = wd(47, "skipped", "already applied to 3 roles at this company", url="https://boards.greenhouse.io/x/jobs/47")
+        big = wd(48, "skipped", "stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.']")
+        other = wd(49, "skipped", "stuck on Workday's 'Application Questions' page; Workday says: ['Error: Enter a valid date.']")
         n = db.requeue_if_new_version("test-build-1")
+        check(db.get(big)["status"] == "queued" and db.get(other)["status"] == "skipped",
+              "a Workday job stuck only on the salary box ('number entered is too large') must come back, other stuck pages stay")
         check(db.get(capped)["status"] == "queued", "a job skipped only because of the old 3-per-employer limit must come back")
         check(all(db.get(k)["status"] == "queued" and not db.get(k)["submitted_at"] for k in (u1, u2)), "a submit the page rejected with an error must come back (submitted_at cleared), or the safety rule keeps it unconfirmed")
         check(db.get(u3)["status"] == "unconfirmed", "a submit with no error shown stays unconfirmed (it may have gone through)")
@@ -1279,7 +1283,14 @@ def field_checks():
         a = b._answer({"id": lab, "kind": "checkbox_single", "label": lab, "question": q, "options": [], "required": True}, "", ctx)
         want = True if lab.lower() in langs else ""
         check(a == want, f"language box {lab!r}: got {a!r}, want {want!r} (from your confirmed languages)")
-    print("ok  Workday skills box and one-box-per-language lists answered from your résumé and confirmed languages")
+    # Workday's salary box is a plain text input that keeps only digits (no 'numericInput' mark on real pages, 2026-10-11):
+    # a range typed into it became one 10-digit number and 'The number entered is too large'.
+    for q in ("What is your desired compensation?*", "Please share the range of your salary requirement?*", "Annual Compensation Expectations*"):
+        a = b._answer({"id": "c", "kind": "text", "label": q, "question": q, "required": True, "key": "formField-9bf21a96d90f1000ffcda96b21b80006"}, "", ctx)
+        check(re.fullmatch(r"\d{4,7}", str(a or "")), f"Workday salary box {q!r} must get one plain number, got a {re.sub(r'[0-9]', '9', str(a))!r}")
+    a = b._answer({"id": "c", "kind": "text", "label": "What is your desired compensation?*", "required": True, "key": "salary"}, "", ctx)
+    check(not re.fullmatch(r"\d+", str(a or "")), "a salary text box outside Workday keeps the written range")
+    print("ok  Workday skills box, one-box-per-language lists and the digits-only salary box answered from your files")
 
 
 def remote_checks():
@@ -1301,7 +1312,7 @@ def remote_checks():
     b = Brain({**CFG, "writer": {"enabled": False}}, PROFILE, ROOT, lambda *a: None)
     sc = {loc: b.score(Job("greenhouse", "acme", "3", "Operations Coordinator", loc, "", "", desc))[0]
           for loc, desc in (("Remote - US", ""), ("New York, NY", ""), ("Denver, CO", ""), ("Los Angeles, CA", ""), ("Austin, TX", yes[0]))}
-    check(min(sc["Remote - US"], sc["New York, NY"], sc["Denver, CO"]) > sc["Los Angeles, CA"],
+    check(sc["Remote - US"] > min(sc["New York, NY"], sc["Denver, CO"]) > sc["Los Angeles, CA"],
           f"remote / New York / Denver must score above Los Angeles: {sc}")
     check(sc["Austin, TX"] == sc["Remote - US"], f"remote stated in the description must count as remote: {sc}")
     tiers = CFG["scoring"].get("location_tiers") or {}
@@ -1312,13 +1323,13 @@ def remote_checks():
     home = ("Glenwood Springs, CO", "Rifle, CO", "Silt, CO", "New Castle, Colorado, United States", "Carbondale, CO", "CO Rifle - Meeker - Willow Creek Plant")
     for loc in home:
         h = b.score(Job("greenhouse", "acme", "4", "Operations Coordinator", loc, "", "", ""))[0]
-        check(h > sc["Remote - US"], f"a job near home ({loc}) must score above remote / Denver: {h} vs {sc}")
+        check(h == sc["Denver, CO"] == sc["New York, NY"] < sc["Remote - US"], f"a job near home ({loc}) must score like Denver / New York, below remote: {h} vs {sc}")
     for loc in ("New Castle, DE", "Carbondale, IL"):
         check(b.score(Job("greenhouse", "acme", "5", "Operations Coordinator", loc, "", "", ""))[0] < sc["Denver, CO"],
               f"{loc} is not the home New Castle / Carbondale")
-    order = sorted(rows + [{**rows[0], "location": "Glenwood Springs, CO"}], key=lambda r: -R.value(R.Prior([]), r, tiers=tiers))
-    check(order[0]["location"] == "Glenwood Springs, CO", f"home-area jobs must be checked first: {[r['location'] for r in order]}")
-    print("ok  remote roles read from the description; home area (Rifle–Carbondale) first, then remote, New York, Denver, then Los Angeles")
+    order = [r["location"] for r in sorted(rows + [{**rows[0], "location": "Glenwood Springs, CO"}], key=lambda r: -R.value(R.Prior([]), r, tiers=tiers))]
+    check(order[0] == "Remote" and order[-1] == "Los Angeles, CA", f"remote first, then New York / Denver / home area, then Los Angeles: {order}")
+    print("ok  remote roles read from the description; remote first, then New York, Denver and the home area (Rifle–Carbondale), then Los Angeles")
 
 
 def location_checks():
