@@ -1309,7 +1309,16 @@ def remote_checks():
             ("Los Angeles, CA", "Denver, CO", "New York, NY", "Remote")]
     order = sorted(rows, key=lambda r: -R.value(R.Prior([]), r, tiers=tiers))
     check(order[-1]["location"] == "Los Angeles, CA", f"Los Angeles must be checked after remote / New York / Denver: {[r['location'] for r in order]}")
-    print("ok  remote roles read from the description; remote, New York and Denver ranked ahead of Los Angeles")
+    home = ("Glenwood Springs, CO", "Rifle, CO", "Silt, CO", "New Castle, Colorado, United States", "Carbondale, CO", "CO Rifle - Meeker - Willow Creek Plant")
+    for loc in home:
+        h = b.score(Job("greenhouse", "acme", "4", "Operations Coordinator", loc, "", "", ""))[0]
+        check(h > sc["Remote - US"], f"a job near home ({loc}) must score above remote / Denver: {h} vs {sc}")
+    for loc in ("New Castle, DE", "Carbondale, IL"):
+        check(b.score(Job("greenhouse", "acme", "5", "Operations Coordinator", loc, "", "", ""))[0] < sc["Denver, CO"],
+              f"{loc} is not the home New Castle / Carbondale")
+    order = sorted(rows + [{**rows[0], "location": "Glenwood Springs, CO"}], key=lambda r: -R.value(R.Prior([]), r, tiers=tiers))
+    check(order[0]["location"] == "Glenwood Springs, CO", f"home-area jobs must be checked first: {[r['location'] for r in order]}")
+    print("ok  remote roles read from the description; home area (Rifle–Carbondale) first, then remote, New York, Denver, then Los Angeles")
 
 
 def location_checks():

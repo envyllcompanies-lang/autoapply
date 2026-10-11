@@ -42,7 +42,19 @@ cover_letters: required
 
 scoring:
   location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).
-    remote: 12              # 'remote' includes postings whose description says they are remote in the US
+    glenwood springs: 16    # home area, Rifle to Carbondale (I-70 / Highway 82): checked first
+    glenwood spgs: 16
+    rifle: 16
+    silt, co: 16            # 'silt, co' / 'new castle, co' / 'carbondale, co' also match '…, Colorado' but not New Castle, DE or Carbondale, IL
+    new castle, co: 16
+    carbondale, co: 16
+    parachute, co: 16
+    battlement mesa: 16
+    basalt: 16
+    el jebel: 16
+    garfield county: 16
+    roaring fork: 16
+    remote: 12             # 'remote' includes postings whose description says they are remote in the US
     new york: 12            # (also 'NY' towns: Brooklyn, Rye Brook, Long Island City…)
     nyc: 12
     denver: 12
