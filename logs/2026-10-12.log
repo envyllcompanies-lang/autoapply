@@ -6736,3 +6736,22 @@ Sign In; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utilit
 [20:17:44]   by site  workday: 3 skipped
 [20:17:44]   by site  greenhouse: 1 applied
 [20:17:48] Summary emailed to delgado@alumni.usc.edu
+[20:29:51] === autoapply run (LIVE) build 2026-10-11-b ===
+[20:29:51] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[20:29:52] mail: logged in to delgado@alumni.usc.edu OK
+[20:30:16] Discovering jobs…
+[20:30:16] Job search already ran at 20:11 (searches run every 3 h): this run only applies
+[20:30:17]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[20:30:17] 0 open roles, 0 new
+[20:30:17] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.4 min)
+[20:30:17] 807 jobs queued: 33 already matched to your résumé, 774 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 432 now
+[20:30:18] Time for this run: 50 min in all (8790 of 1850 free Actions minutes used this month)
+[20:30:18] Accounts: ON (delgado@alumni.usc.edu)
+[20:30:19] → Research Coordinator @ oneoncology (score 32)
+[20:30:28]     match 0% — The job posting text is an error message from Workday and contains no job details.
+[20:30:28]     ✗ set aside: under the 55% match bar
+[20:30:28] → Research Coordinator @ oneoncology (score 32)
+[20:30:35]     match 0% — The job posting text is only a Workday system error message with no job details provided.
+[20:30:35]     ✗ set aside: under the 55% match bar
+[20:30:35] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 195k/195k tokens (+29k served from its cache, not counted); groq-20b 195k/195k tokens (+47k served from its cache, not counted); groq-qwen 195k/195k tokens; gemini-lite 343/480 requests (+45k served from its cache, not counted); gemini-flash 1/18 requests
+[20:30:35] Summary: 2 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-12.md
