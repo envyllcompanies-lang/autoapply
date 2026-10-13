@@ -5588,3 +5588,71 @@ why: no application form found on page
   text: Looking for your next role? Explore thousands of jobs.
   [button] Cookie settings
 
+=== 2026-10-13 13:04:36  skipped  Marketing Specialist @ tiaa
+url: https://tiaa.wd1.myworkdayjobs.com/Search/job/Dallas-TX-USA/Marketing-Specialist_R260800231-3/apply/applyManually
+stage: Voluntary Disclosures
+why: stuck on Workday's 'Voluntary Disclosures' page; Workday says: ['Error: The field Please indicate your race. is required and must have a value.', 'Error-Please indicate your race. The field Please indicate your race. is required and must have a value.']; fields flagged: ['Please indicate your race.']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Marketing Specialist
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+# Errors Found
+! Error-Please indicate your race. The field Please indicate your race. is required and must have a value. {errorHeading}
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data Statement
+  text: Definitions for Veteran Status below:
+  text: “disabled veteran” is a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the recei
+  text: A “recently separated veteran” is any veteran during the three-year period beginning on the date of such veteran's discharge or release from
+  text: An “active duty wartime or campaign badge veteran” is a veteran who served on active duty in the U.S. military, ground, naval or air service
+  text: An “armed forces service medal veteran” is a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, p
+ {formField-hispanicOrLatino}
+label: Please indicate if you are Hispanic or Latino.
+  [dropdown] chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Indicate your military/veterans status based on the definitions provided.
+  [dropdown] chosen #personalInfoUS--veteranStatus
+ {formField-ethnicityMulti}
+label: Please indicate your race.*
+  <input:checkbox #0959caecc7550192929e61a5ba002308-ethnicityMulti required question-unanswered>
+label: American Indian or Alaska Native (United States of America)
+  <input:checkbox #0959caecc75501c8e3ec51a5ba00f607-ethnicityMulti required question-unanswered>
+label: Asian (United States of America)
+  <input:checkbox #0959caecc7550179ac037ea5ba009c08-ethnicityMulti required question-unanswered>
+label: Black or African American (United States of America)
+  <input:checkbox #0959caecc755013066624fa5ba00e807-ethnicityMulti required question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (United States of America)
+  <input:checkbox #0959caecc7550168131a78a5ba008408-ethnicityMulti required question-unanswered>
+label: Not Specified (United States of America)
+  <input:checkbox #0959caecc755014bcc9c6ca5ba005508-ethnicityMulti required question-unanswered>
+label: White (United States of America)
+! Error: The field Please indicate your race. is required and must have a value. {inputAlert}
+ {formField-gender}
+label: Please indicate your gender.*
+  [dropdown] chosen #personalInfoUS--gender
+# Terms and Conditions
+  text: You agree to TIAA and its affiliates (and any third partner acting on its behalf) using your personal information that TIAA receives as part
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-answered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
