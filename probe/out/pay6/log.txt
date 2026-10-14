@@ -1,0 +1,36 @@
+[18:35:16] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[18:35:18] mail: logged in to delgado@alumni.usc.edu OK
+[18:35:18] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[18:35:18] === probe pay6: 2 forms, fill only, nothing is submitted ===
+[18:35:19] ACCOUNT_PASSWORD meets Workday's usual rules
+[18:35:19] Accounts: ON (password set: True, email set: True, create in probe: True)
+[18:35:19] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4566840
+[18:35:52]       step 1: 26 fields (14 required)
+[18:35:52]       (writer answered 'County' -> 'N/A')
+[18:35:52]       ? unanswered: 'Have you applied for a job with us before? (required) *' kind=combobox options=[]
+[18:35:52]     ✗ Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:35:52] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4573853
+[18:36:21]       step 1: 45 fields (27 required)
+[18:36:21]       (writer answered 'County' -> 'N/A')
+[18:36:22]       (writer answered 'County' -> 'N/A')
+[18:36:22]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:36:23]       (writer answered 'Did you Graduate? (required) *' -> 'Yes')
+[18:36:55]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:37:14]       step 2: 55 fields (34 required)
+[18:37:15]       (writer answered 'County' -> 'N/A')
+[18:37:15]       (writer answered 'County' -> 'N/A')
+[18:37:16]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:37:43]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:38:03]       step 3: 55 fields (34 required)
+[18:38:04]       (writer answered 'County' -> 'N/A')
+[18:38:05]       (writer answered 'County' -> 'N/A')
+[18:38:05]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:38:30]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:38:49]     ✗ Unanswerable: stuck on step 4; page says: ['Select a State/Province']; fields flagged: State
+Select a state; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; public-site-address:Country
+United States
+Address ; pub
+[18:38:50] === probe done ===
+[18:38:50]    1 recruiting.paylocity.com (url)              (url)                                    steps=0 empty_req=0 | Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:38:50]    2 recruiting.paylocity.com (url)              (url)                                    steps=3 empty_req=33 | Unanswerable: stuck on step 4; page says: ['Select a State/Province']; fields flagged: State
+Select a state; buttons: :R
