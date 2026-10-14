@@ -112,6 +112,9 @@ EXTRACT_JS = r"""
     const t = clean(l && !l.contains(el) ? l.innerText : '');
     return t;
   };
+  // Paylocity: '(required)' is written after the question, in the block's heading line, not in the box's own label
+  const markedRequired = el => { const fg = el.closest('.form-group'); const h = fg && fg.querySelector('p, label');
+                                 return !!(h && !h.contains(el) && /\(required\)/i.test(h.innerText || '')); };
   let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = root.querySelectorAll('input, textarea, select');
@@ -185,7 +188,7 @@ EXTRACT_JS = r"""
     // Workday's number box is a text input that keeps only the digits typed into it: 'USD 70,000 - 80,000' becomes
     // 7000080000 and the page is sent back with 'The number entered is too large'. It is a number field.
     if (f.kind === 'text' && /^numericInput$/i.test(el.getAttribute('data-automation-id') || '')) f.kind = 'number';
-    if (/[*\u2731]/.test(f.label) || /\(required\)/i.test(f.label) || el.closest('.form-required')) f.required = true;
+    if (/[*\u2731]/.test(f.label) || /\(required\)/i.test(f.label) || el.closest('.form-required') || markedRequired(el)) f.required = true;
     if (el.placeholder) f.ph = el.placeholder;
     fields.push(f);
   }
@@ -200,7 +203,8 @@ EXTRACT_JS = r"""
                     sel: opts[0].sel, key: keyOf(g.members[0]), checked: isOn(g.members[0]) });
     else
       fields.push({ id: 'g_' + opts[0].id, kind: g.type === 'radio' ? 'radio' : 'checkbox_group',
-                    label: gq || name, required: g.required || /[*\u2731]/.test(gq) || !!gbox, key: keyOf(g.members[0]),
+                    label: gq || name, required: g.required || /[*\u2731]/.test(gq) || /\(required\)/i.test(gq) || !!gbox || markedRequired(g.members[0]),
+                    key: keyOf(g.members[0]),
                     options: opts.map(o => o.label), option_ids: opts.map(o => o.id), option_sels: opts.map(o => o.sel),
                     checked: g.members.map((m, i) => isOn(m) ? opts[i].label : null).filter(Boolean) });
   }
@@ -814,6 +818,9 @@ def extract(page) -> list[dict]:
             el.click(timeout=3000)
             page.wait_for_timeout(450)
             f["options"] = _visible_options(page, el)
+            if not f["options"] and f.get("button"):
+                page.wait_for_timeout(700)      # a list that slides open (react-widgets) shows its choices a moment later
+                f["options"] = _visible_options(page, el)
         except Exception:
             f["options"] = []
         _close_list(page)
@@ -2015,10 +2022,12 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
         log(f"      step {step}: {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
         total += len(fields)
         plan = brain.map_fields(job, fields, cover_letter)
-        missing = [by["label"][:60] for by in fields if by["id"] in set(plan["unanswerable_required"])]
+        # a box the site already shows an answer in (picked on the page before, kept from your candidate profile) needs nothing
+        unans = set(plan["unanswerable_required"]) - {f["id"] for f in fields if _already_answered(f)}
+        missing = [by["label"][:60] for by in fields if by["id"] in unans]
         if missing:
             for f in fields:
-                if f["id"] in set(plan["unanswerable_required"]):
+                if f["id"] in unans:
                     log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
             raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
         if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:

@@ -1157,8 +1157,8 @@ class Brain:
     def _experience_answers(self, fields) -> dict:
         """Work-history blocks (Workday 'Work Experience 1, 2 ...': Job Title, Company, Location, I currently work here, From,
         To, Role Description) filled from profile.yaml experience, newest first. Returns {field id: value or None}."""
-        labs = [(f, _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))) for f in fields]
-        if not (any(l == "job title" for _, l in labs) and any(l in ("company", "company name", "employer") for _, l in labs)):
+        labs = [(f, _norm(re.sub(r"[*\u2731]|\(required\)", "", f.get("label", "")))) for f in fields]
+        if not (any(l in ("job title", "position") for _, l in labs) and any(l in ("company", "company name", "employer") for _, l in labs)):
             return {}
         jobs = list(self.profile.get("experience") or [])
         seen: dict = {}
@@ -1168,7 +1168,8 @@ class Brain:
                 continue                                   # a school's From / To years (see _education_years), not a job's dates
             key = {"job title": "title", "title": "title", "company": "company", "company name": "company", "employer": "company",
                    "location": "location", "from": "from", "start date": "from", "to": "to", "end date": "to",
-                   "role description": "desc", "description": "desc", "i currently work here": "current"}.get(l)
+                   "role description": "desc", "description": "desc", "i currently work here": "current",
+                   "position": "title", "currently working here": "current"}.get(l)   # Paylocity's Work History
             if not key:
                 continue
             n = seen.get(key, 0)
