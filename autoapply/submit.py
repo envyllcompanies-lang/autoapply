@@ -807,6 +807,13 @@ def _already_answered(f: dict) -> bool:
     return bool(f.get("has_value"))
 
 
+def _dbg(m):
+    import os
+    os.makedirs("probe/out", exist_ok=True)
+    with open("probe/out/debug.txt", "a") as fh:
+        fh.write(m + "\n")
+
+
 def extract(page) -> list[dict]:
     fields = page.evaluate(EXTRACT_JS)
     for f in fields:  # comboboxes only reveal options when opened
@@ -832,10 +839,10 @@ def extract(page) -> list[dict]:
                     return b ? [...b.querySelectorAll('[role="option"]')].map(o => (o.innerText || o.textContent || '').trim()).filter(Boolean) : []; }""",
                                            timeout=1500) or []
         except Exception as e:
-            print(f"      DEBUG options of {f.get('label','')[:40]!r} failed: {str(e).splitlines()[0][:200]}", flush=True)
+            _dbg(f"      DEBUG options of {f.get('label','')[:40]!r} failed: {str(e).splitlines()[0][:200]}")
             f["options"] = []
         if f.get("button") and not f["options"]:
-            print(f"      DEBUG no options for {f.get('label','')[:40]!r}", flush=True)
+            _dbg(f"      DEBUG no options for {f.get('label','')[:40]!r}: " + str(page.evaluate("""(id) => { const e = document.querySelector('[data-aa="' + id + '"]'); return e ? e.outerHTML.slice(0, 1500) + ' || active=' + (document.activeElement && document.activeElement.outerHTML.slice(0, 200)) : 'gone'; }""", f["id"])))
         _close_list(page)
     return fields
 
@@ -1091,9 +1098,9 @@ def _set_text(el, val: str):
     try:
         if "/" in val:
             v1 = el.input_value(timeout=1000); el.page.wait_for_timeout(800); v2 = el.input_value(timeout=1000)
-            print(f"      DEBUG date box: typed {val!r}, right after {v1!r}, a moment later {v2!r}", flush=True)
+            _dbg(f"      DEBUG date box: typed {val!r}, right after {v1!r}, a moment later {v2!r}")
     except Exception as e:
-        print(f"      DEBUG date read failed {e}", flush=True)
+        _dbg(f"      DEBUG date read failed {e}")
     try:
         if val.strip() and not el.input_value(timeout=1000).strip():
             el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
@@ -1187,6 +1194,7 @@ _SHOWN_JS = """e => {
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
+    _dbg(f"      DEBUG dropdown {f.get('label','')[:40]!r} <- {val!r}")
     try:
         is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
     except Exception:
