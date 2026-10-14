@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS jobs (
@@ -104,6 +104,25 @@ class DB:
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
         return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10))
+
+    def compact(self, slim_after_days: int = 3, drop_after_days: int = 60) -> tuple[int, int]:
+        """Keep the history file small enough to be saved forever (GitHub refuses a file over 100 MB; it was 57 MB and
+        growing 1.5 MB a day on 2026-10-13). A posting dropped by the title / location / level rules only needs its key
+        (so it is not looked at again) and the start of its reason: after a few days the rest of its row is emptied, and
+        after two months the row goes (such postings have closed by then). Returns (rows slimmed, rows removed)."""
+        now = datetime.now()
+        slim_cut = (now - timedelta(days=slim_after_days)).isoformat(timespec="seconds")
+        drop_cut = (now - timedelta(days=drop_after_days)).isoformat(timespec="seconds")
+        gone = self.conn.execute("DELETE FROM jobs WHERE status='filtered' AND first_seen < ? AND updated < ?"
+                                 " AND (submitted_at IS NULL OR submitted_at = '')", (drop_cut, drop_cut)).rowcount
+        slim = self.conn.execute(
+            "UPDATE jobs SET url='', apply_url='', location='', company='', title=substr(COALESCE(title,''),1,60),"
+            " reason=substr(COALESCE(reason,''),1,80) WHERE status='filtered' AND updated < ?"
+            " AND (url != '' OR apply_url != '' OR location != '' OR company != '')", (slim_cut,)).rowcount
+        self.conn.commit()
+        if slim or gone:
+            self.conn.execute("VACUUM")
+        return slim, gone
 
     def requeue_fixed(self, flag: str) -> dict:
         """Jobs that were set aside by a fault that has since been fixed get one more try, once per flag. Each rule names

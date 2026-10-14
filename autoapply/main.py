@@ -406,6 +406,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_titles = db.reset_title_filter(tok)
     if n_titles:
         log(f"Job titles you accept changed: looking again at {n_titles:,} postings that were dropped only for their title")
+    if db.meta_get("compact_day") != date.today().isoformat():      # once a day: keep the history file far under GitHub's 100 MB
+        try:
+            slim, gone = db.compact()
+            db.meta_set("compact_day", date.today().isoformat())
+            if slim or gone:
+                log(f"History kept small: {slim:,} old filtered postings slimmed to their key, {gone:,} older than two months removed")
+        except Exception as e:
+            log(f"  ! history compaction skipped: {str(e)[:100]}")
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")

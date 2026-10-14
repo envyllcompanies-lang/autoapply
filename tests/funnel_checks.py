@@ -320,6 +320,58 @@ def allowance_checks():
     print("ok  free allowance: the best model only answers, match-only models only check, shared models keep part of their day for answers")
 
 
+def history_size_checks():
+    d = DB(str(TMP / "compact.db"))
+    old = (datetime.now() - timedelta(days=10)).isoformat(timespec="seconds")
+    ancient = (datetime.now() - timedelta(days=90)).isoformat(timespec="seconds")
+    for i, (status, when) in enumerate((("filtered", old), ("filtered", ancient), ("filtered", None), ("queued", old), ("applied", ancient))):
+        j = Job("greenhouse", "acme", f"c{i}", "Operations Analyst", "Dallas, TX", f"https://x/{i}", f"https://x/{i}", "")
+        d.add(j, status, reason="location 'Dallas, TX' not allowed" if status == "filtered" else "match 80%: fine")
+        if when:
+            d.conn.execute("UPDATE jobs SET updated=?, first_seen=? WHERE key=?", (when, when, j.key))
+    d.conn.commit()
+    slim, gone = d.compact()
+    rows = {r["key"].split(":")[-1]: r for r in d.conn.execute("SELECT * FROM jobs")}
+    check(slim == 1 and gone == 1 and "c1" not in rows, f"compaction: {slim} slimmed, {gone} removed, left {sorted(rows)}")
+    check(rows["c0"]["url"] == "" and rows["c0"]["reason"].startswith("location 'Dallas") and d.seen(rows["c0"]["key"]),
+          "an old filtered posting keeps its key and the start of its reason (so it is not looked at again)")
+    check(rows["c2"]["url"] and rows["c3"]["url"] and rows["c4"]["url"], "recent filtered postings, queued and applied jobs are never touched")
+    s = {"titles_include": ["analyst"], "locations_include": ["denver"], "_onsite_ok": ["denver"]}
+    check(all(SRC.prefilter(Job("greenhouse", "a", "1", "Operations Analyst", loc, "", "", ""), s) is None for loc in ("United States", "USA"))
+          and SRC.prefilter(Job("greenhouse", "a", "1", "Operations Analyst", "Dallas, TX", "", "", ""), s), "a US-wide posting with no city is kept; another city is still dropped")
+    print("ok  history kept small (old filtered postings slimmed to their key); US-wide postings with no city are kept")
+
+
+def group_pick_checks():
+    from autoapply.brain import Brain
+    b = Brain.__new__(Brain)
+    b.facts, b._log = {"sms_consent": "yes", "open_to_onsite": "yes", "open_to_remote": "yes"}, (lambda *a: None)
+
+    def grp(q, labels):
+        return [{"id": f"{abs(hash(q))}-{i}", "kind": "checkbox_single", "label": l, "question": q, "required": True} for i, l in enumerate(labels)]
+    F = (grp("Are you a citizen or national of any of the following countries?*", ["Cuba", "Iran", "Syria", "None of these"])
+         + grp("Which shifts are you available to work?*", ["Day", "Evening", "Night", "Weekend"])
+         + grp("How would you prefer we contact you for scheduling?*", ["Email", "Text", "Phone"])
+         + grp("What attracted you to our company?*", ["Company reputation", "Opportunity for career advancement"])
+         + grp("Please select the ethnicity which most accurately describes you*", ["Hispanic", "White"])
+         + grp("I certify and agree to the arbitration agreement*", ["Yes", "No"])
+         + grp("Which of our hospitals interest you?*", ["Glens Falls Hospital", "The Saratoga Hospital"]))
+    answers, missing = {}, [f["id"] for f in F]
+    b._pick_in_groups(F, answers, missing)
+    ticked = sorted(next(f["label"] for f in F if f["id"] == i) for i, v in answers.items() if v is True)
+    check(ticked == sorted(["None of these", "Day", "Email", "Text", "Opportunity for career advancement"]),
+          f"tick-box groups: the plainly true box is ticked: {ticked}")
+    left = {next(f["question"] for f in F if f["id"] == i).split()[0] for i in missing}
+    check(left == {"Please", "I", "Which"} and len(missing) == 6, f"self-identification with nothing set and no 'decline' box, agreements and unknown lists are never guessed: {left} {len(missing)}")
+    b.facts["race_ethnicity"] = "decline"
+    R = grp("Please indicate your race.*", ["Asian", "White", "Two or more races", "I do not wish to answer"])
+    ans2, miss2 = {}, [f["id"] for f in R]
+    b._pick_in_groups(R, ans2, miss2)
+    check([f["label"] for f in R if ans2.get(f["id"]) is True] == ["I do not wish to answer"] and not miss2,
+          f"a race question shown as tick boxes gets your configured answer (here: decline): {ans2}")
+    print("ok  tick-box groups: sanctions lists 'none', daytime shifts, email/text contact, career growth; never demographics or agreements")
+
+
 def letter_switch_checks():
     from autoapply.brain import Brain
     for setting, req, opt in ((True, True, True), (False, False, False), ("required", True, False), ("all", True, True)):
@@ -328,6 +380,16 @@ def letter_switch_checks():
         check(got == (req, opt), f"cover_letters: {setting!r} -> required box {got[0]}, optional box {got[1]}")
     check("city" in W.SAFE_FACTS and "state" in W.SAFE_FACTS, "the writer knows your town and state (a 'current city and state?' box was answered N/A)")
     print("ok  cover letters only where required ('required'), on every box (true), or never (false); the writer knows your town")
+
+
+def date_box_checks():
+    from autoapply.submit import _date_as_box as D, _SHOWN_JS
+    check(D("MM/DD/YYYY", "October 21, 2026") == "10/21/2026" and D("YYYY-MM-DD", "October 21, 2026") == "2026-10-21",
+          "a start date is typed in the box's own format (Paylocity's MM/DD/YYYY box threw away 'October 21, 2026')")
+    check(D("", "October 21, 2026") == "October 21, 2026" and D("MM/DD/YYYY", "Immediately") == "Immediately",
+          "a box without a date format, or an answer that is not a date, is typed as given")
+    check("rw-input" in _SHOWN_JS and "single-value" in _SHOWN_JS, "dropdowns drawn as a <div> report the value they show")
+    print("ok  date boxes get their own format; div dropdowns (Paylocity) report what they show")
 
 
 def batch_checks():
@@ -655,7 +717,7 @@ def preflight_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, batch_checks, same_role_checks, second_try_checks,
+    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
                account_record_checks, site_mail_checks, workday_helper_checks, preflight_checks):
         try:
             fn()

@@ -135,6 +135,8 @@ FIELD_RULES = [
      r"spoken languages?", ("languages",), None),
     (r"\bgpa\b|grade point", ("gpa",), None),
     (r"highest (level of )?(\w+ )?(education|degree)|level of (\w+ )?education|education level", ("education_level",), None),
+    (r"\bschool type\b|type of (school|institution)", ("school_type",), None),
+    (r"did you graduate|have you graduated|\bgraduated\?", ("graduated",), None),
     (r"\b(school|university|college|institution)\b", ("school",), None),
     (r"degree|diploma", ("degree",), None),
     (r"\bmajor\b|field of study|discipline", ("major",), None),
@@ -237,6 +239,11 @@ class Brain:
         li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", str(f.get("linkedin") or ""), re.I)
         if li:           # forms accept the plain profile address only, not one with a page or tracking after the name
             f["linkedin"] = f"https://www.linkedin.com/in/{li.group(1)}"
+        if f.get("school") and not f.get("school_type"):     # Paylocity's 'School Type' list: University / College / ...
+            f["school_type"] = "University" if re.search(r"universit", str(f["school"]), re.I) else "College"
+        gy = re.search(r"(19|20)\d\d", str(f.get("graduation_date") or ""))
+        if gy and not f.get("graduated"):                   # 'Did you graduate?': yes once the graduation date has passed
+            f["graduated"] = "Yes" if int(gy.group(0)) <= date.today().year else "No"
         self.facts = f
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))
@@ -528,8 +535,73 @@ class Brain:
                     missing.append(fld["id"])
             else:
                 answers[fld["id"]] = val
+        self._pick_in_groups(fields, answers, missing)
         self._place_resume(fields, answers, missing)
         return {"answers": answers, "unanswerable_required": missing}
+
+    _NONE_OPT = re.compile(r"\W*(none( of (these|the above|them))?|n/?a\b.*|not applicable|no(ne)? apply|i am not|not a (citizen|national)\b.*)\W*$", re.I)
+
+    def _pick_in_groups(self, fields: list, answers: dict, missing: list):
+        """A required question shown as a group of tick boxes ('select all that apply') where no box was ticked: one box
+        per question was left for you and the application was dropped (about 100 of them from 2026-10-07 to 10-13). For the
+        kinds of groups below one choice is plainly true for you; any other group stays as it is.
+          - lists of things to rule out (countries under sanctions, 'employed by the government / served in the military /
+            none of these'): the 'none' box
+          - shifts and schedule: the daytime box; contact preference: email (and text, which you allowed)
+          - 'what attracted you to us': career advancement; where you would work: the arrangements you are open to"""
+        groups: dict = {}
+        for f in fields:
+            if f.get("kind") == "checkbox_single" and f.get("question"):
+                groups.setdefault(f["question"], []).append(f)
+        for q, members in groups.items():
+            if len(members) < 2 or not any(m.get("required") or m["id"] in missing for m in members):
+                continue
+            if any(answers.get(m["id"]) is True for m in members):
+                continue                                   # something is ticked already
+            low = q.lower()
+            lab = {m["id"]: re.sub(r"[*\u2731]", "", str(m.get("label", ""))).strip() for m in members}
+            demo = next((k for k, rx in (("race_ethnicity", r"\brace\b|ethnicit"), ("gender", r"\bgender\b|\bsex\b"),
+                                         ("veteran_status", r"veteran"), ("disability_status", r"disabilit")) if re.search(rx, low)), None)
+            if demo and not LEGAL_RX.search(low):
+                # self-identification shown as tick boxes: the answer you set in config.yaml, else 'decline to answer'
+                got = self._demo_option(demo, self.facts.get(demo), list(lab.values()), "checkbox_group")
+                if got:
+                    for i, t in lab.items():
+                        if t in got:
+                            answers[i] = True
+                    gone = {m["id"] for m in members}
+                    missing[:] = [i for i in missing if i not in gone]
+                    self._log(f"      (self-identification {q[:50]!r}: ticked {', '.join(got)[:60]})")
+                continue
+            if HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
+                    or self._NEVER_GUESS.search(low):
+                continue
+            pick: list = []
+            nones = [i for i, t in lab.items() if self._NONE_OPT.fullmatch(t)]
+            if re.search(r"shift|schedule|hours|availab|days?\b|times? (of|you)|work (on|during)", low):
+                pick = [i for i, t in lab.items() if re.fullmatch(r"(days?|day shift|daytime|mornings?|first( shift)?|weekdays?|"
+                                                                 r"full[- ]?time|monday ?- ?friday)", t, re.I)]
+            elif re.search(r"contact|reach you|communicat|prefer.{0,20}(email|phone|text)", low):
+                sms = re.match(r"y", str(self.facts.get("sms_consent", "")), re.I)
+                pick = [i for i, t in lab.items() if re.search(r"e-?mail", t, re.I) or (sms and re.search(r"\btext|\bsms", t, re.I))]
+            elif re.search(r"attract|interest(s|ed)? you|drew you|brings you|why .{0,30}(us|company|join)|motivat", low):
+                pick = [i for i, t in lab.items() if re.search(r"career (advancement|growth|development)|growth|advancement", t, re.I)][:1]
+            elif re.search(r"work (arrangement|environment|setting|location)|in[- ]person|hybrid|remote", " ".join(lab.values()).lower()) \
+                    and not nones:
+                ok_on = str(self.facts.get("open_to_onsite", "yes")).lower().startswith("y")
+                ok_re = str(self.facts.get("open_to_remote", "yes")).lower().startswith("y")
+                pick = [i for i, t in lab.items() if (re.search(r"remote|virtual", t, re.I) and ok_re)
+                        or (re.search(r"hybrid|in[- ]?person|on-?site|office", t, re.I) and ok_on)]
+            elif nones and re.search(r"citizen|national|countr|employed by|served|military|government|relative|apply to you|"
+                                     r"any of the following|following (apply|statements)|affiliat|sanction|embargo|export", low):
+                pick = nones[:1]
+            if not pick:
+                continue
+            for i in pick:
+                answers[i] = True
+            gone = {m["id"] for m in members}
+            missing[:] = [i for i in missing if i not in gone]
+            self._log(f"      (ticked {', '.join(lab[i] for i in pick)[:80]} for {q[:70]!r})")
 
     # Things an employer asks every applicant to rule out. None of them is true of you (a recent graduate with no public
     # office, no ties to the employer and no military programme), so a required Yes/No question about one is answered No.
@@ -1092,8 +1164,8 @@ class Brain:
     def _experience_answers(self, fields) -> dict:
         """Work-history blocks (Workday 'Work Experience 1, 2 ...': Job Title, Company, Location, I currently work here, From,
         To, Role Description) filled from profile.yaml experience, newest first. Returns {field id: value or None}."""
-        labs = [(f, _norm(re.sub(r"[*\u2731]", "", f.get("label", "")))) for f in fields]
-        if not (any(l == "job title" for _, l in labs) and any(l in ("company", "company name", "employer") for _, l in labs)):
+        labs = [(f, _norm(re.sub(r"[*\u2731]|\(required\)", "", f.get("label", "")))) for f in fields]
+        if not (any(l in ("job title", "position") for _, l in labs) and any(l in ("company", "company name", "employer") for _, l in labs)):
             return {}
         jobs = list(self.profile.get("experience") or [])
         seen: dict = {}
@@ -1103,7 +1175,8 @@ class Brain:
                 continue                                   # a school's From / To years (see _education_years), not a job's dates
             key = {"job title": "title", "title": "title", "company": "company", "company name": "company", "employer": "company",
                    "location": "location", "from": "from", "start date": "from", "to": "to", "end date": "to",
-                   "role description": "desc", "description": "desc", "i currently work here": "current"}.get(l)
+                   "role description": "desc", "description": "desc", "i currently work here": "current",
+                   "position": "title", "currently working here": "current"}.get(l)   # Paylocity's Work History
             if not key:
                 continue
             n = seen.get(key, 0)

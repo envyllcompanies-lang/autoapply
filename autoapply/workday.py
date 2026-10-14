@@ -530,6 +530,22 @@ def apply(page, job, brain, cover_letter: str, files: dict, shot, dry_run: bool,
                 for i in numeric:
                     plan["answers"][i] = answers[i] = again.get(i)
                 redo |= numeric
+            if any(re.search(r"not valid for this region|valid format", m, re.I) for m in errs.get("messages", [])):
+                # Workday checks the phone number against the country picked in its phone-code box, which some employers
+                # preset to their own country: pick the United States (+1) there and type the number as plain digits
+                for f in fields:
+                    lab = S._norm(f.get("label", ""))
+                    if re.search(r"country (phone )?code|phone (country )?code", lab):
+                        f["has_value"] = False
+                        got = brain.map_fields(job, [f], cover_letter)["answers"].get(f["id"])
+                        if got:
+                            plan["answers"][f["id"]] = answers[f["id"]] = got
+                            redo.add(f["id"])
+                    elif re.fullmatch(r"phone( number)?", lab) and answers.get(f["id"]):
+                        digits = re.sub(r"\D", "", str(answers[f["id"]]))[-10:]
+                        if len(digits) == 10:
+                            plan["answers"][f["id"]] = answers[f["id"]] = digits
+                            redo.add(f["id"])
             log(f"      {name} (try {visits[sid]}): Workday said {errs.get('messages') or 'nothing'}; "
                 f"redoing {[f['label'][:30] for f in fields if f['id'] in redo][:8] or 'the required fields'}")
             if redo:

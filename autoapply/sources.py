@@ -610,6 +610,12 @@ def remote_in_text(text: str) -> bool:
     return not foreign_place(near)
 
 
+# a location that names only the country ('United States', 'USA', 'US'): a US-wide posting with no
+# city to go by, not one in a city you did not pick (about 3,000 a month in the snapshot were dropped as if it were)
+US_WIDE = re.compile(r"(united states( of america)?|usa|u\.s\.a?\.?|us|anywhere in the (us|united states)|nationwide)"
+                     r"(\s*\(.*\))?", re.I)
+
+
 def _remote_ish(loc: str) -> bool:
     low = (loc or "").lower().strip()
     return bool(REMOTE_RX.search(low)) or bool(re.fullmatch(r"(united states( of america)?|usa|u\.s\.a?\.?|us)(\s*\(.*\))?", low))
@@ -705,12 +711,12 @@ def prefilter(job: Job, search: dict) -> str | None:
         return "role is tied to another country"
     if remote_in_text(job.description) and not foreign_place(job.location):
         return None          # the posting says it is remote in the US: where its location field puts it does not matter
-    if locs and not any(k in loc for k in locs):
+    if locs and not any(k in loc for k in locs) and not US_WIDE.fullmatch(loc.strip()):
         return f"location '{job.location}' not allowed"
     # On-site / hybrid roles only in the places you said you'd live (facts.relocation_ok_locations, passed in by main);
     # remote and US-wide roles are always fine.
     onsite_ok = [str(x).lower() for x in (search.get("_onsite_ok") or [])]
-    if onsite_ok and "*" not in onsite_ok and loc.strip() and not _remote_ish(loc):
+    if onsite_ok and "*" not in onsite_ok and loc.strip() and not _remote_ish(loc) and not US_WIDE.fullmatch(loc.strip()):
         if not any(re.search(r"(?<![a-z])" + re.escape(x) + r"(?![a-z])", loc) for x in onsite_ok):
             return f"on-site in '{job.location[:60]}', outside the cities you'd move to"
     return None

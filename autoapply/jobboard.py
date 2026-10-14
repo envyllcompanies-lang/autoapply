@@ -29,7 +29,7 @@ REPO = "https://github.com/Feashliaa/job-board-data"
 ATS_SOURCE = {"Workday": "workday", "Greenhouse": "greenhouse", "Lever": "lever", "Ashby": "ashby", "BambooHR": "bamboohr",
               "iCIMS": "icims", "Paylocity": "paylocity"}
 LEVELS = ("entry", "mid")
-SITES = ("Workday", "Greenhouse", "Lever", "BambooHR", "Ashby")      # sites the bot can fill
+SITES = ("Workday", "Greenhouse", "Lever", "BambooHR", "Ashby", "Paylocity")      # sites the bot can fill
 
 
 def remote_version(timeout: int = 40) -> str:

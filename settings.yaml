@@ -110,7 +110,7 @@ aggregators:
     levels: [entry, mid]    # the snapshot's own level guess. 'mid' is where it puts most coordinator / analyst / associate
                             # postings, so reading only 'entry' missed about 95% of what passes your filters. The bot's own
                             # level rules and the posting's real text still drop anything above early career.
-    sites: [Workday, Greenhouse, Lever, BambooHR, Ashby]
+    sites: [Workday, Greenhouse, Lever, BambooHR, Ashby, Paylocity]
     max_age_days: 30        # postings first seen longer ago than this are left out
     max_jobs: 6000          # new candidates taken from one snapshot
   github_lists:             # public GitHub repos that publish new-grad / entry-level postings as JSON

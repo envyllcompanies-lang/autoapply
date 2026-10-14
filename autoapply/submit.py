@@ -15,11 +15,15 @@ EXTRACT_JS = r"""
   };
   const labelOf = el => {
     let t = '';
-    if (el.id) { const l = document.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l) t = l.innerText; }
+    // a dropdown whose shown choice sits inside its label (Paylocity: 'State' + 'Select a state'): the label alone
+    const labTxt = l => { let x = l.innerText || '';
+      for (const sv of l.querySelectorAll('[class*="single-value"], [class*="placeholder"]')) x = x.replace(sv.innerText || '', '');
+      return x; };
+    if (el.id) { const l = document.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l) t = labTxt(l); }
     if (!t && el.getAttribute('aria-labelledby'))
       t = el.getAttribute('aria-labelledby').split(/\s+/).map(i => document.getElementById(i)?.innerText || '').join(' ');
     if (!t) t = el.getAttribute('aria-label') || '';
-    if (!t) { const l = el.closest('label'); if (l) t = l.innerText; }
+    if (!t) { const l = el.closest('label'); if (l) t = labTxt(l); }
     if (!t) {
       // the nearest question text BEFORE this box in its block: never an answer option's <label> (it holds its own input)
       // and never a label that belongs to a later box (Lever cards put several questions in one block)
@@ -112,6 +116,9 @@ EXTRACT_JS = r"""
     const t = clean(l && !l.contains(el) ? l.innerText : '');
     return t;
   };
+  // Paylocity: '(required)' is written after the question, in the block's heading line, not in the box's own label
+  const markedRequired = el => { const fg = el.closest('.form-group'); const h = fg && fg.querySelector('p, label');
+                                 return !!(h && !h.contains(el) && /\(required\)/i.test(h.innerText || '')); };
   let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = root.querySelectorAll('input, textarea, select');
@@ -185,7 +192,8 @@ EXTRACT_JS = r"""
     // Workday's number box is a text input that keeps only the digits typed into it: 'USD 70,000 - 80,000' becomes
     // 7000080000 and the page is sent back with 'The number entered is too large'. It is a number field.
     if (f.kind === 'text' && /^numericInput$/i.test(el.getAttribute('data-automation-id') || '')) f.kind = 'number';
-    if (/[*\u2731]/.test(f.label)) f.required = true;
+    if (/[*\u2731]/.test(f.label) || /\(required\)/i.test(f.label) || el.closest('.form-required') || markedRequired(el)) f.required = true;
+    if (el.placeholder) f.ph = el.placeholder;
     fields.push(f);
   }
   for (const [name, g] of Object.entries(groups)) {
@@ -199,7 +207,8 @@ EXTRACT_JS = r"""
                     sel: opts[0].sel, key: keyOf(g.members[0]), checked: isOn(g.members[0]) });
     else
       fields.push({ id: 'g_' + opts[0].id, kind: g.type === 'radio' ? 'radio' : 'checkbox_group',
-                    label: gq || name, required: g.required || /[*\u2731]/.test(gq) || !!gbox, key: keyOf(g.members[0]),
+                    label: gq || name, required: g.required || /[*\u2731]/.test(gq) || /\(required\)/i.test(gq) || !!gbox || markedRequired(g.members[0]),
+                    key: keyOf(g.members[0]),
                     options: opts.map(o => o.label), option_ids: opts.map(o => o.id), option_sels: opts.map(o => o.sel),
                     checked: g.members.map((m, i) => isOn(m) ? opts[i].label : null).filter(Boolean) });
   }
@@ -212,6 +221,16 @@ EXTRACT_JS = r"""
     const req = /[*\u2731]/.test(lab) || /required/i.test(b.getAttribute('aria-label') || '') || b.getAttribute('aria-required') === 'true';
     fields.push({ id: tag(b), kind: 'combobox', label: lab + (req && !/[*\u2731]/.test(lab) ? ' *' : ''), required: req, maxlength: null,
                   sel: selOf(b), key: keyOf(b), button: true, cur: clean(b.innerText) });
+  }
+  // dropdowns drawn as a plain <div role="combobox"> that opens a list (react-widgets: Paylocity's Yes / No questions)
+  for (const d of root.querySelectorAll('div[role="combobox"], span[role="combobox"]')) {
+    if (d.querySelector('input, select, textarea') || d.getAttribute('aria-disabled') === 'true' || d.closest('[aria-hidden="true"]') ||
+        !visible(d) || chrome(d)) continue;
+    const lab = clean(labelOf(d) || d.getAttribute('data-for') || '');
+    const req = /[*\u2731]/.test(lab) || /\(required\)/i.test(lab) || !!d.closest('.form-required') || d.getAttribute('aria-required') === 'true';
+    const curEl = d.querySelector('.rw-input, [class*="value"]') || d;
+    fields.push({ id: tag(d), kind: 'combobox', label: lab + (req && !/[*\u2731]/.test(lab) ? ' *' : ''), required: req, maxlength: null,
+                  sel: selOf(d), key: keyOf(d), button: true, cur: clean(curEl.innerText) });
   }
   // Ashby-style Yes/No answered with two plain <button>s instead of radio inputs
   const btnGroups = new Map();
@@ -554,6 +573,33 @@ def _open_embedded(page, url: str) -> bool:
     return False
 
 
+def _icims_apply(page):
+    """iCIMS shows the posting inside an iframe (icims_content_iframe) of its career page; the 'Apply Now' link lives in that
+    frame. Follow its address in the main tab, which leads to the application (an email step first, then the form)."""
+    try:
+        for fr in [*[f for f in page.frames if f != page.main_frame], page.main_frame]:   # the posting frame first
+            if "icims.com" not in (fr.url or ""):
+                continue
+            link = fr.locator('a.iCIMS_ApplyOnlineButton, a[href*="/login"][href*="jobs/"], a[title*="Apply" i]')
+            if not link.count():
+                link = fr.get_by_role("link", name=re.compile(r"^\s*apply( for this job)?( online| now)?\s*$", re.I))
+            if not link.count():
+                continue
+            href = link.first.get_attribute("href") or ""
+            if href.startswith("/"):
+                href = re.sub(r"(https://[^/]+).*", r"\1", fr.url) + href
+            if href.startswith("http"):
+                page.goto(href, wait_until="domcontentloaded", timeout=45000)
+            else:
+                link.first.click()
+            page.wait_for_timeout(2500)
+            _dismiss_cookies(page)
+            return True
+    except Exception:
+        pass
+    return False
+
+
 def open_form(page, url: str) -> str:
     """Open the page and get to the actual application form, whichever way the link is built: the form itself, a description page
     with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added.
@@ -566,6 +612,8 @@ def open_form(page, url: str) -> str:
     page.wait_for_timeout(2500)
     _dismiss_cookies(page)
     landing = _body_text(page)                 # the posting as first shown, before an Apply button leads away from it
+    if "icims.com/jobs/" in page.url:
+        _icims_apply(page)
     tried = set()
     for _ in range(4):
         if _has_form(page):
@@ -640,7 +688,11 @@ _OPTIONS_JS = r"""(ids) => {
   };
   for (const id of ids) {
     const box = document.getElementById(id);
-    if (box) { const got = pack([...box.querySelectorAll('[role="option"]')]); if (got.length) return got; }
+    if (!box) continue;
+    let got = pack([...box.querySelectorAll('[role="option"]')]);
+    if (!got.length)          // a list drawn without role="option" (Paylocity's state list): its innermost texts are the choices
+      got = pack([...box.querySelectorAll('*')].filter(e => !e.children.length && (e.innerText || '').trim()));
+    if (got.length) return got;
   }
   const WD = '[data-automation-id="activeListContainer"] ';
   for (const sel of [WD + '[role="option"], ' + WD + '[data-automation-id="promptOption"], ' + WD + '[data-automation-id="promptLeafNode"]',
@@ -691,6 +743,9 @@ def _options(page, el=None) -> list[dict]:
     if el is not None:
         try:
             ids = (el.get_attribute("aria-controls", timeout=800) or el.get_attribute("aria-owns", timeout=800) or "").split()
+            if not ids:             # Paylocity: the box's wrapper names the list (aria-owns="...-dropdown-list-container")
+                ids = (el.evaluate("e => { const w = e.closest('[aria-owns]'); return w ? w.getAttribute('aria-owns') : ''; }",
+                                   timeout=800) or "").split()
         except Exception:
             ids = []
     try:
@@ -764,9 +819,20 @@ def extract(page) -> list[dict]:
             continue
         try:
             el = _loc(page, f)
-            el.click(timeout=3000)
+            try:
+                el.click(timeout=3000)
+            except Exception:
+                el.click(timeout=2000, force=True)   # something drawn over the box (a list another box left open)
             page.wait_for_timeout(450)
             f["options"] = _visible_options(page, el)
+            if not f["options"] and f.get("button"):
+                page.wait_for_timeout(700)      # a list that slides open (react-widgets) shows its choices a moment later
+                f["options"] = _visible_options(page, el)
+            if not f["options"] and f.get("button"):
+                # react-widgets keeps its list in the page while shut: its choices can be read without it being open
+                f["options"] = el.evaluate("""e => { const b = document.getElementById(e.getAttribute('aria-owns') || '');
+                    return b ? [...b.querySelectorAll('[role="option"]')].map(o => (o.innerText || o.textContent || '').trim()).filter(Boolean) : []; }""",
+                                           timeout=1500) or []
         except Exception:
             f["options"] = []
         _close_list(page)
@@ -1021,6 +1087,13 @@ def _set_text(el, val: str):
     except Exception:
         pass
     el.fill(val, timeout=5000)
+    try:
+        if val.strip() and not el.input_value(timeout=1000).strip():
+            el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
+            el.press_sequentially(re.sub(r"\D", "", val) if re.fullmatch(r"\d{1,4}[/.-]\d{1,2}[/.-]\d{2,4}", val.strip()) else val, delay=35)
+            el.press("Tab")
+    except Exception:
+        pass
 
 
 def _set_date(page, f: dict, el, val):
@@ -1095,17 +1168,26 @@ def _set_date(page, f: dict, el, val):
         raise RuntimeError("the date boxes did not take the date")
 
 
+_SHOWN_JS = """e => {
+  if (!['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)) { const v = e.querySelector('.rw-input'); return (v || e).innerText; }
+  if (e.value) return e.value;
+  // a search box that shows the picked choice beside itself, not in itself (Paylocity's Country / State)
+  const w = e.closest('[aria-owns]'); const sv = w && w.querySelector('[class*="single-value"]');
+  return sv ? sv.innerText : '';
+}"""
+
+
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
     try:
-        is_btn = bool(el.evaluate("e => e.tagName === 'BUTTON'", timeout=1500))
+        is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
     except Exception:
         is_btn = bool(f.get("button"))
 
     def shown() -> str:
         try:                                          # looked up afresh each time: picking a value can make the site redraw the box
-            return str(_loc(page, f).evaluate("e => e.tagName === 'BUTTON' ? e.innerText : (e.value || '')", timeout=1500) or "").strip()
+            return str(_loc(page, f).evaluate(_SHOWN_JS, timeout=1500) or "").strip()
         except Exception:
             return ""
 
@@ -1159,10 +1241,35 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
         _close_list(page)
     if is_btn:
         s1 = shown()
-        if not s1 or PLACEHOLDER.match(s1):
+        if not s1 or PLACEHOLDER.match(s1) or re.match(r"^\s*select an? ", s1, re.I):
             log(f"      ! nothing was picked in '{f.get('label', '')[:50]}' (wanted {val[:30]!r}; choices: {texts[:6]})")
             return False
     return True
+
+
+def _date_as_box(ph: str, val) -> str:
+    """A date written the way a plain text box asks for it in its placeholder ('MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'):
+    'October 21, 2026' typed into an MM/DD/YYYY box is thrown away by the box. Anything else is typed as given."""
+    s = str(val).strip()
+    order = re.sub(r"[^a-z]", "", ph.lower())
+    if order not in ("mmddyyyy", "ddmmyyyy", "yyyymmdd") or len(s) > 40:
+        return s
+    from datetime import datetime as _dt
+    d = None
+    for fmt in ("%B %d, %Y", "%b %d, %Y", "%B %d %Y", "%Y-%m-%d", "%m/%d/%Y", "%m-%d-%Y", "%d %B %Y"):
+        try:
+            d = _dt.strptime(s, fmt)
+            break
+        except ValueError:
+            continue
+    if d is None:
+        return s
+    sep = "-" if "-" in ph else "/"
+    if order == "mmddyyyy":
+        return d.strftime(f"%m{sep}%d{sep}%Y")
+    if order == "ddmmyyyy":
+        return d.strftime(f"%d{sep}%m{sep}%Y")
+    return d.strftime(f"%Y{sep}%m{sep}%d")
 
 
 def _number_text(val) -> str:
@@ -1195,7 +1302,7 @@ def _fill_one(page, f: dict, val, files: dict, log):
             if _wd_prompt(page, f, el, str(v), log):
                 break
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
-        _set_text(el, _number_text(val) if kind == "number" else str(val))
+        _set_text(el, _number_text(val) if kind == "number" else _date_as_box(f.get("ph") or "", val) if kind == "text" else str(val))
     elif kind == "select":
         try:
             el.select_option(label=str(val), timeout=4000)
@@ -1826,6 +1933,36 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
     return _apply_generic(page, job, brain, cover_letter, files, shot, dry_run, log, accounts, on_click, on_stage)
 
 
+def _resume_first_modal(page, files: dict, log) -> bool:
+    """Paylocity can cover its form with 'Apply with resume: upload your resume and we'll fill out your application', and
+    nothing under it can be clicked until a résumé is given. It is given the résumé (the form is checked and filled as usual
+    afterwards)."""
+    try:
+        modal = page.locator('#forceUploadResumeModal, [role="dialog"]:has-text("Apply with resume")').locator("visible=true")
+        if not modal.count() or not files.get("RESUME"):
+            return False
+        btn = modal.first.get_by_role("button", name=re.compile(r"upload", re.I))
+        if not btn.count():
+            btn = modal.first.locator("button, a, label").filter(has_text=re.compile(r"upload", re.I))
+        with page.expect_file_chooser(timeout=5000) as fc:
+            btn.first.click(timeout=4000)
+        fc.value.set_files(str(files["RESUME"]))
+        for _ in range(30):                           # the site reads the résumé and fills what it can
+            page.wait_for_timeout(500)
+            if not modal.count():
+                break
+        log("      (résumé given to the site's 'apply with resume' box first)")
+        page.wait_for_timeout(1500)
+        return True
+    except Exception as e:
+        log(f"      ! 'apply with resume' box: {str(e).splitlines()[0][:100]}")
+        try:
+            page.keyboard.press("Escape")
+        except Exception:
+            pass
+        return False
+
+
 def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None,
                    on_click=None, on_stage=None) -> str:
     from . import auth, workday, writer as _w
@@ -1849,6 +1986,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             raise Blocked(b)
         if on_stage:
             on_stage(f"page {step}")
+        _resume_first_modal(page, files, log)
         # Any wizard step may request a code sent to the applicant's inbox.
         if _email_code_prompt(page):
             if not auth.mailbox.configured():
@@ -1934,10 +2072,12 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
         log(f"      step {step}: {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
         total += len(fields)
         plan = brain.map_fields(job, fields, cover_letter)
-        missing = [by["label"][:60] for by in fields if by["id"] in set(plan["unanswerable_required"])]
+        # a box the site already shows an answer in (picked on the page before, kept from your candidate profile) needs nothing
+        unans = set(plan["unanswerable_required"]) - {f["id"] for f in fields if _already_answered(f)}
+        missing = [by["label"][:60] for by in fields if by["id"] in unans]
         if missing:
             for f in fields:
-                if f["id"] in set(plan["unanswerable_required"]):
+                if f["id"] in unans:
                     log(f"      ? unanswered: {f['label'][:90]!r} kind={f['kind']} options={[o[:30] for o in (f.get('options') or [])][:6]}")
             raise Unanswerable("can't truthfully answer required: " + "; ".join(missing))
         if "COVER_LETTER" in plan["answers"].values() and "COVER_LETTER" not in files:
