@@ -1,0 +1,55 @@
+[18:14:48] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[18:14:49] mail: logged in to delgado@alumni.usc.edu OK
+[18:14:49] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[18:14:49] === probe pay4: 2 forms, fill only, nothing is submitted ===
+[18:14:51] ACCOUNT_PASSWORD meets Workday's usual rules
+[18:14:51] Accounts: ON (password set: True, email set: True, create in probe: True)
+[18:14:51] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4566840
+[18:15:20]       step 1: 26 fields (14 required)
+[18:15:22]       (writer answered 'County' -> 'Garfield County')
+[18:15:22]       ? unanswered: 'Have you applied for a job with us before? (required) *' kind=combobox options=[]
+[18:15:22]     ✗ Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:15:22] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4573853
+[18:15:48]       step 1: 45 fields (27 required)
+[18:15:49]       (writer answered 'County' -> 'N/A')
+[18:15:49]       (writer answered 'County' -> 'Garfield County')
+[18:15:49]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:15:50]       (writer answered 'Did you Graduate? (required) *' -> 'Yes')
+[18:16:20]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:17:00]       step 2: 100 fields (70 required)
+[18:17:00]       (writer answered 'County' -> 'N/A')
+[18:17:01]       (writer answered 'County' -> 'N/A')
+[18:17:01]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:17:02]       (writer answered 'County' -> 'Garfield County')
+[18:17:03]       (writer answered 'County' -> 'Garfield County')
+[18:17:04]       (writer answered 'County' -> 'Garfield County')
+[18:17:05]       (writer answered 'May We Contact for Reference? (required) *' -> 'No')
+[18:17:05]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:17:06]       (writer answered 'May We Contact for Reference? (required) *' -> 'No')
+[18:18:02]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:18:40]       step 3: 103 fields (73 required)
+[18:18:40]       (writer answered 'County' -> 'Garfield County')
+[18:18:41]       (writer answered 'County' -> 'N/A')
+[18:18:41]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:18:42]       (writer answered 'County' -> 'N/A')
+[18:18:42]       (writer answered 'County' -> 'N/A')
+[18:18:42]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:18:43]       (writer answered 'County' -> 'N/A')
+[18:19:26]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:20:05]       step 4: 103 fields (73 required)
+[18:20:05]       (writer answered 'County' -> 'N/A')
+[18:20:06]       (writer answered 'County' -> 'N/A')
+[18:20:06]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:20:06]       (writer answered 'County' -> 'N/A')
+[18:20:07]       (writer answered 'County' -> 'Garfield County')
+[18:20:08]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:20:08]       (writer answered 'County' -> 'N/A')
+[18:20:52]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:21:30]     ✗ Unanswerable: stuck on step 5; page says: ['Select a State/Province']; fields flagged: State
+Select a state; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; public-site-address:Country
+United States
+Address ; pub
+[18:21:31] === probe done ===
+[18:21:31]    1 recruiting.paylocity.com (url)              (url)                                    steps=0 empty_req=0 | Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:21:31]    2 recruiting.paylocity.com (url)              (url)                                    steps=4 empty_req=72 | Unanswerable: stuck on step 5; page says: ['Select a State/Province']; fields flagged: State
+Select a state; buttons: :R
