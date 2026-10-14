@@ -19,7 +19,9 @@ EXTRACT_JS = r"""
     if (!t && el.getAttribute('aria-labelledby'))
       t = el.getAttribute('aria-labelledby').split(/\s+/).map(i => document.getElementById(i)?.innerText || '').join(' ');
     if (!t) t = el.getAttribute('aria-label') || '';
-    if (!t) { const l = el.closest('label'); if (l) t = l.innerText; }
+    if (!t) { const l = el.closest('label'); if (l) { t = l.innerText;
+      // a dropdown whose shown choice sits inside its label (Paylocity: 'State' + 'Select a state'): the label alone
+      for (const sv of l.querySelectorAll('[class*="single-value"], [class*="placeholder"]')) t = t.replace(sv.innerText || '', ''); } }
     if (!t) {
       // the nearest question text BEFORE this box in its block: never an answer option's <label> (it holds its own input)
       // and never a label that belongs to a later box (Lever cards put several questions in one block)
@@ -815,7 +817,10 @@ def extract(page) -> list[dict]:
             continue
         try:
             el = _loc(page, f)
-            el.click(timeout=3000)
+            try:
+                el.click(timeout=3000)
+            except Exception:
+                el.click(timeout=2000, force=True)   # something drawn over the box (a list another box left open)
             page.wait_for_timeout(450)
             f["options"] = _visible_options(page, el)
             if not f["options"] and f.get("button"):
@@ -826,8 +831,11 @@ def extract(page) -> list[dict]:
                 f["options"] = el.evaluate("""e => { const b = document.getElementById(e.getAttribute('aria-owns') || '');
                     return b ? [...b.querySelectorAll('[role="option"]')].map(o => (o.innerText || o.textContent || '').trim()).filter(Boolean) : []; }""",
                                            timeout=1500) or []
-        except Exception:
+        except Exception as e:
+            print(f"      DEBUG options of {f.get('label','')[:40]!r} failed: {str(e).splitlines()[0][:200]}", flush=True)
             f["options"] = []
+        if f.get("button") and not f["options"]:
+            print(f"      DEBUG no options for {f.get('label','')[:40]!r}", flush=True)
         _close_list(page)
     return fields
 
@@ -1081,6 +1089,12 @@ def _set_text(el, val: str):
         pass
     el.fill(val, timeout=5000)
     try:
+        if "/" in val:
+            v1 = el.input_value(timeout=1000); el.page.wait_for_timeout(800); v2 = el.input_value(timeout=1000)
+            print(f"      DEBUG date box: typed {val!r}, right after {v1!r}, a moment later {v2!r}", flush=True)
+    except Exception as e:
+        print(f"      DEBUG date read failed {e}", flush=True)
+    try:
         if val.strip() and not el.input_value(timeout=1000).strip():
             el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
             el.press_sequentially(val, delay=35)
@@ -1230,17 +1244,6 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     if i is not None:
         _click_option(page, opts[i])
         page.wait_for_timeout(250)
-    if not is_btn and not shown() and "state" in f.get("label", "").lower():     # PROBE ONLY: what the open list looks like
-        try:
-            el.click(timeout=2000); el.fill("", timeout=2000); el.press_sequentially("Colo", delay=60); page.wait_for_timeout(1200)
-            dump = page.evaluate("""() => { const out = [];
-              for (const c of document.querySelectorAll('[id$="dropdown-list-container"], [role="listbox"], [class*="menu"]'))
-                out.push(c.id + ' | ' + c.className + ' | ' + c.outerHTML.slice(0, 900));
-              return out.slice(0, 6).join(' #### '); }""")
-            log("      DEBUG list: " + dump[:4000])
-            page.screenshot(path="probe/out/statelist.jpg")
-        except Exception as e:
-            log(f"      DEBUG list failed: {e}")
     if _list_open(page):
         _close_list(page)
     if is_btn:
