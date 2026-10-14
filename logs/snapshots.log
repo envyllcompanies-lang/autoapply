@@ -1,278 +1,3 @@
-=== 2026-10-12 18:13:27  skipped  ADMINISTRATIVE ASSISTANT ENGLEWOOD, CO! @ republic
-url: https://republic.wd5.myworkdayjobs.com/republic/job/Englewood-CO-USA/ADMINISTRATIVE-ASSISTANT-ENGLEWOOD--CO-_R-185792/apply/applyManually
-stage: My Information
-why: stuck on Workday's 'My Information' page; Workday says: ['Error: Enter a phone number in the valid format: The number is not valid for this region.', 'Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region.']; fields flagged: ['Phone Number']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# ADMINISTRATIVE ASSISTANT ENGLEWOOD, CO!
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions 1 of 2
-label: step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# My Information
-# Errors Found
-! Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region. {errorHeading}
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-  [dropdown] chosen #source--source
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Legal Name
- {formField-legalName--firstName}
-label: Given Name(s)*
-  <input:text #name--legalName--firstName required filled>
- {formField-legalName--lastName}
-label: Father's Family Name*
-  <input:text #name--legalName--lastName required filled>
- {formField-legalName--secondaryLastName}
-label: Mother's Family Name
-  <input:text #name--legalName--secondaryLastName filled>
- {formField-preferredCheck}
-label: I have a preferred name
-  <input:checkbox #name--preferredCheck question-unanswered>
-# Address
- {formField-addressLine1}
-label: Address Line 1
-  <input:text #address--addressLine1 filled>
- {formField-citySubdivision1}
-label: Neighborhood
-  <input:text #address--citySubdivision1 empty>
- {formField-postalCode}
-label: Postal Code
-  <input:text #address--postalCode filled>
- {formField-city}
-label: City
-  <input:text #address--city filled>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required INVALID filled>
-! Error: Enter a phone number in the valid format: The number is not valid for this region. {inputAlert}
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-12 18:14:12  skipped  Centralized Scheduler Specialist @ wvumedicine
-url: https://wvumedicine.wd1.myworkdayjobs.com/wvuh/job/Remote/Centralized-Scheduler-Specialist_JR26-47266-1/apply/applyManually
-stage: My Information
-why: stuck on Workday's 'My Information' page; Workday says: ['Error: Enter a phone number in the valid format: The number is not valid for this region.', 'Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region.']; fields flagged: ['Phone Number']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Centralized Scheduler Specialist
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# My Information
-# Errors Found
-! Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region. {errorHeading}
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-{multiSelectContainer}
-  <input #source--source required empty>
-    (a choice is selected)
- {formField-candidateIsPreviousWorker}
-label: Have you previously worked for this organization? If Yes, please answer the questions below. If No, please con
-  <input:radio #r6bec question-answered>
-label: Yes
-  <input:radio #r6bed question-answered>
-label: No
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Legal Name
- {formField-legalName--firstName}
-label: Given Name(s)*
-  <input:text #name--legalName--firstName required filled>
- {formField-legalName--lastName}
-label: Father's Family Name*
-  <input:text #name--legalName--lastName required filled>
- {formField-legalName--secondaryLastName}
-label: Mother's Family Name
-  <input:text #name--legalName--secondaryLastName filled>
- {formField-preferredCheck}
-label: I have a preferred name
-  <input:checkbox #name--preferredCheck question-unanswered>
-# Address
- {formField-addressLine1}
-label: Address Line 1
-  <input:text #address--addressLine1 filled>
- {formField-citySubdivision1}
-label: Neighborhood
-  <input:text #address--citySubdivision1 empty>
- {formField-postalCode}
-label: Postal Code
-  <input:text #address--postalCode filled>
- {formField-city}
-label: City
-  <input:text #address--city filled>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required INVALID filled>
-! Error: Enter a phone number in the valid format: The number is not valid for this region. {inputAlert}
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-12 18:20:15  skipped  FVX Process Engineering Technician (Days) @ globalfoundries
-url: https://globalfoundries.wd1.myworkdayjobs.com/external/job/USA---New-York---Malta/FVX-Process-Engineering-Technician--Days-_JR-2605853-1/apply/applyManually
-stage: My Information
-why: stuck on Workday's 'My Information' page; Workday says: ['Error: Enter a phone number in the valid format: The number is not valid for this region.', 'Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region.']; fields flagged: ['Phone Number']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button]  {hammyMenuIcon} opens-true
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# FVX Process Engineering Technician (Days)
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# My Information
-# Errors Found
-! Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region. {errorHeading}
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-{multiSelectContainer}
-  <input #source--source required empty>
-    (a choice is selected)
- {formField-candidateIsPreviousWorker}
-label: Have you previously worked as Employee or Intern for GlobalFoundries? If Yes, provide additional information; 
-  <input:radio #blnx7 question-answered>
-label: Yes
-  <input:radio #blnx8 question-answered>
-label: No
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Legal Name
- {formField-legalName--firstName}
-label: Given Name(s)*
-  <input:text #name--legalName--firstName required filled>
- {formField-legalName--lastName}
-label: Father's Family Name*
-  <input:text #name--legalName--lastName required filled>
- {formField-legalName--secondaryLastName}
-label: Mother's Family Name
-  <input:text #name--legalName--secondaryLastName filled>
- {formField-preferredCheck}
-label: I have a preferred name
-  <input:checkbox #name--preferredCheck question-unanswered>
-# Address
- {formField-addressLine1}
-label: Address Line 1
-  <input:text #address--addressLine1 filled>
- {formField-citySubdivision1}
-label: Neighborhood
-  <input:text #address--citySubdivision1 empty>
- {formField-postalCode}
-label: Postal Code
-  <input:text #address--postalCode filled>
- {formField-city}
-label: City
-  <input:text #address--city filled>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required INVALID filled>
-! Error: Enter a phone number in the valid format: The number is not valid for this region. {inputAlert}
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy | GlobalFoundries {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-12 18:20:47  skipped  LITHO Process Engineering Technician (D Shift Nights) @ globalfoundries
 url: https://globalfoundries.wd1.myworkdayjobs.com/external/job/USA---New-York---Malta/LITHO-Process-Engineering-Technician--D-Shift-Nights-_JR-2605751/apply/applyManually
 stage: My Information
@@ -5626,4 +5351,233 @@ label: Verify New Password*
   [button] Forgot your password? {forgotPasswordLink}
 label: Enter website. This input is for robots only, do not enter if you're human.
   <input:text #1dbb20d8-1848-49a5-9228-ee62e943bdca {beecatcher} empty>
+
+=== 2026-10-14 15:48:07  unconfirmed  Operations Analyst Trainee, Distribution & Networks - Spring 2027 @ spe
+url: https://spe.wd1.myworkdayjobs.com/en-US/SonypicturesEntertainment
+stage: Review
+why: no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; page ends: "haracter A special character Email Address* Password* Verify New Password* Create Account Already have an account? Sign In Forgot your password? Enter webs
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Join our Talent Community! {navigationItem-Join our Talent Community!}
+  <input:text #ofw12 {keywordSearchInput} empty>
+  [button] Search {keywordSearchButton}
+label: Filters
+  [button] Location {distanceLocation}
+  [button] Full/Part-time {employmentType}
+  [button] Job Category {jobFamilyGroup}
+  [button] More {more}
+! Search for Jobs page is loaded
+# Marketplace Analyst Trainee, Home Entertainment Division - Spring 2027
+# Current Programming Intern, Sony Pictures Television – Spring 2027
+# Intern, U.S. Business Affairs, Sony Pictures Television, Spring 2027
+# Trainee, Talent Relations and Publicity, Sony Pictures Television - Spring 2027
+# Intern, Casting, Sony Pictures Television - Spring 2027
+# Operations Analyst Trainee, Distribution & Networks - Spring 2027
+# Managing Director, China
+# Intern, Sales- Sony Pictures Classics- Spring 2027
+# Finance Manager - Hot Sauce Pictures
+# Data Engineer II - Insights, Strategy & Analytics
+# Senior Finance Analyst, FP&A, EMEA
+# Legal Counsel, M&A
+# Analyst, Commercial Analysis
+# Coordinator, Corporate Communications
+# Marketing Operations Coordinator
+# Senior Analyst, Research
+# VP, Creative Technologist & VFX
+# Director, Payroll Applications & Technology
+# Manager, Occupational, Health & Safety
+# Statutory & Tax Lead, Poland / Chief Accountant
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 4
+  [button] 
+  text: Hi, we’re Sony Pictures Entertainment
+  text: We are in the business of creativity … making some of the most beloved film and television of all time for every platform in the world. As t
+  text: Sony Pictures Entertainment is a division of Sony Corporation, a creative entertainment company built on a foundation of technology. Along w
+  text: We are looking for innovators to join us as we forge the future of entertainment!
+  [button] Read More {readMore}
+# Get In Touch
+  text: Don't see a job opportunity that matches your interests, skills or experiences?
+  text: Join our Talent Community!
+  [button] Get Started {introduceYourselfButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Congratulations!
+ {formField-email}
+label: Email Address*
+  <input:text #input-10 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-11 {password} required>
+ {formField-verifyPassword}
+label: Verify New Password*
+  <input:password #input-12 {verifyPassword} required>
+  [button]  {click_filter}
+  [button] Create Account {createAccountSubmitButton}
+  [button] Sign In {signInLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #037bfc3b-ab9e-4922-9504-cb685bac7efc {beecatcher} empty>
+
+=== 2026-10-14 15:49:35  skipped  Budget Analyst I @ ucar
+url: https://ucar.wd5.myworkdayjobs.com/UCAR_Careers/job/Boulder-CO/Budget-Analyst-I_REQ-2026-191-1/apply/applyManually
+stage: Voluntary Disclosures
+why: stuck on Workday's 'Voluntary Disclosures' page; Workday says: ['Error: The field Regardless of your Ethnicity, please select all race(s) with which you identify. is required and must have a value.', 'Error-Regardless of your Ethnicity, please select all race(s) with which you identify. The field Regardless of your Ethnicity, please select all race(s) with which you id']; fields flagged: ['Regardl
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Budget Analyst I
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 7 Voluntary Disclosures
+label: current step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+# Errors Found
+! Error-Regardless of your Ethnicity, please select all race(s) with which you identify. The field Regardless of your Ethnicity, please select all race(s) with which you identify. is required and must h {errorHeading}
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Information
+  text: The following data is for federal reporting purposes only and will not be used in any aspect of the employment or selection process. Submiss
+ {formField-hispanicOrLatino}
+label: Are you of Hispanic or Latino Ethnicity?*
+  [dropdown] chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicityMulti}
+label: Regardless of your Ethnicity, please select all race(s) with which you identify.*
+  <input:checkbox #b8854078213e01f194d783f30905980d-ethnicityMulti required question-unanswered>
+label: American Indian or Alaska Native (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #b8854078213e01db643284f30905990d-ethnicityMulti required question-unanswered>
+label: Asian (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #b8854078213e01bd6eb384f309059a0d-ethnicityMulti required question-unanswered>
+label: Black or African American (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #b8854078213e01fb967683f30905970d-ethnicityMulti required question-unanswered>
+label: I do not wish to answer (United States of America)
+  <input:checkbox #b8854078213e015289c182f30905950d-ethnicityMulti required question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #b8854078213e013b528982f30905940d-ethnicityMulti required question-unanswered>
+label: Two or More Races (Not Hispanic or Latino) (United States of America)
+  <input:checkbox #b8854078213e01ec831f83f30905960d-ethnicityMulti required question-unanswered>
+label: White (Not Hispanic or Latino) (United States of America)
+! Error: The field Regardless of your Ethnicity, please select all race(s) with which you identify. is required and must have a value. {inputAlert}
+ {formField-gender}
+label: How would you describe your gender for federal reporting purposes? Please select only one.*
+  [dropdown] chosen #personalInfoUS--gender
+ {formField-veteranStatus}
+label: What is your veteran status?*
+  [dropdown] chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Please view our Terms of Use and Privacy Notice here:
+  text: https://www.ucar.edu/terms-of-use
+ {formField-acceptTermsAndAgreements}
+label: By clicking the box below you agree to our Terms of Use and Privacy Notice.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-answered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-14 15:51:55  unconfirmed  Marketplace Analyst Trainee, Home Entertainment Division - Spring 2027 @ spe
+url: https://spe.wd1.myworkdayjobs.com/en-US/SonypicturesEntertainment
+stage: Review
+why: no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; page ends: "cter An alphabetic character Email Address* Password* Verify New Password* Create Account Already have an account? Sign In Forgot your password? Enter webs
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Join our Talent Community! {navigationItem-Join our Talent Community!}
+  <input:text #ji5n2 {keywordSearchInput} empty>
+  [button] Search {keywordSearchButton}
+label: Filters
+  [button] Location {distanceLocation}
+  [button] Full/Part-time {employmentType}
+  [button] Job Category {jobFamilyGroup}
+  [button] More {more}
+! Search for Jobs page is loaded
+# Marketplace Analyst Trainee, Home Entertainment Division - Spring 2027
+# Current Programming Intern, Sony Pictures Television – Spring 2027
+# Intern, U.S. Business Affairs, Sony Pictures Television, Spring 2027
+# Trainee, Talent Relations and Publicity, Sony Pictures Television - Spring 2027
+# Intern, Casting, Sony Pictures Television - Spring 2027
+# Operations Analyst Trainee, Distribution & Networks - Spring 2027
+# Managing Director, China
+# Intern, Sales- Sony Pictures Classics- Spring 2027
+# Finance Manager - Hot Sauce Pictures
+# Data Engineer II - Insights, Strategy & Analytics
+# Senior Finance Analyst, FP&A, EMEA
+# Legal Counsel, M&A
+# Analyst, Commercial Analysis
+# Coordinator, Corporate Communications
+# Marketing Operations Coordinator
+# Senior Analyst, Research
+# VP, Creative Technologist & VFX
+# Director, Payroll Applications & Technology
+# Manager, Occupational, Health & Safety
+# Statutory & Tax Lead, Poland / Chief Accountant
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 4
+  [button] 
+  text: Hi, we’re Sony Pictures Entertainment
+  text: We are in the business of creativity … making some of the most beloved film and television of all time for every platform in the world. As t
+  text: Sony Pictures Entertainment is a division of Sony Corporation, a creative entertainment company built on a foundation of technology. Along w
+  text: We are looking for innovators to join us as we forge the future of entertainment!
+  [button] Read More {readMore}
+# Get In Touch
+  text: Don't see a job opportunity that matches your interests, skills or experiences?
+  text: Join our Talent Community!
+  [button] Get Started {introduceYourselfButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Congratulations!
+ {formField-email}
+label: Email Address*
+  <input:text #input-10 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-11 {password} required>
+ {formField-verifyPassword}
+label: Verify New Password*
+  <input:password #input-12 {verifyPassword} required>
+  [button]  {click_filter}
+  [button] Create Account {createAccountSubmitButton}
+  [button] Sign In {signInLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #165da008-4d6b-42bb-8bae-b0e73679588c {beecatcher} empty>
 
