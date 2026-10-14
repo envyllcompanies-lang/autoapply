@@ -1,458 +1,3 @@
-=== 2026-10-12 18:20:47  skipped  LITHO Process Engineering Technician (D Shift Nights) @ globalfoundries
-url: https://globalfoundries.wd1.myworkdayjobs.com/external/job/USA---New-York---Malta/LITHO-Process-Engineering-Technician--D-Shift-Nights-_JR-2605751/apply/applyManually
-stage: My Information
-why: stuck on Workday's 'My Information' page; Workday says: ['Error: Enter a phone number in the valid format: The number is not valid for this region.', 'Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region.']; fields flagged: ['Phone Number']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button]  {hammyMenuIcon} opens-true
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# LITHO Process Engineering Technician (D Shift Nights)
-{progressBarActiveStep} current step 1 of 6 My Information
-label: current step 1 of 6
-label: My Information
-label: step 2 of 6
-label: My Experience
-label: step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# My Information
-# Errors Found
-! Error-Phone Number Enter a phone number in the valid format: The number is not valid for this region. {errorHeading}
-{applyFlowMyInfoPage}
- {formField-source}
-label: How Did You Hear About Us?*
-{multiSelectContainer}
-  <input #source--source required empty>
-    (a choice is selected)
- {formField-candidateIsPreviousWorker}
-label: Have you previously worked as Employee or Intern for GlobalFoundries? If Yes, provide additional information; 
-  <input:radio #s4i96 question-answered>
-label: Yes
-  <input:radio #s4i97 question-answered>
-label: No
- {formField-country}
-label: Country*
-  [dropdown] chosen #country--country
-# Legal Name
- {formField-legalName--firstName}
-label: Given Name(s)*
-  <input:text #name--legalName--firstName required filled>
- {formField-legalName--lastName}
-label: Father's Family Name*
-  <input:text #name--legalName--lastName required filled>
- {formField-legalName--secondaryLastName}
-label: Mother's Family Name
-  <input:text #name--legalName--secondaryLastName filled>
- {formField-preferredCheck}
-label: I have a preferred name
-  <input:checkbox #name--preferredCheck question-unanswered>
-# Address
- {formField-addressLine1}
-label: Address Line 1
-  <input:text #address--addressLine1 filled>
- {formField-citySubdivision1}
-label: Neighborhood
-  <input:text #address--citySubdivision1 empty>
- {formField-postalCode}
-label: Postal Code
-  <input:text #address--postalCode filled>
- {formField-city}
-label: City
-  <input:text #address--city filled>
-# Email Address
-# Phone
- {formField-phoneType}
-label: Phone Device Type*
-  [dropdown] chosen #phoneNumber--phoneType
- {formField-countryPhoneCode}
-label: Country Phone Code*
-{multiSelectContainer}
-  <input #phoneNumber--countryPhoneCode required empty>
-    (a choice is selected)
- {formField-phoneNumber}
-label: Phone Number*
-  <input:text #phoneNumber--phoneNumber required INVALID filled>
-! Error: Enter a phone number in the valid format: The number is not valid for this region. {inputAlert}
- {formField-extension}
-label: Phone Extension
-  <input:text #phoneNumber--extension empty>
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy | GlobalFoundries {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-12 18:21:53  skipped  Roadshow Closing Specialist (East Coast) @ mymvw
-url: https://mymvw.wd5.myworkdayjobs.com/mvw/job/Remote-Florida/Roadshow-Closing-Specialist--East-Coast-_JR94829/apply/applyManually
-stage: My Experience
-why: can't truthfully answer required: Overall Comprehension*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] MVW Careers {navigationItem-MVW Careers}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Roadshow Closing Specialist (East Coast)
-label: completed step 1 of 5
-label: My Information
-{progressBarActiveStep} current step 2 of 5 My Experience
-label: current step 2 of 5
-label: My Experience
-label: step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# My Experience
-{applyFlowMyExpPage}
-# Work Experience
-# Work Experience 1
- {formField-jobTitle}
-label: Job Title*
-  <input:text #workExperience-46--jobTitle required empty>
- {formField-companyName}
-label: Company*
-  <input:text #workExperience-46--companyName required empty>
- {formField-location}
-label: Location
-  <input:text #workExperience-46--location empty>
- {formField-currentlyWorkHere}
-label: I currently work here
-  <input:checkbox #workExperience-46--currentlyWorkHere question-unanswered>
- {formField-startDate}
-label: From*
-  <input #workExperience-46--startDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-46--startDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-endDate}
-label: To*
-  <input #workExperience-46--endDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-46--endDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-roleDescription}
-label: Role Description
-  <textarea #workExperience-46--roleDescription empty>
-  [button] Add Another {add-button}
-# Education
-  text: This is a required entry, even if not applicable. Please click the "add" button to complete.
-  text: Please enter the highest degree received. If you prefer not to disclose or this is not applicable, please type "N/A" under School or Univers
-# Education 1
- {formField-schoolName}
-label: School or University*
-  <input:text #education-47--schoolName required empty>
- {formField-degree}
-label: Degree*
-  [dropdown] nothing chosen #education-47--degree
- {formField-fieldOfStudy}
-label: Field of Study
-{multiSelectContainer}
-  <input #education-47--fieldOfStudy empty>
-  [button] 
- {formField-gradeAverage}
-label: Overall Result (GPA)
-  <input:text #education-47--gradeAverage empty>
- {formField-firstYearAttended}
-  <input #education-47--firstYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
- {formField-lastYearAttended}
-label: To (Actual or Expected)
-  <input #education-47--lastYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
-  [button] Add Another {add-button}
-# Languages
-# Languages 1
- {formField-language}
-label: Language*
-  [dropdown] nothing chosen #language-48--language
- {formField-native}
-label: I am fluent in this language.
-  <input:checkbox #language-48--native question-unanswered>
- {formField-9aa843313452014969790fb68200b6ab}
-label: Overall Comprehension*
-  [dropdown] nothing chosen #language-48--9aa843313452014969790fb68200b6ab
-  [button] Add Another {add-button}
-# Skills
- {formField-skills}
-label: Type to Add Skills
-{multiSelectContainer}
-  <input #skills--skills empty>
-# Resume/CV
- {formField-}
-label: Upload a file (5MB max)
-  [button] Select files {select-files}
-  <input:file {file-upload-input-ref} no-file>
-# Websites
-  text: Add any relevant websites.
-  [button] Add {add-button}
-# Social Network URLs
- {formField-linkedInAccount}
-label: LinkedIn Profile URL (Optional)
-  <input:text #socialNetworkAccounts--linkedInAccount empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Global Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-12 18:22:30  skipped  Roadshow Closing Specialist (West Coast) @ mymvw
-url: https://mymvw.wd5.myworkdayjobs.com/mvw/job/Remote-California/Roadshow-Closing-Specialist--West-Coast-_JR94830/apply/applyManually
-stage: My Experience
-why: can't truthfully answer required: Overall Comprehension*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] MVW Careers {navigationItem-MVW Careers}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Roadshow Closing Specialist (West Coast)
-label: completed step 1 of 5
-label: My Information
-{progressBarActiveStep} current step 2 of 5 My Experience
-label: current step 2 of 5
-label: My Experience
-label: step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# My Experience
-{applyFlowMyExpPage}
-# Work Experience
-# Work Experience 1
- {formField-jobTitle}
-label: Job Title*
-  <input:text #workExperience-4--jobTitle required empty>
- {formField-companyName}
-label: Company*
-  <input:text #workExperience-4--companyName required empty>
- {formField-location}
-label: Location
-  <input:text #workExperience-4--location empty>
- {formField-currentlyWorkHere}
-label: I currently work here
-  <input:checkbox #workExperience-4--currentlyWorkHere question-unanswered>
- {formField-startDate}
-label: From*
-  <input #workExperience-4--startDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-4--startDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-endDate}
-label: To*
-  <input #workExperience-4--endDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-4--endDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-roleDescription}
-label: Role Description
-  <textarea #workExperience-4--roleDescription empty>
-  [button] Add Another {add-button}
-# Education
-  text: This is a required entry, even if not applicable. Please click the "add" button to complete.
-  text: Please enter the highest degree received. If you prefer not to disclose or this is not applicable, please type "N/A" under School or Univers
-# Education 1
- {formField-schoolName}
-label: School or University*
-  <input:text #education-5--schoolName required empty>
- {formField-degree}
-label: Degree*
-  [dropdown] nothing chosen #education-5--degree
- {formField-fieldOfStudy}
-label: Field of Study
-{multiSelectContainer}
-  <input #education-5--fieldOfStudy empty>
-  [button] 
- {formField-gradeAverage}
-label: Overall Result (GPA)
-  <input:text #education-5--gradeAverage empty>
- {formField-firstYearAttended}
-  <input #education-5--firstYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
- {formField-lastYearAttended}
-label: To (Actual or Expected)
-  <input #education-5--lastYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
-  [button] Add Another {add-button}
-# Languages
-# Languages 1
- {formField-language}
-label: Language*
-  [dropdown] nothing chosen #language-6--language
- {formField-native}
-label: I am fluent in this language.
-  <input:checkbox #language-6--native question-unanswered>
- {formField-9aa843313452014969790fb68200b6ab}
-label: Overall Comprehension*
-  [dropdown] nothing chosen #language-6--9aa843313452014969790fb68200b6ab
-  [button] Add Another {add-button}
-# Skills
- {formField-skills}
-label: Type to Add Skills
-{multiSelectContainer}
-  <input #skills--skills empty>
-# Resume/CV
- {formField-}
-label: Upload a file (5MB max)
-  [button] Select files {select-files}
-  <input:file {file-upload-input-ref} no-file>
-# Websites
-  text: Add any relevant websites.
-  [button] Add {add-button}
-# Social Network URLs
- {formField-linkedInAccount}
-label: LinkedIn Profile URL (Optional)
-  <input:text #socialNetworkAccounts--linkedInAccount empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Global Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-12 18:23:00  skipped  Environmental Specialist @ triumvirateenvironmental
-url: https://job-boards.greenhouse.io/triumvirateenvironmental/jobs/4721024006
-stage: page 1
-why: can't truthfully answer required: What is the earliest month you would be available to start?*
-# Environmental Specialist
-  [button] Get Started
-  text: Triumvirate Environmental, one of the largest environmental services firms in North America, is seeking an Environmental Specialist for our
-  text: Lab & Onsite Support Services (Lab/OSS)
-  text: team. As an Environmental Specialist, you will support our clients on-site by managing their hazardous waste programs & projects, utilizing 
-  text: Triumvirate Environmental provides leading organizations in the higher education, life sciences, healthcare, and advanced manufacturing sect
-  text: This position reports to the Operations Manager. This role is based on site at
-  text: You will report out of our
-  text: We invite you to watch this video to discover more about the exciting responsibilities of an Environmental Specialist at Triumvirate Environ
-  text: Develop an understanding of OSHA regulations as well as Triumvirate’s Health and Safety practices
-  text: Preparation of chemical and biological waste for shipment and disposal, including creation of all federal/state waste documents and managing
-  text: Safe handling of hazardous waste containers on client sites, as well as loading/unloading of waste from vehicles
-  text: Conduct safety equipment and hazardous waste inspections.
-  text: Occasionally perform and document Environmental Health and Safety (EHS) audits for clients.
-  text: Deliver Exceptional Customer Service: Champion our commitment to the WOW! by providing outstanding support and innovative solutions to our c
-  text: Develop a high-level of state and federal regulatory expertise ensuring our client’s compliance needs are met (e.g RCRA, DOT, and OSHA)
-  text: Conduct spill response measures, including the assessment of the spills and cleanup efforts
-  text: Rotating on-call responsibilities as part of our Emergency Response team
-  text: Bachelor's degree or equivalent experience in the hazardous-waste industry, or relevant military experience
-  text: Ability to work as a member of a team as well as individually
-  text: Must demonstrate strong verbal and written communication abilities to effectively interact with clients, colleagues, and stakeholders, ensur
-  text: Demonstrated ability to analyze complex issues, develop solutions, and implement strategies to achieve positive outcomes
-  text: Skilled in building strong, positive relationships with clients and colleagues
-  text: Willingness to obtain Commercial Driver’s License (CDL)
-  text: Ability to work overtime on a regular basis
-  text: Must be willing to work flexible hours within the work week (Monday through Friday)
-  text: Ability to complete a 2 to 3 year professional advancement program in hazardous waste management
-  text: The Environmental Specialist frequently handles hazardous chemicals and biological waste and is responsible for putting on and taking off pe
-  text: Must be able to report to the Astoria office within 1 hour during Emergency Response rotating shifts
-  text: Must have a reliable form of transportation
-  text: Must be willing to consent to pre-employment physical and drug screen (inclusive of THC)
-  text: Upon employment, you will be required to participate in a random drug screening program (inclusive of THC) as part of our company’s commitme
-  text: Must be eligible to work in the United States without future sponsorship
-  text: Must be able to lift 60 pounds on a regular basis
-  text: Prior relevant industry experience
-  text: Prior successful experience in a customer service role
-  text: Active HAZWOPER 24 or 40 hour certification
-  text: Besides Health, Dental and Vision Insurance, we contribute to a 401k, offer a generous tuition reimbursement program, TONS of safety trainin
-  text: To learn more about our business, culture, and the exciting work that we are doing in the industry, find us on
-  text: Instagram (@triumvirateenvironmental), or our
-  text: Triumvirate Environmental is committed to a diverse and inclusive workplace. As an Equal Opportunity Employer (EOE), Triumvirate does not di
-  text: If you have a disability and need accommodation during the application and hiring process, please contact us at
-  text: https://www.triumvirate.com/contact
-  text: or call us at <phone>. The requirements listed above are representative of the knowledge, skill, and/or ability required. To view our C
-  text: Actual starting base pay may vary based on factors such as education, experience, skills, location and budget.
-  text: Interested in building your career at Triumvirate Environmental? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: School*
-  <input:text #school--0 required empty>
-  [button] 
-  <input required empty>
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  <input required empty>
-label: Discipline*
-  <input:text #discipline--0 required empty>
-  [button] 
-  <input required empty>
-label: End date month
-  <input:text #end-month--0 empty>
-  [button] 
-label: End date year
-  <input:number #end-year--0 empty>
-  [button] Add another
-label: Full Legal Name*
-  <input:text #question_8750454006 required empty>
-label: Preferred First Name*
-  <input:text #question_8750455006 required empty>
-label: Pronouns *
-  <input:checkbox #question_8750456006[]_19423530006 required question-unanswered>
-label: she/her/hers
-  <input:checkbox #question_8750456006[]_19423531006 required question-unanswered>
-label: he/him/his
-  <input:checkbox #question_8750456006[]_19423532006 required question-unanswered>
-label: they/them/theirs
-  <input:checkbox #question_8750456006[]_19423533006 required question-unanswered>
-label: Other
-  <input:checkbox #question_8750456006[]_19423534006 required question-unanswered>
-label: Prefer not to answer
-label: LinkedIn Profile
-  <textarea #question_8750457006 empty>
-label: Are you legally authorized to work in the United States?*
-  <input:text #question_8750458006 required empty>
-  [button] 
-  <input required empty>
-label: Do you now, or will you in the future, require sponsorship from Triumvirate for work authorization (ex: TN, or
-  <input:text #question_8750459006 required empty>
-  [button] 
-  <input required empty>
-label: Are you willing to relocate for this position if necessary?*
-  <input:text #question_8750460006 required empty>
-  [button] 
-  <input re
-
 === 2026-10-12 20:12:36  skipped  Business Operations Analyst, Data Science & Innovation - Brand Consulting @ caa
 url: https://caa.wd1.myworkdayjobs.com/Careers/job/New-York-NY/Business-Operations-Analyst--Data-Science---Innovation---Brand-Consulting_JR9301/apply/applyManually
 stage: Application Questions
@@ -5580,4 +5125,334 @@ label: Verify New Password*
   [button] Forgot your password? {forgotPasswordLink}
 label: Enter website. This input is for robots only, do not enter if you're human.
   <input:text #165da008-4d6b-42bb-8bae-b0e73679588c {beecatcher} empty>
+
+=== 2026-10-14 19:12:16  skipped  RE Analyst, Portfolio Management @ tiaa
+url: https://tiaa.wd1.myworkdayjobs.com/Search/job/New-York-NY-USA/RE-Analyst--Portfolio-Management_R260800557-1/apply/applyManually
+stage: Voluntary Disclosures
+why: stuck on Workday's 'Voluntary Disclosures' page; Workday says: ['Error: The field Please indicate your race. is required and must have a value.', 'Error-Please indicate your race. The field Please indicate your race. is required and must have a value.']; fields flagged: ['Please indicate your race.']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# RE Analyst, Portfolio Management
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+# Errors Found
+! Error-Please indicate your race. The field Please indicate your race. is required and must have a value. {errorHeading}
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data Statement
+  text: Definitions for Veteran Status below:
+  text: “disabled veteran” is a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the recei
+  text: A “recently separated veteran” is any veteran during the three-year period beginning on the date of such veteran's discharge or release from
+  text: An “active duty wartime or campaign badge veteran” is a veteran who served on active duty in the U.S. military, ground, naval or air service
+  text: An “armed forces service medal veteran” is a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, p
+ {formField-hispanicOrLatino}
+label: Please indicate if you are Hispanic or Latino.
+  [dropdown] chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Indicate your military/veterans status based on the definitions provided.
+  [dropdown] chosen #personalInfoUS--veteranStatus
+ {formField-ethnicityMulti}
+label: Please indicate your race.*
+  <input:checkbox #0959caecc7550192929e61a5ba002308-ethnicityMulti required question-unanswered>
+label: American Indian or Alaska Native (United States of America)
+  <input:checkbox #0959caecc75501c8e3ec51a5ba00f607-ethnicityMulti required question-unanswered>
+label: Asian (United States of America)
+  <input:checkbox #0959caecc7550179ac037ea5ba009c08-ethnicityMulti required question-unanswered>
+label: Black or African American (United States of America)
+  <input:checkbox #0959caecc755013066624fa5ba00e807-ethnicityMulti required question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (United States of America)
+  <input:checkbox #0959caecc7550168131a78a5ba008408-ethnicityMulti required question-unanswered>
+label: Not Specified (United States of America)
+  <input:checkbox #0959caecc755014bcc9c6ca5ba005508-ethnicityMulti required question-unanswered>
+label: White (United States of America)
+! Error: The field Please indicate your race. is required and must have a value. {inputAlert}
+ {formField-gender}
+label: Please indicate your gender.*
+  [dropdown] chosen #personalInfoUS--gender
+# Terms and Conditions
+  text: You agree to TIAA and its affiliates (and any third partner acting on its behalf) using your personal information that TIAA receives as part
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-answered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-14 19:14:40  skipped  Inventory Control Specialist - Third Shift @ thermofisher
+url: https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers/job/Remote-North-Carolina-USA/Inventory-Control-Specialist---Third-Shift_R-01370834/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Cuba; Syria; North Korea; Iran; Sudan; None of these
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home Page {navigationItem-Careers Home Page}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Inventory Control Specialist - Third Shift
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-c8e72211eb361001a287fd78a34d0001}
+label: Are you at least 18 years of age if applying for a position in the United States or of legal working age for t
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287fd78a34d0001
+ {formField-c8e72211eb361001a287fe12a17d0002}
+label: What is your current highest level of completed education?*
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287fe12a17d0002
+ {formField-c8e72211eb361001a287ffe083140003}
+label: Do you now, or will you in the future, require a work permit/work sponsorship to be eligible to work under loc
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287ffe083140003
+ {formField-c8e72211eb361001a287ffe083140006}
+label: Do you now work, or have you in the past worked for a U.S. federal Government agency? (Please note current or 
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287ffe083140006
+ {formField-c8e72211eb361001a2880249749a0000}
+label: Please indicate which, if any, where you are a citizen.*
+  <input:checkbox #c8e72211eb361001a0323b8a803c0002-c8e72211eb361001a2880249749 required question-unanswered>
+label: Cuba
+  <input:checkbox #c8e72211eb361001a0323c2571510000-c8e72211eb361001a2880249749 required question-unanswered>
+label: Syria
+  <input:checkbox #c8e72211eb361001a0323c2571510001-c8e72211eb361001a2880249749 required question-unanswered>
+label: North Korea
+  <input:checkbox #c8e72211eb361001a0323c2571510002-c8e72211eb361001a2880249749 required question-unanswered>
+label: Iran
+  <input:checkbox #c8e72211eb361001a0323c2571510003-c8e72211eb361001a2880249749 required question-unanswered>
+label: Sudan
+  <input:checkbox #c8e72211eb361001a0323cbf37420000-c8e72211eb361001a2880249749 required question-unanswered>
+label: None of these
+ {formField-c8e72211eb361001a2880249749a0007}
+label: Have you examined the description of the essential functions of the position for which you are applying, if av
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a2880249749a0007
+ {formField-c8e72211eb361001a28802e3be160002}
+label: Are you subject to any agreement that may limit your ability to work for Thermo Fisher Scientific (e.g., a non
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a28802e3be160002
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Information Center {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-14 19:14:57  skipped  Business Development Representative, Physical AI  @ innodatainc
+url: https://job-boards.greenhouse.io/innodatainc/jobs/4435149009
+stage: page 1
+why: can't truthfully answer required: Do you have prior experience prospecting or selling into AI,
+# Business Development Representative, Physical AI
+  [button] Apply
+  text: Innodata (Nasdaq: INOD) is a global data engineering company. We believe that data and Artificial Intelligence (AI) are inextricably linked.
+  text: Business Development Representative, Physical AI
+  text: will be responsible for identifying, engaging, and qualifying new business opportunities across the rapidly growing Physical AI ecosystem.
+  text: This role will focus on building a strong pipeline of companies developing robotics, embodied AI, autonomous systems, and Physical AI founda
+  text: The BDR will work closely with Innodata’s Physical AI leadership to identify high-potential accounts, engage relevant technical and business
+  text: This role is approximately 70% outbound prospecting, qualification, and customer-facing activity and 30% account research & planning.
+  text: Outbound Prospecting & Qualification
+  text: Research emerging Physical AI companies, funded robotics startups, autonomous systems, and other Physical AI foundation-model developers.
+  text: Build targeted account and contact lists through market mapping, industry research, conferences, inbound engagement, and outbound prospectin
+  text: Identify relevant technical and business decision makers across AI, machine learning, robotics, data, engineering, product, and research org
+  text: Conduct personalized outreach through email, LinkedIn, industry events, and other channels to generate qualified meetings.
+  text: Conduct discovery calls to understand customer requirements, timelines, technical challenges, and potential commercial opportunities.
+  text: Support the transition of qualified opportunities into pilots, proof-of-concept programs, and larger commercial engagements.
+  text: Coordinate customer-facing meetings, follow-ups, demonstrations, and technical discussions as needed.
+  text: Track relevant industry developments, funding activity, product launches, and technology trends that may create new opportunities for Innoda
+  text: You’ll Thrive in This Role If You Have:
+  text: Bachelor’s degree or equivalent professional experience.
+  text: 1–3+ years of experience in business development, technology sales, or a related customer-facing role.
+  text: Interest in artificial intelligence, robotics, autonomous systems, machine learning, or emerging technologies.
+  text: Strong research skills and the ability to identify relevant companies, initiatives, and decision makers within complex organizations.
+  text: Demonstrated ability to build consultative relationships with prospects, customers, and internal cross-functional teams.
+  text: Must: A proactive, entrepreneurial approach and comfort working in a fast-moving and evolving market.
+  text: The expected salary range for this position is $70,000 – $85,000 USD per year, based on experience, skills, and qualifications.
+  text: Please be aware of recruitment scams involving individuals or organizations falsely claiming to represent employers. Innodata will never ask
+  text: https://consumer.ftc.gov/articles/job-scams.
+  text: If you believe you’ve been targeted by a recruitment scam, please report it to Innodata at
+  text: <email>
+  text: and consider reporting it to the FTC at
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name
+  <input:text #preferred_name empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country
+  <input:text #country empty>
+  [button] 
+  <input:tel #phone empty>
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: LinkedIn Profile*
+  <input:text #question_7848533009 required empty>
+label: What is your highest level of education?*
+  <input:text #question_7848534009 required empty>
+  [button] 
+  <input required empty>
+label: What degree have you earned?*
+  <input:text #question_7848535009 required empty>
+  [button] 
+  <input required empty>
+label: What was the major/field of study for your degree(s)?*
+  <input:text #question_7848536009 required empty>
+label: Are you at years 18 years of age?*
+  <input:text #question_7848537009 required empty>
+  [button] 
+  <input required empty>
+label: What is your desired annual salary?*
+  <input:text #question_7848538009 required empty>
+label: Have you ever worked for Innodata?*
+  <input:text #question_7848539009 required empty>
+  [button] 
+  <input required empty>
+label: Do you, now or in the future, require sponsorship to work in the United States?*
+  <input:text #question_7848540009 required empty>
+  [button] 
+  <input required empty>
+label: ​If you provided a phone number, do you consent to receiving follow-up communication via text message (or SMS 
+  <input:text #question_7848541009 required empty>
+  [button] 
+  <input required empty>
+  text: If yes, you can always opt-out by replying STOP.
+  text: If you opt-in to the service, Innodata Services and its affiliates may send you SMS messages to notify you of any updates to your applicatio
+  text: Standard message and data rates may apply
+  text: opt out of receiving SMS messages at any time
+  text: Mobile information will not be shared with third parties or affiliates for marketing or promotional purposes
+label: Do you have prior experience prospecting or selling into AI, robotics, autonomous systems, or other deep-tech 
+  <input:text #question_7874584009 required empty>
+  [button] 
+  <input required empty>
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Innodata Inc.’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under
+label: Gender
+  <input:text #gender empty>
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  <input:text #veteran_status em
+
+=== 2026-10-14 19:15:40  skipped  Safety Committee Administrator @ thermofisher
+url: https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers/job/Remote-North-Carolina-USA/Safety-Committee-Administrator_R-01370230/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Cuba; Syria; North Korea; Iran; Sudan; None of these
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home Page {navigationItem-Careers Home Page}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Safety Committee Administrator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-c8e72211eb361001a287dd83ff8a0000}
+label: Are you at least 18 years of age if applying for a position in the United States or of legal working age for t
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287dd83ff8a0000
+ {formField-c8e72211eb361001a287dd83ff8a0003}
+label: What is your current highest level of completed education?*
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287dd83ff8a0003
+ {formField-c8e72211eb361001a287dfee0bb40000}
+label: Do you now, or will you in the future, require a work permit/work sponsorship to be eligible to work under loc
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287dfee0bb40000
+ {formField-c8e72211eb361001a287dfee0bb40003}
+label: Do you now work, or have you in the past worked for a U.S. federal Government agency? (Please note current or 
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287dfee0bb40003
+ {formField-c8e72211eb361001a287e1bdbb230002}
+label: Please indicate which, if any, where you are a citizen.*
+  <input:checkbox #c8e72211eb361001a0323b8a803c0002-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: Cuba
+  <input:checkbox #c8e72211eb361001a0323c2571510000-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: Syria
+  <input:checkbox #c8e72211eb361001a0323c2571510001-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: North Korea
+  <input:checkbox #c8e72211eb361001a0323c2571510002-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: Iran
+  <input:checkbox #c8e72211eb361001a0323c2571510003-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: Sudan
+  <input:checkbox #c8e72211eb361001a0323cbf37420000-c8e72211eb361001a287e1bdbb2 required question-unanswered>
+label: None of these
+ {formField-c8e72211eb361001a287e25801440003}
+label: Have you examined the description of the essential functions of the position for which you are applying, if av
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287e25801440003
+ {formField-c8e72211eb361001a287e2f254090000}
+label: Are you subject to any agreement that may limit your ability to work for Thermo Fisher Scientific (e.g., a non
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287e2f254090000
+ {formField-c8e72211eb361001a287e2f254090003}
+label: Are you currently a member of an Institutional Review Board/Independent Ethics Committee (IRB/IEC) or Industry
+  [dropdown] nothing chosen #primaryQuestionnaire--c8e72211eb361001a287e2f254090003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Information Center {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
