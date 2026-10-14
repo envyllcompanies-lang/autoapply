@@ -135,6 +135,8 @@ FIELD_RULES = [
      r"spoken languages?", ("languages",), None),
     (r"\bgpa\b|grade point", ("gpa",), None),
     (r"highest (level of )?(\w+ )?(education|degree)|level of (\w+ )?education|education level", ("education_level",), None),
+    (r"\bschool type\b|type of (school|institution)", ("school_type",), None),
+    (r"did you graduate|have you graduated|\bgraduated\?", ("graduated",), None),
     (r"\b(school|university|college|institution)\b", ("school",), None),
     (r"degree|diploma", ("degree",), None),
     (r"\bmajor\b|field of study|discipline", ("major",), None),
@@ -237,6 +239,11 @@ class Brain:
         li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", str(f.get("linkedin") or ""), re.I)
         if li:           # forms accept the plain profile address only, not one with a page or tracking after the name
             f["linkedin"] = f"https://www.linkedin.com/in/{li.group(1)}"
+        if f.get("school") and not f.get("school_type"):     # Paylocity's 'School Type' list: University / College / ...
+            f["school_type"] = "University" if re.search(r"universit", str(f["school"]), re.I) else "College"
+        gy = re.search(r"(19|20)\d\d", str(f.get("graduation_date") or ""))
+        if gy and not f.get("graduated"):                   # 'Did you graduate?': yes once the graduation date has passed
+            f["graduated"] = "Yes" if int(gy.group(0)) <= date.today().year else "No"
         self.facts = f
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))

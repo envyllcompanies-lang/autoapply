@@ -15,13 +15,15 @@ EXTRACT_JS = r"""
   };
   const labelOf = el => {
     let t = '';
-    if (el.id) { const l = document.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l) t = l.innerText; }
+    // a dropdown whose shown choice sits inside its label (Paylocity: 'State' + 'Select a state'): the label alone
+    const labTxt = l => { let x = l.innerText || '';
+      for (const sv of l.querySelectorAll('[class*="single-value"], [class*="placeholder"]')) x = x.replace(sv.innerText || '', '');
+      return x; };
+    if (el.id) { const l = document.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l) t = labTxt(l); }
     if (!t && el.getAttribute('aria-labelledby'))
       t = el.getAttribute('aria-labelledby').split(/\s+/).map(i => document.getElementById(i)?.innerText || '').join(' ');
     if (!t) t = el.getAttribute('aria-label') || '';
-    if (!t) { const l = el.closest('label'); if (l) { t = l.innerText;
-      // a dropdown whose shown choice sits inside its label (Paylocity: 'State' + 'Select a state'): the label alone
-      for (const sv of l.querySelectorAll('[class*="single-value"], [class*="placeholder"]')) t = t.replace(sv.innerText || '', ''); } }
+    if (!t) { const l = el.closest('label'); if (l) t = labTxt(l); }
     if (!t) {
       // the nearest question text BEFORE this box in its block: never an answer option's <label> (it holds its own input)
       // and never a label that belongs to a later box (Lever cards put several questions in one block)
@@ -838,11 +840,8 @@ def extract(page) -> list[dict]:
                 f["options"] = el.evaluate("""e => { const b = document.getElementById(e.getAttribute('aria-owns') || '');
                     return b ? [...b.querySelectorAll('[role="option"]')].map(o => (o.innerText || o.textContent || '').trim()).filter(Boolean) : []; }""",
                                            timeout=1500) or []
-        except Exception as e:
-            _dbg(f"      DEBUG options of {f.get('label','')[:40]!r} failed: {str(e).splitlines()[0][:200]}")
+        except Exception:
             f["options"] = []
-        if f.get("button") and not f["options"]:
-            _dbg(f"      DEBUG no options for {f.get('label','')[:40]!r}: " + str(page.evaluate("""(id) => { const e = document.querySelector('[data-aa="' + id + '"]'); return e ? e.outerHTML.slice(0, 1500) + ' || active=' + (document.activeElement && document.activeElement.outerHTML.slice(0, 200)) : 'gone'; }""", f["id"])))
         _close_list(page)
     return fields
 
@@ -1095,17 +1094,13 @@ def _set_text(el, val: str):
     except Exception:
         pass
     el.fill(val, timeout=5000)
-    try:
-        if "/" in val:
-            v1 = el.input_value(timeout=1000); el.page.wait_for_timeout(800); v2 = el.input_value(timeout=1000)
-            _dbg(f"      DEBUG date box: typed {val!r}, right after {v1!r}, a moment later {v2!r}")
-    except Exception as e:
-        _dbg(f"      DEBUG date read failed {e}")
+    _dbg(f"DEBUG text {val!r} -> {el.input_value(timeout=1000)!r}")
     try:
         if val.strip() and not el.input_value(timeout=1000).strip():
             el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
-            el.press_sequentially(val, delay=35)
+            el.press_sequentially(re.sub(r"\D", "", val) if re.fullmatch(r"\d{1,4}[/.-]\d{1,2}[/.-]\d{2,4}", val.strip()) else val, delay=35)
             el.press("Tab")
+            _dbg(f"DEBUG typed again -> {el.input_value(timeout=1000)!r}")
     except Exception:
         pass
 
@@ -1194,7 +1189,6 @@ _SHOWN_JS = """e => {
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
-    _dbg(f"      DEBUG dropdown {f.get('label','')[:40]!r} <- {val!r}")
     try:
         is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
     except Exception:
@@ -1252,6 +1246,17 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     if i is not None:
         _click_option(page, opts[i])
         page.wait_for_timeout(250)
+    _dbg(f"DEBUG dropdown {f.get('label','')[:40]!r} <- {val!r}; choices seen {texts[:5]}; shows now {shown()!r}")
+    if not is_btn and not shown() and "state" in f.get("label", "").lower():
+        try:
+            el.click(timeout=2000); el.fill("", timeout=2000); el.press_sequentially("Colo", delay=60); page.wait_for_timeout(1200)
+            dump = page.evaluate("""() => { const out = [];
+              for (const c of document.querySelectorAll('[id$="dropdown-list-container"], [role="listbox"], [class*="menu"]'))
+                out.push(c.id + ' | ' + c.className + ' | ' + c.outerHTML.slice(0, 1500));
+              return out.slice(0, 6).join(' #### '); }""")
+            _dbg("DEBUG list: " + dump[:5000])
+        except Exception as e:
+            _dbg(f"DEBUG list failed: {e}")
     if _list_open(page):
         _close_list(page)
     if is_btn:
@@ -1948,6 +1953,36 @@ def apply(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Pat
     return _apply_generic(page, job, brain, cover_letter, files, shot, dry_run, log, accounts, on_click, on_stage)
 
 
+def _resume_first_modal(page, files: dict, log) -> bool:
+    """Paylocity can cover its form with 'Apply with resume: upload your resume and we'll fill out your application', and
+    nothing under it can be clicked until a résumé is given. It is given the résumé (the form is checked and filled as usual
+    afterwards)."""
+    try:
+        modal = page.locator('#forceUploadResumeModal, [role="dialog"]:has-text("Apply with resume")').locator("visible=true")
+        if not modal.count() or not files.get("RESUME"):
+            return False
+        btn = modal.first.get_by_role("button", name=re.compile(r"upload", re.I))
+        if not btn.count():
+            btn = modal.first.locator("button, a, label").filter(has_text=re.compile(r"upload", re.I))
+        with page.expect_file_chooser(timeout=5000) as fc:
+            btn.first.click(timeout=4000)
+        fc.value.set_files(str(files["RESUME"]))
+        for _ in range(30):                           # the site reads the résumé and fills what it can
+            page.wait_for_timeout(500)
+            if not modal.count():
+                break
+        log("      (résumé given to the site's 'apply with resume' box first)")
+        page.wait_for_timeout(1500)
+        return True
+    except Exception as e:
+        log(f"      ! 'apply with resume' box: {str(e).splitlines()[0][:100]}")
+        try:
+            page.keyboard.press("Escape")
+        except Exception:
+            pass
+        return False
+
+
 def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], shot: Path, dry_run: bool, log=print, accounts=None,
                    on_click=None, on_stage=None) -> str:
     from . import auth, workday, writer as _w
@@ -1971,6 +2006,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             raise Blocked(b)
         if on_stage:
             on_stage(f"page {step}")
+        _resume_first_modal(page, files, log)
         # Any wizard step may request a code sent to the applicant's inbox.
         if _email_code_prompt(page):
             if not auth.mailbox.configured():
