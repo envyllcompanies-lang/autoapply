@@ -1,0 +1,53 @@
+[17:59:33] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[17:59:39] mail: logged in to delgado@alumni.usc.edu OK
+[17:59:40] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[17:59:40] === probe pay2: 3 forms, fill only, nothing is submitted ===
+[17:59:41] ACCOUNT_PASSWORD meets Workday's usual rules
+[17:59:41] Accounts: ON (password set: True, email set: True, create in probe: True)
+[17:59:41] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4579341
+[18:00:00]       step 1: 23 fields (13 required)
+[18:00:02]       (writer answered 'County' -> 'Garfield County')
+[18:00:20]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:00:24]       step 2: 7 fields (0 required)
+[18:00:28]       step 3: 7 fields (0 required)
+[18:00:33]       step 4: 7 fields (0 required)
+[18:00:37]     ✗ Unanswerable: stuck on step 5; page says: ['This position is fully in person at our Fishkill, NY office and does not offer r', 'Are you comfortable adapting to changing priorities, learning new procedures, an', 'Do you accept the pay rate as outlined ($20–$22/hour)? (required)\n\nYes\nNo\nQuesti', 'A parent’s sub
+[18:00:37] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4566840
+[18:01:04]       step 1: 26 fields (14 required)
+[18:01:04]       (writer answered 'County' -> 'Garfield County')
+[18:01:04]       ? unanswered: 'Have you applied for a job with us before? (required) *' kind=combobox options=[]
+[18:01:04]     ✗ Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:01:04] → [recruiting.paylocity.com] (url) @ (url)  https://recruiting.paylocity.com/recruiting/Jobs/Details/4573853
+[18:01:31]       step 1: 45 fields (27 required)
+[18:01:31]       (writer answered 'County' -> 'N/A')
+[18:01:32]       (writer answered 'Company Name (required)' -> 'N/A')
+[18:01:33]       (writer answered 'Position (required)' -> 'N/A')
+[18:01:33]       (writer answered 'County' -> 'Garfield County')
+[18:01:34]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:01:34]       (writer answered 'Did you Graduate? (required) *' -> 'Yes')
+[18:02:03]       ! NOT FILLED: 'Available to Start' (wanted 'October 21, 2026')
+[18:02:44]       step 2: 92 fields (67 required)
+[18:02:44]       (writer answered 'County' -> 'N/A')
+[18:02:45]       (writer answered 'Company Name (required)' -> 'N/A')
+[18:02:45]       (writer answered 'Position (required)' -> 'N/A')
+[18:02:46]       (writer answered 'County' -> 'N/A')
+[18:02:46]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[18:02:47]       (writer answered 'Company Name (required)' -> 'N/A')
+[18:02:47]       (writer answered 'Position (required)' -> 'N/A')
+[18:02:48]       (writer answered 'County' -> 'N/A')
+[18:02:49]       (writer answered 'Company Name (required)' -> 'N/A')
+[18:02:49]       (writer answered 'Position (required)' -> 'N/A')
+[18:02:49]       (writer answered 'County' -> 'N/A')
+[18:02:50]       (writer answered 'Company Name (required)' -> 'Roaring Fork Property Group')
+[18:02:50]       (writer answered 'Position (required)' -> 'N/A')
+[18:02:50]       (writer answered 'County' -> 'N/A')
+[18:02:50]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:02:51]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:02:51]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[18:02:51]       ? unanswered: 'Have you applied for a job with us before? (required) *' kind=combobox options=[]
+[18:02:51]       ? unanswered: 'May We Contact for Reference? (required) *' kind=combobox options=[]
+[18:02:51]     ✗ Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *; May We Contact for Reference? (required) *
+[18:02:52] === probe done ===
+[18:02:52]    1 recruiting.paylocity.com (url)              (url)                                    steps=4 empty_req=4 | Unanswerable: stuck on step 5; page says: ['This position is fully in person at our Fishkill, NY office and does not off
+[18:02:52]    2 recruiting.paylocity.com (url)              (url)                                    steps=0 empty_req=0 | Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *
+[18:02:52]    3 recruiting.paylocity.com (url)              (url)                                    steps=1 empty_req=9 | Unanswerable: can't truthfully answer required: Have you applied for a job with us before? (required) *; May We Contact 
