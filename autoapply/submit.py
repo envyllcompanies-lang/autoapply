@@ -185,7 +185,8 @@ EXTRACT_JS = r"""
     // Workday's number box is a text input that keeps only the digits typed into it: 'USD 70,000 - 80,000' becomes
     // 7000080000 and the page is sent back with 'The number entered is too large'. It is a number field.
     if (f.kind === 'text' && /^numericInput$/i.test(el.getAttribute('data-automation-id') || '')) f.kind = 'number';
-    if (/[*\u2731]/.test(f.label)) f.required = true;
+    if (/[*\u2731]/.test(f.label) || /\(required\)/i.test(f.label) || el.closest('.form-required')) f.required = true;
+    if (el.placeholder) f.ph = el.placeholder;
     fields.push(f);
   }
   for (const [name, g] of Object.entries(groups)) {
@@ -212,6 +213,16 @@ EXTRACT_JS = r"""
     const req = /[*\u2731]/.test(lab) || /required/i.test(b.getAttribute('aria-label') || '') || b.getAttribute('aria-required') === 'true';
     fields.push({ id: tag(b), kind: 'combobox', label: lab + (req && !/[*\u2731]/.test(lab) ? ' *' : ''), required: req, maxlength: null,
                   sel: selOf(b), key: keyOf(b), button: true, cur: clean(b.innerText) });
+  }
+  // dropdowns drawn as a plain <div role="combobox"> that opens a list (react-widgets: Paylocity's Yes / No questions)
+  for (const d of root.querySelectorAll('div[role="combobox"], span[role="combobox"]')) {
+    if (d.querySelector('input, select, textarea') || d.getAttribute('aria-disabled') === 'true' || d.closest('[aria-hidden="true"]') ||
+        !visible(d) || chrome(d)) continue;
+    const lab = clean(labelOf(d) || d.getAttribute('data-for') || '');
+    const req = /[*\u2731]/.test(lab) || /\(required\)/i.test(lab) || !!d.closest('.form-required') || d.getAttribute('aria-required') === 'true';
+    const curEl = d.querySelector('.rw-input, [class*="value"]') || d;
+    fields.push({ id: tag(d), kind: 'combobox', label: lab + (req && !/[*\u2731]/.test(lab) ? ' *' : ''), required: req, maxlength: null,
+                  sel: selOf(d), key: keyOf(d), button: true, cur: clean(curEl.innerText) });
   }
   // Ashby-style Yes/No answered with two plain <button>s instead of radio inputs
   const btnGroups = new Map();
@@ -669,7 +680,11 @@ _OPTIONS_JS = r"""(ids) => {
   };
   for (const id of ids) {
     const box = document.getElementById(id);
-    if (box) { const got = pack([...box.querySelectorAll('[role="option"]')]); if (got.length) return got; }
+    if (!box) continue;
+    let got = pack([...box.querySelectorAll('[role="option"]')]);
+    if (!got.length)          // a list drawn without role="option" (Paylocity's state list): its innermost texts are the choices
+      got = pack([...box.querySelectorAll('*')].filter(e => !e.children.length && (e.innerText || '').trim()));
+    if (got.length) return got;
   }
   const WD = '[data-automation-id="activeListContainer"] ';
   for (const sel of [WD + '[role="option"], ' + WD + '[data-automation-id="promptOption"], ' + WD + '[data-automation-id="promptLeafNode"]',
@@ -720,6 +735,9 @@ def _options(page, el=None) -> list[dict]:
     if el is not None:
         try:
             ids = (el.get_attribute("aria-controls", timeout=800) or el.get_attribute("aria-owns", timeout=800) or "").split()
+            if not ids:             # Paylocity: the box's wrapper names the list (aria-owns="...-dropdown-list-container")
+                ids = (el.evaluate("e => { const w = e.closest('[aria-owns]'); return w ? w.getAttribute('aria-owns') : ''; }",
+                                   timeout=800) or "").split()
         except Exception:
             ids = []
     try:
@@ -1124,17 +1142,26 @@ def _set_date(page, f: dict, el, val):
         raise RuntimeError("the date boxes did not take the date")
 
 
+_SHOWN_JS = """e => {
+  if (!['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)) { const v = e.querySelector('.rw-input'); return (v || e).innerText; }
+  if (e.value) return e.value;
+  // a search box that shows the picked choice beside itself, not in itself (Paylocity's Country / State)
+  const w = e.closest('[aria-owns]'); const sv = w && w.querySelector('[class*="single-value"]');
+  return sv ? sv.innerText : '';
+}"""
+
+
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
     try:
-        is_btn = bool(el.evaluate("e => e.tagName === 'BUTTON'", timeout=1500))
+        is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
     except Exception:
         is_btn = bool(f.get("button"))
 
     def shown() -> str:
         try:                                          # looked up afresh each time: picking a value can make the site redraw the box
-            return str(_loc(page, f).evaluate("e => e.tagName === 'BUTTON' ? e.innerText : (e.value || '')", timeout=1500) or "").strip()
+            return str(_loc(page, f).evaluate(_SHOWN_JS, timeout=1500) or "").strip()
         except Exception:
             return ""
 
@@ -1188,10 +1215,35 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
         _close_list(page)
     if is_btn:
         s1 = shown()
-        if not s1 or PLACEHOLDER.match(s1):
+        if not s1 or PLACEHOLDER.match(s1) or re.match(r"^\s*select an? ", s1, re.I):
             log(f"      ! nothing was picked in '{f.get('label', '')[:50]}' (wanted {val[:30]!r}; choices: {texts[:6]})")
             return False
     return True
+
+
+def _date_as_box(ph: str, val) -> str:
+    """A date written the way a plain text box asks for it in its placeholder ('MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'):
+    'October 21, 2026' typed into an MM/DD/YYYY box is thrown away by the box. Anything else is typed as given."""
+    s = str(val).strip()
+    order = re.sub(r"[^a-z]", "", ph.lower())
+    if order not in ("mmddyyyy", "ddmmyyyy", "yyyymmdd") or len(s) > 40:
+        return s
+    from datetime import datetime as _dt
+    d = None
+    for fmt in ("%B %d, %Y", "%b %d, %Y", "%B %d %Y", "%Y-%m-%d", "%m/%d/%Y", "%m-%d-%Y", "%d %B %Y"):
+        try:
+            d = _dt.strptime(s, fmt)
+            break
+        except ValueError:
+            continue
+    if d is None:
+        return s
+    sep = "-" if "-" in ph else "/"
+    if order == "mmddyyyy":
+        return d.strftime(f"%m{sep}%d{sep}%Y")
+    if order == "ddmmyyyy":
+        return d.strftime(f"%d{sep}%m{sep}%Y")
+    return d.strftime(f"%Y{sep}%m{sep}%d")
 
 
 def _number_text(val) -> str:
@@ -1224,7 +1276,7 @@ def _fill_one(page, f: dict, val, files: dict, log):
             if _wd_prompt(page, f, el, str(v), log):
                 break
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
-        _set_text(el, _number_text(val) if kind == "number" else str(val))
+        _set_text(el, _number_text(val) if kind == "number" else _date_as_box(f.get("ph") or "", val) if kind == "text" else str(val))
     elif kind == "select":
         try:
             el.select_option(label=str(val), timeout=4000)
