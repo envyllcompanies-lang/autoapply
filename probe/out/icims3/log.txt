@@ -1,0 +1,23 @@
+[17:53:11] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[17:53:12] mail: logged in to delgado@alumni.usc.edu OK
+[17:53:12] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[17:53:12] === probe icims3: 4 forms, fill only, nothing is submitted ===
+[17:53:13] ACCOUNT_PASSWORD meets Workday's usual rules
+[17:53:13] Accounts: ON (password set: True, email set: True, create in probe: True)
+[17:53:13] → [icims] (url) @ (url)  https://careers-kimley-horn.icims.com/jobs/26944/civil-engineering-analyst/job
+[17:53:25]       step 1: 1 fields (1 required)
+[17:53:29]       account: signing in on login.icims.com (no 'create account' link found)
+[17:53:32]       account: sign-in refused on login.icims.com; resetting the password through your email
+[17:55:41]       account: the password-reset email did not arrive in time
+[17:55:41]     ✗ Blocked: account: sign-in was refused and the password could not be reset through your email
+[17:55:41] → [icims] (url) @ (url)  https://careers-peraton.icims.com/jobs/171777/configuration-management-associate/job
+[17:55:47]     ✗ Blocked: hCaptcha (a human check: the bot stops here)
+[17:55:47] → [icims] (url) @ (url)  https://careers-mysagedental.icims.com/jobs/9717/dental-treatment-plan-coordinator/job
+[17:55:53]     ✗ Blocked: hCaptcha (a human check: the bot stops here)
+[17:55:53] → [icims] (url) @ (url)  https://careers-frescoymas.icims.com/jobs/7872/customer-service-associate/job
+[17:55:59]     ✗ Blocked: hCaptcha (a human check: the bot stops here)
+[17:55:59] === probe done ===
+[17:55:59]    1 icims        (url)              (url)                                    steps=1 empty_req=0 | Blocked: account: sign-in was refused and the password could not be reset through your email
+[17:55:59]    2 icims        (url)              (url)                                    steps=0 empty_req=0 | Blocked: hCaptcha (a human check: the bot stops here)
+[17:55:59]    3 icims        (url)              (url)                                    steps=0 empty_req=0 | Blocked: hCaptcha (a human check: the bot stops here)
+[17:55:59]    4 icims        (url)              (url)                                    steps=0 empty_req=0 | Blocked: hCaptcha (a human check: the bot stops here)
