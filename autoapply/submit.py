@@ -554,6 +554,33 @@ def _open_embedded(page, url: str) -> bool:
     return False
 
 
+def _icims_apply(page):
+    """iCIMS shows the posting inside an iframe (icims_content_iframe) of its career page; the 'Apply Now' link lives in that
+    frame. Follow its address in the main tab, which leads to the application (an email step first, then the form)."""
+    try:
+        for fr in [*[f for f in page.frames if f != page.main_frame], page.main_frame]:   # the posting frame first
+            if "icims.com" not in (fr.url or ""):
+                continue
+            link = fr.locator('a.iCIMS_ApplyOnlineButton, a[href*="/login"][href*="jobs/"], a[title*="Apply" i]')
+            if not link.count():
+                link = fr.get_by_role("link", name=re.compile(r"^\s*apply( for this job)?( online| now)?\s*$", re.I))
+            if not link.count():
+                continue
+            href = link.first.get_attribute("href") or ""
+            if href.startswith("/"):
+                href = re.sub(r"(https://[^/]+).*", r"\1", fr.url) + href
+            if href.startswith("http"):
+                page.goto(href, wait_until="domcontentloaded", timeout=45000)
+            else:
+                link.first.click()
+            page.wait_for_timeout(2500)
+            _dismiss_cookies(page)
+            return True
+    except Exception:
+        pass
+    return False
+
+
 def open_form(page, url: str) -> str:
     """Open the page and get to the actual application form, whichever way the link is built: the form itself, a description page
     with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added.
@@ -562,30 +589,12 @@ def open_form(page, url: str) -> str:
         from . import workday
         workday.open_posting(page, url)        # the Workday driver finds its own way from the posting to the form
         return _body_text(page)
-    if re.search(r"icims\.com/jobs/\d+", url) and "in_iframe=1" not in url:
-        # iCIMS shows the posting in an iframe of its own career page: open the posting itself, then its
-        # 'Apply for this job online' link, which leads to the application (an email step first, then the form)
-        url = url.split("#")[0] + ("&" if "?" in url else "?") + "in_iframe=1"
     page.goto(url, wait_until="domcontentloaded", timeout=45000)
     page.wait_for_timeout(2500)
     _dismiss_cookies(page)
     landing = _body_text(page)                 # the posting as first shown, before an Apply button leads away from it
     if "icims.com/jobs/" in page.url:
-        try:
-            link = page.locator('a.iCIMS_ApplyOnlineButton, a[href*="/login"], a[title*="Apply" i]').locator("visible=true")
-            if not link.count():
-                link = page.get_by_role("link", name=re.compile(r"apply (for this job )?(online|now)?", re.I)).locator("visible=true")
-            if link.count():
-                href = link.first.get_attribute("href") or ""
-                if href.startswith("http") or href.startswith("/"):
-                    page.goto(href if href.startswith("http") else re.sub(r"(https://[^/]+).*", r"\1", page.url) + href,
-                              wait_until="domcontentloaded", timeout=45000)
-                else:
-                    link.first.click()
-                page.wait_for_timeout(2500)
-                _dismiss_cookies(page)
-        except Exception:
-            pass
+        _icims_apply(page)
     tried = set()
     for _ in range(4):
         if _has_form(page):
