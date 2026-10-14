@@ -821,6 +821,11 @@ def extract(page) -> list[dict]:
             if not f["options"] and f.get("button"):
                 page.wait_for_timeout(700)      # a list that slides open (react-widgets) shows its choices a moment later
                 f["options"] = _visible_options(page, el)
+            if not f["options"] and f.get("button"):
+                # react-widgets keeps its list in the page while shut: its choices can be read without it being open
+                f["options"] = el.evaluate("""e => { const b = document.getElementById(e.getAttribute('aria-owns') || '');
+                    return b ? [...b.querySelectorAll('[role="option"]')].map(o => (o.innerText || o.textContent || '').trim()).filter(Boolean) : []; }""",
+                                           timeout=1500) or []
         except Exception:
             f["options"] = []
         _close_list(page)
@@ -1075,6 +1080,13 @@ def _set_text(el, val: str):
     except Exception:
         pass
     el.fill(val, timeout=5000)
+    try:
+        if val.strip() and not el.input_value(timeout=1000).strip():
+            el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
+            el.press_sequentially(val, delay=35)
+            el.press("Tab")
+    except Exception:
+        pass
 
 
 def _set_date(page, f: dict, el, val):
@@ -1218,6 +1230,17 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     if i is not None:
         _click_option(page, opts[i])
         page.wait_for_timeout(250)
+    if not is_btn and not shown() and "state" in f.get("label", "").lower():     # PROBE ONLY: what the open list looks like
+        try:
+            el.click(timeout=2000); el.fill("", timeout=2000); el.press_sequentially("Colo", delay=60); page.wait_for_timeout(1200)
+            dump = page.evaluate("""() => { const out = [];
+              for (const c of document.querySelectorAll('[id$="dropdown-list-container"], [role="listbox"], [class*="menu"]'))
+                out.push(c.id + ' | ' + c.className + ' | ' + c.outerHTML.slice(0, 900));
+              return out.slice(0, 6).join(' #### '); }""")
+            log("      DEBUG list: " + dump[:4000])
+            page.screenshot(path="probe/out/statelist.jpg")
+        except Exception as e:
+            log(f"      DEBUG list failed: {e}")
     if _list_open(page):
         _close_list(page)
     if is_btn:
