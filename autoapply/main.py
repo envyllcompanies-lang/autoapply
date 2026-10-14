@@ -406,6 +406,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_titles = db.reset_title_filter(tok)
     if n_titles:
         log(f"Job titles you accept changed: looking again at {n_titles:,} postings that were dropped only for their title")
+    if db.meta_get("compact_day") != date.today().isoformat():      # once a day: keep the history file far under GitHub's 100 MB
+        try:
+            slim, gone = db.compact()
+            db.meta_set("compact_day", date.today().isoformat())
+            if slim or gone:
+                log(f"History kept small: {slim:,} old filtered postings slimmed to their key, {gone:,} older than two months removed")
+        except Exception as e:
+            log(f"  ! history compaction skipped: {str(e)[:100]}")
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
@@ -595,6 +603,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         try ended at a human check come last."""
         fit = _fit(r)
         sr = site_rank(r, health)
+        if str(r["reason"] or "").startswith("retry: "):
+            return (2 if sr < 3 else 3, sr, -fit)      # failed before and brought back by a new build: after fresh jobs
         if fit > 0:
             return (0 if sr < 3 else 2, sr, -(fit + rank.location_boost(r, tiers)))
         return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt, tiers) - 8 * sr))

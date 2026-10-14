@@ -208,7 +208,8 @@ SAFE_FACTS = ("authorized_to_work_in_us", "requires_sponsorship_now_or_future", 
               "previously_employed_here", "over_18", "currently_employed", "currently_student", "has_bachelors_degree",
               "has_graduate_degree", "available_full_time", "can_perform_essential_functions", "has_drivers_license",
               "reliable_transportation", "languages", "education_level", "school", "degree", "major", "graduation_date",
-              "most_recent_company", "most_recent_title", "background_check_consent", "drug_test_consent")
+              "most_recent_company", "most_recent_title", "background_check_consent", "drug_test_consent",
+              "city", "state", "location_text")          # (your town and state, never a street address)
 
 BEHAVIORAL_RX = re.compile(r"tell (me|us) about a time|describe a (time|situation|moment|project|challenge)|give (me |us )?an example|"
                            r"challenge|conflict|failure|mistake|difficult|overcame|obstacle|proud|accomplish|learned|disagree|"

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS jobs (
@@ -52,13 +52,14 @@ class DB:
             "UPDATE jobs SET status='queued', attempts=0 WHERE status IN ('skipped','blocked') AND ("
             " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
             " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%'"
-            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%')")
+            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%'"
+            " OR reason LIKE 'stuck on Workday%number entered is too large%')")   # the salary box fixed 2026-10-11
         # submits the site bounced back with 'X is required' (e.g. the résumé upload didn't register): nothing was sent
         cur2 = self.conn.execute(
             "UPDATE jobs SET status='queued', attempts=0, submitted_at=NULL WHERE status='unconfirmed' AND reason LIKE 'no confirmation after submit; page errors:%'"
             " AND (lower(reason) LIKE '%required%' OR lower(reason) LIKE '%please enter a valid%' OR lower(reason) LIKE '%couldn''t submit%'"
             " OR lower(reason) LIKE '%could not submit%' OR lower(reason) LIKE '%must be%' OR lower(reason) LIKE '%invalid%')"
-            " AND lower(reason) NOT LIKE '%thank%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared)
+            " AND lower(reason) NOT LIKE '%thank%' AND lower(reason) NOT LIKE '%flagged%'")      # the page showed an error and nothing was sent: it must really come back (submitted_at cleared); a spam flag would only repeat
         # Workable submits that sat on the form (a YES/NO question the bot could not see, or 'Submitting…' held by a hidden
         # check) and got no confirmation email: almost certainly never sent. One more try; the inbox is checked first.
         cur3 = self.conn.execute(
@@ -92,9 +93,36 @@ class DB:
         # a job whose Submit was clicked is never queued again by any of the rules above, except the inbox re-check
         self.conn.execute("UPDATE jobs SET status='unconfirmed' WHERE status='queued' AND submitted_at IS NOT NULL AND submitted_at != ''"
                           " AND reason NOT LIKE 'recheck-inbox%'")
+        # what came back is marked 'retry: ' so the queue tries it after fresh jobs (it failed once; fresh jobs apply more often)
+        self.conn.execute(
+            "UPDATE jobs SET reason='retry: ' || reason WHERE status='queued' AND reason NOT LIKE 'retry:%' AND reason NOT LIKE 'recheck-inbox%' AND ("
+            " reason LIKE 'can''t truthfully answer%' OR reason LIKE 'no application form%' OR reason LIKE 'could not find the employer%'"
+            " OR reason LIKE 'login required%' OR reason LIKE 'unsupported application site%' OR reason LIKE 'not a real application form%'"
+            " OR reason LIKE 'form requires a cover letter%' OR reason LIKE 'account:%' OR reason LIKE 'stuck on%' OR reason LIKE 'no Next or Submit%'"
+            " OR reason LIKE 'no confirmation after submit%' OR reason LIKE 'apply by hand:%' OR reason LIKE '%Password must include%'"
+            " OR reason LIKE 'already applied to % roles at this company' OR reason LIKE '%security code%' OR reason LIKE '%emailed code%')")
         self.conn.execute("INSERT OR REPLACE INTO meta (k, v) VALUES ('requeue', ?)", (version,))
         self.conn.commit()
         return sum(c.rowcount for c in (cur, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10))
+
+    def compact(self, slim_after_days: int = 3, drop_after_days: int = 60) -> tuple[int, int]:
+        """Keep the history file small enough to be saved forever (GitHub refuses a file over 100 MB; it was 57 MB and
+        growing 1.5 MB a day on 2026-10-13). A posting dropped by the title / location / level rules only needs its key
+        (so it is not looked at again) and the start of its reason: after a few days the rest of its row is emptied, and
+        after two months the row goes (such postings have closed by then). Returns (rows slimmed, rows removed)."""
+        now = datetime.now()
+        slim_cut = (now - timedelta(days=slim_after_days)).isoformat(timespec="seconds")
+        drop_cut = (now - timedelta(days=drop_after_days)).isoformat(timespec="seconds")
+        gone = self.conn.execute("DELETE FROM jobs WHERE status='filtered' AND first_seen < ? AND updated < ?"
+                                 " AND (submitted_at IS NULL OR submitted_at = '')", (drop_cut, drop_cut)).rowcount
+        slim = self.conn.execute(
+            "UPDATE jobs SET url='', apply_url='', location='', company='', title=substr(COALESCE(title,''),1,60),"
+            " reason=substr(COALESCE(reason,''),1,80) WHERE status='filtered' AND updated < ?"
+            " AND (url != '' OR apply_url != '' OR location != '' OR company != '')", (slim_cut,)).rowcount
+        self.conn.commit()
+        if slim or gone:
+            self.conn.execute("VACUUM")
+        return slim, gone
 
     def requeue_fixed(self, flag: str) -> dict:
         """Jobs that were set aside by a fault that has since been fixed get one more try, once per flag. Each rule names
