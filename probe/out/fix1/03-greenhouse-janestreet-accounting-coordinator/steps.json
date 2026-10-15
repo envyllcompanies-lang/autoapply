@@ -1,0 +1,315 @@
+[
+ {
+  "step": 1,
+  "url": "https://www.janestreet.com/join-jane-street/apply/8631912002/?gh_jid=8631912002",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "Legal first name *",
+    "maxlength": null,
+    "sel": "[id=\"first_name\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f1",
+    "required": false,
+    "label": "Preferred first name",
+    "maxlength": null,
+    "sel": "[id=\"preferred_name\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Legal last name *",
+    "maxlength": null,
+    "sel": "[id=\"last_name\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f3",
+    "required": true,
+    "label": "Email *",
+    "maxlength": null,
+    "sel": "input[name=\"email\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "email"
+   },
+   {
+    "id": "f4",
+    "required": true,
+    "label": "Email confirmation *",
+    "maxlength": null,
+    "sel": "[id=\"email_confirmation\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "Phone *",
+    "maxlength": null,
+    "sel": "[id=\"phone-number\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "tel",
+    "ph": "Phone number"
+   },
+   {
+    "id": "f6",
+    "required": false,
+    "label": "Pronouns (Select one or more.)",
+    "maxlength": 1000,
+    "sel": "[id=\"pronouns\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f7",
+    "required": false,
+    "label": "LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)",
+    "maxlength": null,
+    "sel": "[id=\"linkedin_profile\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f8",
+    "required": true,
+    "label": "Current or most recent employer *",
+    "maxlength": null,
+    "sel": "[id=\"current_position\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f9",
+    "required": true,
+    "label": "Your primary college/university/school email *",
+    "maxlength": null,
+    "sel": "[id=\"university_email\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "email"
+   },
+   {
+    "id": "f10",
+    "required": false,
+    "label": "Year",
+    "maxlength": null,
+    "sel": "[id=\"comments\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "textarea"
+   },
+   {
+    "id": "f11",
+    "required": true,
+    "label": "Upload your resume as a PDF file *",
+    "maxlength": null,
+    "sel": "input[name=\"resume\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "file",
+    "accept": ".pdf,application/pdf",
+    "hint": "resume resume",
+    "elid": "resume"
+   }
+  ],
+  "answers": {
+   "f0": "Brian",
+   "f1": "Brian",
+   "f2": "Delgado-Ortega",
+   "f3": "delgado@alumni.usc.edu",
+   "f4": "delgado@alumni.usc.edu",
+   "f5": "(970) 366-8832",
+   "f6": "He/Him",
+   "f7": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+   "f8": "Roaring Fork Property Group",
+   "f9": "delgado@alumni.usc.edu",
+   "f11": "RESUME"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "email",
+    "value": "delgado@alumni.usc.edu",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "delgado@alumni.usc.edu",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "tel",
+    "value": "(970) 366-8832",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "He/Him",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "pronouns-input valid"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Roaring Fork Property Group",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "email",
+    "value": "delgado@alumni.usc.edu",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "comments"
+   },
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "C:\\fakepath\\briandelgado_resume.pdf",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "valid"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "WHO WE ARE WHAT WE DO THE LATEST CULTURE JOIN JANE STREET CLIENT OFFERING GLOBAL CAPITAL MARKETS BENEFITS OUR OFFICES STREET VIEW PUZZLES DEPARTMENTS OPEN ROLES",
+    "html": "<input class=\"search-input\" placeholder=\"Search all Jane Street content\" style=\"\">"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "+1",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Phone * +1",
+    "html": "<div class=\"preview-box\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" aria-controls=\"phone_country_code-options\">\n\t\t<p class=\"text selected\" data-placeholder=\"+1\">+1</p>\n\t\t<img class=\"arrow\" src=\"/static/img/new/dropdown-arrow-gray.svg\" alt=\"\">\n\t\t<input type=\"hidden\" name=\"phone_country_code\" class=\"dropdown-selection required valid\" id=\"phone_country_code\" autocomplete=\"off\" value=\"United Sta"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "Select an option",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Select an option",
+    "html": "<div class=\"preview-box\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" aria-controls=\"source-dropdown-options\">\n\t\t<p class=\"text\" data-placeholder=\"Select an option\">Select an option</p>\n\t\t<img class=\"arrow\" src=\"/static/img/new/dropdown-arrow-gray.svg\" alt=\"\">\n\t\t<input type=\"hidden\" name=\"source\" class=\"dropdown-selection required\" id=\"source-dropdown\" autocomplete=\"off\" style=\"\">\n\t</div>"
+   }
+  ]
+ }
+]

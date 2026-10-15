@@ -1,0 +1,254 @@
+[
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobpostings/Multi-Asset-Analyst_R-02099/jobapplications",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\",\"sessionId\":\"616da28e-6ff2-4935-a956-6eb01a7941c4\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/emailaddress",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/emailAddress\"}],\"definitions\":{\"emailAddress\":{\"required\":[\"emailAddress\"],\"additionalProperties\":false,\"properties\":{\"emailAddress\":{\"hidden\":false,\"label\":\"Email\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a970fe7834e60000\",\"descriptor\":\"Drop Off on My Information page for PineBridge Campus Site: Multi Asset Analyst\",\"jobApplicationApplyPage\":{\"descriptor\":\"My Information\",\"id\":\"240f3666b68210001e640fc335541649\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/phonenumber",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/phoneNumber\"}],\"definitions\":{\"phoneNumber\":{\"required\":[\"phoneType\",\"countryPhoneCode\",\"phoneNumber\"],\"additionalProperties\":false,\"properties\":{\"phoneType\":{\"hidden\":false,\"label\":\"Phone Device Type\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pinebridge/values/phone/deviceTypes\",\"order\":\"a\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"extension\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/emailaddress",
+  "status": 200,
+  "body": "{\"id\":\"e7e706978a4d1001a9800d4d4ef70000\",\"emailAddress\":\"delgado@alumni.usc.edu\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/phonenumber",
+  "status": 200,
+  "body": "{\"id\":\"e7e706978a4d1001a980104e6a1c0000\",\"descriptor\":\"+1 970-366-8832 (Mobile)\",\"phoneNumber\":\"(970) 366-8832\",\"countryPhoneCode\":{\"descriptor\":\"United States of America (+1)\",\"id\":\"db8d3ca6446c11de98360015c5e6daf6\"},\"phoneType\":{\"descriptor\":\"Mobile\",\"id\":\"8cea03c1ce581070996eb191623c396a\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/source",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"sourcePopulatedFromUrl\":false,\"source\":{\"id\":\"d8e6fa4cdca91008c0a58d5a69c2d7ef\",\"descriptor\":\"LinkedIn\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/address",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0521001a972d209c1460000\",\"descriptor\":\"63 Cherry Ct\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"},\"addressLine1\":\"63 Cherry Ct\",\"postalCode\":\"81647\",\"city\":\"New Castle\",\"countryRegion\":{\"id\":\"a83d6eabae3b49718c4ce09eeb66fd0b\",\"descriptor\":\"Colorado\",\"name\":\"Colorado\",\"alpha2Code\":\"CO\"},\"fullyComposedAddress\":\"63 Cherry Ct&#xa;New Castle, CO 81647&#xa;United States of America\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/name",
+  "status": 200,
+  "body": "{\"legalName\":{\"id\":\"fbfe95c3d0521001a972d63d7d920000\",\"descriptor\":\"Brian Delgado-Ortega\",\"lastName\":\"Delgado-Ortega\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"},\"firstName\":\"Brian\",\"preferredName\":false,\"fullyComposedName\":\"Brian Delgado-Ortega\",\"deferToLegalName\":false},\"preferredName\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/initialize",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"required\":[\"attachments\"],\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"r"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a970fe7834e60000\",\"descriptor\":\"Drop Off on My Experience page for PineBridge Campus Site: Multi Asset Analyst\",\"jobApplicationApplyPage\":{\"descriptor\":\"My Experience\",\"id\":\"240f3666b68210001e640fce58ae164a\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/attachments",
+  "status": 200,
+  "body": "{\"diagnosis\":\"clean\",\"containsMacros\":false,\"id\":\"oms-attachments/c7a1362a-efb8-4449-bdae-09af87b58c26\",\"contentType\":{\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\",\"descriptor\":\"application/pdf - mime_pdf\"},\"fileLength\":65152,\"fileName\":\"briandelgado_resume.pdf\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/skills",
+  "status": 200,
+  "body": "{\"skills\":[{\"id\":\"CANDIDATE_SKILL_ITEM-3-566389\",\"descriptor\":\"Excel\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/resumeattachments",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"attachments\":[{\"id\":\"fbfe95c3d0529001a97475d6f4e40000\",\"descriptor\":\"briandelgado_resume.pdf\",\"file\":\"oms-attachments/c7a1362a-efb8-4449-bdae-09af87b58c26\",\"fileLength\":65152,\"fileName\":\"briandelgado_resume.pdf\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"}}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a970fe7834e60000\",\"descriptor\":\"Drop Off on Primary External Questionnaire page for PineBridge Campus Site: Multi Asset Analyst\",\"jobApplicationApplyPage\":{\"descriptor\":\"Primary External Questionnaire\",\"id\":\"240f3666b68210001e640fd1cc44164b\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/questionnaireresponse?type=primary",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9790715f0940000\",\"descriptor\":\"Response for Additional Applicant Questions - V3 -2025\",\"href\":\"http://balance-prod.env.az1.cust.pdx.wd:19010/internalapi/ef/v1/pinebridge/questionnaireResponseContexts/e7e706978a4d1001a986470fe0d00000/questionnaireResponses/fbfe95c3d0529001a9790715f0940000\",\"questionnaireAnswers\":[{\"id\":\"fbfe95c3d0529001a97908495ee10002\",\"descriptor\":\"No\",\"href\":\"http://balance-prod.env.az1.cust.pdx.wd:19010/internalapi/ef/v1/pinebridge/questionnaireAnswers/fbfe95c3d0529001a97908495ee10002\",\"questionMultipleChoiceAnswer\":{\"descriptor\":\"No (Gov't Employmen"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/termsandconditions",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/termsAndConditions\"}],\"definitions\":{\"termsAndConditions\":{\"required\":[\"acceptTermsAndAgreements\"],\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"acceptTermsAndAgreements\":{\"hidden\":false,\"label\":\"Yes, I have read and consent to the terms and conditions\",\"readOnly\":false,\"type\":\"boolean\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/personalInfoUS\"}],\"definitions\":{\"personalInfoUS\":{\"additionalProperties\":false,\"properties\":{\"veteranStatus\":{\"hidden\":true,\"label\":\"\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pinebridge/values/country/veteranStatuses\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"hispanicOrLatino\":{\"hidden\":true,\"label\":\"\",\"readOnly\":false,\"type\":\"boolean\"},\"ethnicity\":"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a970fe7834e60000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for PineBridge Campus Site: Multi Asset Analyst\",\"jobApplicationApplyPage\":{\"descriptor\":\"Voluntary Disclosures\",\"id\":\"240f3666b68210001e640fdc1cca164e\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"ethnicity\":{\"descriptor\":\"Hispanic or Latino (United States of America)\",\"id\":\"8cea03c1ce581070999ab31182143a2c\"},\"gender\":{\"descriptor\":\"Male\",\"id\":\"8cea03c1ce581070999b43cfe7dc3a7d\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/termsandconditions",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a9705e0000a60000\",\"acceptTermsAndAgreements\":true}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/common/pinebridge/questionnaire/98314caf892c100134d3bdd3acaa0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"98314caf892c100134d3bfa03fa40007\",\"98314caf892c100134d3bfa03fa40006\",\"98314caf892c100134d3bfa03fa40005\",\"98314caf892c100134d3bfa03fa40004\",\"98314caf892c100134d3bf06a96a0008\",\"98314caf892c100134d3bf06a96a0003\",\"98314caf892c100134d3be6d2b95000a\",\"98314caf892c100134d3be6d2b950006\",\"98314caf892c100134d3be6d2b950003\",\"98314caf892c100134d3bdd3acaa0001\",\"98314caf892c100134d3bfa03fa40002\",\"98314caf892c100134d3bf06a96a0002\",\"98314caf892c100134d3be6d2b950008\",\"98314caf892c100134d3be6d2b950001\"],\"properties\":{\"98314caf892c100134d3bfa03fa40007\":{\"hidden"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"required\":[\"attachments\"],\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"r"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/termsandconditions",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/termsAndConditions\"}],\"definitions\":{\"termsAndConditions\":{\"required\":[\"acceptTermsAndAgreements\"],\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"acceptTermsAndAgreements\":{\"hidden\":false,\"label\":\"Yes, I have read and consent to the terms and conditions\",\"readOnly\":false,\"type\":\"boolean\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/cxs/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/personalInfoUS\"}],\"definitions\":{\"personalInfoUS\":{\"additionalProperties\":false,\"properties\":{\"veteranStatus\":{\"hidden\":true,\"label\":\"\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pinebridge/values/country/veteranStatuses\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"hispanicOrLatino\":{\"hidden\":true,\"label\":\"\",\"readOnly\":false,\"type\":\"boolean\"},\"ethnicity\":"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/package/fbfe95c3d0529001a9705e0000a60000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"fbfe95c3d0529001a970fe7834e60000\",\"descriptor\":\"Drop Off on Review page for PineBridge Campus Site: Multi Asset Analyst\",\"jobApplicationApplyPage\":{\"descriptor\":\"Review\",\"id\":\"240f3666b68210001e640fe614891651\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pinebridge.wd5.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pinebridge/jobapplication/fbfe95c3d0529001a9705e0000a60000/selfidentify",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/selfIdentifiedDisabilityData\"}],\"definitions\":{\"selfIdentifiedDisabilityData\":{\"required\":[\"disabilityForm\"],\"additionalProperties\":false,\"properties\":{\"disabilityStatus\":{\"hidden\":false,\"label\":\"Please check one of the boxes below:\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pinebridge/values/disabilityForms/statuses\",\"order\":\"e\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}"
+ }
+]

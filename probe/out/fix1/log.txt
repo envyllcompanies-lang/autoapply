@@ -1,0 +1,83 @@
+[16:27:30] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[16:27:31] mail: logged in to delgado@alumni.usc.edu OK
+[16:27:31] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[16:27:31] === probe fix1: 6 forms, fill only, nothing is submitted ===
+[16:27:33] ACCOUNT_PASSWORD meets Workday's usual rules
+[16:27:33] Accounts: ON (password set: True, email set: True, create in probe: True)
+[16:27:33] → [greenhouse] (url) @ (url)  https://job-boards.greenhouse.io/embed/job_app?for=samsara&token=7624120
+[16:27:46]       step 1: 25 fields (19 required)
+[16:27:46]       ? unanswered: 'AI Policy for Interviewers*' kind=combobox options=['Yes', 'No']
+[16:27:46]       ? unanswered: 'If you are based in the US, what is your veteran status? *' kind=combobox options=['I am a protected veteran', 'I am not a protected veteran', 'I prefer to self describe', "I don't wish to answer"]
+[16:27:46]     ✗ Unanswerable: can't truthfully answer required: AI Policy for Interviewers*; If you are based in the US, what is your veteran status? *
+[16:27:46] → [greenhouse] Business Development Specialist @ jensenhughes  https://job-boards.greenhouse.io/jensenhughes/jobs/5417015008
+[16:28:00]       step 1: 31 fields (21 required)
+[16:28:18]     = dry_run (form filled; not submitted)
+[16:28:18] → [greenhouse] Accounting Coordinator @ janestreet  https://job-boards.greenhouse.io/janestreet/jobs/8631912002
+[16:28:23]       step 1: 12 fields (8 required)
+[16:28:25]     = dry_run (form filled; not submitted)
+[16:28:25] → [workday] Marine Claims Analyst @ starrcompanies  https://starrcompanies.wd1.myworkdayjobs.com/careers/job/399-Park-Avenue-New-York-NY/Marine-Claims-Analyst_JR4454
+[16:28:29]       (opening Workday's application form directly)
+[16:28:33]       (account page: creating the account / signing in)
+[16:28:35]       account: signing in on starrcompanies.wd1.myworkdayjobs.com
+[16:29:58]       (Workday has not drawn the form yet: loading it again)
+[16:30:05]       1/6 My Information: 15 fields (12 required)
+[16:30:15]       2/6 My Experience: 18 fields (12 required)
+[16:30:34]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[16:30:44]       writer: groq: free daily limit reached (back in 27 min)
+[16:30:45]       3/6 Application Questions: 6 fields (6 required)
+[16:30:54]       (writer answered 'Please select locations you are willing to relocate to.*' -> 'Denver, CO')
+[16:30:54]       (ticked Denver, CO for 'Please select locations you are willing to relocate to.*')
+[16:30:54]       Application Questions (try 2): Workday said ['Error: The field Work Authorization is required and must have a value.', 'Error: The field Please select locations you are willing to relocate to. is required and must have a value.', 'Error-Work Authorization The field Work Authorization is required and must have a value. Error-Please select locations you are willing to relocate to. The field Please se']; redoing ['399 Park Avenue-New York, NY', 'Atlanta, GA', 'Boston, MA', 'Canada', 'Carpinteria, CA', 'Charlotte, NC', 'Chicago, IL', 'Dallas, TX']
+[16:31:08]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[16:31:17]       5/6 Self Identify: 7 fields (1 required)
+[16:31:22]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[16:31:29]       Review: ready to submit (dry run stops here)
+[16:31:29]     = dry_run (form filled; not submitted)
+[16:31:30] → [workday] Multi Asset Analyst @ pinebridge  https://pinebridge.wd5.myworkdayjobs.com/pinebridge_campus_site/job/New-York/Multi-Asset-Analyst_R-02099
+[16:31:34]       (opening Workday's application form directly)
+[16:31:44]       1/5 My Information: 13 fields (8 required)
+[16:31:50]       2/5 My Experience: 2 fields (1 required)
+[16:32:05]       (writer answered 'Are you a citizen of the country where this job is located?*' -> 'Yes')
+[16:32:06]       (writer answered 'Have you applied to any position(s) at PineBridge in the las' -> 'No')
+[16:32:06]       3/5 Application Questions: 13 fields (10 required)
+[16:32:18]       4/5 Voluntary Disclosures: 3 fields (1 required)
+[16:32:27]       Review: ready to submit (dry run stops here)
+[16:32:27]     = dry_run (form filled; not submitted)
+[16:32:27] → [workday] RE Analyst, Portfolio Management @ tiaa  https://tiaa.wd1.myworkdayjobs.com/Search/job/New-York-NY-USA/RE-Analyst--Portfolio-Management_R260800557-1
+[16:32:31]       (opening Workday's application form directly)
+[16:32:39]       (account page: creating the account / signing in)
+[16:32:39]       account: signing in on tiaa.wd1.myworkdayjobs.com
+[16:32:49]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:33:11]       account: it had gone through
+[16:33:14]       account: signing in on tiaa.wd1.myworkdayjobs.com
+[16:33:23]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:33:48]       account: it had gone through
+[16:33:50]       account: signing in on tiaa.wd1.myworkdayjobs.com
+[16:33:53]       account: sign-in refused; Workday says: nothing
+[16:34:08]       account: sign-in refused on tiaa.wd1.myworkdayjobs.com; resetting the password through your email
+[16:34:10]       account: no button to send the reset email was found
+[16:34:10]       account: no reset email came, so this email probably has no account on tiaa.wd1.myworkdayjobs.com: creating one
+[16:34:40]       account: creating one on tiaa.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:34:52]       account: created
+[16:34:54]       account: signing in on tiaa.wd1.myworkdayjobs.com
+[16:35:10]       1/5 My Information: 18 fields (11 required)
+[16:35:19]       2/5 My Experience: 12 fields (8 required)
+[16:35:37]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[16:35:45]       ! could not pick an option in 'Field of Study' (wanted 'Industrial Engineering'): left as it was
+[16:36:00]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[16:36:15]       ! could not pick an option in 'Field of Study' (wanted 'Industrial Engineering and Operations Re'): left as it was
+[16:36:23]       ! could not pick an option in 'Field of Study' (wanted 'Systems Engineering'): left as it was
+[16:36:31]       ! could not pick an option in 'Field of Study' (wanted 'Operations Research'): left as it was
+[16:36:40]       ! could not pick an option in 'Field of Study' (wanted 'Engineering'): left as it was
+[16:36:44]       (My Experience took 85s)
+[16:36:49]       3/5 Application Questions: 15 fields (15 required)
+[16:37:13]       4/5 Voluntary Disclosures: 10 fields (8 required)
+[16:37:23]       Review: ready to submit (dry run stops here)
+[16:37:23]     = dry_run (form filled; not submitted)
+[16:37:23] === probe done ===
+[16:37:23]    1 greenhouse   (url)              (url)                                    steps=0 empty_req=0 | Unanswerable: can't truthfully answer required: AI Policy for Interviewers*; If you are based in the US, what is your ve
+[16:37:23]    2 greenhouse   jensenhughes       Business Development Specialist          steps=1 empty_req=10 | dry_run
+[16:37:23]    3 greenhouse   janestreet         Accounting Coordinator                   steps=1 empty_req=0 | dry_run
+[16:37:23]    4 workday      starrcompanies     Marine Claims Analyst                    steps=7 empty_req=2 | dry_run
+[16:37:23]    5 workday      pinebridge         Multi Asset Analyst                      steps=4 empty_req=4 | dry_run
+[16:37:23]    6 workday      tiaa               RE Analyst, Portfolio Management         steps=4 empty_req=2 | dry_run

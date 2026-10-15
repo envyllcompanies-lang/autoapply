@@ -1,0 +1,20 @@
+[
+ {
+  "m": "POST",
+  "url": "https://c.spl.greenhouse.io/com.snowplowanalytics.snowplow/tp2",
+  "status": 200,
+  "body": "ok"
+ },
+ {
+  "m": "GET",
+  "url": "https://my.greenhouse.io/users/self?job_post_id=7624120",
+  "status": 401,
+  "body": "{\"error\":\"You need to sign in or sign up before continuing.\"}"
+ },
+ {
+  "m": "GET",
+  "url": "https://my.greenhouse.io/users/self?job_post_id=7624120",
+  "status": 401,
+  "body": "{\"error\":\"You need to sign in or sign up before continuing.\"}"
+ }
+]
