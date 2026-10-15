@@ -600,6 +600,20 @@ def _icims_apply(page):
     return False
 
 
+def direct_url(job) -> str:
+    """Where to open the application. A Greenhouse job shown on the employer's own career page ('...?gh_jid=123') often
+    loads its form late or not at all there (43 'no application form found' in a week: Samsara, GLG, ASM ...); the same
+    form is served by Greenhouse itself, and the job's record names the Greenhouse board."""
+    url = getattr(job, "apply_url", "") or getattr(job, "url", "")
+    key = str(getattr(job, "key", "") or "")
+    m = re.search(r"[?&#]gh_jid=(\d+)", url)
+    if m and "greenhouse.io" not in url and key.startswith("greenhouse:"):
+        board = key.split(":")[1]
+        if re.fullmatch(r"[\w-]+", board):
+            return f"https://job-boards.greenhouse.io/embed/job_app?for={board}&token={m.group(1)}"
+    return url
+
+
 def open_form(page, url: str) -> str:
     """Open the page and get to the actual application form, whichever way the link is built: the form itself, a description page
     with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added.

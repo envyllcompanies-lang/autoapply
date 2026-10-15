@@ -15,7 +15,7 @@ import os
 import sys
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -372,6 +372,65 @@ def group_pick_checks():
     print("ok  tick-box groups: sanctions lists 'none', daytime shifts, email/text contact, career growth; never demographics or agreements")
 
 
+def skip_fix_checks():
+    """Questions that ended applications 2026-10-08 to 10-15, answered from what you said once (settings.yaml)."""
+    from autoapply.brain import Brain
+    from autoapply import submit as S
+    from autoapply.sources import Job
+    cfg = {"facts": {"email": "a@b.org", "phone": "(970) 555-0101", "full_name": "Pat Doe", "sms_consent": "yes", "gender": "male",
+                     "restrictive_agreements": "No", "outside_business": "No", "earliest_start_date": "Two weeks after an offer",
+                     "willing_to_relocate": "Yes", "relocation_ok_locations": ["denver, co", "los angeles, ca"], "open_to_onsite": "yes",
+                     "race_ethnicity": "Hispanic or Latino", "major": "Industrial and Systems Engineering",
+                     "linkedin": "https://www.linkedin.com/in/\u200e-pat-doe-123/"},
+           "consent": {"sign_attestations": True, "ai_screening_consent": True}}
+    b = Brain(cfg, {"name": "Pat Doe"}, ".", lambda *a: None)
+    b.writer = None
+    job = Job("greenhouse", "acme", "1", "Operations Analyst", "Denver, CO", "https://x", "https://x", "Operations role.")
+
+    def ans(label, kind="combobox", opts=None, **kw):
+        f = {"id": "f1", "kind": kind, "label": label, "required": True, "options": opts or [], "sel": "", "key": "", **kw}
+        if kind in ("radio", "checkbox_group"):
+            f["option_ids"] = [f"o{i}" for i in range(len(opts or []))]
+        return b.map_fields(job, [f], "")["answers"].get("f1")
+    yn = ["Select One", "Yes", "No"]
+    check(ans("Did you sign a Non-Compete Agreement with your previous/current employer?*", opts=yn) == "No", "non-compete signed? No")
+    check(ans("If required, would you be willing to sign a non-solicitation agreement?*", opts=yn) != "No", "'willing to sign' is not answered No")
+    check(ans("Are you currently involved in any other business activities as a proprietor, partner or officer?*", opts=yn) == "No", "outside business: No")
+    check(ans("I certify, under penalty of perjury, that all of the above information is true and complete.*", opts=yn) == "Yes", "truth certification: Yes")
+    check(ans("MUTUAL AGREEMENT TO ARBITRATE CLAIMS I understand ...*", opts=["Select One", "I confirm that I have read", "I do not agree"]) is None,
+          "arbitration is never agreed to")
+    check(ans("I understand and agree that Acme does not permit the use of AI tools in my application*", opts=["I agree"]) is None,
+          "a rule that applicants must not use AI is never confirmed")
+    check(ans("Prologis uses HiredScore, an AI-enabled tool, to review applications.*", opts=["Select One", "I agree to HiredScore (AI) being used", "I opt out of HiredScore (AI)"])
+          == "I agree to HiredScore (AI) being used", "an employer's AI screening: consent")
+    check(ans("I certify that the answers given herein are true and complete.*", kind="wddate") == date.today().strftime("%m/%d/%Y"), "sign-off date: today")
+    check(ans("If offered a position, what is your availability to start?*", kind="wddate") == (date.today() + timedelta(days=14)).strftime("%m/%d/%Y"),
+          "start date box: two weeks from today")
+    check(ans("How would you prefer we contact you for scheduling moving forward?*", opts=["Select One", "Email & Text Message", "Email"]) == "Email & Text Message",
+          "contact preference")
+    check(ans("Please select your gender.*", opts=["Select One", "F", "M", "U"]) == "M", "gender drawn as F / M / U")
+    check(ans("Are you authorized to work in the United States? This does not include practical training.*", opts=yn) not in ("No",),
+          "a note after the question ('does not include') is not read as a negated question")
+    check(ans("Contact Number", kind="number") == "9705550101", "contact number box")
+    check(ans("Additional Documents *", kind="file") == "RESUME", "required 'additional documents': the résumé")
+    check(isinstance(ans("Field of Study", kind="wdprompt"), list), "Workday field of study: nearest majors tried in turn")
+    check(b.facts["linkedin"] == "https://www.linkedin.com/in/-pat-doe-123", f"invisible marks removed from the LinkedIn address: {b.facts['linkedin']}")
+    # race boxes where your answer is not one of them: the decline box
+    q = "Race*"
+    F = [{"id": f"r{i}", "kind": "checkbox_single", "label": l + " (United States of America)", "question": q, "required": True}
+         for i, l in enumerate(["Asian", "White", "Two or More Races", "Not Specified"])]
+    got = b.map_fields(job, F, "")["answers"]
+    check([f["label"] for f in F if got.get(f["id"]) is True] == ["Not Specified (United States of America)"], f"race boxes without your answer: decline ({got})")
+    # location tick boxes: your places
+    L = [{"id": f"l{i}", "kind": "checkbox_single", "label": l, "question": "Please select the locations you are interested in*", "required": True}
+         for i, l in enumerate(["Atlanta, GA", "Denver, CO", "Los Angeles, CA", "Miami, FL"])]
+    got = b.map_fields(job, L, "")["answers"]
+    check(sorted(f["label"] for f in L if got.get(f["id"]) is True) == ["Denver, CO", "Los Angeles, CA"], f"location boxes: your places ({got})")
+    j2 = Job("greenhouse", "samsara", "7624120", "Ops", "Denver", "https://www.samsara.com/x?gh_jid=7624120", "https://www.samsara.com/x?gh_jid=7624120")
+    check(S.direct_url(j2) == "https://job-boards.greenhouse.io/embed/job_app?for=samsara&token=7624120", "a Greenhouse job on the employer's page opens on Greenhouse")
+    print("ok  skipped-job fixes: agreements, sign-offs, AI screening consent, start dates, contact, gender letters, race decline, places, LinkedIn, Greenhouse forms")
+
+
 def letter_switch_checks():
     from autoapply.brain import Brain
     for setting, req, opt in ((True, True, True), (False, False, False), ("required", True, False), ("all", True, True)):
@@ -717,7 +776,7 @@ def preflight_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
+    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, skip_fix_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
                account_record_checks, site_mail_checks, workday_helper_checks, preflight_checks):
         try:
             fn()

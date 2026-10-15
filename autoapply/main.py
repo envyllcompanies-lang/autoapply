@@ -28,7 +28,7 @@ from .ats import detect as detect_ats
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
 REQUEUE_VERSION = __version__      # every new build retries, once, the jobs that earlier bugs set aside
-FIXED_FLAG = "2026-10-06-f"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
+FIXED_FLAG = "2026-10-15-a"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -975,7 +975,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         continue
                     db.update(job.key, apply_url=job.apply_url)
                     host = (urlparse(job.apply_url).netloc or "").lower()
-                landing = sub.open_form(page, job.apply_url) or ""   # check for blockers before spending tokens on tailoring
+                landing = sub.open_form(page, sub.direct_url(job)) or ""   # check for blockers before spending tokens on tailoring
                 try:
                     page_txt = page.inner_text("body")[:12000]
                 except Exception:
