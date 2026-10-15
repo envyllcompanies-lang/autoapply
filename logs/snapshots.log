@@ -1,739 +1,3 @@
-=== 2026-10-15 14:38:38  skipped  Pricing & Portfolio Analyst @ Mobotrex LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4547251
-stage: page 4
-why: stuck on step 4; page says: ['LinkedIn Profile URL\nMust be a valid LinkedIn URL. Example: https://www.linkedin', 'Salary Range\nMust be a valid currency amount', 'Must be a valid currency amount', 'End Date (required)\nEnd Date must be after Start Date']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPho
-  text: Pricing & Portfolio Analyst
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} filled>
-  text: Must be a valid LinkedIn URL. Example: https://www.linkedin.com/in/yourname
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills (required)
-  <input:text #info.skills empty>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-  text: Include your last seven (7) years of employment history, starting with the most recent and working backward in time. Incomplete information 
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities (required)
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference?
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-    (choice) --
-    (choice) Yes
-    (choice) No
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type (required)
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-label: City (required)
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State (required)
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-15 14:39:41  skipped  Assistant Demand Planner @ Haddad Brands
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/1514520
-stage: page 3
-why: stuck on step 3; page says: ['LinkedIn Profile URL\nMust be a valid LinkedIn URL. Example: https://www.linkedin', 'Salary Range\nMust be a valid currency amount']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before?
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} filled>
-  text: Must be a valid LinkedIn URL. Example: https://www.linkedin.com/in/yourname
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} empty>
-label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-15 14:39:48  blocked  Business Operations Analyst - Data @ wehrtyou
-url: https://www.hudsonrivertrading.com/careers/job/
-why: no application form found on page
-# www.hudsonrivertrading.com
-# Performing security verification
-  text: This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.
-
-=== 2026-10-15 14:43:16  skipped  Material Planner Buyer @ SCHLUTER SYSTEMS L.P
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4579838
-stage: page 3
-why: stuck on step 3; page says: ['LinkedIn Profile URL\nMust be a valid LinkedIn URL. Example: https://www.linkedin']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; infoLinkedIn:; info.howDidYouHearAboutUs-wr
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before?
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} filled>
-  text: Must be a valid LinkedIn URL. Example: https://www.linkedin.com/in/yourname
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee Google St
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-  text: List positions starting with most recent.
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities (required)
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: Did you Graduate?
-label: Degree Obtained
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: SCHLUTER SYSTEMS L.P: Privacy Policy
-  [button] 
-
-=== 2026-10-15 14:48:02  not sent  Implementation Analyst @ fieldguide
-url: https://jobs.ashbyhq.com/fieldguide/90964e57-fed2-457b-9119-dd09f4249d35/application
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Where did you hea', 'Missing entry for required field: Where did you hear about Fieldguide?', 'Missing entry for required field: Where did you hear about Fieldguide?', 'Where did you hear about Fieldguide?']
-# Implementation Analyst
-# Location
-  text: San Francisco, CA or Remote (USA); Salt Lake City, Utah
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: Estimated base salary $84K – $99K • Offers Equity
-  text: Fieldguide’s Total Rewards philosophy is to ensure holistic and competitive compensation that not only attracts and retains top talent but a
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-! Your form needs corrections Missing entry for required field: Where did you hear about Fieldguide?
-label: Legal Name
-  <input:text #_systemfield_name required filled>
-label: Preferred Name
-  <input:text #e82aca6f-4593-47fb-9502-67e870bfc53b filled>
-label: Preferred Pronouns
-  <input:text #c55762b7-31be-4353-b6d5-9daf5858941d filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #ef88d304-f0cd-44fb-945f-b2110ed4eddf required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Do you have financial audit experience?
-  <input:radio #2784048e-3704-447f-a77a-3071bd591496_631c1e06-a852-46ea-9526 question-answered>
-label: Yes
-  <input:radio #2784048e-3704-447f-a77a-3071bd591496_631c1e06-a852-46ea-9526 question-answered>
-label: No
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Cover Letter
-  <input:file #db221035-d4f6-4551-8395-ddbc30afb5f2 no-file>
-  [button] Upload File
-label: LinkedIn Profile
-  <input:text #f5b9ffb8-e4fd-42fc-83aa-a597c99d9d21 required filled>
-label: Portfolio/Personal Website
-  <input:text #21243c24-1ee9-413a-b1d1-fe0305bfe504 filled>
-label: If you were referred to Fieldguide, who were you referred by?
-  <input:text #7f20328d-afa1-49dd-958c-1401e834628f filled>
-label: Will you now or in the future require visa sponsorship for employment in the United States?
-  text: We evaluate the need for immigration and sponsorship support on a case-by-case basis, considering individual circumstances and the requireme
-  <input:radio #2784048e-3704-447f-a77a-3071bd591496_21d80b01-b0ad-4fc1-8a9c question-answered>
-  <input:radio #2784048e-3704-447f-a77a-3071bd591496_21d80b01-b0ad-4fc1-8a9c question-answered>
-label: Where did you hear about Fieldguide?
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Company website / Careers page
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: LinkedIn
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Indeed
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Glassdoor
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Otta
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Referral from a current employee
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: I know someone at Fieldguide (not a formal referral)
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Recruiter reached out to me
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Word of mouth
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Social media or online community (e.g. Instagram, Reddit, Slack group)
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Event or webinar
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Google search
-  <input:checkbox #2784048e-3704-447f-a77a-3071bd591496_cebb57a3-dd3f-4845-857a question-unanswered>
-label: Other
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Fieldguide provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientat
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_race- question-answered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_veter question-answered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_veter question-answered>
-label: I am not a protected veteran
-  <input:radio #d414aac7-60d1-4605-8978-0fe08d266a3e__systemfield_eeoc_veter question-answered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application
-
-=== 2026-10-15 14:55:35  skipped  Energy Operations Analyst @ Environ Energy
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4531654
-stage: page 4
-why: stuck on step 4; page says: ['Available to Start (required)\nAvailable to Start (date) is required', 'LinkedIn Profile URL\nMust be a valid LinkedIn URL. Example: https://www.linkedin', 'Salary Range\nMust be a valid currency amount', 'Must be a valid currency amount']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellP
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} filled>
-  text: Must be a valid LinkedIn URL. Example: https://www.linkedin.com/in/yourname
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Responsibilities (required)
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference? (required)
-label: Supervisor Email Address (required)
-  <input:text #workHistory.supervisorEmail.0 {workHistorySupervisorEmail0} filled>
-label: Supervisor Name (required)
-  <input:text #workHistory.supervisorName.0 {workHistorySupervisorName0} filled>
-label: Supervisor Phone Number (required)
-  <input:text #workHistory.supervisorPhone.0 {workHistorySupervisorPhone0} filled>
-label: Supervisor Position (required)
-  <input:text #workHistory.supervisorPosition.0 {workHistorySupervisorPosition0} filled>
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  <input:text #workHistory.supervisorEmail.1 {workHistorySupervisorEmail1} filled>
-  <input:text #workHistory.supervisorName.1 {workHistorySupervisorName1} filled>
-  <input:text #workHistory.supervisorPhone.1 {workHistorySupervisorPhone1} filled>
-  <input:text #workHistory.supervisorPosition.1 {workHistorySupervisorPosition1} filled>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  <input:text #workHistory.supervisorEmail.2 {workHistorySupervisorEmail2} filled>
-  <input:text #workHistory.supervisorName.2 {workHistorySupervisorName2} filled>
-  <input:text #workHistory.supervisorPhone.2 {workHistorySupervisorPhone2} filled>
-  <input:text #workHistory.supervisorPosition.2 {workHistorySupervisorPosition2} filled>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  <input:text #workHistory.supervisorEmail.3 {workHistorySupervisorEmail3} filled>
-  <input:text #workHistory.supervisorName.3 {workHistorySupervisorName3} filled>
-  <input:text #workHistory.supervisorPhone.3 {workHistorySupervisorPhone3} filled>
-  <input:text #workHistory.supervisorPosition.3 {workHistorySupervisorPosition3} filled>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-15 14:56:43  skipped  BUSINESS ANALYST @ OCHIN
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4531589
-stage: page 3
-why: stuck on step 3; page says: ['Available to Start (required)\nAvailable to Start (date) is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: Innovation & Improvement Projects
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: OCHIN is an equal opportunity employer. This means that OCHIN is dedicated to providing equal employment opportunities to all employees and 
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: How did you hear about us? Glassdoor/Indeed Diversityjobs.com Employee Referral Facebook I am an OCHIN Employe
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study (required)
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
 === 2026-10-15 14:56:59  blocked  Business Systems Analyst @ Veseris
 url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
 why: no application form found on page
@@ -5977,4 +5241,697 @@ label: I am not a protected veteran
   <input:radio #58c56972-02e7-4133-a5eb-51e0162c5388__systemfield_eeoc_veter question-answered>
 label: I decline to self-identify for protected veteran status
   [button] Submit Application
+
+=== 2026-10-15 19:14:12  not sent  Associate Fire Protection Engineer @ jensenhughes
+url: https://job-boards.greenhouse.io/jensenhughes/jobs/5442409008
+stage: page 1
+why: the form was rejected, not sent; page errors: ['Country*', 'Select...', 'This field is required.']
+# Associate Fire Protection Engineer
+  text: Denver, Colorado, United States
+  [button] Apply Now
+  text: Throughout our worldwide network of experts, clients and communities, we are renowned for our leadership in fire protection engineering – a 
+  text: Our engineers and consultants collaborate to solve complex safety and security challenges, ensuring our clients can protect what matters mos
+  text: At Jensen Hughes, we believe that creating and sustaining a culture of trust, integrity and professional growth starts with putting our peop
+  text: Our wide range of Global Employee Networks connect people from across the organization, supporting career development and providing forums f
+  text: Jensen Hughes has exciting career opportunities available for Associate Fire Protection Engineers in the following offices: Allen, TX, Austi
+  text: Working with us offers an exciting range of opportunities to develop your career within a supportive and diverse team that always strives to
+  text: You will be given early responsibility and the opportunity to progress rapidly. Jensen Hughes encourage all Engineers to achieve professiona
+  text: Perform professional-level fire protection engineering services such as life safety code consulting, sprinkler design, fire alarm design, pe
+  text: Develop plans, specifications, and inspection reports as needed on assigned tasks to see that these items are complete, accurate and in acco
+  text: Assist in the resolution of design problems by performing field investigations or inspections, detailed design work, and detailed checking o
+  text: Identify applicable codes and standards to reference in evaluating how to respond to inquiries.
+  text: Conduct and document basic building code analyses, egress analyses, fire detection and alarm systems reviews, smoke control systems reviews,
+  text: Apply engineering calculations including size required, means of egress, maximum allowable building area, sprinkler system water supplies an
+  text: Submit progress reports to Project Managers and Project Leaders.
+  text: Position may involve some CADD document preparation/production.
+  text: Read, analyze, and interpret general business periodicals, professional journals, technical procedures, or governmental regulations.
+  text: Requirements and Qualifications
+  text: Bachelor's degree (B.S.) or higher in Fire Protection, Mechanical, Civil or Architectural Engineering or other related engineering field
+  text: Demonstrate effective written and oral communication skills to write reports, business correspondence, presentations and procedure manuals, 
+  text: Passion advancing the science of safety and in exceeding our client expectations.
+  text: Please note that the salary range provided is a good faith estimate for the position at the time of posting and not a guarantee of compensat
+  text: Jensen Hughes offers a competitive total rewards package, which includes a retirement plan, healthcare coverage, and a broad range of other 
+  text: Jensen Hughes is an Equal Opportunity Employer. Qualified candidates will receive consideration for employment without regard to race, color
+  text: Interested in building your career at Jensen Hughes? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  text: <file>
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: School*
+  text: Acharya Nagarjuna University
+  <input:text #school--0 required empty>
+  [button] 
+  [button] 
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  [button] 
+label: Discipline*
+  text: Industrial Arts & Carpentry
+  <input:text #discipline--0 required empty>
+  [button] 
+  [button] 
+label: End date year*
+  <input:number #end-year--0 required filled>
+  [button] Add another
+label: Middle Name (if applicable)
+  <input:text #question_18866935008 filled>
+label: Street Address*
+  <input:text #question_18866936008 required filled>
+label: City*
+  <input:text #question_18866937008 required filled>
+label: State / Province / District*
+  <input:text #question_18866938008 required filled>
+  text: Select is focused ,type to refine list, press Down to open the menu,
+  <input:text #question_18866939008 required INVALID empty>
+  [button] 
+  <input required empty>
+label: Zip Code*
+  <input:text #question_18866940008 required filled>
+label: LinkedIn Profile
+  <input:text #question_18866941008 filled>
+label: List any professional licensure or certifications you may have.
+  <input:text #question_18866942008 empty>
+label: Will you now or in the future require sponsorship to work in the country this position is located in?*
+  <input:text #question_18866943008 required empty>
+  [button] 
+  [button] 
+label: Are you at least 18 years of age/?*
+  <input:text #question_18866944008 required empty>
+  [button] 
+  [button] 
+label: Are you subject to a non-compete agreement?*
+  <input:text #question_18866945008 required empty>
+  [button] 
+  [button] 
+label: Are you open to relocation?*
+  <input:text #question_18866946008 required empty>
+  [button] 
+  [button] 
+label: If you are open to relocate, where specifically?
+  <input:text #question_18866947008 filled>
+label: Jensen Hughes has office locations throughout the United States. Please select up to 3 of your top desired sta
+  <input:checkbox #question_18866948008[]_45498085008 required question-answered>
+label: Arizona
+  <input:checkbox #question_18866948008[]_45498086008 required question-answered>
+label: California
+  <input:checkbox #question_18866948008[]_45498087008 required question-answered>
+label: Colorado
+  <input:checkbox #question_18866948008[]_45498088008 required question-answered>
+label: Connecticut
+  <input:checkbox #question_18866948008[]_45498089008 required question-answered>
+label: Florida
+  <input:checkbox #question_18866948008[]_45498090008 required question-answered>
+label: Georgia
+  <input:checkbox #question_18866948008[]_45498091008 required question-answered>
+label: Illinois
+  <input:checkbox #question_18866948008[]_45498092008 required question-answered>
+label: Indiana
+  <input:checkbox #question_18866948008[]_45498093008 required question-answered>
+label: Kansas
+  <input:checkbox #question_18866948008[]_45498094008 required question-answered>
+label: Maryland
+  <input:checkbox #question_18866948008[]_45498095008 required question-answer
+
+=== 2026-10-15 19:15:05  not sent  Business Development Specialist @ jensenhughes
+url: https://job-boards.greenhouse.io/jensenhughes/jobs/5417015008
+stage: page 1
+why: the form was rejected, not sent; page errors: ['Country*', 'Select...', 'This field is required.']
+# Business Development Specialist
+  text: Los Angeles, California, United States; San Diego, California, United States
+  [button] Apply Now
+  text: Throughout our worldwide network of experts, clients and communities, we are renowned for our leadership in fire protection engineering – a 
+  text: Our engineers and consultants collaborate to solve complex safety and security challenges, ensuring our clients can protect what matters mos
+  text: At Jensen Hughes, we believe that creating and sustaining a culture of trust, integrity and professional growth starts with putting our peop
+  text: Our wide range of Global Employee Networks connect people from across the organization, supporting career development and providing forums f
+  text: Jensen Hughes is looking for a motivated and well-spoken inside sales representative to join our global Fire and Life Safety team in our Sou
+  text: Our goal is to hire a candidate that is eager to expand our Fire & Life Safety and our Process Safety service lines through existing and new
+  text: San Diego or Los Angeles, California
+  text: Develop sales opportunities by exploring and identifying potential clients, soliciting new clients, building rapport with clients,
+  text: Following up on leads and opportunities
+  text: Conveying clear and detailed explanations of our services.
+  text: Collaborating with technical colleagues in preparing proposals, and members of our marketing team preparing qualifications.
+  text: Communicating with existing and potential clients and making outbound calls to potential customers.
+  text: Responding to customers' questions, coordinating with technical colleagues, and sending additional information as needed
+  text: Creating/maintaining relationships, while managing existing client accounts, supporting retaining existing services for renewal, and identif
+  text: Support the Business Development and Operations teams with a general understanding of the current pipeline and help the team move proposals 
+  text: Regularly maintain sales data of current and potential clients, pipeline, orders, and projects/contracts up for renewal.
+  text: Explaining the value of our services and how they meet the prospect/existing client’s needs,
+  text: Knowing when to engage operations and subject matter experts to support business development
+  text: Keeping up with industry trends and updates, as well as staying informed about competing firms as and identifying risks within existing clie
+  text: Proactive planning and support of annual growth initiatives
+  text: Requirements and Qualifications
+  text: Bachelor's degree preferred, and/or two (2) plus years’ experience as an Inside Sales Representative.
+  text: Proficient in Microsoft Word, Excel, PowerPoint, and Outlook required.
+  text: Experience with Microsoft Dynamics 365 preferred.
+  text: Experience with government contract tracking systems such as GovWin, Deltek, or similar platforms used to monitor and research federal, stat
+  text: Experience working for a professional services firm preferred.
+  text: General knowledge and confidence using computer databases and menu-driven reports.
+  text: Self-starter who works well independently and is self-motivated, with a bias for action.
+  text: Project coordination and organizational skills, attention to detail, and initiative to follow through.
+  text: Consistently perform at a high level in fast-paced and high-pressure environments.
+  text: Work with minimal supervision and in a team environment.
+  text: Exceptional Customer Service and strong listening skills.
+  text: Able to look at things multidimensionally and able to come to a unique and innovative plan or solution if a problem is identified.
+  text: Please note that the salary range provided is a good faith estimate for the position at the time of posting and not a guarantee of compensat
+  text: Jensen Hughes offers a competitive total rewards package, which includes a retirement plan, healthcare coverage, and a broad range of other 
+  text: Jensen Hughes is an Equal Opportunity Employer. Qualified candidates will receive consideration for employment without regard to race, color
+  text: Interested in building your career at Jensen Hughes? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required filled>
+label: Last Name*
+  <input:text #last_name required filled>
+label: Email*
+  <input:text #email required filled>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input:tel #phone required filled>
+label: Location (City)*
+  text: <city>, Colorado, United States
+  <input:text #candidate-location required empty>
+  [button] 
+  [button] Locate me
+  text: <file>
+  [button] 
+  [button] Attach
+label: Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: School
+  <input:text #school--0 empty>
+  [button] 
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  [button] 
+label: Discipline*
+  text: Industrial Arts & Carpentry
+  <input:text #discipline--0 required empty>
+  [button] 
+  [button] 
+label: End date year*
+  <input:number #end-year--0 required filled>
+  [button] Add another
+label: Middle Name (if applicable)
+  <input:text #question_18595754008 filled>
+label: Street Address*
+  <input:text #question_18595755008 required filled>
+label: City*
+  <input:text #question_18595756008 required filled>
+label: State / Province / District*
+  <input:text #question_18595757008 required filled>
+  text: Select is focused ,type to refine list, press Down to open the menu,
+  <input:text #question_18595758008 required INVALID empty>
+  [button] 
+  <input required empty>
+label: Zip Code*
+  <input:text #question_18595759008 required filled>
+label: LinkedIn Profile
+  <input:text #question_18595760008 filled>
+label: List any professional licensure or certifications you may have.
+  <input:text #question_18595761008 empty>
+label: Will you now or in the future require sponsorship to work in the country this position is located in?*
+  <input:text #question_18595762008 required empty>
+  [button] 
+  [button] 
+label: Are you at least 18 years of age/?*
+  <input:text #question_18595763008 required empty>
+  [button] 
+  [button] 
+label: Are you subject to a non-compete agreement?*
+  <input:text #question_18595764008 required empty>
+  [button] 
+  [button] 
+label: Are you open to relocation?*
+  <input:text #question_18595765008 required empty>
+  [button] 
+  [button] 
+label: If you are open to relocate, where specifically?
+  <input:text #question_18595766008 filled>
+label: Do you have any relatives or close personal relationships with current employees of Jensen Hughes? *
+  <input:text #question_18595767008 required empty>
+  [button] 
+  [button] 
+label: If yes, please provide the n
+
+=== 2026-10-15 19:18:37  not sent  Implementation Analyst @ fieldguide
+url: https://jobs.ashbyhq.com/fieldguide/90964e57-fed2-457b-9119-dd09f4249d35/application
+stage: page 1
+why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Where did you hea', 'Missing entry for required field: Where did you hear about Fieldguide?', 'Missing entry for required field: Where did you hear about Fieldguide?', 'Where did you hear about Fieldguide?']
+# Implementation Analyst
+# Location
+  text: San Francisco, CA or Remote (USA); Salt Lake City, Utah
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: Estimated base salary $84K – $99K • Offers Equity
+  text: Fieldguide’s Total Rewards philosophy is to ensure holistic and competitive compensation that not only attracts and retains top talent but a
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+! Your form needs corrections Missing entry for required field: Where did you hear about Fieldguide?
+label: Legal Name
+  <input:text #_systemfield_name required filled>
+label: Preferred Name
+  <input:text #e82aca6f-4593-47fb-9502-67e870bfc53b filled>
+label: Preferred Pronouns
+  <input:text #c55762b7-31be-4353-b6d5-9daf5858941d filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone Number
+  <input:tel #ef88d304-f0cd-44fb-945f-b2110ed4eddf required filled>
+label: Location
+  <input filled>
+  [button] 
+label: Do you have financial audit experience?
+  <input:radio #202df938-8f53-4ee7-960f-6553c4dd72c0_631c1e06-a852-46ea-9526 question-answered>
+label: Yes
+  <input:radio #202df938-8f53-4ee7-960f-6553c4dd72c0_631c1e06-a852-46ea-9526 question-answered>
+label: No
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace
+label: Cover Letter
+  <input:file #db221035-d4f6-4551-8395-ddbc30afb5f2 no-file>
+  [button] Upload File
+label: LinkedIn Profile
+  <input:text #f5b9ffb8-e4fd-42fc-83aa-a597c99d9d21 required filled>
+label: Portfolio/Personal Website
+  <input:text #21243c24-1ee9-413a-b1d1-fe0305bfe504 filled>
+label: If you were referred to Fieldguide, who were you referred by?
+  <input:text #7f20328d-afa1-49dd-958c-1401e834628f filled>
+label: Will you now or in the future require visa sponsorship for employment in the United States?
+  text: We evaluate the need for immigration and sponsorship support on a case-by-case basis, considering individual circumstances and the requireme
+  <input:radio #202df938-8f53-4ee7-960f-6553c4dd72c0_21d80b01-b0ad-4fc1-8a9c question-answered>
+  <input:radio #202df938-8f53-4ee7-960f-6553c4dd72c0_21d80b01-b0ad-4fc1-8a9c question-answered>
+label: Where did you hear about Fieldguide?
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Company website / Careers page
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: LinkedIn
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Indeed
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Glassdoor
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Otta
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Referral from a current employee
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: I know someone at Fieldguide (not a formal referral)
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Recruiter reached out to me
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Word of mouth
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Social media or online community (e.g. Instagram, Reddit, Slack group)
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Event or webinar
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Google search
+  <input:checkbox #202df938-8f53-4ee7-960f-6553c4dd72c0_cebb57a3-dd3f-4845-857a question-unanswered>
+label: Other
+  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
+  text: Fieldguide provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientat
+  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
+label: Gender
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_gende question-answered>
+label: Male
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_gende question-answered>
+label: Female
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_gende question-answered>
+label: Decline to self-identify
+label: Race
+  text: Native Hawaiian or Other Pacific Islander
+  text: American Indian or Alaska Native
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: Hispanic or Latino
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: White (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: Black or African American (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: Asian (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: American Indian or Alaska Native (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+label: Two or More Races (Not Hispanic or Latino)
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_race- question-answered>
+  text: SELF-IDENTIFICATION OF VETERAN STATUS
+  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
+  text: Recently separated veteran
+  text: Active duty wartime or campaign badge veteran
+  text: Armed forces service medal veteran
+label: Veteran Status
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_veter question-answered>
+label: I identify as one or more of the classifications of protected veteran listed above
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_veter question-answered>
+label: I am not a protected veteran
+  <input:radio #46de47fb-1611-425e-8709-d8d14cba9dbd__systemfield_eeoc_veter question-answered>
+label: I decline to self-identify for protected veteran status
+  [button] Submit Application
+
+=== 2026-10-15 19:19:03  not sent  Financial Analyst, FP&A @ serverobotics
+url: https://jobs.ashbyhq.com/serverobotics/c3597c6d-ba18-4635-a67f-bd06f037465f/application
+stage: page 1
+why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Please select the', "Missing entry for required field: Please select the\xa0 option 'I read this' below", "Missing entry for required field: Please select the\xa0 option 'I read this' below", "Please select the\xa0 option 'I read this' below"]
+# Financial Analyst, FP&A
+# Location
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: $100K – $125K • Offers Equity
+  text: Compensation will vary based on geographic location and level. Leveling, as well as positioning within a level, is determined by a range of 
+! Your form needs corrections Missing entry for required field: Please select the option 'I read this' below
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?
+  [button] Yes
+  [button] No
+  <input:checkbox name=080c43f6-fe3a-4c83-b3f5-6db9da7558aa question-unanswered>
+label: Please select the option 'I read this' below
+  <input:radio #33b3d850-dee8-473d-94e6-88b4b070db4a_8dd7c06a-ffcd-437c-9953 question-unanswered>
+label: I read this
+  <input:radio #33b3d850-dee8-473d-94e6-88b4b070db4a_8dd7c06a-ffcd-437c-9953 question-unanswered>
+label: I did not read this
+label: Location
+  <input filled>
+  [button] 
+  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
+  text: Serve Robotics provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orie
+  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
+label: Gender
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_gende question-answered>
+label: Male
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_gende question-answered>
+label: Female
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_gende question-answered>
+label: Decline to self-identify
+label: Race
+  text: Native Hawaiian or Other Pacific Islander
+  text: American Indian or Alaska Native
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: Hispanic or Latino
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: White (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: Black or African American (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: Asian (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: American Indian or Alaska Native (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+label: Two or More Races (Not Hispanic or Latino)
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_race- question-answered>
+  text: SELF-IDENTIFICATION OF VETERAN STATUS
+  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
+  text: Recently separated veteran
+  text: Active duty wartime or campaign badge veteran
+  text: Armed forces service medal veteran
+label: Veteran Status
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_veter question-answered>
+label: I identify as one or more of the classifications of protected veteran listed above
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_veter question-answered>
+label: I am not a protected veteran
+  <input:radio #1c04bdf9-1ef7-4e3f-8847-36d1ebd91add__systemfield_eeoc_veter question-answered>
+label: I decline to self-identify for protected veteran status
+  [button] Submit Application
+
+=== 2026-10-15 19:24:49  skipped  Reimbursement Specialist @ ivyrehab
+url: https://ivyrehab.wd5.myworkdayjobs.com/ivy_rehab/job/Philadelphia---Remote-PA/Reimbursement-Specialist_JR117900/apply
+stage: Take Assessment
+why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Reimbursement Specialist
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions
+label: completed step 4 of 6
+label: Voluntary Disclosures
+{progressBarActiveStep} current step 5 of 6 Take Assessment
+label: current step 5 of 6
+label: Take Assessment
+label: step 6 of 6
+label: Review
+# Take Assessment
+# Errors Found
+! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
+  [button] Take Assessment {inlineAssessmentButton}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-15 19:43:35  unconfirmed  Contracts Administrator @ wmeimg
+url: https://wmeimg.wd1.myworkdayjobs.com/en-US/wmegrp
+stage: Review
+why: no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://wmeimg.wd1.myworkdayjobs.com/en-US/wmegrp/clientPostData -> 302; POST https://www.myworkday.com/wday/microscope/prelogin/mscp_error_kit_logs -> 202; POST https://wmeimg.wd1.myworkdayjobs.com/wday/cxs/wmeimg/wmegrp/jobs -> 200; page ends: "haracter A numeric character Email Address* Password* Ve
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  <input:text #eezu2 {keywordSearchInput} empty>
+  [button] Search {keywordSearchButton}
+label: Filters
+  [button] Location {distanceLocation}
+  [button] Full/Part-time {employmentType}
+  [button] Job Category {jobFamilyGroup}
+  [button] More {more}
+! Search for Jobs page is loaded
+# Senior IT Program Manager
+  text: CA-Beverly Hills - 9601 Wilshire
+# Head of Data & Data Products
+# Business Affairs Executive, Motion Picture
+# Senior Software Engineer
+# Assistant, Country Music Tour Marketing
+  text: TN-Nashville - 1201 Demonbreun
+# Model Manager
+# Director of Cybersecurity
+# Coordinator, Strategy - EM&A
+# Manager, IMG Models
+# Music Central Assistant - Beverly Hills
+# Music Central Assistant - New York
+# IT Support Engineer
+# Coordinator, Business Affairs Music
+# Vice President, Communications
+# Account Manager, Speaker Logistics
+  text: NY-New York - Park Ave South
+# Agent, Speaker Representation
+# Music Central Assistant - Miami
+# Contracts Administrator
+# Director - Entertainment & Content Strategy
+# Information Manager
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 
+# About Us
+  text: WME Group is a global network of businesses that represent the world’s leading talent, intellectual property and brands.
+  [button] Read More {readMore}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Congratulations!
+  text: Your application has successfully been submitted.
+ {formField-email}
+label: Email Address*
+  <input:text #input-10 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-11 {password} required>
+ {formField-verifyPassword}
+label: Verify New Password*
+  <input:password #input-12 {verifyPassword} required>
+  [button]  {click_filter}
+  [button] Create Account {createAccountSubmitButton}
+  [button] Sign In {signInLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #8dc4abe1-d0e4-4cc8-822a-332c88fcfc7f {beecatcher} empty>
+
+=== 2026-10-15 19:46:00  blocked  PBM Operations Associate @ rightwayhealthcare
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (2 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current Openings at Rightway
+  text: Rightway is a technology and services company radically simplifying healthcare for clients and members. Its care navigation and new-to-the w
+  text: Looking to make an impact? Let's talk!
+  text: Level-up your career by having opportunities at Rightway sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+label: Office
+  <input:text #office-filter empty>
+  [button] 
+# 33 jobs
+# Commercial: Commercial Operations
+  text: Founding Engineer, Commercial Systems
+# Commercial: Consultant Relations
+  text: Director, Consultant Relations
+# Commercial: CS: Navigation
+  text: Client Success Associate, Navigation
+  text: Client Success Manager, Navigation
+# Commercial: CS: PBM
+  text: Senior Manager, Clinical Consulting & Plan Performance
+# Commercial: Enterprise
+# Commercial: Growth
+  text: Director, Strategic Partnerships
+  text: Navigation Solution Consultant
+# Engineering: Data & Analytics
+  text: Data Analyst III, Care Navigation
+# Engineering: Security
+# Engineering: SWE
+# G&A: Finance & Accounting
+# Marketing: Creative Studio
+# Navigation: Clinical COGS
+  text: Registered Nurse (RN), Population Health
+# Navigation: Non-Clinical COGS
+  text: Billing and Claims Specialist
+  text: Customer Support Associate, Healthcare Navigation
+# PBM: Clinical COGS
+  text: Clinical Pharmacist - Specialty
+  text: Clinical Pharmacist- Utilization Management
+# PBM: Non-Clinical COGS
+  text: Pharmacy Technician- Care Team
+  text: Pharmacy Technician, Care Team
+  text: Pharmacy Technician - Care Team (Bilingual)
+  text: Pharmacy Technician - Specialty
+  text: Remote Pharmacy Technician
+  text: Remote Pharmacy Technician (Bilingual)
+# PBM: Operations & Management
+  text: Remote Seasonal Pharmacy Technician
+# Product: Management
+  text: Product Support Specialist
+  text: Senior Product Manager, PBM Platform
+
+=== 2026-10-15 19:58:08  skipped  Recruiting Coordinator @ snapchat
+url: https://snapchat.wd1.myworkdayjobs.com/sourced/job/New-York-New-York/Recruiting-Coordinator_R0047093/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: 3. Did you answer "No" to Question 1 (you are not legally au
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Snap Careers {navigationItem-Snap Careers}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Recruiting Coordinator
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+  text: The information provided in this application must be true, complete, and accurate to the best of the candidate's knowledge. Any misrepresent
+ {formField-29dab01e5e4e1001ee9786e38c090000}
+label: 1. Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee9786e38c090000
+ {formField-29dab01e5e4e1001ee97881725520004}
+label: 2. Will you need Snap to sponsor you for a visa to work legally in the United States, now or in the future (me
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee97881725520004
+ {formField-29dab01e5e4e1001ee97881725520007}
+label: 3. Did you answer "No" to Question 1 (you are not legally authorized to work in the United States) or "Yes" to
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee97881725520007
+ {formField-29dab01e5e4e1001ee978bb44a150005}
+label: Do you currently live in or are you able to relocate to the location this job is advertised in? (Snap may prov
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978bb44a150005
+ {formField-29dab01e5e4e1001ee978c4e4a820002}
+label: This position requires employees to work onsite at the office at least four days per week and the company prov
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978c4e4a820002
+ {formField-29dab01e5e4e1001ee978c4e4a820005}
+label: Can you confirm that you meet the minimum qualification for years of professional work experience for this rol
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978c4e4a820005
+ {formField-29dab01e5e4e1001ee978ce85d2a0000}
+label: Are you a current or former (prior 18 months) employee of EY, PwC, Deloitte or KPMG?*
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0000
+ {formField-29dab01e5e4e1001ee978ce85d2a0003}
+label: Acknowledgement: If there are any changes in the responses provided herein, you will promptly share those upda
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
 
