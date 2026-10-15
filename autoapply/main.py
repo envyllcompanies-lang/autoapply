@@ -975,7 +975,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         continue
                     db.update(job.key, apply_url=job.apply_url)
                     host = (urlparse(job.apply_url).netloc or "").lower()
-                landing = sub.open_form(page, job.apply_url) or ""   # check for blockers before spending tokens on tailoring
+                landing = sub.open_form(page, sub.direct_url(job)) or ""   # check for blockers before spending tokens on tailoring
                 try:
                     page_txt = page.inner_text("body")[:12000]
                 except Exception:

@@ -600,6 +600,20 @@ def _icims_apply(page):
     return False
 
 
+def direct_url(job) -> str:
+    """Where to open the application. A Greenhouse job shown on the employer's own career page ('...?gh_jid=123') often
+    loads its form late or not at all there (43 'no application form found' in a week: Samsara, GLG, ASM ...); the same
+    form is served by Greenhouse itself, and the job's record names the Greenhouse board."""
+    url = getattr(job, "apply_url", "") or getattr(job, "url", "")
+    key = str(getattr(job, "key", "") or "")
+    m = re.search(r"[?&#]gh_jid=(\d+)", url)
+    if m and "greenhouse.io" not in url and key.startswith("greenhouse:"):
+        board = key.split(":")[1]
+        if re.fullmatch(r"[\w-]+", board):
+            return f"https://job-boards.greenhouse.io/embed/job_app?for={board}&token={m.group(1)}"
+    return url
+
+
 def open_form(page, url: str) -> str:
     """Open the page and get to the actual application form, whichever way the link is built: the form itself, a description page
     with an Apply button (same tab, new tab, or a link), a form embedded in an iframe, or a listing that needs '/apply' added.
@@ -807,13 +821,6 @@ def _already_answered(f: dict) -> bool:
     if k == "file":
         return bool(f.get("has_file"))
     return bool(f.get("has_value"))
-
-
-def _dbg(m):
-    import os
-    os.makedirs("probe/out", exist_ok=True)
-    with open("probe/out/debug.txt", "a") as fh:
-        fh.write(m + "\n")
 
 
 def extract(page) -> list[dict]:
@@ -1094,13 +1101,11 @@ def _set_text(el, val: str):
     except Exception:
         pass
     el.fill(val, timeout=5000)
-    _dbg(f"DEBUG text {val!r} -> {el.input_value(timeout=1000)!r}")
     try:
         if val.strip() and not el.input_value(timeout=1000).strip():
             el.click(timeout=2000)                    # a masked box (a date as MM/DD/YYYY) that throws away pasted text: type it
             el.press_sequentially(re.sub(r"\D", "", val) if re.fullmatch(r"\d{1,4}[/.-]\d{1,2}[/.-]\d{2,4}", val.strip()) else val, delay=35)
             el.press("Tab")
-            _dbg(f"DEBUG typed again -> {el.input_value(timeout=1000)!r}")
     except Exception:
         pass
 
@@ -1246,17 +1251,6 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
     if i is not None:
         _click_option(page, opts[i])
         page.wait_for_timeout(250)
-    _dbg(f"DEBUG dropdown {f.get('label','')[:40]!r} <- {val!r}; choices seen {texts[:5]}; shows now {shown()!r}")
-    if not is_btn and not shown() and "state" in f.get("label", "").lower():
-        try:
-            el.click(timeout=2000); el.fill("", timeout=2000); el.press_sequentially("Colo", delay=60); page.wait_for_timeout(1200)
-            dump = page.evaluate("""() => { const out = [];
-              for (const c of document.querySelectorAll('[id$="dropdown-list-container"], [role="listbox"], [class*="menu"]'))
-                out.push(c.id + ' | ' + c.className + ' | ' + c.outerHTML.slice(0, 1500));
-              return out.slice(0, 6).join(' #### '); }""")
-            _dbg("DEBUG list: " + dump[:5000])
-        except Exception as e:
-            _dbg(f"DEBUG list failed: {e}")
     if _list_open(page):
         _close_list(page)
     if is_btn:

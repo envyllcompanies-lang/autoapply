@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from .sources import norm_location, level_title, remote_in_text
@@ -38,6 +38,7 @@ PROMPT_RX = re.compile(
 
 # Things the bot never agrees to or certifies on the person's behalf (the job is skipped instead)
 LEGAL_RX = re.compile(r"arbitrat|waive|jury|non-?compete|non-?solicit|indemnif|release of claims|class action|liquidated|"
+                      r"legal claims?|statute of limitations|limitations? period|(bring|file) (any )?(claim|suit|lawsuit|action)|dispute resolution|"
                       r"invention assignment|intellectual property assignment|forfeit", re.I)
 AI_POLICY_RX = re.compile(r"\bai\b.{0,25}\b(policy|guidelines?|statement)\b|\b(policy|guidelines?)\b.{0,40}\b(use of |using )?(ai|artificial intelligence)\b|"
                           r"use of (ai|artificial intelligence) (in|during) (the )?(application|hiring|interview)", re.I)
@@ -236,7 +237,11 @@ class Brain:
         f.setdefault("last_name", " ".join(parts[1:]))
         if not f.get("location_text") and f.get("city"):
             f["location_text"] = ", ".join(x for x in (f.get("city"), f.get("state")) if x)
-        li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", str(f.get("linkedin") or ""), re.I)
+        # an address copied from the LinkedIn app can carry an invisible direction mark (U+200E) that forms reject as
+        # 'not a valid LinkedIn profile URL' (Jane Street, 8 applications): invisible characters are removed
+        raw_li = re.sub(r"[\u200b-\u200f\u202a-\u202e\u2060\ufeff]|%E2%80%8[B-F]|%E2%80%A[A-E]|%E2%81%A0|%EF%BB%BF", "",
+                        str(f.get("linkedin") or ""), flags=re.I)
+        li = re.search(r"linkedin\.com/in/([A-Za-z0-9_%-]+)", raw_li, re.I)
         if li:           # forms accept the plain profile address only, not one with a page or tracking after the name
             f["linkedin"] = f"https://www.linkedin.com/in/{li.group(1)}"
         if f.get("school") and not f.get("school_type"):     # Paylocity's 'School Type' list: University / College / ...
@@ -554,7 +559,10 @@ class Brain:
             if f.get("kind") == "checkbox_single" and f.get("question"):
                 groups.setdefault(f["question"], []).append(f)
         for q, members in groups.items():
-            if len(members) < 2 or not any(m.get("required") or m["id"] in missing for m in members):
+            if not any(m.get("required") or m["id"] in missing for m in members):
+                continue
+            if len(members) < 2 and not re.fullmatch(r"\W*(yes|i agree|agree|i accept|accept|i consent|consent|confirm|acknowledge/confirm|i acknowledge)\W*\*?\W*",
+                                                       str(members[0].get("label", "")), re.I):
                 continue
             if any(answers.get(m["id"]) is True for m in members):
                 continue                                   # something is ticked already
@@ -595,6 +603,30 @@ class Brain:
             elif nones and re.search(r"citizen|national|countr|employed by|served|military|government|relative|apply to you|"
                                      r"any of the following|following (apply|statements)|affiliat|sanction|embargo|export", low):
                 pick = nones[:1]
+            elif re.search(r"locat|office|cit(y|ies)|where .{0,30}work|site", low) and not re.search(r"relocat", low):
+                got = self._place_options(list(lab.values()))
+                pick = [i for i, t in lab.items() if t in got]
+            elif re.search(r"\byes\b", " ".join(lab.values()).lower()) and any(re.match(r"\W*no\b", t, re.I) for t in lab.values()) or \
+                    re.search(r"relocat", low) or len(members) == 1:
+                # Yes / No (or a relocation list) drawn as tick boxes: answered like the same question with buttons
+                opts_q = list(lab.values()) if len(members) > 1 else ["Yes", "No"]
+                pseudo = {"id": "grp", "kind": "radio", "label": q, "options": opts_q, "required": True}
+                ctx = dict(company=self._company_name(self._job) if self._job else "", role=getattr(self._job, "title", ""),
+                           today=date.today().strftime("%m/%d/%Y"))
+                try:
+                    val = self._answer(pseudo, "", ctx)
+                    if val is None:
+                        val = self._plain(pseudo)
+                    if val is None:
+                        val = self._llm_fill(pseudo)
+                except Exception:
+                    val = None
+                val = val[0] if isinstance(val, list) and val else val
+                if isinstance(val, str):
+                    if len(members) == 1:
+                        pick = [members[0]["id"]] if re.match(r"\W*yes\b", val, re.I) else []
+                    else:
+                        pick = [i for i, t in lab.items() if t == val][:1]
             if not pick:
                 continue
             for i in pick:
@@ -983,6 +1015,12 @@ class Brain:
                 if got is not None or not only_opts:
                     return got
 
+        ap = self._approved(f, low, kind, opts, has_opts)
+        if ap is not _UNSET:
+            return ap
+        ap = self._everyday(f, low, kind, opts, has_opts)
+        if ap is not _UNSET:
+            return ap
         sp = self._special(f, low, kind, opts, has_opts)
         if sp is not _UNSET:
             return sp
@@ -991,18 +1029,32 @@ class Brain:
         if kind == "wddate":
             if re.match(r"\W*(today.s )?date\W*(signed)?\W*\*?\W*$|.*(signature|signed on)", lab):
                 return date.today().strftime("%m/%d/%Y")          # the signature date on a self-identification form
-            if re.search(r"start|available|begin", lab):
+            if re.search(r"start|availab|begin|able to work", lab):
                 v = self.facts.get("earliest_start_date_value") or ""
+                if not v:                      # 'Two weeks after an offer': the date two weeks from today
+                    m = re.search(r"(\d+|one|two|three|four)\s+weeks?", str(self.facts.get("earliest_start_date") or ""), re.I)
+                    if m:
+                        n = {"one": 1, "two": 2, "three": 3, "four": 4}.get(m.group(1).lower(), None) or int(m.group(1))
+                        v = (date.today() + timedelta(days=7 * n)).strftime("%m/%d/%Y")
+                    elif re.search(r"immediate|now|asap", str(self.facts.get("earliest_start_date") or ""), re.I):
+                        v = date.today().strftime("%m/%d/%Y")
                 return v or None
             return None
         if kind == "checkbox_single" and re.search(r"\(united states( of america)?\)\s*\*?\s*$", lab) and \
                 re.search(r"american indian|alaska|asian|black|african|hispanic|latin|pacific islander|hawaiian|white|two or more|"
-                          r"not specified|decline|prefer not|self.?identify|wish to", lab):
+                          r"not specified|not indicated|not listed|decline|prefer not|self.?identify|wish to", lab):
             low = NOT_HISPANIC.sub(" ", lab)           # 'Asian (Not Hispanic or Latino)' is not a Hispanic choice
             want = str(self.facts.get("race_ethnicity") or "")      # Workday draws race/ethnicity as one box per choice
-            if re.search(r"not specified|decline|prefer not|(do not|don.t) wish|not to (self.?identify|answer|disclose)", low):
-                return "" if want else True
             key = next((rx for rx in RACE_KEYS if re.search(rx, want, re.I)), None) or (re.escape(_norm(want).split()[0]) if _norm(want) else None)
+            # the other boxes of this question: when none of them is your answer (a 'Race' list after a separate Hispanic /
+            # Latino question), the decline box is ticked, or Workday holds the page with 'Race is required' (17 in a week)
+            sibs = NOT_HISPANIC.sub(" ", getattr(self, "_siblings", {}).get(f.get("question") or "", ""))
+            listed = bool(key and re.search(key, sibs))
+            dec = r"not specified|not indicated|decline|prefer not|(do not|don.t) wish|not to (self.?identify|answer|disclose)"
+            if re.search(dec, low):
+                return "" if (want and listed) else True
+            if re.search(r"not listed", low):            # 'my race is not listed': only when there is no decline box
+                return "" if (want and listed) or re.search(dec, sibs) else True
             return True if key and re.search(key, low) else ""
         if kind == "checkbox_single" and re.match(r"\W*(yes, i have a disability|no, i (do not|don.t) have a disability|"
                                                   r"i (do not|don.t) (want|wish) to (answer|self.identify))", lab):
@@ -1154,6 +1206,170 @@ class Brain:
         return self._write(f, low, kind)
 
     _MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+    # an employer's own AI screening tool (not the applicant using AI): HiredScore, automated decision-making, AI matching
+    _AI_SCREEN = re.compile(r"hiredscore|automated decision|\badmt\b|automated tools?|ai[- ](powered|assisted|enabled|based|driven)|"
+                            r"(may|might|will|to) (use|utili[sz]e|leverage|employ)\W+(\w+\W+){0,4}(ai|artificial intelligence|automated)|"
+                            r"opt[- ]?(in|out)\W+(\w+\W+){0,6}(ai|artificial intelligence|automated)|(ai|artificial intelligence)\W+(\w+\W+){0,4}"
+                            r"(screen|review|evaluat|assess|match|rediscover|talent)", re.I)
+    _APPLICANT_AI = re.compile(r"(you|applicants?|candidates?)\W+(\w+\W+){0,3}(may not|must not|cannot|can.t|should not|shouldn.t|are not "
+                               r"(permitted|allowed)|do not|don.t|did not|didn.t) (use|rely)|not permit the use|does not permit|"
+                               r"authenticity|in your own words|(did|have) you use|use of (ai|artificial intelligence|generative) (tools )?"
+                               r"(in|during|to|for) (your|the|this) (application|responses?|answers?|interview)", re.I)
+    _SIGN_Q = re.compile(r"certify|under penalty of perjury|true,? (and |accurate and )?(correct|accurate|complete)|"
+                         r"acknowledg|privacy (policy|notice|statement)|applicant privacy|equal opportunity employer|"
+                         r"e-?signature|electronic signature|handwritten signature|by (checking|signing|typing|clicking)|"
+                         r"\bi (hereby )?(verify|declare|attest|affirm)\b|we will collect|personal (data|information) (we|will|may)", re.I)
+    _YES_OPT = re.compile(r"^\W*(yes\b|i (hereby )?(agree|acknowledge|accept|confirm|consent|certify|understand|have read|verify|attest|affirm)|"
+                          r"agree|acknowledge|accept|confirm|consent|acknowledge/confirm)", re.I)
+    _NO_OPT = re.compile(r"\b(do not|don.t|not|decline|disagree|refuse|withhold)\b|opt[- ]?out|^\W*no\b", re.I)
+    _RESTRICT_Q = re.compile(r"non-?compete|non-?solicit|restrict(ion|ive)\W+(\w+\W+){0,8}(agreement|covenant|activit)|"
+                             r"agreements?\W+(\w+\W+){0,14}(restrict|prevent|prohibit|limit)|contractual obligations?\W+(\w+\W+){0,4}"
+                             r"(prevent|restrict|limit|prohibit)|(agreement|contract)s? with (your|any) (current|former|prior|previous)", re.I)
+    _OUTSIDE_BIZ_Q = re.compile(r"other business (activit|interest)|outside (business|employment|activit)|as (a )?(sole )?proprietor|"
+                                r"non-employment positions?|officer of a board|board (member|seat|position)|director of (a|another) (company|corporation)", re.I)
+
+    def _approved(self, f, low, kind, opts, has_opts):
+        """Answers you settled once for every form (settings.yaml facts / consent, 2026-10-15): no restrictive agreements, no
+        outside business, sign-offs that your answers are true (and e-signatures and their date), privacy / EEO notices,
+        and consent to an employer's own AI screening tool. Arbitration and other waivers are never agreed to; a policy that
+        applicants must not use AI is never confirmed (the writer is AI)."""
+        cons = self.cfg.get("consent") or {}
+        q = low[:600]
+        real = [o for o in opts if not re.match(r"\W*(select|choose|--|please select)", str(o), re.I)]
+
+        def pick(rx_yes, rx_no=None):
+            got = next((o for o in real if rx_yes.search(o) and not (rx_no and rx_no.search(o))), None)
+            if got is None:
+                return _UNSET
+            return [got] if kind == "checkbox_group" else got
+
+        if f.get("question") and kind == "checkbox_single":
+            return _UNSET                      # one box of a group: the group is decided as a whole (_pick_in_groups)
+        # did you sign a non-compete / are you bound by a restrictive agreement -> No (never 'would you be willing to sign')
+        rf = str(self.facts.get("restrictive_agreements") or "").strip().lower()
+        if rf.startswith("n") and self._RESTRICT_Q.search(q) and not re.search(r"(willing|agree|able) to (sign|enter|be bound)|would you (sign|be willing)|if (required|hired|offered)", q):
+            if has_opts:
+                got = pick(re.compile(r"^\W*no\b|n/?a\W.{0,20}no such|not applicable|i (do not|don.t) have|none", re.I))
+                if got is not _UNSET:
+                    return got
+            elif kind in ("text", "textarea") and len(q) < 300:
+                return "No"
+        ob = str(self.facts.get("outside_business") or "").strip().lower()
+        if ob.startswith("n") and self._OUTSIDE_BIZ_Q.search(q) and has_opts:
+            got = pick(re.compile(r"^\W*no\b", re.I))
+            if got is not _UNSET:
+                return got
+        if LEGAL_RX.search(q) or HUMAN_CHECK_RX.search(q):
+            return _UNSET                      # arbitration / waivers: never agreed to here
+        # an employer's AI screening tool: consent
+        if cons.get("ai_screening_consent") and self._AI_SCREEN.search(q) and not self._APPLICANT_AI.search(q):
+            if has_opts:
+                return pick(re.compile(r"\b(i )?(consent|agree|opt[- ]?in|participate|allow|accept)\b|^\W*yes\b", re.I),
+                            re.compile(r"\b(do not|don.t|not) (consent|agree|participate|allow)|opt[- ]?out|decline|disagree|refuse", re.I))
+            if kind == "checkbox_single" and not re.search(r"opt[- ]?out|do not|don.t", q[:120]):
+                return True
+            return _UNSET
+        if not cons.get("sign_attestations") or AI_WORDS.search(q) or QUALIFY_CERT_RX.search(q) or \
+                re.search(r"\b(image|likeness|voice|photograph|recording|video|biometric)\b", q):
+            return _UNSET
+        # 'I certify my answers are true' / e-signature / privacy and EEO notices
+        if self._SIGN_Q.search(q) or (has_opts and real and all(re.match(r"\W*(i )?(do not |don.t )?(agree|acknowledge|accept|confirm)", o, re.I) for o in real)):
+            if kind == "wddate" or (kind in ("date", "text") and re.search(r"\bdate\b", str(f.get("label", "")).lower()[-40:])):
+                return date.today().strftime("%m/%d/%Y")          # the date of the sign-off
+            if has_opts:
+                return pick(self._YES_OPT, self._NO_OPT)
+            if kind == "checkbox_single":
+                return True
+            if kind in ("text", "textarea") and re.search(r"signature|sign (here|below)|type your (full )?(legal )?name|full (legal )?name", q):
+                return self.facts.get("full_name") or _UNSET
+            if kind in ("text",) and re.search(r"\binitials?\b", q):
+                n = str(self.facts.get("full_name") or "").split()
+                return "".join(x[0].upper() for x in n) or _UNSET
+        return _UNSET
+
+    def _ok_places(self) -> list[str]:
+        return [str(x).lower().strip() for x in (self.facts.get("relocation_ok_locations") or []) if str(x).strip() and str(x) != "*"]
+
+    def _place_options(self, opts: list[str]) -> list[str]:
+        """The listed places you would work in (your relocation list, matched by city name), and any remote choice."""
+        ok = self._ok_places()
+        city = lambda x: re.split(r",", x)[0].strip()
+        got = [o for o in opts if any(re.search(r"(?<![\w-])" + re.escape(city(x)) + r"(?![\w-])", o.lower()) for x in ok if city(x))]
+        return got or [o for o in opts if re.search(r"\bremote\b|virtual|work from home", o, re.I)]
+
+    def _everyday(self, f, low, kind, opts, has_opts):
+        """Ordinary questions seen on real forms (2026-10-08 to 10-15) that ended applications: how to contact you, where you
+        would work, relocation, whether you can do the job, gender drawn as F / M / U, other-employer questions, a 'contact
+        number' box, a required 'additional documents' upload, an optional links box."""
+        q = low[:600]
+        lab = str(f.get("label", "")).lower()
+        real = [o for o in opts if not re.match(r"\W*(select|choose|--|please select)", str(o), re.I)]
+        one = lambda o: [o] if kind == "checkbox_group" else o
+        if f.get("question") and kind == "checkbox_single":
+            return _UNSET
+        if has_opts and real and re.search(r"(prefer|best way|how (should|would|can|may) we|preferred).{0,40}(contact|reach)|contact (method|preference)", q):
+            sms = re.match(r"y", str(self.facts.get("sms_consent", "")), re.I)
+            both = next((o for o in real if re.search(r"e-?mail", o, re.I) and re.search(r"\btext|sms", o, re.I)), None)
+            mail = next((o for o in real if re.search(r"e-?mail", o, re.I) and not re.search(r"\btext|sms|phone|call", o, re.I)), None)
+            got = (both if sms else None) or mail or both
+            if got:
+                return one(got)
+        if has_opts and real and re.search(r"(location|office|city|cities|site)s?\W+(\w+\W+){0,3}(preference|prefer|interested|would you (like|be willing)|"
+                                            r"(are you )?(open|willing) to work)|(which|what) (location|office|cit(y|ies)|site)s?\b|top location", q):
+            got = self._place_options(real)
+            if got:
+                return got if kind == "checkbox_group" else got[0]
+        if has_opts and real and re.search(r"relocat", q) and any(re.search(r"\b(own|company.s|my) expense|consider relocating|not willing", o, re.I) for o in real):
+            if str(self.facts.get("willing_to_relocate", "")).lower().startswith("y"):
+                got = next((o for o in real if re.search(r"^\W*yes\b.{0,60}(right circumstances|own expense)", o, re.I)), None) or \
+                      next((o for o in real if re.match(r"\W*yes\b", o, re.I)), None)
+                if got:
+                    return one(got)
+        if has_opts and real and re.search(r"(able|unable) to perform|essential functions", q):
+            got = next((o for o in real if re.search(r"\bi am able\b|\bam able to perform|^\W*yes\b(?!.{0,15}unable)", o, re.I)
+                        and not re.search(r"unable|not able", o, re.I)), None)
+            if got and (re.search(r"reason to believe you are unable|unable to perform", q) is None or re.search(r"able", got, re.I)):
+                return one(got)
+        if has_opts and real and re.search(r"willing to work on-?site|work (on-?site|in (the )?office)", q) and \
+                any(re.match(r"\W*yes,? i am willing", o, re.I) for o in real):
+            if str(self.facts.get("open_to_onsite", "yes")).lower().startswith("y") and self._location_ok():
+                return one(next(o for o in real if re.match(r"\W*yes,? i am willing", o, re.I)))
+        if has_opts and real and (re.search(r"\bgender\b|\bsex\b", q) or
+                                  {_norm(o) for o in real} <= {"female", "male", "non binary", "nonbinary", "f", "m", "u", "x", "other"}):
+            if {_norm(o) for o in real} <= {"f", "m", "u", "x"}:
+                g = str(self.facts.get("gender") or "").strip().lower()[:1]
+                got = next((o for o in real if _norm(o) == g), None) if g in ("m", "f") else next((o for o in real if _norm(o) == "u"), None)
+                if got:
+                    return one(got)
+            elif not re.search(r"\bgender\b|\bsex\b", q):
+                return self._demo_option("gender", self.facts.get("gender"), real, kind) or _UNSET
+        if has_opts and real and re.search(r"(currently|presently|now)\W+(\w+\W+){0,2}(a |an )?(full[- ]time|part[- ]time|[\w/-]+[ /-])*employee (or [\w ]+ )?of", q) and \
+                not re.search(r"\b(were|have you ever|previously|formerly)\b", q) and \
+                not re.search(re.escape(str(self.facts.get("current_company") or "~none~").lower()), q):
+            got = next((o for o in real if re.match(r"\W*no\b", o, re.I)), None)
+            if got:
+                return one(got)
+        if kind in ("number", "tel", "text") and re.fullmatch(r"\W*(contact|phone|mobile|cell)( phone)? (number|no\.?)\W*\*?\W*", lab):
+            digits = re.sub(r"\D", "", str(self.facts.get("phone") or ""))[-10:]
+            if digits:
+                return digits if kind == "number" else self.facts.get("phone")
+        if kind == "wdprompt" and re.match(r"\W*(field of study|major|area of study|discipline|concentration)\W*\*?\W*$", lab) and self.facts.get("major"):
+            # Workday's own list may not have your exact major: the nearest ones are tried in turn (a required Field of
+            # Study left empty held 'My Experience' with 'Field of Study is required')
+            major = str(self.facts["major"])
+            near = [major]
+            if re.search(r"industrial", major, re.I):
+                near += ["Industrial Engineering", "Industrial and Systems Engineering", "Industrial Engineering and Operations Research",
+                         "Systems Engineering", "Operations Research", "Engineering"]
+            elif re.search(r"engineer", major, re.I):
+                near += ["Engineering"]
+            return near + ["Other"]
+        if kind == "url" and re.search(r"additional links?|other links?|links?\b", lab) and re.search(r"optional", lab):
+            return self.facts.get("linkedin") or ""
+        if kind == "file" and f.get("required") and re.fullmatch(r"\W*(additional|other|supporting) (documents?|attachments?|files?)\W*\*?\W*", lab):
+            return "RESUME"                    # a required 'additional documents' box: your résumé (never a transcript or sample)
+        return _UNSET
 
     def _month_year(self, txt: str):
         m = re.search(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{4})", txt or "")
@@ -1327,7 +1543,8 @@ class Brain:
                 got = next((o for o in opts if neg.search(o)), None)       # you live in Colorado, which is not on their list
             if got:
                 return [got] if kind == "checkbox_group" else got
-        if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
+        qpart = low.split("?")[0] if "?" in low[:400] else low
+        if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", qpart)) and NEG_TOPIC_RX.search(low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
         if optionish and re.search(r"investigative consumer report|consumer report|background (check|screening|investigation)|"
                                    r"criminal (background|history) check|employment verification", low) and \
