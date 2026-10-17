@@ -4774,3 +4774,65 @@ A
 [14:39:07] Summary: 1 applied. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-17.md
 [14:39:07]   by site  workday: 1 applied
 [14:39:09] Summary emailed to delgado@alumni.usc.edu
+[15:00:22] === autoapply run (LIVE) build 2026-10-15-a ===
+[15:00:22] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[15:00:24] mail: logged in to delgado@alumni.usc.edu OK
+[15:02:13] Discovering jobs…
+[15:02:13] Job search already ran at 12:08 (searches run every 3 h): this run only applies
+[15:02:13]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[15:02:13] 0 open roles, 0 new
+[15:02:13] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.9 min)
+[15:02:13] 947 jobs queued: 7 already matched to your résumé, 940 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 399 now
+[15:02:14] Time for this run: 50 min in all (12382 of 1850 free Actions minutes used this month)
+[15:02:15] Accounts: ON (delgado@alumni.usc.edu)
+[15:02:15] → Environmental Compliance Specialist @ aquaamerica (score 12, match 78%)
+[15:02:19]       (opening Workday's application form directly)
+[15:02:24]       (account page: creating the account / signing in)
+[15:02:24]       account: creating one on aquaamerica.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:02:31]       account: Workday answered with its sign-in form and no message: signing in
+[15:02:31]       account: signing in on aquaamerica.wd5.myworkdayjobs.com
+[15:02:46]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[15:02:53]       account: pressing Sign In once more
+[15:03:02]       (writer answered 'Have you been employed previously by Essential Utilities, In' -> 'No')
+[15:03:02]       1/6 My Information: 16 fields (12 required)
+[15:03:08]       2/6 My Experience: 16 fields (7 required)
+[15:03:38]       (writer answered 'Pay desired:*' -> '$70,000‑$80,000 annually')
+[15:03:39]       (writer answered 'Have you achieved a High School Diploma or G.E.D.?*' -> 'No')
+[15:03:39]       (writer answered 'Desired Pay Rate*' -> 'Annually/Yearly')
+[15:03:39]       3/6 Application Questions: 14 fields (13 required)
+[15:03:52]       (writer answered 'Pay desired:*' -> '$75,000')
+[15:03:52]       Application Questions (try 2): Workday said ['Error: The number entered is too large.', 'Error-Pay desired: The number entered is too large.']; redoing ['Pay desired:*']
+[15:03:58]       4/6 Voluntary Disclosures: 5 fields (4 required)
+[15:04:04]       5/6 Self Identify: 7 fields (6 required)
+[15:04:05]       ! NOT FILLED: 'Employee ID (if applicable)' (wanted 'N/A')
+[15:04:11]       Review: submitting
+[15:04:15]     ✓ applied (2.0 min)
+[15:04:21] → Bilingual Pre-Underwriting and Closing Specialist @ Colorado Enterprise Fund Inc (score 16, match 62%)
+[15:04:39]       step 1: 26 fields (17 required)
+[15:04:39]       (writer answered 'County' -> 'N/A')
+[15:05:15]       ! NOT FILLED: 'Available to Start (required)' (wanted 'October 24, 2026')
+[15:05:59]       step 2: 98 fields (46 required)
+[15:05:59]       (writer answered 'County' -> 'N/A')
+[15:05:59]       (writer answered 'County' -> 'N/A')
+[15:06:00]       writer: groq: free daily limit reached (back in 4 min)
+[15:06:00]       writer unavailable: groq: free daily limit reached (back in 4 min)
+[15:06:00]       ? unanswered: 'County' kind=text options=[]
+[15:06:00]       ? unanswered: 'County' kind=text options=[]
+[15:06:00]       ? unanswered: 'County' kind=text options=[]
+[15:06:00]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[15:06:00] → NYC Sustainability Help Center Associate @ rfcuny (score 18, match 60%)
+[15:06:03]       (opening Workday's application form directly)
+[15:06:06]       (account page: creating the account / signing in)
+[15:06:08]       account: signing in on rfcuny.wd108.myworkdayjobs.com
+[15:07:31]       (Workday has not drawn the form yet: loading it again)
+[15:07:36]       1/6 My Information: 17 fields (12 required)
+[15:07:44]       2/6 My Experience: 1 fields (0 required)
+[15:07:56]       ? unanswered: 'Do you have prior work experience?*' kind=combobox options=['Select One', 'Yes', 'No']
+[15:07:56]       ? unanswered: 'Are you a CUNY student?*' kind=combobox options=['Select One', 'Yes', 'No']
+[15:07:56]       ? unanswered: 'Are you a post-doctoral trainee?*' kind=combobox options=['Select One', 'Yes', 'No']
+[15:07:56]       ? unanswered: 'Are you a retired state or local employee, receiving a service retirement from NYCERS, NYC' kind=combobox options=['Select One', 'Yes', 'No']
+[15:07:56]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[15:07:56] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 146k/195k tokens (+24k served from its cache, not counted) (resting); groq-20b 198k/195k tokens (+40k served from its cache, not counted); groq-qwen 195k/195k tokens; gemini-lite 480/480 requests (+197k served from its cache, not counted); gemini-flash 16/18 requests
+[15:07:56] Summary: 1 applied, 2 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-17.md
+[15:07:56]   by site  workday: 1 applied
+[15:08:00] Summary emailed to delgado@alumni.usc.edu
