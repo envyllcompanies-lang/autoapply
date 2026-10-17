@@ -5116,3 +5116,29 @@ A
 [16:18:00]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
 [16:18:00] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 156k/195k tokens (+27k served from its cache, not counted) (resting); groq-20b 198k/195k tokens (+40k served from its cache, not counted); groq-qwen 195k/195k tokens; gemini-lite 480/480 requests (+197k served from its cache, not counted); gemini-flash 16/18 requests
 [16:18:00] Summary: 1 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-17.md
+[16:40:57] === autoapply run (LIVE) build 2026-10-15-a ===
+[16:40:58] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[16:40:59] mail: logged in to delgado@alumni.usc.edu OK
+[16:41:17] Discovering jobs…
+[16:41:17] Job search already ran at 15:31 (searches run every 3 h): this run only applies
+[16:41:18]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[16:41:18] 0 open roles, 0 new
+[16:41:18] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
+[16:41:18] 946 jobs queued: 6 already matched to your résumé, 940 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 398 now
+[16:41:18] Time for this run: 50 min in all (12413 of 1850 free Actions minutes used this month)
+[16:41:18] Accounts: ON (delgado@alumni.usc.edu)
+[16:41:19] → Bilingual Pre-Underwriting and Closing Specialist @ Colorado Enterprise Fund Inc (score 16, match 62%)
+[16:41:37]       step 1: 26 fields (17 required)
+[16:41:38]       (writer answered 'County' -> 'N/A')
+[16:42:13]       ! NOT FILLED: 'Available to Start (required)' (wanted 'October 24, 2026')
+[16:42:57]       step 2: 98 fields (46 required)
+[16:42:57]       (writer answered 'County' -> 'N/A')
+[16:42:58]       (writer answered 'County' -> 'Weld County')
+[16:42:58]       (writer answered 'County' -> 'N/A')
+[16:42:58]       writer: groq: free daily limit reached (back in 2 min)
+[16:42:58]       writer unavailable: groq: free daily limit reached (back in 2 min)
+[16:42:58]       ? unanswered: 'County' kind=text options=[]
+[16:42:58]       ? unanswered: 'County' kind=text options=[]
+[16:42:58]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[16:42:58] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 159k/195k tokens (+27k served from its cache, not counted) (resting); groq-20b 198k/195k tokens (+40k served from its cache, not counted); groq-qwen 195k/195k tokens; gemini-lite 480/480 requests (+197k served from its cache, not counted); gemini-flash 16/18 requests
+[16:42:58] Summary: 1 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-17.md
