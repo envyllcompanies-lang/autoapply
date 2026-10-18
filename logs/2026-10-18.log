@@ -5865,3 +5865,308 @@ Do y; eeo-section:E
 [23:02:31]   by site  ashby: 2 skipped, 1 unconfirmed
 [23:02:31]   by site  paylocity: 1 blocked, 1 skipped
 [23:02:34] Summary emailed to delgado@alumni.usc.edu
+[23:03:21] === autoapply run (LIVE) build 2026-10-18-a ===
+[23:03:22] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[23:03:23] mail: logged in to delgado@alumni.usc.edu OK
+[23:03:34]   ✓ earlier unconfirmed submit is confirmed by the company's email: 'Thanks for Applying – Stay Tuned!'
+[23:03:43] Discovering jobs…
+[23:03:43] Job search already ran at 22:19 (searches run every 3 h): this run only applies
+[23:03:43]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[23:03:43] 0 open roles, 0 new
+[23:03:43] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.4 min)
+[23:03:44] 1277 jobs queued: 172 already matched to your résumé, 1105 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 448 now
+[23:03:44] Time for this run: 50 min in all (13048 of 1850 free Actions minutes used this month)
+[23:03:44] Accounts: ON (delgado@alumni.usc.edu)
+[23:03:44] → Investment Analyst @ pathstone (score 49, match 88%)
+[23:03:58]       step 1: 31 fields (17 required)
+[23:03:58]       (writer answered 'Have you completed the following level of education: Bachelo' -> 'Yes')
+[23:04:26]     ✗ not sent (the form rejected it): the form was rejected, not sent; page errors: ['What is your state?*', 'Select...', 'This field is required.']
+[23:04:33] → Associate, Tax @ pathstone (score 15, match 55%)
+[23:04:49]       step 1: 36 fields (22 required)
+[23:04:49]       (writer answered 'Have you completed the following level of education: Bachelo' -> 'Yes')
+[23:05:20]     ✗ not sent (the form rejected it): the form was rejected, not sent; page errors: ['What is your state?*', 'Select...', 'This field is required.']
+[23:05:24] → Product Associate / Product Manager, Training & Enablement @ privategdcareers (score 10, match 75%)
+[23:05:35]       step 1: 18 fields (15 required)
+[23:05:35]       (writer answered 'Do you know, or are you related to, anyone at GiveDirectly?*' -> 'No')
+[23:06:19]       writer: gemini-lite: still failing after retries
+[23:06:42]       ? unanswered: 'AI Policy for Application: At GiveDirectly, we value authenticity and individuality in the' kind=combobox options=['Yes']
+[23:06:42]     ✗ skipped: can't truthfully answer required: AI Policy for Application: At GiveDirectly, we value authent
+[23:06:47] → Investment Operations Analyst @ sanmanuel (score 50, match 72%)
+[23:06:51]       (opening Workday's application form directly)
+[23:06:55]       (account page: creating the account / signing in)
+[23:06:57]       account: signing in on sanmanuel.wd1.myworkdayjobs.com
+[23:08:19]       (Workday has not drawn the form yet: loading it again)
+[23:08:25]       1/5 My Information: 13 fields (8 required)
+[23:08:30]       2/5 My Experience: 2 fields (0 required)
+[23:08:47]       (writer answered 'Are you at least 21 years of age?*' -> 'No')
+[23:08:48]       (writer answered 'Are you a Yuhaaviatam of San Manuel Nation Tribal Citizen?*' -> 'No')
+[23:08:48]       (writer answered 'Are you an eligible Yuhaaviatam of San Manuel Nation Tribal ' -> 'No')
+[23:08:48]       ? unanswered: 'Day' kind=checkbox_single options=[]
+[23:08:48]       ? unanswered: 'Swing' kind=checkbox_single options=[]
+[23:08:48]       ? unanswered: 'Graveyard' kind=checkbox_single options=[]
+[23:08:48]       ? unanswered: 'All shifts listed above' kind=checkbox_single options=[]
+[23:08:48]     ✗ skipped: can't truthfully answer required: Day; Swing; Graveyard; All shifts listed above
+[23:08:55] → BlackRock Active Investment Stewardship Operations - Associate @ blackrock (score 49, match 72%)
+[23:08:58]       (opening Workday's application form directly)
+[23:09:04]       (account page: creating the account / signing in)
+[23:09:06]       account: creating one on blackrock.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:09:10]       account: created
+[23:09:12]       account: signing in on blackrock.wd1.myworkdayjobs.com
+[23:09:19]       1/5 My Information: 13 fields (7 required)
+[23:09:24]       2/5 My Experience: 2 fields (1 required)
+[23:09:32]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[23:09:40]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[23:09:48]       ! could not pick an option in 'Type to Add Skills' (wanted 'Word'): left as it was
+[23:09:57]       ! could not pick an option in 'Type to Add Skills' (wanted 'Google Workspace'): left as it was
+[23:10:05]       ! could not pick an option in 'Type to Add Skills' (wanted 'SQL'): left as it was
+[23:10:13]       ! could not pick an option in 'Type to Add Skills' (wanted 'Python'): left as it was
+[23:10:15]       (My Experience took 51s)
+[23:10:17]       3/5 Application Questions: 4 fields (4 required)
+[23:10:29]       (writer answered 'Yes*' -> 'No')
+[23:10:29]       ? unanswered: 'Yes*' kind=checkbox_single options=[]
+[23:10:29]     ✗ skipped: can't truthfully answer required: Yes*
+[23:10:33] → Facility Maintenance Coordinator, Operations @ bseglobal (score 40, match 72%)
+[23:10:42]       step 1: 18 fields (10 required)
+[23:10:51]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:14:54]       mail: passed over: 'Security code for your application to Brooklyn Sports & Ente' (other company)
+[23:14:54]     ✗ not sent (the form rejected it): after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+[23:15:01] → Analyst, Financial Planning & Analysis @ ensemblehp (score 32, match 72%)
+[23:15:05]       (opening Workday's application form directly)
+[23:15:13]       (account page: creating the account / signing in)
+[23:15:13]       account: signing in on ensemblehp.wd5.myworkdayjobs.com
+[23:15:23]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:15:43]       account: it had gone through
+[23:15:46]       account: signing in on ensemblehp.wd5.myworkdayjobs.com
+[23:15:55]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:16:15]       account: it had gone through
+[23:16:18]       account: signing in on ensemblehp.wd5.myworkdayjobs.com
+[23:16:21]       account: sign-in refused; Workday says: nothing
+[23:16:37]       account: sign-in refused on ensemblehp.wd5.myworkdayjobs.com; resetting the password through your email
+[23:16:39]       account: no button to send the reset email was found
+[23:16:39]       account: no reset email came, so this email probably has no account on ensemblehp.wd5.myworkdayjobs.com: creating one
+[23:17:10]       account: creating one on ensemblehp.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:17:14]       account: created
+[23:17:16]       account: signing in on ensemblehp.wd5.myworkdayjobs.com
+[23:17:27]       1/5 My Information: 15 fields (12 required)
+[23:17:35]       2/5 My Experience: 13 fields (12 required)
+[23:18:05]       (writer answered "Are you an employee of any of Ensemble's clients?*" -> 'No')
+[23:18:05]       3/5 Application Questions: 10 fields (10 required)
+[23:18:17]       (writer answered 'Do you have an internet speed of at least 50 Mbps? Again, yo' -> 'No')
+[23:18:17]       Application Questions (try 2): Workday said ['Error: The field Do you have an internet speed of at least 50 Mbps? Again, you will be asked to provide evidence as needed based on the job location. is required and must', 'Error-Do you have an internet speed of at least 50 Mbps? Again, you will be asked to provide evidence as needed based on the job location. The field Do you have an intern']; redoing ['Do you have an internet speed ']
+[23:18:23]       4/5 Voluntary Disclosures: 4 fields (1 required)
+[23:18:32]       Review: submitting
+[23:18:35]     ✓ applied (3.6 min)
+[23:18:45] → 2027 Blackstone Real Estate Acquisitions Analyst @ blackstone (score 32, match 72%)
+[23:18:49]       (opening Workday's application form directly)
+[23:18:53]       (account page: creating the account / signing in)
+[23:18:55]       account: signing in on blackstone.wd1.myworkdayjobs.com
+[23:20:18]       (Workday has not drawn the form yet: loading it again)
+[23:20:23]       1/5 My Information: 14 fields (12 required)
+[23:20:28]       2/5 My Experience: 8 fields (6 required)
+[23:20:43]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:21:01]       (writer answered 'Are you currently an undergraduate or Master degree student?' -> 'No')
+[23:21:01]       (writer answered 'Have you taken either of the following standardized tests: S' -> 'No, I have not taken the SAT or ACT')
+[23:21:01]       (writer answered 'Political Contributions: The following questions are for leg' -> 'No')
+[23:21:02]       (writer answered 'In the past two years, have you donated to, or engaged in vo' -> 'No')
+[23:21:02]       (writer answered 'In the past two years, have you donated to, or engaged in vo' -> 'No')
+[23:21:02]       ? unanswered: 'Public Affairs & Marketing' kind=checkbox_single options=[]
+[23:21:02]     ✗ skipped: can't truthfully answer required: Public Affairs & Marketing
+[23:21:12] → Trust & Safety Specialist, Global Operations @ snapchat (score 31, match 72%)
+[23:21:16]       (opening Workday's application form directly)
+[23:21:21]       (account page: creating the account / signing in)
+[23:21:23]       account: creating one on snapchat.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:21:27]       account: created
+[23:21:29]       account: signing in on snapchat.wd1.myworkdayjobs.com
+[23:21:36]       1/5 My Information: 12 fields (7 required)
+[23:21:41]       2/5 My Experience: 12 fields (8 required)
+[23:21:59]       ! could not pick an option in 'Field of Study*' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:22:08]       ? unanswered: '3. Did you answer "No" to Question 1 (you are not legally authorized to work in the United' kind=combobox options=['Select One', 'Yes', 'No']
+[23:22:08]     ✗ skipped: can't truthfully answer required: 3. Did you answer "No" to Question 1 (you are not legally au
+[23:22:17] → New Accounts Associate @ guggenheim (score 24, match 72%)
+[23:22:22]       (opening Workday's application form directly)
+[23:22:25]       (account page: creating the account / signing in)
+[23:22:27]       account: signing in on guggenheim.wd1.myworkdayjobs.com
+[23:23:50]       (Workday has not drawn the form yet: loading it again)
+[23:23:55]       1/6 My Information: 15 fields (11 required)
+[23:24:00]       2/6 My Experience: 18 fields (14 required)
+[23:24:18]       ! could not pick an option in 'Field of Study*' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:24:26]       ! could not pick an option in 'Field of Study*' (wanted 'Industrial Engineering'): left as it was
+[23:24:30]       3/6 Application Questions 1 of 2: 8 fields (6 required)
+[23:24:50]       (writer answered 'Are you a current or former client, vendor or supplier of pr' -> 'No')
+[23:24:51]       (writer answered 'Within the last two years, have you held a position of senio' -> 'No')
+[23:24:51]       (writer answered 'Do you maintain any public social media accounts? For purpos' -> 'No')
+[23:24:51]       4/6 Application Questions 2 of 2: 15 fields (15 required)
+[23:25:16]       Application Questions 2 of 2 (try 2): Workday said ['Error: The field Please Describe: is required and must have a value.', 'Error-Please Describe: The field Please Describe: is required and must have a value. Error-Please Describe: The field Please Describe: is required and must have a value.']; redoing ['Please Describe:*', 'Please Describe:*']
+[23:25:19]       5/6 Voluntary Disclosures: 1 fields (1 required)
+[23:25:25]       Review: submitting
+[23:25:29]     ✓ applied (3.2 min)
+[23:25:37] → Payments Associate @ keybank (score 24, match 72%)
+[23:25:41]       (opening Workday's application form directly)
+[23:25:47]       (account page: creating the account / signing in)
+[23:25:49]       account: signing in on keybank.wd5.myworkdayjobs.com
+[23:26:47]       (Workday has not drawn the form yet: loading it again)
+[23:26:58]       (writer answered 'County*' -> 'N/A')
+[23:26:58]       1/5 My Information: 17 fields (12 required)
+[23:27:07]       2/5 My Experience: 13 fields (8 required)
+[23:27:24]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:27:30]       3/5 Application Questions: 19 fields (15 required)
+[23:27:48]       ? unanswered: 'I agree to the Arbitration Agreement and the Agreement to Sever.*' kind=checkbox_single options=[]
+[23:27:48]     ✗ skipped: can't truthfully answer required: I agree to the Arbitration Agreement and the Agreement to Se
+[23:27:57] → Associate, Finance & Philanthropies @ gellerco (score 16, match 72%)
+[23:28:02]       (opening Workday's application form directly)
+[23:28:06]       (account page: creating the account / signing in)
+[23:28:08]       account: signing in on gellerco.wd1.myworkdayjobs.com
+[23:29:30]       (Workday has not drawn the form yet: loading it again)
+[23:29:35]       1/5 My Information: 12 fields (7 required)
+[23:29:40]       2/5 My Experience: 3 fields (1 required)
+[23:29:53]       (writer answered 'Have you ever resigned or been discharged as a result of an ' -> 'No')
+[23:29:53]       ? unanswered: 'Are you named as a defendant or respondent in any pending or settled complaint, arbitratio' kind=combobox options=['Select One', 'Yes', 'No', 'N/A']
+[23:29:53]     ✗ skipped: can't truthfully answer required: Are you named as a defendant or respondent in any pending or
+[23:30:01] → Self-Direction Payroll Specialist @ AIM Services Inc (score 12, match 72%)
+[23:30:31]       step 1: 46 fields (32 required)
+[23:30:41]       (writer answered 'County' -> 'N/A')
+[23:31:09]       (writer answered 'County' -> 'N/A')
+[23:31:09]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[23:31:53]       ! NOT FILLED: 'Available to Start' (wanted 'October 25, 2026')
+[23:32:39]       step 2: 94 fields (76 required)
+[23:32:39]       (writer answered 'County' -> 'N/A')
+[23:32:59]       (writer answered 'County' -> 'N/A')
+[23:33:32]       (writer answered 'County' -> 'N/A')
+[23:33:55]       (writer answered 'County' -> 'N/A')
+[23:34:58]       (writer answered 'County' -> 'N/A')
+[23:35:01]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[23:35:05]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[23:35:06]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[23:35:27]       ! NOT FILLED: 'Available to Start' (wanted 'October 25, 2026')
+[23:36:11]       step 3: 97 fields (79 required)
+[23:36:11]       (writer answered 'County' -> 'N/A')
+[23:36:14]       (writer answered 'County' -> 'N/A')
+[23:36:17]       (writer answered 'County' -> 'N/A')
+[23:36:21]       (writer answered 'County' -> 'N/A')
+[23:36:28]       (writer answered 'County' -> 'N/A')
+[23:36:35]       ! NOT FILLED: 'Available to Start' (wanted 'October 25, 2026')
+[23:36:41]       step 4: 12 fields (12 required)
+[23:36:42]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[23:36:42]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[23:36:43]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[23:36:52]       step 5: 6 fields (3 required)
+[23:36:57]     ✓ applied (6.9 min)
+[23:37:02] → Implementation Specialist (Banking Technology & Core Conversions) @ csiweb (score 10, match 72%)
+[23:37:06]       (opening Workday's application form directly)
+[23:37:09]       (account page: creating the account / signing in)
+[23:37:11]       account: signing in on csiweb.wd1.myworkdayjobs.com
+[23:38:34]       (Workday has not drawn the form yet: loading it again)
+[23:38:39]       1/6 My Information: 14 fields (11 required)
+[23:38:49]       2/6 My Experience: 1 fields (1 required)
+[23:39:01]       ? unanswered: 'If you worked in the last 6 months for an organization who is a customer of CSI, you may n' kind=combobox options=['Select One', 'Yes', 'No']
+[23:39:01]     ✗ skipped: can't truthfully answer required: If you worked in the last 6 months for an organization who i
+[23:39:08] → Sales Enablement & RFP Specialist @ talonone (score 10, match 72%)
+[23:39:18]       step 1: 17 fields (13 required)
+[23:39:18]       (writer answered "What's the first thing you check when a new RFP lands on you" -> 'The deadline and who else needs to be looped in to')
+[23:39:18]       (writer answered 'A Sales Engineer tells you a technical answer you drafted wa' -> 'Flag it to the SE and AE right away, and figure ou')
+[23:39:18]       ? unanswered: "An AI tool confidently answers an RFP question about a capability you're not sure the prod" kind=combobox options=['Verify the claim against the p', "Soften the language so it's di", 'Include it as written, since t', 'Leave the question blank and f']
+[23:39:18]     ✗ skipped: can't truthfully answer required: An AI tool confidently answers an RFP question about a capab
+[23:39:23] → Product Operations Associate, Aladdin Platform Engineering @ blackrock (score 68, match 70%)
+[23:39:33]       (opening Workday's application form directly)
+[23:39:38]       1/5 My Information: 13 fields (7 required)
+[23:39:43]       2/5 My Experience: 2 fields (1 required)
+[23:39:52]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[23:39:58]       3/5 Application Questions: 4 fields (4 required)
+[23:40:10]       (writer answered 'Yes*' -> 'Yes')
+[23:40:10]       (ticked Yes for 'Yes*')
+[23:40:10]       4/5 Voluntary Disclosures: 5 fields (5 required)
+[23:40:20]       Review: submitting
+[23:40:22]     ✓ applied (1.0 min)
+[23:40:26] → Capital Project Coordinator I @ avalonbay (score 66, match 70%)
+[23:40:29]       (opening Workday's application form directly)
+[23:40:35]       (account page: creating the account / signing in)
+[23:40:37]       account: signing in on avalonbay.wd5.myworkdayjobs.com
+[23:41:05]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:Vivmark Careers
+Settings
+delga; logoLink:; logo:; headerTitle:Vivmark Careers; navigationContainer:Settings
+delgado@alumni.usc.ed; utilityButtonBar:Settings
+delgado@alumni.usc.ed; utilityButtonBarSettingsMenu:Settings; utilityMenuButton:Set
+[23:41:14] → Data Analyst, Metrics & Reporting @ livenation (score 60, match 70%)
+[23:41:17]       (opening Workday's application form directly)
+[23:41:20]       (account page: creating the account / signing in)
+[23:41:22]       account: signing in on livenation.wd503.myworkdayjobs.com
+[23:41:49]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Settings
+delgado@alumn; logoLink:; logo:; headerTitle:; navigationContainer:English
+Settings
+delgado@alumn; utilityButtonBar:English
+Settings
+delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-bu
+[23:41:49]   ✗ Events Coordinator @ janestreet: the posting is closed (no time spent on it)
+[23:41:57] → Risk Analyst - College Program 2027 @ mmc (score 57, match 70%)
+[23:42:00]       (opening Workday's application form directly)
+[23:42:04]       (account page: creating the account / signing in)
+[23:42:06]       account: signing in on mmc.wd1.myworkdayjobs.com
+[23:42:33]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Settings
+delgado@alumn; logoLink:; logo:; headerTitle:; navigationContainer:English
+Settings
+delgado@alumn; utilityButtonBar:English
+Settings
+delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-bu
+[23:42:40] → Speakers - Coordinator @ caa (score 48, match 70%)
+[23:42:43]       (opening Workday's application form directly)
+[23:42:48]       (account page: creating the account / signing in)
+[23:42:48]       account: signing in on caa.wd1.myworkdayjobs.com
+[23:42:58]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:43:16]       account: it had gone through
+[23:43:18]       account: signing in on caa.wd1.myworkdayjobs.com
+[23:43:27]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[23:43:45]       account: it had gone through
+[23:43:48]       account: signing in on caa.wd1.myworkdayjobs.com
+[23:43:51]       account: sign-in refused; Workday says: nothing
+[23:43:53]       account: sign-in refused on caa.wd1.myworkdayjobs.com; resetting the password through your email
+[23:45:20]       account: the password-reset email did not arrive in time. If it comes later, the next try uses it
+[23:45:20]       account: no reset email came, so this email probably has no account on caa.wd1.myworkdayjobs.com: creating one
+[23:45:47]       1/5 My Information: 13 fields (7 required)
+[23:45:54]       2/5 My Experience: 5 fields (1 required)
+[23:46:08]       (writer answered 'I have disclosed all information that is relevant and should' -> 'Yes')
+[23:46:09]       (writer answered 'I expressly understand and agree that, if employed, my emplo' -> 'Yes')
+[23:46:09]       (writer answered 'I understand that no representation, whether oral or written' -> 'Yes')
+[23:46:09]       ? unanswered: 'I agree that to the extent permitted by law, any legal claims that I may have concerning m' kind=combobox options=['Select One', 'Yes', 'No']
+[23:46:09]     ✗ skipped: can't truthfully answer required: I agree that to the extent permitted by law, any legal claim
+[23:46:18] → Data & Technology Track Associate - Rotational Program @ capital-group (score 38, match 70%)
+[23:46:22]       (opening Workday's application form directly)
+[23:46:25]       (account page: creating the account / signing in)
+[23:46:27]       account: signing in on capgroup.wd1.myworkdayjobs.com
+[23:46:54]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Settings
+delgado@alumn; logoLink:; logo:; headerTitle:; navigationContainer:English
+Settings
+delgado@alumn; utilityButtonBar:English
+Settings
+delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-bu
+[23:47:00] → Analyst, Portfolio Administration @ santander (score 34, match 70%)
+[23:47:04]       (opening Workday's application form directly)
+[23:47:11]       (account page: creating the account / signing in)
+[23:47:13]       account: creating one on santander.wd3.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:47:20]       account: created
+[23:47:22]       account: signing in on santander.wd3.myworkdayjobs.com
+[23:47:31]       1/6 My Information: 13 fields (12 required)
+[23:47:36]       2/6 My Experience: 15 fields (7 required)
+[23:47:53]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:48:06]       (writer answered 'Are you currently in F-1 status or J-1 status to attend univ' -> 'No')
+[23:48:06]       (writer answered 'Has the Federal Reserve Bank or any other regulatory agency ' -> 'No')
+[23:48:06]       ? unanswered: 'Santander values authenticity and transparency throughout our recruitment processes. Candi' kind=combobox options=['Select One', 'I Agree', 'I Disagree']
+[23:48:06]     ✗ skipped: can't truthfully answer required: Santander values authenticity and transparency throughout ou
+[23:48:15] → Client Success Associate @ noomgrowth (score 24, match 70%)
+[23:48:24]       step 1: 15 fields (9 required)
+[23:48:35]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:52:41]       mail: passed over: 'Security code for your application to Noom US' (other company)
+[23:52:42]     ✗ not sent (the form rejected it): after Submit the site asked for an emailed code that did not arrive in the inbox in time; nothing was sent: tried again next run
+[23:52:50] → Grants Associate @ centreforeffectivealtruism (score 22, match 70%)
+[23:52:57]       step 1: 32 fields (3 required)
+[23:54:36]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ['Your form needs corrections\n\nMissing entry for required field: Where did you hea', 'Missing entry for required field: Where did you hear about this position?\n\nMissi', 'Missing entry for required field: Where did
+[23:54:41] Run time limit reached (50 min): the rest waits for the next run
+[23:54:41] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 197k/195k tokens (+29k served from its cache, not counted); groq-20b 196k/195k tokens (+31k served from its cache, not counted); groq-qwen 133k/195k tokens; gemini-lite 149/480 requests (+49k served from its cache, not counted); gemini-flash 0/18 requests
+[23:54:41] Summary: 5 applied, 1 unconfirmed, 4 blocked, 12 skipped, 4 failed. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-18.md
+[23:54:41]   by site  workday: 9 skipped, 4 applied, 4 blocked
+[23:54:41]   by site  greenhouse: 4 failed, 3 skipped
+[23:54:41]   by site  paylocity: 1 applied
+[23:54:41]   by site  ashby: 1 unconfirmed
+[23:54:44] Summary emailed to delgado@alumni.usc.edu
