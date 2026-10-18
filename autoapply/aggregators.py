@@ -415,6 +415,9 @@ def jobright(cfg, base="https://raw.githubusercontent.com"):
     if a.get("enabled", True) is False:
         return []
     out, seen = [], set()
+    cities = [c.lower() for c in (a.get("locations") or DEFAULT_CITIES)]
+    max_age = int(a.get("max_age_days", 21))
+    today = time.gmtime()
     for repo in a.get("lists") or JOBRIGHT_LISTS:
         text = ""
         for branch in ("master", "main"):
@@ -445,6 +448,19 @@ def jobright(cfg, base="https://raw.githubusercontent.com"):
             model = _md_cell(cells[3]) if len(cells) > 4 else ""
             if re.search(r"remote", model, re.I) and "remote" not in loc.lower():
                 loc = f"{loc} (Remote)".strip()
+            low = norm_location(loc)
+            if not (any(c in low for c in cities) or (_remote_ish(loc) and not foreign_place(loc))):
+                continue                                   # your cities, or remote in the US (the list covers the whole country)
+            posted = re.match(r"\s*([A-Za-z]{3})\w*\s+(\d{1,2})\s*$", _md_cell(cells[-1]))
+            if posted:                                     # 'Oct 17': the list keeps old rows too
+                try:
+                    mo = time.strptime(posted.group(1)[:3].title(), "%b").tm_mon
+                    yr = today.tm_year - (1 if mo > today.tm_mon else 0)
+                    age = (time.mktime(today) - time.mktime((yr, mo, int(posted.group(2)), 0, 0, 0, 0, 0, -1))) / 86400
+                    if age > max_age:
+                        continue
+                except Exception:
+                    pass
             jid = re.search(r"/jobs/info/([0-9a-f]+)", url)
             out.append(_job("jobright", company, jid.group(1) if jid else _slug(company + "-" + title), title, loc, url,
                             f"{title} at {company}. New grad / entry level. {repo.replace('-', ' ')}.", url))
