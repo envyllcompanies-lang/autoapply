@@ -7,6 +7,7 @@ limited to the same facts and discards anything it can't ground.
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import date, timedelta
 from pathlib import Path
@@ -203,6 +204,9 @@ def pick_option(options: list[str], want) -> str | None:
     return None
 
 
+# things you said the bot never gives (2026-10-18): a job that requires one is skipped
+NEVER_GIVE_RX = re.compile(r"social security|\bssn\b|\bs\.s\.n\b|\bsat\b.{0,12}(score|result)|\b(sat|act)\s+score|\bact\b.{0,8}score|"
+                           r"transcript|writing sample|sample of (your )?writing", re.I)
 HUMAN_CHECK_RX = re.compile(r"not a robot|i'?m (a )?human|are you (a )?human|prove you|captcha|verify (that )?you are (a )?(human|person)|human verification", re.I)
 NEG_Q_RX = re.compile(r"\b(are|do|does|did|is|will|would|can|could|have|has)\s+(you\s+|there\s+)?(not|n't)\b|\b(unable to|cannot|can't|cant|won't)\b|\b(are|is)\s+not\b", re.I)
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
@@ -249,6 +253,8 @@ class Brain:
         gy = re.search(r"(19|20)\d\d", str(f.get("graduation_date") or ""))
         if gy and not f.get("graduated"):                   # 'Did you graduate?': yes once the graduation date has passed
             f["graduated"] = "Yes" if int(gy.group(0)) <= date.today().year else "No"
+        if not f.get("date_of_birth") and os.environ.get("DATE_OF_BIRTH", "").strip():
+            f["date_of_birth"] = os.environ["DATE_OF_BIRTH"].strip()     # kept in a GitHub secret, never in the public repository
         self.facts = f
         self.sc = cfg.get("scoring", {})
         self.answers = [(re.compile(a["match"], re.I), a["answer"], bool(a.get("only_options")))
@@ -968,6 +974,8 @@ class Brain:
         low = re.sub(r"^\W*if you are (based|located|applying|residing|living) (in|for|from|within) (the )?[\w. ]{1,30}[,:]\s*", "", low)
         if HUMAN_CHECK_RX.search(low):
             return None          # "I'm not a robot" style boxes are the site's human check: never ticked by the bot
+        if NEVER_GIVE_RX.search(low[:400]):
+            return None          # you said never: Social Security number, SAT / ACT scores, transcripts, writing samples
         has_opts = kind in ("select", "radio", "combobox", "checkbox_group")
         opts = f.get("options") or []
 
@@ -1364,6 +1372,36 @@ class Brain:
             digits = re.sub(r"\D", "", str(self.facts.get("phone") or ""))[-10:]
             if digits:
                 return digits if kind == "number" else self.facts.get("phone")
+        dob = str(self.facts.get("date_of_birth") or "").strip()
+        m_dob = re.fullmatch(r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})", dob)
+        if m_dob and re.search(r"birth|\bdob\b|when were you born", q) and not re.search(r"place of birth|country of birth|birth ?place|city of birth|state of birth", q):
+            mm, dd, yy = int(m_dob.group(1)), int(m_dob.group(2)), m_dob.group(3)
+            month = date(2000, mm, 1).strftime("%B")
+            if has_opts and real:
+                if re.search(r"month", q) and not re.search(r"\bday\b", q):
+                    got = next((o for o in real if re.match(rf"\W*(0?{mm}\b|{month}|{month[:3]}\b)", o, re.I)), None)
+                    return one(got) if got else _UNSET
+                if re.search(r"\bday\b", q) and not re.search(r"month|year", q):
+                    got = next((o for o in real if re.fullmatch(rf"\W*0?{dd}\W*", o)), None)
+                    return one(got) if got else _UNSET
+                if re.search(r"\byear\b", q) and not re.search(r"month|day", q):
+                    got = next((o for o in real if o.strip() == yy), None)
+                    return one(got) if got else _UNSET
+                return _UNSET
+            if re.search(r"month and (birth )?day|month/day|mm/dd(?!/)|do not (provide|include) the year|without the year", q):
+                return f"{mm:02d}/{dd:02d}"
+            if re.search(r"birth ?date|date of birth|\bdob\b|when were you born", q):
+                return f"{mm:02d}/{dd:02d}/{yy}"
+        # certifications and licenses: you hold none (a driver's license is a separate question)
+        if str(self.facts.get("certifications") or "").strip().lower() in ("none", "no") and \
+                re.search(r"certif|licen[cs]e|licensure|\bseries \d+|finra|\bcpa\b|\bpmp\b|six sigma|\bcfa\b|\bcapm\b", q) and \
+                not re.search(r"driver|driving|willing|able to obtain|obtain|pursue|within \d|plan to|intend to|certify (that|the|this)|i certify", q):
+            if has_opts and real:
+                got = next((o for o in real if re.search(r"(do not|don.t) (currently )?(possess|have|hold)|^\W*none\b|not applicable|^\W*n/?a\b|^\W*no\b", o, re.I)), None)
+                if got:
+                    return one(got)
+            elif kind in ("text", "textarea") and len(q) < 250:
+                return "None"
         if kind == "wdprompt" and re.match(r"\W*(field of study|major|area of study|discipline|concentration)\W*\*?\W*$", lab) and self.facts.get("major"):
             # Workday's own list may not have your exact major: the nearest ones are tried in turn (a required Field of
             # Study left empty held 'My Experience' with 'Field of Study is required')

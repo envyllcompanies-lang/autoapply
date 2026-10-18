@@ -417,6 +417,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
+    if os.environ.get("DATE_OF_BIRTH", "").strip() and db.once("dob-requeue"):
+        n_dob = db.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='skipped' AND reason LIKE 'can''t truthfully answer%'"
+                                " AND lower(reason) LIKE '%birth%' AND (submitted_at IS NULL OR submitted_at = '')").rowcount
+        db.conn.commit()
+        if n_dob:
+            log(f"Your date of birth is set: {n_dob} jobs that asked for it are tried again")
     fixed = db.requeue_fixed(FIXED_FLAG)
     if fixed:
         log(f"Trying {sum(fixed.values())} jobs again that were set aside by faults fixed in this build: "

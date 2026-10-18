@@ -431,6 +431,76 @@ def skip_fix_checks():
     print("ok  skipped-job fixes: agreements, sign-offs, AI screening consent, start dates, contact, gender letters, race decline, places, LinkedIn, Greenhouse forms")
 
 
+def new_board_checks():
+    """Jobright's GitHub lists and Hacker News 'Who is hiring?' read from saved samples (no network)."""
+    from autoapply import aggregators as AG
+    td = time.strftime("%b %d")
+    md = ("# 2026 New Grad\n| Company | Job Title | Location | Work Model | Date Posted |\n| ----- | --------- | --------- | ---- | ------- |\n"
+          "| **[Acme Corp](https://www.acme.com)** | **[Business Operations Analyst](https://jobright.ai/jobs/info/68f0a1b2c3?utm_source=1)** | Denver, CO | On Site | " + td + " |\n"
+          "| ↳ | **[Supply Chain Analyst](https://jobright.ai/jobs/info/68f0a1b2c4)** | New York, NY | Remote | " + td + " |\n"
+          "| **[Beta](https://beta.io)** | **[Project Coordinator](https://jobright.ai/jobs/info/68f0a1b2c5)** | Los Angeles, CA | Hybrid | " + td + " |\n"
+          "| **[Old Co](https://old.io)** | **[Operations Analyst](https://jobright.ai/jobs/info/68f0a1b2c6)** | Denver, CO | On Site | " +
+          time.strftime("%b %d", time.gmtime(time.time() - 60 * 86400)) + " |\n"
+          "| **[Far Co](https://far.io)** | **[Operations Analyst](https://jobright.ai/jobs/info/68f0a1b2c7)** | Mobile, AL | On Site | " + td + " |\n")
+
+    class R:
+        def __init__(self, text=None, js=None):
+            self.text, self._js = text, js
+
+        def json(self):
+            return self._js
+    old = AG._get
+    try:
+        AG._get = lambda url, **kw: R(text=md)
+        got = AG.jobright({"aggregators": {"jobright": {"lists": ["2026-Business-Analyst-New-Grad"]}}})
+        check([(j.extra["company_name"], j.title, j.location) for j in got] == [
+            ("Acme Corp", "Business Operations Analyst", "Denver, CO"), ("Acme Corp", "Supply Chain Analyst", "New York, NY (Remote)"),
+            ("Beta", "Project Coordinator", "Los Angeles, CA")], f"jobright rows (with '↳' for the same company): {[(j.company, j.title, j.location) for j in got]}")
+        check(all(AG.account_gated(j.apply_url) for j in got), "jobright links go to the employer's own posting, never through jobright")
+        story = {"hits": [{"objectID": "900", "title": "Ask HN: Who is hiring? (October 2026)"}]}
+        comments = {"nbPages": 1, "hits": [
+            {"objectID": "1", "parent_id": 900, "comment_text": "Acme Robotics | Operations Analyst, Software Engineer | Denver, CO | ONSITE<p>Apply: "
+             "<a href=\"https://jobs.lever.co/acme/1234-abcd\">https://jobs.lever.co/acme/1234-abcd</a>"},
+            {"objectID": "2", "parent_id": 900, "comment_text": "Zeta | Senior Engineer | Remote<p>https://jobs.lever.co/zeta/99"},
+            {"objectID": "3", "parent_id": 1, "comment_text": "a reply | Operations Analyst | https://jobs.lever.co/x/1"}]}
+        AG._get = lambda url, **kw: R(js=story if "search_by_date" in url else comments)
+        hn = AG.hnhiring({"search": {"titles_include": ["operations analyst"]}})
+        check([(j.extra["company_name"], j.title, j.apply_url) for j in hn] == [("Acme Robotics", "Operations Analyst", "https://jobs.lever.co/acme/1234-abcd")],
+              f"HN who-is-hiring: only your titles, only links to systems the bot completes, never replies: {[(j.title, j.apply_url) for j in hn]}")
+    finally:
+        AG._get = old
+    check({"jobright", "hnhiring"} <= set(AG.ALWAYS_ON) and {"jobright", "hnhiring"} <= set(AG.FETCHERS), "the new boards are always read")
+    print("ok  new boards: Jobright's new-grad lists and Hacker News 'Who is hiring?'")
+
+
+def personal_answer_checks():
+    """Birthday from the DATE_OF_BIRTH secret, no certifications, and the things you said never to give."""
+    from autoapply.brain import Brain
+    from autoapply.sources import Job
+    os.environ["DATE_OF_BIRTH"] = "01/02/1999"
+    try:
+        b = Brain({"facts": {"email": "a@b.org", "phone": "1", "full_name": "Pat Doe", "certifications": "None"}}, {"name": "Pat Doe"}, ".", lambda *a: None)
+    finally:
+        os.environ.pop("DATE_OF_BIRTH", None)
+    b.writer = None
+    job = Job("greenhouse", "acme", "1", "Operations Analyst", "Denver, CO", "https://x", "https://x", "Operations role.")
+
+    def ans(label, kind="text", opts=None):
+        f = {"id": "f1", "kind": kind, "label": label, "required": True, "options": opts or [], "sel": "", "key": ""}
+        return b.map_fields(job, [f], "")["answers"].get("f1")
+    check(ans("Please provide your Birth Month and Birth Day (e.g. 11/18). DO NOT provide the year.*", "textarea") == "01/02", "birth month and day")
+    check(ans("Date of Birth*", "wddate") == "01/02/1999", "date of birth")
+    check(ans("Birth Month*", "combobox", ["Select One", "January", "February"]) == "January", "birth month from a list")
+    check(ans("Country of birth*", "text") != "01/02/1999", "country of birth is not the birthday")
+    check(ans("Which of the following licenses do you hold?*", "combobox", ["SIE", "Series 7", "I do not possess any FINRA licenses"]) == "I do not possess any FINRA licenses",
+          "no licenses held")
+    check(ans("Do you hold a PMP certification?*", "combobox", ["Select One", "Yes", "No"]) == "No", "no certifications held")
+    for q in ("Please provide the last four digits of your Social Security Number.*", "SAT Score*", "Please upload your academic transcript*",
+              "Please upload a brief unedited writing sample here.*"):
+        check(ans(q) is None, f"never given: {q[:40]}")
+    print("ok  birthday (from the secret), no certifications, never SSN / SAT / transcripts / writing samples")
+
+
 def letter_switch_checks():
     from autoapply.brain import Brain
     for setting, req, opt in ((True, True, True), (False, False, False), ("required", True, False), ("all", True, True)):
@@ -776,7 +846,7 @@ def preflight_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, skip_fix_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
+    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, personal_answer_checks, new_board_checks, skip_fix_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
                account_record_checks, site_mail_checks, workday_helper_checks, preflight_checks):
         try:
             fn()

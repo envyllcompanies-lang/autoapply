@@ -78,6 +78,7 @@ jobs:
           JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
           CAREERJET_API_KEY: ${{ secrets.CAREERJET_API_KEY }}
           ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
+          DATE_OF_BIRTH: ${{ secrets.DATE_OF_BIRTH }}
           IMAP_USER: ${{ secrets.IMAP_USER }}
           IMAP_PASS: ${{ secrets.IMAP_PASS }}
         run: python -m autoapply ${{ inputs.dry_run && '--dry-run' || '' }}

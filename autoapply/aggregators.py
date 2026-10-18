@@ -18,7 +18,10 @@ from .sources import Job, _strip_html, prefilter, discover as discover_boards, n
 UA = {"User-Agent": "Mozilla/5.0 (compatible; autoapply/1.0; personal job search)"}
 TIMEOUT = 25
 TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalayas": 2, "jicy": 2, "wwr": 2, "themuse": 3, "adzuna": 3,
-             "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3, "githublists": 3, "builtin": 3, "careerjet": 3, "localfeed": 1}
+             "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3, "githublists": 3, "builtin": 3, "careerjet": 3, "localfeed": 1,
+             "jobright": 4, "hnhiring": 12}
+
+SOURCE_CAP = {"jobright": 1500, "jobboard": 6000}      # big daily lists: more than the usual per-source cap is kept
 
 ATS_RX = {
     "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
@@ -152,7 +155,8 @@ def themuse(cfg, base="https://www.themuse.com"):
     a = cfg.get("aggregators", {}) or {}
     out = []
     for cat in ("Business Operations", "Project Management", "Management", "Data and Analytics", "Real Estate",
-                "Manufacturing and Warehouse", "Construction", "Operations"):
+                "Manufacturing and Warehouse", "Construction", "Operations", "Accounting", "Finance", "Product Management",
+                "Consulting", "Logistics", "Supply Chain"):
         for loc in a.get("locations", []) + ["Flexible / Remote"]:
             for page in (1, 2):
                 try:
@@ -393,6 +397,129 @@ def githublists(cfg, base="https://raw.githubusercontent.com"):
     return out
 
 
+JOBRIGHT_LISTS = ("2026-Business-Analyst-New-Grad", "2026-Supply-Chain-New-Grad", "2026-Consultant-New-Grad",
+                  "2026-Management-New-Grad", "2026-Account-New-Grad", "2026-Product-Management-New-Grad",
+                  "2026-Data-Analysis-New-Grad")
+_MD_LINK = re.compile(r"\[([^\]]*)\]\((https?://[^)\s]+)\)")
+
+
+def _md_cell(c: str) -> str:
+    return re.sub(r"\s+", " ", _MD_LINK.sub(lambda m: m.group(1), c).replace("**", "").replace("<br>", " ")).strip()
+
+
+def jobright(cfg, base="https://raw.githubusercontent.com"):
+    """Jobright's public GitHub lists of 2026 new-grad openings (business analyst, supply chain, consulting, management,
+    accounting / finance, product, data analysis), updated daily. Each row is a Markdown table line:
+    | Company | Job Title (link) | Location | Work Model | Date Posted |, with '↳' for another role at the same company.
+    The links go to jobright.ai, which wants an account to apply, so the bot finds each posting on the employer's own
+    board (direct_apply_url), never through jobright."""
+    a = (cfg.get("aggregators", {}) or {}).get("jobright") or {}
+    if a.get("enabled", True) is False:
+        return []
+    out, seen = [], set()
+    cities = [c.lower() for c in (a.get("locations") or DEFAULT_CITIES)]
+    max_age = int(a.get("max_age_days", 21))
+    today = time.gmtime()
+    for repo in a.get("lists") or JOBRIGHT_LISTS:
+        text = ""
+        for branch in ("master", "main"):
+            try:
+                text = _get(f"{base}/jobright-ai/{repo}/{branch}/README.md").text
+                break
+            except Exception:
+                continue
+        company = ""
+        for line in text.splitlines():
+            if not line.startswith("|") or re.match(r"^\|\s*:?-{3,}", line):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 3 or re.match(r"\W*company\W*$", cells[0], re.I):
+                continue
+            name = _md_cell(cells[0])
+            if name and name not in ("↳", "\u21b3"):
+                company = name
+            links = _MD_LINK.findall(cells[1])
+            title = _md_cell(cells[1])
+            if not company or not title or not links:
+                continue
+            url = links[0][1]
+            if url in seen:
+                continue
+            seen.add(url)
+            loc = _md_cell(cells[2])
+            model = _md_cell(cells[3]) if len(cells) > 4 else ""
+            if re.search(r"remote", model, re.I) and "remote" not in loc.lower():
+                loc = f"{loc} (Remote)".strip()
+            low = norm_location(loc)
+            if not (any(c in low for c in cities) or (_remote_ish(loc) and not foreign_place(loc))):
+                continue                                   # your cities, or remote in the US (the list covers the whole country)
+            posted = re.match(r"\s*([A-Za-z]{3})\w*\s+(\d{1,2})\s*$", _md_cell(cells[-1]))
+            if posted:                                     # 'Oct 17': the list keeps old rows too
+                try:
+                    mo = time.strptime(posted.group(1)[:3].title(), "%b").tm_mon
+                    yr = today.tm_year - (1 if mo > today.tm_mon else 0)
+                    age = (time.mktime(today) - time.mktime((yr, mo, int(posted.group(2)), 0, 0, 0, 0, 0, -1))) / 86400
+                    if age > max_age:
+                        continue
+                except Exception:
+                    pass
+            jid = re.search(r"/jobs/info/([0-9a-f]+)", url)
+            out.append(_job("jobright", company, jid.group(1) if jid else _slug(company + "-" + title), title, loc, url,
+                            f"{title} at {company}. New grad / entry level. {repo.replace('-', ' ')}.", url))
+    return out
+
+
+_HN_ATS = re.compile(r"https?://(?:boards\.greenhouse\.io|job-boards\.greenhouse\.io|jobs\.lever\.co|jobs\.ashbyhq\.com|apply\.workable\.com|"
+                     r"[\w-]+\.wd\d+\.myworkdayjobs\.com|jobs\.smartrecruiters\.com|[\w-]+\.recruitee\.com|[\w-]+\.breezy\.hr|"
+                     r"[\w-]+\.bamboohr\.com)/[^\s\"'<>)]+", re.I)
+
+
+def hnhiring(cfg, base="https://hn.algolia.com"):
+    """Hacker News' monthly 'Ask HN: Who is hiring?' thread through Algolia's public API (no key): each top-level comment is
+    one employer, first line 'Company | Role(s) | Location | ...'. A comment becomes a job only when it links to a posting on
+    an application system the bot completes, and a role in its first line is one of your titles (the usual filters still
+    apply). The employer's board is remembered, so all its other openings are read from then on."""
+    a = (cfg.get("aggregators", {}) or {}).get("hnhiring") or {}
+    if a.get("enabled", True) is False:
+        return []
+    inc = [str(x).lower() for x in ((cfg.get("search") or {}).get("titles_include") or [])]
+    try:
+        hits = _get(base + "/api/v1/search_by_date", params={"tags": "story,author_whoishiring", "hitsPerPage": 6}).json().get("hits", [])
+    except Exception:
+        return []
+    story = next((h for h in hits if re.search(r"who is hiring", h.get("title", ""), re.I)), None)
+    if not story:
+        return []
+    out = []
+    for page in range(0, 6):
+        try:
+            data = _get(base + "/api/v1/search", params={"tags": f"comment,story_{story['objectID']}", "hitsPerPage": 200, "page": page}).json()
+        except Exception:
+            break
+        for c in data.get("hits", []):
+            if str(c.get("parent_id")) != str(story["objectID"]):
+                continue                                   # replies, not job posts
+            body = html_unescape(c.get("comment_text") or "")
+            first = _strip_html(re.split(r"<p>|\n", body)[0])
+            parts = [x.strip() for x in first.split("|") if x.strip()]
+            if len(parts) < 2:
+                continue
+            company = re.sub(r"\s*\(.*?\)", "", parts[0]).strip()[:60]
+            cand = [r.strip() for x in parts[1:] for r in re.split(r",|;|/| & | and ", x) if r.strip()]
+            roles = [x for x in cand if inc and len(x) < 80 and any(k in x.lower() for k in inc)]
+            links = [html_unescape(u).rstrip(".,;") for u in _HN_ATS.findall(re.sub(r"<[^>]+>", " ", body.replace('href="', ' ')))]
+            if not roles or not links:
+                continue
+            where = next((x for x in parts[1:] if re.search(r"remote|onsite|on-site|hybrid|\b[A-Z]{2}\b|new york|nyc|denver|los angeles|\bla\b", x, re.I)
+                          and x not in roles), "")
+            for i, role in enumerate(roles[:3]):
+                url = links[min(i, len(links) - 1)]
+                out.append(_job("hnhiring", company, f"{c.get('objectID')}-{i}", role, where or "Remote", url, _strip_html(body)[:3000], url))
+        if page + 1 >= int(data.get("nbPages", 1)):
+            break
+    return out
+
+
 BUILTIN_SITES = {"colorado": "https://www.builtincolorado.com", "nyc": "https://www.builtinnyc.com", "la": "https://www.builtinla.com"}
 _BUILTIN_LEVEL = re.compile(r"\|(Entry level|Junior|Mid level|Senior level|Expert/Leader|Internship)\|", re.I)
 
@@ -405,8 +532,8 @@ def builtin(cfg, base=None):
     if a.get("enabled", True) is False:
         return []
     regions = a.get("regions") or list(BUILTIN_SITES)
-    cats = a.get("categories") or ["operations", "project-management"]
-    pages = int(a.get("pages", 2))
+    cats = a.get("categories") or ["operations", "project-management", "data-analytics", "finance", "product", "consulting"]
+    pages = int(a.get("pages", 3))
     out, seen = [], set()
     for region in regions:
         site = BUILTIN_SITES.get(region)
@@ -515,9 +642,11 @@ def localfeed(cfg, base=None):
     return out
 
 
-ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed")      # keyless feeds that run whatever the config's own source list says
+ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed", "jobright", "hnhiring",
+             "themuse", "remotive", "remoteok", "jicy", "himalayas", "wwr")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
-            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads, "githublists": githublists, "builtin": builtin, "careerjet": careerjet, "localfeed": localfeed}
+            "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads, "githublists": githublists, "builtin": builtin, "careerjet": careerjet, "localfeed": localfeed,
+            "jobright": jobright, "hnhiring": hnhiring}
 
 
 # ---------------------------------------------------------------------------------------------- cache + entry point
@@ -550,7 +679,8 @@ def discover_aggregators(cfg: dict, base: Path, log=print) -> list[Job]:
             else:
                 raw = fn(cfg, urls[name]) if name in urls else fn(cfg)
                 # keep only roles that could pass the title/location gate, so caches stay small
-                found = [j for j in raw if j.apply_url and not prefilter(j, search)][:cap]
+                cap_n = int(((a.get(name) or {}) if isinstance(a.get(name), dict) else {}).get("max_jobs") or SOURCE_CAP.get(name, cap))
+                found = [j for j in raw if j.apply_url and not prefilter(j, search)][:cap_n]
                 cache.write_text(json.dumps([_to_dict(j) for j in found]))
                 log(f"  agg/{name}: {len(raw)} fetched, {len(found)} pass the title/location filter")
         except Exception as e:
@@ -590,7 +720,7 @@ def _tnorm(t: str) -> str:
 
 # a listing whose apply link leads to the listing site's own sign-in, never to the employer's form (Built In: '?handler=ApplyRedirect'
 # answers 302 to '?applyRequired=true', checked 2026-10-06): the bot makes no accounts there, so it goes to the employer directly
-ACCOUNT_GATED = re.compile(r"builtin\w*\.com/job/.*[?&]handler=ApplyRedirect", re.I)
+ACCOUNT_GATED = re.compile(r"builtin\w*\.com/job/.*[?&]handler=ApplyRedirect|jobright\.ai/", re.I)
 
 
 def account_gated(url: str) -> bool:
