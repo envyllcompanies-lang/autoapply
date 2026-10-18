@@ -118,6 +118,25 @@ def _job(r: dict) -> Job:
 def main():
     base = Path(".").resolve()
     req = yaml.safe_load((base / "probe" / "request.yaml").read_text()) or {}
+    if req.get("feeds"):                              # job-feed test: what each named feed returns, nothing else
+        import json as _j
+        from . import aggregators as _A
+        from .main import merge_settings as _ms
+        cfg_f = _ms(yaml.safe_load((base / "config.yaml").read_text()), base)
+        od = base / "probe" / "out" / f"feeds-{req.get('id', 'x')}"
+        od.mkdir(parents=True, exist_ok=True)
+        rep = {}
+        for name in req["feeds"]:
+            try:
+                raw = _A.FETCHERS[name](cfg_f)
+                keep = [j for j in raw if not _A.prefilter(j, cfg_f.get("search") or {})]
+                rep[name] = {"fetched": len(raw), "pass_filters": len(keep),
+                             "sample": [[j.extra.get("company_name"), j.title, j.location, j.apply_url] for j in keep[:15]]}
+            except Exception as e:
+                rep[name] = {"error": str(e)[:300]}
+        (od / "feeds.json").write_text(_j.dumps(rep, indent=1))
+        print(_j.dumps(rep, indent=1)[:5000])
+        return
     if req.get("writer_samples"):                     # writer test: sample cover letters and answers, nothing else
         from . import writer_samples
         writer_samples.run(req, base, base / "probe" / "out" / f"writer-{req.get('id', 'x')}")
