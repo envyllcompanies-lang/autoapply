@@ -1,1930 +1,3 @@
-=== 2026-10-17 04:20:26  skipped  Credentialing Specialist @ point32health
-url: https://point32health.wd5.myworkdayjobs.com/thp/job/Remote-Worker-Home-Office-MA/Credentialing-Specialist_R9526/apply/applyManually
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Please select the veteran status which most accurately descr
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] View All Jobs {navigationItem-View All Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Credentialing Specialist
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Personal Data Statement
-  text: This Company is an Equal Opportunity Employer, and does not discriminate on the basis of race, gender, ethnicity, religion, national origin,
- {formField-hispanicOrLatino}
-label: Please indicate if you are Hispanic or Latino.
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicity}
-label: Please select the ethnicity which most accurately describes how you identify yourself.
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-gender}
-label: Please select your gender.
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-veteranStatus}
-label: Please select the veteran status which most accurately describes your status. This employer is a Government co
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: We respect the privacy of candidates for employment.
-  text: This Privacy Notice sets forth how we will use the information we obtain when you apply for a position through this career site. If you do n
-  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-17 04:20:35  blocked  Motus Technical Specialist @ American Bird Conservancy
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:24:03  skipped  SEO/GEO Specialist @ Archer Education
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4579613
-stage: page 3
-why: stuck on step 3; page says: ['Salary Range\nMust be a valid currency amount', 'Must be a valid currency amount', 'End Date\nEnd Date must be after Start Date']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: It is our policy to provide equal employment opportunity to all qualified persons without regard to race, creed, color, religious belief, se
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee Other
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-  text: Please list previous employers starting with most recent.
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference?
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-    (choice) --
-    (choice) Yes
-    (choice) No
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-  text: Please list educational institutions starting with most recently attended.
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: Did you Graduate?
-label: Degree Obtained
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 04:24:14  blocked  Business Development Center Specialist - Toyota of Colorado Springs @ Baxter Auto Group
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:24:23  blocked  Inside Sales & Revenue Development Specialist @ Innovative Concepts in Entertainment Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:24:34  blocked  Patient Account Specialist @ VALUE
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:27:02  blocked  Activities Coordinator $500 Sign on Bonus @ Senior Housing Options Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:27:12  blocked  Wellness Coordinator $500 Sign on Bonus @ Senior Housing Options Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:27:23  blocked  Medication Access Specialist - PST @ Visante Consulting LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:27:36  blocked  Safety Coordinator @ Golden Aluminum
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:27:47  blocked  HR Specialist @ Gills Point S Tire & Auto
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:30:46  skipped  Payroll Processor @ dutchbros
-url: https://dutchbros.wd1.myworkdayjobs.com/dbshops/job/Remote/Payroll-Processor_REQ-20463/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: I verify that the information contained in this application 
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Dutch Bros Careers
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Payroll Processor
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Personal Information
-  text: Completion of the form is entirely voluntary. Whatever your decision, it will not be considered in the hiring process or thereafter. Any inf
- {formField-ethnicity}
-label: Please select the ethnicity which most accurately describes how you identify yourself.
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-gender}
-label: Please select your gender.
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Please indicate if you are Hispanic or Latino?
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-veteranStatus}
-label: Please select the veteran status which most accurately describes your status.
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: TYPES OF PERSONAL INFORMATION COLLECTED:
-  text: Processing employment applications
-  text: Processing background and credit checks,
-  text: Preparing payroll and depositing wages into employee bank accounts,
-  text: Processing for scheduling and timecard data collection and leave management,
-  text: Processing data for participation in performance, engagement and wellness programs,
-  text: Enrolling employees in health benefits and other benefit programs,
-  text: Managing benefit programs such as health care and retirement plans,
-  text: Making disclosures as required by applicable legislation or regulations,
-  text: Responding to garnishment requests,
-  text: Compliance with garnishment procedures,
-  text: Responding to reference requests,
-  text: Responding to verification of employment requests,
-  text: Compliance with valid court orders, and
-  text: In an emergency to protect the physical safety of an employee or to notify emergency contacts.
-  text: RIGHTS OF EMPLOYEE ACCESS AND CORRECTION
-  text: I hereby certify that I have not knowingly withheld any information that might adversely affect my chances (initials) for employment and tha
-  text: I understand that nothing contained in the application, or conveyed during any interview which may be (initials) granted or during my employ
-  text: I understand that in compliance with federal law, if hired, I will be required to verify identity and eligibility to (initials) work in the 
- {formField-acceptTermsAndAgreements}
-label: I verify that the information contained in this application is complete, true, and accurate.*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-17 04:33:40  skipped  EPIC BILLING PB/HB LEARNING SPECIALIST @ OCHIN
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4549238
-stage: page 3
-why: stuck on step 3; page says: ['Available to Start (required)\nAvailable to Start (date) is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: EPIC BILLING PB/HB LEARNING SPECIALIST
-  text: Operations, Learning - Billing
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: OCHIN is an equal opportunity employer. This means that OCHIN is dedicated to providing equal employment opportunities to all employees and 
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: How did you hear about us? Glassdoor/Indeed Diversityjobs.com Employee Referral Facebook I am an OCHIN Employe
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study (required)
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 04:35:00  skipped  MEDICAL BILLING SPECIALIST-SOW @ OCHIN
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4297930
-stage: page 3
-why: stuck on step 3; page says: ['Available to Start (required)\nAvailable to Start (date) is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: MEDICAL BILLING SPECIALIST-SOW
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: OCHIN is an equal opportunity employer. This means that OCHIN is dedicated to providing equal employment opportunities to all employees and 
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: How did you hear about us? Glassdoor/Indeed Diversityjobs.com Employee Referral Facebook I am an OCHIN Employe
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study (required)
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 04:35:09  blocked  Credentialing Specialist @ iCare Health Solutions Enterprise
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:38:54  skipped  Executive Administrative Fellowship @ Stride Community Health Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4580293
-stage: page 3
-why: can't truthfully answer required: Please confirm that you have attached a cover letter explain; Please confirm that you understand the transcript submission; Please confirm that you understand the transcript submission
-  text: Executive Administrative Fellowship
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: Are you willing to comply with STRIDE’s vaccination and screening for communicable disease requirements, as well as federal, state, and loca
-  <input:radio #multiQuestionAnswer1898529_0 question-unanswered>
-label: Yes
-  <input:radio #multiQuestionAnswer1898529_1 question-unanswered>
-label: No
-label: Are you fluent in any language besides English? If so, please specify
-  <textarea:text #screener-question-1-textarea empty>
-  text: Will you now or in the future require sponsorship for employment visa status?
-  <input:radio #multiQuestionAnswer1898535_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1898535_1 question-unanswered>
-  text: Please confirm that you have attached a personal statement (maximum 500 words) outlining your professional goals, leadership interests, and 
-  <input:radio #multiQuestionAnswer1898537_0 question-unanswered>
-label: I have attached my personal statement as required
-  <input:radio #multiQuestionAnswer1898537_1 question-unanswered>
-label: I do not have a personal statement available to attach at this time. (Please note: Your application will be co
-  text: As part of the application process, you are required to submit a personal essay (maximum 500 words) addressing the following: What are your 
-  <input:radio #multiQuestionAnswer1898550_0 question-unanswered>
-label: Yes, I understand that I must submit a personal essay (maximum 500 words) answering the question above.
-  <input:radio #multiQuestionAnswer1898550_1 question-unanswered>
-label: No, I do not have a personal essay available to submit at this time (Please note: Your application will be con
-  text: Please confirm that you have attached a cover letter explaining your interest in the Executive Administrative Fellowship.
-  <input:radio #multiQuestionAnswer1898556_0 question-unanswered>
-label: I have attached my cover letter as required.
-  <input:radio #multiQuestionAnswer1898556_1 question-unanswered>
-label: I do not have a cover letter available to attach at this time (Please note: Your application will be considere
-  text: Please confirm that you understand the transcript submission process.
-  <input:radio #multiQuestionAnswer1898558_0 question-unanswered>
-label: I will attach my unofficial graduate transcript as required.
-  <input:radio #multiQuestionAnswer1898558_1 question-unanswered>
-label: I do not have my unofficial graduate transcript available to attach at this time (Please note: Your applicatio
-  <input:radio #multiQuestionAnswer1898559_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1898559_1 question-unanswered>
-  text: Please confirm that you understand the recommendation letter submission requirements. Three letters of recommendation are required and shoul
-  <input:radio #multiQuestionAnswer1898561_0 question-unanswered>
-label: I understand that three letters of recommendation are required and will upload them with my application or ema
-  <input:radio #multiQuestionAnswer1898561_1 question-unanswered>
-label: I do not have my letters of recommendation available at this time (Please note: Your application will be consi
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: Stride Community Health Center: Privacy Policy
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-17 04:39:03  blocked  Intake Specialist - Insurance Verification @ AdaptHealth LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:39:11  blocked  eCommerce Demand Forecasting Associate (Hybrid) @ Beauty Industry Group
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:41:12  blocked  Child Care Resource & Referral Specialist @ Early Learning Coalition of Duval Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:41:21  blocked  Summer Legal Associate, Litigation @ Center for Reproductive Rights
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:41:30  blocked  Intake Specialists - Scheduling @ AdaptHealth LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:42:24  skipped  Customer Service Billing Specialist @ albanymed
-url: https://albanymed.wd5.myworkdayjobs.com/albany_med/job/1275-Broadway-Albany-NY-12204/Customer-Service-Billing-Specialist_71800/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: Per Diem; Temporary
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers at Albany Medical Center
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Careers at Albany Medical Center {navigationItem-Careers at Albany Medical Center}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Customer Service Billing Specialist
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-4eb8ef6964f31001adb9ce5c0abd0000}
-label: Do you currently hold a professional registration, certification, or license?
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9ce5c0abd0000
- {formField-4eb8ef6964f31001adb9cef5c65f0002}
-label: Please select the shift you are willing to work:*
-  <input:checkbox #61c05149eff50100bc7f6c7262410000-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Day
-  <input:checkbox #61c05149eff50100bc7f6c7262410001-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Evening
-  <input:checkbox #61c05149eff50100bc7f6c7262410002-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Night
-  <input:checkbox #61c05149eff50100bc7f6c7262410003-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Weekend
-  <input:checkbox #61c05149eff50100bc7f6c7262410004-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Rotating
- {formField-4eb8ef6964f31001adb9cf8fa8440000}
-label: Please select the schedule you are willing to work:*
-  <input:checkbox #009d99c3c8760100bc9439570fbd0000-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Full Time
-  <input:checkbox #009d99c3c8760100bc9439570fbd0001-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Part Time
-  <input:checkbox #009d99c3c8760100bc9439570fbd0002-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Per Diem
-  <input:checkbox #009d99c3c8760100bc9439570fbd0003-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Temporary
- {formField-4eb8ef6964f31001adb9cf8fa8440005}
-label: What is your desired hourly rate or annual salary amount?*
-  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440005 required empty>
- {formField-4eb8ef6964f31001adb9cf8fa8440006}
-label: Are you a U.S. Citizen?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440006
- {formField-4eb8ef6964f31001adb9d02987410005}
-label: Are you at least 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410005
- {formField-4eb8ef6964f31001adb9d02987410008}
-label: Are you currently under investigation or have you been sanctioned, excluded or have had any adverse action bee
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410008
- {formField-4eb8ef6964f31001adb9d0c3353b0003}
-label: Are you presently debarred, suspended, proposed for debarment, or excluded by any Federal department or agency
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d0c3353b0003
- {formField-4eb8ef6964f31001adb9d15d05f10000}
-label: Have you ever been investigated by, or have you ever been subject to a disciplinary proceeding by a profession
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10000
- {formField-4eb8ef6964f31001adb9d15d05f10004}
-label: Are you able to perform the essential functions of the job for which you are enquiring, with or without a reas
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10004
- {formField-4eb8ef6964f31001adb9d1f6e8bb0001}
-label: Have you ever been employed by Albany Med?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d1f6e8bb0001
- {formField-4eb8ef6964f31001adb9d1f6e8bb0005}
-label: Have you been employed or are currently employed at any of the Albany Med Health System Affiliate Hospitals?*
-  <input:checkbox #9e954e79f37210015a3efbdc3f4d0000-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: N/A Not Applicable
-  <input:checkbox #9e954e79f37210015a3efc76c1830001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: Columbia Memorial Hospital
-  <input:checkbox #9e954e79f37210015a3efd107f5f0001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: Glens Falls Hospital
-  <input:checkbox #9e954e79f37210015a3efd107f5f0003-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: The Saratoga Hospital
- {formField-4eb8ef6964f31001adb9d290efa60001}
-label: If you have relatives that are presently employed by Albany Medical Center, please list name(s) and relationsh
-  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60001 empty>
- {formField-4eb8ef6964f31001adb9d290efa60002}
-label: During the preceding year, were you employed in a managerial, accounting, auditing, or similar capacity by Nat
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-17 04:46:50  skipped  Work Package Administrator – Business Aviation Sales @ Pilatus Aircraft USA Ltd
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4554031
-stage: page 4
-why: stuck on step 4; page says: ['Salary Range (required)\nMust be a valid currency amount', 'Must be a valid currency amount', 'End Date (required)\nEnd Date must be after Start Date']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: Work Package Administrator – Business Aviation Sales
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: WE DO NOT DISCRIMINATE ON THE BASIS OF RACE, COLOR, RELIGION, NATIONAL ORIGIN, SEX, AGE, DISABILITY, GENETIC INFORMATION, OR ANY OTHER STATU
-  text: Answer each question fully and accurately. No action can be taken on this application until you have answered all questions. In reading and 
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before?
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: Desired Salary Type (required)
-label: Salary Range (required)
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us? Online Job Board - Connecting Colorado Online Job Board - Glassdoor Online Job Boar
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-  text: Add last seven (7) years of employment history in consecutive order with present or most recent position listed first. Include military serv
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference?
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-    (choice) --
-    (choice) Yes
-    (choice) No
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-  text: Please indicate education or training which you believe qualifies you for the position you are seeking.
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} empty>
-label: School Type
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate?
-label: Degree Obtained
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: Pilatus Aircraft USA Ltd: Privacy Policy
-  [button] 
-
-=== 2026-10-17 04:51:06  skipped  Accounting Specialist @ GPO Federal Credit Union
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4557255
-stage: page 4
-why: stuck on step 4; page says: ['Available to Start (required)\nAvailable to Start (date) is required', 'Salary Range\nMust be a valid currency amount', 'Must be a valid currency amount', 'End Date (required)\nEnd Date must be after Start Date']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-s
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us? Indeed Facebook LinkedIn Current Employee Digital Ad Online Video/TV Online Radio A
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities (required)
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference?
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-    (choice) --
-    (choice) Yes
-    (choice) No
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type (required)
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-label: City (required)
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State (required)
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 04:53:01  skipped  Client Service Associate @ spsnorthamerica
-url: https://job-boards.greenhouse.io/spsnorthamerica/jobs/5442150008
-why: posting restricts AI-assisted applications: "may not use AI"
-# Client Service Associate
-  text: New York, New York, United States
-  [button] Apply
-  text: As a Client Services Associate, you aren’t just "handling mail"—you are the engine that keeps our workplace humming. You are a hospitality p
-  text: From managing high-stakes logistics to ensuring our tech and pantry are "VIP-ready," you turn routine office tasks into a seamless, premium 
-  text: This job description is not designed to cover or contain a comprehensive listing of activities, duties or responsibilities that are required
-# Why Join Us?
-  text: We value professionals who take initiative. This isn't just a "task" role; it’s a career path into facilities management, corporate hospital
-  text: Ready to be the MVP of our company? Apply today.
-  text: Note: Please inquire with the Human Resources team for benefit offerings per role as regular positions that routinely are under 30 hours/wee
-  text: SPS is a global workplace solutions and business transformation company operating in more than 20 countries
-  text: Our clients include leading organizations across banking, insurance, legal, higher education, professional services, and many Fortune 500 co
-  text: At SPS we embrace the uniqueness of our employees and are committed to the fair and equal treatment of all people, applicants, and employees
-  text: SPS provides equal employment opportunities (EEO) to all employees
-  text: To ensure a fair and authentic interview process, applicants may not use AI tools or any other form of real-time assistance during interview
-  text: SPS team members may use transcription or note-taking technology solely to support accurate interview documentation. No AI or automated deci
-  text: SPS offers reasonable accommodations
-  text: To view our privacy policy, click on the link below:
-  text: Interested in building your career at SPS North America? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-label: Location (City)*
-  <input:text #candidate-location required empty>
-  <input required empty>
-  [button] Locate me
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: School
-  <input:text #school--0 empty>
-  [button] 
-label: Degree
-  <input:text #degree--0 empty>
-  [button] 
-  [button] Add another
-label: If you provided a phone number, do you consent to receiving follow-up communication via text message (or SMS m
-  <input:text #question_18864166008 required empty>
-  [button] 
-  <input required empty>
-  text: If yes, you can always opt-out by replying STOP.
-label: Do you have a significant other and/or relative(s) currently working for SPS? Below please write: -"No" if you
-  <input:text #question_18864167008 required empty>
-label: Have you ever worked for Swiss Post Solutions, SPS, or any affiliate companies?*
-  <input:text #question_18864168008 required empty>
-  [button] 
-  <input required empty>
-label: If you have been REFERRED into this position by a current SPS employee, please state their name below. (If you
-  <input:text #question_18864169008 empty>
-label: Do you have familiarity with basic office software, including Excel and Word? *
-  <input:text #question_18864170008 required empty>
-  [button] 
-  <input required empty>
-label: Are you currently legally authorized to work in the United States? (Without SPS work sponsorship)*
-  <input:text #question_18864171008 required empty>
-  [button] 
-  <input required empty>
-  text: All new hires will be required to provide proof of their identity and eligibility to work in the United States as required by the Form I-9 p
-label: Will you now or in the future require sponsorship for employment visa status (e.g. H-1B visa status)? *
-  <input:text #question_18864172008 required empty>
-  [button] 
-  <input required empty>
-  text: All employment offers are contingent upon completion of I-9 and verification of employment eligibility.
-# Company Standard Application Demographic Questions
-  text: We invite applicants to share their demographic background. If you choose to complete this survey, your responses may be used to identify ar
-label: How would you describe your gender identity?
-  <input:text #<phone> empty>
-  [button] 
-label: How would you describe your racial/ethnic background?
-  <input:text #<phone> empty>
-  [button] 
-label: Are you a veteran or active member of the United States Armed Forces?
-  <input:text #<phone> empty>
-  [button] 
-label: Are you a former or current military spouse of an active member of the United States Armed Forces?
-  <input:text #<phone> empty>
-  [button] 
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in SPS North America’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status u
-label: Gender
-  <input:text #gender empty>
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  <input:text #veteran_status empty>
-  [button] 
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-17 04:53:09  blocked  Medical Compliance Auditor @ VMG Health
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:53:15  blocked  Entry Level Express Technician - Toyota of Colorado Springs @ Baxter Auto Group
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:53:21  blocked  System Specialist @ Early Learning Coalition of Duval Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:57:22  skipped  Payroll and Labor Allocation Administrator @ Center For Family Life in Sunset Park Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4367674
-stage: page 4
-why: stuck on step 4; page says: ['Salary Range\nMust be a valid currency amount', 'Must be a valid currency amount', 'End Date\nEnd Date must be after Start Date']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: Payroll and Labor Allocation Administrator
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: Center For Family Life in Sunset Park, Inc. is an Equal Employment Opportunity Employer.
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before?
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: Desired Salary Type
-label: Salary Range
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee HireNYC B
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Have you worked with us before?
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  text: End Date must be after Start Date
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-  text: Please provide your highest level of completed educational level.
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Graduation Date (required)
-  <input:text #txt-educationHistory-graduationDate-0 {txt-educationHistory-graduationDate-0} filled>
-  [button]  {educationHistory.graduationDate.0.picker-button} opens-dialog
-(dialog)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: Center For Family Life in Sunset Park Inc: Privacy Policy
-  [button] 
-
-=== 2026-10-17 04:57:31  blocked  Career Specialist (Bilingual Preferred) @ Big Brothers Big Sisters of Long Island
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 04:58:09  unconfirmed  Patient Engagement Specialist @ kivo-health
-url: https://jobs.ashbyhq.com/kivo-health/40912ac2-3af6-4b14-9217-5ac469a52feb/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'to work in the US? Yes No Location Are you willing to work Pacific Time Zone hours (~9am-5pm)? Yes No Tell us why this role is exciting to you! Submit Application Powered by Privacy PolicySecurityVulnerability Disclosur
-# Patient Engagement Specialist
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: $28 – $31 per hour • Offers Equity • Offers Bonus • This role is eligible for incentive compensation
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: LinkedIn URL
-  <input:url #8ae3d021-8dae-4c3f-845e-08e943cf408c filled>
-label: Are you authorized to work in the US?
-  [button] Yes
-  [button] No
-  <input:checkbox name=616e8361-b9d5-402f-8c49-da7678915b3e question-answered>
-label: Location
-  <input filled>
-  [button] 
-label: Are you willing to work Pacific Time Zone hours (~9am-5pm)?
-  [button] Yes
-  [button] No
-  <input:checkbox name=795daeec-0a48-4219-a76e-b72fe8146857 question-answered>
-label: Tell us why this role is exciting to you!
-  <textarea #3a000595-a7da-4421-83ca-c01c3481e725 required filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-10-17 05:04:48  blocked  Benefit Specialist, CDH @ National Benefit Services, LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:05:00  blocked  Credentialing Specialist (Fully Remote) @ Aspirion
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:05:10  blocked  Pooled Trust Administrator @ AIM Services Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:05:21  blocked  Eligibility Specialist @ Lighthouse Autism Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:06:27  blocked  Accounting Specialist (AP/AR Clerk) @ Tagawa Greenhouse Ent.
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:08:06  blocked  Acquisition Specialist @ Groove Toyota
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:08:14  blocked  Warehouseperson Trainee - 1st shift @ Select Division Career Page
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:09:19  blocked  Customer Service Specialist @ Transwest
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4544039
-stage: page 6
-why: not a real application form (34 fields, no résumé upload); page shows: information-section:My Information
-Edit
-<first> Delg; "<first>_<middle>_delgado_ortega_resume_uploaded":<first>_<middle>_delgado_ortega; screener-questions:Additional Questions
-Edit
-We e; references-section:References
-Edit
-<first> Alejandr; eeo-section:Equal Employment Opportunity
-E; btnSubmit:Submit
-  text: Customer Service Specialist
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-# My Information
-# <first> <last>
-# Preferred First Name
-# Middle Name
-# Desired Salary
-# LinkedIn Profile URL
-  text: https://www.linkedin.com/in/-<first>-<middle>-<last>-a26625220
-# Referred By
-# How did you hear about us?
-# Do you give us permission to text you?
-# Have you worked with us before?
-# Resume (required)
-# Additional Questions
-# We endeavor to make this application accessible to all users. If you would like to contact us regarding the ac
-# Are you at least 18 years of age?
-# If hired, can you furnish proof that you are eligible to work in the United States?
-# Have you ever been employed by Transwest as a regular employee, temporary employee,contractor, or intern?
-# The hiring process will consist of a phone interview, manager(s) interview, reference checks, pre-employment a
-# Desired Salary
-# Do you have relatives employed by our company? If yes, who and what is your relation to them?
-# If you were referred, please tell us the name of the referring employee.
-  text: I wasn't referred by an employee for this role, so I don't have a name to share. I actually came across the position through a job board onl
-  text: What caught my attention was the opportunity to provide account support and coordinate directly with customers and vendors, which aligns wel
-# What is your home address?
-# Have you ever had a Daimler or ARC Login before? If so, where?
-# Are you able to perform the essential job requirements of the position for which you are applying with or with
-# If you possess a CDL, please select class.
-# References
-# <full>
-# Equal Employment Opportunity
-# Gender
-# Ethnicity
-# Disability
-  text: No, I do not have a disability and have not had one in the past
-# Veteran
-  text: I am not a protected veteran
-label: Are you authorized to work lawfully in the United States? (required)
-  text: In compliance with federal law, all persons hired will be required to verify identity and eligibility to work in the United States and to co
-  text: I understand that any false statement or omission made herein is sufficient reason for rejection of this application or termination of subse
-  <input:checkbox #applyAcknowledgement question-answered>
-label: I have read and accept the above acknowledgement (required)
-  [button] Submit {btnSubmit}
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-17 05:09:32  blocked  Luxury Sales Specialist, Uniworld @ The Travel Corporation
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:09:38  blocked  Patient Care Coordinator I @ Refocus Eye Health
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:09:47  blocked  Medication Access Specialist - Pacific Time (PST) @ Visante Consulting LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:33:41  blocked  Production Associate I - All Shifts @ SCHLUTER SYSTEMS L.P
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:33:51  blocked  Production Associate I - Profile Stamping 1st Shift, 2nd & 3rd shift @ SCHLUTER SYSTEMS L.P
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:34:00  blocked  EPIC LEARNING SPECIALIST-CADENCE/PRELUDE @ OCHIN
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:34:08  blocked  MEDICAL CODING SPECIALIST-RISK ADJUSTMENT @ OCHIN
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:34:16  blocked  Dispatcher (PST) @ AdaptHealth LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:34:23  blocked  Patient Care Coordinator - Remote @ Refocus Eye Health
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:35:38  skipped  Junior Designer @ Carrier Process Equipment Group, Inc. (CPEG)
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4521199
-stage: page 3
-why: stuck on step 3; page says: ['Available to Start (required)\nAvailable to Start (date) is required', 'Salary Range (required)\nMust be a valid currency amount', 'Must be a valid currency amount']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} filled>
-label: Desired Salary Type (required)
-label: Salary Range (required)
-  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} filled>
-  text: Must be a valid currency amount
-label: to
-  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} filled>
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee Social Me
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 05:35:50  blocked  Social Worker, LCSW  (Survivorship Program)  SIGN ON BONUS!! @ RPCI Oncology PC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:36:01  blocked  Packaging Specialist @ CAYUGA MILK INGREDIENTS LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:36:12  blocked  Gummy Line Machine Operator Trainee @ Enstrom Candies Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:36:24  blocked  Behavioral Health Support Specialist @ Oak Orchard Community Health Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:36:35  blocked  Aquatics Specialist @ Breckenridge Grand Vacations
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:39:52  skipped  Payroll Specialist @ Living Resources Career Opportunties
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4533009
-stage: page 3
-why: stuck on step 3; page says: ['Available to Start (required)\nAvailable to Start (date) is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: Applicants have rights under Federal Employment Laws. Please see the websites below for more information.
-  text: https://www.dol.gov/agencies/whd/posters/fmla
-  text: https://www.dol.gov/agencies/whd/posters/employee-polygraph-protection-act
-  text: https://www.dol.gov/sites/dolgov/files/OFCCP/regs/compliance/posters/pdf/<file>
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-  text: Available to Start (date) is required
-label: How did you hear about us? Indeed Company Website Friend or Family Member Current Employee Facebook Post Linke
-label: Referred by (required)
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Skills
-  <input:text #info.skills empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate?
-label: Degree Obtained
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-10-17 05:40:02  blocked  Aircraft Parts Administrator @ Pilatus Aircraft USA Ltd
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:40:09  blocked  Information Associate (Req 101107) @ Whitney M Young Jr Health Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:40:15  blocked  Yard Cleaning Specialist @ CGCB Associates LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
-why: no application form found on page
-# 
-# We're sorry, that job does not exist or is not currently active.
-  text: SMS Terms and Conditions and Privacy Policy
-
-=== 2026-10-17 05:40:59  skipped  Self-Direction Payroll Specialist @ AIM Services Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4528481
-stage: page 1
-why: can't truthfully answer required: May We Contact for Reference? (required) *
-  text: Self-Direction Payroll Specialist
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  <input:file #btn-resume no-file>
-  [button] Select Resume to Upload {btn-resume}
-  <input:checkbox #useAttachedResumeToFillOutApplication question-answered>
-label: Fill out application with my resume
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} empty>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} empty>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} empty>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} empty>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} empty>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} empty>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} empty>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State Select a state
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: How did you hear about us?(optional) Online Job Board AIM Website Friend or Family Member Current Employee Sel
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-  text: Please include at least the last 7 years of work history. Include military service assignments and positions related volunteer activities.
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} empty>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} empty>
-label: Company Phone Number (required)
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} empty>
-label: Responsibilities (required)
-  <textarea:text #workHistory.responsibilities.0 empty>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} empty>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} empty>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference? (required)
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} empty>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} empty>
-label: School Type (required)
-label: Did you Graduate? (required)
-label: Country
-label: City (required)
-  <input:text #educationHistory.city.0 {educationHistoryCity0} empty>
-label: State (required)
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: AIM Services Inc: Privacy Policy
-  [button] 
-
 === 2026-10-17 05:41:05  blocked  Junior Graphic Designer @ Support Center
 url: https://recruiting.paylocity.com/Recruiting/Jobs/JobNotFound
 why: no application form found on page
@@ -5692,4 +3765,1894 @@ label: Review
   [button] Back {pageFooterBackButton}
   [button] Save and Continue {pageFooterNextButton}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 17:55:14  unconfirmed  Commercial Construction Project Engineer- 2027 @ hitt
+url: https://hitt.wd503.myworkdayjobs.com/hitt/job/New-York-NY/Commercial-Construction-Project-Engineer--2027_JR102831/apply
+stage: Review
+why: no confirmation after submit; page errors: ['Error-Page Error\nAnswer all required questions to submit this application.']; server said: POST 3.myworkdayjobs.com/wday/cxs/hitt/jobapplication/de7e9e55b03890022abdb62e38900000/finalize -> 200; page ends: ' applicable) No Response Date 10/18/2026 Please check one of the boxes below: No, I do not have a disability and have not had one in the past Back 
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# HITT Jobs
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Commercial Construction Project Engineer- 2027
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+label: completed step 5 of 7
+label: Voluntary Disclosures
+label: completed step 6 of 7
+label: Self Identify
+{progressBarActiveStep} current step 7 of 7 Review
+label: current step 7 of 7
+label: Review
+# Review
+# Errors Found
+! Error-Page Error Answer all required questions to submit this application. {errorHeading}
+{applyFlowReviewPage} (shows your answers back; not recorded)
+# My Information
+# Legal Name
+# Address
+# Email Address
+# Phone
+# My Experience
+# Work Experience
+# Education
+# Certifications
+# Languages
+# Skills
+# Resume/CV
+# Application Questions 1 of 2
+# Application Questions 2 of 2
+# Voluntary Disclosures
+# Personal Data Statement
+# Terms and Conditions
+# Self Identify
+  [button] Back {pageFooterBackButton}
+  [button] Submit {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 17:57:05  unconfirmed  Operations Specialist @ janestreet
+url: https://www.janestreet.com/join-jane-street/apply/8360490002/
+stage: page 1
+why: no confirmation after submit; page errors: ['This field is required.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Street.'
+  <input empty>
+# Operations Specialist
+  <input:checkbox name=position question-answered>
+  <input:checkbox name=city question-answered>
+label: Legal first name *
+  <input:text #first_name required filled>
+label: Preferred first name
+  <input:text #preferred_name filled>
+label: Legal last name *
+  <input:text #last_name required filled>
+label: Email *
+  <input:email #email required filled>
+label: Email confirmation *
+  <input:text #email_confirmation required filled>
+label: Phone *
+  [button] +1
+  <input:tel #phone-number required filled>
+label: Pronouns (Select one or more.)
+  text: self-describe, please specify:
+  <input:text #pronouns filled>
+label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
+  <input:text #linkedin_profile filled>
+  <input:checkbox name=category question-answered>
+label: Current or most recent employer *
+  <input:text #current_position required filled>
+  [button] Select an option
+label: This field is required.
+  <input:radio #recruiting_timelines-true required question-unanswered>
+label: Yes
+  <input:radio #recruiting_timelines-false required question-unanswered>
+label: No
+  <input:radio #interviewed-true required question-unanswered>
+  <input:radio #interviewed-false required question-unanswered>
+  <input:radio #student-true required question-unanswered>
+  <input:radio #student-false required question-unanswered>
+  text: Please search via full name or acronym before selecting "Other"
+  [button] Select an option
+  text: We may use this email to verify your enrollment.
+  <input:email #university_email required filled>
+  <input:checkbox #no-university-email question-unanswered>
+label: I don't have a school email
+label: What degree are you currently pursuing? *
+  [button] Select an option
+  [button] Select an option
+  text: Secondary Major / Field of study
+  [button] Select an option
+label: Month
+  [button] Select an option
+label: Year
+  [button] Select an option
+  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
+  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
+  text: Why you're interested in Jane Street
+  text: If you have a job now, why you're looking for a new one
+  <textarea #comments empty>
+label: Upload your resume as a PDF file *
+  <input:file #resume required has-file>
+  text: Global Applicant Privacy Notice
+  [button] Submit
+  text: Jane Street is an Equal Opportunity Employer
+  text: Fraud and Impersonation Warnings
+  text: Autoriteit Financiële Markten
+
+=== 2026-10-18 17:59:04  skipped  Operations Administrator @ Fresh Group LTD
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4525700
+stage: page 2
+why: can't truthfully answer required: Are you able to lift up to 25 pounds? (required)
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: Are you legally eligible to work in the U.S.?
+  <input:radio #multiQuestionAnswer307036_0 question-unanswered>
+label: Yes
+  <input:radio #multiQuestionAnswer307036_1 question-unanswered>
+label: No
+  text: Are you able to lift up to 25 pounds?
+  <input:radio #multiQuestionAnswer307037_0 question-unanswered>
+  <input:radio #multiQuestionAnswer307037_1 question-unanswered>
+  text: Do you have a valid drivers license?
+  <input:radio #multiQuestionAnswer307038_0 question-unanswered>
+  <input:radio #multiQuestionAnswer307038_1 question-unanswered>
+  text: Which of the following is your minimum acceptable annual salary?
+  <input:radio #multiQuestionAnswer307039_0 question-unanswered>
+label: Below $10.00
+  <input:radio #multiQuestionAnswer307039_1 question-unanswered>
+label: $10.00 - $12.00
+  <input:radio #multiQuestionAnswer307039_2 question-unanswered>
+label: $12.00 - $13.00
+  <input:radio #multiQuestionAnswer307039_3 question-unanswered>
+label: $13.00 - $15.00
+  <input:radio #multiQuestionAnswer307039_4 question-unanswered>
+label: More than $15
+label: What languages do you speak?
+  <textarea:text #screener-question-4-textarea empty>
+  text: What is your preferred shift?
+  <input:checkbox #multiQuestionAnswer307050_0 question-unanswered>
+label: First Shift Full-Time (40+ hours per week)
+  <input:checkbox #multiQuestionAnswer307050_1 question-unanswered>
+label: Second Shift Full-Time (40+ hours per week)
+  <input:checkbox #multiQuestionAnswer307050_2 question-unanswered>
+label: Part Time Mornings (4 - 5 hours per day)
+  <input:checkbox #multiQuestionAnswer307050_3 question-unanswered>
+label: Part Time Afternoons (4 - 5 hours per day)
+  <input:checkbox #multiQuestionAnswer307050_4 question-unanswered>
+label: Other
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-10-18 18:02:06  skipped  Executive Administrative Fellowship @ Stride Community Health Center
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4580293
+stage: page 4
+why: can't truthfully answer required: Years Known (required) *; Years Known (required) *
+  text: Executive Administrative Fellowship
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address (required)
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number (required)
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  <input:text #references.name.2 {referencesName2} empty>
+  <input:text #references.email.2 {referencesEmail2} empty>
+  <input:text #references.phone.2 {referencesPhone2} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: Stride Community Health Center: Privacy Policy
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-10-18 18:03:57  skipped  Field Process Engineering at ASM: Where Innovation Meets Impact @ asm
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: can't truthfully answer required: Please select the country where you hold citizenship / perma
+  text: Interested in building your career at ASM? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: School*
+  <input:text #school--0 required empty>
+  [button] 
+  <input required empty>
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  <input required empty>
+label: Discipline*
+  <input:text #discipline--0 required empty>
+  [button] 
+  <input required empty>
+label: Start date year*
+  <input:number #start-year--0 required empty>
+label: End date year*
+  <input:number #end-year--0 required empty>
+  [button] Add another
+label: Are you legally authorized to work in this country?*
+  <input:text #question_9577249101 required empty>
+  [button] 
+  <input required empty>
+label: Will you now or in the future require visa sponsorship for employment?*
+  <input:text #question_9577250101 required empty>
+  [button] 
+  <input required empty>
+label: Do you have any agreement with your current employer or any other employer that you had in the past 2 years (s
+  <input:text #question_9577251101 required empty>
+  [button] 
+  <input required empty>
+label: Have you ever been employed with ASM before?*
+  <input:text #question_9577252101 required empty>
+  [button] 
+  <input required empty>
+label: Have you been convicted of a misdemeanor or a felony in the past 7 years? Do not include convictions that have
+  <input:text #question_9577253101 required empty>
+  [button] 
+  <input required empty>
+label: ASM may work with technologies subject to U.S. export control regulations. The following questions are being a
+  <input:text #question_9577254101 required empty>
+  [button] 
+  <input required empty>
+label: Please select the country where you hold citizenship / permanent residence. If you have dual citizenship / per
+  <input:text #question_9577255101 required empty>
+  [button] 
+  <input required empty>
+label: I opt-in to receive occasional messages and/or emails from ASM with respect to career opportunities and applic
+  <input:text #question_9577256101 empty>
+  [button] 
+label: Have you ever relinquished, abandoned, or lost citizenship, nationality or permanent residence in the country 
+  <input:text #question_9577257101 required empty>
+  [button] 
+  <input required empty>
+label: I hereby authorize ASM to contact, obtain and verify the accuracy of information contained in this application
+  <input:text #question_9577258101 required empty>
+  [button] 
+  <input required empty>
+label: I have read and agree to the Privacy notice and Terms of use.*
+  <input:text #question_9577259101 required empty>
+  [button] 
+  <input required empty>
+label: How would you describe your gender?
+  <input:text #question_9577260101 empty>
+  [button] 
+# EEOC Demographic Questions (US only)
+  text: As an equal opportunity employer, we hire without consideration to race, religion, creed, color, national origin, age, gender, sexual orient
+label: How would you describe your racial/ethnic background? (mark all that apply)
+  <input:text #<phone> empty>
+  [button] 
+label: Are you a veteran or active member of the United States Armed Forces?
+  <input:text #<phone> empty>
+  [button] 
+  <input:checkbox #gdpr_demographic_data_consent_given_1 question-unanswered>
+label: By checking this box, I consent to ASM collecting, storing, and processing my responses to the demographic dat
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-18 18:04:13  skipped  Associate Data Analyst @ ispottv
+url: https://job-boards.greenhouse.io/ispottv/jobs/4742654005
+stage: page 1
+why: can't truthfully answer required: iSpot cannot support visa sponsorships or transfers for this
+# Associate Data Analyst
+  [button] Apply
+  text: Immigration / Work Authorization Notice:
+  text: iSpot competes for the best talent. Our compensation packages consist of salary and equity in one of Seattle’s hottest start-ups, as well as
+# What You’ll Be Part Of:
+  text: As a key member of the Client Data Science team, you will be responsible for a variety of critical tasks, including:
+  text: Collaborating on complex problems, both independently and as part of a team, while writing and optimizing R, Python, or SQL scripts for effe
+  text: Adapting existing tools and methods to meet evolving needs, balancing workloads across various projects, and leveraging solid machine learni
+  text: Collecting, aggregating, and manipulating data from multiple sources, applying analytical techniques to derive insights, and creating clear 
+  text: Engaging with internal and external teams to clarify requirements, address challenges, and develop tailored solutions, while documenting pro
+  text: Communicating effectively with diverse audiences, translating complex findings into accessible formats through written reports and presentat
+# Responsibilities:
+# Your expected workday will consist of:
+  text: 95% Hands on: Reporting, Coding, Debugging, Developing, Methods, etc
+# Qualifications and Education Requirements:
+  text: Education: Bachelor's degree in a quantitative or social science field;
+  text: Coding Experience: 1+ year coding in SQL or Python;
+  text: Technical Knowledge: Introductory knowledge of Analytics, Statistics, and AI coding tools;
+  text: Communication: Exceptional written and verbal communication with internal stakeholders at all levels. Must be proactive and curious
+# Preferred Skills:
+  text: Experience with analytical and data processing software, such as AWS s3, Snowflake, and Databricks
+  text: Prior role in the Ad Tech industry
+# Additional Notes:
+# iSpot’s Client Data Science team expects all candidates to have a range of soft skills, including but not limi
+  text: We are committed to providing competitive, market-informed compensation.
+  text: The cash compensation above includes base salary, variable commission for employees in eligible roles, and annual bonus targets for eligible
+  text: For more information on total rewards package, go
+  text: Hybrid & Flexible Workplace Policy
+  text: iSpot supports a hybrid and flexible workplace. Depending on location and work responsibilities, employees may be designated as full-time or
+  text: Those local or living in surrounding areas to one of our offices (Bellevue, WA or New York, NY) will work a hybrid schedule, coming into the
+  text: If you don't feel you met every single requirement for the role, don't rule yourself out. Please apply anyway!
+  text: iSpot is an equal opportunity employer. All applicants will receive consideration for employment without regard to race, ethnicity, gender, 
+  text: Interested in building your career at iSpot? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: LinkedIn Profile
+  <input:text #question_9159206005 empty>
+label: Website
+  <input:text #question_9159207005 empty>
+label: Where are you currently located?*
+  <input:text #question_9159208005 required empty>
+  text: We have offices around the country and may offer the opportunity to work remotely.
+label: Are you currently eligible to work in the United States of America?*
+  <input:text #question_9159209005 required empty>
+  [button] 
+  <input required empty>
+label: Do you now or in the future require visa sponsorship to continue working in the United States?*
+  <input:text #question_9159210005 required empty>
+  [button] 
+  <input required empty>
+label: iSpot cannot support visa sponsorships or transfers for this role. Please confirm you do not need visa sponsor
+  <input:text #question_9159211005 required empty>
+  [button] 
+  <input required empty>
+label: Is your current work-in State one of the below: AK, AR, HI, KY, LA, MS, NE, NM, ND, OH, OK, SD, UT, VT, or WY
+  <input:text #question_9159212005 empty>
+  [button] 
+label: Preferred First Name(s)*
+  <input:text #question_9159213005 required empty>
+  text: Combined with Preferred Last Name(s) to format iSpot email address
+label: Preferred Last Name(s)*
+  <input:text #question_9159214005 required empty>
+  text: Combined with Preferred First Name(s) to format an iSpot email address
+label: What programming languages and data tools have you used hands-on?
+  <input:checkbox #question_9175395005[]_24723629005 question-unanswered>
+label: SQL
+  <input:checkbox #question_9175395005[]_24723630005 question-unanswered>
+label: Python
+  <input:checkbox #question_9175395005[]_24723631005 question-unanswered>
+label: R
+  <input:checkbox #question_9175395005[]_24723632005 question-unanswered>
+label: Excel or Google Sheets
+  <input:checkbox #question_9175395005[]_24723633005 question-unanswered>
+label: Tableau, Power BI, or other visualization tools
+  <input:checkbox #question_9175395005[]_24723634005 question-unanswered>
+label: Other
+  <input:checkbox #question_9175395005[]_24723635005 question-unanswered>
+label: No hands-on experience yet
+label: How much hands-on experience do you have writing SQL queries or Python scripts to analyze, manipulate, or proc
+  <input:text #question_9175396005 empty>
+  [button] 
+label: Have you worked with advertising technology (AdTech), marketing analytics, TV measurement, or campaign perform
+  <input:checkbox #question_9175397005[]_24731171005 question-unanswered>
+label: Yes, 0-1 years directly in AdTech or TV measurement
+  <input:checkbox #question_9175397005[]_24731172005 question-unanswered>
+label: Yes, 1-2 years directly in AdTech or TV measurement
+  <input:checkbox #question_9175397005[]_24731173005 question-unanswered>
+label: Yes, 2+ years directly in AdTech or TV measurement
+  <input:checkbox #question_9175397005[]_24723645005 question-unanswered>
+label: No relevant experience yet
+label: Are you willing to work Pacific Standard Time hours?
+  <input:text #question_9177643005 empty>
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below
+
+=== 2026-10-18 18:08:02  skipped  Sales Readiness Coordinator @ lambweston
+url: https://lambweston.wd1.myworkdayjobs.com/lamb_external/job/Idaho-USA-Remote/Sales-Readiness-Coordinator_Req-271980/apply
+stage: Application Questions 2 of 2
+why: can't truthfully answer required: All Days; Monday; Tuesday; Wednesday; Thursday; Friday; Saturday; Sunday
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Sales Readiness Coordinator
+label: completed step 1 of 8
+label: My Information
+label: completed step 2 of 8
+label: My Experience
+label: completed step 3 of 8
+label: Application Questions 1 of 2
+{progressBarActiveStep} current step 4 of 8 Application Questions 2 of 2
+label: current step 4 of 8
+label: Application Questions 2 of 2
+label: step 5 of 8
+label: Voluntary Disclosures
+label: step 6 of 8
+label: Self Identify
+label: step 7 of 8
+label: Take Assessment
+label: step 8 of 8
+label: Review
+# Application Questions 2 of 2
+{applyFlowSecondaryQuestionsPage}
+ {formField-cec5f362256301af37a5445b5b019800}
+label: What shift(s) are you available to work?*
+  <input:checkbox #9b41abbc671101c3b6893fb91e882ec2-cec5f362256301af37a5445b5b0 required question-unanswered>
+label: All Shifts
+  <input:checkbox #9b41abbc6711017d88983fb91e882fc2-cec5f362256301af37a5445b5b0 required question-unanswered>
+label: Day Shift
+  <input:checkbox #9b41abbc671101efb1a43fb91e8830c2-cec5f362256301af37a5445b5b0 required question-unanswered>
+label: Swing Shift
+  <input:checkbox #9b41abbc6711018bedb03fb91e8831c2-cec5f362256301af37a5445b5b0 required question-unanswered>
+label: Graveyard Shift
+  <input:checkbox #9b41abbc671101fc3dbd3fb91e8832c2-cec5f362256301af37a5445b5b0 required question-unanswered>
+label: Rotation Shift
+ {formField-cec5f362256301c248ed445b5b019e00}
+label: What days are you available to work?*
+  <input:checkbox #9b41abbc671101b16c24e5ca1e8879c2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: All Days
+  <input:checkbox #9b41abbc671101a9e231e5ca1e887ac2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Monday
+  <input:checkbox #9b41abbc671101b84a3fe5ca1e887bc2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Tuesday
+  <input:checkbox #9b41abbc6711019da14be5ca1e887cc2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Wednesday
+  <input:checkbox #9b41abbc671101ab2599e7ca1e887dc2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Thursday
+  <input:checkbox #9b41abbc671101999aa7e7ca1e887ec2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Friday
+  <input:checkbox #9b41abbc671101953db5e7ca1e887fc2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Saturday
+  <input:checkbox #9b41abbc671101c525c2e7ca1e8880c2-cec5f362256301c248ed445b5b0 required question-unanswered>
+label: Sunday
+ {formField-cec5f36225630165dc06455b5b01a700}
+label: If required, will you be able to work overtime?*
+  <input:checkbox #cec5f362256301ba80bca7575b018800-cec5f36225630165dc06455b5b0 required question-unanswered>
+label: Yes
+  <input:checkbox #cec5f36225630142afd1a7575b018900-cec5f36225630165dc06455b5b0 required question-unanswered>
+label: No
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:12:34  blocked  Business Analyst - Gooding Christie's (1year Fixed Term Contract) @ christies
+url: https://christies.wd3.myworkdayjobs.com/Christies_Careers/job/Santa-Monica/Business-Analyst---Gooding-Christie-s_JR00015183/apply/applyManually
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email (Workday says: You may have entered the wrong email address or password or your account might be locked.): sign in there once yourself (make the account, or use 'Forgot your password?') with your ACCOUNT_PASSWORD and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Welcome to the Christie's Career Site.
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Business Analyst - Gooding Christie's (1year Fixed Term Contract)
+{progressBarActiveStep} current step 1 of 5 Create Account/Sign In
+label: current step 1 of 5
+label: Create Account/Sign In
+label: step 2 of 5
+label: My Information
+label: step 3 of 5
+label: My Experience
+label: step 4 of 5
+label: Application Questions
+label: step 5 of 5
+label: Review
+{signInContent}
+# Sign In
+! You may have entered the wrong email address or password or your account might be locked. {errorMessage}
+ {formField-email}
+label: Email Address*
+  <input:text #input-14 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-15 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #48a028b7-ad56-48e1-bb7c-cde203bee8c3 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:15:08  skipped  2027 Commercial Credit Analyst Program - Cleveland @ keybank
+url: https://keybank.wd5.myworkdayjobs.com/external_career_site/job/Brooklyn-OH/XMLNAME-2027-Commercial-Credit-Analyst-Program---Cleveland_R-41392/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: I agree to the Arbitration Agreement and the Agreement to Se
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Key Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Key Careers Homepage {navigationItem-Key Careers Homepage}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# 2027 Commercial Credit Analyst Program - Cleveland
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Voluntary Self-Identification
+  text: Recently Separated Veterans
+  text: Armed Forces Service Medal Veteran
+  text: Active Duty Wartime or Campaign Badge Veteran
+  text: https://www.opm.gov/policy-data-oversight/veterans-services/vet-guide/
+ {formField-veteranStatus}
+label: Veteran Status*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+ {formField-ethnicity}
+label: Race/Ethnicity*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-gender}
+label: Gender*
+  [dropdown] nothing chosen #personalInfoUS--gender
+# Terms and Conditions
+  text: I understand that my application will not be accepted, and I will not be permitted to proceed further in the pre-employment process unless I
+  text: By checking the "I agree" checkbox in the external employment application, I acknowledge that I have read the Arbitration Agreement and the 
+ {formField-acceptTermsAndAgreements}
+label: I agree to the Arbitration Agreement and the Agreement to Sever.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] California job applicants, please click here to view Key’s p {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:17:14  skipped  TechEdge Service Coordinator @ pattersoncompanies
+url: https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Rochester-NY/TechEdge-Service-Coordinator_R110567/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Checking the box is equivalent to a handwritten signature.*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Patterson Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# TechEdge Service Coordinator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+label: completed step 4 of 6
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 6 Voluntary Disclosures
+label: current step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Voluntary Self-Identification
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-gender}
+label: Please select your gender.
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Please indicate if you are Hispanic or Latino.
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Please select the veteran status which most accurately describes your status. Protected Veterans status includ
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Patterson Companies, Inc., and its affiliated companies is an equal opportunity employer and affirms the right of every applicant and employ
+  text: <email>.
+  text: For Rhode Island Applicants:
+  text: Applicant’s Acknowledgment
+  text: Certification of Information
+  text: Conditional Offers of Employment
+  text: , my employment is at-will
+  text: Obligation to Previous Employers
+  text: Return of Company Property
+  text: For California, Cincinnati (Ohio), Colorado, Columbus (Ohio), Connecticut, Delaware, District of Columbia, Hawaii, Illinois, Kansas City (Mi
+  text: For Massachusetts Applicants:
+  text: I UNDERSTAND THAT UNDER MARYLAND LAW, AN EMPLOYER MAY NOT REQUIRE OR DEMAND, AS A CONDITION OF EMPLOYMENT, PROSPECTIVE EMPLOYMENT OR CONTINU
+  text: I agree to the above terms and conditions and confirm that I have read applicable state and local notices. I further agree that checking the
+ {formField-acceptTermsAndAgreements}
+label: Checking the box is equivalent to a handwritten signature.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] Candidate and Employee Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:19:31  skipped  Data Analyst @ Venture Forthe
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4592989
+stage: page 3
+why: can't truthfully answer required: Years Known (required) *; Years Known (required) *
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number (required)
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-10-18 18:21:40  skipped  Revenue Assurance Coordinator @ interiorlogicgroup
+url: https://interiorlogicgroup.wd5.myworkdayjobs.com/careersatilg/job/Remote-Maryland/Revenue-Assurance-Coordinator_R-8214/apply
+stage: Application Questions
+why: can't truthfully answer required: On-Site; Hybrid; Remote Only
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Visit Us {navigationItem-Visit Us}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Revenue Assurance Coordinator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-0e83dd009506100161a2cd1ee5350000}
+label: Are you eligible to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e83dd009506100161a2cd1ee5350000
+ {formField-0e83dd009506100161a2cd1ee5350003}
+label: Will you now or in the future require sponsorship to work or maintain employment in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e83dd009506100161a2cd1ee5350003
+ {formField-0e83dd009506100161a2cdba1af00001}
+label: Are you at least 18 years of age?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e83dd009506100161a2cdba1af00001
+ {formField-0e83dd009506100161a2cdba1af00004}
+label: What are your pay requirements?*
+  <textarea #primaryQuestionnaire--0e83dd009506100161a2cdba1af00004 required empty>
+ {formField-0e83dd009506100161a2cdba1af00005}
+label: Are you able to perform the essential functions of the job for which you are applying, either with or without 
+  [dropdown] nothing chosen #primaryQuestionnaire--0e83dd009506100161a2cdba1af00005
+ {formField-0e83dd009506100161a2cdba1af00008}
+label: Please provide the type of work schedule that you are seeking? (Select all that apply)*
+  <input:checkbox #0e83dd0095061001613a1342e2a20002-0e83dd009506100161a2cdba1af required question-unanswered>
+label: On-Site
+  <input:checkbox #0e83dd0095061001613a1342e2a20003-0e83dd009506100161a2cdba1af required question-unanswered>
+label: Hybrid
+  <input:checkbox #0e83dd0095061001613a13dc7a640000-0e83dd009506100161a2cdba1af required question-unanswered>
+label: Remote Only
+  <input:checkbox #0e83dd0095061001613a13dc7a640001-0e83dd009506100161a2cdba1af required question-unanswered>
+label: Part Time
+ {formField-0e83dd009506100161a2ce5619f50004}
+label: How do your skills and experience align with this position?*
+  <textarea #primaryQuestionnaire--0e83dd009506100161a2ce5619f50004 required empty>
+ {formField-0e83dd009506100161a2ce5619f50005}
+label: Do you have any relatives who are employed with ILG?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0e83dd009506100161a2ce5619f50005
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link] ILG Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:22:11  unconfirmed  Data Specialist @ janestreet
+url: https://www.janestreet.com/join-jane-street/apply/6110602002/
+stage: page 1
+why: no confirmation after submit; page errors: ['This field is required.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Street.'
+  <input empty>
+# Data Specialist
+  <input:checkbox name=position question-answered>
+  <input:checkbox name=city question-answered>
+label: Legal first name *
+  <input:text #first_name required filled>
+label: Preferred first name
+  <input:text #preferred_name filled>
+label: Legal last name *
+  <input:text #last_name required filled>
+label: Email *
+  <input:email #email required filled>
+label: Email confirmation *
+  <input:text #email_confirmation required filled>
+label: Phone *
+  [button] +1
+  <input:tel #phone-number required filled>
+label: Pronouns (Select one or more.)
+  text: self-describe, please specify:
+  <input:text #pronouns filled>
+label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
+  <input:text #linkedin_profile filled>
+  <input:checkbox name=category question-answered>
+label: Current or most recent employer *
+  <input:text #current_position required filled>
+  [button] Select an option
+label: This field is required.
+  <input:radio #recruiting_timelines-true required question-unanswered>
+label: Yes
+  <input:radio #recruiting_timelines-false required question-unanswered>
+label: No
+  <input:radio #interviewed-true required question-unanswered>
+  <input:radio #interviewed-false required question-unanswered>
+  <input:radio #student-true required question-unanswered>
+  <input:radio #student-false required question-unanswered>
+  text: Please search via full name or acronym before selecting "Other"
+  [button] Select an option
+  text: We may use this email to verify your enrollment.
+  <input:email #university_email required filled>
+  <input:checkbox #no-university-email question-unanswered>
+label: I don't have a school email
+label: What degree are you currently pursuing? *
+  [button] Select an option
+  [button] Select an option
+  text: Secondary Major / Field of study
+  [button] Select an option
+label: Month
+  [button] Select an option
+label: Year
+  [button] Select an option
+  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
+  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
+  text: Why you're interested in Jane Street
+  text: If you have a job now, why you're looking for a new one
+  <textarea #comments empty>
+label: Upload your resume as a PDF file *
+  <input:file #resume required has-file>
+  text: Global Applicant Privacy Notice
+  [button] Submit
+  text: Jane Street is an Equal Opportunity Employer
+  text: Fraud and Impersonation Warnings
+  text: Autoriteit Financiële Markten
+
+=== 2026-10-18 18:24:20  skipped  Service Coordinator @ pattersoncompanies
+url: https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Checking the box is equivalent to a handwritten signature.*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Patterson Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Service Coordinator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+label: completed step 4 of 6
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 6 Voluntary Disclosures
+label: current step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Voluntary Self-Identification
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-gender}
+label: Please select your gender.
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Please indicate if you are Hispanic or Latino.
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Please select the veteran status which most accurately describes your status. Protected Veterans status includ
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Patterson Companies, Inc., and its affiliated companies is an equal opportunity employer and affirms the right of every applicant and employ
+  text: <email>.
+  text: For Rhode Island Applicants:
+  text: Applicant’s Acknowledgment
+  text: Certification of Information
+  text: Conditional Offers of Employment
+  text: , my employment is at-will
+  text: Obligation to Previous Employers
+  text: Return of Company Property
+  text: For California, Cincinnati (Ohio), Colorado, Columbus (Ohio), Connecticut, Delaware, District of Columbia, Hawaii, Illinois, Kansas City (Mi
+  text: For Massachusetts Applicants:
+  text: I UNDERSTAND THAT UNDER MARYLAND LAW, AN EMPLOYER MAY NOT REQUIRE OR DEMAND, AS A CONDITION OF EMPLOYMENT, PROSPECTIVE EMPLOYMENT OR CONTINU
+  text: I agree to the above terms and conditions and confirm that I have read applicable state and local notices. I further agree that checking the
+ {formField-acceptTermsAndAgreements}
+label: Checking the box is equivalent to a handwritten signature.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] Candidate and Employee Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:26:48  skipped  Private Wealth Associate @ abglobal
+url: https://abglobal.wd1.myworkdayjobs.com/alliancebernsteincareers/job/Los-Angeles-California/Associate_R0019751-2/apply
+stage: Application Questions
+why: can't truthfully answer required: Atlanta; Boston; Chicago; Cleveland; Dallas; Denver; Houston; Los Angeles; Miami; Minneapolis; Nashville; New York; Philadelphia; San Diego; San Francisco; Seattle; Tampa; Washington DC; West Palm Beach
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Private Wealth Associate
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+# Errors Found
+! Error-Which of the below markets would you be interested in? (Please click all that apply) The field Which of the below markets would you be interested in? (Please click all that apply) is required an {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-9ffd2cb35e331001ff96e399abf90000}
+label: Are you at least 18 years of age or older?*
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e399abf90000
+ {formField-9ffd2cb35e331001ff96e4347b850001}
+label: Choose your highest level of education completed*
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e4347b850001
+ {formField-9ffd2cb35e331001ff96e4cea75f0003}
+label: At the time of your application, are you eligible to work full time? Please note that current full-time underg
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e4cea75f0003
+ {formField-9ffd2cb35e331001ff96e569ac090001}
+label: Are you authorized to work for any employer in the U.S.?*
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e569ac090001
+ {formField-9ffd2cb35e331001ff96e6043e9a0000}
+label: Do you now or will you in the future require sponsorship to gain or maintain work authorization in the U.S. (i
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e6043e9a0000
+ {formField-9ffd2cb35e331001ff96e739c4640003}
+label: Are you willing and able to look at Bernstein opportunities in other markets?*
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96e739c4640003
+ {formField-9ffd2cb35e331001ff96e7d4178c0002}
+label: Which of the below markets would you be interested in? (Please click all that apply)*
+  <input:checkbox #f449ce7f8cae01e937bbce25bb0180e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Atlanta
+  <input:checkbox #f449ce7f8cae01969adcce25bb0181e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Boston
+  <input:checkbox #f449ce7f8cae01073ffbce25bb0182e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Chicago
+  <input:checkbox #f449ce7f8cae01e0541ccf25bb0183e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Cleveland
+  <input:checkbox #f449ce7f8cae01224c3ecf25bb0184e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Dallas
+  <input:checkbox #f449ce7f8cae01b8095dcf25bb0185e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Denver
+  <input:checkbox #f449ce7f8cae0154e79bcf25bb0186e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Houston
+  <input:checkbox #f449ce7f8cae01c2ecb7cf25bb0187e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Los Angeles
+  <input:checkbox #f449ce7f8cae01faaef8cf25bb0188e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Miami
+  <input:checkbox #f449ce7f8cae01eee814d025bb0189e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Minneapolis
+  <input:checkbox #f449ce7f8cae01e69a35d025bb018ae4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Nashville
+  <input:checkbox #f449ce7f8cae01676c56d025bb018be4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: New York
+  <input:checkbox #f449ce7f8cae0142c273d025bb018ce4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Philadelphia
+  <input:checkbox #f449ce7f8cae0120cd92d025bb018de4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: San Diego
+  <input:checkbox #f449ce7f8cae012adfb0d025bb018ee4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: San Francisco
+  <input:checkbox #f449ce7f8cae010070d3d025bb018fe4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Seattle
+  <input:checkbox #f449ce7f8cae010a930fd125bb0190e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Tampa
+  <input:checkbox #f449ce7f8cae019fad2dd125bb0191e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: Washington DC
+  <input:checkbox #f449ce7f8cae0170974ed125bb0192e4-9ffd2cb35e331001ff96e7d4178 required question-unanswered>
+label: West Palm Beach
+! Error: The field Which of the below markets would you be interested in? (Please click all that apply) is required and must have a value. {inputAlert}
+ {formField-9ffd2cb35e331001ff96ead8ef190000}
+label: Do you currently or have you ever held any FINRA licenses?*
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96ead8ef190000
+ {formField-9ffd2cb35e331001ff96eb732fd50003}
+label: If you answered "Other" above, please specify here.
+  <textarea #primaryQuestionnaire--9ffd2cb35e331001ff96eb732fd50003 empty>
+ {formField-9ffd2cb35e331001ff96eb732fd50004}
+label: Do you have any relatives or in-laws currently employed with AllianceBernstein or any affiliates? (A relative 
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96eb732fd50004
+ {formField-9ffd2cb35e331001ff96ec0e84620003}
+label: Are you a current client or relative of a current or prospective client of Bernstein Private Wealth Management
+  [dropdown] chosen #primaryQuestionnaire--9ffd2cb35e331001ff96ec0e84620003
+ {formField-9ffd2cb35e331001ff96eca99b1b0001}
+label: Please tell us about your compensation expectations
+  <textarea #primaryQuestionnaire--9ffd2cb35e331001ff96eca99b1b0001 empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:27:11  skipped  M&E Associate - Rapid Experimentation (Remote) @ privategdcareers
+url: https://job-boards.greenhouse.io/privategdcareers/jobs/4743156005
+stage: page 1
+why: can't truthfully answer required: AI Policy for Application: At GiveDirectly, we value authent
+# M&E Associate - Rapid Experimentation (Remote)
+  [button] Apply
+  text: hear from the people who do
+  text: Priority Application Deadline:
+  text: The Monitoring and Evaluation (M&E) Associate for Rapid Experimentation will support the execution and analysis of A/B tests across GiveDire
+  text: Supporting the execution and analysis of rapid A/B tests across GiveDirectly projects
+  text: Ensuring experiments are implemented correctly, measured reliably, and analyzed to produce clear and credible results
+  text: Translating findings into actionable insights and well-structured learning products
+  text: In practice, this role is about managing a high volume of rapid experiments and turning results into clear, credible evidence that continuou
+  text: Execute and manage A/B tests across programs
+  text: Conduct power calculations to ensure experiments are both statistically rigorous and feasible to implement within program constraints
+  text: Set up pre-specified experimental designs, applying defined experimental groups, outcome measures, and measurement timelines
+  text: Review experiment setups prior to launch and flag execution and measurement risks that may affect interpretability
+  text: Ensure experiments are well-coordinated and executed as designed, aligning implementation with research plans and integrating smoothly into 
+  text: Work at a fast pace across a portfolio of 2–3 live A/B tests at any given time, designed to generate actionable answers quickly and feed rap
+  text: Ensure accurate measurement and high-quality data for experiments
+  text: Collaborate with external Principal Investigators (PIs) to ensure measurement approaches and data collection are aligned with research desig
+  text: Ensure experimental outcomes are captured accurately and consistently by applying established indicator and measurement approaches
+  text: Prepare and manage datasets that are clean, well-structured, and ready for analysis using survey, administrative, and product data
+  text: Identify and flag data quality risks (e.g., missingness, inconsistencies, measurement error) that could affect the validity of experimental 
+  text: Conduct targeted literature reviews to ensure measurement approaches are grounded in evidence and aligned with best practices
+  text: Analyze experimental data and interpret results to inform decisions
+  text: Generate reliable and decision-ready analyses of experimental data from A/B tests
+  text: Assess the magnitude and direction of effects and highlight what the results do and do not suggest, noting key limitations
+  text: Ensure results are clearly understood and appropriately interpreted, given data quality, sample size, and implementation considerations
+  text: Translate results into actionable insights and learning across experiments
+  text: Translate experimental results into clear, actionable recommendations to guide program and product decisions for individual country programs
+  text: Structure results and key learnings so they can be reused to inform future experiments and program design
+  text: Prepare concise learning products (e.g., memos, summaries) that serve multiple audiences, including internal Programs and Product teams, and
+  text: Prepare and clean de-identified datasets for sharing with external PIs and academic partners, ensuring data is structured, well-documented, 
+  text: Contribute to cross-country discussions to ensure learnings from experiments are shared and applied across contexts, and maintain clear docu
+  text: Bachelor’s degree (or equivalent) in Economics, Statistics, Public Policy, or a related quantitative field
+  text: 2–4 years of experience working with data in applied settings (e.g., experimentation, evaluation, analytics, or program learning), ideally i
+  text: Solid understanding of experimental design and causal inference concepts (e.g., randomization, treatment/control groups, units of randomizat
+  text: Experience using R, Python, or Stata to clean, manipulate, and analyze data, including working with multiple data sources (e.g., survey or a
+  text: Experience collaborating with cross-functional teams (e.g., programs/operations, product, or research) and external partners to implement pr
+  text: Fluency in English required
+  text: Comfort working at pace - able to manage multiple workstreams simultaneously, make progress with imperfect data, and iterate quickly based o
+  text: Ability to interpret results beyond statistical significance and communicate clear, actionable insights to both technical and non-technical 
+  text: Unless otherwise noted, the benefits stipend may be used to cover benefits or taken as additional taxable income.
+  text: Bonus at Target Performance:
+  text: Estimated Total Compensation at Target:
+  text: This role is fully remote, so if you are not based in Kenya or Rwanda, we will share an estimated salary benchmark for the country you are b
+  text: At GiveDirectly, we work to ensure that you have everything you need to excel in your role and on your team, including:
+  text: A supportive team that works hard and cares hard
+  text: A robust health benefits plan (exact details will vary by country)
+  text: Flexible paid time off that staff is encouraged to take
+  text: Allowances for desk set-up and learning and development
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+label: Where are you currently based? (City, State [if applicable], Country)*
+  <input:text #question_9163133005 required empty>
+label: Do you now or in the future require visa sponsorship to work in the country you are based in?*
+  <input:text #question_9163134005 required empty>
+  [button] 
+  <input required empty>
+label: How did you hear about this opportunity?*
+  <input:text #question_9163135005 required empty>
+  [button] 
+  <input required empty>
+label: Do you know, or are you related to, anyone at GiveDirectly?*
+  <input:text #question_9163136005 required empty>
+  [button] 
+  <input required empty>
+label: What draws you to GiveDirectly, and what is it about this role specifically that feels like the right next ste
+  <textarea #question_9163137005 required empty>
+label: What statistical packages or coding languages are you familiar with? (Select all that apply) *
+  <input:checkbox #question_9163138005[]_24665058005 required question-unanswered>
+label: Excel
+  <input:checkbox #q
+
+=== 2026-10-18 18:28:50  skipped  Credit Trainee @ ferguson
+url: https://ferguson.wd1.myworkdayjobs.com/ferguson_experienced/job/Brooklyn-NY/Credit-Trainee_R-141108/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Protected Veterans are defined as follows: Disabled Veteran:
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Credit Trainee
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# APPLICANT VOLUNTARY SELF-IDENTIFICATION ETHNICITY/RACE, GENDER, AND PROTECTED VETERAN STATUS SURVEY
+  text: The Company is Federal contractor and is subject to certain governmental record keeping and reporting requirements. In order to help it comp
+  text: The Company and its subsidiaries and divisions are government contractors and equal opportunity employers. As such, we are committed to ensu
+  text: The Company will use the information in accordance with the provisions of applicable laws, executive orders, and regulations, including thos
+  text: Please check the appropriate box which applies to you for each section below:
+ {formField-gender}
+label: Gender:*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish cult
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicity}
+label: Select Race: DEFINITIONS: White (not Hispanic or Latino): A person having origins in any of the original peopl
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Protected Veterans are defined as follows: Disabled Veteran: a veteran of the U.S. military, ground, naval or 
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Ferguson and its subsidiaries and divisions (the “Company”) are equal opportunity employers dedicated to a policy of non-discrimination in e
+  text: I HAVE READ AND UNDERSTAND THE FOLLOWING:
+  text: I understand that an offer of employment with the Company does not constitute a contract of employment for any definite duration. If I becom
+  text: I authorize investigation of all information contained in this application, including my qualifications, character and/or ability from forme
+  text: I understand that any conditional offer of employment is subject to verification of all information contained in this Application or other p
+  text: I understand that if I am offered a position at the Company, I will be required to take a drug test and receive a negative result on the dru
+  text: I understand and agree that any false, misleading or incomplete information given in my Application, resumé, interview(s) or other pre-emplo
+  text: I hereby certify that I am able to perform, with or without reasonable accommodations, the essential job functions of the position for which
+  text: I understand that I am required to abide by all policies, rules and regulations of the Company including, but not limited to, all applicable
+  text: I hereby acknowledge that I have read and understand all of the information written above and agree to the terms therein. I certify that the
+  text: Attention Massachusetts Applicants
+  text: Attention Maryland Applicants:
+  text: Attention California Applicants
+  text: Attention Colorado Applicants:
+  text: Colorado candidates are not required to list dates of attendance, graduation from an educational institution, or other information about the
+  text: This certifies that this Application was completed by me and that all entries on it, and information in it, are true and complete to the bes
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Applicant Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:29:36  skipped  Quality and Safety Specialist @ ferguson
+url: https://ferguson.wd1.myworkdayjobs.com/ferguson_experienced/job/Aurora-CO/Quality-and-Safety-Specialist_R-140870/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Protected Veterans are defined as follows: Disabled Veteran:
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Quality and Safety Specialist
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# APPLICANT VOLUNTARY SELF-IDENTIFICATION ETHNICITY/RACE, GENDER, AND PROTECTED VETERAN STATUS SURVEY
+  text: The Company is Federal contractor and is subject to certain governmental record keeping and reporting requirements. In order to help it comp
+  text: The Company and its subsidiaries and divisions are government contractors and equal opportunity employers. As such, we are committed to ensu
+  text: The Company will use the information in accordance with the provisions of applicable laws, executive orders, and regulations, including thos
+  text: Please check the appropriate box which applies to you for each section below:
+ {formField-gender}
+label: Gender:*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish cult
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicity}
+label: Select Race: DEFINITIONS: White (not Hispanic or Latino): A person having origins in any of the original peopl
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Protected Veterans are defined as follows: Disabled Veteran: a veteran of the U.S. military, ground, naval or 
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Ferguson and its subsidiaries and divisions (the “Company”) are equal opportunity employers dedicated to a policy of non-discrimination in e
+  text: I HAVE READ AND UNDERSTAND THE FOLLOWING:
+  text: I understand that an offer of employment with the Company does not constitute a contract of employment for any definite duration. If I becom
+  text: I authorize investigation of all information contained in this application, including my qualifications, character and/or ability from forme
+  text: I understand that any conditional offer of employment is subject to verification of all information contained in this Application or other p
+  text: I understand that if I am offered a position at the Company, I will be required to take a drug test and receive a negative result on the dru
+  text: I understand and agree that any false, misleading or incomplete information given in my Application, resumé, interview(s) or other pre-emplo
+  text: I hereby certify that I am able to perform, with or without reasonable accommodations, the essential job functions of the position for which
+  text: I understand that I am required to abide by all policies, rules and regulations of the Company including, but not limited to, all applicable
+  text: I hereby acknowledge that I have read and understand all of the information written above and agree to the terms therein. I certify that the
+  text: Attention Massachusetts Applicants
+  text: Attention Maryland Applicants:
+  text: Attention California Applicants
+  text: Attention Colorado Applicants:
+  text: Colorado candidates are not required to list dates of attendance, graduation from an educational institution, or other information about the
+  text: This certifies that this Application was completed by me and that all entries on it, and information in it, are true and complete to the bes
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Applicant Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:29:45  blocked  Data Analyst @ urbancompass
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (3 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current openings at Compass
+  text: Level-up your career by having opportunities at Compass sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+label: Department
+  <input:text #department-filter empty>
+  [button] 
+label: Office
+  <input:text #office-filter empty>
+  [button] 
+# 205 jobs
+# Agent Operations
+  text: Agent Experience Coordinator
+  text: Winter Park, Florida, United States
+  text: Huntington, New York, United States
+  text: PA - Wayne - 216 East Lancaster Avenue
+  text: IN - Carmel - 10 East Main Street
+  text: Ridgewood, New Jersey, United States
+  text: Greenbrae, California, United States
+  text: Miami Beach; Miami Beach, Florida, United States
+  text: Chicago, Illinois, United States
+  text: Libertyville, Illinois, United States; Long Grove, Illinois, United States
+  text: Customer Success Coordinator
+  text: Customer Success & Office Coordinator
+# Business Operations
+  text: Lead, Inventory Operations
+  text: Program Manager, Inventory Strategy and Ops
+  text: Madison, New Jersey, United States; Manhattan; New York City
+# Data & Analytics
+  text: VP, Data Products & Solutions
+  text: Dallas, Texas, United States
+  text: Seattle, Washington, United States
+  text: Boston, Massachusetts, United States
+# Engineering
+  text: Manhattan, New York, United States
+  text: Senior Software Engineer I
+  text: Boca Raton; Boston; New York City; Seattle
+  text: Senior Software Engineer I - Front End
+  text: Senior Software Engineer II
+  text: Senior Software Engineer II - Front End
+  [button] 
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 4
+  [button] 5
+  [button] 
+
+=== 2026-10-18 18:31:50  skipped  University Associate, Forensic Data & Analytics @ ankura
+url: https://ankura.wd5.myworkdayjobs.com/ankura/job/New-York-NY/University-Associate--Forensic-Data---Analytics_R104938/apply
+stage: Application Questions
+why: can't truthfully answer required: Employment Contract; Non-Compete Agreement; Non-Solicitation Agreement; Other; Not Applicable
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# University Associate, Forensic Data & Analytics
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-db24c57924991001aa48035043920000}
+label: Without sponsorship, are you legally permitted to work in the country where this job is located?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa48035043920000
+ {formField-db24c57924991001aa48051daf260006}
+label: What is your availability to start a new position?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-db24c57924991001aa4805b75d700000}
+label: Are you currently or have you previously worked for the US Government (including US Military)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4805b75d700000
+ {formField-db24c57924991001aa4805b75d700006}
+label: Are you subject to any restrictive covenants that would preclude you from fully performing your work with anot
+  <input:checkbox #5b979464138c0151bb7f55e0c746d395-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Employment Contract
+  <input:checkbox #5b979464138c0181948655e0c746d495-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Compete Agreement
+  <input:checkbox #5b979464138c01d6038d55e0c746d595-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Disclosure Agreement
+  <input:checkbox #5b979464138c01ea179355e0c746d695-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Solicitation Agreement
+  <input:checkbox #5b979464138c01caae9855e0c746d795-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Other
+  <input:checkbox #5b979464138c0124e7b255e0c746d895-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Not Applicable
+ {formField-db24c57924991001aafbb455c4260000}
+label: Is your graduation date between December 2026 and August 2027?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aafbb455c4260000
+ {formField-db24c57924991001aa4806eabbae0001}
+label: Is your cumulative GPA 3.0 or higher?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0001
+ {formField-db24c57924991001aa4806eabbae0004}
+label: Are you available to be based in the posted location of this role?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0004
+ {formField-db24c57924991001aa480784514c0001}
+label: What type of role (career focus area) do you ideally see yourself in 3-5 years from now?*
+  <textarea #primaryQuestionnaire--db24c57924991001aa480784514c0001 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+
+=== 2026-10-18 18:32:10  skipped  Specialist I, Customer Service @ asm
+url: https://job-boards.greenhouse.io/embed/job_app
+stage: page 1
+why: can't truthfully answer required: Please select the country where you hold citizenship / perma
+  text: Interested in building your career at ASM? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Enter manually
+label: School*
+  <input:text #school--0 required empty>
+  [button] 
+  <input required empty>
+label: Degree*
+  <input:text #degree--0 required empty>
+  [button] 
+  <input required empty>
+label: Discipline*
+  <input:text #discipline--0 required empty>
+  [button] 
+  <input required empty>
+label: Start date year*
+  <input:number #start-year--0 required empty>
+label: End date year*
+  <input:number #end-year--0 required empty>
+  [button] Add another
+label: Are you legally authorized to work in this country?*
+  <input:text #question_9649733101 required empty>
+  [button] 
+  <input required empty>
+label: Will you now or in the future require visa sponsorship for employment?*
+  <input:text #question_9649734101 required empty>
+  [button] 
+  <input required empty>
+label: Do you have any agreement with your current employer or any other employer that you had in the past 2 years (s
+  <input:text #question_9649735101 required empty>
+  [button] 
+  <input required empty>
+label: Have you ever been employed with ASM before?*
+  <input:text #question_9649736101 required empty>
+  [button] 
+  <input required empty>
+label: How would you describe your gender?
+  <input:text #question_9649737101 empty>
+  [button] 
+label: ASM may work with technologies subject to U.S. export control regulations. The following questions are being a
+  <input:text #question_9649738101 required empty>
+  [button] 
+  <input required empty>
+label: Please select the country where you hold citizenship / permanent residence. If you have dual citizenship / per
+  <input:text #question_9649739101 required empty>
+  [button] 
+  <input required empty>
+label: Have you ever relinquished, abandoned, or lost citizenship, nationality or permanent residence in the country 
+  <input:text #question_9649740101 required empty>
+  [button] 
+  <input required empty>
+label: I opt-in to receive occasional messages and/or emails from ASM with respect to career opportunities and applic
+  <input:text #question_9649741101 empty>
+  [button] 
+label: I hereby authorize ASM to contact, obtain and verify the accuracy of information contained in this application
+  <input:text #question_9649742101 required empty>
+  [button] 
+  <input required empty>
+label: I have read and agree to the Privacy notice and Terms of use.*
+  <input:text #question_9649743101 required empty>
+  [button] 
+  <input required empty>
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-18 18:34:14  skipped  Sales Trainee - Access Equipment - Texas @ oshkoshcorporation
+url: https://oshkoshcorporation.wd5.myworkdayjobs.com/oshkosh/job/Remote-Texas-United-States/Sales-Trainee---Access-Equipment---Texas_R50378/apply
+stage: Application Questions
+why: can't truthfully answer required: 1st Shift; 2nd Shift; 3rd Shift; 4th Shift/Weekend
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Sales Trainee - Access Equipment - Texas
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-d69bae5b51671000bbb89734a2850000}
+label: Are you a current employee of Oshkosh Corporation or one of its affiliates (this does NOT include contractor, 
+  [dropdown] nothing chosen #primaryQuestionnaire--d69bae5b51671000bbb89734a2850000
+ {formField-d69bae5b51671000bbb897ce15ee0000}
+label: Are you at least 18 years of age?*
+  [dropdown] nothing chosen #primaryQuestionnaire--d69bae5b51671000bbb897ce15ee0000
+ {formField-d69bae5b51671000bbb897ce15ee0006}
+label: Have you signed any agreement with a current or former employer that could limit your ability to do certain wo
+  [dropdown] nothing chosen #primaryQuestionnaire--d69bae5b51671000bbb897ce15ee0006
+ {formField-bd0d172b23291000bbfb932e56390000}
+label: Select “Yes” if any one of the categories below applies to you. Select “No” only if none of these apply to you
+  text: A U.S. citizen (either by birth or naturalization), or
+  text: A lawful permanent resident (green card holder), or
+  text: An individual granted refugee or asylum status in the U.S. (for example, admitted as a refugee or granted asylum and legally authorized to w
+  [dropdown] nothing chosen #primaryQuestionnaire--bd0d172b23291000bbfb932e56390000
+ {formField-bd0d172b23291000bbfb932e56390003}
+label: Do you have a conflict of interest that could affect your ability to perform this role at Oshkosh Corporation?
+  [dropdown] nothing chosen #primaryQuestionnaire--bd0d172b23291000bbfb932e56390003
+ {formField-d69bae5b51671000bbb8986794e80004}
+label: What shift are you available to work? Check all that Apply.*
+  <input:checkbox #880efd8d37cb1001e97961f55d6f0000-d69bae5b51671000bbb8986794e required question-unanswered>
+label: 1st Shift
+  <input:checkbox #880efd8d37cb1001e97961f55d6f0001-d69bae5b51671000bbb8986794e required question-unanswered>
+label: 2nd Shift
+  <input:checkbox #880efd8d37cb1001e979628f8d970000-d69bae5b51671000bbb8986794e required question-unanswered>
+label: 3rd Shift
+  <input:checkbox #880efd8d37cb1001e979628f8d970001-d69bae5b51671000bbb8986794e required question-unanswered>
+label: 4th Shift/Weekend
+ {formField-d69bae5b51671000bbb899012f670003}
+label: What are your salary/wage expectations?
+  <textarea #primaryQuestionnaire--d69bae5b51671000bbb899012f670003 empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Oshkosh Careers Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:36:15  skipped  Safety Specialist I @ comfortsystemsusa
+url: https://comfortsystemsusa.wd1.myworkdayjobs.com/design_mechanical/job/Louisville-CO-DesignMech-HQ/Safety-Specialist-I_JR108493-1/apply
+stage: Application Questions
+why: can't truthfully answer required: Sign; Other
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Safety Specialist I
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-de08b59f09ac100168b9ebda1a4c0000}
+label: Date available to begin work?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--de08b59f09ac100168b9ebda1a4c0000-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--de08b59f09ac100168b9ebda1a4c0000-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--de08b59f09ac100168b9ebda1a4c0000-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-de08b59f09ac100168b9ebda1a4c0001}
+label: What is your desired wage?*
+  <input:text #primaryQuestionnaire--de08b59f09ac100168b9ebda1a4c0001 required empty>
+ {formField-de08b59f09ac100168b9ebda1a4c0002}
+label: Are you 18 years or older?*
+  [dropdown] nothing chosen #primaryQuestionnaire--de08b59f09ac100168b9ebda1a4c0002
+ {formField-de08b59f09ac100168b9ed0ea8650001}
+label: For employment reference verification, have you ever worked under a different name(s)*
+  [dropdown] nothing chosen #primaryQuestionnaire--de08b59f09ac100168b9ed0ea8650001
+ {formField-de08b59f09ac100168b9ed0ea8650005}
+label: Which languages can you fluently speak, read or write?*
+  <input:checkbox #39e5eedb63eb10011bf2190b0ff60002-de08b59f09ac100168b9ed0ea86 required question-unanswered>
+label: English
+  <input:checkbox #39e5eedb63eb10011bf2190b0ff60003-de08b59f09ac100168b9ed0ea86 required question-unanswered>
+label: Spanish
+  <input:checkbox #39e5eedb63eb10011bf219a6854c0000-de08b59f09ac100168b9ed0ea86 required question-unanswered>
+label: Sign
+  <input:checkbox #39e5eedb63eb10011bf219a6854c0001-de08b59f09ac100168b9ed0ea86 required question-unanswered>
+label: Other
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:38:17  skipped  Distribution Planner @ jcrew
+url: https://jcrew.wd1.myworkdayjobs.com/madewellcareers/job/New-York-NY-USA-Headquarters/Senior-Distribution-Planner_127908/apply
+stage: Application Questions
+why: can't truthfully answer required: What attracted you to Madewell? (pick one that best describe
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Come Shop With Us! {navigationItem-Come Shop With Us!}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Distribution Planner
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-4ff3ba58b2e51000bdeeb525ff600000}
+label: Are you legally permitted to work in the country where this job is located?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000bdeeb525ff600000
+ {formField-4ff3ba58b2e51000be0babe249170000}
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000be0babe249170000
+ {formField-4ff3ba58b2e51000bdeeb525ff600003}
+label: Are you at least 18 years of age?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000bdeeb525ff600003
+ {formField-4ff3ba58b2e51000bdeeb5bf8d720001}
+label: Pronoun
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000bdeeb5bf8d720001
+ {formField-4ff3ba58b2e51000bdeeb5bf8d720009}
+label: Gender Identity
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000bdeeb5bf8d720009
+ {formField-4ff3ba58b2e51000bdeeb65939970004}
+label: What attracted you to Madewell? (pick one that best describes you)*
+  [dropdown] nothing chosen #primaryQuestionnaire--4ff3ba58b2e51000bdeeb65939970004
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:40:19  skipped  Account Specialist - Roofing Systems @ jm
+url: https://jm.wd103.myworkdayjobs.com/external/job/Littleton-CO-JMTC/Account-Specialist---Roofing-Systems_R26_0936/apply
+stage: Application Questions
+why: can't truthfully answer required: If required, would you be willing to sign a Confidentiality,
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# JM Careers
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Account Specialist - Roofing Systems
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-0585a13c2c6c1001e7059278736c0000}
+label: The hiring process will consist of a phone interview, manager interview, drug screen, reference checks, and po
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e7059278736c0000
+ {formField-0585a13c2c6c1001e70593126d260000}
+label: If required, would you be willing to sign a Confidentiality, Nondisclosure and Invention Assignment Agreement?
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260000
+ {formField-0585a13c2c6c1001e70593126d260003}
+label: Are you at least 18 years of age?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260003
+ {formField-0585a13c2c6c1001e70593126d260006}
+label: Are you legally eligible to work in the country to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260006
+ {formField-0585a13c2c6c1001e70593ae64da0000}
+label: Will you now or in the future require sponsorship for employment visa status?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0000
+ {formField-0585a13c2c6c1001e70593ae64da0003}
+label: Salary Expected:
+  <input:text #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0003 empty>
+ {formField-0585a13c2c6c1001e70593ae64da0004}
+label: Do you know a current JM employee that would recommend you for hire?
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0004
+ {formField-0585a13c2c6c1001e7059448205b0000}
+label: Do you agree to allow text messages relating to reference checks in our recruiting process to be sent on behal
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e7059448205b0000
+ {formField-0585a13c2c6c1001e76435c089400000}
+label: If you are not local to the position you are applying too, are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e76435c089400000
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:41:14  skipped  Facilities - Department Assistant @ caa
+url: https://caa.wd1.myworkdayjobs.com/Careers/job/New-York-NY/Global-Operations---Facilities-Assistant_JR9175/apply
+stage: Application Questions
+why: can't truthfully answer required: I agree that to the extent permitted by law, any legal claim
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Facilities - Department Assistant
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-04bedb0b88b3100209baeb9e38790001}
+label: Have you previously worked for CAA or any of its affiliate companies?*
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baeb9e38790001
+ {formField-04bedb0b88b3100209baecd277b60001}
+label: Are you legally authorized to work in the United States? (If hired, verification will be required consistent w
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baecd277b60001
+ {formField-04bedb0b88b3100209baecd277b60004}
+label: Are you 18 years of age or older?*
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baecd277b60004
+ {formField-04bedb0b88b3100209baed6c5ab80001}
+label: Individuals who now or in the future will require visa sponsorship are not eligible for our internships and en
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baed6c5ab80001
+ {formField-04bedb0b88b3100209baed6c5ab80007}
+label: What pay range are you seeking?*
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baed6c5ab80007
+ {formField-04bedb0b88b3100209baef399d810001}
+label: Do you have any family members who currently work at CAA?*
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baef399d810001
+ {formField-04bedb0b88b3100209baef399d810005}
+label: Date available to start:*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--04bedb0b88b3100209baef399d810005-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-04bedb0b88b3100209baef399d810006}
+label: I have disclosed all information that is relevant and should be considered applicable to my candidacy for empl
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baef399d810006
+ {formField-04bedb0b88b3100209baefd375aa0001}
+label: I hereby certify that the information given by me is true in all respects.*
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baefd375aa0001
+ {formField-04bedb0b88b3100209baefd375aa0004}
+label: I understand employment with the Company is contingent on my providing sufficient documentation necessary to e
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baefd375aa0004
+ {formField-04bedb0b88b3100209baf06d7cc40001}
+label: I expressly understand and agree that, if employed, my employment, having no specified term, is based upon mut
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40001
+ {formField-04bedb0b88b3100209baf06d7cc40004}
+label: I understand that no representation, whether oral or written, by any representative or agent of the Company, a
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40004
+ {formField-04bedb0b88b3100209baf06d7cc40007}
+label: I certify, under penalty of perjury, that all of the above information is true and complete, and I understand 
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf06d7cc40007
+ {formField-04bedb0b88b3100209baf10788d70001}
+label: I agree that to the extent permitted by law, any legal claims that I may have concerning my application for em
+  [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf10788d70001
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-18 18:43:14  blocked  Expense Report Analyst @ RER Solutions, Inc.
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4515088
+stage: page 4
+why: not a real application form (97 fields, no résumé upload); page shows: information-section:My Information
+Edit
+<first> Delg; "<first>_<middle>_delgado_ortega_resume_uploaded":<first>_<middle>_delgado_ortega; work-history-section:Work History
+Edit
+Company
+
+Roa; education-section:Education History
+Edit
+School ; screener-questions:Additional Questions
+Edit
+Do y; eeo-section:E
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+# My Information
+# <first> <last>
+# Address
+# Preferred First Name
+# Middle Name
+# Referred By
+# How did you hear about us?
+# Do you give us permission to text you?
+# Skills
+  text: Excel (advanced), PowerPoint, Word, Google Workspace, SQL, Python, C++, Microsoft Project, QuickBooks, PostgreSQL, SQLite, Flask, Git/GitHub
+# Resume (required)
+# Work History
+# Company
+  text: Roaring Fork Property Group
+# Position
+# Dates
+# Contact
+# Company
+# Position
+# Dates
+# Contact
+# Company
+# Position
+  text: Data Clerk & Community Volunteer
+# Dates
+# Contact
+# Company
+  text: A. Hernandez Construction Inc.
+# Position
+# Dates
+# Contact
+# Education History
+# School Name
+  text: University of Southern California
+# Location
+# School Type
+# Graduated
+# Degree Obtained
+# Graduation Date
+# Area of Study
+  text: Industrial and Systems Engineering
+# Additional Questions
+# Do you have experience reviewing expense reports, travel expenses, invoices, reimbursements, accounts payable,
+# Do you have experience supporting a federal government contractor or government-funded organization?
+# How many years of experience do you have in accounting, expense analysis, accounts payable, financial analysis
+# Do you have experience in accounting, expense analysis, accounts payable, financial analysis, or a related fie
+# Equal Employment Opportunity
+# Gender
+# Ethnicity
+# Disability
+  text: No, I do not have a disability and have not had one in the past
+# Veteran
+  text: I am not a protected veteran
+label: Are you authorized to work lawfully in the United States? (required)
+  text: In compliance with federal law, all persons hired will be required to verify identity and eligibility to work in the United States and to co
+  <input:checkbox #applyAcknowledgement question-answered>
+label: I have read and accept the above acknowledgement (required)
+  [button] Submit {btnSubmit}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
 
