@@ -133,12 +133,16 @@ def main():
         except Exception as e:
             rep["catalog_error"] = str(e)[:300]
         for m in req["llm_test"]:
-            try:
-                r = _rq.post("https://models.github.ai/inference/chat/completions", headers=h, timeout=60,
-                             json={"model": m, "messages": [{"role": "user", "content": "Reply with the single word: ready"}], "max_tokens": 5})
-                rep[m] = {"status": r.status_code, "body": r.text[:300], "headers": {k: v for k, v in r.headers.items() if "ratelimit" in k.lower()}}
-            except Exception as e:
-                rep[m] = {"error": str(e)[:300]}
+            for ep, mm in (("https://models.github.ai/inference/chat/completions", m),
+                           ("https://models.inference.ai.azure.com/chat/completions", m.split("/")[-1])):
+                try:
+                    r = _rq.post(ep, headers=h, timeout=60, allow_redirects=False,
+                                 json={"model": mm, "messages": [{"role": "user", "content": "Reply with the single word: ready"}], "max_tokens": 5})
+                    rep[f"{ep} {mm}"] = {"status": r.status_code, "body": r.text[:400], "url": r.url,
+                                         "headers": {k: v for k, v in r.headers.items() if re.search(r"ratelimit|content-type|location|server", k, re.I)}}
+                except Exception as e:
+                    rep[f"{ep} {mm}"] = {"error": str(e)[:300]}
+        rep["env_proxy"] = {k: os.environ.get(k, "") for k in ("HTTPS_PROXY", "HTTP_PROXY", "https_proxy", "NO_PROXY")}
         (od / "llm.json").write_text(_j.dumps(rep, indent=1))
         print(_j.dumps(rep, indent=1)[:6000])
         return
