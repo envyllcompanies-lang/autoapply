@@ -3403,3 +3403,22 @@ E; btnSubmit:Submit
 [15:21:29]   by site  greenhouse: 4 applied, 3 skipped
 [15:21:29]   by site  workday: 4 applied
 [15:21:33] Summary emailed to delgado@alumni.usc.edu
+[15:27:20] === autoapply run (LIVE) build 2026-10-18-a ===
+[15:27:20] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[15:27:28] mail: logged in to delgado@alumni.usc.edu OK
+[15:30:03] Discovering jobs…
+[15:30:03] Job search already ran at 15:11 (searches run every 3 h): this run only applies
+[15:30:04]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[15:30:04] 0 open roles, 0 new
+[15:30:04] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 2.7 min)
+[15:30:04] 936 jobs queued: 11 already matched to your résumé, 925 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 479 now
+[15:30:04] Time for this run: 50 min in all (13519 of 1850 free Actions minutes used this month)
+[15:30:05] Accounts: ON (delgado@alumni.usc.edu)
+[15:30:07]   match  60%  Production Operations Specialist  @ altentechnologyusa — The candidate has an engineering degree but lacks the required 5+ years of experience in manufacturi
+[15:30:07] → Production Operations Specialist  @ altentechnologyusa (score 57, match 60%)
+[15:30:17]       step 1: 21 fields (13 required)
+[15:30:17]       ? unanswered: 'To prove you are a real person, please type Real below*' kind=text options=[]
+[15:30:17]     ✗ skipped: can't truthfully answer required: To prove you are a real person, please type Real below*
+[15:30:24] Résumé checks this run: 1 (1 passed) in 1 calls. Free writer allowance used today: groq 81k/195k tokens (+3k served from its cache, not counted); groq-20b 79k/195k tokens (+13k served from its cache, not counted); groq-qwen 105k/195k tokens; gemini-lite 117/480 requests (+41k served from its cache, not counted); gemini-flash 0/18 requests
+[15:30:24] Summary: 1 skipped. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-19.md
+[15:30:24]   by site  greenhouse: 1 skipped
