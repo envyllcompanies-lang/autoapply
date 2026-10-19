@@ -1,0 +1,32 @@
+{
+ "token_set": true,
+ "catalog_error": "Expecting value: line 1 column 1 (char 0)",
+ "https://models.github.ai/inference/chat/completions openai/gpt-4.1-mini": {
+  "status": 200,
+  "body": "OK\r\n",
+  "url": "https://models.github.ai/inference/chat/completions",
+  "headers": {
+   "Content-Type": "text/plain"
+  }
+ },
+ "https://models.inference.ai.azure.com/chat/completions gpt-4.1-mini": {
+  "error": "HTTPSConnectionPool(host='models.inference.ai.azure.com', port=443): Max retries exceeded with url: /chat/completions (Caused by NameResolutionError(\"HTTPSConnection(host='models.inference.ai.azure.com', port=443): Failed to resolve 'models.inference.ai.azure.com' ([Errno -2] Name or service not kno"
+ },
+ "https://models.github.ai/inference/chat/completions openai/gpt-4o-mini": {
+  "status": 200,
+  "body": "OK\r\n",
+  "url": "https://models.github.ai/inference/chat/completions",
+  "headers": {
+   "Content-Type": "text/plain"
+  }
+ },
+ "https://models.inference.ai.azure.com/chat/completions gpt-4o-mini": {
+  "error": "HTTPSConnectionPool(host='models.inference.ai.azure.com', port=443): Max retries exceeded with url: /chat/completions (Caused by NameResolutionError(\"HTTPSConnection(host='models.inference.ai.azure.com', port=443): Failed to resolve 'models.inference.ai.azure.com' ([Errno -2] Name or service not kno"
+ },
+ "env_proxy": {
+  "HTTPS_PROXY": "",
+  "HTTP_PROXY": "",
+  "https_proxy": "",
+  "NO_PROXY": ""
+ }
+}
