@@ -118,6 +118,29 @@ def _job(r: dict) -> Job:
 def main():
     base = Path(".").resolve()
     req = yaml.safe_load((base / "probe" / "request.yaml").read_text()) or {}
+    if req.get("fetch"):                              # raw page test: what a plain request and a browser each get back
+        import requests as _rq
+        od = base / "probe" / "out" / f"fetch-{req.get('id', 'x')}"
+        od.mkdir(parents=True, exist_ok=True)
+        from playwright.sync_api import sync_playwright as _sp
+        with _sp() as pw:
+            br = pw.chromium.launch(headless=True)
+            pg = br.new_page()
+            for n, u in enumerate(req["fetch"]):
+                try:
+                    r = _rq.get(u, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"}, timeout=30)
+                    (od / f"{n}-plain.html").write_text(f"<!-- {r.status_code} {r.url} -->\n" + r.text)
+                except Exception as e:
+                    (od / f"{n}-plain.html").write_text(f"error {e}")
+                try:
+                    pg.goto(u, wait_until="domcontentloaded", timeout=45000)
+                    pg.wait_for_timeout(4000)
+                    (od / f"{n}-browser.html").write_text(f"<!-- {pg.url} -->\n" + pg.content())
+                    pg.screenshot(path=str(od / f"{n}.jpg"), full_page=False)
+                except Exception as e:
+                    (od / f"{n}-browser.html").write_text(f"error {e}")
+            br.close()
+        return
     if req.get("feeds"):                              # job-feed test: what each named feed returns, nothing else
         import json as _j
         from . import aggregators as _A
