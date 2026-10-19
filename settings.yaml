@@ -19,7 +19,8 @@ search:
                               # the limit should be the résumé check, not this number
   max_per_company: 0          # no limit on applications to one employer: every role that passes your résumé match goes
   max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
-  max_human_check_tries_per_day: 6      # tries per day on sites where every recent try ended at a human check (CAPTCHA)
+  max_human_check_tries_per_day: 3      # tries per day on sites where every recent try ended at a human check (CAPTCHA);
+                                        # their other good matches go to your apply-by-hand list
   max_level: 1                # 0 = entry only, 1 = entry + early career (up to 2 required years). Mid/senior are skipped.
   exclude_government: true    # federal, state, county, city and public-agency employers are dropped, whatever source they come from
   titles_include_add:         # added to your private list of accepted titles (not replacing it): entry roles an Industrial &

@@ -29,7 +29,7 @@ from .ats import detect as detect_ats
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
 REQUEUE_VERSION = __version__      # every new build retries, once, the jobs that earlier bugs set aside
-FIXED_FLAG = "2026-10-15-a"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
+FIXED_FLAG = "2026-10-18-b"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 

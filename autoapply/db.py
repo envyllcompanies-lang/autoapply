@@ -154,6 +154,9 @@ class DB:
             "wrongly called no longer listed": "status='skipped' AND reason = 'posting no longer listed' AND COALESCE(attempts, 0) = 0",
             # forms the site bounced back before anything was sent (a Country / start-month list, a name box)
             "a form the site bounced back": "status='failed' AND reason LIKE 'the form was rejected, not sent%'",
+            # Paylocity pages the site sent back (pay range as two numbers, a start date it accepts, job dates in order)
+            # and Workday tick-box lists / terms boxes the bot reads now (2026-10-18)
+            "a Paylocity page the site sent back": "status='skipped' AND reason LIKE 'stuck on step%' AND apply_url LIKE '%paylocity%'",
             # Greenhouse forms on an employer's own career page ('?gh_jid='): opened on Greenhouse itself now
             "a Greenhouse form that did not load on the employer's page": "status='blocked' AND reason LIKE 'no application form found%'"
                 " AND apply_url LIKE '%gh_jid=%'",

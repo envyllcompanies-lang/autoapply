@@ -1123,11 +1123,72 @@ def _set_text(el, val: str):
         pass
 
 
+_CAL_JS = r"""([fid, day, monthName, year]) => {
+  const fly = document.getElementById(fid) || document.querySelector('[role="dialog"][aria-hidden="false"], [role="dialog"]:not([aria-hidden])');
+  if (!fly) return 'no-calendar';
+  const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; };
+  const head = (fly.innerText || '');
+  const shows = new RegExp(monthName + '\\s+' + year, 'i').test(head);
+  if (!shows) return 'month:' + head.slice(0, 60).replace(/\s+/g, ' ');
+  const cells = [...fly.querySelectorAll('button, [role="gridcell"], td')].filter(vis);
+  const want = new RegExp('(^|\\D)' + day + '(\\D|$)');
+  const full = new RegExp(monthName + '\\s+' + day + ',?\\s+' + year, 'i');
+  let hit = cells.find(c => full.test(c.getAttribute('aria-label') || '') || full.test(c.getAttribute('title') || ''));
+  if (!hit) hit = cells.find(c => (c.innerText || '').trim() === String(day) && !/disabled|outside|other-month|muted/i.test(c.className + ' ' + (c.getAttribute('aria-disabled') || '')));
+  if (!hit) return 'no-day';
+  hit.click();
+  return 'clicked';
+}"""
+
+
+def _pick_on_calendar(page, el, val: str) -> bool:
+    """A date box with its own calendar button (Paylocity): open the calendar, go to the month, click the day."""
+    m = re.fullmatch(r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})", val.strip())
+    if not m:
+        return False
+    mm, dd, yy = int(m.group(1)), int(m.group(2)), m.group(3)
+    month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+             "December"][mm - 1]
+    try:
+        eid = el.get_attribute("id", timeout=1000) or ""
+        btn = page.locator(f'[aria-controls="{eid}-flyout"], [data-pcty-flyout-id="{eid}-flyout"]') if eid else None
+        if not btn or not btn.count():
+            btn = el.locator("xpath=ancestor::*[.//button[@aria-haspopup='dialog']][1]//button[@aria-haspopup='dialog']")
+        if not btn.count():
+            return False
+        btn.first.click(timeout=3000)
+        page.wait_for_timeout(600)
+        try:                                                     # PROBE ONLY: what the calendar looks like
+            import os as _os
+            _os.makedirs("probe/out", exist_ok=True)
+            with open("probe/out/calendar.html", "a") as _fh:
+                _fh.write(page.evaluate("(i) => { const f = document.getElementById(i); return f ? f.outerHTML : 'none'; }", f"{eid}-flyout")[:20000] + "\n<!-- ===== -->\n")
+        except Exception as _e:
+            pass
+        for _ in range(4):
+            got = page.evaluate(_CAL_JS, [f"{eid}-flyout", dd, month, yy])
+            if got == "clicked":
+                page.wait_for_timeout(400)
+                return bool((el.input_value(timeout=1000) or "").strip())
+            if not str(got).startswith("month:"):
+                return False
+            nxt = page.locator(f'[id="{eid}-flyout"] button[aria-label*="next" i], [id="{eid}-flyout"] button[title*="next" i]')
+            if not nxt.count():
+                return False
+            nxt.first.click(timeout=2000)
+            page.wait_for_timeout(400)
+    except Exception:
+        return False
+    return False
+
+
 def _force_date(page, el, val: str):
     """A date box that threw away the typed date (Paylocity's 'Available to Start'): typed again the ways such pickers
     accept: digits only after selecting all, then Enter; then through the box's own value setter with the events a page
     listens for. Stops at the first that sticks."""
     digits = re.sub(r"\D", "", val)
+    if _pick_on_calendar(page, el, val):
+        return True
     for how in ("keys", "enter", "setter"):
         try:
             el.click(timeout=2000)
@@ -1415,7 +1476,14 @@ def _fill_one(page, f: dict, val, files: dict, log):
     elif kind == "text" and isinstance(val, str) and val.startswith("__DATE__"):
         _force_date(page, el, _date_as_box(f.get("ph") or "", val[len("__DATE__"):]))
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
-        _set_text(el, _number_text(val) if kind == "number" else _date_as_box(f.get("ph") or "", val) if kind == "text" else str(val))
+        txt = _number_text(val) if kind == "number" else _date_as_box(f.get("ph") or "", val) if kind == "text" else str(val)
+        _set_text(el, txt)
+        if kind == "text" and txt and re.search(r"mm.?dd.?yyyy|dd.?mm.?yyyy|yyyy.?mm.?dd", str(f.get("ph") or ""), re.I):
+            try:
+                if not (el.input_value(timeout=1000) or "").strip():
+                    _force_date(page, el, txt)        # a date box that threw the typed date away: its calendar, then other ways
+            except Exception:
+                pass
     elif kind == "select":
         try:
             el.select_option(label=str(val), timeout=4000)
