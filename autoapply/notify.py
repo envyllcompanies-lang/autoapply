@@ -70,7 +70,10 @@ _KINDS = ((r"hcaptcha", "hCaptcha"), (r"recaptcha", "reCAPTCHA"), (r"turnstile|c
 def _hand_line(r) -> str:
     fit = f"match {r['fit']}%, " if (r["fit"] or 0) > 0 else ""
     where = f" ({r['location']})" if r["location"] else ""
-    why = re.sub(r"^apply by hand \(human check\):\s*", "", r["reason"] or "")
+    why = re.sub(r"^apply by hand \((human check|your call)\):\s*", "", r["reason"] or "")
+    if (r["reason"] or "").startswith("apply by hand (your call)"):
+        what = re.sub(r"^the form asks you to agree to:\s*", "", why)[:110]
+        return f"  - [{fit}score {r['score']}] {r['title']} @ {r['company']}{where} · your call: asks you to agree to \"{what}\"\n    {_link(r)}"
     kind = next((name for rx, name in _KINDS if re.search(rx, why, re.I)), "human check")
     note = " · look for their confirmation email first" if "confirmation email from them first" in (r["reason"] or "") else ""
     return f"  - [{fit}score {r['score']}] {r['title']} @ {r['company']}{where} · asks for: {kind}{note}\n    {_link(r)}"
@@ -83,9 +86,10 @@ def build_text(today: str, counts: str, groups: dict, manual: list, run_url: str
         lines.append(f"NEEDS YOU ({len(needs)}): things only you can do")
         lines += [f"  - {x}" for x in needs] + [""]
     if hand_new:
-        lines.append(f"APPLY BY HAND ({len(hand_new)} new): these sites ask every applicant to pass a human check (a CAPTCHA or "
-                     f"similar), which the bot never does. Each one passed your filters and résumé match. Open the link and apply; "
-                     f"when the employer's confirmation email arrives, the bot marks it applied.")
+        lines.append(f"APPLY BY HAND ({len(hand_new)} new): each passed your filters and résumé match, but needs you: the site asks "
+                     f"every applicant to pass a human check (a CAPTCHA or similar), which the bot never does, or the form asks you "
+                     f"to agree to something you said the bot never agrees to for you. Open the link and apply; when the "
+                     f"employer's confirmation email arrives, the bot marks it applied.")
         lines += [_hand_line(r) for r in sorted(hand_new, key=lambda r: -((r["fit"] or 0) * 1000 + (r["score"] or 0)))[:60]] + [""]
     if hand_open:
         lines.append(f"STILL ON YOUR APPLY-BY-HAND LIST (best {len(hand_open)}; once a day)")

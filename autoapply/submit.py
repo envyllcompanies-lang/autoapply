@@ -56,6 +56,19 @@ EXTRACT_JS = r"""
     return '';
   };
 
+  // the terms a lone tick-box agrees to, when they are written above it rather than in its label (Workday's 'Terms and
+  // Conditions' text before 'Yes*' / 'Checking the box is equivalent to a handwritten signature')
+  const termsOf = el => {
+    const box = el.closest('[data-automation-id^="formField"]') || el.closest('.form-group, fieldset') || el.parentElement;
+    let t = '', p = box;
+    for (let i = 0; i < 4 && p && t.length < 12000; i++) {
+      p = p.previousElementSibling;
+      if (!p) break;
+      if (p.querySelector && p.querySelector('input, select, textarea, button[aria-haspopup]')) break;
+      t = (p.innerText || '').replace(/\s+/g, ' ').trim() + ' ' + t;      // (whole: an arbitration clause may come late)
+    }
+    return t.trim().slice(-12000);
+  };
   const BTN_WORDS = /^(attach|upload|browse|choose|select|add)\b/i;
   const STRIP = /\b(attach|dropbox|google drive|enter manually|paste|upload( a)?( file)?|browse|choose( a)? file|no file chosen|or drag and drop( here)?|drag and drop|drop (your )?files? here|remove|replace|accepted file types?:[^\n]*|(max(imum)?|file) size[^\n]*|pdf, doc[^\n]*)\b/gi;
   const fileLabelOf = el => {
@@ -204,7 +217,7 @@ EXTRACT_JS = r"""
     const gbox = g.members[0].closest('[aria-required="true"]');
     if (g.type === 'checkbox' && g.members.length === 1)
       fields.push({ id: opts[0].id, kind: 'checkbox_single', label: opts[0].label, question: gq, required: g.required,
-                    sel: opts[0].sel, key: keyOf(g.members[0]), checked: isOn(g.members[0]) });
+                    sel: opts[0].sel, key: keyOf(g.members[0]), checked: isOn(g.members[0]), context: termsOf(g.members[0]) });
     else
       fields.push({ id: 'g_' + opts[0].id, kind: g.type === 'radio' ? 'radio' : 'checkbox_group',
                     label: gq || name, required: g.required || /[*\u2731]/.test(gq) || /\(required\)/i.test(gq) || !!gbox || markedRequired(g.members[0]),
@@ -1110,6 +1123,34 @@ def _set_text(el, val: str):
         pass
 
 
+def _force_date(page, el, val: str):
+    """A date box that threw away the typed date (Paylocity's 'Available to Start'): typed again the ways such pickers
+    accept: digits only after selecting all, then Enter; then through the box's own value setter with the events a page
+    listens for. Stops at the first that sticks."""
+    digits = re.sub(r"\D", "", val)
+    for how in ("keys", "enter", "setter"):
+        try:
+            el.click(timeout=2000)
+            page.keyboard.press("Control+a")
+            page.keyboard.press("Backspace")
+            if how == "keys":
+                page.keyboard.type(digits, delay=60)
+            elif how == "enter":
+                page.keyboard.type(val, delay=60)
+                page.keyboard.press("Enter")
+            else:
+                el.evaluate("""(e, v) => { const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+                                set.call(e, v); for (const t of ['input', 'change', 'blur']) e.dispatchEvent(new Event(t, {bubbles: true})); }""", val)
+            page.wait_for_timeout(300)
+            el.press("Tab")
+            page.wait_for_timeout(300)
+            if (el.input_value(timeout=1000) or "").strip():
+                return True
+        except Exception:
+            continue
+    return False
+
+
 def _set_date(page, f: dict, el, val):
     """Workday's MM / DD / YYYY boxes. Typing the digits into the month box moves along by itself; if the boxes do not
     show the date afterwards, each box is typed on its own."""
@@ -1191,6 +1232,37 @@ _SHOWN_JS = """e => {
 }"""
 
 
+_STATE_ABBR = {"AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut",
+               "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois",
+               "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+               "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska",
+               "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina",
+               "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island",
+               "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia",
+               "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"}
+_US_NAMES = re.compile(r"^\W*(the )?(united states( of america)?|usa|u\.s\.a?\.?|us|america)\W*$", re.I)
+
+
+def _value_variants(val: str) -> list[str]:
+    """Other ways a search-as-you-type list may spell the same answer: 'United States of America' -> 'United States', 'USA';
+    'CO' <-> 'Colorado'; then shorter beginnings ('Industrial and Systems Engineering' -> 'Industrial and')."""
+    v = str(val).strip()
+    out = [v]
+    if _US_NAMES.match(v):
+        out += ["United States", "United States of America", "USA", "US", "U.S."]
+    if v.upper() in _STATE_ABBR:
+        out.append(_STATE_ABBR[v.upper()])
+    rev = {n.lower(): a for a, n in _STATE_ABBR.items()}
+    if v.lower() in rev:
+        out.append(rev[v.lower()])
+    words = v.split()
+    if len(words) > 2:
+        out.append(" ".join(words[:2]))
+    if len(words) > 1 and len(words[0]) > 3:
+        out.append(words[0])
+    return list(dict.fromkeys(x for x in out if x))
+
+
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
@@ -1237,16 +1309,39 @@ def _set_dropdown(page, f: dict, el, val, log) -> bool:
         texts = [o["text"] for o in opts]
         i = _match_option(texts, val) if texts else None
         if i is None and not is_btn:
+            for v2 in _value_variants(val)[1:]:       # the list spells it another way ('United States' for 'United States of America')
+                try:
+                    el.fill("", timeout=3000)
+                    el.press_sequentially(v2, delay=40)
+                except Exception:
+                    break
+                page.wait_for_timeout(800)
+                opts = _options(page, el)
+                texts = [o["text"] for o in opts]
+                i = (_match_option(texts, v2) if texts else None)
+                if i is None and texts:
+                    i = _match_option(texts, val)
+                if i is not None:
+                    break
+        if i is None and not is_btn:
             page.keyboard.press("Enter")              # a search box: Enter takes its top suggestion
         # (a list of fixed choices is never answered with 'whatever is highlighted': nothing picked is reported instead)
     elif i is None:                                   # search-as-you-type (places): type, take the first suggestion
-        el.fill("", timeout=3000)
-        el.press_sequentially(val, delay=50)
-        page.wait_for_timeout(1300)
-        opts = _options(page, el)
-        if opts:
-            i = 0
-        else:
+        for v2 in _value_variants(val):
+            el.fill("", timeout=3000)
+            el.press_sequentially(v2, delay=50)
+            page.wait_for_timeout(1300)
+            opts = _options(page, el)
+            if opts:
+                texts = [o["text"] for o in opts]
+                i = _match_option(texts, v2)
+                if i is None:
+                    i = _match_option(texts, val)
+                if i is None and v2 == val:
+                    i = 0                             # (the first spelling: its first suggestion, as before)
+                if i is not None:
+                    break
+        if i is None:
             page.keyboard.press("Enter")
     if i is not None:
         _click_option(page, opts[i])
@@ -1315,6 +1410,10 @@ def _fill_one(page, f: dict, val, files: dict, log):
         for v in (val if isinstance(val, list) else [val]):       # several answers (your skills): the first the site's list has
             if _wd_prompt(page, f, el, str(v), log):
                 break
+    elif kind in ("text", "textarea", "email", "tel", "url", "number", "date") and val == "__CLEAR__":
+        el.fill("", timeout=4000)
+    elif kind == "text" and isinstance(val, str) and val.startswith("__DATE__"):
+        _force_date(page, el, _date_as_box(f.get("ph") or "", val[len("__DATE__"):]))
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date"):
         _set_text(el, _number_text(val) if kind == "number" else _date_as_box(f.get("ph") or "", val) if kind == "text" else str(val))
     elif kind == "select":
@@ -1590,7 +1689,7 @@ def verify(page, fields: list[dict], answers: dict, log=print) -> list[str]:
     empty = []
     for f in fields:
         val = answers.get(f["id"])
-        if val in (None, "") or f["kind"] not in ("text", "textarea", "email", "tel", "url", "number", "select"):
+        if val in (None, "", "__CLEAR__") or f["kind"] not in ("text", "textarea", "email", "tel", "url", "number", "select"):
             continue
         try:
             got = _loc(page, f).input_value(timeout=1200)
@@ -1642,6 +1741,64 @@ def _find_advance(page):
     if nxt is not None:
         return nxt, "next"
     return None, None
+
+
+def _repair_key(f: dict) -> str:
+    return re.sub(r"\W+", " ", str(f.get("label", "")).lower()).strip()[:80]
+
+
+def _all_errors(page) -> str:
+    """Every error the page shows, in full (not cut at 80 characters), as one lower-case text."""
+    try:
+        errs = page.locator('[data-automation-id="errorMessage"], [data-automation-id="inputError"], [aria-invalid="true"], [role="alert"], '
+                            '.error, .field-error, [class*="error"], [class*="invalid"], .type-footnote').locator("visible=true").all_inner_texts()
+    except Exception:
+        return ""
+    return " | ".join(e.strip() for e in errs if e.strip())[:4000].lower()
+
+
+def _repairs_from_errors(page, fields: list[dict], answers: dict) -> dict:
+    """{field key: new value} for what the site's error messages say is wrong with the answers just sent:
+      - 'must be a valid currency amount' / 'numbers only' on a pay box: the plain number ('$70,000 to $80,000' -> '70000')
+      - 'enter a valid LinkedIn URL' on an optional LinkedIn box: the box is left empty (a required one is kept)
+      - a date box that came back empty: typed again key by key in its own format (see _fill_one)"""
+    errs = _all_errors(page)
+    if not errs:
+        return {}
+    out = {}
+    for f in fields:
+        val = answers.get(f["id"])
+        lab = str(f.get("label", "")).lower()
+        k = _repair_key(f)
+        if f["kind"] in ("text", "number") and val not in (None, "") and re.search(r"salary|pay\b|compensation|wage|amount|rate|range", lab) and \
+                re.search(r"currency|valid (amount|number)|must be a (valid )?number|numeric|whole number|numbers only|only numbers|digits", errs):
+            num = _number_text(val)
+            if num != str(val) and re.fullmatch(r"\d+(\.\d+)?", num):
+                out[k] = num
+        if f["kind"] in ("text", "url") and "linkedin" in lab + " " + str(f.get("hint") or "").lower() and not f.get("required") \
+                and re.search(r"linkedin", errs) and re.search(r"valid|invalid|format", errs):
+            out[k] = "__CLEAR__"
+        if f["kind"] == "text" and re.search(r"mm.?dd.?yyyy|dd.?mm.?yyyy|yyyy.?mm.?dd", str(f.get("ph") or ""), re.I) and val not in (None, "") \
+                and re.search(re.escape(lab.replace("*", "").strip()[:25]) if lab.strip() else r"$^", errs) and re.search(r"required|invalid|valid date", errs):
+            out[k] = "__DATE__" + str(val)
+    return out
+
+
+def _named_missing(err: str, fields: list[dict], answers: dict) -> list[dict]:
+    """Fields the site names as missing ('Missing entry for required field: Legal Last Name', 'Legal Last Name is required')
+    that the bot had answered: their boxes were emptied after they were filled."""
+    names = re.findall(r"missing entry for required field:\s*([^\n'\]]{2,80})", err, re.I) + \
+        re.findall(r"([A-Z][^\n'\]]{2,60}?) (?:is|are) required", err)
+    out = []
+    for n in names:
+        nn = re.sub(r"\W+", " ", n.lower()).strip()
+        for f in fields:
+            if f["id"] in [x["id"] for x in out] or answers.get(f["id"]) in (None, "") or f["kind"] in ("file",):
+                continue
+            if _repair_key(f).replace(" ", "").startswith(nn.replace(" ", "")[:30]) and nn:
+                out.append(f)
+                break
+    return out
 
 
 def _page_errors(page) -> list[str]:
@@ -1982,6 +2139,8 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
     from . import auth, workday, writer as _w
     start_url = page.url
     total, uploaded, prev_sig, stuck, answered, code_tries, opened = 0, False, None, 0, {}, 0, False
+    repairs: dict = {}            # field label -> the value to use instead, learnt from the site's own error messages
+    plan_prev = None
     # Correlate inbox codes with the current application action, not just account creation.
     mail_since = time.time() - 45
     limit_at = time.time() + MAX_APPLY_SECONDS
@@ -2079,6 +2238,12 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
 
         sig = tuple(sorted(f.get("label", "") for f in fields))
         stuck = stuck + 1 if sig == prev_sig else 0
+        if stuck == 1 and plan_prev is not None:
+            # the page came back with errors: what the site says is wrong decides a different value for those fields
+            fixes = _repairs_from_errors(page, fields, plan_prev["answers"])
+            if fixes:
+                repairs.update(fixes)
+                log(f"      (the site rejected some answers; retrying with: {', '.join(k[:30] for k in fixes)[:150]})")
         if stuck >= 2:
             raise Unanswerable(f"stuck on step {step}; page says: {_page_errors(page) or 'nothing'}; "
                                f"fields flagged: {_invalid_labels(page) or 'none'}; buttons: {_visible_buttons(page)[:160]}")
@@ -2086,6 +2251,11 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
         log(f"      step {step}: {len(fields)} fields ({sum(f['required'] for f in fields)} required)")
         total += len(fields)
         plan = brain.map_fields(job, fields, cover_letter)
+        for f in fields:
+            fix = repairs.get(_repair_key(f))
+            if fix is not None and f["id"] in plan["answers"] or (fix == "__CLEAR__" and _repair_key(f) in repairs):
+                plan["answers"][f["id"]] = fix
+        plan_prev = plan
         # a box the site already shows an answer in (picked on the page before, kept from your candidate profile) needs nothing
         unans = set(plan["unanswerable_required"]) - {f["id"] for f in fields if _already_answered(f)}
         missing = [by["label"][:60] for by in fields if by["id"] in unans]
@@ -2108,7 +2278,12 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
         fill(page, fields, plan["answers"], files, log, deadline=limit_at)
         if any(f["kind"] == "file" and plan["answers"].get(f["id"]) for f in fields):
             _wait_uploads(page)
-        verify(page, fields, plan["answers"], log)
+            page.wait_for_timeout(1200)        # some sites read the résumé and refill the form from it, emptying boxes already typed
+        empty = verify(page, fields, plan["answers"], log)
+        if empty:
+            fill(page, [f for f in fields if f["id"] in empty], {i: plan["answers"][i] for i in empty}, files, log, deadline=limit_at)
+            if not verify(page, fields, {i: plan["answers"][i] for i in empty}, lambda *a: None):
+                log(f"      (filled again: {len(empty)} box(es) the page had emptied)")
         uploaded = uploaded or any(f["kind"] == "file" for f in fields)
         btn, kind = _find_advance(page)
         page.screenshot(path=str(shot if step == 1 else shot.with_name(f"step{step}.png")), full_page=True)
@@ -2140,6 +2315,17 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                     result = submit(page, btn=btn, on_click=on_click, mail_hint="|".join(x for x in (getattr(job, "company", ""), (getattr(job, "extra", None) or {}).get("company_name", "")) if x), log=log)
                 except NotSubmitted as e:
                     res_fields = [f for f in fields if plan["answers"].get(f["id"]) == "RESUME"]
+                    named = _named_missing(str(e), fields, plan["answers"])
+                    if named and not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b", str(e), re.I)):
+                        # 'Missing entry for required field: Legal Last Name': the box was answered but the page lost it
+                        log(f"      the form says {len(named)} answered box(es) are empty: filling them again and submitting once more")
+                        fill(page, named, {f["id"]: plan["answers"][f["id"]] for f in named}, files, log, deadline=limit_at)
+                        btn2, kind2 = _find_advance(page)
+                        if kind2 != "submit":
+                            raise
+                        result = submit(page, btn=btn2, on_click=on_click, mail_hint="|".join(x for x in (getattr(job, "company", ""), (getattr(job, "extra", None) or {}).get("company_name", "")) if x), log=log)
+                        page.screenshot(path=str(shot.with_name("confirmation.png")), full_page=True)
+                        return result
                     if not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b|attach|upload|\bfiles?\b", str(e), re.I)):
                         raise
                     # the form says the résumé is missing, so nothing was sent: attach it with the site's own button, submit once more

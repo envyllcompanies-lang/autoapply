@@ -19,6 +19,7 @@ import yaml
 
 from .db import DB
 from .brain import Brain
+from . import brain as brain_mod
 from .sources import discover, prefilter, Job
 from .aggregators import account_gated, direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
@@ -160,6 +161,10 @@ SITE_PRIOR = {"workday": 0, "bamboohr": 1, "breezy": 1, "recruitee": 1, "smartre
 # a spam screen) is handed to you instead of being failed: it is match-checked like any other, and a good match is put on
 # your apply-by-hand list (emailed) with its link. The bot never tries to get past such a check itself.
 HANDOFF_PREFIX = "apply by hand (human check): "
+# A form that asks you to agree to something you said the bot never agrees to for you (arbitration, a jury or class-action
+# waiver, a time limit on legal claims) is handed to you the same way: your call, job by job.
+YOURCALL_PREFIX = "apply by hand (your call): "
+HAND_LIKE = "apply by hand (%"
 HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verification|are you a robot|anti-bot|"
                          r"submission was flagged|flagged as (possible |potential )?(spam|suspicious)", re.I)
 
@@ -1159,6 +1164,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log("    … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued")
                     continue
                 snap("skipped", str(e))
+                if handoff_on and not clicked and str(e).startswith("can't truthfully answer") and (
+                        brain_mod.TERMS_WAIVER_RX.search(str(e)) or brain_mod.LEGAL_RX.search(str(e))):
+                    # the form wants you to agree to arbitration or the like, which the bot never does for you: your call
+                    db.update(job.key, status="manual", reason=YOURCALL_PREFIX + "the form asks you to agree to: " + str(e)[34:330],
+                              attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log("    (on your apply-by-hand list: the form asks you to agree to something you said the bot never agrees to)")
+                    continue
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 co_fail[co_n] = co_fail.get(co_n, 0) + 1
@@ -1231,6 +1244,13 @@ def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:
         extra = "" if r["status"] == "blocked" else "look for a confirmation email from them first; if none came, apply by hand: "
         db.conn.execute("UPDATE jobs SET status='manual', reason=? WHERE key=?", (HANDOFF_PREFIX + extra + why[:300], r["key"]))
         n += 1
+    for r in db.conn.execute("SELECT key, reason FROM jobs WHERE status='skipped' AND updated >= ? AND fit >= ? AND reason LIKE ?"
+                             " AND (submitted_at IS NULL OR submitted_at = '')", (cutoff, min_fit, "can't truthfully answer%")).fetchall():
+        why = r["reason"] or ""
+        if brain_mod.TERMS_WAIVER_RX.search(why) or brain_mod.LEGAL_RX.search(why):
+            db.conn.execute("UPDATE jobs SET status='manual', reason=? WHERE key=?",
+                            (YOURCALL_PREFIX + "the form asks you to agree to: " + why[34:330], r["key"]))
+            n += 1
     db.conn.commit()
     return n
 
@@ -1243,7 +1263,7 @@ def _resolve_hand_applied(db: DB, brain: Brain, log):
     db.meta_set("hand_scan", str(time.time()))
     cutoff = datetime.fromtimestamp(time.time() - 21 * 86400).isoformat(timespec="seconds")
     rows = db.conn.execute("SELECT key, company, title, updated FROM jobs WHERE status='manual' AND updated >= ? AND reason LIKE ?",
-                           (cutoff, HANDOFF_PREFIX + "%")).fetchall()
+                           (cutoff, HAND_LIKE)).fetchall()
     if not rows:
         return
     comp = {}
@@ -1288,12 +1308,12 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     counts = ", ".join(f"{len(groups[k])} {k}" for k in order if k in groups) or "nothing new"
     manual = notify.manual_rows(rows)
     # your apply-by-hand list: the ones handed over in this run, and once a day everything still open on it
-    hand_new = [r for r in rows if r["status"] == "manual" and str(r["reason"] or "").startswith(HANDOFF_PREFIX)]
+    hand_new = [r for r in rows if r["status"] == "manual" and str(r["reason"] or "").startswith("apply by hand (")]
     hand_open = []
     if db.meta_get("hand_digest_day") != today:
         cutoff = datetime.fromtimestamp(time.time() - 21 * 86400).isoformat(timespec="seconds")
         hand_open = db.conn.execute("SELECT * FROM jobs WHERE status='manual' AND reason LIKE ? AND updated >= ?"
-                                    " ORDER BY COALESCE(fit, 0) DESC, score DESC LIMIT 60", (HANDOFF_PREFIX + "%", cutoff)).fetchall()
+                                    " ORDER BY COALESCE(fit, 0) DESC, score DESC LIMIT 60", (HAND_LIKE, cutoff)).fetchall()
         new_keys = {r["key"] for r in hand_new}
         hand_open = [r for r in hand_open if r["key"] not in new_keys]
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
