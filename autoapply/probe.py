@@ -118,6 +118,30 @@ def _job(r: dict) -> Job:
 def main():
     base = Path(".").resolve()
     req = yaml.safe_load((base / "probe" / "request.yaml").read_text()) or {}
+    if req.get("llm_test"):                           # can this run's token use GitHub's free models? (tiny calls only)
+        import requests as _rq, json as _j
+        od = base / "probe" / "out" / f"llm-{req.get('id', 'x')}"
+        od.mkdir(parents=True, exist_ok=True)
+        tok = os.environ.get("GITHUB_MODELS_TOKEN", "")
+        h = {"Authorization": f"Bearer {tok}", "Content-Type": "application/json", "Accept": "application/vnd.github+json"}
+        rep = {"token_set": bool(tok)}
+        try:
+            r = _rq.get("https://models.github.ai/catalog/models", headers=h, timeout=30)
+            cat = r.json() if r.ok else []
+            rep["catalog_status"] = r.status_code
+            rep["catalog"] = [{"id": m.get("id"), "tier": m.get("rate_limit_tier"), "limits": m.get("limits")} for m in cat][:80] if isinstance(cat, list) else str(cat)[:500]
+        except Exception as e:
+            rep["catalog_error"] = str(e)[:300]
+        for m in req["llm_test"]:
+            try:
+                r = _rq.post("https://models.github.ai/inference/chat/completions", headers=h, timeout=60,
+                             json={"model": m, "messages": [{"role": "user", "content": "Reply with the single word: ready"}], "max_tokens": 5})
+                rep[m] = {"status": r.status_code, "body": r.text[:300], "headers": {k: v for k, v in r.headers.items() if "ratelimit" in k.lower()}}
+            except Exception as e:
+                rep[m] = {"error": str(e)[:300]}
+        (od / "llm.json").write_text(_j.dumps(rep, indent=1))
+        print(_j.dumps(rep, indent=1)[:6000])
+        return
     if req.get("fetch"):                              # raw page test: what a plain request and a browser each get back
         import requests as _rq
         od = base / "probe" / "out" / f"fetch-{req.get('id', 'x')}"
