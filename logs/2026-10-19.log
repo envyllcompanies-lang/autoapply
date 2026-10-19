@@ -1234,3 +1234,510 @@ E; btnSubmit:Submit
 [03:22:16]   by site  greenhouse: 3 skipped, 2 blocked, 1 failed, 1 unconfirmed
 [03:22:16]   by site  paylocity: 1 applied, 1 blocked
 [03:22:20] Summary emailed to delgado@alumni.usc.edu
+[03:23:10] === autoapply run (LIVE) build 2026-10-18-a ===
+[03:23:10] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[03:23:11] mail: logged in to delgado@alumni.usc.edu OK
+[03:23:55] Discovering jobs…
+[03:23:55] Job search already ran at 01:45 (searches run every 3 h): this run only applies
+[03:23:55]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[03:23:55] 0 open roles, 0 new
+[03:23:55] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.8 min)
+[03:23:55] 1146 jobs queued: 40 already matched to your résumé, 1106 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 492 now
+[03:23:56] Time for this run: 50 min in all (13318 of 1850 free Actions minutes used this month)
+[03:23:57] Accounts: ON (delgado@alumni.usc.edu)
+[03:23:58] → Pre-Service Specialist I @ albanymed (score 19, match 55%)
+[03:24:01]       (opening Workday's application form directly)
+[03:24:05]       (account page: creating the account / signing in)
+[03:24:07]       account: signing in on albanymed.wd5.myworkdayjobs.com
+[03:25:29]       (Workday has not drawn the form yet: loading it again)
+[03:25:35]       1/6 My Information: 10 fields (9 required)
+[03:25:39]       2/6 My Experience: 17 fields (7 required)
+[03:25:57]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[03:26:08]       (writer answered 'Are you currently under investigation or have you been sanct' -> 'No')
+[03:26:08]       (writer answered 'During the preceding year, were you employed in a managerial' -> 'No')
+[03:26:08]       (ticked Day for 'Please select the shift you are willing to work:*')
+[03:26:08]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[03:26:08]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[03:26:08]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[03:26:08]     ✗ skipped: can't truthfully answer required: Per Diem; Temporary
+[03:26:15] → Customer Service Billing Specialist @ albanymed (score 12, match 55%)
+[03:26:25]       (opening Workday's application form directly)
+[03:26:31]       1/6 My Information: 14 fields (12 required)
+[03:26:38]       2/6 My Experience: 17 fields (7 required)
+[03:26:56]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[03:27:07]       (writer answered 'Are you currently under investigation or have you been sanct' -> 'No')
+[03:27:07]       (writer answered 'During the preceding year, were you employed in a managerial' -> 'No')
+[03:27:07]       (ticked Day for 'Please select the shift you are willing to work:*')
+[03:27:07]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[03:27:07]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[03:27:07]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[03:27:07]     ✗ skipped: can't truthfully answer required: Per Diem; Temporary
+[03:27:13] → Credentialing Applications Specialist @ albanymed (score 10, match 55%)
+[03:27:23]       (opening Workday's application form directly)
+[03:27:29]       1/6 My Information: 14 fields (12 required)
+[03:27:36]       2/6 My Experience: 17 fields (7 required)
+[03:27:54]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[03:28:05]       writer: groq-20b: free daily limit reached (back in 0 min)
+[03:28:05]       (writer answered 'Are you currently under investigation or have you been sanct' -> 'No')
+[03:28:06]       (writer answered 'During the preceding year, were you employed in a managerial' -> 'No')
+[03:28:06]       (ticked Day for 'Please select the shift you are willing to work:*')
+[03:28:06]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[03:28:06]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[03:28:06]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[03:28:06]     ✗ skipped: can't truthfully answer required: Per Diem; Temporary
+[03:28:12] → Contract Technical Recruiter @ invisibletech (score 10, match 55%)
+[03:28:21]       step 1: 16 fields (15 required)
+[03:28:21]       (writer answered 'How many years of full-cycle technical recruiting experience' -> '<2')
+[03:28:21]       writer: groq-20b: free daily limit reached (back in 7 min)
+[03:28:21]       (writer answered 'This role is only eligible to be based in the United States,' -> 'CO')
+[03:28:23]       ? unanswered: 'What environments have you recruited in? (multi-select) *' kind=checkbox_group options=['In-house: <200 employees', 'In-house: 200-1,000 employees', 'In-house: 1,000-5,000 employee', 'In-house: 5,000+ employees', 'Agency', 'Independent/freelance recruite']
+[03:28:23]     ✗ skipped: can't truthfully answer required: What environments have you recruited in? (multi-select) *
+[03:28:28] → Data Business Analyst I @ Gemini Legal Support Inc (score 69)
+[03:28:31]     ✗ blocked: no application form found on page
+[03:28:39] → Elati Village Site Operations Associate @ The Gathering Place A Refuge for Rebuild (score 68)
+[03:28:41]     ✗ blocked: no application form found on page
+[03:28:45] → Analyst, GTM Strategy & Operations @ Vector Solutions (score 64)
+[03:28:47]     ✗ blocked: no application form found on page
+[03:28:55] → Business Analyst / Scrum Master @ Hyertek (score 63)
+[03:28:58]     ✗ blocked: no application form found on page
+[03:29:04] → RCM Systems & Business Analyst @ Nimble Solutions (score 63)
+[03:29:07]     ✗ blocked: no application form found on page
+[03:29:14] → Delivery Operations Coordinator @ Fencing Supply Group (score 62)
+[03:29:17]     ✗ blocked: no application form found on page
+[03:29:20] → Industrial Engineer – Planning & Analytics @ RAS Logistics Inc (score 58)
+[03:29:23]     ✗ blocked: no application form found on page
+[03:29:26] → Logistics Analyst (Associate) @ CompQsoft Inc. (score 57)
+[03:29:29]     ✗ blocked: no application form found on page
+[03:29:33] → Quality Engineer I @ Graham Manufacturing (score 48)
+[03:29:35]     ✗ blocked: no application form found on page
+[03:29:38]   match  55%  Quality Assurance Specialist @ AdaptHealth LLC — The role is largely administrative healthcare/insurance processing, which is a weak match for an ind
+[03:29:39] → Demand Planner @ Select Division Career Page (score 48)
+[03:29:41]     ✗ blocked: no application form found on page
+[03:29:47] → Quality Assurance Specialist @ AdaptHealth LLC (score 46, match 55%)
+[03:30:14]       step 1: 43 fields (29 required)
+[03:30:15]       (writer answered 'County' -> 'N/A')
+[03:30:22]       (writer answered 'County' -> 'N/A')
+[03:30:48]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[03:30:52]       step 2: 6 fields (6 required)
+[03:31:02]       step 3: 2 fields (0 required)
+[03:31:14]       step 4: 1 fields (0 required)
+[03:31:16]     ✓ applied (1.5 min)
+[03:31:22] → Phone Scheduler @ CloseKnit (score 46)
+[03:31:25]     ✗ blocked: no application form found on page
+[03:31:33] → Media Buyer/Planner @ Dixon Schwabl + Company (score 44)
+[03:31:36]     ✗ blocked: no application form found on page
+[03:31:42] → Patient Care Coordinator I @ Refocus Eye Health (score 44)
+[03:31:45]     ✗ blocked: no application form found on page
+[03:31:52] → Business Configuration Analyst I @ CareMetx (score 44)
+[03:31:54]     ✗ blocked: no application form found on page
+[03:32:03] → Program Coordinator - Polk @ Girl Scouts Of West Central FL (score 43)
+[03:32:06]     ✗ blocked: no application form found on page
+[03:32:13] → Coordinator, Merchandise Operations @ New York Islanders Hockey Club (score 42)
+[03:32:16]     ✗ blocked: no application form found on page
+[03:32:19] → Operations and Maintenance Analyst @ Radial Power Operations LLC (score 42)
+[03:32:22]     ✗ blocked: no application form found on page
+[03:32:27] → Bilingual Care Coordinator Full-Time (Start date 10/19/2026) @ TimeDoc Health (score 42)
+[03:32:30]     ✗ blocked: no application form found on page
+[03:32:33] → Surgery Scheduler - Orthopaedics - Colorado Based Only @ VAIL (score 42)
+[03:32:36]     ✗ blocked: no application form found on page
+[03:32:44] → Operations Integration Specialist @ The Clearing Inc (score 41)
+[03:32:47]     ✗ blocked: no application form found on page
+[03:32:53] → Patient Scheduling Coordinator - Remote @ Pediatric Therapies Hawaii LLC (score 41)
+[03:32:56]     ✗ blocked: no application form found on page
+[03:33:01] → Administrative Assistant - Manhattan Children's Program @ ADAPT Community Network (score 40)
+[03:33:04]     ✗ blocked: no application form found on page
+[03:33:12] → HEALTH HOMES PROGRAM ASSISTANT - Central Islip, NY @ The Economic Opportunity Council of Suffolk Inc (score 40)
+[03:33:15]     ✗ blocked: no application form found on page
+[03:33:20] → Database Analyst (Assistant) @ The Frick Collection (score 40)
+[03:33:23]     ✗ blocked: no application form found on page
+[03:33:29] → Client Care Junior Coordinator @ Venture Forthe (score 40)
+[03:33:32]     ✗ blocked: no application form found on page
+[03:33:37] → Workday Financial Planning Technical Analyst @ e4health (score 38)
+[03:33:40]     ✗ blocked: no application form found on page
+[03:33:45] → Transportation Research Analyst @ American Council for an Energy Efficient Economy (score 38)
+[03:33:47]     ✗ blocked: no application form found on page
+[03:33:54] → Risk Management Coordinator @ Heritage Bank Career Page (score 38)
+[03:33:57]     ✗ blocked: no application form found on page
+[03:34:00] → Administrative Coordinator - Full Time @ Hydration Room (score 38)
+[03:34:03]     ✗ blocked: no application form found on page
+[03:34:08] → Payroll Coordinator @ ICAT LOGISTICS INC (score 38)
+[03:34:11]     ✗ blocked: no application form found on page
+[03:34:18] → Marketing Coordinator @ LayerCake (score 38)
+[03:34:21]     ✗ blocked: no application form found on page
+[03:34:26] → Research Analyst, Finance and Development Unit @ LeSar Holdings (score 38)
+[03:34:29]     ✗ blocked: no application form found on page
+[03:34:36] → Insurance Coordinator @ Lighthouse Autism Center (score 38)
+[03:34:38]     ✗ blocked: no application form found on page
+[03:34:42] → EPIC CERTIFIED CLINDOC/STORK ANALYST @ OCHIN (score 38)
+[03:34:45]     ✗ blocked: no application form found on page
+[03:34:53] → HEALTH CARE - BUSINESS INTELLIGENCE ANALYST @ OCHIN (score 38)
+[03:34:55]     ✗ blocked: no application form found on page
+[03:35:00] → LEARNING PROGRAM ADMINISTRATOR @ OCHIN (score 38)
+[03:35:02]     ✗ blocked: no application form found on page
+[03:35:09] → Service Desk Analyst @ AssureCare, LLC (score 38)
+[03:35:11]     ✗ blocked: no application form found on page
+[03:35:19] → Flight Coordinator @ Premier Air Inc (score 38)
+[03:35:22]     ✗ blocked: no application form found on page
+[03:35:31] → Patient Care Coordinator - Remote @ Refocus Eye Health (score 38)
+[03:35:34]     ✗ blocked: no application form found on page
+[03:35:40] → Compensation Analyst @ SendCutSend Inc [175255] (score 38)
+[03:35:43]     ✗ blocked: no application form found on page
+[03:35:51] → Specialty Prior Authorization Coordinator @ Soleo Health Inc (score 38)
+[03:35:53]     ✗ blocked: no application form found on page
+[03:36:02] → Full-Time Care Coordinator (Start Date 10/19/2026) @ TimeDoc Health (score 38)
+[03:36:04]     ✗ blocked: no application form found on page
+[03:36:08] → Program Services Audit - Claims @ Trean Corporation (score 38)
+[03:36:11]     ✗ blocked: no application form found on page
+[03:36:16] → Business Systems Analyst @ Veseris (score 38)
+[03:36:19]     ✗ blocked: no application form found on page
+[03:36:24] → Marketing Coordinator @ Blue Alliance (score 38)
+[03:36:27]     ✗ blocked: no application form found on page
+[03:36:34] → Talent Acquisition Coordinator @ CareMetx (score 38)
+[03:36:37]     ✗ blocked: no application form found on page
+[03:36:42] → SBHC Operations Specialist, Dental @ Connextcare (score 37)
+[03:36:45]     ✗ blocked: no application form found on page
+[03:36:49] → Outside Golf Operations Attendant @ Glen Oaks Club, Inc. (score 37)
+[03:36:52]     ✗ blocked: no application form found on page
+[03:36:57] → Residence Program Specialist - Sun-Thurs, 3pm-11pm @ ADAPT Community Network (score 34)
+[03:36:59]     ✗ blocked: no application form found on page
+[03:37:03] → Residence Program Specialist - Tues-Sat, 3pm-11pm @ ADAPT Community Network (score 34)
+[03:37:06]     ✗ blocked: no application form found on page
+[03:37:14] → Site Coordinator (Days) @ Colorado Village Collaborative (score 34)
+[03:37:17]     ✗ blocked: no application form found on page
+[03:37:17]   ✗ Benefits Outreach Coordinator @ Critical Nurse Staffing: pays too little: tops out near $45,760 a year (your floor is $65,000)
+[03:37:22] → Executive Coordinator @ Community Health Action of Staten (score 34)
+[03:37:25]     ✗ blocked: no application form found on page
+[03:37:30] → Membership Coordinator @ DENVER BOTANIC GARDENS INC (score 34)
+[03:37:32]     ✗ blocked: no application form found on page
+[03:37:40] → Visitor Services Coordinator – Chatfield Farms @ DENVER BOTANIC GARDENS INC (score 34)
+[03:37:43]     ✗ blocked: no application form found on page
+[03:37:49] → Service Coordinator @ Foothills Regional Housing (score 34)
+[03:37:52]     ✗ blocked: no application form found on page
+[03:38:01] → Environmental Coordinator @ Golden Aluminum (score 34)
+[03:38:03]     ✗ blocked: no application form found on page
+[03:38:11] → Safety Coordinator @ Golden Aluminum (score 34)
+[03:38:14]     ✗ blocked: no application form found on page
+[03:38:20] → Compliance Coordinator @ HEALTHY KIDS PROGRAMS (score 34)
+[03:38:23]     ✗ blocked: no application form found on page
+[03:38:30] → Credentialing Coordinator @ INTRANERVE NEUROSCIENCE HOLDINGS LLC (score 34)
+[03:38:33]     ✗ blocked: no application form found on page
+[03:38:39] → Data and Payment Processing Analyst @ Archdiocese Of Denver (score 34)
+[03:38:42]     ✗ blocked: no application form found on page
+[03:38:47] → Office Coordinator @ Arms Acres Inc. (score 34)
+[03:38:50]     ✗ blocked: no application form found on page
+[03:38:54] → Office Coordinator @ Mission Rock Residential LLC (score 34)
+[03:38:57]     ✗ blocked: no application form found on page
+[03:39:07] → Social Worker, LCSW  (Survivorship Program)  SIGN ON BONUS!! @ RPCI Oncology PC (score 34)
+[03:39:10]     ✗ blocked: no application form found on page
+[03:39:17] → Activities Coordinator $500 Sign on Bonus @ Senior Housing Options Inc (score 34)
+[03:39:19]     ✗ blocked: no application form found on page
+[03:39:28] → Wellness Coordinator $500 Sign on Bonus @ Senior Housing Options Inc (score 34)
+[03:39:30]     ✗ blocked: no application form found on page
+[03:39:36] → Human Resources Coordinator @ The Gathering Place A Refuge for Rebuild (score 34)
+[03:39:39]     ✗ blocked: no application form found on page
+[03:39:47] → Marketing & Design Coordinator @ Growing Place (score 28)
+[03:39:49]     ✗ blocked: no application form found on page
+[03:39:53] → Food Distribution Coordinator @ Phoenix Rescue Mission (score 28)
+[03:39:55]     ✗ blocked: no application form found on page
+[03:40:00] → Referral/Authorization Coordinator @ Balance Health (score 28)
+[03:40:03]     ✗ blocked: no application form found on page
+[03:40:09] → Development Coordinator @ Cherry Hills Christian School (score 24)
+[03:40:12]     ✗ blocked: no application form found on page
+[03:40:15] → Construction Project Engineer Associate @ Breckenridge Grand Vacations (score 23)
+[03:40:18]     ✗ blocked: no application form found on page
+[03:40:27] → Case Management Associate (Bi-Lingual and CST time zone) - NICU @ ProgenyHealth LLC (score 22)
+[03:40:30]     ✗ blocked: no application form found on page
+[03:40:39] → Utilization Management Associate @ ProgenyHealth LLC (score 22)
+[03:40:42]     ✗ blocked: no application form found on page
+[03:40:51] → Business Systems Analyst @ Tanaq Management Services LLC (score 22)
+[03:40:53]     ✗ blocked: no application form found on page
+[03:41:03] → Public Health Informatics Analyst @ Tanaq Support Services LLC (score 22)
+[03:41:06]     ✗ blocked: no application form found on page
+[03:41:10] → Pediatric Bilingual Spanish Social Worker- Manhattan @ ADAPT Community Network (score 20)
+[03:41:12]     ✗ blocked: no application form found on page
+[03:41:21] → Intake Specialists - Scheduling @ AdaptHealth LLC (score 19)
+[03:41:24]     ✗ blocked: no application form found on page
+[03:41:33] → Executive Administrative Assistant @ ADAPT of Hudson Valley (score 18)
+[03:41:35]     ✗ blocked: no application form found on page
+[03:41:42] → Summer Legal Associate, Litigation @ Center for Reproductive Rights (score 18)
+[03:41:45]     ✗ blocked: no application form found on page
+[03:41:48] → Outreach and Engagement Associate @ Community Health Action of Staten (score 18)
+[03:41:51]     ✗ blocked: no application form found on page
+[03:41:54] → Customer Experience Associate I @ Douglas County Libraries (score 18)
+[03:41:57]     ✗ blocked: no application form found on page
+[03:42:05] → Assistant Truffle Machine Operator/Candy Maker Trainee @ Enstrom Candies Inc (score 18)
+[03:42:07]     ✗ blocked: no application form found on page
+[03:42:16] → Gummy Line Machine Operator Trainee @ Enstrom Candies Inc (score 18)
+[03:42:18]     ✗ blocked: no application form found on page
+[03:42:26] → Administrative Assistant @ Atlantic Testing Laboratories (score 18)
+[03:42:29]     ✗ blocked: no application form found on page
+[03:42:35] → Warehouse & Parts Associate @ Autowash Management LLC (score 18)
+[03:42:38]     ✗ blocked: no application form found on page
+[03:42:45] → Executive Administrative Assistant @ Rocky Mountain Classical Academy (score 18)
+[03:42:47]     ✗ blocked: no application form found on page
+[03:42:54] → Production Associate I - All Shifts @ SCHLUTER SYSTEMS L.P (score 18)
+[03:42:57]     ✗ blocked: no application form found on page
+[03:43:05] → Production Associate I - Profile Stamping 1st Shift, 2nd & 3rd shift @ SCHLUTER SYSTEMS L.P (score 18)
+[03:43:08]     ✗ blocked: no application form found on page
+[03:43:17] → Warehouseperson Trainee - 1st shift @ Select Division Career Page (score 18)
+[03:43:19]     ✗ blocked: no application form found on page
+[03:43:28] → Entry Level Express Technician - Toyota of Colorado Springs @ Baxter Auto Group (score 18)
+[03:43:31]     ✗ blocked: no application form found on page
+[03:43:38] → Accounting Specialist (AP/AR Clerk) @ Tagawa Greenhouse Ent. (score 18)
+[03:43:41]     ✗ blocked: no application form found on page
+[03:43:45] → JUNIOR ACCOUNTANT - Patchogue, NY @ The Economic Opportunity Council of Suffolk Inc (score 18)
+[03:43:48]     ✗ blocked: no application form found on page
+[03:43:53] → Information Associate (Req 101097) @ Whitney M Young Jr Health Center (score 18)
+[03:43:56]     ✗ blocked: no application form found on page
+[03:44:02] → Information Associate (Req 101107) @ Whitney M Young Jr Health Center (score 18)
+[03:44:05]     ✗ blocked: no application form found on page
+[03:44:09] → Information Associate (Req 101122) @ Whitney M Young Jr Health Center (score 18)
+[03:44:12]     ✗ blocked: no application form found on page
+[03:44:16] → Pick & Pack Associate @ BR Printers, Inc. (score 18)
+[03:44:19]     ✗ blocked: no application form found on page
+[03:44:23] → Payroll/ Benefits Administrator @ Elder Construction Inc (score 17)
+[03:44:25]     ✗ blocked: no application form found on page
+[03:44:32] → Talent Acquisition Specialist @ BRINKMAN CONSTRUCTION INC (score 17)
+[03:44:35]     ✗ blocked: no application form found on page
+[03:44:42] → Automotive Implementation Specialist (FL/GA) @ 700 Credit (score 16)
+[03:44:44]     ✗ blocked: no application form found on page
+[03:44:53] → Human Resources Administrator @ Absolute Home Mortgage Corporation (score 16)
+[03:44:56]     ✗ blocked: no application form found on page
+[03:45:00] → Dispatcher (PST) @ AdaptHealth LLC (score 16)
+[03:45:02]     ✗ blocked: no application form found on page
+[03:45:12] → Intake Specialist - Insurance Verification @ AdaptHealth LLC (score 16)
+[03:45:14]     ✗ blocked: no application form found on page
+[03:45:23] → Email Marketing Specialist @ CeriFi (score 16)
+[03:45:26]     ✗ blocked: no application form found on page
+[03:45:36] → Yard Cleaning Specialist @ CGCB Associates LLC (score 16)
+[03:45:39]     ✗ blocked: no application form found on page
+[03:45:45] → 988 Crisis Intervention Specialist Call Team GY (FT) @ Crisis Connections (score 16)
+[03:45:48]     ✗ blocked: no application form found on page
+[03:45:55] → Child Care Resource & Referral Specialist @ Early Learning Coalition of Duval Inc (score 16)
+[03:45:57]     ✗ blocked: no application form found on page
+[03:46:05] → System Specialist @ Early Learning Coalition of Duval Inc (score 16)
+[03:46:07]     ✗ blocked: no application form found on page
+[03:46:14] → Motus Technical Specialist @ American Bird Conservancy (score 16)
+[03:46:17]     ✗ blocked: no application form found on page
+[03:46:24] → Encompass Administrator @ Flat Branch Home Loans Inc (score 16)
+[03:46:27]     ✗ blocked: no application form found on page
+[03:46:32] → Business Development Representative @ FlexTrades (score 16)
+[03:46:35]     ✗ blocked: no application form found on page
+[03:46:44] → Product Support Specialist @ Foundation Source Philanthropic Services (score 16)
+[03:46:47]     ✗ blocked: no application form found on page
+[03:46:52] → Payroll and Benefits Administrator @ Genesis Rail Co default (score 16)
+[03:46:54]     ✗ blocked: no application form found on page
+[03:47:03] → HR Specialist @ Gills Point S Tire & Auto (score 16)
+[03:47:06]     ✗ blocked: no application form found on page
+[03:47:12] → Credentialing Specialist @ iCare Health Solutions Enterprise (score 16)
+[03:47:15]     ✗ blocked: no application form found on page
+[03:47:22] → iMR Implementation Specialist @ Imricor Medical Systems Inc (score 16)
+[03:47:24]     ✗ blocked: no application form found on page
+[03:47:33] → Eligibility Specialist @ Lighthouse Autism Center (score 16)
+[03:47:36]     ✗ blocked: no application form found on page
+[03:47:39] → Market Development Specialist – Rescue @ LN Curtis & Sons (score 16)
+[03:47:42]     ✗ blocked: no application form found on page
+[03:47:46] → Benefit Specialist, CDH @ National Benefit Services, LLC (score 16)
+[03:47:49]     ✗ blocked: no application form found on page
+[03:47:59] → Credentialing & Payer Enrollment Specialist @ Nimble Solutions (score 16)
+[03:48:01]     ✗ blocked: no application form found on page
+[03:48:07] → Commercial Contracts Administrator @ Northstar Recycling Company, LLC (score 16)
+[03:48:10]     ✗ blocked: no application form found on page
+[03:48:13] → Commodity Sales Administrator @ Northstar Recycling Company, LLC (score 16)
+[03:48:16]     ✗ blocked: no application form found on page
+[03:48:19] → Commodity Sales Administrator - Rubbish/Waste to Energy @ Northstar Recycling Company, LLC (score 16)
+[03:48:22]     ✗ blocked: no application form found on page
+[03:48:31] → Rubbish/Waste to Energy Solutions Specialist @ Northstar Recycling Company, LLC (score 16)
+[03:48:34]     ✗ blocked: no application form found on page
+[03:48:38] → EPIC LEARNING SPECIALIST-CADENCE/PRELUDE @ OCHIN (score 16)
+[03:48:41]     ✗ blocked: no application form found on page
+[03:48:47] → MEDICAL CODING SPECIALIST-RISK ADJUSTMENT @ OCHIN (score 16)
+[03:48:50]     ✗ blocked: no application form found on page
+[03:48:50]   ✗ Credentialing Specialist (Fully Remote) @ Aspirion: pays too little: tops out near $52,707 a year (your floor is $65,000)
+[03:48:56] → Automotive Implementation Specialist (FL/GA) @ Open Dealer Exchange (score 16)
+[03:48:58]     ✗ blocked: no application form found on page
+[03:49:04] → Associate Product Manager @ Pathfinder Software LLC (score 16)
+[03:49:07]     ✗ blocked: no application form found on page
+[03:49:14] → Client Onboarding Specialist @ Prosites Corporate (score 16)
+[03:49:17]     ✗ blocked: no application form found on page
+[03:49:22] → Onboarding Specialist @ Prosites Corporate (score 16)
+[03:49:25]     ✗ blocked: no application form found on page
+[03:49:29] → Luxury Sales Specialist, Uniworld @ The Travel Corporation (score 16)
+[03:49:31]     ✗ blocked: no application form found on page
+[03:49:35] → Marketing Specialist @ TransImpact Open Positions (score 16)
+[03:49:38]     ✗ blocked: no application form found on page
+[03:49:42] → Collections Specialist @ U. S. Digestive Health (score 16)
+[03:49:44]     ✗ blocked: no application form found on page
+[03:49:52] → Patient Account Specialist @ VALUE (score 16)
+[03:49:55]     ✗ blocked: no application form found on page
+[03:49:58] → Medication Access Specialist - Pacific Time (PST) @ Visante Consulting LLC (score 16)
+[03:50:01]     ✗ blocked: no application form found on page
+[03:50:08] → Medication Access Specialist - PST @ Visante Consulting LLC (score 16)
+[03:50:11]     ✗ blocked: no application form found on page
+[03:50:19] → Medical Compliance Auditor @ VMG Health (score 16)
+[03:50:21]     ✗ blocked: no application form found on page
+[03:50:30] → Customer Experience Omnichannel Specialist @ Whisker (score 16)
+[03:50:33]     ✗ blocked: no application form found on page
+[03:50:38] → Affordable Housing Compliance Specialist – LIHTC File Reviews (Remote) @ Zeffert & Associates, Inc. (score 16)
+[03:50:41]     ✗ blocked: no application form found on page
+[03:50:49] → Career Specialist (Bilingual Preferred) @ Big Brothers Big Sisters of Long Island (score 16)
+[03:50:51]     ✗ blocked: no application form found on page
+[03:50:57] → Revenue Cycle Management (RCM) Specialist @ CAN Community Health Inc (score 16)
+[03:50:59]     ✗ blocked: no application form found on page
+[03:51:09] → Documentation Specialist @ Paper Alternative Solutions Inc (score 15)
+[03:51:11]     ✗ blocked: no application form found on page
+[03:51:21] → eCommerce Demand Forecasting Associate (Hybrid) @ Beauty Industry Group (score 15)
+[03:51:24]     ✗ blocked: no application form found on page
+[03:51:32] → Pooled Trust Administrator @ AIM Services Inc (score 12)
+[03:51:34]     ✗ blocked: no application form found on page
+[03:51:40] → Community Outreach Specialist @ Community Health Action of Staten (score 12)
+[03:51:42]     ✗ blocked: no application form found on page
+[03:51:49] → Seafood Field Specialist @ Empire Marketing Strategies (score 12)
+[03:51:51]     ✗ blocked: no application form found on page
+[03:52:00] → Housing Choice Voucher Specialist @ Foothills Regional Housing (score 12)
+[03:52:02]     ✗ blocked: no application form found on page
+[03:52:12] → Acquisition Specialist @ Groove Toyota (score 12)
+[03:52:15]     ✗ blocked: no application form found on page
+[03:52:22] → Associate Manager @ Guardian Storage Development I (score 12)
+[03:52:25]     ✗ blocked: no application form found on page
+[03:52:34] → Regulatory Compliance Specialist @ HEALTHY KIDS PROGRAMS (score 12)
+[03:52:37]     ✗ blocked: no application form found on page
+[03:52:41] → Subsidy & Automation Specialist @ HEALTHY KIDS PROGRAMS (score 12)
+[03:52:44]     ✗ blocked: no application form found on page
+[03:52:50] → EMR Specialist @ Hematology Oncology (score 12)
+[03:52:53]     ✗ blocked: no application form found on page
+[03:52:59] → Inside Sales & Revenue Development Specialist @ Innovative Concepts in Entertainment Inc (score 12)
+[03:53:02]     ✗ blocked: no application form found on page
+[03:53:05] → Technical Baker and Commecialization Specialist @ Izzio Artisan Bakery LLC (score 12)
+[03:53:08]     ✗ blocked: no application form found on page
+[03:53:11] → Production Operator - 2nd Shift @ J.D. Heiskell & Companies (score 12)
+[03:53:14]     ✗ blocked: no application form found on page
+[03:53:17] → Project Engineer @ Jaxon Engineering and Maintenance (score 12)
+[03:53:20]     ✗ blocked: no application form found on page
+[03:53:25] → Production Operator @ MicroCare LLC (score 12)
+[03:53:28]     ✗ blocked: no application form found on page
+[03:53:32] → Behavioral Health Support Specialist @ Oak Orchard Community Health Center (score 12)
+[03:53:35]     ✗ blocked: no application form found on page
+[03:53:41] → Claims Specialist, Motor Vehicle Accident (Hybrid) @ Aspirion (score 12)
+[03:53:44]     ✗ blocked: no application form found on page
+[03:53:49] → Aircraft Parts Administrator @ Pilatus Aircraft USA Ltd (score 12)
+[03:53:52]     ✗ blocked: no application form found on page
+[03:53:58] → Business Development Center Specialist - Toyota of Colorado Springs @ Baxter Auto Group (score 12)
+[03:54:01]     ✗ blocked: no application form found on page
+[03:54:09] → Client Service Associate @ Sunflower Bank, N.A. (score 12)
+[03:54:11]     ✗ blocked: no application form found on page
+[03:54:18] → Junior Graphic Designer @ Support Center (score 12)
+[03:54:20]     ✗ blocked: no application form found on page
+[03:54:27] → Medical Records Specialist @ The Steadman Clinic (score 12)
+[03:54:30]     ✗ blocked: no application form found on page
+[03:54:37] → Business Admin @ Urban Egg (score 12)
+[03:54:40]     ✗ blocked: no application form found on page
+[03:54:47] → Accounting Specialist @ USAirports Flight Support LLC (score 12)
+[03:54:50]     ✗ blocked: no application form found on page
+[03:54:53] → Billing/Data Entry Specialist @ USAirports Flight Support LLC (score 12)
+[03:54:55]     ✗ blocked: no application form found on page
+[03:55:03] → Aquatics Specialist @ Breckenridge Grand Vacations (score 12)
+[03:55:06]     ✗ blocked: no application form found on page
+[03:55:11] → Contracts Processor @ Breckenridge Grand Vacations (score 12)
+[03:55:14]     ✗ blocked: no application form found on page
+[03:55:19] → Packaging Specialist @ CAYUGA MILK INGREDIENTS LLC (score 12)
+[03:55:21]     ✗ blocked: no application form found on page
+[03:55:27] → Data Analyst @ RedBull (score 28, match 85%)
+[03:55:30]     ✗ blocked: no application form found on page
+[03:55:36] → AP, Real Estate Analyst @ Equinox (score 34, match 82%)
+[03:55:44]     ✗ blocked: no application form found on page
+[03:55:51] → Quality Investigator  @ Transperfect (score 46, match 80%)
+[03:55:59]     ✗ blocked: no application form found on page
+[03:56:04] → Specialist, Digital Poster Operations US @ red-bull (score 31, match 78%)
+[03:56:14]     ✗ blocked: no application form found on page
+[03:56:21] → Specialist, Digital Poster Operations US @ RedBull (score 31, match 78%)
+[03:56:29]     ✗ blocked: no application form found on page
+[03:56:38] → Financial Analyst  @ RedBull (score 28, match 78%)
+[03:56:46]     ✗ blocked: no application form found on page
+[03:56:53] → Business Development Associate @ stimulus-inc (score 17, match 78%)
+[03:57:19]     ✗ blocked: could not find the employer's application page
+[03:57:28] → Procurement Coordinator @ AspenSkiingCompany (score 54, match 75%)
+[03:57:36]     ✗ blocked: no application form found on page
+[03:57:39] → Founding Marketer @ anagram (score 27, match 75%)
+[03:58:15]     ✗ blocked: could not find the employer's application page
+[03:58:22] → Business Development Representative @ ServiceTitan (score 16, match 75%)
+[03:58:30]     ✗ blocked: no application form found on page
+[03:58:37] → Food & Beverage Office Administrative Assistant - The Little Nell - Winter @ AspenSkiingCompany (score 12, match 75%)
+[03:58:45]     ✗ blocked: no application form found on page
+[03:58:49] → Planner, Retail @ Equinox (score 10, match 75%)
+[03:58:52]     ✗ blocked: no application form found on page
+[03:58:59] → Junior Corporate Support Engineer @ Schonfeld (score 16, match 72%)
+[03:59:07]     ✗ blocked: no application form found on page
+[03:59:13] → Junior Digital Assets Operations Analyst @ omega-enterprises (score 75, match 70%)
+[03:59:18]     ✗ blocked: could not find the employer's application page
+[03:59:24] → Junior Crypto Analyst & Trader @ empire-assets (score 37, match 70%)
+[03:59:29]     ✗ blocked: could not find the employer's application page
+[03:59:36] → Real Estate Analyst @ Equinox (score 32, match 60%)
+[03:59:44]     ✗ blocked: no application form found on page
+[03:59:48] → Financial Analyst @ salesloft (score 55, match 55%)
+[04:00:24]     ✗ blocked: could not find the employer's application page
+[04:00:29] → Consultative Offerings - Analyst - Technology Transformation ( Packages, Platforms, & AI) @ deloitte (score 48, match 55%)
+[04:00:35]     ✗ blocked: could not find the employer's application page
+[04:00:42] → Consultative Offerings - Summer Scholar - Functional & Operations Strategy @ deloitte (score 39, match 55%)
+[04:00:48]     ✗ blocked: could not find the employer's application page
+[04:00:53] → Musketeer - On Premise Specialist @ RedBull (score 12, match 55%)
+[04:00:57]     ✗ blocked: no application form found on page
+[04:01:06] → Musketeer Scout- On Premise Specialist @ RedBull (score 12, match 55%)
+[04:01:09]     ✗ blocked: no application form found on page
+[04:01:09]   ✗ Business Analyst @ freelink-interpreting-llc: the posting is closed (its page is gone; no time spent on it)
+[04:01:10]   match  55%  Operations Analyst, Cross-Department @ utilisave-llc — same role at this employer, checked before: retry: could not find the employer's application page
+[04:01:12]   ✗ FP&A Analyst @ venusaero: above entry level: mid (requires 3+ yrs)
+[04:01:14]   match  55%  Associate Project Manager, Device Logistics @ jobgether — Candidate has strong operations and project skills, but lacks the required 2-3 years of specific cli
+[04:01:14]   match  50%  Business Analyst @ planettechnologies — Candidate has a strong analytical and systems background, but falls short of the required 3-5 years 
+[04:01:14]   match  65%  Solutions Analyst (Acute and Payer-General Support) @ pointclickcare — Candidate has solid technical and operational exposure, though lacks direct SaaS technical support e
+[04:01:14]   match  55%  Legal Operations Analyst @ jobgether — Candidate has process improvement and operations background, but lacks the required 3 years of legal
+[04:01:14]   match  75%  Accounts Payable Associate @ pivotenergy — Candidate has strong Excel, QuickBooks, and financial tracking experience that aligns well with acco
+[04:01:19] → Enterprise Account Executive (Bilingual) @ singlestore (score 19)
+[04:01:21]     ✗ blocked: could not find the employer's application page
+[04:01:30] → Associate Project Manager, Device Logistics @ jobgether (score 73, match 55%)
+[04:01:34]       step 1: 6 fields (2 required)
+[04:01:46]     ✗ blocked: hCaptcha (a human check: the bot stops here) after submit
+[04:01:46]   ✗ Business Analyst @ freelink-interpreting-llc: the posting is closed (its page is gone; no time spent on it)
+[04:01:46]   ✗ Business Analyst @ freelink-interpreting-llc: the posting is closed (its page is gone; no time spent on it)
+[04:01:46]   match  70%  Business Analyst @ freelink-interpreting-llc — same role at this employer, checked before: Cloudflare's human check held the submit (the form only 
+[04:01:54] → Product & Sourcing Coordinator @ gadge-usa (score 84)
+[04:01:58]     match 75% — Good match for a sourcing and product coordinator role given the candidate's supply chain and e-commerce busin
+[04:01:59]       step 1: 17 fields (13 required)
+[04:02:24]     ✗ blocked: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+[04:02:29] → Business Analyst @ freelink-interpreting-llc (score 69, match 70%)
+[04:02:34]       step 1: 11 fields (8 required)
+[04:02:56]     ✗ blocked: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+[04:03:06] → Enterprise Account Operations Analyst @ city-wide-facility-solutions (score 72)
+[04:03:26]     match 80% — Strong match in operations, Excel, and data analysis, though the 2-4 years experience requirement is a slight 
+[04:03:28]       step 1: 22 fields (19 required)
+[04:03:28]       writer: groq: free daily limit reached (back in 7 min)
+[04:03:28]       writer: groq-20b: free daily limit reached (back in 27 min)
+[04:04:15]     ✗ blocked: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+[04:04:20] → Operations Analyst, Cross-Department @ utilisave-llc (score 89, match 55%)
+[04:04:41]       step 1: 10 fields (4 required)
+[04:05:03]     ✗ blocked: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+[04:05:10] → Solutions Analyst (Acute and Payer-General Support) @ pointclickcare (score 38, match 65%)
+[04:05:18]       step 1: 20 fields (8 required)
+[04:05:29]     ✗ blocked: hCaptcha (a human check: the bot stops here) after submit
+[04:05:33] → Compliance Onboarding Analyst @ caliza-financial-technologies (score 34)
+[04:05:40]     match 52% — The role requires 2-4 years of dedicated KYC/KYB and compliance experience, which the candidate lacks as a rec
+[04:05:40]     ✗ set aside: under the 55% match bar
+[04:05:40] → Legal Operations Analyst @ jobgether (score 25, match 55%)
+[04:05:45]       step 1: 6 fields (2 required)
+[04:05:56]     ✗ blocked: hCaptcha (a human check: the bot stops here) after submit
+[04:06:03] → Accounts Payable Associate @ pivotenergy (score 27, match 75%)
+[04:06:07]       step 1: 20 fields (6 required)
+[04:06:19]     ✗ blocked: hCaptcha (a human check: the bot stops here) after submit
+[04:06:25] Résumé checks this run: 8 (7 passed) in 2 calls. Free writer allowance used today: groq 55k/195k tokens (+3k served from its cache, not counted) (resting); groq-20b 73k/195k tokens (+10k served from its cache, not counted) (resting); groq-qwen 101k/195k tokens; gemini-lite 105/480 requests (+41k served from its cache, not counted); gemini-flash 0/18 requests
+[04:06:25] Summary: 1 applied, 199 blocked, 11 skipped, 2 low_score, 3 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-19.md
+[04:06:25]   by site  paylocity: 169 blocked, 1 applied, 1 skipped
+[04:06:25]   by site  smartrecruiters: 14 blocked, 2 skipped
+[04:06:25]   by site  workable: 4 blocked, 4 skipped
+[04:06:25]   by site  lever: 4 blocked
+[04:06:25]   by site  workday: 3 skipped
+[04:06:25]   by site  remoteok.com: 2 blocked
+[04:06:25]   by site  jobicy.com: 2 blocked
+[04:06:25]   by site  apply.deloitte.com: 2 blocked
+[04:06:25]   by site  www.arbeitnow.co.uk: 1 blocked
+[04:06:25]   by site  www.themuse.com: 1 blocked
+[04:06:28] Summary emailed to delgado@alumni.usc.edu
