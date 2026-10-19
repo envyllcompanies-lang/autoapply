@@ -1,0 +1,26 @@
+[
+ {
+  "m": "POST",
+  "url": "https://c.spl.greenhouse.io/com.snowplowanalytics.snowplow/tp2",
+  "status": 200,
+  "body": "ok"
+ },
+ {
+  "m": "GET",
+  "url": "https://my.greenhouse.io/users/self?job_post_id=4683595006",
+  "status": 401,
+  "body": "{\"error\":\"You need to sign in or sign up before continuing.\"}"
+ },
+ {
+  "m": "GET",
+  "url": "https://my.greenhouse.io/users/self?job_post_id=4683595006",
+  "status": 401,
+  "body": "{\"error\":\"You need to sign in or sign up before continuing.\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://grnhse-prod-jben-us-east-1.s3.amazonaws.com/",
+  "status": 201,
+  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PostResponse><Location>https://grnhse-prod-jben-us-east-1.s3.amazonaws.com/stash%2Fapplications%2Fresumes%2F1792373320662-gtrheacotge-f7a527e0e2013951da460ee577298994</Location><Bucket>grnhse-prod-jben-us-east-1</Bucket><Key>stash/applications/resumes/1792373320662-gtrheacotge-f7a527e0e2013951da460ee577298994</Key><ETag>\"ca325d3c44d0f18542584749d2caa404\"</ETag></PostResponse>"
+ }
+]

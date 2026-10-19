@@ -1,0 +1,356 @@
+[
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/en-US/pdco/login",
+  "status": 303,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobpostings/Service-Coordinator_R111645/jobapplications",
+  "status": 400,
+  "body": "{\"errorCode\":\"HTTP_400\",\"errorCaseId\":\"DA1C60MVEKJSVU\",\"httpStatus\":400,\"locale\":\"en-US\",\"message\":\"invalid request: validation errors\",\"messageParams\":{}}"
+ },
+ {
+  "m": "HEAD",
+  "url": "https://wd501.myworkday.com/wday/asset/uic-shared-vendors/shared-vendors.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd501.myworkdaycdn.com/wday/asset/candidate-experience-jobs/cx-jobs.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd501.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/candidate-experience-apply-flow.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://wd501.myworkday.com/wday/asset/uic-shared-vendors/2.341.0/shared-vendors.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd501.myworkdaycdn.com/wday/asset/candidate-experience-jobs/2026.40.17/cx-jobs.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd501.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/2026.40.17/candidate-experience-apply-flow.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/undefined/source",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"A9342CMVEKJT9A\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/undefined/emailaddress",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"08BE88MVEKJT9Q\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://wd501.myworkday.com/wday/microscope/prelogin/mscp_error_kit_logs?version=v1&level=ERROR",
+  "status": 202,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/undefined/phonenumber",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"08BE88MVEKJTHE\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/undefined/previousworker",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"A9342CMVEKJTL2\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/emailaddress",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/emailAddress\"}],\"definitions\":{\"emailAddress\":{\"additionalProperties\":false,\"properties\":{\"emailAddress\":{\"hidden\":false,\"label\":\"\",\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/previousworker",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/previousWorker\"}],\"definitions\":{\"previousWorker\":{\"required\":[\"candidateIsPreviousWorker\"],\"additionalProperties\":false,\"properties\":{\"manager\":{\"hidden\":true,\"label\":\"Please specify your former manager.\",\"order\":\"0c\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":true,\"label\":\"Please specify your former work location.\",\"order\":\"0b\",\"readOnly\":false,\"type\":\"string\"},\"employeeID\":{\"hidden\":true,\"label\":\"Enter your employee ID number if you remember it.\",\"order\":\"0a\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/phonenumber",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/phoneNumber\"}],\"definitions\":{\"phoneNumber\":{\"required\":[\"phoneType\",\"countryPhoneCode\",\"phoneNumber\"],\"additionalProperties\":false,\"properties\":{\"extension\":{\"hidden\":false,\"label\":\"Phone Extension\",\"order\":\"d\",\"readOnly\":false,\"type\":\"string\"},\"phoneType\":{\"hidden\":false,\"label\":\"Phone Device Type\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pattersoncompanies/values/phone/deviceTypes\",\"order\":\"a\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"ty"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/phonenumber/f702374f6505100896e7141a1e860000",
+  "status": 200,
+  "body": "{\"id\":\"f702374f6505100896e7141a1e860000\",\"descriptor\":\"+1 (970) 3668832 (Mobile)\",\"phoneType\":{\"descriptor\":\"Mobile\",\"id\":\"ea5ea07c0eaa010a4a16d527bd870000\"},\"countryPhoneCode\":{\"descriptor\":\"United States of America (+1)\",\"id\":\"db8d3ca6446c11de98360015c5e6daf6\"},\"phoneNumber\":\"(970) 366-8832\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/source",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"source\":{\"id\":\"ea5ea07c0eaa010a49f9ebe2d7510000\",\"descriptor\":\"State Job Board\"},\"sourcePopulatedFromUrl\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/previousworker/5068cd15c9ae100896e7157004fb0000",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae100896e7157004fb0000\",\"candidateIsPreviousWorker\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/name",
+  "status": 200,
+  "body": "{\"legalName\":{\"id\":\"64edd743726b100896e718c134ad0000\",\"descriptor\":\"Brian Delgado-Ortega\",\"firstName\":\"Brian\",\"lastName\":\"Delgado-Ortega\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"},\"deferToLegalName\":false,\"fullyComposedName\":\"Brian Delgado-Ortega\",\"preferredName\":false},\"preferredName\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/address",
+  "status": 200,
+  "body": "{\"id\":\"f702374f6505100896e71db41d2c0000\",\"descriptor\":\"63 Cherry Ct\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha2Code\":\"US\",\"alpha3Code\":\"USA\"},\"regionSubdivision1Local\":\"Garfield County\",\"countryRegion\":{\"id\":\"a83d6eabae3b49718c4ce09eeb66fd0b\",\"descriptor\":\"Colorado\",\"alpha2Code\":\"CO\",\"name\":\"Colorado\"},\"fullyComposedAddress\":\"63 Cherry Ct&#xa;New Castle, CO 81647&#xa;United States of America\",\"postalCode\":\"81647\",\"addressLine1\":\"63 Cherry Ct\",\"regionSubdivision1\":\"Garfield County\",\"city\":\"New Castle\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/initialize",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"readOnly\":false,\"type\":\"stri"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/workexperiences",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/workExperience\"}],\"definitions\":{\"workExperience\":{\"required\":[\"endDate\",\"jobTitle\",\"companyName\",\"location\",\"roleDescription\",\"startDate\"],\"additionalProperties\":false,\"properties\":{\"endDate\":{\"hidden\":false,\"label\":\"To\",\"order\":\"f\",\"readOnly\":false,\"format\":\"date\",\"precision\":\"YYYY-MM\",\"type\":\"string\"},\"jobTitle\":{\"hidden\":false,\"label\":\"Job Title\",\"order\":\"a\",\"readOnly\":false,\"type\":\"string\"},\"companyName\":{\"hidden\":false,\"label\":\"Company\",\"order\":\"b\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":false,\"label\":\"Location\",\"order\":\"c\",\"readOnly\":false"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/workexperiences/64edd743726b900896e8e61e82d00000",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e8e61e82d00000\",\"jobTitle\":\"Property Management Crew\",\"companyName\":\"Roaring Fork Property Group\",\"endDate\":\"2026-03-01\",\"location\":\"Aspen, CO\",\"startDate\":\"2022-12-01\",\"roleDescription\":\"Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed property maintenance across 70+ luxury estates (6,000\u201315,000 sq ft), coordinating with vendors and clients. Managed inspection scheduling and property readiness for ultra-high-net-worth clientele under strict quality standards. Conducted property inspections and readine"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/skills",
+  "status": 200,
+  "body": "{\"skills\":[{\"id\":\"CANDIDATE_SKILL_ITEM-3-1155834\",\"descriptor\":\"Microsoft Excel\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/resumeattachments",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"attachments\":[{\"id\":\"64edd743726b900896e8eaeb839e0000\",\"descriptor\":\"brian_alejandro_delgado_ortega_resume.pdf\",\"fileLength\":42629,\"file\":\"oms-attachments/e1c5701c-7c19-47e3-ac03-ef71b0ba531b\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"},\"fileName\":\"brian_alejandro_delgado_ortega_resume.pdf\"},{\"id\":\"fd51d8c8acaa900077a8635a01810000\",\"descriptor\":\"briandelgado_resume.pdf\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"},\"fileName\":\"briandelgado_resume.p"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/common/pattersoncompanies/questionnaire/a130eff0ed8f10011a188744b7a10000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"a130eff0ed8f10011a1887dedb130000\",\"a130eff0ed8f10011a188a46d3fc0001\",\"a130eff0ed8f10011a1889ace4d90002\",\"a130eff0ed8f10011a188912bca30005\",\"a130eff0ed8f10011a188912bca30002\",\"a130eff0ed8f10011a188878baad0002\"],\"properties\":{\"a130eff0ed8f10011a1887dedb130000\":{\"hidden\":false,\"label\":\"If offered employment, can you submit proof of your legal right to work in the United States of America?\",\"order\":\"a\",\"readOnly\":false,\"type\":\"object\"},\"a130eff0ed8f10011a23c12414bb0000\":{\"hidden\":false,\"label\":\"<p>(Optional) If you are currently bound by an empl"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/questionnaireresponse?type=primary",
+  "status": 200,
+  "body": "{\"id\":\"fd51d8c8acaa9000790c27b81d380000\",\"descriptor\":\"Response for External Candidate Questionnaire v4\",\"href\":\"http://sir-prod-wd501.sir:11710/internalapi/ef/v1/pattersoncompanies/questionnaireResponseContexts/d2c20bc3c6461004a3a6ae6c6db10000/questionnaireResponses/fd51d8c8acaa9000790c27b81d380000\",\"questionnaireAnswers\":[{\"id\":\"fd51d8c8acaa9000790c27b81d380002\",\"descriptor\":\"No\",\"href\":\"http://sir-prod-wd501.sir:11710/internalapi/ef/v1/pattersoncompanies/questionnaireAnswers/fd51d8c8acaa9000790c27b81d380002\",\"questionMultipleChoiceAnswers\":[{\"id\":\"57ae2f2c6d1501020ad0db0818d40000\",\"descript"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/common/pattersoncompanies/questionnaire/ea5ea07c0eaa010a4abf2e4a89360000/definition?type=secondary",
+  "status": 200,
+  "body": "{\"definitions\":{\"secondaryQuestionnaire\":{\"required\":[],\"properties\":{\"ea5ea07c0eaa010aaab8ae21b5a30000\":{\"hidden\":false,\"label\":\"Please select your preferred pronouns\",\"order\":\"a\",\"readOnly\":false,\"type\":\"object\"},\"ea5ea07c0eaa010aaab8aebc11460004\":{\"hidden\":true,\"label\":\"Please enter your preferred pronouns\",\"order\":\"a.d\",\"readOnly\":false,\"type\":\"string\"}}}},\"allOf\":[{\"$ref\":\"#/definitions/secondaryQuestionnaire\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/questionnaireresponse?type=secondary",
+  "status": 200,
+  "body": "{\"id\":\"345c19c9d9a89000790d0b3ae9ef0000\",\"descriptor\":\"Response for External Pronouns Questionnaire\",\"href\":\"http://sir-prod-wd501.sir:11710/internalapi/ef/v1/pattersoncompanies/questionnaireResponseContexts/196c729db7241004a3a7f62d26780000/questionnaireResponses/345c19c9d9a89000790d0b3ae9ef0000\",\"questionnaireAnswers\":[{\"id\":\"345c19c9d9a89000790d0bd47eba0000\",\"descriptor\":\"He/Him\",\"href\":\"http://sir-prod-wd501.sir:11710/internalapi/ef/v1/pattersoncompanies/questionnaireAnswers/345c19c9d9a89000790d0bd47eba0000\",\"questionMultipleChoiceAnswer\":{\"descriptor\":\"He/Him (Pronouns)\",\"id\":\"ea5ea07c0eaa"
+ },
+ {
+  "m": "GET",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/nonuspersonalinfo",
+  "status": 403,
+  "body": "{\"errorCode\":\"S22\",\"errorCaseId\":\"A9342CMVEKM1NK\",\"httpStatus\":403,\"locale\":\"en-US\",\"message\":\"permission denied\",\"messageParams\":{}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/termsandconditions",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/termsAndConditions\"}],\"definitions\":{\"termsAndConditions\":{\"required\":[\"acceptTermsAndAgreements\"],\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"acceptTermsAndAgreements\":{\"hidden\":false,\"label\":\"Checking the box is equivalent to a handwritten signature.\",\"readOnly\":false,\"type\":\"boolean\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/personalInfoUS\"}],\"definitions\":{\"personalInfoUS\":{\"required\":[\"veteranStatus\",\"ethnicity\"],\"additionalProperties\":false,\"properties\":{\"veteranStatus\":{\"hidden\":false,\"label\":\"Please select the veteran status which most accurately describes your status. Protected Veterans status includes: Disabled Veteran, Recently Separated Veteran, Active Duty Wartime or Campaign Badge Veteran, or Armed Forces Service Medal Veteran.\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pattersoncompanies/values/country/veteranStatuses\",\"order\":\"d\",\"readOnly\":false,\"additionalPropert"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/termsandconditions",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"acceptTermsAndAgreements\":true}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"id\":\"5068cd15c9ae900896e4a43574c50000\",\"veteranStatus\":{\"descriptor\":\"I AM NOT A VETERAN\",\"id\":\"ea5ea07c0eaa010a4a15f130001e0000\"},\"hispanicOrLatino\":true,\"gender\":{\"descriptor\":\"Male\",\"id\":\"ea5ea07c0eaa010a4a14e373cdc80001\"},\"ethnicity\":{\"descriptor\":\"I do not wish to answer (United States of America)\",\"id\":\"ea5ea07c0eaa010a49ffff6080f80001\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/common/pattersoncompanies/questionnaire/ea5ea07c0eaa010a4abf2e4a89360000/definition?type=secondary",
+  "status": 200,
+  "body": "{\"definitions\":{\"secondaryQuestionnaire\":{\"required\":[],\"properties\":{\"ea5ea07c0eaa010aaab8ae21b5a30000\":{\"hidden\":false,\"label\":\"Please select your preferred pronouns\",\"order\":\"a\",\"readOnly\":false,\"type\":\"object\"},\"ea5ea07c0eaa010aaab8aebc11460004\":{\"hidden\":true,\"label\":\"Please enter your preferred pronouns\",\"order\":\"a.d\",\"readOnly\":false,\"type\":\"string\"}}}},\"allOf\":[{\"$ref\":\"#/definitions/secondaryQuestionnaire\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/common/pattersoncompanies/questionnaire/a130eff0ed8f10011a188744b7a10000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"a130eff0ed8f10011a1887dedb130000\",\"a130eff0ed8f10011a188a46d3fc0001\",\"a130eff0ed8f10011a1889ace4d90002\",\"a130eff0ed8f10011a188912bca30005\",\"a130eff0ed8f10011a188912bca30002\",\"a130eff0ed8f10011a188878baad0002\"],\"properties\":{\"a130eff0ed8f10011a1887dedb130000\":{\"hidden\":false,\"label\":\"If offered employment, can you submit proof of your legal right to work in the United States of America?\",\"order\":\"a\",\"readOnly\":false,\"type\":\"object\"},\"a130eff0ed8f10011a23c12414bb0000\":{\"hidden\":false,\"label\":\"<p>(Optional) If you are currently bound by an empl"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/termsandconditions",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/termsAndConditions\"}],\"definitions\":{\"termsAndConditions\":{\"required\":[\"acceptTermsAndAgreements\"],\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"acceptTermsAndAgreements\":{\"hidden\":false,\"label\":\"Checking the box is equivalent to a handwritten signature.\",\"readOnly\":false,\"type\":\"boolean\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/personalInfoUS\"}],\"definitions\":{\"personalInfoUS\":{\"required\":[\"veteranStatus\",\"ethnicity\"],\"additionalProperties\":false,\"properties\":{\"veteranStatus\":{\"hidden\":false,\"label\":\"Please select the veteran status which most accurately describes your status. Protected Veterans status includes: Disabled Veteran, Recently Separated Veteran, Active Duty Wartime or Campaign Badge Veteran, or Armed Forces Service Medal Veteran.\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pattersoncompanies/values/country/veteranStatuses\",\"order\":\"d\",\"readOnly\":false,\"additionalPropert"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"readOnly\":false,\"type\":\"stri"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/workexperiences",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/workExperience\"}],\"definitions\":{\"workExperience\":{\"required\":[\"endDate\",\"jobTitle\",\"companyName\",\"location\",\"roleDescription\",\"startDate\"],\"additionalProperties\":false,\"properties\":{\"endDate\":{\"hidden\":false,\"label\":\"To\",\"order\":\"f\",\"readOnly\":false,\"format\":\"date\",\"precision\":\"YYYY-MM\",\"type\":\"string\"},\"jobTitle\":{\"hidden\":false,\"label\":\"Job Title\",\"order\":\"a\",\"readOnly\":false,\"type\":\"string\"},\"companyName\":{\"hidden\":false,\"label\":\"Company\",\"order\":\"b\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":false,\"label\":\"Location\",\"order\":\"c\",\"readOnly\":false"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/previousworker",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/previousWorker\"}],\"definitions\":{\"previousWorker\":{\"required\":[\"candidateIsPreviousWorker\"],\"additionalProperties\":false,\"properties\":{\"manager\":{\"hidden\":true,\"label\":\"Please specify your former manager.\",\"order\":\"0c\",\"readOnly\":false,\"type\":\"string\"},\"employeeID\":{\"hidden\":true,\"label\":\"Enter your employee ID number if you remember it.\",\"order\":\"0a\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":true,\"label\":\"Please specify your former work location.\",\"order\":\"0b\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/package/5068cd15c9ae900896e4a43574c50000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"64edd743726b900896e4faee30820000\",\"descriptor\":\"Drop Off on Review page for External Careers: Service Coordinator\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/calypso/cxs/jobapplication/pattersoncompanies/jobapplication/5068cd15c9ae900896e4a43574c50000/selfidentify",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/selfIdentifiedDisabilityData\"}],\"definitions\":{\"selfIdentifiedDisabilityData\":{\"required\":[\"disabilityForm\"],\"additionalProperties\":false,\"properties\":{\"disabilityStatus\":{\"hidden\":false,\"label\":\"Please check one of the boxes below:\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/pattersoncompanies/values/disabilityForms/statuses\",\"order\":\"e\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\""
+ }
+]

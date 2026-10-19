@@ -1,0 +1,1679 @@
+[
+ {
+  "step": 1,
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "How Did You Hear About Us?*",
+    "maxlength": null,
+    "sel": "[id=\"source--source\"]",
+    "key": "formField-source",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "State Job Board"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "First Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--firstName\"]",
+    "key": "formField-legalName--firstName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Last Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--lastName\"]",
+    "key": "formField-legalName--lastName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f3",
+    "required": true,
+    "label": "Address Line 1*",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine1\"]",
+    "key": "formField-addressLine1",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f4",
+    "required": false,
+    "label": "Address Line 2",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine2\"]",
+    "key": "formField-addressLine2",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "City*",
+    "maxlength": null,
+    "sel": "[id=\"address--city\"]",
+    "key": "formField-city",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f6",
+    "required": true,
+    "label": "Postal Code*",
+    "maxlength": null,
+    "sel": "[id=\"address--postalCode\"]",
+    "key": "formField-postalCode",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f7",
+    "required": true,
+    "label": "County*",
+    "maxlength": null,
+    "sel": "[id=\"address--regionSubdivision1\"]",
+    "key": "formField-regionSubdivision1",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f8",
+    "required": true,
+    "label": "Country Phone Code*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--countryPhoneCode\"]",
+    "key": "formField-countryPhoneCode",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "United States of America (+1)"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f9",
+    "required": true,
+    "label": "Phone Number*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneNumber\"]",
+    "key": "formField-phoneNumber",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f10",
+    "required": false,
+    "label": "Phone Extension",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--extension\"]",
+    "key": "formField-extension",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "g_f11",
+    "kind": "radio",
+    "label": "Have you previously been employed by Patterson Companies, Inc. or any of our subsidiaries?*",
+    "required": true,
+    "key": "formField-candidateIsPreviousWorker",
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f11",
+     "f12"
+    ],
+    "option_sels": [
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"true\"]",
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"false\"]"
+    ],
+    "checked": [
+     "No"
+    ]
+   },
+   {
+    "id": "f13",
+    "kind": "checkbox_single",
+    "label": "I have a preferred name",
+    "question": "I have a preferred name",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"preferredCheck\"]",
+    "key": "formField-preferredCheck",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f14",
+    "kind": "combobox",
+    "label": "Country*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"country--country\"]",
+    "key": "formField-country",
+    "button": true,
+    "cur": "United States of America",
+    "options": []
+   },
+   {
+    "id": "f15",
+    "kind": "combobox",
+    "label": "State*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"address--countryRegion\"]",
+    "key": "formField-countryRegion",
+    "button": true,
+    "cur": "Colorado",
+    "options": []
+   },
+   {
+    "id": "f16",
+    "kind": "combobox",
+    "label": "Phone Device Type*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneType\"]",
+    "key": "formField-phoneType",
+    "button": true,
+    "cur": "Mobile",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f14": "United States",
+   "f15": "Colorado",
+   "f16": "(970) 366-8832",
+   "f0": "Job board",
+   "f1": "Brian",
+   "f2": "Delgado-Ortega",
+   "f3": "63 Cherry Ct",
+   "f4": "",
+   "f5": "New Castle",
+   "f6": "81647",
+   "f7": "Garfield County",
+   "f8": "",
+   "f9": "(970) 366-8832",
+   "f10": "",
+   "g_f11": "No"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "true",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-cj2lkl"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "false",
+    "checked": true,
+    "pressed": null,
+    "achecked": "true",
+    "text": "",
+    "cls": "css-1gvordf"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "bc33aa3152ec42d4995f4791a106ed09",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "United States of America",
+    "cls": "css-u68hxr"
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-3mfh21"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "63 Cherry Ct",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "New Castle",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "a83d6eabae3b49718c4ce09eeb66fd0b",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Colorado",
+    "cls": "css-u68hxr"
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "81647",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Garfield County",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f16": {
+    "id": "f16",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a4a16d527bd870000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Mobile",
+    "cls": "css-u68hxr"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "(970) 366-8832",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f0",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#00817D\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"3fcf31e5-eb88-4120-9bae-47e6a65578ef\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"387ff539-0db1-411a-8ba7-dd3f588958cc\" id=\"source--source\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f0\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"3fcf31e5-eb88-4120-9bae-47e6a65578ef\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, State Job Board</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"387ff539-0db1-411a-8ba7-dd3f588958cc\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mct89k css-2ltlsp css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-ea5ea07c0eaa010a49f9ebe2d7510000\" tabindex=\"-1\" aria-label=\"State Job Board, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ct89d: #00817D;\"><div class=\"css-ct89p css-ct89t mct89t\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-ct89o: var(--cnvs-brand-neutral-dark); --iconHoverColor-ct89o: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-ct89v css-ct89z mct89z\" data-automation-id=\"promptOption\" data-automation-label=\"State Job Board\">State Job Board</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-ic"
+   },
+   {
+    "id": "f8",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#00817D\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"7e2f1d55-a563-44ac-91db-57c77e1dc0f6\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" id=\"phoneNumber--countryPhoneCode\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f8\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"7e2f1d55-a563-44ac-91db-57c77e1dc0f6\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, United States of America (+1)</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mct89k css-2ltlsp css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ct89d: #00817D;\"><div class=\"css-ct89p css-ct89t mct89t\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-ct89o: var(--cnvs-brand-neutral-dark); --iconHoverColor-ct89o: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-ct89v css-ct89z mct89z\" data-automation-id=\"promptOption\" data-automation-label=\"United States of America (+1)\">United States of America (+1)</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><svg"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#FFFFFF\" class=\"css-7muunn\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#FFFFFF\" class=\"css-7muunn\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#FFFFFF\" class=\"css-7muunn\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-1uw14a2\"><span class=\"css-1vtnjep\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-conta"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "State Job Board",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "State Job Board",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-387ff539-0db1-411a-8ba7-dd3f588958cc\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"387ff539-0db1-411a-8ba7-dd3f588958cc\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "State Job Board",
+    "aria": "State Job Board, press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "State Job Board",
+    "html": "<div class=\"mct89k css-2ltlsp css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-ea5ea07c0eaa010a49f9ebe2d7510000\" tabindex=\"-1\" aria-label=\"State Job Board, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ct89d: #00817D;\"><div class=\"css-ct89p css-ct89t mct89t\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"t"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"9e1cedc5-a1a3-4615-a24e-75a5bd1ae740\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "United States of America (+1), press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<div class=\"mct89k css-2ltlsp css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ct89d: #00817D;\"><div class=\"css-ct89p css-ct89t mct89t\" data-automation-id=\"DELETE_charm\" role=\"presentation\" "
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-fel271\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply",
+  "fields": [
+   {
+    "id": "f17",
+    "required": true,
+    "label": "Job Title*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--jobTitle\"]",
+    "key": "formField-jobTitle",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f18",
+    "required": true,
+    "label": "Company*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--companyName\"]",
+    "key": "formField-companyName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f19",
+    "required": true,
+    "label": "Location*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--location\"]",
+    "key": "formField-location",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f20",
+    "kind": "wddate",
+    "label": "From*",
+    "required": true,
+    "sel": "[id=\"workExperience-4--startDate-dateSectionMonth-input\"]",
+    "key": "formField-startDate",
+    "maxlength": null,
+    "hasDay": false
+   },
+   {
+    "id": "f22",
+    "kind": "wddate",
+    "label": "To*",
+    "required": true,
+    "sel": "[id=\"workExperience-4--endDate-dateSectionMonth-input\"]",
+    "key": "formField-endDate",
+    "maxlength": null,
+    "hasDay": false
+   },
+   {
+    "id": "f24",
+    "required": true,
+    "label": "Role Description*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--roleDescription\"]",
+    "key": "formField-roleDescription",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f25",
+    "required": false,
+    "label": "Type to Add Skills",
+    "maxlength": null,
+    "sel": "[id=\"skills--skills\"]",
+    "key": "formField-skills",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "Microsoft Excel"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f26",
+    "required": false,
+    "label": "Resume/CV",
+    "maxlength": null,
+    "sel": "input[data-automation-id=\"file-upload-input-ref\"]",
+    "key": "formField-",
+    "has_value": false,
+    "kind": "file",
+    "accept": "",
+    "has_file": [
+     "brian_alejandro_delgado_ortega_resume.pdf",
+     "briandelgado_resume.pdf"
+    ],
+    "hint": "file-upload-input-ref",
+    "elid": ""
+   },
+   {
+    "id": "f27",
+    "kind": "checkbox_single",
+    "label": "I currently work here",
+    "question": "I currently work here",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"currentlyWorkHere\"]",
+    "key": "formField-currentlyWorkHere",
+    "checked": false,
+    "context": ""
+   }
+  ],
+  "answers": {
+   "f17": "Property Management Crew",
+   "f18": "Roaring Fork Property Group",
+   "f19": "Aspen, CO",
+   "f20": "12/01/2022",
+   "f22": "03/01/2026",
+   "f24": "Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed property maintenance across 70+ luxury estates (6,000\u201315,000 sq ft), coordinating with vendors and clients. Managed inspection scheduling and property readiness for ultra-high-net-wor",
+   "f25": [
+    "Excel",
+    "PowerPoint",
+    "Word",
+    "Google Workspace",
+    "SQL",
+    "Python"
+   ],
+   "f26": "RESUME",
+   "f27": ""
+  },
+  "readback": {
+   "f17": {
+    "id": "f17",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Property Management Crew",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Roaring Fork Property Group",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Aspen, CO",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1m2yjbe"
+   },
+   "f27": {
+    "id": "f27",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-3mfh21"
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "INPUT",
+    "type": "",
+    "value": "12",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "INPUT",
+    "type": "",
+    "value": "2022",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "INPUT",
+    "type": "",
+    "value": "3",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "INPUT",
+    "type": "",
+    "value": "2026",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed pro",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-j5fmad"
+   },
+   "f25": {
+    "id": "f25",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f26": {
+    "id": "f26",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hyfx7x"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#FFFFFF\" class=\"css-7muunn\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#FFFFFF\" class=\"css-7muunn\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#FFFFFF\" class=\"css-7muunn\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-1uw14a2\"><span class=\"css-1vtnjep\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-conta"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is 12/2022 12 / 2022",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is 3/2026 03 / 2026",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add Another",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Work Experience Please provide at least one example of work experience. Work Experience 1 Job Title* Company* Location* I currently work here From* current valu",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1lwf8ir\" data-aa-add=\"sec0\">Add Another</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Education Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1lwf8ir\" data-aa-add=\"sec1\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Certifications Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1lwf8ir\" data-aa-add=\"sec2\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Languages Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1lwf8ir\" data-aa-add=\"sec3\">Add</button>"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "Microsoft Excel",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "Microsoft Excel",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-baf91a38-d326-4600-aabd-058fe720bc80\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"baf91a38-d326-4600-aabd-058fe720bc80\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "Microsoft Excel",
+    "aria": "Microsoft Excel, press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "Microsoft Excel",
+    "html": "<div class=\"mct89k css-2ltlsp css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-REMOTE_SKILL-1-24953\" tabindex=\"-1\" aria-label=\"Microsoft Excel, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ct89d: #00817D;\"><div class=\"css-ct89p css-ct89t mct89t\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabinde"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select files",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "or Select files",
+    "html": "<button type=\"button\" data-automation-id=\"select-files\" id=\"resumeAttachments--attachments\" class=\"css-cy55xy\"><span class=\"css-pplshs\">Select files</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete brian_alejandro_delgado_ortega_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "brian_alejandro_delgado_ortega_resume.pdf successfully uploaded brian_alejandro_delgado_ortega_resume.pdf 41.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete brian_alejandro_delgado_ortega_resume.pdf\" title=\"Delete\" class=\"css-4rz8sj\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete briandelgado_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf successfully uploaded briandelgado_resume.pdf 63.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete briandelgado_resume.pdf\" title=\"Delete\" class=\"css-4rz8sj\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height=\"14\" x=\"6\" y=\"7\" "
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Websites Add any relevant websites. Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1lwf8ir\" data-aa-add=\"sec4\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-14gtyke\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-fel271\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply",
+  "fields": [
+   {
+    "id": "f28",
+    "required": true,
+    "label": "What is your desired annual salary?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a188a46d3fc0001\"]",
+    "key": "formField-a130eff0ed8f10011a188a46d3fc0001",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f29",
+    "kind": "combobox",
+    "label": "If offered employment, can you submit proof of your legal right to work in the United States of America?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a1887dedb130000\"]",
+    "key": "formField-a130eff0ed8f10011a1887dedb130000",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f30",
+    "kind": "combobox",
+    "label": "Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a188878baad0002\"]",
+    "key": "formField-a130eff0ed8f10011a188878baad0002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f31",
+    "kind": "combobox",
+    "label": "Can you perform the essential functions of the job for which you are applying with or without reasonable accommodation?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a188912bca30002\"]",
+    "key": "formField-a130eff0ed8f10011a188912bca30002",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f32",
+    "kind": "combobox",
+    "label": "If offered this position, would you consent to any additional background check screenings that may be applicable?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a188912bca30005\"]",
+    "key": "formField-a130eff0ed8f10011a188912bca30005",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f33",
+    "kind": "combobox",
+    "label": "Are you subject to a confidentiality agreement, trade secret agreement, restrictive covenant such as a non-compete or non-solicitation agreement, or other similar restriction with your current or any prior employer?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--a130eff0ed8f10011a1889ace4d90002\"]",
+    "key": "formField-a130eff0ed8f10011a1889ace4d90002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f29": "Yes",
+   "f30": "No",
+   "f32": "Yes",
+   "f28": "75000"
+  },
+  "readback": {
+   "f29": {
+    "id": "f29",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "6a1c3b86739e0101077385e8d2700000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-u68hxr"
+   },
+   "f30": {
+    "id": "f30",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "6a1c3b86739e0101077d2180e1010001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-u68hxr"
+   },
+   "f31": {
+    "id": "f31",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a4abf8fcbac9b0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-u68hxr"
+   },
+   "f32": {
+    "id": "f32",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "6a1c3b86739e010107d00d20d4eb0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-u68hxr"
+   },
+   "f28": {
+    "id": "f28",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "75000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-if6lnu"
+   },
+   "f33": {
+    "id": "f33",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "57ae2f2c6d1501020ad0db0818d40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-u68hxr"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#FFFFFF\" class=\"css-7muunn\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#FFFFFF\" class=\"css-7muunn\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#FFFFFF\" class=\"css-7muunn\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-1uw14a2\"><span class=\"css-1vtnjep\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-conta"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete brian_alejandro_delgado_ortega_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "brian_alejandro_delgado_ortega_resume.pdf successfully uploaded brian_alejandro_delgado_ortega_resume.pdf 41.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete brian_alejandro_delgado_ortega_resume.pdf\" title=\"Delete\" class=\"css-4rz8sj\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-14gtyke\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-fel271\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 4,
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply",
+  "fields": [
+   {
+    "id": "f34",
+    "kind": "combobox",
+    "label": "Please select your preferred pronouns",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"secondaryQuestionnaire--ea5ea07c0eaa010aaab8ae21b5a30000\"]",
+    "key": "formField-ea5ea07c0eaa010aaab8ae21b5a30000",
+    "button": true,
+    "cur": "He/Him",
+    "options": []
+   }
+  ],
+  "answers": {},
+  "readback": {
+   "f34": {
+    "id": "f34",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a49fca2b6b1ab0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "He/Him",
+    "cls": "css-u68hxr"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#FFFFFF\" class=\"css-7muunn\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#FFFFFF\" class=\"css-7muunn\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#FFFFFF\" class=\"css-7muunn\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-1uw14a2\"><span class=\"css-1vtnjep\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-conta"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-14gtyke\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-fel271\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "url": "https://pattersoncompanies.wd501.myworkdayjobs.com/pdco/job/Los-Angeles-CA/Service-Coordinator_R111645/apply",
+  "fields": [
+   {
+    "id": "f35",
+    "kind": "checkbox_single",
+    "label": "Checking the box is equivalent to a handwritten signature.*",
+    "question": "Checking the box is equivalent to a handwritten signature.*",
+    "required": true,
+    "sel": "input[type=\"checkbox\"][name=\"acceptTermsAndAgreements\"]",
+    "key": "formField-acceptTermsAndAgreements",
+    "checked": false,
+    "context": "Patterson Companies, Inc., and its affiliated companies is an equal opportunity employer and affirms the right of every applicant and employee to participate in all aspects of employment without regard to race, color, religion, creed, sex, national origin, age (40 and over), disability, protected veteran status, genetic information, pregnancy, gender identity, sexual orientation, marital status, or any other legally recognized protected basis under federal, state or local law. Patterson prohibits unlawful discrimination and harassment of applicants and employees based on any of these protected categories. It is also Patterson\u2019s policy to comply with all applicable federal and state laws respecting consideration of unemployment status in making hiring decisions. Applicants with disabilities may be entitled to reasonable accommodation under the American with Disabilities Act and certain state or local laws. If you require reasonable accommodation in the application process, you may submit your request to HR by calling 1-866-234-2165 or by email to jobs@pattersoncompanies.com. We appreciate your interest in a career with Patterson. Note to Applicants: Patterson provides a work environment that is smoke and tobacco-free. Smoking and the use of all tobacco-related products is strictly prohibited inside Company buildings and Company-owned vehicles. State Specific Notices For Indiana Applicants: It is unlawful for an employer to discriminate against a prospective employee on the basis of status as a veteran by refusing to employ an applicant on the basis that they are a veteran of the armed forces of the United States, a member of the Indiana National Guard or a member of a reserve component. For Montana Applicants: If hired, the employment relationship is governed by the Wrongful Discharge from Employment Act. Mont. Code Ann. Section 39-2-901. For Rhode Island Applicants: Patterson is subject to Chapters 29-38 of Title 28 of the General Laws of Rhode Island, and is therefore covered by the state\u2019s workers\u2019 compensation law. If you willfully provide false information about your ability to perform the essential functions of the job, with or without reasonable accommodations, you may be barred from filing a claim under the provisions of the Workers\u2019 Compensation Act of the State of Rhode Island if the false information is directly related to the personal injury that is the basis for the new claim for compensation. The Company complies fully with the Americans with Disabilities Act. Applicant\u2019s Acknowledgment Privacy Policy: We respect the privacy of our candidates. Our Privacy Policy sets forth how we will use the information we obtain when you apply for a position through our career site. Please take a few minutes to review this policy. If you do not consent to the terms of the Privacy Policy, you may not access or use this site. Certification of Information: I certify that the information given in this application is true, complete and correct to the best of my knowledge. I understand that false, omitted, incomplete or misleading information may result in disqualification from further consideration, or immediate discharge regardless of when the false answer or omissions are discovered. I agree that Patterson shall not be liable in any respect if my employment is so denied or terminated. Authorization: I authorize Patterson, to the extent allowed by applicable federal, state and local laws, to make any necessary investigations and inquiries of information in connection with my application for employment. I authorize any school, employer, person or government agency that I have listed to give Patterson any information they may have about me without giving me prior notice of such disclosure. I also understand that the Company may share the information obtained in this application with other Company employees for employment and administrative purposes and herby consent to such transfer. I agree to release Patterson and all providers of information from any and all liability in making or responding to inquiries in connection with my application. Conditional Offers of Employment: I understand that all offers of employment are conditional upon satisfactory background and reference checks, acceptable results from a pre-employment drug test and production of documents necessary for Patterson to verify identity and work authorization in accordance with applicable law. I agree that I will not take any action in anticipation of employment until Patterson informs me that all conditions placed upon the offer of employment have been satisfied. Policies and Procedures: If I am employed, I agree to abide by all Patterson policies and procedures including the Code of Conduct. I agree that Patterson has the right to unilaterally add, delete or change policies and procedures, including incentive plans and benefits, without prior notice or agreement. Employment At-Will: I understand that nothing contained in this application or in the granting of an interview is intended to create an employment contract. If an employment relationship is established, I understand that unless otherwise defined by applicable law, my employment is at-will. Employment at-will means that an employee may resign at any time and that Patterson may discharge at any time, without cause. I understand that no employment handbook or oral or written statements that I receive during my employment will constitute a contract of employment. I understand that this \u201cat-will\u201d relationship may only be changed by a business unit President, the Chief Human Resources Officer, or the General Counsel in writing and signed by the president. Terms of Employment: I further understand and agree that, except for my at-will employment status, if hired, my wages, hours, working conditions, job assignment(s), and compensation rate(s) will be subject to change by Patterson. Due to the nature of our business, some positions may require overtime. Obligation to Previous Employers: I certify that if employed, my employment with Patterson will not conflict with, violate or breach any contract or agreement I may have with my current or previous employer(s), including but not limited to non-solicitation, non-competition or other similar post-employment restrictive covenants. I will present a copy of any such agreement to the hiring manager or recruiter in advance of any job interview. Return of Company Property: If employed, I agree that upon termination of my employment, I will immediately return all Company property, records and information in my possession. For California, Cincinnati (Ohio), Colorado, Columbus (Ohio), Connecticut, Delaware, District of Columbia, Hawaii, Illinois, Kansas City (Missouri), Leigh High County (Pennsylvania), Maine, Maryland, Massachusetts, Minnesota, Nevada, New Jersey, New York, Oregon, Philadelphia (Pennsylvania), Rhode Island, Toledo (Ohio), Vermont and Washington Applicants: I understand that the Company may not ask or require applicants to disclose past salary, wages or other compensation. For Massachusetts Applicants: I understand that it is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employer who violates this law shall be subject to criminal penalties and civil liability. For Maryland Applicants: I UNDERSTAND THAT UNDER MARYLAND LAW, AN EMPLOYER MAY NOT REQUIRE OR DEMAND, AS A CONDITION OF EMPLOYMENT, PROSPECTIVE EMPLOYMENT OR CONTINUED EMPLOYMENT, THAT ANY INDIVIDUAL SUBMIT TO OR TAKE A POLYGRAPH OR SIMILAR TEST. AN EMPLOYER WHO VIOLATES THIS LAW IS GUILTY OF A MISDEMEANOR AND SUBJECT TO A FINE NOT EXCEEDING $100. I agree to the above terms and conditions and confirm that I have read applicable state and local notices. I further agree that checking the box will be accepted and have the same authority as my original signature."
+   },
+   {
+    "id": "f36",
+    "kind": "combobox",
+    "label": "Please select the ethnicity which most accurately describes how you identify yourself.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"personalInfoUS--ethnicity\"]",
+    "key": "formField-ethnicity",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "American Indian or Alaska Native (United States of America)",
+     "Asian (United States of America)",
+     "Black or African American (United States of America)",
+     "I do not wish to answer (United States of America)",
+     "Native Hawaiian or Other Pacific Islander (United States of America)",
+     "Two or More Races (United States of America)",
+     "White (United States of America)"
+    ]
+   },
+   {
+    "id": "f37",
+    "kind": "combobox",
+    "label": "Please select your gender.",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"personalInfoUS--gender\"]",
+    "key": "formField-gender",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Female",
+     "Male"
+    ]
+   },
+   {
+    "id": "f38",
+    "kind": "combobox",
+    "label": "Please indicate if you are Hispanic or Latino.",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"personalInfoUS--hispanicOrLatino\"]",
+    "key": "formField-hispanicOrLatino",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f39",
+    "kind": "combobox",
+    "label": "Please select the veteran status which most accurately describes your status. Protected Veterans status includes: Disabled Veteran, Recently Separated Veteran, Active Duty Wartime or Campaign Badge Veteran, or Armed Forces Service Medal Veteran.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"personalInfoUS--veteranStatus\"]",
+    "key": "formField-veteranStatus",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "I IDENTIFY AS ONE OR MORE OF THE CLASSIFICATIONS OF PROTECTED VETERANS LISTED ABOVE",
+     "I IDENTIFY AS A VETERAN, JUST NOT A PROTECTED VETERAN",
+     "I AM NOT A VETERAN",
+     "I DO NOT WISH TO SELF-IDENTIFY"
+    ]
+   }
+  ],
+  "answers": {
+   "f36": "I do not wish to answer (United States of America)",
+   "f37": "Male",
+   "f38": "Yes",
+   "f39": "I AM NOT A VETERAN",
+   "f35": true
+  },
+  "readback": {
+   "f36": {
+    "id": "f36",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a49ffff6080f80001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I do not wish to answer (United States o",
+    "cls": "css-u68hxr"
+   },
+   "f37": {
+    "id": "f37",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a4a14e373cdc80001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Male",
+    "cls": "css-u68hxr"
+   },
+   "f38": {
+    "id": "f38",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "true",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-u68hxr"
+   },
+   "f39": {
+    "id": "f39",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ea5ea07c0eaa010a4a15f130001e0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I AM NOT A VETERAN",
+    "cls": "css-u68hxr"
+   },
+   "f35": {
+    "id": "f35",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": "true",
+    "text": "",
+    "cls": "css-3mfh21"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#FFFFFF\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-gw5itl\"><span class=\"css-53a7ht\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#FFFFFF\" class=\"css-7muunn\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#FFFFFF\" class=\"css-7muunn\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#FFFFFF\" class=\"css-7muunn\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-1uw14a2\"><span class=\"css-1vtnjep\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-conta"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-14gtyke\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-fel271\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ }
+]
