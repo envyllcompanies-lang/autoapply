@@ -1,0 +1,218 @@
+[
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/en-US/blackrock_professional/login",
+  "status": 303,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/cxs/blackrock/jobpostings/BlackRock-Active-Investment-Stewardship-Operations---Associate_R266656/jobapplications",
+  "status": 400,
+  "body": "{\"errorCode\":\"HTTP_400\",\"errorCaseId\":\"EE57FDMVEJRE0H\",\"httpStatus\":400,\"locale\":\"en-US\",\"message\":\"invalid request: validation errors\",\"messageParams\":{}}"
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkday.com/wday/asset/uic-shared-vendors/shared-vendors.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkdaycdn.com/wday/asset/candidate-experience-jobs/cx-jobs.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/undefined/source",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"959CF2MVEJREMR\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/undefined/emailaddress",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"5B7B3DMVEJRENC\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/candidate-experience-apply-flow.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkday.com/wday/asset/uic-shared-vendors/2.341.0/shared-vendors.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkdaycdn.com/wday/asset/candidate-experience-jobs/2026.40.17/cx-jobs.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://www.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/2026.40.17/candidate-experience-apply-flow.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://www.myworkday.com/wday/microscope/prelogin/mscp_error_kit_logs?version=v1&level=ERROR",
+  "status": 202,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/undefined/phonenumber",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"64BA0DMVEJREW1\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/emailaddress",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/emailAddress\"}],\"definitions\":{\"emailAddress\":{\"additionalProperties\":false,\"properties\":{\"emailAddress\":{\"hidden\":false,\"label\":\"\",\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"27b6b07aed4b900119612ab159920000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for BlackRock Professional: BlackRock Active Investment Stewardship Operations - Associate\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/phonenumber",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/phoneNumber\"}],\"definitions\":{\"phoneNumber\":{\"required\":[\"countryPhoneCode\",\"phoneType\",\"phoneNumber\"],\"additionalProperties\":false,\"properties\":{\"countryPhoneCode\":{\"hidden\":false,\"label\":\"Country Phone Code\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/blackrock/values/phone/countryCodes\",\"order\":\"b\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"extension\":"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/source",
+  "status": 200,
+  "body": "{\"id\":\"b748bf69f842900119358ed623460000\",\"sourcePopulatedFromUrl\":false,\"source\":{\"id\":\"131d7f8fcf9f0185af74e684bc508aa5\",\"descriptor\":\"LinkedIn\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/phonenumber/b748bf69f84210011938c5cbbcf60000",
+  "status": 200,
+  "body": "{\"id\":\"b748bf69f84210011938c5cbbcf60000\",\"descriptor\":\"+1 970-366-8832 (Mobile)\",\"phoneType\":{\"descriptor\":\"Mobile\",\"id\":\"131d7f8fcf9f0147baea8ab05150a307\"},\"phoneNumber\":\"(970) 366-8832\",\"countryPhoneCode\":{\"descriptor\":\"United States of America (+1)\",\"id\":\"db8d3ca6446c11de98360015c5e6daf6\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/address",
+  "status": 200,
+  "body": "{\"id\":\"b748bf69f84210011938cb3447ab0000\",\"descriptor\":\"63 Cherry Ct\",\"fullyComposedAddress\":\"63 Cherry Ct&#xa;New Castle, CO 81647&#xa;United States of America\",\"addressLine1\":\"63 Cherry Ct\",\"countryRegion\":{\"id\":\"a83d6eabae3b49718c4ce09eeb66fd0b\",\"descriptor\":\"Colorado\",\"name\":\"Colorado\",\"alpha2Code\":\"CO\"},\"city\":\"New Castle\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"},\"postalCode\":\"81647\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/name",
+  "status": 200,
+  "body": "{\"legalName\":{\"id\":\"b748bf69f84210011938ca0078090000\",\"descriptor\":\"Brian Delgado-Ortega\",\"preferredName\":false,\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"},\"lastName\":\"Delgado-Ortega\",\"fullyComposedName\":\"Brian Delgado-Ortega\",\"deferToLegalName\":false,\"firstName\":\"Brian\"},\"preferredName\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/cxs/blackrock/jobapplication/b748bf69f842900119358ed623460000/initialize",
+  "status": 200,
+  "body": "{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"required\":[\"attachments\"],\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"r"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"27b6b07aed4b900119612ab159920000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for BlackRock Professional: BlackRock Active Investment Stewardship Operations - Associate\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/common/blackrock/attachments",
+  "status": 200,
+  "body": "{\"diagnosis\":\"clean\",\"containsMacros\":false,\"id\":\"oms-attachments/ab9562e3-1310-459c-a269-a766f3953226\",\"contentType\":{\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\",\"descriptor\":\"application/pdf - mime_pdf\"},\"fileLength\":65152,\"fileName\":\"briandelgado_resume.pdf\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/resumeattachments",
+  "status": 200,
+  "body": "{\"id\":\"b748bf69f842900119358ed623460000\",\"attachments\":[{\"id\":\"27b6b07aed4b900119647e87661b0000\",\"descriptor\":\"brian_alejandro_delgado_ortega_resume.pdf\",\"file\":\"oms-attachments/1672c528-a228-46e4-bb94-db8a2b6e7114\",\"fileName\":\"brian_alejandro_delgado_ortega_resume.pdf\",\"fileLength\":42587,\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"}},{\"id\":\"e80b5d2696e0900086fccc6fd1ed0000\",\"descriptor\":\"briandelgado_resume.pdf\",\"file\":\"oms-attachments/ab9562e3-1310-459c-a269-a766f3953226\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3c"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/skills",
+  "status": 200,
+  "body": "{\"skills\":[{\"descriptor\":\"Other\",\"id\":\"CANDIDATE_SKILL_ITEM-3-40007988\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/common/blackrock/questionnaire/aa50d29c4e951001fa22c5859fcc0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"aa50d29c4e951001fa22c5859fcc0001\",\"aa50d29c4e951001fa22c6ba3a9e0003\",\"aa50d29c4e951001fa22c62023450003\",\"aa50d29c4e951001fa22c62023450002\",\"aa50d29c4e951001fa22c6ba3a9e0006\",\"aa50d29c4e951001fa22c6ba3a9e0000\",\"aa50d29c4e951001fa22c6ba3a9e0002\"],\"properties\":{\"aa50d29c4e951001fa22c5859fcc0001\":{\"hidden\":false,\"label\":\"<p><b><span>Prior to hire date, BlackRock will conduct a verification check to validate employees have legal authorization to undertake the role applied for, and to work in compliance with immigration laws in the country work lo"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"27b6b07aed4b900119612ab159920000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for BlackRock Professional: BlackRock Active Investment Stewardship Operations - Associate\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"b748bf69f842900119358ed623460000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/jobapplication/b748bf69f842900119358ed623460000/questionnaireresponse?type=primary",
+  "status": 200,
+  "body": "{\"id\":\"69460711b6ea900086e717fb91920000\",\"descriptor\":\"Response for Experienced Job Application Questionnaire_2025 Q4 Refresh\",\"href\":\"http://balance-prod.env.az1.cust.ash.wd:19010/internalapi/ef/v1/blackrock/questionnaireResponseContexts/b748bf69f84210011958733b7cb00000/questionnaireResponses/69460711b6ea900086e717fb91920000\",\"questionnaireAnswers\":[{\"id\":\"69460711b6ea900086e71895b3370002\",\"descriptor\":\"No\",\"href\":\"http://balance-prod.env.az1.cust.ash.wd:19010/internalapi/ef/v1/blackrock/questionnaireAnswers/69460711b6ea900086e71895b3370002\",\"questionMultipleChoiceAnswers\":[{\"id\":\"903efb78443"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/cxs/blackrock/jobapplication/b748bf69f842900119358ed623460000/termsandconditions",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/termsAndConditions\"}],\"definitions\":{\"termsAndConditions\":{\"required\":[\"acceptTermsAndAgreements\"],\"additionalProperties\":false,\"properties\":{\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"acceptTermsAndAgreements\":{\"hidden\":false,\"label\":\"Yes\",\"readOnly\":false,\"type\":\"boolean\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/cxs/blackrock/jobapplication/b748bf69f842900119358ed623460000/uspersonalinfo",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/personalInfoUS\"}],\"definitions\":{\"personalInfoUS\":{\"required\":[\"veteranStatus\",\"hispanicOrLatino\",\"gender\",\"ethnicity\"],\"additionalProperties\":false,\"properties\":{\"veteranStatus\":{\"hidden\":false,\"label\":\"Do you identify as a veteran?\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/blackrock/values/country/veteranStatuses\",\"order\":\"d\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://blackrock.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/blackrock/package/b748bf69f842900119358ed623460000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"27b6b07aed4b900119612ab159920000\",\"descriptor\":\"Drop Off on Voluntary Disclosures page for BlackRock Professional: BlackRock Active Investment Stewardship Operations - Associate\"}"
+ }
+]
