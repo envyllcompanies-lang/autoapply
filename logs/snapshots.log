@@ -1,176 +1,3 @@
-=== 2026-10-19 01:52:15  skipped  Safety Coordinator  @ hellofresh
-url: https://careers.hellofresh.com/global/en/apply
-stage: page 5
-why: stuck on step 5; page says: ['Last Name*\nPlease enter valid Last Name', 'Please enter valid Last Name', 'Phone*\nThis Phone Number Format is not Allowed.', 'This Phone Number Format is not Allowed.']; fields flagged: Last Name; Phone; buttons: :Inside HelloFresh; :DENY; :ALLOW; :UPLOAD RESUME; :Download; :Continue; :Close how would you rate your ; :Send Feedback
-label: Enter Job Title or Location
-  <input:text #typehead empty>
-  [button] Search
-  [button] Inside HelloFresh
-  text: We use cookies to offer you a better browsing experience, analyze site traffic, and personalize content. Read about how we use cookies and h
-  [button] DENY
-  [button] ALLOW
-# Safety Coordinator (8163394)
-  text: Please upload your resume or CV
-<iframe about:blank>
-  [button] 
-  [button] 
-  <input:file has-file>
-  [button] UPLOAD RESUME
-  text: <file>
-  [link] Download
-  [link] 
-label: I agree to be contacted for other job opportunities as well as to receive talent related communication, includ
-label: First Name*
-  <input:text #firstName required filled>
-label: Last Name*
-  <input:text #lastName required INVALID filled>
-  text: Please enter valid Last Name
-label: Email*
-  <input:text #email required filled>
-label: Phone*
-  <input:text #phoneNumber required INVALID filled>
-  text: This Phone Number Format is not Allowed.
-label: Cover Letter
-  [button] 
-  [button] 
-label: Upload file
-  [button] Continue
-  text: How would you rate your experience popup
-  [button] Close how would you rate your experience popup
-  text: How would you rate your experience?
-  <input:radio #noRating question-answered>
-label: No rating
-  <input:radio #star1 question-answered>
-label: 1 star
-  <input:radio #star2 question-answered>
-label: 2 star
-  <input:radio #star3 question-answered>
-label: 3 star
-  <input:radio #star4 question-answered>
-label: 4 star
-  <input:radio #star5 question-answered>
-label: 5 star
-  [button] Send Feedback disabled
-
-=== 2026-10-19 01:52:39  blocked  Document Retrieval Specialist (Remote) @ abclegalservices
-url: https://job-boards.greenhouse.io/embed/job_board
-why: no application form found on page
-  text: The job you are looking for is no longer open.
-# Current openings at ABC Legal Services
-  text: Level-up your career by having opportunities at ABC Legal Services sent directly to your inbox.
-label: Search
-  <input:text #keyword-filter empty>
-# 106 jobs
-# Account Management
-# Court Support
-# Customer Success
-  text: Customer Service Representative (Remote)
-# Operations (Docketly)
-  text: Onsite Senior Full-Cycle Recruiter — Attorneys
-  text: Senior Full-Cycle Recruiter — Attorneys
-# Performance (Docketly)
-  text: Legal Performance Specialist
-# Success (Docketly)
-# International
-  text: International Legal Support Specialist
-# IT
-  text: Product Manager — Service of Process
-  text: Security Analyst I-Seattle, Washington
-  text: Senior Java Developer — Enterprise API Integrations
-  text: Sr. Database Engineer, Postgre SQL/AWS Aurora
-# Physical Fulfillment
-# Process Server Performance
-  text: Dispatch Coordinator for Process Servers
-  text: Regional Operations Manager, Process Server Network – Southwest
-  text: Arizona, Texas, US (Remote)
-# Process Servers
-  text: Certified DCWP Process Server
-  text: Copy of Legal Process Server
-  text: Employee Legal Process Server*
-  text: Arlington, Washington, United States
-  text: Ogden, Utah, United States
-  [button] 
-  [button] 1
-  [button] 2
-  [button] 3
-  [button] 
-
-=== 2026-10-19 01:54:59  skipped  Production Underwriter @ amynta
-url: https://amynta.wd5.myworkdayjobs.com/global/job/KS---Remote/Production-Underwriter_2507-0548/apply
-stage: Application Questions
-why: can't truthfully answer required: Call - Mobile Phone; Call - Home Phone; Call - Work Phone; Email
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Production Underwriter
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-4eaa740958f11001b03d525411a60000}
-label: Are you currently employed by Amynta Group or one of Amynta's family of affiliated brands? If Yes, you will ne
-  [dropdown] nothing chosen #primaryQuestionnaire--4eaa740958f11001b03d525411a60000
- {formField-2b8bcaf7a96b1001b0289586be420001}
-label: Are you at least 18 years old?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289586be420001
- {formField-2b8bcaf7a96b1001b0289620d5860002}
-label: Are you eligible to work in the country in which this position is located?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289620d5860002
- {formField-2b8bcaf7a96b1001b0289620d5860005}
-label: Do you now, or will you in the future require immigration sponsorship for work Authorization (e.g.H-1B)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289620d5860005
- {formField-2b8bcaf7a96b1001b02896bba7f20004}
-label: Have you worked for Amynta Group or one of the firms in the Amynta portfolio before?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02896bba7f20004
- {formField-2b8bcaf7a96b1001b02896bba7f20007}
-label: Do you have any relatives employed by Amynta or any of the firms in the Amynta Group portfolio?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02896bba7f20007
- {formField-2b8bcaf7a96b1001b028975665ce0002}
-label: What are your preferred methods of communication?*
-  <input:checkbox #519f2f60edaf01324f3da5bbfc300879-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Call - Mobile Phone
-  <input:checkbox #519f2f60edaf01393a4aa5bbfc300979-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Call - Home Phone
-  <input:checkbox #519f2f60edaf016ba057a5bbfc300a79-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Call - Work Phone
-  <input:checkbox #519f2f60edaf01522164a5bbfc300b79-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Text Message (Carrier charges may apply)
-  <input:checkbox #519f2f60edaf01491171a5bbfc300c79-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Email
- {formField-2b8bcaf7a96b1001b028975665ce0008}
-label: What is the best time of day to reach you?*
-  <input:checkbox #519f2f60edaf015e275da4bbfc30fd78-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Morning
-  <input:checkbox #519f2f60edaf0192156da4bbfc30fe78-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Afternoon
-  <input:checkbox #519f2f60edaf018755a9a4bbfc30ff78-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Evening
-  <input:checkbox #519f2f60edaf01fa6cbea4bbfc300079-2b8bcaf7a96b1001b028975665c required question-unanswered>
-label: Night
- {formField-2b8bcaf7a96b1001b02897f146c00003}
-label: Are you willing to travel for business?*
-  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02897f146c00003
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-19 01:55:21  skipped  RFP Administrator @ keepersecurity
 url: https://job-boards.greenhouse.io/keepersecurity/jobs/4412987009
 stage: page 1
@@ -5099,4 +4926,170 @@ label: Review
   [link]  {socialIcon}
   [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-19 18:38:21  unconfirmed  Research Analyst - Enterprise Tech @ qualitate
+url: https://jobs.ashbyhq.com/qualitate/ed4318c2-a03e-4742-aec4-593a0f570438/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'port now and in the future? Yes No LinkedIn Profile Type here... Resume <file> Replace or drag and drop here Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Research Analyst - Enterprise Tech
+# Location
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: $130K – $170K • Offers Equity • Offers Bonus
+  text: Competitive base + bonus. Early-stage equity stake.
+  text: The final compensation will depend on the level at which the candidate is hired.
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone Number
+  <input:tel #3d133cbc-66f3-4aaa-be3f-1470a6d538e7 required filled>
+label: Are you able to work out of our NYC office 3x a week?
+  text: We require everyone on the team to work from our office in NYC Monday-Wednesday.
+  [button] Yes
+  [button] No
+  <input:checkbox name=265c27aa-2c62-4bda-8006-1fa2880316fa question-answered>
+label: Are you legally authorized to work in the United States without employer-sponsored visa support now and in the
+  [button] Yes
+  [button] No
+  <input:checkbox name=5e7731a9-b718-4473-80b0-d8ebb98e60c3 question-unanswered>
+label: LinkedIn Profile
+  <input:url #5887972e-a930-49be-9fd7-a44351259ed1 required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-10-19 18:40:04  blocked  Data Analyst, Live Ops - Mattel Digital Studio @ MattelInc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: 6f27b4e3-fc5a-c7c9-a22d-5e46f93a08f2
+
+=== 2026-10-19 18:40:22  blocked  Sales Planning & Analytics Analyst @ MattelInc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: 2b9f4637-8a26-304d-e0f3-fc64d3615137
+
+=== 2026-10-19 18:44:30  blocked  Development Program Management Associate I - Action Figures @ MattelInc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: 3811fbe9-912a-ca0b-d010-0920ed810972
+
+=== 2026-10-19 18:45:22  blocked  Security Systems Coordinator @ MattelInc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: 183e719d-8d85-f6bd-c88b-7158bcbfc22e
+
+=== 2026-10-19 18:49:49  blocked  Manufacturing Execution Systems (MES) Specialist | Siemens OpCenter @ accenture
+url: https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/Chicago-Accenture-Tower-Corp/Manufacturing-Execution-Systems--MES--Specialist---Siemens-OpCenter_R00364258/apply/applyManually
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email: sign in there once yourself (make the account, or use 'Forgot your password?') with your ACCOUNT_PASSWORD and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search Careers {navigationItem-Search Careers}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Manufacturing Execution Systems (MES) Specialist | Siemens OpCenter
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #e8d5f57b-8fe3-420a-87b0-e42c95e4caa1 {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Accenture Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Sign In
+  text: You may choose to sign in using your Google account as an alternative authentication method. Where selected, authentication is handled by th
+  text: Accenture’s privacy policy
+  text: Recruitment and Hiring Privacy Statement
+  text: Security features such as multi-factor authentication is strongly encouraged to be enabled, however are governed by the respective provider 
+  [button] Sign in with Google {GoogleSignInButton}
+  [button] Sign in with email {SignInWithEmailButton}
+
+=== 2026-10-19 18:50:05  blocked  Administrative Assistant @ mattel-inc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: 5c3b345e-9bed-6be1-2558-2b65dd41d13c
+
+=== 2026-10-19 18:50:20  blocked  Administrative Assistant @ MattelInc
+url: https://geo.captcha-delivery.com/captcha/
+why: no application form found on page
+  text: Access is temporarily restricted
+  text: We detected unusual activity from your device or network.
+  text: JavaScript disabled or not working
+  text: Automated (bot) activity on your network (IP 20.29.55.2)
+  text: Use of developer or inspection tools
+  [button] Submit feedback.
+  text: ID: b2289697-d209-b6e3-2323-edee24ab5dd1
 
