@@ -21,6 +21,8 @@ TTL_HOURS = {"linkedin": 2, "jooble": 3, "remotive": 6, "remoteok": 1, "himalaya
              "workablejobs": 3, "arbeitnow": 3, "workingnomads": 3, "githublists": 3, "builtin": 3, "careerjet": 3, "localfeed": 1,
              "jobright": 4, "hnhiring": 12}
 
+SOURCE_CAP = {"jobright": 1500, "jobboard": 6000}      # big daily lists: more than the usual per-source cap is kept
+
 ATS_RX = {
     "greenhouse": re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)"),
     "lever": re.compile(r"jobs\.lever\.co/([A-Za-z0-9_-]+)"),
@@ -412,7 +414,9 @@ def jobright(cfg, base="https://raw.githubusercontent.com"):
     The links go to jobright.ai, which wants an account to apply, so the bot finds each posting on the employer's own
     board (direct_apply_url), never through jobright."""
     a = (cfg.get("aggregators", {}) or {}).get("jobright") or {}
-    if a.get("enabled", True) is False:
+    if a.get("enabled", False) is not True:
+        # Off unless switched on: jobright's pages keep the employer's application link behind a jobright sign-in, and the
+        # employer's own posting was found for none of 814 listings tried (2026-10-18), at up to 13 s of searching each
         return []
     out, seen = [], set()
     cities = [c.lower() for c in (a.get("locations") or DEFAULT_CITIES)]
@@ -640,7 +644,7 @@ def localfeed(cfg, base=None):
     return out
 
 
-ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed", "jobright", "hnhiring",
+ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed", "hnhiring",
              "themuse", "remotive", "remoteok", "jicy", "himalayas", "wwr")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
             "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads, "githublists": githublists, "builtin": builtin, "careerjet": careerjet, "localfeed": localfeed,
@@ -677,7 +681,8 @@ def discover_aggregators(cfg: dict, base: Path, log=print) -> list[Job]:
             else:
                 raw = fn(cfg, urls[name]) if name in urls else fn(cfg)
                 # keep only roles that could pass the title/location gate, so caches stay small
-                found = [j for j in raw if j.apply_url and not prefilter(j, search)][:cap]
+                cap_n = int(((a.get(name) or {}) if isinstance(a.get(name), dict) else {}).get("max_jobs") or SOURCE_CAP.get(name, cap))
+                found = [j for j in raw if j.apply_url and not prefilter(j, search)][:cap_n]
                 cache.write_text(json.dumps([_to_dict(j) for j in found]))
                 log(f"  agg/{name}: {len(raw)} fetched, {len(found)} pass the title/location filter")
         except Exception as e:
