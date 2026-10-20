@@ -2224,7 +2224,8 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
             raise Blocked(b)
         if on_stage:
             on_stage(f"page {step}")
-        _resume_first_modal(page, files, log)
+        if _resume_first_modal(page, files, log):
+            uploaded = True               # the résumé went in through that box: the form itself then has no file field
         # Any wizard step may request a code sent to the applicant's inbox.
         if _email_code_prompt(page):
             if not auth.mailbox.configured():

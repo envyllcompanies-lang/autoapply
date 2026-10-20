@@ -439,6 +439,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         db.conn.commit()
         if n_dob:
             log(f"Your date of birth is set: {n_dob} jobs that asked for it are tried again")
+    if db.once("paylocity-review-requeue"):    # Paylocity review pages written off as 'no résumé upload' when the résumé went in first
+        n_pr = db.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND reason LIKE 'not a real application form%'"
+                               " AND reason LIKE '%resume_uploaded%' AND apply_url LIKE '%paylocity%' AND (submitted_at IS NULL OR submitted_at = '')").rowcount
+        db.conn.commit()
+        if n_pr:
+            log(f"Paylocity forms stopped at their review page: {n_pr} tried again")
     fixed = db.requeue_fixed(FIXED_FLAG)
     if fixed:
         log(f"Trying {sum(fixed.values())} jobs again that were set aside by faults fixed in this build: "
