@@ -166,6 +166,10 @@ class DB:
             # 'no form': the first now go to your apply-by-hand list, the second are skipped as closed (2026-10-20)
             "a human check or closed posting read as 'no form'": "status='blocked' AND reason LIKE 'no application form found%'"
                 " AND (apply_url LIKE '%smartrecruiters.com%' OR apply_url LIKE '%paylocity.com%')",
+            # a salary box taken for a spam trap ('Please do not enter 0'), S&P's HiredScore date, Ashby's 'Which option best
+            # describes your situation?' (2026-10-20)
+            "a salary box, HiredScore date or sponsorship choice the bot reads now": "status IN ('skipped','failed') AND ("
+                "reason LIKE '%Please do not enter 0%' OR reason LIKE '%HiredScore%' OR reason LIKE '%Which option best describes your situation%')",
         }
         found = {}
         for name, where in rules.items():
