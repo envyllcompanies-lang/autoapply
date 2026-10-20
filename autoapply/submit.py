@@ -278,6 +278,7 @@ BLOCKERS = [
     ('iframe[src*="recaptcha/api2/anchor"]', "reCAPTCHA checkbox"),
     ('iframe[src*="hcaptcha.com"]', "hCaptcha"),
     ('iframe[src*="challenges.cloudflare.com"]', "Cloudflare Turnstile"),
+    ('iframe[src*="captcha-delivery.com"]', "DataDome check"),
     ('input[type="password"]', "login required"),
 ]
 
@@ -414,6 +415,8 @@ def guard_ai_policy(page, job):
 def _blocker(page) -> str | None:
     """What stands in the way on this page: a human check (reCAPTCHA, hCaptcha, Cloudflare Turnstile) or a login wall.
     A human check ends the application. The bot never solves one, clicks through one, or hands one to a solving service."""
+    if "captcha-delivery.com" in (page.url or ""):      # DataDome sends the whole tab to its check (SmartRecruiters' oneclick pages)
+        return "DataDome check (a human check: the bot stops here)"
     for sel, name in _blockers():
         for el in page.locator(sel).all():
             try:
@@ -678,7 +681,7 @@ def open_form(page, url: str) -> str:
         raise Blocked(b)
     if not _has_form(page):
         try:
-            if CLOSED_RX.search(page.inner_text("body")[:3000]):
+            if CLOSED_RX.search(page.inner_text("body")[:3000]) or re.search(r"/JobNotFound\b", page.url, re.I):
                 raise Blocked("posting closed: the employer's page says the job is no longer available")
         except Blocked:
             raise
@@ -1768,7 +1771,8 @@ FINAL_RX = re.compile(r"^\s*(submit( (your )?application)?|send( my)? applicatio
 LANDING_RX = re.compile(r"^\s*(apply manually|start (your )?application|apply( now)?|continue application|"
                         r"(sign in|continue|apply|sign up) with (e-?mail|your e-?mail)( address)?)\s*$", re.I)
 CLOSED_RX = re.compile(r"page you are looking for (doesn.t|does not) exist|(job|position|posting|requisition) (is )?(no longer|not) (available|open|accepting)|"
-                       r"no longer accepting applications|this job (has been|was) (closed|filled|removed)|job not found|position has been filled", re.I)
+                       r"no longer accepting applications|this job (has been|was) (closed|filled|removed)|job not found|position has been filled|"
+                       r"(job|position|posting) (does not|doesn.t) exist|is not currently active", re.I)
 MAX_STEPS = 32
 
 

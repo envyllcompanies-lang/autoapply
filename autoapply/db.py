@@ -160,6 +160,10 @@ class DB:
             # Greenhouse forms on an employer's own career page ('?gh_jid='): opened on Greenhouse itself now
             "a Greenhouse form that did not load on the employer's page": "status='blocked' AND reason LIKE 'no application form found%'"
                 " AND apply_url LIKE '%gh_jid=%'",
+            # SmartRecruiters pages that were DataDome's human check, and closed Paylocity postings, both written off as
+            # 'no form': the first now go to your apply-by-hand list, the second are skipped as closed (2026-10-20)
+            "a human check or closed posting read as 'no form'": "status='blocked' AND reason LIKE 'no application form found%'"
+                " AND (apply_url LIKE '%smartrecruiters.com%' OR apply_url LIKE '%paylocity.com%')",
         }
         found = {}
         for name, where in rules.items():

@@ -1465,6 +1465,8 @@ class Brain:
             return self._start_date()             # a date box for 'Available to Start': a date, not 'Two weeks after an offer'
         dob = str(self.facts.get("date_of_birth") or "").strip()
         m_dob = re.fullmatch(r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})", dob)
+        if not m_dob and (iso := re.fullmatch(r"(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})", dob)):    # the secret written 1995-11-18
+            m_dob = re.fullmatch(r"(\d+)/(\d+)/(\d+)", f"{iso.group(2)}/{iso.group(3)}/{iso.group(1)}")
         if m_dob and re.search(r"birth|\bdob\b|when were you born", q) and not re.search(r"place of birth|country of birth|birth ?place|city of birth|state of birth", q):
             mm, dd, yy = int(m_dob.group(1)), int(m_dob.group(2)), m_dob.group(3)
             month = date(2000, mm, 1).strftime("%B")
