@@ -364,6 +364,9 @@ def site_mail(site_host: str, kind: str, max_age_s: float = 86400, limit: int = 
     return sorted(out, key=lambda m: -m["ts"])[:limit]
 
 
+_CODE_ASKED: set = set()          # employers (squashed names) whose emailed code this run has waited for
+
+
 def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 150, log=print, require_code: bool = False,
                           kind: str = "", site_host: str = "") -> dict | None:
     """Poll the inbox until the email this site just sent arrives: {'link', 'code'} or None.
@@ -380,11 +383,19 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     start = time.time()
     fresh = since_ts - 5 if since_ts > start - 600 else start - 20
     why = {}                                  # subject -> why it was passed over (logged if nothing is accepted)
+    # codes sent after this Submit by an employer named differently ('GLG' for the board 'gersonlehrmangroup') that no
+    # earlier application in this run waited for: one of them is used only when no email names this employer by the end
+    alias = {}
+    if require_code:
+        _CODE_ASKED.update(n for n in names if n)
 
     def passed_over(info, reason):
         if JOB_MAIL.search(info["subject"]):          # the logs are public: only job-site emails are named in them
             why.setdefault(info["subject"][:60], reason)
+    alias_at = [0.0]
     while time.time() < deadline and not _DISABLED:
+        if alias and time.time() - alias_at[0] > 30:
+            break                     # an email naming this employer had half a minute to turn up: use the one that came
         try:
             for info in _recent(since_ts, 12, ("INBOX", "[Gmail]/Spam")):
                 if not info["hint"]:
@@ -398,6 +409,14 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
                     if said:
                         other = re.sub(r"[^a-z0-9]", "", said.group(1).lower())
                         if other and not any(n and (n in other or other in n) for n in names):
+                            # the email may call the employer something else ('GLG' for the board 'gersonlehrmangroup'). A
+                            # code sent after this Submit is still this one's, unless it names an employer whose code the
+                            # bot waited for earlier (a late code from that application).
+                            earlier = any(n and (n in other or other in n) for n in _CODE_ASKED - set(names))
+                            if not earlier and info["ts"] >= since_ts and info.get("code"):
+                                if not alias:
+                                    alias_at[0] = time.time()
+                                alias.setdefault(other, info)     # kept aside: used only if no email names this employer
                             passed_over(info, "other company")
                             continue          # this code was sent for a different company's application: never typed into this one
                 if require_code and info["ts"] < since_ts - 5:
@@ -421,6 +440,11 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
         except Exception as e:
             log(f"      mail: {str(e)[:80]}")
         time.sleep(6)
+    if len(alias) == 1:
+        info = next(iter(alias.values()))
+        log(f"      mail: using '{info['subject'][:60]}': it names the employer differently, came after this Submit, and no "
+            "other application in this run waits for a code from it")
+        return {"link": info["link"], "code": info["code"]}
     if why:
         log("      mail: passed over: " + "; ".join(f"'{k}' ({v})" for k, v in list(why.items())[:4]))
     return None

@@ -43,10 +43,21 @@ def _mail(company, code, age=0):
 _old_recent = M._recent
 M._DISABLED = ""
 try:
+    M._CODE_ASKED.clear()
+    M._CODE_ASKED.add("acmelogistics")        # back to back: the application before this one waited for Acme's code
     M._recent = lambda since, n=12, folders=("INBOX",): iter([_mail("Acme Logistics", "AAAA1111", 2)])
     got = M.wait_for_verification(since_ts=_now - 5, host_hint="vardaspace|Varda Space Industries", timeout=1, require_code=True, log=lambda *a: None)
     print("OK " if got is None else "BAD", "another company's fresh code ->", got)
     bad_mail += got is not None
+    # the email names the employer differently ('GLG' for the board 'gersonlehrmangroup') and no earlier application
+    # waited for a GLG code: it came after this Submit, so it is this one's
+    M._CODE_ASKED.clear()
+    M._recent = lambda since, n=12, folders=("INBOX",): iter([_mail("GLG", "EEEE5555", 2)])
+    got = M.wait_for_verification(since_ts=_now - 5, host_hint="gersonlehrmangroup", timeout=1, require_code=True, log=lambda *a: None)
+    ok = bool(got and got["code"] == "EEEE5555")
+    print("OK " if ok else "BAD", "a fresh code naming the employer differently is used ->", got)
+    bad_mail += not ok
+    M._CODE_ASKED.clear()
     M._recent = lambda since, n=12, folders=("INBOX",): iter([_mail("Acme Logistics", "AAAA1111", 2), _mail("Varda Space Industries", "BBBB2222", 1)])
     got = M.wait_for_verification(since_ts=_now - 5, host_hint="vardaspace|Varda Space Industries", timeout=1, require_code=True, log=lambda *a: None)
     ok = bool(got and got["code"] == "BBBB2222")
