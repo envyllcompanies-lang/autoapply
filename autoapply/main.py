@@ -472,6 +472,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         if n_h:
             log(f"Apply-by-hand list started: {n_h} good matches that earlier runs lost to a human check")
     _resolve_hand_applied(db, brain, log)
+    _prune_hand_list(db, log)
     _note_followups(db, brain, log)
     n_up = 0
     for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
@@ -1270,6 +1271,42 @@ def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:
             n += 1
     db.conn.commit()
     return n
+
+
+def _prune_hand_list(db: DB, log):
+    """Once a day, your apply-by-hand list loses what you no longer need to look at: postings the employer has taken down
+    (its own feed says so) and a second copy of a role already on the list. Nothing is ever applied to from here."""
+    today = date.today().isoformat()
+    if db.meta_get("hand_prune_day") == today:
+        return
+    db.meta_set("hand_prune_day", today)
+    rows = db.conn.execute("SELECT key, company, title, apply_url, url, fit FROM jobs WHERE status='manual' AND reason LIKE ?"
+                           " ORDER BY COALESCE(fit, 0) DESC", (HAND_LIKE,)).fetchall()
+    if not rows:
+        return
+    from concurrent.futures import ThreadPoolExecutor
+
+    def closed(r) -> bool:
+        try:
+            return bool(prescreen.preflight(r["apply_url"] or r["url"] or "", deep=False)["closed"])
+        except Exception:
+            return False              # could not tell: it stays on the list
+    with ThreadPoolExecutor(8) as ex:
+        shut = [r["key"] for r, c in zip(rows, ex.map(closed, rows)) if c]
+    seen, twice = set(), []
+    for r in rows:                    # best match first: that copy stays
+        if r["key"] in shut:
+            continue
+        k = (norm_co(r["company"] or ""), re.sub(r"[^a-z0-9]", "", str(r["title"] or "").lower()))
+        if k in seen:
+            twice.append(r["key"])
+        seen.add(k)
+    for k in shut:
+        db.update(k, status="skipped", reason="posting closed: taken down while on your apply-by-hand list")
+    for k in twice:
+        db.update(k, status="skipped", reason="same role already on your apply-by-hand list")
+    if shut or twice:
+        log(f"Apply-by-hand list tidied: {len(shut)} postings taken down since, {len(twice)} second copies of a role (off the list)")
 
 
 def _resolve_hand_applied(db: DB, brain: Brain, log):
