@@ -1,0 +1,302 @@
+[
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/en-US/gti/login",
+  "status": 303,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/cxs/greyco/jobpostings/Planning-and-Real-Estate-Analyst_JR0000139/jobapplications",
+  "status": 400,
+  "body": "{\"errorCode\":\"HTTP_400\",\"errorCaseId\":\"39FF7EMVGB75IV\",\"httpStatus\":400,\"locale\":\"en-US\",\"message\":\"invalid request: validation errors\",\"messageParams\":{}}"
+ },
+ {
+  "m": "HEAD",
+  "url": "https://wd108.myworkday.com/wday/asset/uic-shared-vendors/shared-vendors.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/undefined/source",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"C4A32BMVGB75SM\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd108.myworkdaycdn.com/wday/asset/candidate-experience-jobs/cx-jobs.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd108.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/candidate-experience-apply-flow.min.js",
+  "status": 307,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://wd108.myworkday.com/wday/asset/uic-shared-vendors/2.341.0/shared-vendors.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd108.myworkdaycdn.com/wday/asset/candidate-experience-jobs/2026.40.17/cx-jobs.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "HEAD",
+  "url": "https://prod-wd108.myworkdaycdn.com/wday/asset/candidate-experience-apply-flow/2026.40.17/candidate-experience-apply-flow.min.js",
+  "status": 200,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/undefined/emailaddress",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"C4A32BMVGB75TA\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://wd108.myworkday.com/wday/microscope/prelogin/mscp_error_kit_logs?version=v1&level=ERROR",
+  "status": 202,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/undefined/phonenumber",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"8AD8CBMVGB75ZH\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/undefined/previousworker",
+  "status": 404,
+  "body": "{\"errorCode\":\"HTTP_404\",\"errorCaseId\":\"E1DB70MVGB7623\",\"httpStatus\":404,\"locale\":\"en-US\",\"message\":\"\",\"messageParams\":{}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/emailaddress",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/emailAddress\"}],\"definitions\":{\"emailAddress\":{\"additionalProperties\":false,\"properties\":{\"emailAddress\":{\"hidden\":false,\"label\":\"\",\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/previousworker",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/previousWorker\"}],\"definitions\":{\"previousWorker\":{\"required\":[\"candidateIsPreviousWorker\"],\"additionalProperties\":false,\"properties\":{\"manager\":{\"hidden\":true,\"label\":\"Please specify your former manager.\",\"order\":\"0b\",\"readOnly\":false,\"type\":\"string\"},\"employeeID\":{\"hidden\":true,\"label\":\"\",\"order\":\"0\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":true,\"label\":\"Please specify your former work location.\",\"order\":\"0a\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"candidateIsPreviousWorker\":{\"hidden\":false,\"label"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/phonenumber",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/phoneNumber\"}],\"definitions\":{\"phoneNumber\":{\"required\":[\"countryPhoneCode\",\"phoneType\",\"phoneNumber\"],\"additionalProperties\":false,\"properties\":{\"countryPhoneCode\":{\"hidden\":false,\"label\":\"Country Phone Code\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/greyco/values/phone/countryCodes\",\"order\":\"b\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"href\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"extension\":{\"h"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"f4642b70c7129008e41d6adfb28d0000\",\"descriptor\":\"Drop Off on Primary External Questionnaire page for Greystone: Planning and Real Estate Analyst\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/previousworker/1ce6c36946ea1006be467b102cff0000",
+  "status": 200,
+  "body": "{\"id\":\"1ce6c36946ea1006be467b102cff0000\",\"candidateIsPreviousWorker\":false}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/phonenumber/1ce6c36946ea1006be467b102d000000",
+  "status": 200,
+  "body": "{\"id\":\"1ce6c36946ea1006be467b102d000000\",\"descriptor\":\"(970) 366-8832 (Mobile)\",\"phoneNumber\":\"(970) 366-8832\",\"phoneType\":{\"descriptor\":\"Mobile\",\"id\":\"97ede22dda9b1001214c227fb4030000\"},\"countryPhoneCode\":{\"descriptor\":\"United States of America (+1)\",\"id\":\"db8d3ca6446c11de98360015c5e6daf6\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/source",
+  "status": 200,
+  "body": "{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"sourcePopulatedFromUrl\":false,\"source\":{\"id\":\"a3d69e79a5401001c5cbaa7300240000\",\"descriptor\":\"Corporate Website\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/name",
+  "status": 200,
+  "body": "{\"legalName\":{\"id\":\"68e50173d4131013a284404f1d690000\",\"descriptor\":\"Brian Delgado-Ortega\",\"fullyComposedName\":\"Brian Delgado-Ortega\",\"preferredName\":false,\"deferToLegalName\":false,\"lastName\":\"Delgado-Ortega\",\"firstName\":\"Brian\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"}},\"preferredName\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/address",
+  "status": 200,
+  "body": "{\"id\":\"1ce6c36946ea1006be468075aaf80000\",\"descriptor\":\"63 Cherry Ct\",\"city\":\"New Castle\",\"postalCode\":\"81647\",\"addressLine1\":\"63 Cherry Ct\",\"countryRegion\":{\"id\":\"a83d6eabae3b49718c4ce09eeb66fd0b\",\"descriptor\":\"Colorado\",\"name\":\"Colorado\",\"alpha2Code\":\"CO\"},\"fullyComposedAddress\":\"63 Cherry Ct&#xa;New Castle, CO 81647&#xa;United States of America\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha3Code\":\"USA\",\"alpha2Code\":\"US\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/cxs/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/initialize",
+  "status": 200,
+  "body": "{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"required\":[\"attachments\"],\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"r"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/workexperiences",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/workExperience\"}],\"definitions\":{\"workExperience\":{\"required\":[\"endDate\",\"companyName\",\"jobTitle\",\"startDate\"],\"additionalProperties\":false,\"properties\":{\"endDate\":{\"hidden\":false,\"label\":\"To\",\"order\":\"f\",\"readOnly\":false,\"format\":\"date\",\"precision\":\"YYYY-MM\",\"type\":\"string\"},\"companyName\":{\"hidden\":false,\"label\":\"Company\",\"order\":\"b\",\"readOnly\":false,\"type\":\"string\"},\"jobTitle\":{\"hidden\":false,\"label\":\"Job Title\",\"order\":\"a\",\"readOnly\":false,\"type\":\"string\"},\"location\":{\"hidden\":false,\"label\":\"Location\",\"order\":\"c\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidd"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/socials",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/socialNetworkAccounts\"}],\"definitions\":{\"socialNetworkAccounts\":{\"additionalProperties\":false,\"properties\":{\"twitterAccount\":{\"hidden\":true,\"label\":\"\",\"readOnly\":false,\"type\":\"string\"},\"facebookAccount\":{\"hidden\":true,\"label\":\"\",\"readOnly\":false,\"type\":\"string\"},\"linkedInAccount\":{\"hidden\":false,\"label\":\"LinkedIn\",\"order\":\"a\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"f4642b70c7129008e41d6adfb28d0000\",\"descriptor\":\"Drop Off on Primary External Questionnaire page for Greystone: Planning and Real Estate Analyst\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/attachments",
+  "status": 200,
+  "body": "{\"diagnosis\":\"clean\",\"containsMacros\":false,\"id\":\"oms-attachments/68372010-21cb-46fe-87fd-adede1368301\",\"contentType\":{\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\",\"descriptor\":\"application/pdf - mime_pdf\"},\"fileLength\":65152,\"fileName\":\"briandelgado_resume.pdf\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/workexperiences/1ce6c36946ea9006be4763c0090d0000",
+  "status": 200,
+  "body": "{\"id\":\"1ce6c36946ea9006be4763c0090d0000\",\"location\":\"Aspen, CO\",\"companyName\":\"Roaring Fork Property Group\",\"roleDescription\":\"Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed property maintenance across 70+ luxury estates (6,000\u201315,000 sq ft), coordinating with vendors and clients. Managed inspection scheduling and property readiness for ultra-high-net-worth clientele under strict quality standards. Conducted property inspections and readiness checks, and tracked preventative maintenance and repair needs across the portfolio."
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/socials",
+  "status": 200,
+  "body": "{\"linkedInAccount\":\"https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/jobapplication/ae42d6a7b058900d30791f6883970000/resumeattachments",
+  "status": 200,
+  "body": "{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"attachments\":[{\"id\":\"ae42d6a7b058900d307c5ab60fb80000\",\"descriptor\":\"brian_alejandro_delgado_ortega_resume.pdf\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"},\"fileName\":\"brian_alejandro_delgado_ortega_resume.pdf\",\"fileLength\":42531,\"file\":\"oms-attachments/3fbede5b-54d7-424b-9807-928809b09f2e\"},{\"id\":\"ca70f3c164469000ea1d7a3d29b00000\",\"descriptor\":\"briandelgado_resume.pdf\",\"file\":\"oms-attachments/68372010-21cb-46fe-87fd-adede1368301\",\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3c"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"f4642b70c7129008e41d6adfb28d0000\",\"descriptor\":\"Drop Off on Primary External Questionnaire page for Greystone: Planning and Real Estate Analyst\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "POST",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/common/greyco/questionnaire/c4c5dc3554881001ccee670280a90000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"c4c5dc3554881001ccee6d9f4fc70000\",\"c4c5dc3554881001ccee6d0596140003\",\"c4c5dc3554881001ccee6c6b51820003\",\"c4c5dc3554881001ccee6bd15aac0003\",\"c4c5dc3554881001ccee6b371b100006\",\"c4c5dc3554881001ccee6b371b100005\",\"c4c5dc3554881001ccee6b371b100001\",\"c4c5dc3554881001ccee6a9d58420004\",\"c4c5dc3554881001ccee6a9d58420000\",\"c4c5dc3554881001ccee6969e9c70004\",\"c4c5dc3554881001ccee6969e9c70000\",\"c4c5dc3554881001ccee68d006340004\",\"c4c5dc3554881001ccee68d006340001\",\"c4c5dc3554881001ccee68363a9b0002\",\"c4c5dc3554881001ccee679c8c640002\",\"c4c5dc3554881001ccee67"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://greyco.wd108.myworkdayjobs.com/wday/calypso/cxs/jobapplication/greyco/package/ae42d6a7b058900d30791f6883970000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":{\"id\":\"ae42d6a7b058900d30791f6883970000\",\"descriptor\":\"\u200e-\"}}"
+ }
+]

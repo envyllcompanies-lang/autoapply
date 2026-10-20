@@ -1,0 +1,2626 @@
+[
+ {
+  "step": 1,
+  "url": "https://greyco.wd108.myworkdayjobs.com/gti/job/New-York-NY/Planning-and-Real-Estate-Analyst_JR0000139/apply",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "How Did You Hear About Us?*",
+    "maxlength": null,
+    "sel": "[id=\"source--source\"]",
+    "key": "formField-source",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "Corporate Website"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "First Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--firstName\"]",
+    "key": "formField-legalName--firstName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Last Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--lastName\"]",
+    "key": "formField-legalName--lastName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f3",
+    "required": true,
+    "label": "Address Line 1*",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine1\"]",
+    "key": "formField-addressLine1",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f4",
+    "required": false,
+    "label": "Address Line 2",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine2\"]",
+    "key": "formField-addressLine2",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "City*",
+    "maxlength": null,
+    "sel": "[id=\"address--city\"]",
+    "key": "formField-city",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f6",
+    "required": true,
+    "label": "Postal Code*",
+    "maxlength": null,
+    "sel": "[id=\"address--postalCode\"]",
+    "key": "formField-postalCode",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f7",
+    "required": false,
+    "label": "County",
+    "maxlength": null,
+    "sel": "[id=\"address--regionSubdivision1\"]",
+    "key": "formField-regionSubdivision1",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f8",
+    "required": true,
+    "label": "Country Phone Code*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--countryPhoneCode\"]",
+    "key": "formField-countryPhoneCode",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "United States of America (+1)"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f9",
+    "required": true,
+    "label": "Phone Number*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneNumber\"]",
+    "key": "formField-phoneNumber",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f10",
+    "required": false,
+    "label": "Phone Extension",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--extension\"]",
+    "key": "formField-extension",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "g_f11",
+    "kind": "radio",
+    "label": "Have you previously been employed by Greystone or its Affliates? CURRENT EMPLOYEES: Please apply via your internal Workday account.*",
+    "required": true,
+    "key": "formField-candidateIsPreviousWorker",
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f11",
+     "f12"
+    ],
+    "option_sels": [
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"true\"]",
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"false\"]"
+    ],
+    "checked": [
+     "No"
+    ]
+   },
+   {
+    "id": "f13",
+    "kind": "checkbox_single",
+    "label": "I have a preferred name",
+    "question": "I have a preferred name",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"preferredCheck\"]",
+    "key": "formField-preferredCheck",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f14",
+    "kind": "combobox",
+    "label": "Country*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"country--country\"]",
+    "key": "formField-country",
+    "button": true,
+    "cur": "United States of America",
+    "options": []
+   },
+   {
+    "id": "f15",
+    "kind": "combobox",
+    "label": "State*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"address--countryRegion\"]",
+    "key": "formField-countryRegion",
+    "button": true,
+    "cur": "Colorado",
+    "options": []
+   },
+   {
+    "id": "f16",
+    "kind": "combobox",
+    "label": "Phone Device Type*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneType\"]",
+    "key": "formField-phoneType",
+    "button": true,
+    "cur": "Mobile",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f14": "United States",
+   "f15": "Colorado",
+   "f16": "(970) 366-8832",
+   "f0": "Job board",
+   "f1": "Brian",
+   "f2": "Delgado-Ortega",
+   "f3": "63 Cherry Ct",
+   "f4": "",
+   "f5": "New Castle",
+   "f6": "81647",
+   "f8": "",
+   "f9": "(970) 366-8832",
+   "f10": "",
+   "g_f11": "No"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "true",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-2yemrv"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "false",
+    "checked": true,
+    "pressed": null,
+    "achecked": "true",
+    "text": "",
+    "cls": "css-sp3s3x"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "bc33aa3152ec42d4995f4791a106ed09",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "United States of America",
+    "cls": "css-1pa9pr8"
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-1lwo07n"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "63 Cherry Ct",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "New Castle",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "a83d6eabae3b49718c4ce09eeb66fd0b",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Colorado",
+    "cls": "css-1pa9pr8"
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "81647",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f16": {
+    "id": "f16",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "97ede22dda9b1001214c227fb4030000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Mobile",
+    "cls": "css-1pa9pr8"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "(970) 366-8832",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f0",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#3C4D4F\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"137d2c49-56ea-4d3c-ac0c-378fa37eba75\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"dfa9c495-babc-40fe-bf83-defa5fb7dad8\" id=\"source--source\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f0\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"137d2c49-56ea-4d3c-ac0c-378fa37eba75\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, Corporate Website</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"dfa9c495-babc-40fe-bf83-defa5fb7dad8\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mu29yk css-1qxj2kr css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-a3d69e79a5401001c5cbaa7300240000\" tabindex=\"-1\" aria-label=\"Corporate Website, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-u29yd: #3C4D4F;\"><div class=\"css-u29yp css-u29yt mu29yt\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-u29yo: var(--cnvs-brand-neutral-dark); --iconHoverColor-u29yo: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-u29yv css-u29yz mu29yz\" data-automation-id=\"promptOption\" data-automation-label=\"Corporate Website\">Corporate Website</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" cla"
+   },
+   {
+    "id": "f8",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#3C4D4F\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"82ba419f-6c64-4be8-a8c2-be05335f5a19\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" id=\"phoneNumber--countryPhoneCode\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f8\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"82ba419f-6c64-4be8-a8c2-be05335f5a19\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, United States of America (+1)</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mu29yk css-1qxj2kr css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-u29yd: #3C4D4F;\"><div class=\"css-u29yp css-u29yt mu29yt\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-u29yo: var(--cnvs-brand-neutral-dark); --iconHoverColor-u29yo: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-u29yv css-u29yz mu29yz\" data-automation-id=\"promptOption\" data-automation-label=\"United States of America (+1)\">United States of America (+1)</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><sv"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-l7s794\"><span class=\"css-znqtt5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contain"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "Corporate Website",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "Corporate Website",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-dfa9c495-babc-40fe-bf83-defa5fb7dad8\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"dfa9c495-babc-40fe-bf83-defa5fb7dad8\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "Corporate Website",
+    "aria": "Corporate Website, press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "Corporate Website",
+    "html": "<div class=\"mu29yk css-1qxj2kr css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-a3d69e79a5401001c5cbaa7300240000\" tabindex=\"-1\" aria-label=\"Corporate Website, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-u29yd: #3C4D4F;\"><div class=\"css-u29yp css-u29yt mu29yt\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"9b7be03b-5167-4c26-9e75-b2e2b4b71aa2\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "United States of America (+1), press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<div class=\"mu29yk css-1qxj2kr css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-u29yd: #3C4D4F;\"><div class=\"css-u29yp css-u29yt mu29yt\" data-automation-id=\"DELETE_charm\" role=\"presentation\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-17ttq0g\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "url": "https://greyco.wd108.myworkdayjobs.com/gti/job/New-York-NY/Planning-and-Real-Estate-Analyst_JR0000139/apply",
+  "fields": [
+   {
+    "id": "f17",
+    "required": true,
+    "label": "Job Title*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--jobTitle\"]",
+    "key": "formField-jobTitle",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f18",
+    "required": true,
+    "label": "Company*",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--companyName\"]",
+    "key": "formField-companyName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f19",
+    "required": false,
+    "label": "Location",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--location\"]",
+    "key": "formField-location",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f20",
+    "kind": "wddate",
+    "label": "From*",
+    "required": true,
+    "sel": "[id=\"workExperience-4--startDate-dateSectionMonth-input\"]",
+    "key": "formField-startDate",
+    "maxlength": null,
+    "hasDay": false
+   },
+   {
+    "id": "f22",
+    "kind": "wddate",
+    "label": "To*",
+    "required": true,
+    "sel": "[id=\"workExperience-4--endDate-dateSectionMonth-input\"]",
+    "key": "formField-endDate",
+    "maxlength": null,
+    "hasDay": false
+   },
+   {
+    "id": "f24",
+    "required": false,
+    "label": "Role Description",
+    "maxlength": null,
+    "sel": "[id=\"workExperience-4--roleDescription\"]",
+    "key": "formField-roleDescription",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f25",
+    "required": true,
+    "label": "Resume/CV *",
+    "maxlength": null,
+    "sel": "input[data-automation-id=\"file-upload-input-ref\"]",
+    "key": "formField-",
+    "has_value": false,
+    "kind": "file",
+    "accept": "",
+    "has_file": [
+     "brian_alejandro_delgado_ortega_resume.pdf"
+    ],
+    "hint": "file-upload-input-ref",
+    "elid": ""
+   },
+   {
+    "id": "f26",
+    "required": false,
+    "label": "LinkedIn",
+    "maxlength": null,
+    "sel": "[id=\"socialNetworkAccounts--linkedInAccount\"]",
+    "key": "formField-linkedInAccount",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f27",
+    "kind": "checkbox_single",
+    "label": "I currently work here",
+    "question": "I currently work here",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"currentlyWorkHere\"]",
+    "key": "formField-currentlyWorkHere",
+    "checked": false,
+    "context": ""
+   }
+  ],
+  "answers": {
+   "f17": "Property Management Crew",
+   "f18": "Roaring Fork Property Group",
+   "f19": "Aspen, CO",
+   "f20": "12/01/2022",
+   "f22": "03/01/2026",
+   "f24": "Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed property maintenance across 70+ luxury estates (6,000\u201315,000 sq ft), coordinating with vendors and clients. Managed inspection scheduling and property readiness for ultra-high-net-wor",
+   "f25": "RESUME",
+   "f26": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+   "f27": ""
+  },
+  "readback": {
+   "f17": {
+    "id": "f17",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Property Management Crew",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Roaring Fork Property Group",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Aspen, CO",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   },
+   "f27": {
+    "id": "f27",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-1lwo07n"
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "INPUT",
+    "type": "",
+    "value": "12",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "INPUT",
+    "type": "",
+    "value": "2022",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "INPUT",
+    "type": "",
+    "value": "3",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "INPUT",
+    "type": "",
+    "value": "2026",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "Designed standard operating procedures for maintenance, property management, and housekeeping departments. Performed pro",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mm9kgt"
+   },
+   "f25": {
+    "id": "f25",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hyfx7x"
+   },
+   "f26": {
+    "id": "f26",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-ezq5wd"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-l7s794\"><span class=\"css-znqtt5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contain"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is 12/2022 12 / 2022",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is 3/2026 03 / 2026",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add Another",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Work Experience Work Experience 1 Job Title* Company* Location I currently work here From* current value is 12/2022 12 / 2022 To* current value is 3/2026 03 / 2",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1a4r1md\" data-aa-add=\"sec0\">Add Another</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Education Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1a4r1md\" data-aa-add=\"sec1\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Languages Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1a4r1md\" data-aa-add=\"sec2\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select files",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "or Select files",
+    "html": "<button type=\"button\" data-automation-id=\"select-files\" id=\"resumeAttachments--attachments\" class=\"css-1iz0pzl\"><span class=\"css-pplshs\">Select files</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete brian_alejandro_delgado_ortega_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "brian_alejandro_delgado_ortega_resume.pdf successfully uploaded brian_alejandro_delgado_ortega_resume.pdf 41.53 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete brian_alejandro_delgado_ortega_resume.pdf\" title=\"Delete\" class=\"css-cuugay\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete briandelgado_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf successfully uploaded briandelgado_resume.pdf 63.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete briandelgado_resume.pdf\" title=\"Delete\" class=\"css-cuugay\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height=\"14\" x=\"6\" y=\"7\" "
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-3ismh6\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-17ttq0g\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "url": "https://greyco.wd108.myworkdayjobs.com/gti/job/New-York-NY/Planning-and-Real-Estate-Analyst_JR0000139/apply",
+  "fields": [
+   {
+    "id": "f28",
+    "required": true,
+    "label": "What would be the base salary you would accept for this role?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640000\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640000",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f29",
+    "required": true,
+    "label": "What are your bonus expectations?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640001",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f30",
+    "required": true,
+    "label": "Account for any lapse of time not covered in your employment or education record?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100005\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100005",
+    "has_value": false,
+    "kind": "textarea"
+   },
+   {
+    "id": "f31",
+    "kind": "combobox",
+    "label": "Are you at least 18 years old?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee670280a90001\"]",
+    "key": "formField-c4c5dc3554881001ccee670280a90001",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f32",
+    "kind": "combobox",
+    "label": "Are you available to work overtime if needed?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640002\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640002",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f33",
+    "kind": "combobox",
+    "label": "Do you have in effect any agreement or obligation in a company policy or employee manual to which you are currently bound with any prior or existing employer which includes any restrictions on your ability to compete or to solicit customers?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68363a9b0002\"]",
+    "key": "formField-c4c5dc3554881001ccee68363a9b0002",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f34",
+    "kind": "combobox",
+    "label": "Are you able to work for any employer in the United States?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340001\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340001",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f35",
+    "kind": "combobox",
+    "label": "Do you now, or will you in the future, require sponsorship?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340004\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340004",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f36",
+    "kind": "combobox",
+    "label": "Have you ever been terminated, asked to resign, or left a job without notice?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70000",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f37",
+    "kind": "combobox",
+    "label": "Have you ever been de-barred, suspended, or subject to limited denial of participation by HUD?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70004\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70004",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f38",
+    "kind": "combobox",
+    "label": "Have any business or professional license ever held by you ever been revoked, suspended, surrendered, subject to disciplinary proceedings, or in any way restricted by probation or agreement by ANY licensing authority in ANY state?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420000\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420000",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f39",
+    "kind": "combobox",
+    "label": "Have you ever had any suspension, debarment or exclusion from participation in, or any sanction imposed by, any Federal or State program in any state, or any debarment from participation in any Federal Executive Branch procurement or non-procurement program or any prohibition from supplying services to Federal program beneficiaries?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420004\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420004",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f40",
+    "kind": "combobox",
+    "label": "Are you the subject of a Freddie Mac No New Business Letter that is still in effect, or have you received any similar notification from any other lender or secondary market mortgage participant?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100001\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100001",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f41",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with a competitor or potential competitor of Greystone? Financial interests include ownership interests, partnerships, investments, etc. Affiliations include serving as an officer, director, board member, committee member, or employee.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100006\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100006",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f42",
+    "kind": "combobox",
+    "label": "Do you have financial interests or affiliations with a service provider or potential service provider to Greystone? Service providers include suppliers and vendors.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6bd15aac0003\"]",
+    "key": "formField-c4c5dc3554881001ccee6bd15aac0003",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f43",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with any client or potential client of Greystone? Clients include borrowers, sponsors, principals, and properties.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6c6b51820003\"]",
+    "key": "formField-c4c5dc3554881001ccee6c6b51820003",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f44",
+    "kind": "combobox",
+    "label": "Do you have an immediate family member or close friend who is an employee, officer, director, or partner of any client, competitor, potential competitor, service provider or potential service provider?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d0596140003\"]",
+    "key": "formField-c4c5dc3554881001ccee6d0596140003",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f45",
+    "kind": "combobox",
+    "label": "Do you have any existing business arrangements with Greystone or an affiliate of Greystone, e.g. participating in a joint venture, partnership, or other arrangement?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d9f4fc70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6d9f4fc70000",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   }
+  ],
+  "answers": {
+   "f31": "Yes",
+   "f32": "Yes",
+   "f33": "No",
+   "f34": "Yes",
+   "f35": "No",
+   "f36": "No",
+   "f37": "No",
+   "f38": "No",
+   "f39": "No",
+   "f40": "No",
+   "f41": "No",
+   "f42": "No",
+   "f43": "No",
+   "f44": "No",
+   "f45": "No",
+   "f28": "75000",
+   "f29": "N/A",
+   "f30": "I have no gaps in my employment or education record. From May\u202f2017 through May\u202f2025 I have been continuously engaged in work or study, with no periods of unemployment or academic interruption."
+  },
+  "readback": {
+   "f31": {
+    "id": "f31",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b9d3394a0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f28": {
+    "id": "f28",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "75000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f29": {
+    "id": "f29",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f32": {
+    "id": "f32",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ab688a210000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f33": {
+    "id": "f33",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a734379d0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f34": {
+    "id": "f34",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3bb06aea40001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f35": {
+    "id": "f35",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ac9c03140002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f36": {
+    "id": "f36",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a99b545b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f37": {
+    "id": "f37",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b59ef6660001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f38": {
+    "id": "f38",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3c06ecbb50001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f39": {
+    "id": "f39",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b805fdc70001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f40": {
+    "id": "f40",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3be078af10001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f30": {
+    "id": "f30",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "I have no gaps in my employment or education record. From May\u202f2017 through May\u202f2025 I have been continuously engaged in ",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mm9kgt"
+   },
+   "f41": {
+    "id": "f41",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b6d2815b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f42": {
+    "id": "f42",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a566df3c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f43": {
+    "id": "f43",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b3d180690000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f44": {
+    "id": "f44",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b16a8d9f0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f45": {
+    "id": "f45",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b0370f710001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f29",
+    "html": "<div data-automation-id=\"formField-c4c5dc3554881001ccee679c8c640001\" data-fkit-id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" class=\"css-gvoll6\"><fieldset class=\"css-1s9yhc\"><legend><div id=\"rich-label552\" class=\"css-f6y8ld\"><div data-automation-id=\"richText\" class=\"css-182gnn4\"><p><b>What are your bonus expectations?<abbr title=\"required\" class=\"requiredAsterisk\">*</abbr></b></p></div></div></legend><div class=\"css-15rz5ap\"><div><input type=\"text\" id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" aria-required=\"true\" class=\"css-1hk1cnb\" value=\"\" data-aa=\"f29\"></div><div class=\"css-0\"></div></div></fieldset></div>"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-l7s794\"><span class=\"css-znqtt5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contain"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-3ismh6\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-17ttq0g\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 4,
+  "url": "https://greyco.wd108.myworkdayjobs.com/gti/job/New-York-NY/Planning-and-Real-Estate-Analyst_JR0000139/apply",
+  "fields": [
+   {
+    "id": "f28",
+    "required": true,
+    "label": "What would be the base salary you would accept for this role?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640000\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640000",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f29",
+    "required": true,
+    "label": "What are your bonus expectations?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640001",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f30",
+    "required": true,
+    "label": "Account for any lapse of time not covered in your employment or education record?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100005\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100005",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f31",
+    "kind": "combobox",
+    "label": "Are you at least 18 years old?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee670280a90001\"]",
+    "key": "formField-c4c5dc3554881001ccee670280a90001",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f32",
+    "kind": "combobox",
+    "label": "Are you available to work overtime if needed?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640002\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640002",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f33",
+    "kind": "combobox",
+    "label": "Do you have in effect any agreement or obligation in a company policy or employee manual to which you are currently bound with any prior or existing employer which includes any restrictions on your ability to compete or to solicit customers?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68363a9b0002\"]",
+    "key": "formField-c4c5dc3554881001ccee68363a9b0002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f34",
+    "kind": "combobox",
+    "label": "Are you able to work for any employer in the United States?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340001\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340001",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f35",
+    "kind": "combobox",
+    "label": "Do you now, or will you in the future, require sponsorship?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340004\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f36",
+    "kind": "combobox",
+    "label": "Have you ever been terminated, asked to resign, or left a job without notice?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f37",
+    "kind": "combobox",
+    "label": "Have you ever been de-barred, suspended, or subject to limited denial of participation by HUD?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70004\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f38",
+    "kind": "combobox",
+    "label": "Have any business or professional license ever held by you ever been revoked, suspended, surrendered, subject to disciplinary proceedings, or in any way restricted by probation or agreement by ANY licensing authority in ANY state?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420000\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f39",
+    "kind": "combobox",
+    "label": "Have you ever had any suspension, debarment or exclusion from participation in, or any sanction imposed by, any Federal or State program in any state, or any debarment from participation in any Federal Executive Branch procurement or non-procurement program or any prohibition from supplying services to Federal program beneficiaries?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420004\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f40",
+    "kind": "combobox",
+    "label": "Are you the subject of a Freddie Mac No New Business Letter that is still in effect, or have you received any similar notification from any other lender or secondary market mortgage participant?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100001\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100001",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f41",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with a competitor or potential competitor of Greystone? Financial interests include ownership interests, partnerships, investments, etc. Affiliations include serving as an officer, director, board member, committee member, or employee.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100006\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100006",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f42",
+    "kind": "combobox",
+    "label": "Do you have financial interests or affiliations with a service provider or potential service provider to Greystone? Service providers include suppliers and vendors.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6bd15aac0003\"]",
+    "key": "formField-c4c5dc3554881001ccee6bd15aac0003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f43",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with any client or potential client of Greystone? Clients include borrowers, sponsors, principals, and properties.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6c6b51820003\"]",
+    "key": "formField-c4c5dc3554881001ccee6c6b51820003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f44",
+    "kind": "combobox",
+    "label": "Do you have an immediate family member or close friend who is an employee, officer, director, or partner of any client, competitor, potential competitor, service provider or potential service provider?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d0596140003\"]",
+    "key": "formField-c4c5dc3554881001ccee6d0596140003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f45",
+    "kind": "combobox",
+    "label": "Do you have any existing business arrangements with Greystone or an affiliate of Greystone, e.g. participating in a joint venture, partnership, or other arrangement?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d9f4fc70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6d9f4fc70000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f29": "N/A"
+  },
+  "readback": {
+   "f31": {
+    "id": "f31",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b9d3394a0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f28": {
+    "id": "f28",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "75000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f29": {
+    "id": "f29",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f32": {
+    "id": "f32",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ab688a210000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f33": {
+    "id": "f33",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a734379d0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f34": {
+    "id": "f34",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3bb06aea40001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f35": {
+    "id": "f35",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ac9c03140002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f36": {
+    "id": "f36",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a99b545b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f37": {
+    "id": "f37",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b59ef6660001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f38": {
+    "id": "f38",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3c06ecbb50001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f39": {
+    "id": "f39",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b805fdc70001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f40": {
+    "id": "f40",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3be078af10001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f30": {
+    "id": "f30",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "I have no gaps in my employment or education record. From May\u202f2017 through May\u202f2025 I have been continuously engaged in ",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mm9kgt"
+   },
+   "f41": {
+    "id": "f41",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b6d2815b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f42": {
+    "id": "f42",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a566df3c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f43": {
+    "id": "f43",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b3d180690000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f44": {
+    "id": "f44",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b16a8d9f0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f45": {
+    "id": "f45",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b0370f710001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f29",
+    "html": "<div data-automation-id=\"formField-c4c5dc3554881001ccee679c8c640001\" data-fkit-id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" class=\"css-gvoll6\"><fieldset class=\"css-1s9yhc\"><legend><div id=\"rich-label639\" class=\"css-f6y8ld\"><div data-automation-id=\"richText\" class=\"css-182gnn4\"><p><b>What are your bonus expectations?<abbr title=\"required\" class=\"requiredAsterisk\">*</abbr></b></p></div></div></legend><div class=\"css-15rz5ap\"><div><input type=\"text\" id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" aria-required=\"true\" class=\"css-1hk1cnb\" value=\"\" data-aa=\"f29\" style=\"\"></div><div class=\"css-0\"></div></div></fieldset></div>"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-l7s794\"><span class=\"css-znqtt5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contain"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-3ismh6\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-17ttq0g\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "url": "https://greyco.wd108.myworkdayjobs.com/gti/job/New-York-NY/Planning-and-Real-Estate-Analyst_JR0000139/apply",
+  "fields": [
+   {
+    "id": "f28",
+    "required": true,
+    "label": "What would be the base salary you would accept for this role?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640000\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640000",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f29",
+    "required": true,
+    "label": "What are your bonus expectations?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640001",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f30",
+    "required": true,
+    "label": "Account for any lapse of time not covered in your employment or education record?*",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100005\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100005",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f31",
+    "kind": "combobox",
+    "label": "Are you at least 18 years old?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee670280a90001\"]",
+    "key": "formField-c4c5dc3554881001ccee670280a90001",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f32",
+    "kind": "combobox",
+    "label": "Are you available to work overtime if needed?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640002\"]",
+    "key": "formField-c4c5dc3554881001ccee679c8c640002",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f33",
+    "kind": "combobox",
+    "label": "Do you have in effect any agreement or obligation in a company policy or employee manual to which you are currently bound with any prior or existing employer which includes any restrictions on your ability to compete or to solicit customers?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68363a9b0002\"]",
+    "key": "formField-c4c5dc3554881001ccee68363a9b0002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f34",
+    "kind": "combobox",
+    "label": "Are you able to work for any employer in the United States?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340001\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340001",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f35",
+    "kind": "combobox",
+    "label": "Do you now, or will you in the future, require sponsorship?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee68d006340004\"]",
+    "key": "formField-c4c5dc3554881001ccee68d006340004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f36",
+    "kind": "combobox",
+    "label": "Have you ever been terminated, asked to resign, or left a job without notice?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f37",
+    "kind": "combobox",
+    "label": "Have you ever been de-barred, suspended, or subject to limited denial of participation by HUD?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6969e9c70004\"]",
+    "key": "formField-c4c5dc3554881001ccee6969e9c70004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f38",
+    "kind": "combobox",
+    "label": "Have any business or professional license ever held by you ever been revoked, suspended, surrendered, subject to disciplinary proceedings, or in any way restricted by probation or agreement by ANY licensing authority in ANY state?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420000\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f39",
+    "kind": "combobox",
+    "label": "Have you ever had any suspension, debarment or exclusion from participation in, or any sanction imposed by, any Federal or State program in any state, or any debarment from participation in any Federal Executive Branch procurement or non-procurement program or any prohibition from supplying services to Federal program beneficiaries?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6a9d58420004\"]",
+    "key": "formField-c4c5dc3554881001ccee6a9d58420004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f40",
+    "kind": "combobox",
+    "label": "Are you the subject of a Freddie Mac No New Business Letter that is still in effect, or have you received any similar notification from any other lender or secondary market mortgage participant?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100001\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100001",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f41",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with a competitor or potential competitor of Greystone? Financial interests include ownership interests, partnerships, investments, etc. Affiliations include serving as an officer, director, board member, committee member, or employee.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6b371b100006\"]",
+    "key": "formField-c4c5dc3554881001ccee6b371b100006",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f42",
+    "kind": "combobox",
+    "label": "Do you have financial interests or affiliations with a service provider or potential service provider to Greystone? Service providers include suppliers and vendors.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6bd15aac0003\"]",
+    "key": "formField-c4c5dc3554881001ccee6bd15aac0003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f43",
+    "kind": "combobox",
+    "label": "Do you have a financial interest or affiliation with any client or potential client of Greystone? Clients include borrowers, sponsors, principals, and properties.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6c6b51820003\"]",
+    "key": "formField-c4c5dc3554881001ccee6c6b51820003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f44",
+    "kind": "combobox",
+    "label": "Do you have an immediate family member or close friend who is an employee, officer, director, or partner of any client, competitor, potential competitor, service provider or potential service provider?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d0596140003\"]",
+    "key": "formField-c4c5dc3554881001ccee6d0596140003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f45",
+    "kind": "combobox",
+    "label": "Do you have any existing business arrangements with Greystone or an affiliate of Greystone, e.g. participating in a joint venture, partnership, or other arrangement?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--c4c5dc3554881001ccee6d9f4fc70000\"]",
+    "key": "formField-c4c5dc3554881001ccee6d9f4fc70000",
+    "button": true,
+    "cur": "No",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f29": "N/A"
+  },
+  "readback": {
+   "f31": {
+    "id": "f31",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b9d3394a0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f28": {
+    "id": "f28",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "75000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f29": {
+    "id": "f29",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hk1cnb"
+   },
+   "f32": {
+    "id": "f32",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ab688a210000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f33": {
+    "id": "f33",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a734379d0002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f34": {
+    "id": "f34",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3bb06aea40001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-1pa9pr8"
+   },
+   "f35": {
+    "id": "f35",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3ac9c03140002",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f36": {
+    "id": "f36",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a99b545b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f37": {
+    "id": "f37",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b59ef6660001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f38": {
+    "id": "f38",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3c06ecbb50001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f39": {
+    "id": "f39",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b805fdc70001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f40": {
+    "id": "f40",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3be078af10001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f30": {
+    "id": "f30",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "I have no gaps in my employment or education record. From May\u202f2017 through May\u202f2025 I have been continuously engaged in ",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mm9kgt"
+   },
+   "f41": {
+    "id": "f41",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b6d2815b0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f42": {
+    "id": "f42",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3a566df3c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f43": {
+    "id": "f43",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b3d180690000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f44": {
+    "id": "f44",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b16a8d9f0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   },
+   "f45": {
+    "id": "f45",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "c4c5dc3554881001cce3b0370f710001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-1pa9pr8"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f29",
+    "html": "<div data-automation-id=\"formField-c4c5dc3554881001ccee679c8c640001\" data-fkit-id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" class=\"css-gvoll6\"><fieldset class=\"css-1s9yhc\"><legend><div id=\"rich-label709\" class=\"css-f6y8ld\"><div data-automation-id=\"richText\" class=\"css-182gnn4\"><p><b>What are your bonus expectations?<abbr title=\"required\" class=\"requiredAsterisk\">*</abbr></b></p></div></div></legend><div class=\"css-15rz5ap\"><div><input type=\"text\" id=\"primaryQuestionnaire--c4c5dc3554881001ccee679c8c640001\" aria-required=\"true\" class=\"css-1hk1cnb\" value=\"\" data-aa=\"f29\" style=\"\"></div><div class=\"css-0\"></div></div></fieldset></div>"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#3C4D4F\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-1m1ulq8\"><span class=\"css-1dxdkc8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#3C4D4F\" class=\"css-17f2pnu\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-l7s794\"><span class=\"css-znqtt5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contain"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-3ismh6\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-17ttq0g\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ }
+]

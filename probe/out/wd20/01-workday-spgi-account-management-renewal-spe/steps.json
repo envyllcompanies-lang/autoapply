@@ -1,0 +1,2001 @@
+[
+ {
+  "step": 1,
+  "url": "https://spgi.wd5.myworkdayjobs.com/SPGI_Careers/job/New-York-NY/Account-Management-Renewal-Specialist_332239-1/apply",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "How Did You Hear About Us?*",
+    "maxlength": null,
+    "sel": "[id=\"source--source\"]",
+    "key": "formField-source",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "LinkedIn Job Board"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "First Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--firstName\"]",
+    "key": "formField-legalName--firstName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Last Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--lastName\"]",
+    "key": "formField-legalName--lastName",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f3",
+    "required": true,
+    "label": "Address Line 1*",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine1\"]",
+    "key": "formField-addressLine1",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f4",
+    "required": true,
+    "label": "City*",
+    "maxlength": null,
+    "sel": "[id=\"address--city\"]",
+    "key": "formField-city",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "Postal Code*",
+    "maxlength": null,
+    "sel": "[id=\"address--postalCode\"]",
+    "key": "formField-postalCode",
+    "has_value": true,
+    "kind": "text"
+   },
+   {
+    "id": "g_f6",
+    "kind": "radio",
+    "label": "Have you previously worked for S&P Global or any of it's affiliates? Current Employees, please exit this site and apply via the internal Workday careers worklet.*",
+    "required": true,
+    "key": "formField-candidateIsPreviousWorker",
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f6",
+     "f7"
+    ],
+    "option_sels": [
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"true\"]",
+     "input[type=\"radio\"][name=\"candidateIsPreviousWorker\"][value=\"false\"]"
+    ],
+    "checked": [
+     "No"
+    ]
+   },
+   {
+    "id": "f8",
+    "kind": "checkbox_single",
+    "label": "I have a preferred name",
+    "question": "I have a preferred name",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"preferredCheck\"]",
+    "key": "formField-preferredCheck",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f9",
+    "kind": "combobox",
+    "label": "Country*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"country--country\"]",
+    "key": "formField-country",
+    "button": true,
+    "cur": "United States of America",
+    "options": []
+   },
+   {
+    "id": "f10",
+    "kind": "combobox",
+    "label": "State",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"address--countryRegion\"]",
+    "key": "formField-countryRegion",
+    "button": true,
+    "cur": "Colorado",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f9": "United States",
+   "f10": "Colorado",
+   "f0": "Job board",
+   "f1": "Brian",
+   "f2": "Delgado-Ortega",
+   "f3": "63 Cherry Ct",
+   "f4": "New Castle",
+   "f5": "81647",
+   "g_f6": "No"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "true",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-pl53xa"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "false",
+    "checked": true,
+    "pressed": null,
+    "achecked": "true",
+    "text": "",
+    "cls": "css-5lzo61"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "bc33aa3152ec42d4995f4791a106ed09",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "United States of America",
+    "cls": "css-3fboo9"
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1d46vxi"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1d46vxi"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-1rmmx2s"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "63 Cherry Ct",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1d46vxi"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "New Castle",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1d46vxi"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "a83d6eabae3b49718c4ce09eeb66fd0b",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Colorado",
+    "cls": "css-3fboo9"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "81647",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1d46vxi"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f0",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#0875e1\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"c438d604-83b7-4ab8-b126-072e156182a3\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"053ee817-fb01-4a7c-8a62-4baa1e2396c4\" id=\"source--source\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f0\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"c438d604-83b7-4ab8-b126-072e156182a3\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, LinkedIn Job Board</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"053ee817-fb01-4a7c-8a62-4baa1e2396c4\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mj2vuk css-ldirr6 css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-24eaafb24ed8015a0b864a08826a370c\" tabindex=\"-1\" aria-label=\"LinkedIn Job Board, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-j2vud: #0875e1;\"><div class=\"css-j2vup css-j2vut mj2vut\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-j2vuo: var(--cnvs-brand-neutral-dark); --iconHoverColor-j2vuo: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-j2vuv css-j2vuz mj2vuz\" data-automation-id=\"promptOption\" data-automation-label=\"LinkedIn Job Board\">LinkedIn Job Board</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" "
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-ju8d7j\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#494949\" class=\"css-ju8d7j\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#494949\" class=\"css-ju8d7j\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "LinkedIn Job Board",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "LinkedIn Job Board",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-053ee817-fb01-4a7c-8a62-4baa1e2396c4\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"053ee817-fb01-4a7c-8a62-4baa1e2396c4\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "LinkedIn Job Board",
+    "aria": "LinkedIn Job Board, press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "LinkedIn Job Board",
+    "html": "<div class=\"mj2vuk css-ldirr6 css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-24eaafb24ed8015a0b864a08826a370c\" tabindex=\"-1\" aria-label=\"LinkedIn Job Board, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-j2vud: #0875e1;\"><div class=\"css-j2vup css-j2vut mj2vut\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select One",
+    "aria": "Phone Device Type Select One Required",
+    "dataui": null,
+    "name": "phoneType",
+    "context": "Phone Device Type* Select One",
+    "html": "<button aria-haspopup=\"listbox\" type=\"button\" value=\"\" aria-label=\"Phone Device Type Select One Required\" name=\"phoneType\" id=\"phoneNumber--phoneType\" class=\"css-3fboo9\">Select One</button>"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "1 item selected, United States of America (+1)",
+    "html": "<input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"a69bf3c3-85ec-4d07-bd9c-f6735177f518\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-320dae3e-953c-4c93-b847-cd5a08c54467\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"320dae3e-953c-4c93-b847-cd5a08c54467\" id=\"phoneNumber--co"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-320dae3e-953c-4c93-b847-cd5a08c54467\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"320dae3e-953c-4c93-b847-cd5a08c54467\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "United States of America (+1), press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<div class=\"mj2vuk css-ldirr6 css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-j2vud: #0875e1;\"><div class=\"css-j2vup css-j2vut mj2vut\" data-automation-id=\"DELETE_charm\" role=\"presentation\" "
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "phoneNumber",
+    "context": "Phone Device Type* Select One Country Phone Code* 1 item selected, United States of America (+1) United States of America (+1) Phone Number* Phone Extension",
+    "html": "<input type=\"text\" id=\"phoneNumber--phoneNumber\" name=\"phoneNumber\" aria-required=\"true\" class=\"css-1d46vxi\" value=\"(970) 366-8832\">"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "extension",
+    "context": "Phone Extension",
+    "html": "<input type=\"text\" id=\"phoneNumber--extension\" name=\"extension\" aria-required=\"false\" class=\"css-1d46vxi\" value=\"\">"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-3kxmln\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "url": "https://spgi.wd5.myworkdayjobs.com/SPGI_Careers/job/New-York-NY/Account-Management-Renewal-Specialist_332239-1/apply",
+  "fields": [
+   {
+    "id": "f11",
+    "required": true,
+    "label": "Resume/CV *",
+    "maxlength": null,
+    "sel": "input[data-automation-id=\"file-upload-input-ref\"]",
+    "key": "formField-",
+    "has_value": false,
+    "kind": "file",
+    "accept": "",
+    "has_file": [
+     "brian_alejandro_delgado_ortega_resume.pdf"
+    ],
+    "hint": "file-upload-input-ref",
+    "elid": ""
+   }
+  ],
+  "answers": {
+   "f11": "RESUME"
+  },
+  "readback": {
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hyfx7x"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-ju8d7j\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#494949\" class=\"css-ju8d7j\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#494949\" class=\"css-ju8d7j\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Work Experience Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-yih7c7\" data-aa-add=\"sec0\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Education Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-yih7c7\" data-aa-add=\"sec1\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Languages Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-yih7c7\" data-aa-add=\"sec2\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select files",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "or Select files",
+    "html": "<button type=\"button\" data-automation-id=\"select-files\" id=\"resumeAttachments--attachments\" class=\"css-1tmq4at\"><span class=\"css-pplshs\">Select files</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete brian_alejandro_delgado_ortega_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "brian_alejandro_delgado_ortega_resume.pdf successfully uploaded brian_alejandro_delgado_ortega_resume.pdf 41.46 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete brian_alejandro_delgado_ortega_resume.pdf\" title=\"Delete\" class=\"css-6rq0ig\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete briandelgado_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf successfully uploaded briandelgado_resume.pdf 63.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete briandelgado_resume.pdf\" title=\"Delete\" class=\"css-6rq0ig\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height=\"14\" x=\"6\" y=\"7\" "
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Websites Add any relevant websites. Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-yih7c7\" data-aa-add=\"sec3\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-sxsyyg\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-3kxmln\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 3,
+  "url": "https://spgi.wd5.myworkdayjobs.com/SPGI_Careers/job/New-York-NY/Account-Management-Renewal-Specialist_332239-1/apply",
+  "fields": [
+   {
+    "id": "f12",
+    "required": false,
+    "label": "What is your desired annual gross base salary in your local currency?",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10002\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10002",
+    "has_value": false,
+    "kind": "textarea"
+   },
+   {
+    "id": "f13",
+    "kind": "wddate",
+    "label": "Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screening tool, to help evaluate your application. What HiredScore Does: HiredScore compares your resume and application against job posting requirements and generates a grade reflecting how closely your background matches the role. This grade is one factor among many that recruiters consider. It is not the deciding factor, is not a final hiring decision, and does not automatically reject or advance any candidate. A human recruiter is always involved. HiredScore evaluates only job-related information (skills, experience, qualifications) and does not consider protected characteristics. Your Consent: By consenting below, you agree to allow HiredScore to evaluate your application. Consent is voluntary. If you do not consent, your application will be reviewed using the same job-related criteria applied to all candidates. Declining will not disadvantage you. Withdrawal & Accommodations: You may withdraw consent or request an alternative selection process at any time by contacting privacy@spglobal.com. For disability accommodations, Internal candidates can ",
+    "required": false,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00001-dateSectionMonth-input\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00001",
+    "maxlength": null,
+    "hasDay": true
+   },
+   {
+    "id": "f16",
+    "kind": "combobox",
+    "label": "Are you legally authorized to work in the country to which you are applying?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0000\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0000",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f17",
+    "kind": "combobox",
+    "label": "Do you, or will you in the future, require sponsorship by S&P Global for an employment visa or immigration related benefit? For purposes of this question, \"employment visa or immigration related benefit\" includes (but is not limited to) H-1B petitions, sponsorship for OPT extension purposes, TN applications, E-3 visas, and I-140 or Adjustment of Status portability.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0003\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0003",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f18",
+    "kind": "combobox",
+    "label": "Are you willing to relocate for the position?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390002\"]",
+    "key": "formField-e29ea976174b1001c987a9144c390002",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No",
+     "Not applicable"
+    ]
+   },
+   {
+    "id": "f19",
+    "kind": "combobox",
+    "label": "What is your notice period?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10003\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10003",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Less than 30 days",
+     "30 to 59 days",
+     "60 to 89 days",
+     "90 or more days"
+    ]
+   },
+   {
+    "id": "f20",
+    "kind": "combobox",
+    "label": "What types of schedules you are willing to work?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0000\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0000",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Onsite/In-Office",
+     "Hybrid",
+     "Fully Remote"
+    ]
+   },
+   {
+    "id": "f21",
+    "kind": "combobox",
+    "label": "Are any of your personal relations or blood relatives, currently employed by S&P Global? This is not deciding factor*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0004\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0004",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f22",
+    "kind": "combobox",
+    "label": "As part of the recruitment process, you may be invited to complete one or more timed online assessments. We are committed to providing an accessible and inclusive recruitment process. Do you require any accommodations to participate in these assessments, including additional time?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aae236dd0002\"]",
+    "key": "formField-e29ea976174b1001c987aae236dd0002",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "No",
+     "Yes"
+    ]
+   },
+   {
+    "id": "f23",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global using HiredScore to evaluate your application as described above?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00002\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00002",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "I consent to S&P Global using HiredScore to evaluate my application as described above.",
+     "I DO NOT consent to S&P Global using HiredScore to evaluate my application as described above."
+    ]
+   },
+   {
+    "id": "f24",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global retaining your application to consider you for future job opportunities, using HiredScore?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00005\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00005",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "I consent to S&P retaining my application to consider me for future job opportunities, using HiredScore.",
+     "I DO NOT consent to S&P retaining my application to consider me for future job opportunities, using HiredScore."
+    ]
+   }
+  ],
+  "answers": {
+   "f16": "Yes",
+   "f17": "No",
+   "f18": "Yes",
+   "f19": "Less than 30 days",
+   "f20": "Hybrid",
+   "f21": "No",
+   "f22": "No",
+   "f23": "I consent to S&P Global using HiredScore to evaluate my application as described above.",
+   "f24": "I consent to S&P retaining my application to consider me for future job opportunities, using HiredScore.",
+   "f12": "$70,000 to $80,000"
+  },
+  "readback": {
+   "f16": {
+    "id": "f16",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "622970c09f0e1000a46c23eb0ee40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f17": {
+    "id": "f17",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193d0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ac290b7180c910009cb1a3241bdc0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "$70,000 to $80,000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-6p1b5t"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "75d21294063f10020292841e29e40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Less than 30 days",
+    "cls": "css-3fboo9"
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "2d581260991c100202936f0906530001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Hybrid",
+    "cls": "css-3fboo9"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193f0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "646b821ddfbe1001c9d0072bea350000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0c9584d7888c1001c9954ad6d1220000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P Global using HiredScore",
+    "cls": "css-3fboo9"
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0fec05b197a61001ca0c29de888c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P retaining my applicatio",
+    "cls": "css-3fboo9"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-ju8d7j\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#494949\" class=\"css-ju8d7j\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#494949\" class=\"css-ju8d7j\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select One",
+    "aria": " Select One",
+    "dataui": null,
+    "name": "e29ea976174b1001c987a9144c390006",
+    "context": "If yes, do you require relocation assistance? Select One",
+    "html": "<button aria-haspopup=\"listbox\" type=\"button\" value=\"\" aria-label=\" Select One\" name=\"e29ea976174b1001c987a9144c390006\" id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390006\" class=\"css-3fboo9\">Select One</button>"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is MM/DD/YYYY MM / DD / YYYY",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-sxsyyg\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-3kxmln\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 4,
+  "url": "https://spgi.wd5.myworkdayjobs.com/SPGI_Careers/job/New-York-NY/Account-Management-Renewal-Specialist_332239-1/apply",
+  "fields": [
+   {
+    "id": "f12",
+    "required": false,
+    "label": "What is your desired annual gross base salary in your local currency?",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10002\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10002",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f13",
+    "kind": "wddate",
+    "label": "Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screening tool, to help evaluate your application. What HiredScore Does: HiredScore compares your resume and application against job posting requirements and generates a grade reflecting how closely your background matches the role. This grade is one factor among many that recruiters consider. It is not the deciding factor, is not a final hiring decision, and does not automatically reject or advance any candidate. A human recruiter is always involved. HiredScore evaluates only job-related information (skills, experience, qualifications) and does not consider protected characteristics. Your Consent: By consenting below, you agree to allow HiredScore to evaluate your application. Consent is voluntary. If you do not consent, your application will be reviewed using the same job-related criteria applied to all candidates. Declining will not disadvantage you. Withdrawal & Accommodations: You may withdraw consent or request an alternative selection process at any time by contacting privacy@spglobal.com. For disability accommodations, Internal candidates can ",
+    "required": false,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00001-dateSectionMonth-input\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00001",
+    "maxlength": null,
+    "hasDay": true
+   },
+   {
+    "id": "f16",
+    "kind": "combobox",
+    "label": "Are you legally authorized to work in the country to which you are applying?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0000\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0000",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f17",
+    "kind": "combobox",
+    "label": "Do you, or will you in the future, require sponsorship by S&P Global for an employment visa or immigration related benefit? For purposes of this question, \"employment visa or immigration related benefit\" includes (but is not limited to) H-1B petitions, sponsorship for OPT extension purposes, TN applications, E-3 visas, and I-140 or Adjustment of Status portability.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0003\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f18",
+    "kind": "combobox",
+    "label": "Are you willing to relocate for the position?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390002\"]",
+    "key": "formField-e29ea976174b1001c987a9144c390002",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f25",
+    "kind": "combobox",
+    "label": "If yes, do you require relocation assistance?",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390006\"]",
+    "key": "formField-e29ea976174b1001c987a9144c390006",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Yes",
+     "No"
+    ]
+   },
+   {
+    "id": "f19",
+    "kind": "combobox",
+    "label": "What is your notice period?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10003\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10003",
+    "button": true,
+    "cur": "Less than 30 days",
+    "options": []
+   },
+   {
+    "id": "f20",
+    "kind": "combobox",
+    "label": "What types of schedules you are willing to work?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0000\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0000",
+    "button": true,
+    "cur": "Hybrid",
+    "options": []
+   },
+   {
+    "id": "f21",
+    "kind": "combobox",
+    "label": "Are any of your personal relations or blood relatives, currently employed by S&P Global? This is not deciding factor*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0004\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f22",
+    "kind": "combobox",
+    "label": "As part of the recruitment process, you may be invited to complete one or more timed online assessments. We are committed to providing an accessible and inclusive recruitment process. Do you require any accommodations to participate in these assessments, including additional time?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aae236dd0002\"]",
+    "key": "formField-e29ea976174b1001c987aae236dd0002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f23",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global using HiredScore to evaluate your application as described above?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00002\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00002",
+    "button": true,
+    "cur": "I consent to S&P Global using HiredScore to evaluate my application as described above.",
+    "options": []
+   },
+   {
+    "id": "f24",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global retaining your application to consider you for future job opportunities, using HiredScore?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00005\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00005",
+    "button": true,
+    "cur": "I consent to S&P retaining my application to consider me for future job opportunities, using HiredScore.",
+    "options": []
+   }
+  ],
+  "answers": {
+   "f25": "Yes"
+  },
+  "readback": {
+   "f16": {
+    "id": "f16",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "622970c09f0e1000a46c23eb0ee40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f17": {
+    "id": "f17",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193d0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ac290b7180c910009cb1a3241bdc0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f25": {
+    "id": "f25",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "d2482b869f9d10009cbfd67bd86a0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "$70,000 to $80,000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-6p1b5t"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "75d21294063f10020292841e29e40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Less than 30 days",
+    "cls": "css-3fboo9"
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "2d581260991c100202936f0906530001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Hybrid",
+    "cls": "css-3fboo9"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193f0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "646b821ddfbe1001c9d0072bea350000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0c9584d7888c1001c9954ad6d1220000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P Global using HiredScore",
+    "cls": "css-3fboo9"
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0fec05b197a61001ca0c29de888c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P retaining my applicatio",
+    "cls": "css-3fboo9"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-ju8d7j\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#494949\" class=\"css-ju8d7j\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#494949\" class=\"css-ju8d7j\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Errors Found",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Errors Found Error-Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screenin",
+    "html": "<button aria-controls=\"m1v214\" aria-expanded=\"true\" class=\"css-1m3mkpx\"><div class=\"css-10bs8u2\"><span class=\"css-1w6unsi\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-exclamation-circle wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><circle cx=\"12\" cy=\"12\" r=\"9\" class=\"wd-icon-background\"></circl"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Error-Candidate Consent: Use of AI-Assisted Screening Tool (",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Error-Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screening tool, to he",
+    "html": "<button aria-describedby=\"hint227\" class=\"css-tgkpvs\"><span class=\"css-0\">Error</span><div aria-hidden=\"true\" class=\"css-1v2gbx6\">-</div>Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore)  S&amp;P Global requests your consent to use HiredScore, an AI-assisted screening tool, to help evaluate your application.    What HiredScore Does:&nbsp;HiredScore compares your resume and applicat"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is MM/DD/YYYY MM / DD / YYYY",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-sxsyyg\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-3kxmln\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ },
+ {
+  "step": 5,
+  "url": "https://spgi.wd5.myworkdayjobs.com/SPGI_Careers/job/New-York-NY/Account-Management-Renewal-Specialist_332239-1/apply",
+  "fields": [
+   {
+    "id": "f12",
+    "required": false,
+    "label": "What is your desired annual gross base salary in your local currency?",
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10002\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10002",
+    "has_value": true,
+    "kind": "textarea"
+   },
+   {
+    "id": "f13",
+    "kind": "wddate",
+    "label": "Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screening tool, to help evaluate your application. What HiredScore Does: HiredScore compares your resume and application against job posting requirements and generates a grade reflecting how closely your background matches the role. This grade is one factor among many that recruiters consider. It is not the deciding factor, is not a final hiring decision, and does not automatically reject or advance any candidate. A human recruiter is always involved. HiredScore evaluates only job-related information (skills, experience, qualifications) and does not consider protected characteristics. Your Consent: By consenting below, you agree to allow HiredScore to evaluate your application. Consent is voluntary. If you do not consent, your application will be reviewed using the same job-related criteria applied to all candidates. Declining will not disadvantage you. Withdrawal & Accommodations: You may withdraw consent or request an alternative selection process at any time by contacting privacy@spglobal.com. For disability accommodations, Internal candidates can ",
+    "required": false,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00001-dateSectionMonth-input\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00001",
+    "maxlength": null,
+    "hasDay": true
+   },
+   {
+    "id": "f16",
+    "kind": "combobox",
+    "label": "Are you legally authorized to work in the country to which you are applying?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0000\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0000",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f17",
+    "kind": "combobox",
+    "label": "Do you, or will you in the future, require sponsorship by S&P Global for an employment visa or immigration related benefit? For purposes of this question, \"employment visa or immigration related benefit\" includes (but is not limited to) H-1B petitions, sponsorship for OPT extension purposes, TN applications, E-3 visas, and I-140 or Adjustment of Status portability.*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a87a5ddd0003\"]",
+    "key": "formField-e29ea976174b1001c987a87a5ddd0003",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f18",
+    "kind": "combobox",
+    "label": "Are you willing to relocate for the position?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390002\"]",
+    "key": "formField-e29ea976174b1001c987a9144c390002",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f25",
+    "kind": "combobox",
+    "label": "If yes, do you require relocation assistance?",
+    "required": false,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9144c390006\"]",
+    "key": "formField-e29ea976174b1001c987a9144c390006",
+    "button": true,
+    "cur": "Yes",
+    "options": []
+   },
+   {
+    "id": "f19",
+    "kind": "combobox",
+    "label": "What is your notice period?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987a9ae57a10003\"]",
+    "key": "formField-e29ea976174b1001c987a9ae57a10003",
+    "button": true,
+    "cur": "Less than 30 days",
+    "options": []
+   },
+   {
+    "id": "f20",
+    "kind": "combobox",
+    "label": "What types of schedules you are willing to work?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0000\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0000",
+    "button": true,
+    "cur": "Hybrid",
+    "options": []
+   },
+   {
+    "id": "f21",
+    "kind": "combobox",
+    "label": "Are any of your personal relations or blood relatives, currently employed by S&P Global? This is not deciding factor*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aa4848fc0004\"]",
+    "key": "formField-e29ea976174b1001c987aa4848fc0004",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f22",
+    "kind": "combobox",
+    "label": "As part of the recruitment process, you may be invited to complete one or more timed online assessments. We are committed to providing an accessible and inclusive recruitment process. Do you require any accommodations to participate in these assessments, including additional time?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987aae236dd0002\"]",
+    "key": "formField-e29ea976174b1001c987aae236dd0002",
+    "button": true,
+    "cur": "No",
+    "options": []
+   },
+   {
+    "id": "f23",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global using HiredScore to evaluate your application as described above?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00002\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00002",
+    "button": true,
+    "cur": "I consent to S&P Global using HiredScore to evaluate my application as described above.",
+    "options": []
+   },
+   {
+    "id": "f24",
+    "kind": "combobox",
+    "label": "Do you consent to S&P Global retaining your application to consider you for future job opportunities, using HiredScore?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"primaryQuestionnaire--e29ea976174b1001c987ab7c32f00005\"]",
+    "key": "formField-e29ea976174b1001c987ab7c32f00005",
+    "button": true,
+    "cur": "I consent to S&P retaining my application to consider me for future job opportunities, using HiredScore.",
+    "options": []
+   }
+  ],
+  "answers": {},
+  "readback": {
+   "f16": {
+    "id": "f16",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "622970c09f0e1000a46c23eb0ee40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f17": {
+    "id": "f17",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193d0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "ac290b7180c910009cb1a3241bdc0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f25": {
+    "id": "f25",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "d2482b869f9d10009cbfd67bd86a0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Yes",
+    "cls": "css-3fboo9"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "$70,000 to $80,000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-6p1b5t"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "75d21294063f10020292841e29e40000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Less than 30 days",
+    "cls": "css-3fboo9"
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "2d581260991c100202936f0906530001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Hybrid",
+    "cls": "css-3fboo9"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "37f95159e146100202927b85193f0001",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "646b821ddfbe1001c9d0072bea350000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "No",
+    "cls": "css-3fboo9"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-72im0m"
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0c9584d7888c1001c9954ad6d1220000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P Global using HiredScore",
+    "cls": "css-3fboo9"
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "0fec05b197a61001ca0c29de888c0000",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "I consent to S&P retaining my applicatio",
+    "cls": "css-3fboo9"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Settings",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"listbox\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"settingsSelectorButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-gear wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m12.838 2.7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "delgado@alumni.usc.edu",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "delgado@alumni.usc.edu",
+    "html": "<button aria-expanded=\"false\" aria-haspopup=\"true\" color=\"#494949\" data-automation-id=\"utilityMenuButton\" id=\"accountSettingsButton\" class=\"css-y4oj1c\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-ju8d7j\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Candidate Home",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Candidate Home\" color=\"#494949\" class=\"css-ju8d7j\">Candidate Home</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Job Alerts",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs Candidate Home Job Alerts",
+    "html": "<button data-automation-id=\"navigationItem-Job Alerts\" color=\"#494949\" class=\"css-ju8d7j\">Job Alerts</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Settings delgado@alumni.usc.edu Search for Jobs Candidate Home Job Alerts",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Errors Found",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Errors Found Error-Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screenin",
+    "html": "<button aria-controls=\"m1v214\" aria-expanded=\"true\" class=\"css-1m3mkpx\"><div class=\"css-10bs8u2\"><span class=\"css-1w6unsi\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-exclamation-circle wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><circle cx=\"12\" cy=\"12\" r=\"9\" class=\"wd-icon-background\"></circl"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Error-Candidate Consent: Use of AI-Assisted Screening Tool (",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Error-Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore) S&P Global requests your consent to use HiredScore, an AI-assisted screening tool, to he",
+    "html": "<button aria-describedby=\"hint263\" class=\"css-tgkpvs\"><span class=\"css-0\">Error</span><div aria-hidden=\"true\" class=\"css-1v2gbx6\">-</div>Candidate Consent: Use of AI-Assisted Screening Tool (HiredScore)  S&amp;P Global requests your consent to use HiredScore, an AI-assisted screening tool, to help evaluate your application.    What HiredScore Does:&nbsp;HiredScore compares your resume and applicat"
+   },
+   {
+    "tag": "DIV",
+    "role": "button",
+    "type": "",
+    "text": "",
+    "aria": "Calendar",
+    "dataui": null,
+    "name": null,
+    "context": "current value is MM/DD/YYYY MM / DD / YYYY",
+    "html": "<div aria-label=\"Calendar\" aria-describedby=\"\" data-automation-id=\"dateIcon\" role=\"button\" tabindex=\"0\" class=\"css-hdh0bo\"><span class=\"css-8qepr6\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-calendar wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M4 5h16v4H4z\" class=\"wd-icon-background\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back Save and Continue",
+    "html": "<button class=\"css-sxsyyg\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Save and Continue",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Save and Continue",
+    "html": "<button class=\"css-3kxmln\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Save and Continue</button>"
+   }
+  ]
+ }
+]
