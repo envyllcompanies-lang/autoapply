@@ -132,7 +132,10 @@ EXTRACT_JS = r"""
   };
   // Paylocity: '(required)' is written after the question, in the block's heading line, not in the box's own label
   const markedRequired = el => { const fg = el.closest('.form-group'); const h = fg && fg.querySelector('p, label');
-                                 return !!(h && !h.contains(el) && /\(required\)/i.test(h.innerText || '')); };
+                                 return !!(h && !h.contains(el) && /\(required\)/i.test(h.innerText || '')) || ashbyRequired(el); };
+  // Ashby: a required question's title carries a '_required_' class (the star is drawn by CSS, not written in the label)
+  const ashbyRequired = el => { const q = el.closest('[data-field-path]'); const t = q && q.querySelector('.ashby-application-form-question-title');
+                                return !!(t && /(^|\s)_required_/.test(t.className || '')); };
   let n = window.__aa || 0; const tag = el => { if (!el.dataset.aa) el.dataset.aa = 'f' + (n++); window.__aa = n; return el.dataset.aa; };
   const fields = [], groups = {};
   const els = root.querySelectorAll('input, textarea, select');
@@ -263,7 +266,7 @@ EXTRACT_JS = r"""
       if (txt.length > 3) yq = txt;
     }
     const ord = bs.map(b => ({ id: tag(b), label: clean(b.innerText) }));
-    fields.push({ id: 'g_' + ord[0].id, kind: 'radio', label: yq, required: /[*\u2731]/.test(yq),
+    fields.push({ id: 'g_' + ord[0].id, kind: 'radio', label: yq, required: /[*\u2731]/.test(yq) || ashbyRequired(bs[0]),
                   options: ord.map(o => o.label), option_ids: ord.map(o => o.id) });
   }
   return fields;
@@ -1574,6 +1577,25 @@ def _clear_overlays(page):
 _CHECKED_JS = "e => !!e.checked || e.getAttribute('aria-checked') === 'true' || e.getAttribute('aria-pressed') === 'true'"
 
 
+def _unset(page, fields: list):
+    """Boxes the site calls empty although they show the answer (Ashby: 'Missing entry for required field: Legal Last
+    Name' with the name on screen): the site's own record lost it. Typed boxes are emptied so the next fill types the
+    answer again, and a ticked choice is clicked once more through its label, so the site hears of it."""
+    for f in fields:
+        try:
+            el = _loc(page, f)
+            if f["kind"] in ("text", "textarea", "email", "tel", "url", "number"):
+                el.fill("", timeout=3000)
+            elif f["kind"] == "radio" and f.get("option_ids"):
+                for oid in f["option_ids"]:
+                    o = _loc(page, f, oid)
+                    if o.evaluate(_CHECKED_JS, timeout=1500) and o.evaluate("e => e.tagName", timeout=1500) == "INPUT":
+                        o.evaluate("""e => { const w = e.id && document.querySelector('label[for="' + CSS.escape(e.id) + '"]');
+                                             (w || e).click(); }""", timeout=1500)
+        except Exception:
+            pass
+
+
 def _choose(page, f: dict, fid: str | None = None):
     """Select a radio / checkbox option the way a person would, and make sure it took: the box itself when it can be seen,
     else what the site draws in its place (its <label>, a role="radio" wrapper), else a scripted click. Workday and
@@ -2386,6 +2408,7 @@ def _apply_generic(page, job, brain, cover_letter: str, files: dict[str, Path], 
                     if named and not (res_fields and re.search(r"resume|r\u00e9sum\u00e9|\bcv\b", str(e), re.I)):
                         # 'Missing entry for required field: Legal Last Name': the box was answered but the page lost it
                         log(f"      the form says {len(named)} answered box(es) are empty: filling them again and submitting once more")
+                        _unset(page, named)     # the page still shows those answers, so filling again alone would change nothing
                         fill(page, named, {f["id"]: plan["answers"][f["id"]] for f in named}, files, log, deadline=limit_at)
                         btn2, kind2 = _find_advance(page)
                         if kind2 != "submit":

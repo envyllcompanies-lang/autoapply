@@ -170,6 +170,10 @@ class DB:
             # describes your situation?' (2026-10-20)
             "a salary box, HiredScore date or sponsorship choice the bot reads now": "status IN ('skipped','failed') AND ("
                 "reason LIKE '%Please do not enter 0%' OR reason LIKE '%HiredScore%' OR reason LIKE '%Which option best describes your situation%')",
+            # Ashby forms sent back with 'Missing entry for required field': required yes/no questions read as optional, and
+            # answers on screen that the site's own record had lost (2026-10-20)
+            "an Ashby form that lost answers or hid required questions": "status='failed' AND reason LIKE '%Missing entry for required field%'"
+                " AND apply_url LIKE '%ashbyhq.com%'",
         }
         found = {}
         for name, where in rules.items():
