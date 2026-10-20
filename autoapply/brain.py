@@ -1088,7 +1088,8 @@ class Brain:
 
         lab = str(f.get("label", "")).lower()
         if kind == "wddate":
-            if re.match(r"\W*(today.s )?date\W*(signed)?\W*\*?\W*$|.*(signature|signed on)", lab):
+            if re.match(r"\W*(today.s )?date\W*(signed)?\W*\*?\W*$|.*(signature|signed on)", lab) or \
+                    re.search(r"enter (today.s|the current|the) date (below )?to (confirm|acknowledge)", lab):
                 return date.today().strftime("%m/%d/%Y")          # the signature date on a self-identification form
             if re.search(r"start|availab|begin|able to work", lab):
                 v = self.facts.get("earliest_start_date_value") or ""
@@ -1180,6 +1181,14 @@ class Brain:
                     return [got] if kind == "checkbox_group" else got     # Workday language rows: the language picked is English
         if kind in ("text", "tel", "number") and re.search(r"(phone )?extension\b|^\W*ext\.?\W*$", low):
             return ""                                 # no extension
+        if has_opts and opts and not re.search(r"sponsor|visa|immigra|authori[sz]", low) and \
+                sum(bool(re.search(r"sponsor", str(o), re.I)) for o in opts) >= 2:
+            # 'Which option best describes your situation?' asked with only the choices naming sponsorship (Ashby: Acorns)
+            want = self._fact(("requires_sponsorship_now_or_future",))
+            if want is not None:
+                got = self._semantic("requires_sponsorship_now_or_future", want, opts, kind, low)
+                if got:
+                    return got
         # 2) facts (Workable draws every free-text question as a textarea: short factual ones get the fact too)
         short_box = kind != "textarea" or (len(low) < 160 and not re.search(
             r"\b(why|describe|explain|tell us|walk us|example|share (a|an|your (experience|approach|story))|how (do|did|would|have|will) you)\b", low))

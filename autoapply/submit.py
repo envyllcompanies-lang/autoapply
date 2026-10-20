@@ -7,7 +7,8 @@ from pathlib import Path
 
 EXTRACT_JS = r"""
 () => {
-  const clean = t => (t || '').replace(/\s+/g, ' ').trim().slice(0, 1200);
+  // a long notice keeps its end too: what it asks for is often its last sentence ('Enter today's date below to confirm ...')
+  const clean = t => { t = (t || '').replace(/\s+/g, ' ').trim(); return t.length > 1200 ? t.slice(0, 700) + ' … ' + t.slice(-480) : t; };
   const visible = el => {
     if (el.type === 'file') return true;             // usually hidden behind a styled button
     const r = el.getBoundingClientRect(), s = getComputedStyle(el);
@@ -121,7 +122,7 @@ EXTRACT_JS = r"""
   const chrome = el => !!el.closest('header, nav, footer, [data-automation-id="header"], [data-automation-id="utilityButtonBar"], ' +
                                     '[data-automation-id="footerContainer"], [class*="iti__country"], [class*="iti__search"], ' +
                                     '[class*="iti__dropdown"], [class*="iti__selected"], [class*="iti__flag"]');
-  const HONEY = /for robots|robots only|leave (this )?(field |box )?(blank|empty)|do not (fill|enter|complete)|honeypot|if you are (a )?human/i;
+  const HONEY = /for robots|robots only|leave (this )?(field |box )?(blank|empty)|do not (fill|enter|complete) (in )?(this|anything|any|it|here)|honeypot|if you are (a )?human/i;
   const fieldQuestion = el => {             // Workday: <div data-automation-id="formField-..."><fieldset><legend>question</legend> ... <button>
     const box = el.closest('[data-automation-id^="formField"]');
     if (!box) return '';
