@@ -1,774 +1,3 @@
-=== 2026-10-20 04:51:02  skipped  Shop & Equipment Coordinator - Windsor @ Elder Construction Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4510108
-stage: page 5
-why: can't truthfully answer required: Years Known (required) *; Years Known (required) *
-  text: Shop & Equipment Coordinator - Windsor
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-label: Name (required)
-  <input:text #references.name.0 {referencesName0} empty>
-label: Email Address
-  <input:text #references.email.0 {referencesEmail0} empty>
-label: Phone Number (required)
-  <input:text #references.phone.0 {referencesPhone0} empty>
-label: Personal or Work Reference? (required)
-label: Years Known (required)
-  <input:text #references.name.1 {referencesName1} empty>
-  <input:text #references.email.1 {referencesEmail1} empty>
-  <input:text #references.phone.1 {referencesPhone1} empty>
-  <input:text #references.name.2 {referencesName2} empty>
-  <input:text #references.email.2 {referencesEmail2} empty>
-  <input:text #references.phone.2 {referencesPhone2} empty>
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: Elder Construction Inc: Privacy Policy
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-20 04:58:45  blocked  Deal Desk Coordinator @ Transwest
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4522967
-stage: page 6
-why: not a real application form (32 fields, no résumé upload); page shows: information-section:My Information
-Edit
-<first> Delg; "<first>_<middle>_delgado_ortega_resume_uploaded":<first>_<middle>_delgado_ortega; screener-questions:Additional Questions
-Edit
-We e; references-section:References
-Edit
-<first> Alejandr; eeo-section:Equal Employment Opportunity
-E; btnSubmit:Submit
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-# My Information
-# <first> <last>
-# Preferred First Name
-# Middle Name
-# Desired Salary
-# LinkedIn Profile URL
-  text: https://www.linkedin.com/in/-<first>-<middle>-<last>-a26625220
-# Referred By
-# How did you hear about us?
-# Do you give us permission to text you?
-# Have you worked with us before?
-# Resume (required)
-# Additional Questions
-# We endeavor to make this application accessible to all users. If you would like to contact us regarding the ac
-# Are you at least 18 years of age?
-# If hired, can you furnish proof that you are eligible to work in the United States (this position is not eligi
-# Have you ever been employed by Transwest as a regular employee, temporary employee,contractor, or intern?
-# The hiring process will consist of a phone interview, manager(s) interview, reference checks, pre-employment a
-# Desired Salary:
-# Do you have relatives employed by our Company?
-# If you were referred, please tell us the name of the referring employee.
-# Are you able to perform the essential job requirements of the position for which you are applying with or with
-# If you possess a CDL, please select class.
-  text: I do not currently possess a CDL.
-# References
-# <full>
-# Equal Employment Opportunity
-# Gender
-# Ethnicity
-# Disability
-  text: No, I do not have a disability and have not had one in the past
-# Veteran
-  text: I am not a protected veteran
-label: Are you authorized to work lawfully in the United States? (required)
-  text: In compliance with federal law, all persons hired will be required to verify identity and eligibility to work in the United States and to co
-  text: I understand that any false statement or omission made herein is sufficient reason for rejection of this application or termination of subse
-  <input:checkbox #applyAcknowledgement question-answered>
-label: I have read and accept the above acknowledgement (required)
-  [button] Submit {btnSubmit}
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-20 05:00:04  skipped  Associate Analyst @ skechers
-url: https://skechers.wd5.myworkdayjobs.com/One-career-site/job/Manhattan-Beach-CA/Associate-Analyst_JR133282/apply
-stage: Take Assessment
-why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers at Skechers
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] About Skechers {navigationItem-About Skechers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Associate Analyst
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Take Assessment
-label: current step 4 of 5
-label: Take Assessment
-label: step 5 of 5
-label: Review
-# Take Assessment
-# Errors Found
-! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
-# Select “Take Assessment” below to launch the Work Opportunity Tax Credit survey.
-  [button] Take Assessment {inlineAssessmentButton}
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link] Skechers Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 05:01:37  not sent  Jr. Invest Operations Associate @ acorns
-url: https://jobs.ashbyhq.com/acorns/1423e34d-b5df-4568-bb28-7e56459a08cd/application
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Legal Last Name\n\n', 'Missing entry for required field: Legal Last Name\n\nMissing entry for required fi', 'Missing entry for required field: Legal Last Name', 'Legal Last Name']
-# Jr. Invest Operations Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-! Your form needs corrections Missing entry for required field: Legal Last Name Missing entry for required field: Phone Number Missing entry for required field: Which option best describes your situatio
-label: Legal First Name
-  <input:text #_systemfield_name required filled>
-label: Legal Last Name
-  <input:text #60c184f9-afe2-4fa9-91e1-eb7b1e6f3c6c required filled>
-label: Preferred First Name
-  <input:text #56aaa9a0-413e-44fd-8147-883ab54d4c1e required filled>
-label: Preferred Last Name
-  <input:text #dd91dbb4-9116-40d9-b2c9-ca32d5f81aa8 required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #8af5fb13-4877-4af9-9fa9-5c222adf8c48 required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Cover Letter (optional)
-  <input:file #c27fb61b-7b31-4987-8b48-505984d051db no-file>
-  [button] Upload File
-label: Personal Website
-  text: Do you have a personal website with work you'd like to showcase? Drop the link!
-  <input:text #36991bc2-a8fd-4cd6-9d22-2fa61d74dc1e filled>
-label: LinkedIn Profile
-  text: Share the link to your LinkedIn profile!
-  <input:text #defcd699-9a19-4eda-b876-a8d1bf541266 required filled>
-label: How did you hear about this job?
-  <textarea #8f78c895-de10-4fe4-977f-1de02d338668 required filled>
-label: Why do you want to work for Acorns?
-  <textarea #ddb47411-a81e-48c4-8943-4b8b3e070de0 empty>
-# U.S. Work Authorization & Future Sponsorship Needs
-  text: For this question, “sponsorship” means the company would need to file or support a work authorization petition/extension for you (now or lat
-label: Which option best describes your situation?
-  <input:radio #94e0ea83-311c-4922-a031-46a80a7e6543_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I will not require sponsorship now or in the future.
-  <input:radio #94e0ea83-311c-4922-a031-46a80a7e6543_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I do not require sponsorship now, but I may require sponsorship in the future.
-  <input:radio #94e0ea83-311c-4922-a031-46a80a7e6543_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I require sponsorship now.
-# Diversity Survey
-  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
-label: What is your current age?
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: Under 30
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 30-39
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 40-49
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 50-59
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 60 or older
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: I prefer not to answer
-label: What is your gender identity?
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Man
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Woman
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Non-Binary
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Another Gender Identity
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Do you identify as transgender?
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_0a90dc7e-908c-449f-9151 question-answered>
-label: Yes
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_0a90dc7e-908c-449f-9151 question-answered>
-label: No
-  <input:radio #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_0a90dc7e-908c-449f-9151 question-answered>
-label: How do you identify your sexual orientation? Please select all that apply.
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Bisexual
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Lesbian
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Gay
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Queer
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Heterosexual / straight
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Other
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a63b6f87-d090-40f0-a462 question-answered>
-label: Which ethnicity(ies) do you identify with? Please select all that apply.
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian or Asian American
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Black or African American
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Hispanic or Latine
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous or Native American
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Native Hawaiian or Other Pacific Islander
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: White
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Which of the following communities do you belong to? Please select all that apply.
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Person with disability
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Neurodiverse
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Veteran
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Parent
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107cb1528_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Refugee or immigrant
-  <input:checkbox #dd2cfcc4-2d45-401c-bf4c-c00107c
-
-=== 2026-10-20 05:02:07  not sent  Jr. Invest Operations Associate @ acorns
-url: https://jobs.ashbyhq.com/acorns/1423e34d-b5df-4568-bb28-7e56459a08cd/application
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Legal Last Name\n\n', 'Missing entry for required field: Legal Last Name\n\nMissing entry for required fi', 'Missing entry for required field: Legal Last Name', 'Legal Last Name']
-# Jr. Invest Operations Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-! Your form needs corrections Missing entry for required field: Legal Last Name Missing entry for required field: Which option best describes your situation?
-label: Legal First Name
-  <input:text #_systemfield_name required filled>
-label: Legal Last Name
-  <input:text #60c184f9-afe2-4fa9-91e1-eb7b1e6f3c6c required filled>
-label: Preferred First Name
-  <input:text #56aaa9a0-413e-44fd-8147-883ab54d4c1e required filled>
-label: Preferred Last Name
-  <input:text #dd91dbb4-9116-40d9-b2c9-ca32d5f81aa8 required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #8af5fb13-4877-4af9-9fa9-5c222adf8c48 required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Cover Letter (optional)
-  <input:file #c27fb61b-7b31-4987-8b48-505984d051db no-file>
-  [button] Upload File
-label: Personal Website
-  text: Do you have a personal website with work you'd like to showcase? Drop the link!
-  <input:text #36991bc2-a8fd-4cd6-9d22-2fa61d74dc1e filled>
-label: LinkedIn Profile
-  text: Share the link to your LinkedIn profile!
-  <input:text #defcd699-9a19-4eda-b876-a8d1bf541266 required filled>
-label: How did you hear about this job?
-  <textarea #8f78c895-de10-4fe4-977f-1de02d338668 required filled>
-label: Why do you want to work for Acorns?
-  <textarea #ddb47411-a81e-48c4-8943-4b8b3e070de0 empty>
-# U.S. Work Authorization & Future Sponsorship Needs
-  text: For this question, “sponsorship” means the company would need to file or support a work authorization petition/extension for you (now or lat
-label: Which option best describes your situation?
-  <input:radio #a0b53262-fab6-4b1f-bce8-3f4ae1b2fba9_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I will not require sponsorship now or in the future.
-  <input:radio #a0b53262-fab6-4b1f-bce8-3f4ae1b2fba9_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I do not require sponsorship now, but I may require sponsorship in the future.
-  <input:radio #a0b53262-fab6-4b1f-bce8-3f4ae1b2fba9_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I require sponsorship now.
-# Diversity Survey
-  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
-label: What is your current age?
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: Under 30
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 30-39
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 40-49
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 50-59
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 60 or older
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: I prefer not to answer
-label: What is your gender identity?
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Man
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Woman
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Non-Binary
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Another Gender Identity
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Do you identify as transgender?
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_0a90dc7e-908c-449f-9151 question-answered>
-label: Yes
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_0a90dc7e-908c-449f-9151 question-answered>
-label: No
-  <input:radio #82b5ca90-0650-4547-80f7-adb1676141a9_0a90dc7e-908c-449f-9151 question-answered>
-label: How do you identify your sexual orientation? Please select all that apply.
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Bisexual
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Lesbian
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Gay
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Queer
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Heterosexual / straight
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Other
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a63b6f87-d090-40f0-a462 question-answered>
-label: Which ethnicity(ies) do you identify with? Please select all that apply.
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian or Asian American
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Black or African American
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Hispanic or Latine
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous or Native American
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Native Hawaiian or Other Pacific Islander
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: White
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Which of the following communities do you belong to? Please select all that apply.
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Person with disability
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Neurodiverse
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Veteran
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Parent
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Refugee or immigrant
-  <input:checkbox #82b5ca90-0650-4547-80f7-adb1676141a9_a76e67f9-eeb8-4d06-a9a5 question-unansw
-
-=== 2026-10-20 05:16:14  skipped  Project Coordinator @ Swanson Rink
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4589190
-stage: page 4
-why: stuck on step 4; page says: ['THIS IS NOT A REMOTE OPPORTUNITY. This position available in Denver, CO. If you ']; fields flagged: none; buttons: :Previous Step; btnNext:Next Step
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: What is your highest level of completed education?
-  <input:radio #multiQuestionAnswer229282_0 question-answered>
-label: Bachelor's Degree or Higher
-  <input:radio #multiQuestionAnswer229282_1 question-unanswered>
-label: Associates Degree
-  <input:radio #multiQuestionAnswer229282_2 question-unanswered>
-label: Certificate from a Technical College (i.e. Drafting certificate)
-  <input:radio #multiQuestionAnswer229282_3 question-unanswered>
-label: Some college
-  <input:radio #multiQuestionAnswer229282_4 question-unanswered>
-label: High School Diploma or GED
-  <input:radio #multiQuestionAnswer229282_5 question-unanswered>
-label: None of the Above
-label: If applicable, what was your college major?
-  <textarea:text #screener-question-1-textarea filled>
-label: Please list any certificates you have earned:
-  <textarea:text #screener-question-2-textarea filled>
-label: Describe your experience with Microsoft Programs (i.e., Excel, Word, etc.)
-  <textarea:text #screener-question-3-textarea filled>
-label: Do you have experience with any Project Management Software? If so, which one(s)?
-  <textarea:text #screener-question-4-textarea filled>
-  text: How many years of experience do you have providing project management support for architectural, engineering, or construction projects?
-  <input:radio #multiQuestionAnswer620518_0 question-unanswered>
-label: None
-  <input:radio #multiQuestionAnswer620518_1 question-answered>
-label: Less than 2 years
-  <input:radio #multiQuestionAnswer620518_2 question-unanswered>
-label: 3 - 4 years
-  <input:radio #multiQuestionAnswer620518_3 question-unanswered>
-label: 5 - 9 years
-  <input:radio #multiQuestionAnswer620518_4 question-unanswered>
-label: 10+ years
-label: What are your minimum salary expectations?
-  <textarea:text #screener-question-6-textarea filled>
-label: THIS IS NOT A REMOTE OPPORTUNITY. This position available in Denver, CO. If you are located outside of this ar
-  <textarea:text #screener-question-7-textarea filled>
-label: Must be 1000 characters or fewer
-  text: Are you authorized to work in the US?
-  <input:radio #multiQuestionAnswer765742_0 question-answered>
-label: Yes
-  <input:radio #multiQuestionAnswer765742_1 question-unanswered>
-label: No
-  text: Will you now or in the future require sponsorship for employment visa status, including but not limited to H-1B visa status?
-  <input:radio #multiQuestionAnswer1033802_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1033802_1 question-answered>
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-20 05:18:13  skipped  The North Face: Associate Allocator (Outlet) @ vfc
-url: https://vfc.wd5.myworkdayjobs.com/northface_careers/job/USCA--USA--Colorado--Denver-HQ---VFC/The-North-Face--Associate-Allocator--Outlet-_R-20260930-0024/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] VF Careers {navigationItem-VF Careers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# The North Face: Associate Allocator (Outlet)
-label: completed step 1 of 8
-label: My Information
-label: completed step 2 of 8
-label: My Experience
-label: completed step 3 of 8
-label: Application Questions 1 of 2
-label: completed step 4 of 8
-label: Application Questions 2 of 2
-{progressBarActiveStep} current step 5 of 8 Voluntary Disclosures
-label: current step 5 of 8
-label: Voluntary Disclosures
-label: step 6 of 8
-label: Self Identify
-label: step 7 of 8
-label: Take Assessment
-label: step 8 of 8
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# VF Corporation Privacy Statement
-  text: VF Corporation ("VF") recognizes that you care how information about you is used and shared and respects your privacy. This Privacy Policy d
-  text: <email>
-  text: This Privacy Policy was last updated on October 7, 2015. This Privacy Policy may be updated from time to time. Please check back periodicall
-  text: Collection and Use of Information.
-  text: "Personal Information" means any information relating to your use of this website and that specifically identifies you. We may collect, gene
-  text: We use your IP address to help diagnose problems with our server and to administer our website. Your IP address is used to gather broad demo
-  text: We use cookies, when needed, to deliver content specific to your interests and when applicable to save your password or sign-up information 
-  text: Your Personal Information will not be sold, rented, shared, disseminated, or otherwise disclosed except as described in this Privacy Policy 
-  text: We may share your information with the VF Corporation family of brands (including, for example, Supreme®, The North Face®, Vans®, Timberland
-  text: We may share information with certain third parties that perform services on our behalf. We use third-party companies to provide Internet da
-  text: Data security is important to VF and we have instituted security procedures and measures to protect our servers and networks that store pers
-  text: This website may contain links to or from websites to which this Privacy Policy does not apply ("Linked Websites"). Please be advised that t
-# Voluntary Disclosures
-  text: Answering these questions is voluntary. If you do not wish to answer these questions, please just leave them blank.
- {formField-ethnicity}
-label: Please select your ethnicity.
-  [dropdown] chosen #personalInfoUS--ethnicity
- {formField-gender}
-label: Please select your gender.
-  [dropdown] chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Are you Hispanic or Latino?
-  [dropdown] chosen #personalInfoUS--hispanicOrLatino
- {formField-veteranStatus}
-label: Please select your veteran status.
-  [dropdown] chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: I understand that if hired, unless I am employed under a specific written contract or collective bargaining agreement, my employment with VF
-  text: I authorize VF to investigate my references and communicate with my former employers concerning my employment unless specifically stated oth
-  text: I further understand that the completion of an application with VF is a preliminary step to employment. It does not obligate VF to offer emp
-  text: FOR MASSACHUSETTS APPLICANTS
-  text: FOR RHODE ISLAND APPLICANTS
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] VF North America Employee Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 05:21:13  skipped  Broker Trainee @ tp
-url: https://tp.wd107.myworkdayjobs.com/tp-icap/job/New-York/Broker-Trainee_R5874/apply
-stage: Application Questions
-why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The field What is your desired annual salary? Please do not enter 0. is required and must have a value.', 'Error-What is your desired annual salary? Please do not enter 0. The field What is your desired annual salary? Please do not enter 0. is required and must have a value.']; fields flagged: ['What is your desired annual sal
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Open Positions
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Broker Trainee
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-# Errors Found
-! Error-What is your desired annual salary? Please do not enter 0. The field What is your desired annual salary? Please do not enter 0. is required and must have a value. {errorHeading}
-{applyFlowPrimaryQuestionsPage}
- {formField-909998a722c6100148168c823b370000}
-label: Are you legally authorized to work in the country for which this job is located?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168c823b370000
- {formField-909998a722c61001481feabad01a0000}
-label: Will you now or in the future require sponsorship for employment visa status?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c61001481feabad01a0000
- {formField-909998a722c6100148168d1be7c30000}
-label: Do you have any family members and/or friends currently employed at TP ICAP?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168d1be7c30000
- {formField-909998a722c6100148168d1be7c30004}
-label: Have you been registered with FINRA in the past 2 years?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168d1be7c30004
- {formField-909998a722c6100148995eeca7f70000}
-label: Were you ever registered with FINRA?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148995eeca7f70000
- {formField-909998a722c6100148168db592f10006}
-label: Have you ever worked for TP ICAP or its divisions before?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168db592f10006
- {formField-909998a722c6100148168e4fa83d0003}
-label: Are you able to meet the attendance requirements of the position?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168e4fa83d0003
- {formField-909998a722c6100148168e4fa83d0006}
-label: What is your desired annual salary? Please do not enter 0.*
-  <input:text #primaryQuestionnaire--909998a722c6100148168e4fa83d0006 required INVALID empty>
-! Error: The field What is your desired annual salary? Please do not enter 0. is required and must have a value. {inputAlert}
- {formField-909998a722c6100148168ee985200000}
-label: Date available to start?*
-  text: current value is 10/27/2026
-  <input #primaryQuestionnaire--909998a722c6100148168ee985200000-dateS {dateSectionMonth-input} filled>
-  <input #primaryQuestionnaire--909998a722c6100148168ee985200000-dateS {dateSectionDay-input} filled>
-  <input #primaryQuestionnaire--909998a722c6100148168ee985200000-dateS {dateSectionYear-input} filled>
-  [button]  {dateIcon}
- {formField-909998a722c6100148168ee985200001}
-label: What is your current notice period? (month(s) )*
-  <textarea #primaryQuestionnaire--909998a722c6100148168ee985200001 required filled>
- {formField-909998a722c6100148168ee985200002}
-label: Are you held to any hiring restrictions by your current employer (e.g. Garden Leave, Non-Compete, etc.)?*
-  [dropdown] chosen #primaryQuestionnaire--909998a722c6100148168ee985200002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] TP ICAP Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 05:23:44  skipped  Associate Analyst @ skechers
-url: https://skechers.wd5.myworkdayjobs.com/One-career-site/job/Manhattan-Beach-CA/Associate-Analyst_JR133282/apply
-stage: Take Assessment
-why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers at Skechers
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] About Skechers {navigationItem-About Skechers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Associate Analyst
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Take Assessment
-label: current step 4 of 5
-label: Take Assessment
-label: step 5 of 5
-label: Review
-# Take Assessment
-# Errors Found
-! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
-# Select “Take Assessment” below to launch the Work Opportunity Tax Credit survey.
-  [button] Take Assessment {inlineAssessmentButton}
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link] Skechers Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 05:24:09  not sent  Jr. Invest Operations Associate @ acorns
-url: https://jobs.ashbyhq.com/acorns/1423e34d-b5df-4568-bb28-7e56459a08cd/application
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Which option best', 'Missing entry for required field: Which option best describes your situation?', 'Missing entry for required field: Which option best describes your situation?', 'Which option best describes your situation?']
-# Jr. Invest Operations Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-! Your form needs corrections Missing entry for required field: Which option best describes your situation?
-label: Legal First Name
-  <input:text #_systemfield_name required filled>
-label: Legal Last Name
-  <input:text #60c184f9-afe2-4fa9-91e1-eb7b1e6f3c6c required filled>
-label: Preferred First Name
-  <input:text #56aaa9a0-413e-44fd-8147-883ab54d4c1e required filled>
-label: Preferred Last Name
-  <input:text #dd91dbb4-9116-40d9-b2c9-ca32d5f81aa8 required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #8af5fb13-4877-4af9-9fa9-5c222adf8c48 required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace
-label: Cover Letter (optional)
-  <input:file #c27fb61b-7b31-4987-8b48-505984d051db no-file>
-  [button] Upload File
-label: Personal Website
-  text: Do you have a personal website with work you'd like to showcase? Drop the link!
-  <input:text #36991bc2-a8fd-4cd6-9d22-2fa61d74dc1e filled>
-label: LinkedIn Profile
-  text: Share the link to your LinkedIn profile!
-  <input:text #defcd699-9a19-4eda-b876-a8d1bf541266 required filled>
-label: How did you hear about this job?
-  <textarea #8f78c895-de10-4fe4-977f-1de02d338668 required filled>
-label: Why do you want to work for Acorns?
-  <textarea #ddb47411-a81e-48c4-8943-4b8b3e070de0 empty>
-# U.S. Work Authorization & Future Sponsorship Needs
-  text: For this question, “sponsorship” means the company would need to file or support a work authorization petition/extension for you (now or lat
-label: Which option best describes your situation?
-  <input:radio #3bbb424b-fd4f-4932-b98f-3650cff55948_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I will not require sponsorship now or in the future.
-  <input:radio #3bbb424b-fd4f-4932-b98f-3650cff55948_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I do not require sponsorship now, but I may require sponsorship in the future.
-  <input:radio #3bbb424b-fd4f-4932-b98f-3650cff55948_38f91367-a2f3-45f9-b3fe question-unanswered>
-label: I require sponsorship now.
-# Diversity Survey
-  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
-label: What is your current age?
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: Under 30
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 30-39
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 40-49
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 50-59
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 60 or older
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: I prefer not to answer
-label: What is your gender identity?
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Man
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Woman
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Non-Binary
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Another Gender Identity
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Do you identify as transgender?
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_0a90dc7e-908c-449f-9151 question-answered>
-label: Yes
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_0a90dc7e-908c-449f-9151 question-answered>
-label: No
-  <input:radio #20c9b9ae-f641-4061-9df2-b376d9234685_0a90dc7e-908c-449f-9151 question-answered>
-label: How do you identify your sexual orientation? Please select all that apply.
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Bisexual
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Lesbian
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Gay
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Queer
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Heterosexual / straight
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Other
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a63b6f87-d090-40f0-a462 question-answered>
-label: Which ethnicity(ies) do you identify with? Please select all that apply.
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian or Asian American
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Black or African American
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Hispanic or Latine
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous or Native American
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Native Hawaiian or Other Pacific Islander
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: White
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Which of the following communities do you belong to? Please select all that apply.
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Person with disability
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Neurodiverse
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Veteran
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Parent
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Refugee or immigrant
-  <input:checkbox #20c9b9ae-f641-4061-9df2-b376d9234685_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: None of the above
-  <input:checkbox #
-
 === 2026-10-20 05:24:32  not sent  Jr. Invest Operations Associate @ acorns
 url: https://jobs.ashbyhq.com/acorns/1423e34d-b5df-4568-bb28-7e56459a08cd/application
 stage: page 1
@@ -5540,5 +4769,873 @@ label: I agree that to the extent permitted by law, any legal claims that I may 
   [dropdown] nothing chosen #primaryQuestionnaire--04bedb0b88b3100209baf10788d70001
   [button] Back {pageFooterBackButton}
   [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 08:39:07  not sent  Finance Analyst @ acorns
+url: https://jobs.ashbyhq.com/acorns/91e69836-7a14-421a-a8ec-d3bb85336be4/application
+stage: page 1
+why: the form was rejected, not sent; page errors: ['Your form needs corrections\n\nMissing entry for required field: Legal Last Name\n\n', 'Missing entry for required field: Legal Last Name\n\nMissing entry for required fi', 'Missing entry for required field: Legal Last Name', 'Legal Last Name']
+# Finance Analyst
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+! Your form needs corrections Missing entry for required field: Legal Last Name Missing entry for required field: Resume
+label: Legal First Name
+  <input:text #_systemfield_name required filled>
+label: Legal Last Name
+  <input:text #84e9631d-7671-4d6d-a8b0-0cf62ce2f554 required filled>
+label: Preferred First Name
+  <input:text #64f7a3ce-eb01-4c53-8e5f-bbf9e76af051 required filled>
+label: Preferred Last Name
+  <input:text #31cafb85-280c-4767-b480-1c7e576f0aea required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone Number
+  <input:tel #671c713d-a21d-4f11-9654-f0db7a6a8133 required filled>
+label: Location
+  <input filled>
+  [button] 
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  [button] Upload File
+label: Cover Letter (optional)
+  <input:file #19860456-461f-4ef3-8472-a63e1287727b no-file>
+  [button] Upload File
+label: Personal Website
+  text: Do you have a personal website with work you'd like to showcase? Drop the link!
+  <input:text #d739eed4-79c1-43cb-86b8-54a44a9ee538 filled>
+label: LinkedIn Profile
+  text: Share the link to your LinkedIn profile!
+  <input:text #80444ad9-8add-49d0-9a02-951ced64a8c7 required filled>
+label: How did you hear about this job?
+  <textarea #1bc5de45-a6f2-4e4f-acf7-af6b5354579b required filled>
+label: Why do you want to work for Acorns?
+  <textarea #8bd77d0c-0ed2-49f9-9212-7b65a49fbe63 empty>
+# U.S. Work Authorization & Future Sponsorship Needs
+  text: For this question, “sponsorship” means the company would need to file or support a work authorization petition/extension for you (now or lat
+label: Which option best describes your situation?
+  <input:radio #0ef31adf-a1cf-47c0-882f-3d5e75a06c42_03118b3d-2f98-4c10-af43 question-answered>
+label: I will not require sponsorship now or in the future.
+  <input:radio #0ef31adf-a1cf-47c0-882f-3d5e75a06c42_03118b3d-2f98-4c10-af43 question-answered>
+label: I do not require sponsorship now, but I may require sponsorship in the future.
+  <input:radio #0ef31adf-a1cf-47c0-882f-3d5e75a06c42_03118b3d-2f98-4c10-af43 question-answered>
+label: I require sponsorship now.
+# Diversity Survey
+  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
+label: What is your current age?
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: Under 30
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: 30-39
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: 40-49
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: 50-59
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: 60 or older
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
+label: I prefer not to answer
+label: What is your gender identity?
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_8d7dcc65-3a0b-476a-b679 question-answered>
+label: Man
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_8d7dcc65-3a0b-476a-b679 question-answered>
+label: Woman
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_8d7dcc65-3a0b-476a-b679 question-answered>
+label: Non-Binary
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_8d7dcc65-3a0b-476a-b679 question-answered>
+label: Another Gender Identity
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_8d7dcc65-3a0b-476a-b679 question-answered>
+label: Do you identify as transgender?
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_0a90dc7e-908c-449f-9151 question-answered>
+label: Yes
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_0a90dc7e-908c-449f-9151 question-answered>
+label: No
+  <input:radio #4b32559d-b36c-4168-a559-b3d1e56a9edf_0a90dc7e-908c-449f-9151 question-answered>
+label: How do you identify your sexual orientation? Please select all that apply.
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Bisexual
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Lesbian
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Gay
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Queer
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Heterosexual / straight
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Other
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a63b6f87-d090-40f0-a462 question-answered>
+label: Which ethnicity(ies) do you identify with? Please select all that apply.
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Asian or Asian American
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Black or African American
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Hispanic or Latine
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Indigenous or Native American
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Native Hawaiian or Other Pacific Islander
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: White
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_1e21d43f-548e-481a-aa5f question-unanswered>
+label: Which of the following communities do you belong to? Please select all that apply.
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: Person with disability
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: Neurodiverse
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: Veteran
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: Parent
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: Refugee or immigrant
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a9edf_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
+label: None of the above
+  <input:checkbox #4b32559d-b36c-4168-a559-b3d1e56a
+
+=== 2026-10-20 08:40:33  skipped  Associate, Strategy Planning & Systems @ Center for Reproductive Rights
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4547783
+stage: page 4
+why: stuck on step 4; page says: ['Upload Cover Letter (required)\nSelect Cover Letter\<file> and .doc files only, 10M', 'Upload Cover Letter (required)', 'Cover Letter is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
+United States
+A
+  text: Associate, Strategy Planning & Systems
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: <file>
+  [button] Remove
+label: First Name (required)
+  <input:text #info.firstName {infoFirstName} filled>
+label: Last Name (required)
+  <input:text #info.lastName {infoLastName} filled>
+label: Middle Name
+  <input:text #info.middleName {infoMiddleName} filled>
+label: Preferred First Name
+  <input:text #info.preferredName {infoPreferredName} filled>
+label: Email Address (required)
+  <input:text #info.email {infoEmail} filled>
+label: Mobile Number (required)
+  <input:text #info.cellPhone {infoCellPhone} filled>
+  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
+label: Home Phone Number
+  <input:text #info.phone {infoPhone} filled>
+label: Have you applied for a job with us before?
+label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
+  text: SMS Terms and Conditions and Privacy Policy
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+label: County
+label: State CO
+label: Zip Code
+label: Available to Start
+  <input:date #info.dateAvailableToStart filled>
+  [button] 
+  [button]  opens-dialog
+(dialog)
+label: LinkedIn Profile URL
+  <input:text #info.linkedIn {infoLinkedIn} filled>
+label: Desired Salary (required)
+  <input:text #info.desiredSalaryDescription {infoDesiredSalaryDescription} filled>
+label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
+label: Referred by
+  <input:text #info.referredBy {infoReferredBy} filled>
+label: Skills
+  <input:text #info.skills empty>
+label: Have you worked with us before?
+label: Upload Cover Letter (required)
+  <input:file #btn-coverLetter no-file>
+  [button] Select Cover Letter {btn-coverLetter}
+  text: .pdf and .doc files only, 10MB file size limit
+  [button] Next Step {btnNext}
+  [button] 
+
+=== 2026-10-20 08:48:52  skipped  Accounting Specialist @ GPO Federal Credit Union
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4557255
+stage: page 4
+why: can't truthfully answer required: Years Known (required) *; Years Known (required) *; Years Known (required) *
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number (required)
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+label: County
+label: State Select a state
+label: Zip Code
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  <input:text #references.name.2 {referencesName2} empty>
+  <input:text #references.email.2 {referencesEmail2} empty>
+  <input:text #references.phone.2 {referencesPhone2} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-10-20 08:52:09  skipped  AGI CARGO - Safety & Training Coordinator @ allianceground
+url: https://allianceground.wd1.myworkdayjobs.com/agi_careers/job/Los-Angeles-CA/AGI-CARGO---Safety---Training-Coordinator_R-112076-1/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: I consent to the above terms and conditions.*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# AGI Careers
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# AGI CARGO - Safety & Training Coordinator
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions
+{progressBarActiveStep} current step 4 of 7 Voluntary Disclosures
+label: current step 4 of 7
+label: Voluntary Disclosures
+label: step 5 of 7
+label: Self Identify
+label: step 6 of 7
+label: Take Assessment
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data
+ {formField-gender}
+label: Please indicate your gender:*
+  [dropdown] chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?
+  [dropdown] chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicity}
+label: Please indicate your ethnicity:*
+  [dropdown] chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Are you a protected veteran?*
+  [dropdown] chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: By submitting this application for employment with AGI, and as a material condition of applying for and, if offered, accepting employment wi
+ {formField-acceptTermsAndAgreements}
+label: I consent to the above terms and conditions.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 08:54:29  skipped  Enrollment & Outreach Coordinator @ Universal Community Health Center
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4548543
+stage: page 2
+why: can't truthfully answer required: Years Known (required) *
+  text: Enrollment & Outreach Coordinator
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  <input:text #references.name.2 {referencesName2} empty>
+  <input:text #references.email.2 {referencesEmail2} empty>
+  <input:text #references.phone.2 {referencesPhone2} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-10-20 08:57:08  skipped  Actuarial Analyst I @ elevancehealth
+url: https://elevancehealth.wd1.myworkdayjobs.com/ANT/job/GA-ATLANTA-740-W-PEACHTREE-ST-NW/Actuarial-Analyst-I_JR209802/apply
+stage: Application Questions 2 of 3
+why: stuck on Workday's 'Application Questions 2 of 3' page; Workday says: ['Error: The field If you have previous experience in the Managed Healthcare industry, please indicate which areas you have experience. is required and must have a value.', 'Error-If you have previous experience in the Managed Healthcare industry, please indicate which areas you have experience. The field If you have previous ex
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers at Elevance Health
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Site {navigationItem-Careers Site}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Actuarial Analyst I
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 3
+{progressBarActiveStep} current step 4 of 7 Application Questions 2 of 3
+label: current step 4 of 7
+label: Application Questions 2 of 3
+label: step 5 of 7
+label: Application Questions 3 of 3
+label: step 6 of 7
+label: Voluntary Disclosures
+label: step 7 of 7
+label: Review
+# Application Questions 2 of 3
+# Errors Found
+! Error-If you have previous experience in the Managed Healthcare industry, please indicate which areas you have experience. The field If you have previous experience in the Managed Healthcare industry, {errorHeading}
+{applyFlowSecondaryQuestionsPage}
+ {formField-cfa35fa69e6410015e03a39120d70000}
+label: How many years of experience do you have related to this job posting?*
+  [dropdown] chosen #secondaryQuestionnaire--cfa35fa69e6410015e03a39120d70000
+ {formField-cfa35fa69e6410015e03a39120d70001}
+label: If you have previous experience in the Managed Healthcare industry, please indicate which areas you have exper
+  text: experience in the Managed Healthcare industry, please
+  <input:checkbox #caa812f121a110015dc9cee32f130003-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Vision
+  <input:checkbox #caa812f121a110015dc9cf7d27de0001-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Dental
+  <input:checkbox #caa812f121a110015dc9cf7d27de0003-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Health
+  <input:checkbox #caa812f121a110015dc9cf7d27de0005-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Behavioral Health
+  <input:checkbox #caa812f121a110015dc9d016ce3e0001-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Senior Health
+  <input:checkbox #caa812f121a110015dc9d016ce3e0003-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: Wellness & Disease Management
+  <input:checkbox #caa812f121a110015dc9d016ce3e0005-cfa35fa69e6410015e03a39120d required question-unanswered>
+label: None of the above
+! Error: The field If you have previous experience in the Managed Healthcare industry, please indicate which areas you have experience. is required and must have a value. {inputAlert}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 08:59:17  skipped  Executive Administrative Assistant @ Beach Front Property Management, Inc.
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4079463
+stage: page 1
+why: can't truthfully answer required: May We Contact for Reference? (required) *; May We Contact for Reference? (required) *; May We Contact for Reference? (required) *; May We Contact for Reference? (required) *
+  text: Executive Administrative Assistant
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: <file>
+  [button] Remove
+label: First Name (required)
+  <input:text #info.firstName {infoFirstName} filled>
+label: Last Name (required)
+  <input:text #info.lastName {infoLastName} filled>
+label: Middle Name
+  <input:text #info.middleName {infoMiddleName} empty>
+label: Preferred First Name
+  <input:text #info.preferredName {infoPreferredName} empty>
+label: Email Address (required)
+  <input:text #info.email {infoEmail} filled>
+label: Mobile Number (required)
+  <input:text #info.cellPhone {infoCellPhone} filled>
+  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
+label: Home Phone Number
+  <input:text #info.phone {infoPhone} empty>
+label: Have you applied for a job with us before? (required)
+label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
+  text: SMS Terms and Conditions and Privacy Policy
+label: Available to Start (required)
+  <input:text #info.dateAvailableToStart empty>
+  [button]  opens-dialog
+(dialog)
+label: LinkedIn Profile URL
+  <input:text #info.linkedIn {infoLinkedIn} empty>
+label: Desired Salary (required)
+  <input:text #info.desiredSalaryDescription {infoDesiredSalaryDescription} empty>
+label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee Other
+label: Referred by
+  <input:text #info.referredBy {infoReferredBy} empty>
+label: Skills (required)
+  <input:text #info.skills empty>
+label: Have you worked with us before? (required)
+label: Upload Cover Letter
+  <input:file #btn-coverLetter no-file>
+  [button] Select Cover Letter {btn-coverLetter}
+  text: .pdf and .doc files only, 10MB file size limit
+label: Upload Additional Files
+  <input:file #btn-additionalFiles no-file>
+  [button] Select File(s) {btn-additionalFiles}
+label: Company Name (required)
+  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
+label: Position (required)
+  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
+label: Company Website
+  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} empty>
+label: Company Phone Number
+  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} empty>
+label: Responsibilities (required)
+  <textarea:text #workHistory.responsibilities.0 filled>
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+! City is required {public-candidate-work-history-address-0-city-error}
+label: County
+label: State Select a state
+! Select a State/Province {public-candidate-work-history-address-0-us-state-error}
+label: Zip Code
+! Zip/Postal Code is required {public-candidate-work-history-address-0-zip-error}
+label: Start Date (required)
+  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
+  [button]  {workHistory.startDate.0.picker-button} opens-dialog
+(dialog)
+label: End Date (required)
+  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
+  [button]  {workHistory.endDate.0.picker-button} opens-dialog
+(dialog)
+label: Reason for Leaving (required)
+  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
+label: Currently Working Here
+label: May We Contact for Reference? (required)
+  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
+  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
+  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} empty>
+  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} empty>
+  <textarea:text #workHistory.responsibilities.1 filled>
+  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
+  [button]  {workHistory.startDate.1.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
+  [button]  {workHistory.endDate.1.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
+  [button] Delete This Work History
+  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
+  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
+  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} empty>
+  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} empty>
+  <textarea:text #workHistory.responsibilities.2 filled>
+  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
+  [button]  {workHistory.startDate.2.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
+  [button]  {workHistory.endDate.2.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
+  [button] Delete This Work History
+  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
+  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
+  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} empty>
+  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} empty>
+  <textarea:text #workHistory.responsibilities.3 filled>
+  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
+  [button]  {workHistory.startDate.3.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
+  [button]  {workHistory.endDate.3.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
+  [button] Delete This Work History
+  [button] Add Work History {btnAddWorkHistory}
+label: Certifications & Awards Earned
+  <input:text #educationHistory.certificationsAndAwards empty>
+label: School Name (required)
+  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
+label: Area of Study (required)
+  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
+label: Did you Graduate? (required)
+label: Degree Obtained (required)
+label: Graduation Date (required)
+  <input:text #txt-educationHistory-graduationDate-0 {txt-educationHistory-graduationDate-0} filled>
+  [button]  {educationHistory.graduationDate.0.picker-button} opens-dialog
+(dialog)
+label: Country
+  <input:text #educationHistory.city.0 {educationHistoryCity0} empty>
+label: State
+  [button] Add Education {btnAddEducationHistory}
+  [button] Next Step {btnNext}
+  [button] 
+
+=== 2026-10-20 09:02:43  skipped  Demand Planner @ revelyst
+url: https://revelyst.wd1.myworkdayjobs.com/external_revelyst/job/Irvine-CA/Demand-Planner_R0013584/apply
+stage: Take Assessment
+why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Join the Adventure
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Revelyst {navigationItem-Revelyst}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Demand Planner
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions
+label: completed step 4 of 6
+label: Voluntary Disclosures
+{progressBarActiveStep} current step 5 of 6 Take Assessment
+label: current step 5 of 6
+label: Take Assessment
+label: step 6 of 6
+label: Review
+# Take Assessment
+# Errors Found
+! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
+  text: You will now be sent to an external partner site to complete the Work Opportunity Tax Credit (WOTC) Assessment. This information collected i
+  text: , you will be returned to this system to review and finalize your Official Submission to this Application.
+  [button] Take Assessment {inlineAssessmentButton}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Revelyst Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 09:05:25  skipped  Patient Coordinator (Front Office) @ ivyrehab
+url: https://ivyrehab.wd5.myworkdayjobs.com/ivy_rehab/job/Scarsdale-NY/Patient-Coordinator--Front-Office-_JR118294/apply
+stage: Take Assessment
+why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Patient Coordinator (Front Office)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions
+label: completed step 4 of 6
+label: Voluntary Disclosures
+{progressBarActiveStep} current step 5 of 6 Take Assessment
+label: current step 5 of 6
+label: Take Assessment
+label: step 6 of 6
+label: Review
+# Take Assessment
+# Errors Found
+! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
+  [button] Take Assessment {inlineAssessmentButton}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 09:10:49  skipped  Sales Trainee @ graybar
+url: https://graybar.wd1.myworkdayjobs.com/careers/job/Albany-NY/Sales-Trainee_R263296/apply
+stage: Application Questions 1 of 2
+why: stuck on Workday's 'Application Questions 1 of 2' page; Workday says: ['Error: The number entered is too large.', 'Error-Enter Amount The number entered is too large.']; fields flagged: ['Enter Amount']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers {navigationItem-Careers}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Sales Trainee
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions 1 of 2
+label: current step 3 of 6
+label: Application Questions 1 of 2
+label: step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 1 of 2
+# Errors Found
+! Error-Enter Amount The number entered is too large. {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-0e269fc5e058100115413f16723a0001}
+label: Are you legally eligible to work in the country to which you are applying?*
+  [dropdown] chosen #primaryQuestionnaire--0e269fc5e058100115413f16723a0001
+ {formField-0e269fc5e058100115413fb0abb20002}
+label: Will you now, or in the future, require visa sponsorship for employment?*
+  [dropdown] chosen #primaryQuestionnaire--0e269fc5e058100115413fb0abb20002
+ {formField-0e269fc5e058100115413fb0abb20005}
+label: Please indicate your requested pay for the position for which you are applying.*
+  [dropdown] chosen #primaryQuestionnaire--0e269fc5e058100115413fb0abb20005
+ {formField-0e269fc5e0581001155e0580c23b0000}
+label: Enter Amount*
+  <input:text #primaryQuestionnaire--0e269fc5e0581001155e0580c23b0000 required INVALID filled>
+! Error: The number entered is too large. {inputAlert}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 09:10:59  blocked  Food & Beverage Office Administrative Assistant - The Little Nell - Winter @ AspenSkiingCompany
+url: https://jobs.smartrecruiters.com/oneclick-ui/company/AspenSkiingCompany/publication/4f965905-43d0-47fd-9080-053010f13335
+why: DataDome check (a human check: the bot stops here)
+<iframe https://geo.captcha-delivery.com/captcha/>
+
+=== 2026-10-20 09:14:38  blocked  Operations - Project Coordinator @ kpff-consulting-engineers
+url: https://jobs.smartrecruiters.com/oneclick-ui/company/KPFFConsultingEngineers/publication/55b64866-b838-4e7b-ae7b-069865b627a1
+why: DataDome check (a human check: the bot stops here)
+<iframe https://geo.captcha-delivery.com/captcha/>
+
+=== 2026-10-20 09:16:12  unconfirmed  Analyst, Labor Relations @ spe
+url: https://spe.wd1.myworkdayjobs.com/en-US/SonypicturesEntertainment
+stage: Review
+why: no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; page ends: "er A minimum of 8 characters Email Address* Password* Verify New Password* Create Account Already have an account? Sign In Forgot your password? Enter webs
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Join our Talent Community! {navigationItem-Join our Talent Community!}
+  <input:text #gjs12 {keywordSearchInput} empty>
+  [button] Search {keywordSearchButton}
+label: Filters
+  [button] Location {distanceLocation}
+  [button] Full/Part-time {employmentType}
+  [button] Job Category {jobFamilyGroup}
+  [button] More {more}
+! Search for Jobs page is loaded
+# Analyst, Labor Relations
+# Coordinator, Operations & Post Services
+# Intern, Global Creative Content, Sony Pictures - Spring 2027
+# Chief Accountant, Poland
+# Coordinator Insights, Strategy & Analysis
+# Sr. Systems Administrator, Production Finance
+# Analyst, Office of the CIO
+# Senior Lease Administrator, Commercial Real Estate
+# Executive Director, Enterprise Agent Platform
+# Lead, Cloud Security Operations Engineer
+# Production Coordinator
+# Line Producer
+# Production Manager
+# Executive Producer
+# Series Producer
+# Creative Coordinator
+# Senior Manager, Finance
+# Manager, Facilities & S3 Systems
+# Marketplace Analyst Trainee, Home Entertainment Division - Spring 2027
+# Current Programming Intern, Sony Pictures Television – Spring 2027
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 4
+  [button] 
+  text: Hi, we’re Sony Pictures Entertainment
+  text: We are in the business of creativity … making some of the most beloved film and television of all time for every platform in the world. As t
+  text: Sony Pictures Entertainment is a division of Sony Corporation, a creative entertainment company built on a foundation of technology. Along w
+  text: We are looking for innovators to join us as we forge the future of entertainment!
+  [button] Read More {readMore}
+# Get In Touch
+  text: Don't see a job opportunity that matches your interests, skills or experiences?
+  text: Join our Talent Community!
+  [button] Get Started {introduceYourselfButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Congratulations!
+ {formField-email}
+label: Email Address*
+  <input:text #input-10 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-11 {password} required>
+ {formField-verifyPassword}
+label: Verify New Password*
+  <input:password #input-12 {verifyPassword} required>
+  [button]  {click_filter}
+  [button] Create Account {createAccountSubmitButton}
+  [button] Sign In {signInLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #a71b162c-4952-4c31-bda5-8362426ae2b2 {beecatcher} empty>
+
+=== 2026-10-20 09:16:34  blocked  Financial Analyst  @ RedBull
+url: https://jobs.smartrecruiters.com/oneclick-ui/company/RedBull/publication/3857e5cc-4e5e-4fcf-ae74-73dd68e1510d
+why: DataDome check (a human check: the bot stops here)
+<iframe https://geo.captcha-delivery.com/captcha/>
+
+=== 2026-10-20 09:17:16  unconfirmed  Investment Analyst, Real Estate @ outpost
+url: https://jobs.ashbyhq.com/outpost/7cddbe76-d63e-48cd-9116-267ad4127e09/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'thorized to work in the United States? Yes No Will you now or in the future require sponsorship for employment visa status (e.g., H-1B)? Yes No Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Investment Analyst, Real Estate
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone
+  <input:tel #7d3f2c92-62ef-41db-8da2-9ca917b8fc95 required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn URL
+  <input:text #9a5729d1-5b1c-405c-b583-d6df17b21980 filled>
+label: Cover Letter
+  <input:file #099e9d11-c65b-46ed-b15c-0913f0fa39da no-file>
+  [button] Upload File disabled
+label: Location
+  <input filled>
+  [button] 
+label: Do you live in Los Angeles, CA? If not, are you open to relocating to Los Angeles?
+  <input:radio #f2a35ef2-55c0-4aae-92c6-0d193240922d_7589696f-d57b-47e9-89c9 question-answered>
+label: I currently live in Los Angeles, CA.
+  <input:radio #f2a35ef2-55c0-4aae-92c6-0d193240922d_7589696f-d57b-47e9-89c9 question-answered>
+label: I am willing to relocate to Los Angeles, CA.
+  <input:radio #f2a35ef2-55c0-4aae-92c6-0d193240922d_7589696f-d57b-47e9-89c9 question-answered>
+label: I am not willing to relocate.
+label: Desired Salary Range
+  text: What are your base and total compensation expectations for your next role?
+  <input:text #c24b5734-eda1-421a-98cb-a97c6d4fb862 required filled>
+label: Desired Start Date
+  <input:text required filled>
+label: Are you legally authorized to work in the United States?
+  [button] Yes
+  [button] No
+  <input:checkbox name=60d18949-a6c2-4657-95fe-eb5f7388f2fe question-answered>
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B)?
+  [button] Yes
+  [button] No
+  <input:checkbox name=cc97dbcc-67ae-4f47-8569-7ae02e98dd6b question-unanswered>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-10-20 09:22:27  skipped  Trust & Safety Specialist, Global Operations @ snapchat
+url: https://snapchat.wd1.myworkdayjobs.com/sourced/job/Los-Angeles-California/Trust---Safety-Specialist--Global-Operations_R0047206-1/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: 3. Did you answer "No" to Question 1 (you are not legally au
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Snap Careers {navigationItem-Snap Careers}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Trust & Safety Specialist, Global Operations
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+  text: The information provided in this application must be true, complete, and accurate to the best of the candidate's knowledge. Any misrepresent
+ {formField-29dab01e5e4e1001ee9786e38c090000}
+label: 1. Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee9786e38c090000
+ {formField-29dab01e5e4e1001ee97881725520004}
+label: 2. Will you need Snap to sponsor you for a visa to work legally in the United States, now or in the future (me
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee97881725520004
+ {formField-29dab01e5e4e1001ee97881725520007}
+label: 3. Did you answer "No" to Question 1 (you are not legally authorized to work in the United States) or "Yes" to
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee97881725520007
+ {formField-29dab01e5e4e1001ee978bb44a150005}
+label: Do you currently live in or are you able to relocate to the location this job is advertised in? (Snap may prov
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978bb44a150005
+ {formField-29dab01e5e4e1001ee978c4e4a820002}
+label: This position requires employees to work onsite at the office at least four days per week and the company prov
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978c4e4a820002
+ {formField-29dab01e5e4e1001ee978c4e4a820005}
+label: Can you confirm that you meet the minimum qualification for years of professional work experience for this rol
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978c4e4a820005
+ {formField-29dab01e5e4e1001ee978ce85d2a0000}
+label: Are you a current or former (prior 18 months) employee of EY, PwC, Deloitte or KPMG?*
+  [dropdown] nothing chosen #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0000
+ {formField-29dab01e5e4e1001ee978ce85d2a0003}
+label: Acknowledgement: If there are any changes in the responses provided herein, you will promptly share those upda
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--29dab01e5e4e1001ee978ce85d2a0003-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
 
