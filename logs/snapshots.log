@@ -1,491 +1,3 @@
-=== 2026-10-20 09:54:21  unconfirmed  Data Specialist @ janestreet
-url: https://www.janestreet.com/join-jane-street/apply/6110602002/
-stage: page 1
-why: no confirmation after submit; page errors: ['This field is required.', 'This field is required.', 'This field is required.', 'This field is required.']; page ends: ' purposes only and does not constitute an offer or solicitation for the purchase or sale of any security or other financial instrument.|Jane Street and the concentric circle mark are registered trademarks of Jane Street.'
-  <input empty>
-# Data Specialist
-  <input:checkbox name=position question-answered>
-  <input:checkbox name=city question-answered>
-label: Legal first name *
-  <input:text #first_name required filled>
-label: Preferred first name
-  <input:text #preferred_name filled>
-label: Legal last name *
-  <input:text #last_name required filled>
-label: Email *
-  <input:email #email required filled>
-label: Email confirmation *
-  <input:text #email_confirmation required filled>
-label: Phone *
-  [button] +1
-  <input:tel #phone-number required filled>
-label: Pronouns (Select one or more.)
-  text: self-describe, please specify:
-  <input:text #pronouns filled>
-label: LinkedIn profile URL (E.g., 'https://www.linkedin.com/in/yourname'.)
-  <input:text #linkedin_profile filled>
-  <input:checkbox name=category question-answered>
-label: Current or most recent employer *
-  <input:text #current_position required filled>
-  [button] Select an option
-label: This field is required.
-  <input:radio #recruiting_timelines-true required question-unanswered>
-label: Yes
-  <input:radio #recruiting_timelines-false required question-unanswered>
-label: No
-  <input:radio #interviewed-true required question-unanswered>
-  <input:radio #interviewed-false required question-unanswered>
-  <input:radio #student-true required question-unanswered>
-  <input:radio #student-false required question-unanswered>
-  text: Please search via full name or acronym before selecting "Other"
-  [button] Select an option
-  text: We may use this email to verify your enrollment.
-  <input:email #university_email required filled>
-  <input:checkbox #no-university-email question-unanswered>
-label: I don't have a school email
-label: What degree are you currently pursuing? *
-  [button] Select an option
-  [button] Select an option
-  text: Secondary Major / Field of study
-  [button] Select an option
-label: Month
-  [button] Select an option
-label: Year
-  [button] Select an option
-  text: When we receive an application, we consider it for all available positions worldwide to determine the best fit. If you are interested in add
-  text: We don't need a cover letter, but if there's any additional information that could be helpful to us when reviewing your application, use the
-  text: Why you're interested in Jane Street
-  text: If you have a job now, why you're looking for a new one
-  <textarea #comments empty>
-label: Upload your resume as a PDF file *
-  <input:file #resume required has-file>
-  text: Global Applicant Privacy Notice
-  [button] Submit
-  text: Jane Street is an Equal Opportunity Employer
-  text: Fraud and Impersonation Warnings
-  text: Autoriteit Financiële Markten
-
-=== 2026-10-20 09:57:12  failed  2027 Private Equity Analyst @ stepstone
-url: https://www.stepstonegroup.com/current-opportunities/
-why: Page.goto: Timeout 45000ms exceeded.
-# Join our team
-  text: When you choose to work with us, you'll find a group of professionals who are passionate about anticipating changes, solving problems and wo
-
-=== 2026-10-20 10:00:38  skipped  M&E Associate - Rapid Experimentation (Remote) @ privategdcareers
-url: https://job-boards.greenhouse.io/privategdcareers/jobs/4743156005
-stage: page 1
-why: can't truthfully answer required: AI Policy for Application: At GiveDirectly, we value authent
-# M&E Associate - Rapid Experimentation (Remote)
-  [button] Apply
-  text: hear from the people who do
-  text: Priority Application Deadline:
-  text: The Monitoring and Evaluation (M&E) Associate for Rapid Experimentation will support the execution and analysis of A/B tests across GiveDire
-  text: Supporting the execution and analysis of rapid A/B tests across GiveDirectly projects
-  text: Ensuring experiments are implemented correctly, measured reliably, and analyzed to produce clear and credible results
-  text: Translating findings into actionable insights and well-structured learning products
-  text: In practice, this role is about managing a high volume of rapid experiments and turning results into clear, credible evidence that continuou
-  text: Execute and manage A/B tests across programs
-  text: Conduct power calculations to ensure experiments are both statistically rigorous and feasible to implement within program constraints
-  text: Set up pre-specified experimental designs, applying defined experimental groups, outcome measures, and measurement timelines
-  text: Review experiment setups prior to launch and flag execution and measurement risks that may affect interpretability
-  text: Ensure experiments are well-coordinated and executed as designed, aligning implementation with research plans and integrating smoothly into 
-  text: Work at a fast pace across a portfolio of 2–3 live A/B tests at any given time, designed to generate actionable answers quickly and feed rap
-  text: Ensure accurate measurement and high-quality data for experiments
-  text: Collaborate with external Principal Investigators (PIs) to ensure measurement approaches and data collection are aligned with research desig
-  text: Ensure experimental outcomes are captured accurately and consistently by applying established indicator and measurement approaches
-  text: Prepare and manage datasets that are clean, well-structured, and ready for analysis using survey, administrative, and product data
-  text: Identify and flag data quality risks (e.g., missingness, inconsistencies, measurement error) that could affect the validity of experimental 
-  text: Conduct targeted literature reviews to ensure measurement approaches are grounded in evidence and aligned with best practices
-  text: Analyze experimental data and interpret results to inform decisions
-  text: Generate reliable and decision-ready analyses of experimental data from A/B tests
-  text: Assess the magnitude and direction of effects and highlight what the results do and do not suggest, noting key limitations
-  text: Ensure results are clearly understood and appropriately interpreted, given data quality, sample size, and implementation considerations
-  text: Translate results into actionable insights and learning across experiments
-  text: Translate experimental results into clear, actionable recommendations to guide program and product decisions for individual country programs
-  text: Structure results and key learnings so they can be reused to inform future experiments and program design
-  text: Prepare concise learning products (e.g., memos, summaries) that serve multiple audiences, including internal Programs and Product teams, and
-  text: Prepare and clean de-identified datasets for sharing with external PIs and academic partners, ensuring data is structured, well-documented, 
-  text: Contribute to cross-country discussions to ensure learnings from experiments are shared and applied across contexts, and maintain clear docu
-  text: Bachelor’s degree (or equivalent) in Economics, Statistics, Public Policy, or a related quantitative field
-  text: 2–4 years of experience working with data in applied settings (e.g., experimentation, evaluation, analytics, or program learning), ideally i
-  text: Solid understanding of experimental design and causal inference concepts (e.g., randomization, treatment/control groups, units of randomizat
-  text: Experience using R, Python, or Stata to clean, manipulate, and analyze data, including working with multiple data sources (e.g., survey or a
-  text: Experience collaborating with cross-functional teams (e.g., programs/operations, product, or research) and external partners to implement pr
-  text: Fluency in English required
-  text: Comfort working at pace - able to manage multiple workstreams simultaneously, make progress with imperfect data, and iterate quickly based o
-  text: Ability to interpret results beyond statistical significance and communicate clear, actionable insights to both technical and non-technical 
-  text: Unless otherwise noted, the benefits stipend may be used to cover benefits or taken as additional taxable income.
-  text: Bonus at Target Performance:
-  text: Estimated Total Compensation at Target:
-  text: This role is fully remote, so if you are not based in Kenya or Rwanda, we will share an estimated salary benchmark for the country you are b
-  text: At GiveDirectly, we work to ensure that you have everything you need to excel in your role and on your team, including:
-  text: A supportive team that works hard and cares hard
-  text: A robust health benefits plan (exact details will vary by country)
-  text: Flexible paid time off that staff is encouraged to take
-  text: Allowances for desk set-up and learning and development
-# Apply for this job
-  text: indicates a required field
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-label: Location (City)*
-  <input:text #candidate-location required empty>
-  <input required empty>
-  [button] Locate me
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: Where are you currently based? (City, State [if applicable], Country)*
-  <input:text #question_9163133005 required empty>
-label: Do you now or in the future require visa sponsorship to work in the country you are based in?*
-  <input:text #question_9163134005 required empty>
-  [button] 
-  <input required empty>
-label: How did you hear about this opportunity?*
-  <input:text #question_9163135005 required empty>
-  [button] 
-  <input required empty>
-label: Do you know, or are you related to, anyone at GiveDirectly?*
-  <input:text #question_9163136005 required empty>
-  [button] 
-  <input required empty>
-label: What draws you to GiveDirectly, and what is it about this role specifically that feels like the right next ste
-  <textarea #question_9163137005 required empty>
-label: What statistical packages or coding languages are you familiar with? (Select all that apply) *
-  <input:checkbox #question_9163138005[]_24665058005 required question-unanswered>
-label: Excel
-  <input:checkbox #q
-
-=== 2026-10-20 10:02:45  skipped  Credit Trainee @ ferguson
-url: https://ferguson.wd1.myworkdayjobs.com/ferguson_experienced/job/Brooklyn-NY/Credit-Trainee_R-141108/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Protected Veterans are defined as follows: Disabled Veteran:
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Credit Trainee
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# APPLICANT VOLUNTARY SELF-IDENTIFICATION ETHNICITY/RACE, GENDER, AND PROTECTED VETERAN STATUS SURVEY
-  text: The Company is Federal contractor and is subject to certain governmental record keeping and reporting requirements. In order to help it comp
-  text: The Company and its subsidiaries and divisions are government contractors and equal opportunity employers. As such, we are committed to ensu
-  text: The Company will use the information in accordance with the provisions of applicable laws, executive orders, and regulations, including thos
-  text: Please check the appropriate box which applies to you for each section below:
- {formField-gender}
-label: Gender:*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish cult
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicity}
-label: Select Race: DEFINITIONS: White (not Hispanic or Latino): A person having origins in any of the original peopl
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-veteranStatus}
-label: Protected Veterans are defined as follows: Disabled Veteran: a veteran of the U.S. military, ground, naval or 
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: Ferguson and its subsidiaries and divisions (the “Company”) are equal opportunity employers dedicated to a policy of non-discrimination in e
-  text: I HAVE READ AND UNDERSTAND THE FOLLOWING:
-  text: I understand that an offer of employment with the Company does not constitute a contract of employment for any definite duration. If I becom
-  text: I authorize investigation of all information contained in this application, including my qualifications, character and/or ability from forme
-  text: I understand that any conditional offer of employment is subject to verification of all information contained in this Application or other p
-  text: I understand that if I am offered a position at the Company, I will be required to take a drug test and receive a negative result on the dru
-  text: I understand and agree that any false, misleading or incomplete information given in my Application, resumé, interview(s) or other pre-emplo
-  text: I hereby certify that I am able to perform, with or without reasonable accommodations, the essential job functions of the position for which
-  text: I understand that I am required to abide by all policies, rules and regulations of the Company including, but not limited to, all applicable
-  text: I hereby acknowledge that I have read and understand all of the information written above and agree to the terms therein. I certify that the
-  text: Attention Massachusetts Applicants
-  text: Attention Maryland Applicants:
-  text: Attention California Applicants
-  text: Attention Colorado Applicants:
-  text: Colorado candidates are not required to list dates of attendance, graduation from an educational institution, or other information about the
-  text: This certifies that this Application was completed by me and that all entries on it, and information in it, are true and complete to the bes
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Applicant Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 10:03:27  blocked  Specialist I, Customer Service @ asm
-url: https://www.asm.com/open-vacancies/specialist-i-customer-service-4976204101
-why: no application form found on page
-  [button] 
-  [button] 
-# Search
-  [button] 
-  <input:search #quickSearchInput empty>
-  [button] 
-# Specialist I, Customer Service
-  text: Ireland > Lucan, Co. Dublin
-  text: Specialist I, Customer Service
-# Job details
-  text: Step into a career with ASM, where cutting edge technology meets collaborative culture.
-  text: For over 55 years ASM has been ahead of what’s next, at the forefront of innovation and what’s technologically possible. With more than 4,50
-  text: We’re not like most. We don’t just overcome obstacles – we don’t see them. Instead, we see the potential in every person, and every situatio
-  text: . A company that has been searching for people just like you.
-  text: The Operations Specialist is responsible for supporting and improving day-to-day business operations to ensure efficiency, accuracy, and ser
-  text: Execute and support daily operational activities to ensure business continuity and service delivery.
-  text: Monitor operational workflows, identify bottlenecks, and implement corrective actions.
-  text: Coordinate activities across departments to ensure alignment with business objectives.
-  text: Ensure compliance with company policies, procedures, and regulatory requirements.
-  text: Data Analysis and Reporting
-  text: Collect, analyze,interpret and publish operational data and performance metrics.
-  text: Prepare regular reports, dashboards, and KPI scorecards.
-  text: Identify trends, risks, and opportunities based on operational performance.
-  text: Support operational projects, system implementations, and organizational initiatives.
-  text: Track project milestones, action items, and deliverables.
-  text: Assist with change management activities and user adoption efforts.
-  text: Coordinate testing, training, and process documentation for new initiatives.
-  text: 2-5 years customer service within a high tech environment is required or an equivalent combination of education and experience from which co
-  text: Bachelor's degree in Business Administration, Operations Management, Supply Chain, Engineering, or related field.
-  text: 2-5 years of experience in operations, supply chain, customer service, logistics, or a related business function.
-  text: Strong analytical and problem-solving skills.
-  text: Proficiency in Microsoft Excel, Power BI, and Microsoft Office Suite.
-  text: Experience using ERP, CRM, or operational management systems.
-  text: Excellent communication and stakeholder management skills.
-  text: Knowledge of supply chain, inventory management, or customer operations.
-  text: Project management experience.
-  text: Apply today to be part of what’s next.
-  text: We make the tech that enables the chips in devices which improve lives around the world. We do this with an eye to the future, pushing the b
-  text: ASM is an equal opportunity employer and considers qualified applicants for employment without regard to race, color, religion, age, nationa
-# ASM is hiring! Review all of the job details and apply today:
-  [button] Share on Facebook
-  [button] Share on Twitter
-  [button] Share on LinkedIn
-  [button] Share via E-mail
-<iframe https://job-boards.eu.greenhouse.io/embed/job_app>
-  text: © 2026 ASM International N.V.
-
-=== 2026-10-20 10:04:09  skipped  Quality and Safety Specialist @ ferguson
-url: https://ferguson.wd1.myworkdayjobs.com/ferguson_experienced/job/Aurora-CO/Quality-and-Safety-Specialist_R-140870/apply
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Protected Veterans are defined as follows: Disabled Veteran:
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Quality and Safety Specialist
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# APPLICANT VOLUNTARY SELF-IDENTIFICATION ETHNICITY/RACE, GENDER, AND PROTECTED VETERAN STATUS SURVEY
-  text: The Company is Federal contractor and is subject to certain governmental record keeping and reporting requirements. In order to help it comp
-  text: The Company and its subsidiaries and divisions are government contractors and equal opportunity employers. As such, we are committed to ensu
-  text: The Company will use the information in accordance with the provisions of applicable laws, executive orders, and regulations, including thos
-  text: Please check the appropriate box which applies to you for each section below:
- {formField-gender}
-label: Gender:*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Hispanic or Latino: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish cult
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicity}
-label: Select Race: DEFINITIONS: White (not Hispanic or Latino): A person having origins in any of the original peopl
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-veteranStatus}
-label: Protected Veterans are defined as follows: Disabled Veteran: a veteran of the U.S. military, ground, naval or 
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
-  text: Ferguson and its subsidiaries and divisions (the “Company”) are equal opportunity employers dedicated to a policy of non-discrimination in e
-  text: I HAVE READ AND UNDERSTAND THE FOLLOWING:
-  text: I understand that an offer of employment with the Company does not constitute a contract of employment for any definite duration. If I becom
-  text: I authorize investigation of all information contained in this application, including my qualifications, character and/or ability from forme
-  text: I understand that any conditional offer of employment is subject to verification of all information contained in this Application or other p
-  text: I understand that if I am offered a position at the Company, I will be required to take a drug test and receive a negative result on the dru
-  text: I understand and agree that any false, misleading or incomplete information given in my Application, resumé, interview(s) or other pre-emplo
-  text: I hereby certify that I am able to perform, with or without reasonable accommodations, the essential job functions of the position for which
-  text: I understand that I am required to abide by all policies, rules and regulations of the Company including, but not limited to, all applicable
-  text: I hereby acknowledge that I have read and understand all of the information written above and agree to the terms therein. I certify that the
-  text: Attention Massachusetts Applicants
-  text: Attention Maryland Applicants:
-  text: Attention California Applicants
-  text: Attention Colorado Applicants:
-  text: Colorado candidates are not required to list dates of attendance, graduation from an educational institution, or other information about the
-  text: This certifies that this Application was completed by me and that all entries on it, and information in it, are true and complete to the bes
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Applicant Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-20 10:04:23  blocked  Data Analyst @ urbancompass
-url: https://job-boards.greenhouse.io/embed/job_board
-stage: page 1
-why: not a real application form (3 fields, no résumé upload); page shows: 
-  text: The job you are looking for is no longer open.
-# Current openings at Compass
-  text: Level-up your career by having opportunities at Compass sent directly to your inbox.
-label: Search
-  <input:text #keyword-filter empty>
-label: Department
-  <input:text #department-filter empty>
-  [button] 
-label: Office
-  <input:text #office-filter empty>
-  [button] 
-# 209 jobs
-# Agent Operations
-  text: Agent Experience Coordinator
-  text: Winter Park, Florida, United States
-  text: Huntington, New York, United States
-  text: PA - Wayne - 216 East Lancaster Avenue
-  text: IN - Carmel - 10 East Main Street
-  text: Atlanta, Georgia, United States
-  text: Ridgewood, New Jersey, United States
-  text: Greenbrae, California, United States
-  text: Miami Beach; Miami Beach, Florida, United States
-  text: Chicago, Illinois, United States
-  text: Libertyville, Illinois, United States; Long Grove, Illinois, United States
-  text: Customer Success Coordinator
-  text: Customer Success & Office Coordinator
-# Business Operations
-  text: Lead, Inventory Operations
-  text: Program Manager, Inventory Strategy and Ops
-  text: Madison, New Jersey, United States; Manhattan; New York City
-# Data & Analytics
-  text: VP, Data Products & Solutions
-  text: Dallas, Texas, United States
-  text: Seattle, Washington, United States
-  text: Boston, Massachusetts, United States
-# Engineering
-  text: Manhattan, New York, United States
-  text: Senior Software Engineer I
-  text: Boca Raton; Boston; New York City; Seattle
-  text: Senior Software Engineer I - Front End
-  text: Senior Software Engineer II
-  [button] 
-  [button] 1
-  [button] 2
-  [button] 3
-  [button] 4
-  [button] 5
-  [button] 
-
-=== 2026-10-20 10:06:33  skipped  University Associate, Forensic Data & Analytics @ ankura
-url: https://ankura.wd5.myworkdayjobs.com/ankura/job/New-York-NY/University-Associate--Forensic-Data---Analytics_R104938/apply
-stage: Application Questions
-why: can't truthfully answer required: Employment Contract; Non-Compete Agreement; Non-Solicitation Agreement; Other; Not Applicable
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# University Associate, Forensic Data & Analytics
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-db24c57924991001aa48035043920000}
-label: Without sponsorship, are you legally permitted to work in the country where this job is located?*
-  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa48035043920000
- {formField-db24c57924991001aa48051daf260006}
-label: What is your availability to start a new position?*
-  text: current value is MM/DD/YYYY
-  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionMonth-input} empty>
-  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionDay-input} empty>
-  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-db24c57924991001aa4805b75d700000}
-label: Are you currently or have you previously worked for the US Government (including US Military)?*
-  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4805b75d700000
- {formField-db24c57924991001aa4805b75d700006}
-label: Are you subject to any restrictive covenants that would preclude you from fully performing your work with anot
-  <input:checkbox #5b979464138c0151bb7f55e0c746d395-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Employment Contract
-  <input:checkbox #5b979464138c0181948655e0c746d495-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Non-Compete Agreement
-  <input:checkbox #5b979464138c01d6038d55e0c746d595-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Non-Disclosure Agreement
-  <input:checkbox #5b979464138c01ea179355e0c746d695-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Non-Solicitation Agreement
-  <input:checkbox #5b979464138c01caae9855e0c746d795-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Other
-  <input:checkbox #5b979464138c0124e7b255e0c746d895-db24c57924991001aa4805b75d7 required question-unanswered>
-label: Not Applicable
- {formField-db24c57924991001aafbb455c4260000}
-label: Is your graduation date between December 2026 and August 2027?*
-  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aafbb455c4260000
- {formField-db24c57924991001aa4806eabbae0001}
-label: Is your cumulative GPA 3.0 or higher?*
-  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0001
- {formField-db24c57924991001aa4806eabbae0004}
-label: Are you available to be based in the posted location of this role?*
-  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0004
- {formField-db24c57924991001aa480784514c0001}
-label: What type of role (career focus area) do you ideally see yourself in 3-5 years from now?*
-  <textarea #primaryQuestionnaire--db24c57924991001aa480784514c0001 required empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-
 === 2026-10-20 10:08:08  skipped  Sales Trainee - Access Equipment - Texas @ oshkoshcorporation
 url: https://oshkoshcorporation.wd5.myworkdayjobs.com/oshkosh/job/Remote-Texas-United-States/Sales-Trainee---Access-Equipment---Texas_R50378/apply
 stage: Application Questions
@@ -5503,4 +5015,557 @@ why: no confirmation after submit; server said: POST 1.myworkdayjobs.com/wday/cx
   [button]  {taskModalCloseButton}
 # Application Submitted
   [button] Return to Home {returnToHome}
+
+=== 2026-10-20 13:42:59  skipped  Production Operations Specialist  @ altentechnologyusa
+url: https://job-boards.greenhouse.io/altentechnologyusa/jobs/5199963007
+stage: page 1
+why: can't truthfully answer required: To prove you are a real person, please type Real below*
+# Production Operations Specialist
+  text: Conklin, New York, United States
+  [button] Apply
+  text: We’re ALTEN Technology USA, an engineering company helping clients bring groundbreaking ideas to life—from advancing space exploration and l
+  text: As part of the global ALTEN Group—57,000+ engineers in 30 countries—we deliver across the entire product development cycle, from consulting 
+  text: When you join ALTEN Technology USA, you’ll collaborate on some of the world’s toughest engineering challenges, supported by mentorship, care
+  text: As a Production Operations Specialist you will be responsible for;
+  text: KPI Implementation & Framework Design: Support and evaluate supplier’s KPI plan definition. Implement KPI plan to measure line efficiency, q
+  text: Real-Time Monitoring & Floor Control: Maintain a permanent physical presence on the production floor to monitor processes, ensuring the prod
+  text: Deviation Management & Rapid Action: Identify real-time production bottlenecks or quality deviations and immediately drive corrective and pr
+  text: Integrated Program & MES Support: Collaborate directly with and support the current Program Manager in driving overall project coordination,
+  text: Transparent Reporting: Create and maintain daily/weekly operational dashboards, in support to Airbus NL’s supplier, to report performance me
+  text: 5+ years in Manufacturing Operations, Production Management, or Quality Engineering within high-volume or regulated manufacturing environmen
+  text: Strong familiarity with MES implementations, shop-floor data automation, and digital tracking. BSc/MSc in Engineering. Experience within aer
+  text: Skills: Proven expertise in Lean Manufacturing, root-cause analysis and PPS (e.g., 5 Whys, 8D), and KPI dashboard design.
+  text: Soft Skills: Strong assertiveness and stakeholder management skills; ability to comfortably navigate and drive accountability within a third
+  text: All qualified applicants will receive consideration for employment and will not be discriminated against on the basis of race, color, religi
+  text: Drug Screening Requirement:
+  text: Interested in building your career at ALTEN Technology USA? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: LinkedIn Profile
+  <input:text #question_12589178007 empty>
+label: Website
+  <input:text #question_12589179007 empty>
+label: What is your full legal name, as presented on your ID?*
+  <input:text #question_12589180007 required empty>
+label: What is your preferred first name?
+  <input:text #question_12589181007 empty>
+label: Are you eligible to work in the US?*
+  <input:text #question_12589182007 required empty>
+  [button] 
+  <input required empty>
+label: Will you now or in the future require sponsorship ?*
+  <input:text #question_12589183007 required empty>
+  [button] 
+  <input required empty>
+label: If yes, please enter visa type*
+  <input:text #question_12589184007 required empty>
+  [button] 
+  <input required empty>
+label: If referred by an Alten USA employee, please enter their full name below.
+  <input:text #question_12589185007 empty>
+label: To prove you are a real person, please type Real below*
+  <input:text #question_12589186007 required empty>
+label: By selecting YES, I consent to receive recruiting SMS messages from Alten Technology USA at the phone number p
+  <input:text #question_12589187007 required empty>
+  [button] 
+  <input required empty>
+  text: Message and data rates may apply, depending on your mobile phone service plan. At any time you can get more help by replying HELP to these t
+  text: Candidate Privacy Policy & Terms of Service
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in ALTEN Technology USA’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group statu
+label: Gender
+  <input:text #gender empty>
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  <input:text #veteran_status empty>
+  [button] 
+  text: We use Greenhouse’s AI-powered Talent Matching tool to compare your application against our job requirements.
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-20 13:50:47  blocked  Bilingual Referral Coordinator (Remote PST, Spanish Speaking) @ pairteam
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (2 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current openings at Pair Team
+  text: Spam or fraudulent activity is on the rise!
+  text: Level-up your career by having opportunities at Pair Team sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+label: Department
+  <input:text #department-filter empty>
+  [button] 
+# 4 jobs
+# Legal
+# Clinical Services
+  text: Part-Time Family Physician (Remote)
+
+=== 2026-10-20 13:53:55  skipped  Documentation Coordinator - Audit Management @ convatec
+url: https://convatec.wd1.myworkdayjobs.com/convatec/job/Centennial---Colorado-US/Documentation-Coordinator---Audit-Management_JR00021657/apply
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Other (United States of America)
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Forever Caring
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Documentation Coordinator - Audit Management
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions
+{progressBarActiveStep} current step 4 of 6 Voluntary Disclosures
+label: current step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data Statement
+  text: ou are being given the opportunity to provide the following information in order to help us comply with federal and state Equal Employment
+  text: Action record keeping, reporting, and other legal requirements.
+ {formField-gender}
+label: Gender*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Ethnicity - Hispanic or Latino?*
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicityMulti}
+label: Race*
+  <input:checkbox #45492c468885496cbf5f731296a9fb20-ethnicityMulti required question-unanswered>
+label: American Indian or Alaska Native (United States of America)
+  <input:checkbox #d4aedbb8f8b0428389a4b24070e6c6a2-ethnicityMulti required question-unanswered>
+label: Asian (United States of America)
+  <input:checkbox #fb41ab69bc0345cbaad597d2101827ff-ethnicityMulti required question-unanswered>
+label: Black or African American (United States of America)
+  <input:checkbox #7fcf0af01c654e65b2203d3ff59cd3bd-ethnicityMulti required question-unanswered>
+label: Decline to State (United States of America)
+  <input:checkbox #e4f6295350b74117a746c82875754467-ethnicityMulti required question-unanswered>
+label: Hispanic or Latino (United States of America)
+  <input:checkbox #ed12ba810ed44daeb35039325bf802ba-ethnicityMulti required question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (United States of America)
+  <input:checkbox #5d9cbd7d894041658acecebbe8bf0bee-ethnicityMulti required question-unanswered>
+label: Other (United States of America)
+  <input:checkbox #0dbd3924099b4e2996be4d058096a52f-ethnicityMulti required question-unanswered>
+label: Two or More Races (United States of America)
+  <input:checkbox #bd298c5d68ab41809dc12279f929d35e-ethnicityMulti required question-unanswered>
+label: White (United States of America)
+ {formField-veteranStatus}
+label: Protected Veteran Status*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: https://www.convatec.com/about-us/privacy-policy/
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 13:59:49  blocked  Tech Support Analyst - NYC (onsite) @ accenture
+url: https://accenture.wd103.myworkdayjobs.com/AccentureCareers/job/New-York-One-Manhattan-West-Corp/Tech-Support-Analyst---NYC--onsite-_R00333803/apply/applyManually
+stage: account
+why: account: Workday refused the sign-in and the password could not be reset through your email: sign in there once yourself (make the account, or use 'Forgot your password?') with your ACCOUNT_PASSWORD and it will work from then on
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search Careers {navigationItem-Search Careers}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Tech Support Analyst - NYC (onsite)
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{signInContent}
+# Sign In
+ {formField-email}
+label: Email Address*
+  <input:text #input-6 {email} required filled>
+ {formField-password}
+label: Password*
+  <input:password #input-7 {password} required>
+  [button]  {click_filter}
+  [button] Sign In {signInSubmitButton}
+  [button] Create Account {createAccountLink}
+  [button] Forgot your password? {forgotPasswordLink}
+label: Enter website. This input is for robots only, do not enter if you're human.
+  <input:text #654c8b37-1a4e-42d9-a318-83a2a9f14fff {beecatcher} empty>
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Accenture Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+(dialog)
+  [button] 
+{signInContent}
+# Sign In
+  text: You may choose to sign in using your Google account as an alternative authentication method. Where selected, authentication is handled by th
+  text: Accenture’s privacy policy
+  text: Recruitment and Hiring Privacy Statement
+  text: Security features such as multi-factor authentication is strongly encouraged to be enabled, however are governed by the respective provider 
+  [button] Sign in with Google {GoogleSignInButton}
+  [button] Sign in with email {SignInWithEmailButton}
+
+=== 2026-10-20 14:26:09  skipped  Leasing Professional - Indigo 19 (Virginia Beach, VA) @ greystar
+url: https://greystar.wd1.myworkdayjobs.com/External/job/Remote-Virginia-Remote-Virginia-VA/Leasing-Professional---Indigo-19--Virginia-Beach--VA-_R0194503/apply
+stage: Application Questions
+why: can't truthfully answer required: Please provide your Birth Month and Birth Day (e.g. 11/18). ; Please provide the last four digits of your Social Security 
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers Home {navigationItem-Careers Home}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Leasing Professional - Indigo 19 (Virginia Beach, VA)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-f35f0aebbd0f100970576ab9f21a0000}
+label: Are you currently employed by Greystar?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0000
+ {formField-f35f0aebbd0f100970576ab9f21a0003}
+label: Are you a Former Greystar Team Member?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0003
+ {formField-f35f0aebbd0f100970576ab9f21a0007}
+label: Are you legally eligible to work in the country to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576ab9f21a0007
+ {formField-f35f0aebbd0f100970576b5393f10002}
+label: Will you now or in the future require sponsorship by Greystar in order for us to employ (or continue to employ
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10002
+ {formField-f35f0aebbd0f100970576b5393f10006}
+label: Do you meet the minimum requirements for the job, as outlined in the Job Description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10006
+ {formField-f35f0aebbd0f100970576b5393f10009}
+label: Are you able to perform all essential functions of the position you are applying to with or without reasonable
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576b5393f10009
+ {formField-f35f0aebbd0f100970576bed2afa0001}
+label: If hired, will you be at least 18 years old when you start work with Greystar?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0001
+ {formField-f35f0aebbd0f100970576bed2afa0004}
+label: Will you have reliable transportation to get to work on time?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0004
+ {formField-f35f0aebbd0f100970576bed2afa0007}
+label: Are you available to work overtime if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576bed2afa0007
+ {formField-f35f0aebbd0f100970576c86ec220000}
+label: Are you available to work weekends if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220000
+ {formField-f35f0aebbd0f100970576c86ec220003}
+label: Are you available to work on-call, if needed?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220003
+ {formField-f35f0aebbd0f100970576c86ec220006}
+label: Are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220006
+ {formField-f35f0aebbd0f100970576c86ec220009}
+label: Salary Expectations:*
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576c86ec220009 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0000}
+label: What is your primary spoken language?*
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0000 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0001}
+label: What other languages are you fluent in, if any?
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0001 empty>
+ {formField-f35f0aebbd0f100970576d209a7b0002}
+label: Please provide your Birth Month and Birth Day (e.g. 11/18). DO NOT provide the year. This information is used 
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0002 required empty>
+ {formField-f35f0aebbd0f100970576d209a7b0003}
+label: Please provide the last four digits of your Social Security Number. This information is used along with your M
+  <textarea #primaryQuestionnaire--f35f0aebbd0f100970576d209a7b0003 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 14:26:21  blocked  Document Retrieval Specialist (Remote) @ abclegalservices
+url: https://job-boards.greenhouse.io/embed/job_board
+why: no application form found on page
+  text: The job you are looking for is no longer open.
+# Current openings at ABC Legal Services
+  text: Level-up your career by having opportunities at ABC Legal Services sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+# 109 jobs
+# Account Management
+# Court Support
+# Customer Success
+  text: Customer Service Representative (Remote)
+  text: Montana, Wisconsin, Florida, Oklahoma, Iowa, Arkansas, Michigan (Remote)
+  text: North Dakota, Kansas, Indiana, Kentucky, North Carolina, South Carolina, Virginia (Remote)
+# Operations (Docketly)
+  text: Onsite Senior Full-Cycle Recruiter — Attorneys
+  text: Senior Full-Cycle Recruiter — Attorneys
+# Performance (Docketly)
+  text: Legal Performance Specialist
+# Success (Docketly)
+# International
+  text: International Legal Support Specialist
+# IT
+  text: Product Manager — Service of Process
+  text: Security Analyst I-Seattle, Washington
+  text: Senior Java Developer — Enterprise API Integrations
+  text: Sr. Database Engineer, Postgre SQL/AWS Aurora
+# Physical Fulfillment
+# Process Server Performance
+  text: Dispatch Coordinator for Process Servers
+  text: Regional Operations Manager, Process Server Network – Southwest
+  text: Arizona, Texas, US (Remote)
+# Process Servers
+  text: Certified DCWP Process Server
+  text: Employee Legal Process Server*
+  text: Arlington, Washington, United States
+  text: Ogden, Utah, United States
+  [button] 
+  [button] 1
+  [button] 2
+  [button] 3
+  [button] 
+
+=== 2026-10-20 14:28:41  skipped  Production Underwriter @ amynta
+url: https://amynta.wd5.myworkdayjobs.com/global/job/KS---Remote/Production-Underwriter_2507-0548/apply
+stage: Application Questions
+why: can't truthfully answer required: Call - Mobile Phone; Call - Home Phone; Call - Work Phone; Email
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Production Underwriter
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-4eaa740958f11001b03d525411a60000}
+label: Are you currently employed by Amynta Group or one of Amynta's family of affiliated brands? If Yes, you will ne
+  [dropdown] nothing chosen #primaryQuestionnaire--4eaa740958f11001b03d525411a60000
+ {formField-2b8bcaf7a96b1001b0289586be420001}
+label: Are you at least 18 years old?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289586be420001
+ {formField-2b8bcaf7a96b1001b0289620d5860002}
+label: Are you eligible to work in the country in which this position is located?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289620d5860002
+ {formField-2b8bcaf7a96b1001b0289620d5860005}
+label: Do you now, or will you in the future require immigration sponsorship for work Authorization (e.g.H-1B)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b0289620d5860005
+ {formField-2b8bcaf7a96b1001b02896bba7f20004}
+label: Have you worked for Amynta Group or one of the firms in the Amynta portfolio before?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02896bba7f20004
+ {formField-2b8bcaf7a96b1001b02896bba7f20007}
+label: Do you have any relatives employed by Amynta or any of the firms in the Amynta Group portfolio?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02896bba7f20007
+ {formField-2b8bcaf7a96b1001b028975665ce0002}
+label: What are your preferred methods of communication?*
+  <input:checkbox #519f2f60edaf01324f3da5bbfc300879-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Call - Mobile Phone
+  <input:checkbox #519f2f60edaf01393a4aa5bbfc300979-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Call - Home Phone
+  <input:checkbox #519f2f60edaf016ba057a5bbfc300a79-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Call - Work Phone
+  <input:checkbox #519f2f60edaf01522164a5bbfc300b79-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Text Message (Carrier charges may apply)
+  <input:checkbox #519f2f60edaf01491171a5bbfc300c79-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Email
+ {formField-2b8bcaf7a96b1001b028975665ce0008}
+label: What is the best time of day to reach you?*
+  <input:checkbox #519f2f60edaf015e275da4bbfc30fd78-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Morning
+  <input:checkbox #519f2f60edaf0192156da4bbfc30fe78-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Afternoon
+  <input:checkbox #519f2f60edaf018755a9a4bbfc30ff78-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Evening
+  <input:checkbox #519f2f60edaf01fa6cbea4bbfc300079-2b8bcaf7a96b1001b028975665c required question-unanswered>
+label: Night
+ {formField-2b8bcaf7a96b1001b02897f146c00003}
+label: Are you willing to travel for business?*
+  [dropdown] nothing chosen #primaryQuestionnaire--2b8bcaf7a96b1001b02897f146c00003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-20 14:30:45  blocked  PBM Operations Associate @ rightwayhealthcare
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (2 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current Openings at Rightway
+  text: Rightway is a technology and services company radically simplifying healthcare for clients and members. Its care navigation and new-to-the w
+  text: Looking to make an impact? Let's talk!
+  text: Level-up your career by having opportunities at Rightway sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+label: Office
+  <input:text #office-filter empty>
+  [button] 
+# 32 jobs
+# Commercial: Commercial Operations
+  text: Founding Engineer, Commercial Systems
+# Commercial: Consultant Relations
+  text: Director, Consultant Relations
+# Commercial: CS: Navigation
+  text: Client Success Associate, Navigation
+# Commercial: CS: PBM
+  text: Senior Manager, Clinical Consulting & Plan Performance
+# Commercial: Enterprise
+# Commercial: Growth
+  text: Director, Strategic Partnerships
+  text: Navigation Solution Consultant
+# Engineering: Data & Analytics
+  text: Data Analyst III, Care Navigation
+# Engineering: Security
+# Engineering: SWE
+# G&A: Finance & Accounting
+# Marketing: Creative Studio
+# Navigation: Clinical COGS
+  text: Registered Nurse (RN), Population Health
+# Navigation: Non-Clinical COGS
+  text: Billing and Claims Specialist
+# PBM: Clinical COGS
+  text: Clinical Pharmacist - Specialty
+  text: Clinical Pharmacist- Utilization Management
+# PBM: Non-Clinical COGS
+  text: Pharmacy Technician- Care Team
+  text: Pharmacy Technician, Care Team
+  text: Pharmacy Technician - Care Team (Bilingual)
+  text: Remote Pharmacy Technician
+  text: Remote Pharmacy Technician (Bilingual)
+# PBM: Operations & Management
+  text: Remote Seasonal Pharmacy Technician
+# Product: Management
+  text: Product Support Specialist
+  text: Senior Product Manager, PBM Platform
+
+=== 2026-10-20 14:32:10  blocked  Deal Desk Analyst @ elastic
+url: https://jobs.elastic.co/
+stage: page 1
+why: not a real application form (2 fields, no résumé upload); page shows: :Elasticsearch; :Solutions; :Enterprise; :Resources; :Search; :UNSUBSCRIBE
+  text: The Forrester Wave™: XDR Platforms, Q2 2026
+  [button] Elasticsearch
+  [button] Solutions
+  [button] Enterprise
+  [button] Resources
+  [button] Search
+# Careers at Elastic
+  <input:text name=search filled>
+  text: Results update automatically after you enter at least 3 characters.
+  text: Please beware of potentially fraudulent job postings or suspicious recruiting activity by persons that are currently posing as Elastic emplo
+# Openings By Teams
+# Openings By Country
+# Unsubscribe from Recruiting Communications
+  text: Entering your email here will remove your data from our recruiting system and your data will be anonymized.
+label: Email
+  <input:text #outlined-basic filled>
+  [button] UNSUBSCRIBE
+  text: This website and all associated content, software, discussion forums, products, and services are intended for professional use only. No cons
+  text: Elastic, Elasticsearch, and other related marks are trademarks, logos, or registered trademarks of elasticsearch B.V. in the United States a
+  text: Apache Software Foundation
+  text: Showing 0 to 0 results out of 0, searching for "<city>, Colorado".
+
+=== 2026-10-20 14:32:19  blocked  Associate Deal Desk Analyst @ jamasoftware
+url: https://job-boards.greenhouse.io/embed/job_board
+why: no application form found on page
+  text: The job you are looking for is no longer open.
+  text: Level-up your career by having opportunities at Jama Software sent directly to your inbox.
+  text: There are no current openings.
 
