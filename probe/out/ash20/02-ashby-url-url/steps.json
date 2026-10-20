@@ -1,0 +1,956 @@
+[
+ {
+  "step": 1,
+  "url": "https://jobs.ashbyhq.com/worldly/4c6865c2-9cf3-49cc-bfaf-2490420b7b72/application",
+  "fields": [
+   {
+    "id": "f0",
+    "required": false,
+    "label": "Autofill from resume your resume here to autofill key application fields.",
+    "maxlength": null,
+    "sel": "",
+    "key": "",
+    "has_value": false,
+    "kind": "file",
+    "accept": "application/pdf,.pdf,application/msword,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,application/vnd.oasis.opendocument.text,.odt,application/rtf,.rtf,text/plain,.txt,text/markdown,.md",
+    "hint": "",
+    "elid": ""
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "Name",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_name\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text",
+    "ph": "Type here..."
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Email",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_email\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "email",
+    "ph": "hello@example.com..."
+   },
+   {
+    "id": "f3",
+    "required": true,
+    "label": "Phone Number",
+    "maxlength": null,
+    "sel": "[id=\"56b8cb55-7d85-43c6-aea6-a432ecbbac42\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "tel",
+    "ph": "1-415-555-1234..."
+   },
+   {
+    "id": "f4",
+    "required": false,
+    "label": "Location",
+    "maxlength": null,
+    "sel": "",
+    "key": "",
+    "has_value": false,
+    "kind": "combobox",
+    "ph": "Start typing...",
+    "options": []
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "Resume",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_resume\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "file",
+    "accept": "application/pdf,.pdf,application/msword,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,application/vnd.oasis.opendocument.text,.odt,application/rtf,.rtf,text/plain,.txt,text/markdown,.md,image/*,video/*,audio/*",
+    "hint": "_systemfield_resume",
+    "elid": "_systemfield_resume"
+   },
+   {
+    "id": "f6",
+    "required": false,
+    "label": "LinkedIn Profile",
+    "maxlength": null,
+    "sel": "[id=\"d6fc78dc-d2e7-48a9-a930-3b385ff1ac0f\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text",
+    "ph": "Type here..."
+   },
+   {
+    "id": "f7",
+    "required": false,
+    "label": "Website /Portfolio/Other Links",
+    "maxlength": null,
+    "sel": "[id=\"b33582d1-c372-4b06-b24a-645f055ab4d0\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "textarea",
+    "ph": "Type here..."
+   },
+   {
+    "id": "g_f8",
+    "kind": "radio",
+    "label": "What is your current age?",
+    "required": false,
+    "key": "",
+    "options": [
+     "Under 30",
+     "30-39",
+     "40-49",
+     "50-59",
+     "60 or older",
+     "I prefer not to answer"
+    ],
+    "option_ids": [
+     "f8",
+     "f9",
+     "f10",
+     "f11",
+     "f12",
+     "f13"
+    ],
+    "option_sels": [
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-0\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-1\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-2\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-3\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-4\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_cf0f1bc7-7ce6-4eb3-aebc-b6562141cb68-labeled-radio-5\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "g_f14",
+    "kind": "radio",
+    "label": "What is your gender identity?",
+    "required": false,
+    "key": "",
+    "options": [
+     "Man",
+     "Woman",
+     "Non-Binary",
+     "Another Gender Identity",
+     "I prefer not to answer"
+    ],
+    "option_ids": [
+     "f14",
+     "f15",
+     "f16",
+     "f17",
+     "f18"
+    ],
+    "option_sels": [
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_8d7dcc65-3a0b-476a-b679-574b869780bb-labeled-radio-0\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_8d7dcc65-3a0b-476a-b679-574b869780bb-labeled-radio-1\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_8d7dcc65-3a0b-476a-b679-574b869780bb-labeled-radio-2\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_8d7dcc65-3a0b-476a-b679-574b869780bb-labeled-radio-3\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_8d7dcc65-3a0b-476a-b679-574b869780bb-labeled-radio-4\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "f19",
+    "kind": "checkbox_single",
+    "label": "Asian or Asian American",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Black or African American Hispanic or Latine Indigenous or Native American Native Hawaiian or Other Pacific Islander White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Asian or Asian American\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f20",
+    "kind": "checkbox_single",
+    "label": "Black or African American",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Hispanic or Latine Indigenous or Native American Native Hawaiian or Other Pacific Islander White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Black or African American\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f21",
+    "kind": "checkbox_single",
+    "label": "Hispanic or Latine",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Indigenous or Native American Native Hawaiian or Other Pacific Islander White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Hispanic or Latine\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f22",
+    "kind": "checkbox_single",
+    "label": "Indigenous or Native American",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Hispanic or Latine Native Hawaiian or Other Pacific Islander White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Indigenous or Native American\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f23",
+    "kind": "checkbox_single",
+    "label": "Native Hawaiian or Other Pacific Islander",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Hispanic or Latine Indigenous or Native American White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Native Hawaiian or Other Pacific Islander\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f24",
+    "kind": "checkbox_single",
+    "label": "White",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Hispanic or Latine Indigenous or Native American Native Hawaiian or Other Pacific Islander Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"White\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f25",
+    "kind": "checkbox_single",
+    "label": "Other",
+    "question": "Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Hispanic or Latine Indigenous or Native American Native Hawaiian or Pacific Islander White Other I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Other\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "g_f26",
+    "kind": "checkbox_group",
+    "label": "Diversity Survey This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will not affect your job application. The answers to these questions are not seen on an individualized basis and your submission will only be used to assess our diversity and inclusion efforts. What is your current age? Under 30 30-39 40-49 50-59 60 or older What is your gender identity? Man Woman Non-Binary Another Gender Identity Which ethnicity(ies) do you identify with? Please select all that apply. Asian or Asian American Black or African American Hispanic or Latine Indigenous or Native American Native Hawaiian or Other Pacific Islander White Other I prefer not to answer Which of the following communities do you belong to? Please select all that apply. Person with disability Neurodiverse Veteran Parent Refugee or immigrant None of the above I prefer not to answer",
+    "required": false,
+    "key": "",
+    "options": [
+     "I prefer not to answer",
+     "I prefer not to answer"
+    ],
+    "option_ids": [
+     "f26",
+     "f27"
+    ],
+    "option_sels": [
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_1e21d43f-548e-481a-aa5f-f048c73f3de3-labeled-checkbox-7\"]",
+     "[id=\"9b686e87-85b9-496b-ab18-3b30955e4d92_a76e67f9-eeb8-4d06-a9a5-b1596a9726e7-labeled-checkbox-6\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "f28",
+    "kind": "checkbox_single",
+    "label": "Person with disability",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Neurodiverse Veteran Parent Refugee or immigrant None of the above I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Person with disability\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f29",
+    "kind": "checkbox_single",
+    "label": "Neurodiverse",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Person with disability Veteran Parent Refugee or immigrant None of the above I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Neurodiverse\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f30",
+    "kind": "checkbox_single",
+    "label": "Veteran",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Person with disability Neurodiverse Parent Refugee or immigrant None of the above I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Veteran\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f31",
+    "kind": "checkbox_single",
+    "label": "Parent",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Person with disability Neurodiverse Veteran Refugee or immigrant None of the above I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Parent\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f32",
+    "kind": "checkbox_single",
+    "label": "Refugee or immigrant",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Person with disability Neurodiverse Veteran Parent None of the above I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"Refugee or immigrant\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f33",
+    "kind": "checkbox_single",
+    "label": "None of the above",
+    "question": "Which of the following communities do you belong to? Please select all that apply. Person with disability Neurodiverse Veteran Parent Refugee or immigrant I prefer not to answer",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"None of the above\"]",
+    "key": "",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "g_f34",
+    "kind": "radio",
+    "label": "Do you now or will you at any time in the future require sponsorship?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f34",
+     "f35"
+    ]
+   },
+   {
+    "id": "g_f36",
+    "kind": "radio",
+    "label": "Are you located in and legally eligible to work in the location listed on this job posting?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f36",
+     "f37"
+    ]
+   },
+   {
+    "id": "g_f38",
+    "kind": "radio",
+    "label": "Do you have at least 2 years of experience working in an analytical, data-focused, or consulting role?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f38",
+     "f39"
+    ]
+   },
+   {
+    "id": "g_f40",
+    "kind": "radio",
+    "label": "Are you proficient in SQL and comfortable working directly with raw data?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f40",
+     "f41"
+    ]
+   },
+   {
+    "id": "g_f42",
+    "kind": "radio",
+    "label": "Do you have a solid understanding of sustainability concepts such as environmental impact measurement or carbon accounting?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f42",
+     "f43"
+    ]
+   }
+  ],
+  "answers": {
+   "f1": "Brian Alejandro Delgado-Ortega",
+   "f2": "delgado@alumni.usc.edu",
+   "f3": "(970) 366-8832",
+   "f4": "New Castle, Colorado",
+   "f5": "RESUME",
+   "f6": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+   "f7": "https://envyforged.com",
+   "g_f14": "Man",
+   "g_f26": [
+    "I prefer not to answer"
+   ],
+   "g_f34": "No",
+   "g_f36": "No",
+   "g_f38": "Yes",
+   "g_f40": "Yes"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian Alejandro Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "email",
+    "value": "delgado@alumni.usc.edu",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "tel",
+    "value": "(970) 366-8832",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "",
+    "value": "New Castle, Colorado, United States",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_d7ago_28 ashby-application-form-input-autocomplete"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "C:\\fakepath\\briandelgado_resume.pdf",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "https://www.linkedin.com/in/-brian-alejandro-delgado-ortega-a26625220",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "TEXTAREA",
+    "type": "",
+    "value": "https://envyforged.com",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_zf0lr_28 _input_1e3gg_32  ashby-application-form-input-textarea"
+   },
+   "f34": {
+    "id": "f34",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f35": {
+    "id": "f35",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "true",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32 _active_1svni_57 ashby-application-form-input-yesno-option"
+   },
+   "f36": {
+    "id": "f36",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f37": {
+    "id": "f37",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "true",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32 _active_1svni_57 ashby-application-form-input-yesno-option"
+   },
+   "f38": {
+    "id": "f38",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "true",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32 _active_1svni_57 ashby-application-form-input-yesno-option"
+   },
+   "f39": {
+    "id": "f39",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f40": {
+    "id": "f40",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "true",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32 _active_1svni_57 ashby-application-form-input-yesno-option"
+   },
+   "f41": {
+    "id": "f41",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f42": {
+    "id": "f42",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f43": {
+    "id": "f43",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f16": {
+    "id": "f16",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f17": {
+    "id": "f17",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f22": {
+    "id": "f22",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f23": {
+    "id": "f23",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f24": {
+    "id": "f24",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f25": {
+    "id": "f25",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f26": {
+    "id": "f26",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f28": {
+    "id": "f28",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f29": {
+    "id": "f29",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f30": {
+    "id": "f30",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f31": {
+    "id": "f31",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f32": {
+    "id": "f32",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f33": {
+    "id": "f33",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f27": {
+    "id": "f27",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Upload file",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Autofill from resume Upload your resume here to autofill key application fields. Upload file",
+    "html": "<button class=\"_button_zyh3g_28 _secondary_zyh3g_115    _ctaButton_xd2v0_94\">Upload file</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Name Email Phone Number Location Resume briandelgado_resume.pdf Replace or drag and drop here LinkedIn Profile Website /Portfolio/Other Links Do you now or will",
+    "html": "<button class=\"_container_pjyt6_1 _toggleButton_d7ago_32\"><svg viewBox=\"0 0 640 640\" fill=\"none\" height=\"1em\"><path d=\"M303.5 473C312.9 482.4 328.1 482.4 337.4 473L537.4 273C546.8 263.6 546.8 248.4 537.4 239.1C528 229.8 512.8 229.7 503.5 239.1L320.5 422.1L137.5 239.1C128.1 229.7 112.9 229.7 103.6 239.1C94.3 248.5 94.2 263.7 103.6 273L303.6 473z\"></path></svg></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf",
+    "html": "<button title=\"Delete file\" class=\"_button_zyh3g_28 _quaternary_zyh3g_92 _negative_zyh3g_172   _removeButton_10xk4_83 ashby-application-form-input-file-item-delete\"><svg viewBox=\"0 0 448 512\" fill=\"none\" height=\"1em\"><path d=\"M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 3"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Replace",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Replace or drag and drop here",
+    "html": "<button class=\"_button_zyh3g_28 _secondary_zyh3g_115    _button_10xk4_106 ashby-application-form-input-file-dropzone-upload\"><span>Replace</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Submit Application",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Autofill from resume Upload your resume here to autofill key application fields. Upload file Name Email Phone Number Location Resume briandelgado_resume.pdf Rep",
+    "html": "<button class=\"_button_zyh3g_28 _primary_zyh3g_97  _greedy_zyh3g_221  _submitButton_5yu8i_411 ashby-application-form-submit-button\"><span>Submit Application</span><svg viewBox=\"0 0 512 512\" fill=\"none\" height=\"1em\"><path d=\"M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-"
+   }
+  ]
+ }
+]

@@ -1,0 +1,98 @@
+[
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiOrganizationFromHostedJobsPageName",
+  "status": 200,
+  "body": "{\"data\":{\"organization\":{\"organizationId\":\"4195e5bd-57d0-4a7e-beb4-ede14867816b\",\"name\":\"Serve Robotics\",\"publicWebsite\":\"https://www.serverobotics.com/\",\"customJobsPageUrl\":\"https://www.serverobotics.com/careers\",\"hostedJobsPageSlug\":\"serverobotics\",\"allowJobPostIndexing\":true,\"isDemoOrg\":false,\"theme\":{\"colors\":{\"version\":\"1\",\"colorPrimary600\":\"#62D0B5\",\"colorPrimary900\":\"#32B897\"},\"showJobFilters\":true,\"showLocationAddress\":false,\"showTeams\":false,\"showAutofillApplicationsBox\":false,\"logoWordmarkImageUrl\":null,\"logoSquareImageUrl\":null,\"applicationSubmittedSuccessMessage\":null,\"jobBoardTopD"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiJobPosting",
+  "status": 200,
+  "body": "{\"data\":{\"jobPosting\":{\"id\":\"c3597c6d-ba18-4635-a67f-bd06f037465f\",\"title\":\"Financial Analyst, FP&A\",\"departmentName\":\"Finance\",\"departmentExternalName\":\"Finance\",\"locationName\":\"USA (remote)\",\"locationAddress\":null,\"workplaceType\":\"Remote\",\"employmentType\":\"FullTime\",\"descriptionHtml\":\"<p style=\\\"min-height:1.5em\\\">At Serve Robotics, we\u2019re reimagining how things move in cities. Our personable sidewalk robot is our vision for the future. It\u2019s designed to take deliveries away from congested streets, make deliveries available to more people, and benefit local businesses. </p><p style=\\\"min-heigh"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiAutocompleteGeoLocation",
+  "status": 200,
+  "body": "{\"data\":{\"result\":{\"suggestions\":[],\"__typename\":\"AutocompleteLocationResult\"}}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiOrganizationFromHostedJobsPageName",
+  "status": 200,
+  "body": "{\"data\":{\"organization\":{\"organizationId\":\"4195e5bd-57d0-4a7e-beb4-ede14867816b\",\"name\":\"Serve Robotics\",\"publicWebsite\":\"https://www.serverobotics.com/\",\"customJobsPageUrl\":\"https://www.serverobotics.com/careers\",\"hostedJobsPageSlug\":\"serverobotics\",\"allowJobPostIndexing\":true,\"isDemoOrg\":false,\"theme\":{\"colors\":{\"version\":\"1\",\"colorPrimary600\":\"#62D0B5\",\"colorPrimary900\":\"#32B897\"},\"showJobFilters\":true,\"showLocationAddress\":false,\"showTeams\":false,\"showAutofillApplicationsBox\":false,\"logoWordmarkImageUrl\":null,\"logoSquareImageUrl\":null,\"applicationSubmittedSuccessMessage\":null,\"jobBoardTopD"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiCreateFileUploadHandle",
+  "status": 200,
+  "body": "{\"data\":{\"fileUploadHandle\":{\"handle\":\"LaABNcEZnhdNvWX0CI9L8Cg+XLx6CVLLpfUySbBqUXkX62lsjwmjHT3fKHaoi6xmSBaoubh1mOEHRHuGvpdKVsgGsislEBSKIbCGfyNg838ueog6r8hzcshhxs2SdjnaHairO1BbkNokFTqCJgIbE0r/yipyEGLHm3nB960jAddN5WqdOMgAsm00umXVCjckOb2EQsHm0U7AkU8VDiuRpWESBviKNoW2GHjAL4OyMUWMGcM5wMNg2cbbieBrdeFcczEi4fD7yL4O6A0JoofO8IR5RBTep5vxLXBlx+l8oixVCHkcPhKa71B5tSZq/6G8rlC44yrCT8OrLJMsrMYfDHJIY5Og2geHgTT9S1Vhuyg2uOp+0uHV/At2jBfttGstyq89oxTJkg==\",\"url\":\"https://ashbyhq-infra-prd-main-app-uploaded-files-us-east-1.s3.us-east-1.amazonaws.com/\",\"fields\":{\"acl\":\"private\",\"bucket\":\"ashbyhq-infra-prd-main-app-uplo"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationID\":\"St"
+ },
+ {
+  "m": "POST",
+  "url": "https://ashbyhq-infra-prd-main-app-uploaded-files-us-east-1.s3.us-east-1.amazonaws.com/",
+  "status": 204,
+  "body": ""
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValueToFile",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValueToFile\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationI"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationID\":\"St"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationID\":\"St"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiAutocompleteGeoLocation",
+  "status": 200,
+  "body": "{\"data\":{\"result\":{\"suggestions\":[{\"name\":\"New Castle, Colorado, United States\",\"geoLocationPath\":[{\"name\":\"United States\",\"type\":\"Country\",\"providerLocationId\":\"united_states\",\"__typename\":\"GeoLocation\"},{\"name\":\"Colorado\",\"type\":\"Region\",\"providerLocationId\":\"united_states/colorado\",\"__typename\":\"GeoLocation\"},{\"name\":\"New Castle\",\"type\":\"City\",\"providerLocationId\":\"united_states/colorado/new_castle\",\"__typename\":\"GeoLocation\"}],\"__typename\":\"AutocompleteLocation\"},{\"name\":\"New Castle, Delaware, United States\",\"geoLocationPath\":[{\"name\":\"United States\",\"type\":\"Country\",\"providerLocationId\":\""
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationID\":\"St"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"bdcb7914-03ab-4586-a902-98b08f1f4a8e\",\"formControls\":[{\"identifier\":\"997fd8f9-eb02-4093-a70d-5e7b3f86a8e9\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":\"<p><strong>U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION</strong> \u00a0\u00a0(Completion is voluntary and will not subject you to adverse treatment)</p><p></p><p>Serve Robotics provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, "
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"bdcb7914-03ab-4586-a902-98b08f1f4a8e\",\"formControls\":[{\"identifier\":\"997fd8f9-eb02-4093-a70d-5e7b3f86a8e9\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":\"<p><strong>U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION</strong> \u00a0\u00a0(Completion is voluntary and will not subject you to adverse treatment)</p><p></p><p>Serve Robotics provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, "
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5\",\"formControls\":[{\"identifier\":\"4df4652a-87ee-4c4e-b6f7-0083e8861493\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":null,\"fieldEntries\":[{\"id\":\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5__systemfield_name\",\"field\":{\"id\":\"17a42eba-839e-45e9-b66b-9a0926a7e6b2\",\"path\":\"_systemfield_name\",\"humanReadablePath\":\"Name\",\"title\":\"Name\",\"isNullable\":false,\"isPrivate\":false,\"isDeactivated\":false,\"isMany\":false,\"metadata\":{},\"type\":\"String\",\"__autoSerializationID\":\"St"
+ },
+ {
+  "m": "POST",
+  "url": "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiSetFormValue",
+  "status": 200,
+  "body": "{\"data\":{\"setFormValue\":{\"id\":\"bdcb7914-03ab-4586-a902-98b08f1f4a8e\",\"formControls\":[{\"identifier\":\"997fd8f9-eb02-4093-a70d-5e7b3f86a8e9\",\"title\":\"Submit\",\"__typename\":\"FormControl\"}],\"errorMessages\":[],\"formErrors\":[],\"sections\":[{\"title\":null,\"descriptionHtml\":\"<p><strong>U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION</strong> \u00a0\u00a0(Completion is voluntary and will not subject you to adverse treatment)</p><p></p><p>Serve Robotics provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, "
+ }
+]

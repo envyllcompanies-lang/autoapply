@@ -1,0 +1,474 @@
+[
+ {
+  "step": 1,
+  "url": "https://jobs.ashbyhq.com/serverobotics/c3597c6d-ba18-4635-a67f-bd06f037465f/application",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "Name",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_name\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "text",
+    "ph": "Type here..."
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "Email",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_email\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "email",
+    "ph": "hello@example.com..."
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Resume",
+    "maxlength": null,
+    "sel": "[id=\"_systemfield_resume\"]",
+    "key": "",
+    "has_value": false,
+    "kind": "file",
+    "accept": "application/pdf,.pdf,application/msword,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,application/vnd.oasis.opendocument.text,.odt,application/rtf,.rtf,text/plain,.txt,text/markdown,.md,image/*,video/*,audio/*",
+    "hint": "_systemfield_resume",
+    "elid": "_systemfield_resume"
+   },
+   {
+    "id": "f3",
+    "required": false,
+    "label": "Location",
+    "maxlength": null,
+    "sel": "",
+    "key": "",
+    "has_value": false,
+    "kind": "combobox",
+    "ph": "Start typing...",
+    "options": []
+   },
+   {
+    "id": "g_f4",
+    "kind": "radio",
+    "label": "Please select the option '' below I read this",
+    "required": false,
+    "key": "",
+    "options": [
+     "I read this",
+     "I did not read this"
+    ],
+    "option_ids": [
+     "f4",
+     "f5"
+    ],
+    "option_sels": [
+     "[id=\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5_8dd7c06a-ffcd-437c-9953-b3be4918d84c-labeled-radio-0\"]",
+     "[id=\"a9037ac6-0a02-4317-950e-e0fe4fac9ff5_8dd7c06a-ffcd-437c-9953-b3be4918d84c-labeled-radio-1\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "g_f6",
+    "kind": "radio",
+    "label": "Gender Input gender",
+    "required": false,
+    "key": "",
+    "options": [
+     "Male",
+     "Female",
+     "Decline to self-identify"
+    ],
+    "option_ids": [
+     "f6",
+     "f7",
+     "f8"
+    ],
+    "option_sels": [
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_gender-labeled-radio-0\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_gender-labeled-radio-1\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_gender-labeled-radio-2\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "g_f9",
+    "kind": "radio",
+    "label": "Race - A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin regardless of race. - A person having origins in any of the original peoples of Europe, the Middle East, or North Africa. - A person having origins in any of the Black racial groups of Africa. - A person having origins in any of the peoples of Hawaii, Guam, Samoa, or other Pacific Islands. - A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian Subcontinent, including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. - A person having origins in any of the original peoples of North and South America (including Central America), and who maintain tribal affiliation or community attachment. - All persons who identify with more than one of the above five races. Hispanic or Latino White (Not Hispanic or Latino) Black or African American (Not Hispanic or Latino) Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino) Asian (Not Hispanic or Latino) American Indian or Alaska Native (Not Hispanic or Latino) Two or More Races (Not Hispanic or Latino)",
+    "required": false,
+    "key": "",
+    "options": [
+     "Hispanic or Latino",
+     "White (Not Hispanic or Latino)",
+     "Black or African American (Not Hispanic or Latino)",
+     "Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)",
+     "Asian (Not Hispanic or Latino)",
+     "American Indian or Alaska Native (Not Hispanic or Latino)",
+     "Two or More Races (Not Hispanic or Latino)",
+     "Decline to self-identify"
+    ],
+    "option_ids": [
+     "f9",
+     "f10",
+     "f11",
+     "f12",
+     "f13",
+     "f14",
+     "f15",
+     "f16"
+    ],
+    "option_sels": [
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-0\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-1\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-2\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-3\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-4\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-5\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-6\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_race-labeled-radio-7\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "g_f17",
+    "kind": "radio",
+    "label": "Veteran Status",
+    "required": false,
+    "key": "",
+    "options": [
+     "I identify as one or more of the classifications of protected veteran listed above",
+     "I am not a protected veteran",
+     "I decline to self-identify for protected veteran status"
+    ],
+    "option_ids": [
+     "f17",
+     "f18",
+     "f19"
+    ],
+    "option_sels": [
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_veteran_status-labeled-radio-0\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_veteran_status-labeled-radio-1\"]",
+     "[id=\"bdcb7914-03ab-4586-a902-98b08f1f4a8e__systemfield_eeoc_veteran_status-labeled-radio-2\"]"
+    ],
+    "checked": []
+   },
+   {
+    "id": "g_f20",
+    "kind": "radio",
+    "label": "Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?",
+    "required": false,
+    "options": [
+     "Yes",
+     "No"
+    ],
+    "option_ids": [
+     "f20",
+     "f21"
+    ]
+   }
+  ],
+  "answers": {
+   "f0": "Brian Alejandro Delgado-Ortega",
+   "f1": "delgado@alumni.usc.edu",
+   "f2": "RESUME",
+   "f3": "New Castle, Colorado",
+   "g_f6": "Male",
+   "g_f9": "Decline to self-identify",
+   "g_f17": "I am not a protected veteran",
+   "g_f20": "No"
+  },
+  "readback": {
+   "f0": {
+    "id": "f0",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "Brian Alejandro Delgado-Ortega",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f1": {
+    "id": "f1",
+    "tag": "INPUT",
+    "type": "email",
+    "value": "delgado@alumni.usc.edu",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_80epu_28 _input_1e3gg_32 ashby-application-form-input-text"
+   },
+   "f2": {
+    "id": "f2",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "C:\\fakepath\\briandelgado_resume.pdf",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": ""
+   },
+   "f20": {
+    "id": "f20",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "false",
+    "achecked": null,
+    "text": "Yes",
+    "cls": "_container_pjyt6_1 _option_1svni_32  ashby-application-form-input-yesno-option"
+   },
+   "f21": {
+    "id": "f21",
+    "tag": "BUTTON",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": "true",
+    "achecked": null,
+    "text": "No",
+    "cls": "_container_pjyt6_1 _option_1svni_32 _active_1svni_57 ashby-application-form-input-yesno-option"
+   },
+   "f4": {
+    "id": "f4",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f5": {
+    "id": "f5",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "",
+    "value": "New Castle, Colorado, United States",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "_input_d7ago_28 ashby-application-form-input-autocomplete"
+   },
+   "f6": {
+    "id": "f6",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f11": {
+    "id": "f11",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f16": {
+    "id": "f16",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f17": {
+    "id": "f17",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f18": {
+    "id": "f18",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": true,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   },
+   "f19": {
+    "id": "f19",
+    "tag": "INPUT",
+    "type": "radio",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "ashby-application-form-input-radio-group-option-radio"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf",
+    "html": "<button title=\"Delete file\" class=\"_button_zyh3g_28 _quaternary_zyh3g_92 _negative_zyh3g_172   _removeButton_10xk4_83 ashby-application-form-input-file-item-delete\"><svg viewBox=\"0 0 448 512\" fill=\"none\" height=\"1em\"><path d=\"M177.1 48h93.7c2.7 0 5.2 1.3 6.7 3.6l19 28.4h-145l19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0H177.1c-18.7 0-36.2 9.4-46.6 24.9L93.8 80H80.1 3"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Replace",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Replace or drag and drop here",
+    "html": "<button class=\"_button_zyh3g_28 _secondary_zyh3g_115    _button_10xk4_106 ashby-application-form-input-file-dropzone-upload\"><span>Replace</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Name Email Resume briandelgado_resume.pdf Replace or drag and drop here Will you now or in the future require sponsorship for employment visa status (e.g., H-1B",
+    "html": "<button class=\"_container_pjyt6_1 _toggleButton_d7ago_32\"><svg viewBox=\"0 0 640 640\" fill=\"none\" height=\"1em\"><path d=\"M303.5 473C312.9 482.4 328.1 482.4 337.4 473L537.4 273C546.8 263.6 546.8 248.4 537.4 239.1C528 229.8 512.8 229.7 503.5 239.1L320.5 422.1L137.5 239.1C128.1 229.7 112.9 229.7 103.6 239.1C94.3 248.5 94.2 263.7 103.6 273L303.6 473z\"></path></svg></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Submit Application",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Name Email Resume briandelgado_resume.pdf Replace or drag and drop here Will you now or in the future require sponsorship for employment visa status (e.g., H-1B",
+    "html": "<button class=\"_button_zyh3g_28 _primary_zyh3g_97  _greedy_zyh3g_221  _submitButton_5yu8i_411 ashby-application-form-submit-button\"><span>Submit Application</span><svg viewBox=\"0 0 512 512\" fill=\"none\" height=\"1em\"><path d=\"M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-"
+   }
+  ]
+ }
+]
