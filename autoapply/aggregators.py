@@ -414,7 +414,9 @@ def jobright(cfg, base="https://raw.githubusercontent.com"):
     The links go to jobright.ai, which wants an account to apply, so the bot finds each posting on the employer's own
     board (direct_apply_url), never through jobright."""
     a = (cfg.get("aggregators", {}) or {}).get("jobright") or {}
-    if a.get("enabled", True) is False:
+    if a.get("enabled", False) is not True:
+        # Off unless switched on: jobright's pages keep the employer's application link behind a jobright sign-in, and the
+        # employer's own posting was found for none of 814 listings tried (2026-10-18), at up to 13 s of searching each
         return []
     out, seen = [], set()
     cities = [c.lower() for c in (a.get("locations") or DEFAULT_CITIES)]
@@ -642,7 +644,7 @@ def localfeed(cfg, base=None):
     return out
 
 
-ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed", "jobright", "hnhiring",
+ALWAYS_ON = ("workablejobs", "arbeitnow", "workingnomads", "githublists", "builtin", "careerjet", "localfeed", "hnhiring",
              "themuse", "remotive", "remoteok", "jicy", "himalayas", "wwr")      # keyless feeds that run whatever the config's own source list says
 FETCHERS = {"linkedin": linkedin, "jooble": jooble, "remoteok": remoteok, "remotive": remotive, "jicy": jicy, "himalayas": himalayas, "wwr": wwr,
             "themuse": themuse, "adzuna": adzuna, "workablejobs": workablejobs, "arbeitnow": arbeitnow, "workingnomads": workingnomads, "githublists": githublists, "builtin": builtin, "careerjet": careerjet, "localfeed": localfeed,

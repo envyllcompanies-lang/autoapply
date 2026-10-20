@@ -254,7 +254,7 @@ M.run(str(work / "config.yaml"), dry_run="--dry" in sys.argv)
 db = sqlite3.connect(work / "applications.db")
 rows = {r[0].split(":")[-1]: r[1:] for r in db.execute("select key,status,score,reason from jobs")}
 print("\nDB:"); [print("  ", k, v) for k, v in sorted(rows.items())]
-exp = {"1": "applied", "2": "filtered", "3": "blocked", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "filtered", "agg1": "applied", "agg2": "filtered", "12": "applied",
+exp = {"1": "applied", "2": "filtered", "3": "manual", "4": "applied", "5": "applied", "6": "skipped", "7": "applied", "8": "filtered", "9": "filtered", "10": "applied", "11": "filtered", "agg1": "applied", "agg2": "filtered", "12": "applied",
        "13": "applied", "14": "applied", "15": "unconfirmed", "16": "applied", "17": "applied", "18": "applied", "19": "skipped", "21": "low_score",
        "R-200": "applied", "R-77": "applied"}
 if "--dry" in sys.argv: exp.update({"1": "dry_run", "4": "dry_run", "5": "dry_run", "7": "dry_run", "10": "dry_run", "agg1": "dry_run", "12": "dry_run", "14": "dry_run", "15": "dry_run",
@@ -274,7 +274,8 @@ if "--dry" not in sys.argv:
     if not MAILS: problems.append("no summary email was sent")
     else:
         subj, body = MAILS[-1]
-        for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "reCAPTCHA", "BEST MATCHES CHECKED", "match 86%"):
+        if not (rows["3"][2] or "").startswith("apply by hand (human check):"): problems.append(f"human-check job not handed to you: {rows['3'][2]!r}")
+        for want in ("APPLIED", "EXCEPTIONS", "SUBMITTED BUT NOT CONFIRMED", "APPLY BY HAND", "asks for: reCAPTCHA", "BEST MATCHES CHECKED", "match 86%"):
             if want.lower() not in body.lower(): problems.append(f"summary email lacks {want!r}")
         if "applied" not in subj: problems.append(f"summary subject: {subj!r}")
         if "TESTKEY: the provider does not accept the key" not in body: problems.append("the summary email does not say that a provider rejected its key")
@@ -322,8 +323,8 @@ M.run(str(work / "config2.yaml"), dry_run="--dry" in sys.argv)
 gdb = sqlite3.connect(work / "gate.db"); gdb.row_factory = sqlite3.Row
 g = {r[0].split(":")[-1]: r[1:] for r in gdb.execute("select key,status,score,reason from jobs")}
 if "--dry" not in sys.argv:
-    blocked = [k for k in g if k.startswith("g") and g[k][0] == "blocked"]
-    if len(blocked) != 5: problems.append(f"every human-check job should still be tried and recorded as blocked: {len(blocked)} of 5: {g}")
+    blocked = [k for k in g if k.startswith("g") and g[k][0] == "manual" and (g[k][2] or "").startswith("apply by hand (human check):")]
+    if len(blocked) != 5: problems.append(f"every human-check job should still be tried, then handed to you to apply by hand: {len(blocked)} of 5: {g}")
     for k in blocked:
         if not HITS.get(f"/gate{k[1:]}.html"): problems.append(f"blocked job {k} was never tried")
     if g.get("ok", ("",))[0] != "applied": problems.append(f"the job on the working site did not go through: {g.get('ok')}")
@@ -335,6 +336,19 @@ if "--dry" not in sys.argv:
     snaps = (work / "logs" / "snapshots.log").read_text() if (work / "logs" / "snapshots.log").exists() else ""
     if "reCAPTCHA" not in snaps or "=== " not in snaps: problems.append("no snapshot was saved for the blocked applications")
     if "delgado@alumni.usc.edu" in snaps or "366-8832" in snaps: problems.append("a snapshot contains your email address or phone number")
+    # once today's few tries on such a site are spent, its next good match is handed to you without being opened at all
+    cfg3 = copy.deepcopy(cfg2); cfg3["search"]["max_human_check_tries_per_day"] = 0
+    (work / "config3.yaml").write_text(yaml.safe_dump(cfg3))
+    M.discover = lambda companies, log=print, base=None: [J("h1", "Operations Associate", "gatehand.html", co="handco", src="lever")]
+    n_mail3 = len(MAILS)
+    M.run(str(work / "config3.yaml"), dry_run=False)
+    h1 = gdb.execute("select status, reason from jobs where key like '%:h1'").fetchone()
+    if not h1 or h1[0] != "manual" or not (h1[1] or "").startswith("apply by hand (human check): lever"):
+        problems.append(f"a job on a site that always asks for a human check was not handed to you: {tuple(h1) if h1 else None}")
+    h1n = gdb.execute("select attempts from jobs where key like '%:h1'").fetchone()
+    if h1n and (h1n[0] or 0) > 0: problems.append("a job handed to you was tried by the bot anyway")
+    if len(MAILS) <= n_mail3 or "APPLY BY HAND (1 new)" not in MAILS[-1][1] or "gatehand.html" not in MAILS[-1][1] or "to apply by hand" not in MAILS[-1][0]:
+        problems.append(f"the email does not list the job to apply to by hand: {MAILS[-1][0] if MAILS else None}")
 
 # 3) one stuck site cannot use up the run: the per-application time cap stops both the wizard loop and the field filler
 import time as _t

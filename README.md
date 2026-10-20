@@ -113,14 +113,16 @@ anything tied to another country (for example "Belize (Remote)") is dropped. Add
   one gets one more try, and only after the inbox has been checked for a confirmation).
 
 ## What it will not do (on purpose), and what lands on your list
-- **Human checks are never solved, entered or worked around:** CAPTCHAs, Cloudflare / "are you human" checks, and the
-  security code some sites (Greenhouse) email *after* you press Submit to prove a person is applying. The application stops
-  there at once, nothing is sent, and the job is listed under EXCEPTIONS for you to finish by hand. (Codes and links for
-  *creating or signing in to an account* are a different thing, and the bot does handle those.)
-- **No site is paused or skipped.** Instead they are tried in the order of what has actually been going through lately:
-  sites where applications finish (Workday) first, sites whose submits keep ending at a human check last. The email shows
-  the tally per site.
-- Legal waivers, "I did not use AI" certifications and qualification statements it can't back up. It also skips postings that say they
+- **Human checks are never solved or worked around:** CAPTCHAs, Cloudflare / "are you human" checks and spam screens.
+  When a site asks for one, the job goes on your **apply-by-hand list** instead of being lost: the email's APPLY BY HAND
+  section lists each one (link, résumé match), and once a day the ones still open. Apply yourself; when the employer's
+  "we received your application" email arrives in the inbox, the bot marks the job applied. (Codes and links for
+  *creating or signing in to an account*, and Greenhouse's emailed code, are handled by the bot's own sign-in code.)
+- **Sites where every recent try ended at a human check** (Lever, Workable and BambooHR lately) get a few tries a day to see
+  whether that has changed. Their other jobs are still match-checked, and the good matches go straight to your list
+  without being opened. Every other site is tried in the order of what has actually been going through (Workday first).
+- Legal waivers (arbitration, jury or class-action waivers, time limits on claims) are never agreed to for you: such a job
+  goes on your list as "your call". Also never: "I did not use AI" certifications, qualification statements it can't back up. It also skips postings that say they
   don't want AI-assisted applications, and answers truthfully if a form asks whether AI was used.
 - It never logs into your personal LinkedIn.
 

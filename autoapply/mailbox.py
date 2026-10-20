@@ -470,6 +470,33 @@ def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:
     return found
 
 
+def scan_confirmations_after(companies: dict, n: int = 120) -> dict:
+    """Like scan_confirmations, but each company has its own start time: companies = {key: (display name, since_ts)}.
+    Used for the jobs handed to you to apply by hand: an 'application received' email from that employer that arrived
+    after the job was handed over means you applied. Returns {key: subject}."""
+    if not companies:
+        return {}
+    since = min(t for _n, t in companies.values())
+    found = {}
+    try:
+        msgs = [m for m in _recent(since, n, ("INBOX",)) if not NOT_CONFIRM.search(m["subject"])
+                and (CONFIRM_SUBJECT.search(m["subject"]) or CONFIRM_SUBJECT.search(m["body"][:600]))]
+    except Exception:
+        return found
+    for key, (name, t0) in companies.items():
+        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
+        words = [w for w in re.split(r"[^a-z0-9]+", (name or "").lower()) if len(w) > 2]
+        for m in msgs:
+            if m["ts"] < t0:
+                continue
+            text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
+            flat = re.sub(r"[^a-z0-9]", "", text)
+            if (flat_key and len(flat_key) >= 4 and flat_key in flat) or (words and all(w in text for w in words[:2])):
+                found[key] = m["subject"]
+                break
+    return found
+
+
 FOLLOWUP_SUBJECT = re.compile(r"incomplete application|complete your application|finish your application|additional information|"
                               r"action (required|needed)|assessment|questionnaire|more information (is )?(needed|required)", re.I)
 

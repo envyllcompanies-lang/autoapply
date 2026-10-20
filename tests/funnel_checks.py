@@ -452,7 +452,8 @@ def new_board_checks():
     old = AG._get
     try:
         AG._get = lambda url, **kw: R(text=md)
-        got = AG.jobright({"aggregators": {"jobright": {"lists": ["2026-Business-Analyst-New-Grad"]}}})
+        check(AG.jobright({"aggregators": {}}) == [], "jobright is off unless switched on (its apply links need a jobright account)")
+        got = AG.jobright({"aggregators": {"jobright": {"enabled": True, "lists": ["2026-Business-Analyst-New-Grad"]}}})
         check([(j.extra["company_name"], j.title, j.location) for j in got] == [
             ("Acme Corp", "Business Operations Analyst", "Denver, CO"), ("Acme Corp", "Supply Chain Analyst", "New York, NY (Remote)"),
             ("Beta", "Project Coordinator", "Los Angeles, CA")], f"jobright rows (with '↳' for the same company): {[(j.company, j.title, j.location) for j in got]}")
@@ -469,7 +470,8 @@ def new_board_checks():
               f"HN who-is-hiring: only your titles, only links to systems the bot completes, never replies: {[(j.title, j.apply_url) for j in hn]}")
     finally:
         AG._get = old
-    check({"jobright", "hnhiring"} <= set(AG.ALWAYS_ON) and {"jobright", "hnhiring"} <= set(AG.FETCHERS), "the new boards are always read")
+    check("hnhiring" in AG.ALWAYS_ON and "jobright" not in AG.ALWAYS_ON and {"jobright", "hnhiring"} <= set(AG.FETCHERS),
+          "Hacker News is always read; jobright only when switched on")
     print("ok  new boards: Jobright's new-grad lists and Hacker News 'Who is hiring?'")
 
 
@@ -499,6 +501,66 @@ def personal_answer_checks():
               "Please upload a brief unedited writing sample here.*"):
         check(ans(q) is None, f"never given: {q[:40]}")
     print("ok  birthday (from the secret), no certifications, never SSN / SAT / transcripts / writing samples")
+
+
+def form_fix_checks():
+    """Forms that stopped the bot in the week to 2026-10-18, answered from what you already said."""
+    from autoapply.brain import Brain
+    from autoapply import submit as S
+    from autoapply.sources import Job
+    cfg = {"facts": {"email": "a@b.org", "phone": "1", "full_name": "Pat Doe", "state": "Colorado", "salary_expectation": "$70,000 to $80,000",
+                     "earliest_start_date": "Two weeks after an offer", "relocation_ok_locations": ["denver, co", "los angeles, ca", "new york, ny"]},
+           "consent": {"sign_attestations": True, "ai_screening_consent": True}}
+    b = Brain(cfg, {"name": "Pat Doe", "experience": [{"title": "Crew", "company": "Acme", "dates": "Dec 2022 – Mar 2026"},
+                                                      {"title": "Intern", "company": "Beta", "dates": "May 2024 – May 2025"}]}, ".", lambda *a: None)
+    b.writer = None
+    job = Job("workday", "acme", "1", "Operations Analyst", "Denver, CO", "https://x", "https://x", "Operations role.")
+    two_weeks = (date.today() + timedelta(days=14)).strftime("%m/%d/%Y")
+
+    def plan(fields):
+        return b.map_fields(job, fields, "")
+    # Workday: one question, its boxes sharing a field id; the question is about why you applied
+    reasons = ["Company reputation", "Opportunity for career advancement", "Park admission and discounts", "Other"]
+    F = [{"id": f"r{i}", "kind": "checkbox_single", "label": l, "required": True, "key": "formField-80e7", "sel": "",
+          "question": "Which of these potential reasons were important to your decision to apply?*"} for i, l in enumerate(reasons)]
+    got = plan(F)
+    check([f["label"] for f in F if got["answers"].get(f["id"]) is True] == ["Opportunity for career advancement"] and not got["unanswerable_required"],
+          f"'why did you apply' tick-boxes: career advancement ({got})")
+    cities = ["Atlanta", "Boston", "Denver", "Los Angeles", "Miami", "New York", "Seattle"]
+    F = [{"id": f"c{i}", "kind": "checkbox_single", "label": l, "required": True, "key": "formField-77aa", "sel": "", "question": l}
+         for i, l in enumerate(cities)]
+    got = plan(F)
+    check(sorted(f["label"] for f in F if got["answers"].get(f["id"]) is True) == ["Denver", "Los Angeles", "New York"],
+          f"a list of places whose question was lost: your places ({got['answers']})")
+    # a lone 'Yes' box under terms: signed unless the terms give up a right
+    ok_terms = "ACKNOWLEDGEMENT By clicking Yes you acknowledge our privacy policy and certify that the information is true and complete."
+    bad_terms = ok_terms + " You agree that any dispute will be resolved by binding arbitration and waive a jury trial."
+    for terms, want in ((ok_terms, True), (bad_terms, None)):
+        f = {"id": "t1", "kind": "checkbox_single", "label": "Yes*", "question": "Yes*", "required": True, "key": "formField-acceptTermsAndAgreements",
+             "sel": "", "context": terms}
+        check(plan([f])["answers"].get("t1") is want, f"terms box ({'arbitration' if want is None else 'privacy/truth'}): {want}")
+    f = {"id": "s1", "kind": "checkbox_single", "label": "Checking the box is equivalent to a handwritten signature.*", "required": True,
+         "question": "Checking the box is equivalent to a handwritten signature.*", "key": "formField-acceptTermsAndAgreements", "sel": "",
+         "context": "I agree to the above terms and conditions and confirm that I have read applicable state and local notices."}
+    check(plan([f])["answers"].get("s1") is True, "e-signature box under ordinary terms: ticked")
+    # Paylocity: a pay range of two boxes, and work-history dates that stay with their jobs
+    F = [{"id": "lo", "kind": "text", "label": "Salary Range", "required": False, "sel": '[id="info.minimumDesiredSalary"]', "key": ""},
+         {"id": "hi", "kind": "text", "label": "to", "required": False, "sel": '[id="info.maximumDesiredSalary"]', "key": ""},
+         {"id": "t", "kind": "text", "label": "Position (required)", "required": True, "sel": '[id="workHistory.position.0"]', "key": ""},
+         {"id": "c", "kind": "text", "label": "Company Name (required)", "required": True, "sel": '[id="workHistory.companyName.0"]', "key": ""},
+         {"id": "s0", "kind": "text", "label": "Start Date", "ph": "MM/YYYY", "required": True, "sel": '[id="txt-workHistory-startDate-0"]', "key": ""},
+         {"id": "e0", "kind": "text", "label": "End Date", "ph": "MM/YYYY", "required": True, "sel": '[id="txt-workHistory-endDate-0"]', "key": ""},
+         {"id": "av", "kind": "text", "label": "Available to Start", "ph": "MM/DD/YYYY", "required": False, "sel": '[id="info.dateAvailableToStart"]', "key": ""}]
+    a = plan(F)["answers"]
+    check((a.get("lo"), a.get("hi")) == ("70000", "80000"), f"pay range boxes: the two ends as plain numbers ({a.get('lo')}, {a.get('hi')})")
+    check(str(a.get("e0") or "").endswith("2026"), f"a job's end date is not taken by the pay range's 'to' box ({a.get('e0')})")
+    check(a.get("av") == two_weeks, f"'Available to Start' date box: a date ({a.get('av')})")
+    st = {"id": "st", "kind": "combobox", "label": "What is your state?*", "required": True, "options": ["AL", "AK", "CO", "CT"], "sel": "", "key": ""}
+    check(plan([st])["answers"].get("st") == "CO", "a list of state codes gets yours")
+    # the bot reads what the site says is wrong
+    check(S._value_variants("United States of America")[:2] == ["United States of America", "United States"], "other spellings of the United States are tried")
+    check("CO" in S._value_variants("Colorado") and "Colorado" in S._value_variants("CO"), "a state is tried as name and as code")
+    print("ok  form fixes: Workday tick-box lists, terms boxes (never arbitration), pay range, job dates, start date, state codes")
 
 
 def letter_switch_checks():
@@ -846,7 +908,7 @@ def preflight_checks():
 
 
 def run_all() -> list[str]:
-    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, personal_answer_checks, new_board_checks, skip_fix_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
+    for fn in (rank_checks, snapshot_checks, source_helper_checks, excerpt_checks, allowance_checks, letter_switch_checks, form_fix_checks, personal_answer_checks, new_board_checks, skip_fix_checks, date_box_checks, history_size_checks, group_pick_checks, batch_checks, same_role_checks, second_try_checks,
                account_record_checks, site_mail_checks, workday_helper_checks, preflight_checks):
         try:
             fn()

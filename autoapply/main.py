@@ -19,6 +19,7 @@ import yaml
 
 from .db import DB
 from .brain import Brain
+from . import brain as brain_mod
 from .sources import discover, prefilter, Job
 from .aggregators import account_gated, direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
@@ -28,7 +29,7 @@ from .ats import detect as detect_ats
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
 REQUEUE_VERSION = __version__      # every new build retries, once, the jobs that earlier bugs set aside
-FIXED_FLAG = "2026-10-15-a"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
+FIXED_FLAG = "2026-10-18-b"         # jobs set aside by faults this build fixed get one more try (db.requeue_fixed)
 ACTIONS_OVERHEAD_MIN = 3.0          # checkout + install + history save around the Python step, per run
 
 
@@ -72,7 +73,8 @@ REPORT_ROWS = 40            # rows listed per section of the daily report (the q
 def human_check_tries_today(db) -> int:
     """How many of today's tries ended at a human check (CAPTCHA and the like)."""
     today = date.today().isoformat()
-    return sum(1 for r in db.conn.execute("SELECT reason FROM jobs WHERE status IN ('blocked','unconfirmed') AND updated LIKE ?", (today + "%",))
+    return sum(1 for r in db.conn.execute("SELECT reason FROM jobs WHERE status IN ('blocked','unconfirmed','manual') AND attempts > 0"
+                                          " AND updated LIKE ?", (today + "%",))
                if HUMAN_CHECK.search(r["reason"] or ""))
 
 
@@ -155,6 +157,14 @@ def row_job(row):
 # 2 = submits are often held by a human check when they come from a data-centre address.
 SITE_PRIOR = {"workday": 0, "bamboohr": 1, "breezy": 1, "recruitee": 1, "smartrecruiters": 1, "icims": 1, "jobvite": 1,
               "ashby": 2, "workable": 2, "greenhouse": 2, "lever": 2}
+# A job whose application system stops every automated application at a human check (a CAPTCHA, Cloudflare's check,
+# a spam screen) is handed to you instead of being failed: it is match-checked like any other, and a good match is put on
+# your apply-by-hand list (emailed) with its link. The bot never tries to get past such a check itself.
+HANDOFF_PREFIX = "apply by hand (human check): "
+# A form that asks you to agree to something you said the bot never agrees to for you (arbitration, a jury or class-action
+# waiver, a time limit on legal claims) is handed to you the same way: your call, job by job.
+YOURCALL_PREFIX = "apply by hand (your call): "
+HAND_LIKE = "apply by hand (%"
 HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verification|are you a robot|anti-bot|"
                          r"submission was flagged|flagged as (possible |potential )?(spam|suspicious)", re.I)
 
@@ -183,7 +193,7 @@ def site_health(db: DB, days: int = 14) -> dict:
     since = (datetime.now() - timedelta(days=days)).isoformat(timespec="seconds")
     out: dict = {}
     for r in db.conn.execute("SELECT source, url, apply_url, status, reason FROM jobs WHERE attempts > 0 AND updated >= ?"
-                             " AND status IN ('applied','blocked','unconfirmed','failed','skipped')", (since,)):
+                             " AND status IN ('applied','blocked','unconfirmed','failed','skipped','manual')", (since,)):
         site = out.setdefault(_row_ats(r), {"ok": 0, "human": 0, "other": 0})
         if r["status"] == "applied":
             site["ok"] += 1
@@ -417,6 +427,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_req = db.requeue_if_new_version(REQUEUE_VERSION)
     if n_req:
         log(f"Re-checking {n_req} jobs that were skipped by earlier bugs")
+    if db.once("jobright-off"):         # its listings can't be applied to without a jobright account (see aggregators.jobright)
+        n_jr = db.conn.execute("UPDATE jobs SET status='skipped', reason='listed only on jobright, whose apply link needs a jobright account;"
+                               " the employer''s own posting was not found' WHERE status='queued' AND apply_url LIKE '%jobright.ai/%'").rowcount
+        db.conn.commit()
+        if n_jr:
+            log(f"Jobright listings set aside: {n_jr} (their apply link needs a jobright account)")
     if os.environ.get("DATE_OF_BIRTH", "").strip() and db.once("dob-requeue"):
         n_dob = db.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='skipped' AND reason LIKE 'can''t truthfully answer%'"
                                 " AND lower(reason) LIKE '%birth%' AND (submitted_at IS NULL OR submitted_at = '')").rowcount
@@ -441,6 +457,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     brain.applied_before = {r[0] for r in db.conn.execute(
         "SELECT DISTINCT company FROM jobs WHERE status IN ('applied','unconfirmed')")}
     _resolve_old_unconfirmed(db, brain, log)
+    if db.once("handoff-v1"):
+        n_h = _handoff_past(db, int((cfg.get("search") or {}).get("min_fit", 70)))
+        if n_h:
+            log(f"Apply-by-hand list started: {n_h} good matches that earlier runs lost to a human check")
+    _resolve_hand_applied(db, brain, log)
     _note_followups(db, brain, log)
     n_up = 0
     for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
@@ -648,6 +669,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     batch_n = max(1, min(6, int(s.get("match_batch", prescreen.BATCH))))      # postings per match-check call
     hc_cap = int(s.get("max_human_check_tries_per_day", 6))
     hc_tries = [human_check_tries_today(db)]   # tries today on sites that stop every application at a human check
+    handoff_on = s.get("handoff_human_checks", True) is not False
+    handoff_cap = int(s.get("handoff_per_run", 60))
+    handed = [0]                              # jobs handed to you this run (apply by hand)
 
     def settle(row, job, v, unchecked: bool):
         """Log and count the outcome of one job's match check and turn it into the verdict the apply loop uses."""
@@ -770,8 +794,9 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 return True       # the bot could not sign in to this career site (a moment ago, or on its last tries): its jobs stay queued
             if host and host in weak_pw:
                 return True       # this one site refused your password's form this run (its own rule): its other jobs wait
-            if site_rank(row, health) >= 3 and hc_tries[0] >= hc_cap:
+            if site_rank(row, health) >= 3 and hc_tries[0] >= hc_cap and (not handoff_on or handed[0] >= handoff_cap):
                 return True       # a site where every recent try ended at a human check: only a few tries a day are spent there
+                                  # (the rest go to your apply-by-hand list, after their match check)
             if match_on and _fit(row) <= 0:                    # still waiting for its match check
                 if match_out[0] and (row["score"] or 0) < no_match_bar:
                     return True
@@ -932,6 +957,21 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 continue
             failed_checks[0] = 0
 
+            if handoff_on and site_rank(row, health) >= 3 and hc_tries[0] >= hc_cap:
+                # this site stops every automated application at a human check: the job goes to your apply-by-hand list
+                fit_h = _fit(db.get(job.key) or row)
+                site_h = _row_ats(row)
+                db.update(job.key, status="manual", reason=HANDOFF_PREFIX + f"{site_h} stops every automated application at a human "
+                          f"check" + (f"; résumé match {fit_h}%" if fit_h > 0 else "; résumé match not checked"))
+                applied_n[co_n] = applied_n.get(co_n, 0) + 1
+                applied_roles.add((co_n, ck[1]))
+                if fit_h > 0:
+                    co_waiting[co_n] = max(0, co_waiting.get(co_n, 0) - 1)
+                handed[0] += 1
+                log(f"→ {job.title} @ {job.company}" + (f" (match {fit_h}%)" if fit_h > 0 else "") +
+                    f": on your apply-by-hand list ({site_h} asks every applicant to pass a human check)")
+                continue
+
             fit_now = _fit(db.get(job.key) or row)
             was_waiting = fit_now > 0          # counted among its employer's matched jobs waiting: whatever happens now, it no longer is
             log(f"→ {job.title} @ {job.company} (score {row['score']}" + (f", match {fit_now}%" if fit_now > 0 else "") + ")")
@@ -1062,7 +1102,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log("    ✗ skipped: the posting is closed")
                     continue
                 snap("blocked", blocked_text)
-                db.update(job.key, status="blocked", reason=blocked_text, attempts=row["attempts"] + 1)
+                if handoff_on and HUMAN_CHECK.search(blocked_text) and not clicked:
+                    db.update(job.key, status="manual", reason=HANDOFF_PREFIX + blocked_text[:300], attempts=row["attempts"] + 1)
+                    log("    (on your apply-by-hand list: the site asks for a human check, which the bot never does)")
+                else:
+                    db.update(job.key, status="blocked", reason=blocked_text, attempts=row["attempts"] + 1)
                 dead.add(ck)
                 if "could not find the employer" in blocked_text:
                     nofind[job.source] = nofind.get(job.source, 0) + 1
@@ -1092,7 +1136,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log(f"    ✓ applied (the company's confirmation email arrived: {got[:70]!r})")
                     done += 1
                 else:
-                    db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
+                    if handoff_on and HUMAN_CHECK.search(str(e)):
+                        # the site's human check or spam screen held the submit: most likely nothing reached the employer
+                        db.update(job.key, status="manual", reason=HANDOFF_PREFIX + "the site's human check held the submit (look for a "
+                                  "confirmation email from them first; if none came, apply by hand): " + str(e)[:250],
+                                  attempts=row["attempts"] + 1)
+                        log("    (on your apply-by-hand list: the site's human check held the submit)")
+                    else:
+                        db.update(job.key, status="unconfirmed", reason=str(e)[:400], attempts=row["attempts"] + 1)
                     dead.add(ck)
                     co_fail[co_n] = co_fail.get(co_n, 0) + 1
                     if HUMAN_CHECK.search(str(e)):
@@ -1113,6 +1164,14 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     log("    … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued")
                     continue
                 snap("skipped", str(e))
+                if handoff_on and not clicked and str(e).startswith("can't truthfully answer") and (
+                        brain_mod.TERMS_WAIVER_RX.search(str(e)) or brain_mod.LEGAL_RX.search(str(e))):
+                    # the form wants you to agree to arbitration or the like, which the bot never does for you: your call
+                    db.update(job.key, status="manual", reason=YOURCALL_PREFIX + "the form asks you to agree to: " + str(e)[34:330],
+                              attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log("    (on your apply-by-hand list: the form asks you to agree to something you said the bot never agrees to)")
+                    continue
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 co_fail[co_n] = co_fail.get(co_n, 0) + 1
@@ -1172,6 +1231,53 @@ def _resolve_old_unconfirmed(db: DB, brain: Brain, log):
         log(f"  ✓ earlier unconfirmed submit is confirmed by the company's email: {subj[:70]!r}")
 
 
+def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:
+    """Once: matched jobs of the last two weeks that ended at a human check (blocked, or a submit the site's check held) go
+    to the apply-by-hand list. Greenhouse's emailed code is left to its own handling."""
+    cutoff = datetime.fromtimestamp(time.time() - days * 86400).isoformat(timespec="seconds")
+    n = 0
+    for r in db.conn.execute("SELECT key, status, reason FROM jobs WHERE status IN ('blocked','unconfirmed') AND updated >= ? AND fit >= ?",
+                             (cutoff, min_fit)).fetchall():
+        why = r["reason"] or ""
+        if not HUMAN_CHECK.search(why) or re.search(r"emailed code|security code", why, re.I):
+            continue
+        extra = "" if r["status"] == "blocked" else "look for a confirmation email from them first; if none came, apply by hand: "
+        db.conn.execute("UPDATE jobs SET status='manual', reason=? WHERE key=?", (HANDOFF_PREFIX + extra + why[:300], r["key"]))
+        n += 1
+    for r in db.conn.execute("SELECT key, reason FROM jobs WHERE status='skipped' AND updated >= ? AND fit >= ? AND reason LIKE ?"
+                             " AND (submitted_at IS NULL OR submitted_at = '')", (cutoff, min_fit, "can't truthfully answer%")).fetchall():
+        why = r["reason"] or ""
+        if brain_mod.TERMS_WAIVER_RX.search(why) or brain_mod.LEGAL_RX.search(why):
+            db.conn.execute("UPDATE jobs SET status='manual', reason=? WHERE key=?",
+                            (YOURCALL_PREFIX + "the form asks you to agree to: " + why[34:330], r["key"]))
+            n += 1
+    db.conn.commit()
+    return n
+
+
+def _resolve_hand_applied(db: DB, brain: Brain, log):
+    """Jobs on your apply-by-hand list that you have applied to: the employer's 'we received your application' email,
+    arriving after the job was handed to you, marks it applied (looked at about once an hour)."""
+    if not mailbox.configured() or time.time() - float(db.meta_get("hand_scan") or 0) < 3300:
+        return
+    db.meta_set("hand_scan", str(time.time()))
+    cutoff = datetime.fromtimestamp(time.time() - 21 * 86400).isoformat(timespec="seconds")
+    rows = db.conn.execute("SELECT key, company, title, updated FROM jobs WHERE status='manual' AND updated >= ? AND reason LIKE ?",
+                           (cutoff, HAND_LIKE)).fetchall()
+    if not rows:
+        return
+    comp = {}
+    for r in rows:
+        try:
+            t0 = datetime.fromisoformat(r["updated"]).timestamp()
+        except Exception:
+            t0 = time.time() - 21 * 86400
+        comp[r["key"]] = (brain._company_name(type("J", (), {"company": r["company"], "extra": {}})()), t0)
+    for key, subj in mailbox.scan_confirmations_after(comp).items():
+        db.update(key, status="applied", reason=f"applied by you (confirmation email: {subj[:90]})")
+        log(f"  ✓ applied by you: {comp[key][0]} confirmed it ({subj[:60]!r})")
+
+
 def _note_followups(db: DB, brain: Brain, log):
     """An employer that answers an application with 'incomplete application' or 'please complete the assessment' does not
     treat it as finished. The bot cannot do those steps, so you are told about each one, once."""
@@ -1201,7 +1307,23 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     order = ["applied", "unconfirmed", "blocked", "skipped", "failed", "dry_run", "queued", "low_score", "filtered"]
     counts = ", ".join(f"{len(groups[k])} {k}" for k in order if k in groups) or "nothing new"
     manual = notify.manual_rows(rows)
+    # your apply-by-hand list: the ones handed over in this run, and once a day everything still open on it
+    hand_new = [r for r in rows if r["status"] == "manual" and str(r["reason"] or "").startswith("apply by hand (")]
+    hand_open = []
+    if db.meta_get("hand_digest_day") != today:
+        cutoff = datetime.fromtimestamp(time.time() - 21 * 86400).isoformat(timespec="seconds")
+        hand_open = db.conn.execute("SELECT * FROM jobs WHERE status='manual' AND reason LIKE ? AND updated >= ?"
+                                    " ORDER BY COALESCE(fit, 0) DESC, score DESC LIMIT 60", (HAND_LIKE, cutoff)).fetchall()
+        new_keys = {r["key"] for r in hand_new}
+        hand_open = [r for r in hand_open if r["key"] not in new_keys]
     lines = [f"# autoapply — {today}", "", f"**{counts}**", ""]
+    if hand_new:
+        lines += [f"## Apply by hand ({len(hand_new)}): the site asks every applicant to pass a human check", "",
+                  "| Match | Role | Company | Where |", "|---:|---|---|---|"]
+        for r in sorted(hand_new, key=lambda r: -(r["fit"] or 0)):
+            lines.append(f"| {(str(r['fit']) + '%') if (r['fit'] or 0) > 0 else ''} | [{r['title']}]({r['apply_url'] or r['url']}) | "
+                         f"{r['company']} | {(r['location'] or '').replace('|', '/')[:60]} |")
+        lines.append("")
     if manual:
         lines += [f"## Exceptions not submitted automatically ({len(manual)})", "", "| Score | Role | Company | Why |", "|---:|---|---|---|"]
         for r in manual:
@@ -1252,16 +1374,21 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
         top = [line for _fit, line in sorted(TOP_MATCHES, key=lambda x: -x[0])[:6]]
         footer = "BEST MATCHES CHECKED THIS RUN\n" + "\n".join("- " + x for x in top) + "\n\n" + footer
     text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site,
-                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES) + key_notes)
+                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES) + key_notes, hand_new=hand_new, hand_open=hand_open)
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
     daily_check_in = db.meta_get("last_email_day") != today
-    if not dry_run and (applied_n or manual or FOLLOWUPS or groups.get("unconfirmed") or daily_check_in or not n.get("only_if_activity", True)):
-        subject = (f"autoapply: {applied_n} applied" + (f", {len(FOLLOWUPS)} need you" if FOLLOWUPS else "")
-                   + (f", {len(manual)} not sent" if manual else "") + ("" if applied_n or manual or FOLLOWUPS else " (running, nothing new to send)"))
+    if not dry_run and (applied_n or manual or hand_new or FOLLOWUPS or groups.get("unconfirmed") or daily_check_in
+                        or not n.get("only_if_activity", True)):
+        subject = (f"autoapply: {applied_n} applied" + (f", {len(hand_new)} to apply by hand" if hand_new else "")
+                   + (f", {len(FOLLOWUPS)} need you" if FOLLOWUPS else "")
+                   + (f", {len(manual)} not sent" if manual else "")
+                   + ("" if applied_n or manual or hand_new or FOLLOWUPS else " (running, nothing new to send)"))
         if notify.send_email(cfg, subject, text, log):
             db.meta_set("last_email_day", today)
+            if hand_open:
+                db.meta_set("hand_digest_day", today)
             for env in writer_mod.BAD_KEYS:
                 db.meta_set("key_note:" + env, today)
     notify.send_webhook(cfg, text, log)
