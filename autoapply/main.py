@@ -169,6 +169,10 @@ HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verifi
                          r"submission was flagged|flagged as (possible |potential )?(spam|suspicious)", re.I)
 
 
+TYPED_CHECK = re.compile(r"prove (that )?you are (a )?(real |human )?(person|human)|are you (a )?real person|"
+                         r"type the word \w+ (below|here)|not a (robot|bot)\b", re.I)
+
+
 def ats_of(job) -> str:
     """Which application system a posting lives on: workday, greenhouse, lever ... or the site's own host."""
     src = (getattr(job, "source", "") or "").lower()
@@ -1177,6 +1181,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                               attempts=row["attempts"] + 1)
                     dead.add(ck)
                     log("    (on your apply-by-hand list: the form asks you to agree to something you said the bot never agrees to)")
+                    continue
+                if handoff_on and not clicked and str(e).startswith("can't truthfully answer") and TYPED_CHECK.search(str(e)):
+                    # 'To prove you are a real person, please type Real below': a human check written as a question
+                    db.update(job.key, status="manual", reason=HANDOFF_PREFIX + "the form asks you to prove you are a person: "
+                              + str(e)[34:300], attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log("    (on your apply-by-hand list: the form asks for a human check, which the bot never does)")
                     continue
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)

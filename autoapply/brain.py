@@ -1200,6 +1200,8 @@ class Brain:
                     if kind in ("text", "textarea") and keys[0] == "know_employee" and self._fact(keys):
                         return str(self._fact(keys))      # 'Were you referred by a current employee? If so, who?' -> No
                     continue
+                if mode == "salary" and re.search(r"\bveterans?\b", low):
+                    continue         # a veteran self-ID whose definitions mention 'compensation' is not a pay question
                 if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
                 if keys[0] == "gpa" and not f.get("required"):

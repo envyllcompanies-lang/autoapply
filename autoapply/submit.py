@@ -1580,18 +1580,21 @@ _CHECKED_JS = "e => !!e.checked || e.getAttribute('aria-checked') === 'true' || 
 def _unset(page, fields: list):
     """Boxes the site calls empty although they show the answer (Ashby: 'Missing entry for required field: Legal Last
     Name' with the name on screen): the site's own record lost it. Typed boxes are emptied so the next fill types the
-    answer again, and a ticked choice is clicked once more through its label, so the site hears of it."""
+    answer again, and a ticked choice is swapped for another one so the next fill's tick is a change the site records."""
     for f in fields:
         try:
             el = _loc(page, f)
             if f["kind"] in ("text", "textarea", "email", "tel", "url", "number"):
                 el.fill("", timeout=3000)
-            elif f["kind"] == "radio" and f.get("option_ids"):
-                for oid in f["option_ids"]:
-                    o = _loc(page, f, oid)
-                    if o.evaluate(_CHECKED_JS, timeout=1500) and o.evaluate("e => e.tagName", timeout=1500) == "INPUT":
-                        o.evaluate("""e => { const w = e.id && document.querySelector('label[for="' + CSS.escape(e.id) + '"]');
-                                             (w || e).click(); }""", timeout=1500)
+            elif f["kind"] == "radio" and len(f.get("option_ids") or []) > 1:
+                # clicking the ticked choice again tells the site nothing: tick another one, and the fill that follows
+                # ticks the answer, a change the site does record
+                ids = f["option_ids"]
+                on = [i for i in ids if _loc(page, f, i).evaluate(_CHECKED_JS, timeout=1500)]
+                if on and _loc(page, f, on[0]).evaluate("e => e.tagName", timeout=1500) == "INPUT":
+                    other = next(i for i in ids if i not in on)
+                    _loc(page, f, other).evaluate("""e => { const w = e.id && document.querySelector('label[for="' + CSS.escape(e.id) + '"]');
+                                                            (w || e).click(); }""", timeout=1500)
         except Exception:
             pass
 
