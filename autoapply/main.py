@@ -1295,6 +1295,17 @@ def _resolve_hand_applied(db: DB, brain: Brain, log):
         log(f"  ✓ applied by you: {comp[key][0]} confirmed it ({subj[:60]!r})")
 
 
+def _names_role(subj: str, title: str) -> bool:
+    """False when the email names a role ('your application for the Markets Support Specialist ...') that is not this one:
+    one such email from an employer was put on all eight applications there (2026-10-20). True when it names none."""
+    m = re.search(r"application (?:for|to) (?:the |our )?(.+?)(?:\s+(?:position|role|opening|job)\b|\s+at\s|[.,!:;(]|$)", subj or "", re.I)
+    if not m:
+        return True
+    sq = lambda t: re.sub(r"[^a-z0-9]", "", str(t).lower())
+    said, own = sq(m.group(1)), sq(re.sub(r"\(.*?\)|\*.*?\*|[-–,].*$", "", title or ""))
+    return not said or not own or said in sq(title) or own in said
+
+
 def _note_followups(db: DB, brain: Brain, log):
     """An employer that answers an application with 'incomplete application' or 'please complete the assessment' does not
     treat it as finished. The bot cannot do those steps, so you are told about each one, once."""
@@ -1310,6 +1321,8 @@ def _note_followups(db: DB, brain: Brain, log):
     for key, subj in mailbox.scan_followups(names, time.time() - 7 * 86400).items():
         if (by[key]["followup"] or "") == subj:
             continue                                        # already told
+        if not _names_role(subj, by[key]["title"]):
+            continue                                        # the email is about another of your applications there
         db.conn.execute("UPDATE jobs SET followup=? WHERE key=?", (subj, key))      # (not through update(): 'updated' stays as it was)
         db.conn.commit()
         FOLLOWUPS.append(f"{by[key]['title']} @ {names[key]}: the employer emailed \"{subj[:100]}\"")
