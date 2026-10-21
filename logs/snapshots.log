@@ -1,126 +1,3 @@
-=== 2026-10-21 00:54:09  skipped  HR Generalist & Benefits Coordinator @ Transwest
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4528231
-stage: page 3
-why: can't truthfully answer required: Personal or Work Reference? (required) *
-  text: HR Generalist & Benefits Coordinator
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-label: Name (required)
-  <input:text #references.name.0 {referencesName0} empty>
-label: Personal or Work Reference? (required)
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-10-21 01:04:57  skipped  Accounting Associate- Patient Payables @ chaptershealth
-url: https://chaptershealth.wd5.myworkdayjobs.com/jobs/job/Remote---Florida/Accounting-Associate--Patient-Payables_R2611754/apply
-stage: Application Questions
-why: can't truthfully answer required: Per Diem/SSP
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers at Chapters Health System
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Accounting Associate- Patient Payables
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-d86cca4ae25610001009d0ffa13d0001}
-label: I have reviewed the job description and agree to the terms and conditions.*
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d0ffa13d0001
- {formField-d86cca4ae25610001009d19acdae0002}
-label: Are you over age 18?*
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d19acdae0002
- {formField-d86cca4ae25610001009d234bd380000}
-label: Can you, within 3 days of employment, submit documentation verifying that you are legally eligible to work in 
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d234bd380000
- {formField-d86cca4ae25610001009d234bd380003}
-label: Do you now, or will you in the future, require sponsorship for employment visa status (e.g., H-1B visa status,
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d234bd380003
- {formField-d86cca4ae25610001009d234bd380006}
-label: Employment Preference:*
-  <input:checkbox #298f9c6db6371001a74389719e850000-d86cca4ae25610001009d234bd3 required question-unanswered>
-label: Full Time
-  <input:checkbox #298f9c6db6371001a74389719e850001-d86cca4ae25610001009d234bd3 required question-unanswered>
-label: Part Time
-  <input:checkbox #298f9c6db6371001a74389719e850002-d86cca4ae25610001009d234bd3 required question-unanswered>
-label: Per Diem/SSP
- {formField-d86cca4ae25610001009d2ce96910002}
-label: Have you ever been employed by Chapters Health System, Inc., one of its subsidiaries, or Cornerstone Hospice &
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d2ce96910002
- {formField-d86cca4ae25610001009d2ce96910006}
-label: If hired, on what date will you be able to work?*
-  <textarea #primaryQuestionnaire--d86cca4ae25610001009d2ce96910006 required empty>
- {formField-d86cca4ae25610001009d369861a0000}
-label: Salary/Wage requested:*
-  <textarea #primaryQuestionnaire--d86cca4ae25610001009d369861a0000 required empty>
- {formField-d86cca4ae25610001009d369861a0001}
-label: Please list any days or times that you are unable to work. If none, please list not applicable (NA) in the box
-  <textarea #primaryQuestionnaire--d86cca4ae25610001009d369861a0001 required empty>
- {formField-d86cca4ae25610001009d369861a0002}
-label: Chapters Health System, Inc. and its affiliates require that staff who drive as a function of their job must c
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d369861a0002
- {formField-d86cca4ae25610001009d369861a0005}
-label: According to our insurance carrier, the driving records of all employees who drive as a function of their job 
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d369861a0005
- {formField-d86cca4ae25610001009d40497b90005}
-label: Have you ever appeared on the office of Inspector General's exclusion list?*
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d40497b90005
- {formField-d86cca4ae25610001009d49ea0940000}
-label: Have you ever had your professional license suspended, revoked or otherwise acted against?*
-  <input:checkbox #298f9c6db6371001a7d871f05dfa0001-d86cca4ae25610001009d49ea09 required question-unanswered>
-label: Yes
-  <input:checkbox #298f9c6db6371001a7d8728a458b0000-d86cca4ae25610001009d49ea09 required question-unanswered>
-label: No
-  <input:checkbox #298f9c6db6371001a7d8728a458b0001-d86cca4ae25610001009d49ea09 required question-unanswered>
-label: NA
- {formField-d86cca4ae25610001009d49ea0940004}
-label: Chapters Health System, Inc. uses Electronic Medical Records (EMR) to document patient information. Have you u
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d49ea0940004
- {formField-d86cca4ae25610001009d49ea0940007}
-label: How many years of hospice experience do you have?*
-  <textarea #primaryQuestionnaire--d86cca4ae25610001009d49ea0940007 required empty>
- {formField-d86cca4ae25610001009d538d1b40000}
-label: Do you have any relatives currently working at Chapters Health System, Inc. or one of its affiliates?*
-  [dropdown] nothing chosen #primaryQuestionnaire--d86cca4ae25610001009d538d1b40000
- {formField-dffe8c89aadf10001016cc5a07a70000}
-label: I understand field and direct care positions may be scheduled anywhere in the area covered by the affiliate sh
-  [dropdown] nothing chosen #primaryQuestionnaire--dffe8c89aadf10001016cc5a07a70000
- {formField-dffe8c89aadf10001016cc5a07a70003}
-label: I understand that field and direct care positions may require work any day of the week, including Saturday and
-  [dropdown] nothing chosen #primaryQuestionnaire--dffe8c89aadf10001016cc5a07a70003
- {formField-dffe8c89aadf10001016ccf3b75b0001}
-label: I understand that field and direct care positions may require work during varied shifts, including days, eveni
-  [dropdown] nothing chosen #primaryQuestionnaire--dffe8c89aadf10001016ccf3b75b0001
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-21 01:07:31  skipped  Specialist, Quality Compliance @ cardinalhealth
 url: https://cardinalhealth.wd1.myworkdayjobs.com/EXT/job/US-Nationwide-FIELD/Specialist--Quality-Compliance_20189410/apply
 stage: Application Questions
@@ -5088,4 +4965,108 @@ why: could not find the employer's application page
 # www.arbeitnow.co.uk
 # Performing security verification
   text: This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.
+
+=== 2026-10-21 03:37:52  skipped  Administrative Coordinator (Laboratory Administration) @ albanymed
+url: https://albanymed.wd5.myworkdayjobs.com/albany_med/job/43-New-Scotland-Avenue-Albany-NY-12208/Administrative-Coordinator--Laboratory-Administration-_71876/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Per Diem; Temporary
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers at Albany Medical Center
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Careers at Albany Medical Center {navigationItem-Careers at Albany Medical Center}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Administrative Coordinator (Laboratory Administration)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-4eb8ef6964f31001adb9ce5c0abd0000}
+label: Do you currently hold a professional registration, certification, or license?
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9ce5c0abd0000
+ {formField-4eb8ef6964f31001adb9cef5c65f0002}
+label: Please select the shift you are willing to work:*
+  <input:checkbox #61c05149eff50100bc7f6c7262410000-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
+label: Day
+  <input:checkbox #61c05149eff50100bc7f6c7262410001-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
+label: Evening
+  <input:checkbox #61c05149eff50100bc7f6c7262410002-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
+label: Night
+  <input:checkbox #61c05149eff50100bc7f6c7262410003-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
+label: Weekend
+  <input:checkbox #61c05149eff50100bc7f6c7262410004-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
+label: Rotating
+ {formField-4eb8ef6964f31001adb9cf8fa8440000}
+label: Please select the schedule you are willing to work:*
+  <input:checkbox #009d99c3c8760100bc9439570fbd0000-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
+label: Full Time
+  <input:checkbox #009d99c3c8760100bc9439570fbd0001-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
+label: Part Time
+  <input:checkbox #009d99c3c8760100bc9439570fbd0002-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
+label: Per Diem
+  <input:checkbox #009d99c3c8760100bc9439570fbd0003-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
+label: Temporary
+ {formField-4eb8ef6964f31001adb9cf8fa8440005}
+label: What is your desired hourly rate or annual salary amount?*
+  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440005 required empty>
+ {formField-4eb8ef6964f31001adb9cf8fa8440006}
+label: Are you a U.S. Citizen?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440006
+ {formField-4eb8ef6964f31001adb9d02987410005}
+label: Are you at least 18 years of age or older?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410005
+ {formField-4eb8ef6964f31001adb9d02987410008}
+label: Are you currently under investigation or have you been sanctioned, excluded or have had any adverse action bee
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410008
+ {formField-4eb8ef6964f31001adb9d0c3353b0003}
+label: Are you presently debarred, suspended, proposed for debarment, or excluded by any Federal department or agency
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d0c3353b0003
+ {formField-4eb8ef6964f31001adb9d15d05f10000}
+label: Have you ever been investigated by, or have you ever been subject to a disciplinary proceeding by a profession
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10000
+ {formField-4eb8ef6964f31001adb9d15d05f10004}
+label: Are you able to perform the essential functions of the job for which you are enquiring, with or without a reas
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10004
+ {formField-4eb8ef6964f31001adb9d1f6e8bb0001}
+label: Have you ever been employed by Albany Med?*
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d1f6e8bb0001
+ {formField-4eb8ef6964f31001adb9d1f6e8bb0005}
+label: Have you been employed or are currently employed at any of the Albany Med Health System Affiliate Hospitals?*
+  <input:checkbox #9e954e79f37210015a3efbdc3f4d0000-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
+label: N/A Not Applicable
+  <input:checkbox #9e954e79f37210015a3efc76c1830001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
+label: Columbia Memorial Hospital
+  <input:checkbox #9e954e79f37210015a3efd107f5f0001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
+label: Glens Falls Hospital
+  <input:checkbox #9e954e79f37210015a3efd107f5f0003-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
+label: The Saratoga Hospital
+ {formField-4eb8ef6964f31001adb9d290efa60001}
+label: If you have relatives that are presently employed by Albany Medical Center, please list name(s) and relationsh
+  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60001 empty>
+ {formField-4eb8ef6964f31001adb9d290efa60002}
+label: During the preceding year, were you employed in a managerial, accounting, auditing, or similar capacity by Nat
+  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60002
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
