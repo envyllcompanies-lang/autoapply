@@ -1,329 +1,3 @@
-=== 2026-10-21 03:22:43  skipped  Executive Administrative Assistant @ ADAPT of Hudson Valley
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4314800
-stage: page 2
-why: can't truthfully answer required: May We Contact for Reference? (required) *; May We Contact for Reference? (required) *; May We Contact for Reference? (required) *; May We Contact for Reference? (required) *
-  text: Executive Administrative Assistant
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-  text: ADAPT of the Hudson Valley is an equal opportunity employer. The actions of the Agency regarding the recruitment, hiring, promotion, termina
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: Have you applied for a job with us before?
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Available to Start (required)
-  <input:date #info.dateAvailableToStart filled>
-  [button] 
-  [button]  opens-dialog
-(dialog)
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member Current Employee Other
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Have you worked with us before? (required)
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} empty>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-! City is required {public-candidate-work-history-address-0-city-error}
-label: State Select a state
-! Select a State/Province {public-candidate-work-history-address-0-us-state-error}
-! Zip/Postal Code is required {public-candidate-work-history-address-0-zip-error}
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} empty>
-  text: Reason for Leaving is required
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference? (required)
-  text: May We Contact is required
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} empty>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} empty>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} empty>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} empty>
-label: Area of Study (required)
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} empty>
-label: School Type (required)
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-label: City (required)
-  <input:text #educationHistory.city.0 {educationHistoryCity0} empty>
-label: State (required)
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: ADAPT of Hudson Valley: Privacy Policy
-  [button] 
-
-=== 2026-10-21 03:32:12  blocked  Enterprise Account Executive (Bilingual) @ singlestore
-url: https://www.arbeitnow.co.uk/jobs/companies/singlestore/enterprise-account-executive-bilingual-62525
-why: could not find the employer's application page
-# www.arbeitnow.co.uk
-# Performing security verification
-  text: This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.
-
-=== 2026-10-21 03:37:52  skipped  Administrative Coordinator (Laboratory Administration) @ albanymed
-url: https://albanymed.wd5.myworkdayjobs.com/albany_med/job/43-New-Scotland-Avenue-Albany-NY-12208/Administrative-Coordinator--Laboratory-Administration-_71876/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: Per Diem; Temporary
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers at Albany Medical Center
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Careers at Albany Medical Center {navigationItem-Careers at Albany Medical Center}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Administrative Coordinator (Laboratory Administration)
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-4eb8ef6964f31001adb9ce5c0abd0000}
-label: Do you currently hold a professional registration, certification, or license?
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9ce5c0abd0000
- {formField-4eb8ef6964f31001adb9cef5c65f0002}
-label: Please select the shift you are willing to work:*
-  <input:checkbox #61c05149eff50100bc7f6c7262410000-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Day
-  <input:checkbox #61c05149eff50100bc7f6c7262410001-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Evening
-  <input:checkbox #61c05149eff50100bc7f6c7262410002-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Night
-  <input:checkbox #61c05149eff50100bc7f6c7262410003-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Weekend
-  <input:checkbox #61c05149eff50100bc7f6c7262410004-4eb8ef6964f31001adb9cef5c65 required question-unanswered>
-label: Rotating
- {formField-4eb8ef6964f31001adb9cf8fa8440000}
-label: Please select the schedule you are willing to work:*
-  <input:checkbox #009d99c3c8760100bc9439570fbd0000-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Full Time
-  <input:checkbox #009d99c3c8760100bc9439570fbd0001-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Part Time
-  <input:checkbox #009d99c3c8760100bc9439570fbd0002-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Per Diem
-  <input:checkbox #009d99c3c8760100bc9439570fbd0003-4eb8ef6964f31001adb9cf8fa84 required question-unanswered>
-label: Temporary
- {formField-4eb8ef6964f31001adb9cf8fa8440005}
-label: What is your desired hourly rate or annual salary amount?*
-  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440005 required empty>
- {formField-4eb8ef6964f31001adb9cf8fa8440006}
-label: Are you a U.S. Citizen?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9cf8fa8440006
- {formField-4eb8ef6964f31001adb9d02987410005}
-label: Are you at least 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410005
- {formField-4eb8ef6964f31001adb9d02987410008}
-label: Are you currently under investigation or have you been sanctioned, excluded or have had any adverse action bee
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d02987410008
- {formField-4eb8ef6964f31001adb9d0c3353b0003}
-label: Are you presently debarred, suspended, proposed for debarment, or excluded by any Federal department or agency
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d0c3353b0003
- {formField-4eb8ef6964f31001adb9d15d05f10000}
-label: Have you ever been investigated by, or have you ever been subject to a disciplinary proceeding by a profession
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10000
- {formField-4eb8ef6964f31001adb9d15d05f10004}
-label: Are you able to perform the essential functions of the job for which you are enquiring, with or without a reas
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d15d05f10004
- {formField-4eb8ef6964f31001adb9d1f6e8bb0001}
-label: Have you ever been employed by Albany Med?*
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d1f6e8bb0001
- {formField-4eb8ef6964f31001adb9d1f6e8bb0005}
-label: Have you been employed or are currently employed at any of the Albany Med Health System Affiliate Hospitals?*
-  <input:checkbox #9e954e79f37210015a3efbdc3f4d0000-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: N/A Not Applicable
-  <input:checkbox #9e954e79f37210015a3efc76c1830001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: Columbia Memorial Hospital
-  <input:checkbox #9e954e79f37210015a3efd107f5f0001-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: Glens Falls Hospital
-  <input:checkbox #9e954e79f37210015a3efd107f5f0003-4eb8ef6964f31001adb9d1f6e8b required question-unanswered>
-label: The Saratoga Hospital
- {formField-4eb8ef6964f31001adb9d290efa60001}
-label: If you have relatives that are presently employed by Albany Medical Center, please list name(s) and relationsh
-  <textarea #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60001 empty>
- {formField-4eb8ef6964f31001adb9d290efa60002}
-label: During the preceding year, were you employed in a managerial, accounting, auditing, or similar capacity by Nat
-  [dropdown] nothing chosen #primaryQuestionnaire--4eb8ef6964f31001adb9d290efa60002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-21 15:01:02  unconfirmed  Product Operations Associate @ paxos
-url: https://jobs.ashbyhq.com/paxos/efa810ec-2996-4d00-991d-51b3272b7ab2/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e of the classifications of protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran status Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Product Operations Associate
-# Location
-  text: New York City, US - HQ on-site
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: Annual Salary $94,000 – $107,250 • Offers Equity
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Phone
-  <input:tel #387efae5-45cf-44d4-b894-52c7581c2d03 required filled>
-label: Cover Letter
-  <input:file #cover_letter no-file>
-  [button] Upload File disabled
-label: How did you hear about Paxos?
-  <input filled>
-  [button] 
-label: LinkedIn Profile
-  <input:text #question_32662220002 required filled>
-label: This role is an in-office position based in our Midtown NYC office. Are you comfortable with this arrangement?
-  [button] Yes
-  [button] No
-  <input:checkbox name=0a1ba5a6-8e13-4380-bcb3-6cbdffe944d7 question-unanswered>
-label: Due to the sensitive nature of our work at Paxos, we may conduct identity verification during the interview pr
-  [button] Yes
-  [button] No
-  <input:checkbox name=question_32662221002 question-answered>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Paxos provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation, 
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_race- question-answered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_veter question-answered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_veter question-answered>
-label: I am not a protected veteran
-  <input:radio #659139fb-1d79-400c-a98e-ff960662f646__systemfield_eeoc_veter question-answered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-10-21 15:05:46  unconfirmed  Project Coordinator @ graymatter-robotics
 url: https://jobs.ashbyhq.com/graymatter-robotics/6b5fc8c9-bf48-487b-bd0d-0c34671776da/application
 stage: page 1
@@ -5604,4 +5278,307 @@ label: Review
   [link]  {socialIcon}
   [link] Skechers Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-23 20:50:01  unconfirmed  Product Operations | General Builder (All Levels) @ ramp
+url: https://jobs.ashbyhq.com/ramp/e0cca3aa-24f7-46ca-9493-9984a7ae2285/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ' delivered, technical or otherwise. Why do you consider it your most impactful work? (Links or artifacts are a plus.) Recruiting Privacy Policy Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Product Operations | General Builder (All Levels)
+# Location
+  text: New York, NY (HQ); San Francisco, CA
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: $130K – $200K • Offers Equity
+  text: The final compensation will depend on the location and level at which the candidate is hired.
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Legal Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone
+  <input:tel #5267323e-7033-4229-8d35-fa071122e334 required filled>
+label: Yes - I consent to receiving SMS text messages
+label: No - I do not consent to receiving SMS text messages
+label: Yes - I consent to receiving WhatsApp messages
+label: No - I do not consent to receiving WhatsApp messages
+label: Where do you plan on working from (for payroll tax purposes)?
+  <input filled>
+  [button] 
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn Profile
+  <input:text #15fe45bd-c926-4c5d-828e-f9a3257a8148 required filled>
+label: Are you comfortable working in-person at our NYC HQ (located near Madison Square Park) at least 2 days/week?
+  <input:radio #00a26fbe-b315-42d1-8d0b-3468b78e3db6_245b2a1b-890c-433a-b4c0 question-answered>
+label: No | Would prefer to work remotely
+  <input:radio #00a26fbe-b315-42d1-8d0b-3468b78e3db6_245b2a1b-890c-433a-b4c0 question-answered>
+label: Yes | Able to relocate to the broader NYC area upon offer acceptance and comfortable being in the NY office at
+  <input:radio #00a26fbe-b315-42d1-8d0b-3468b78e3db6_245b2a1b-890c-433a-b4c0 question-answered>
+label: Yes | Currently located in the broader NYC area and comfortable being in the NY office at least 2 days/week
+label: Do you have a minimum of 2 years of professional working in product management, product operations, or strateg
+  [button] Yes
+  [button] No
+  <input:checkbox name=1b4dfa1a-8c49-4be5-b5e3-4218d6382f7e question-answered>
+label: Please outline your experience in product management or product operations
+  <textarea #93a9b9da-e9c5-45ed-aa68-192304933467 required filled>
+label: What's an example of using an AI tool to actually speed up or improve your work? Please share an example that 
+  <textarea #72429dd5-9fce-4d0c-82f7-280376e490d7 empty>
+label: Describe an accomplishment outside of your professional work that you are particularly proud of. This may incl
+  <textarea #4eb26e46-9c94-4237-b8ce-d9abd4153846 empty>
+label: Tell us about the most impactful project you have built or delivered, technical or otherwise. Why do you consi
+  <textarea #e7fabdc8-77cf-4c9c-8026-2547532f8367 empty>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-10-23 20:52:15  skipped  Meeting Planner, Specialty Programs, Meetings & Events @ cardinalhealth
+url: https://cardinalhealth.wd1.myworkdayjobs.com/EXT/job/US-Nationwide-FIELD/Meeting-Planner--Specialty-Programs--Meetings---Events_20189806/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Are you authorized to work in the country in which you are a
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Meeting Planner, Specialty Programs, Meetings & Events
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-3d13234ffff31000ac6e117e41ab0000}
+label: Are you willing to submit to a background check? Please note Cardinal Health will conduct a background check o
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e117e41ab0000
+ {formField-3d13234ffff31000ac6e121995e20002}
+label: Are you willing to submit to a criminal record check? Please note Cardinal Health will conduct a criminal reco
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e121995e20002
+ {formField-3d13234ffff31000ac6e12b4101d0002}
+label: Are you willing to complete a drug screen and/or medical examination? Please note that Cardinal Health will on
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e12b4101d0002
+ {formField-3d13234ffff31000ac6e134efbcb0000}
+label: Are you 18 years of age or older? (Applicants under age 18 will be required to submit documentation verifying 
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e134efbcb0000
+ {formField-3d13234ffff31000ac6e134efbcb0003}
+label: Are you authorized to work in the country in which you are applying and can you provide documentation supporti
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e134efbcb0003
+ {formField-3d13234ffff31000ac6e13e969410002}
+label: Are you willing to take a random drug test if employed by Cardinal Health? Please note that Cardinal Health wi
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e13e969410002
+ {formField-3d13234ffff31000ac6e1483e3ba0001}
+label: Do you currently have a non-compete, non-solicitation, or other restrictive covenant agreement that would proh
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e1483e3ba0001
+ {formField-3d13234ffff31000ac6e151e5b740000}
+label: Have you ever been an employee, contractor or temporary associate at Cardinal Health?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e151e5b740000
+ {formField-3d13234ffff31000ac6e151e5b740003}
+label: Please indicate how many years of experience you have in the field in which you are applying.*
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e151e5b740003
+ {formField-3d13234ffff31000ac6e15b8f0330003}
+label: Please indicate your highest level of education*
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e15b8f0330003
+ {formField-3d13234ffff31000ac6e16ee371f0001}
+label: It is standard policy for Cardinal Health recruiting operations to support the primary language in the country
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e16ee371f0001
+ {formField-3d13234ffff31000ac6e17882ccc0004}
+label: Will you require sponsorship to work in the country you are applying for now or in the future?*
+  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e17882ccc0004
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] Are you a current Cardinal Health employee? Please use the I {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-23 20:52:54  unconfirmed  Platform Creator Activation Specialist @ cookunity
+url: https://careers.cookunity.com/jobs/8043299003
+stage: page 1
+why: no confirmation after submit; page ends: "e Search Word of Mouth What AI or automation tools (like ChatGPT or others) are you currently using? Can you share a specific workflow or task you've improved using one? This field is required 0 / 5000 Submit application"
+  [button] Apply Now
+# Platform Creator Activation Specialist
+# About CookUnity:
+  text: Food has lost its soul to modern convenience. And with it, it has lost the power to nourish, inspire, and connect us. So in 2018, CookUnity 
+  text: empower Chefs to nourish the world.
+  text: If that mission has you hungry in more ways than one, you’ve found the right job posting.
+# What we're looking for
+  text: Chef-creators are at the core of what we do at CookUnity. We are looking for an enthusiastic Creator Activation Specialist to help CookUnity
+  text: CookUnity offers the best chefs and culinary creators the ability to build and manage their platform food businesses successfully and with g
+# Responsibilities:
+  text: Onboarding and Activation of New Creators
+  text: Facilitate the successful launch of new creator brands and products by creating customized onboarding materials, tracking timelines, and ens
+  text: Creator Support and Education
+  text: Provide guidance, resources, and front-line support across multiple channels (voice, email, chat, video) to help creators build thriving bus
+  text: Compliance and Documentation Management
+  text: Review, process, and maintain accurate records of onboarding documents to ensure compliance with CookUnity standards and guidelines.
+  text: Process Coordination and Collaboration
+  text: Collaborate with internal teams to align on requirements, policies, and workflows while monitoring and following up to ensure a seamless onb
+  text: Continuous Improvement and Reporting
+  text: Identify opportunities for process enhancement, contribute to service improvements, and support audits, reporting, and special projects to a
+# What You Bring
+  text: We’re seeking a candidate with a passion for food and the culinary business, eager to support creators during a critical phase of their jour
+  text: Curious and enthusiastic about learning.
+  text: Empathetic and attuned to creator needs.
+  text: Self-driven and capable of thriving in a remote work environment.
+  text: Strong sense of accountability and responsibility.
+  text: Excellent verbal and written communication skills.
+  text: Familiarity with food production, culinary brands, and chef-driven businesses is a plus.
+  text: A collaborative spirit with a desire to support teammates and grow professionally.
+  text: Passionate about educating and supporting creators to achieve their goals.
+  text: Flexible and open to adapting in a dynamic environment.
+  text: Skilled in managing multiple onboarding projects and prioritizing effectively.
+  text: Able to guide creators toward success during their initial platform launch.
+  text: Dedicated to refining and scaling implementation processes.
+  text: Focused on fostering strong creator relationships from onboarding kickoff through launch (9–12 weeks), ensuring a smooth transition to the A
+  text: Committed to meeting creator needs comprehensively and professionally.
+# Qualifications
+  text: 1+ years of experience in onboarding or account activation for a culinary physical product business (preferred) or relevant post-secondary e
+  text: Ability to work remotely during U.S. EST hours, with a start time no later than 10:00 AM EST.
+  text: Experience managing multiple clients or accounts simultaneously.
+  text: Proven customer relations skills.
+  text: Excellent organizational and time management abilities.
+  text: Proficiency with Google Suite, project management tools, and data visualization platforms.
+  text: Capable of multitasking and thriving under pressure.
+  text: Professional demeanor in all communications with creators, internal teams, and stakeholders.
+  text: Experience in roles with administrative, operational, or supervisory responsibilities
+# Benefits
+  text: 🩺 Health Insurance coverage
+  text: 🗓️ 5- year Sabbatical: After 5 years with CookUnity, you get a 4-week paid sabbatical
+  text: 🕯 Compassionate Leave: 3-5 days each time the need arises
+  text: 🤖 AI-forward workplace: enterprise access to ChatGPT and Claude to help you work smarter and grow faster.
+  text: 🥘 A generous amount of CookUnity credits to enjoy our amazing meals, added to your account, monthly
+  text: 🧘🏽‍♀️ Wellness perks: access to fitness subsidies to build a healthy lifestyle
+  text: 👩🏾‍🏫 Personalized Spanish coach
+  text: 🚀 Awesome opportunity to join a company that is looking to change how we eat and how chefs work!
+# Compensation
+  text: Pay Range for this position
+  text: CookUnity is an Equal Opportunity Employer
+  text: A quick note for all candidates
+  text: stay safe while applying to CookUnity.
+  text: Here are a few tips to help you protect yourself and know what to expect from us:
+  text: Apply only through our official channels.
+  text: Our recruiters are real people — and easy to verify.
+  text: We only communicate through official CookUnity channels.
+  text: We’ll never ask for payment or personal financial details.
+  text: If anyone does, please don’t share any information and let us know right away.
+  text: we care about keeping your experience (and safety) as genuine as possible.
+# Apply for this position
+  text: Join our team and help us transform the food industry!
+label: First Name
+  <input:text #«Rnn3rmdb»-form-item filled>
+label: Last Name
+  <input:text #«R17n3rmdb»-form-item filled>
+label: Preferred First Name (Optional)
+  <input:text #«R1nn3rmdb»-form-item filled>
+label: Email
+  <input:email #«R27n3rmdb»-form-item filled>
+label: Phone
+  <input:text #«R2nn3rmdb»-form-item filled>
+label: Resume/CV
+  <input:file has-file>
+  [button] Change File
+  text: Accepted file types: pdf, doc, docx, txt, rtf. Maximum size: 5 MiB.
+  text: File selected: <first>_<middle>_delgado_ortega_resume
+  [button] ✕
+label: Cover Letter (Optional)
+  <input:file no-file>
+  [button] Attach File
+label: Please share your LinkedIn Profile
+  <input:text #«R47n3rmdb»-form-item filled>
+label: Where do you currently live?
+  <input:text #«R4nn3rmdb»-form-item INVALID empty>
+label: Are you authorized to work for all employers in the U.S. on a full-time basis?
+  <select #«R57n3rmdb»-form-item filled options=3>
+label: Do you now or will you in the future need immigration sponsorship by Cookunity for continued U.S. work authori
+  <select #«R5nn3rmdb»-form-item filled options=3>
+label: How did you hear about this opportunity at CookUnity?
+  <select #«R67n3rmdb»-form-item filled options=21>
+label: What AI or automation tools (like ChatGPT or others) are you currently using? Can you share a specific workflo
+  <textarea #«R6nn3rmdb»-form-item INVALID empty>
+  [button] Submit application
+
+=== 2026-10-23 20:55:36  blocked  Business Development Operations Specialist @ match-group
+url: https://jobs.lever.co/matchgroup/230733db-0bff-4381-bb96-ae7320b54411/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# Business Development Operations Specialist
+  text: Tinder – Business Development /
+# SUBMIT YOUR APPLICATION
+  [button] Apply with LinkedIn
+<iframe about:blank>
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: He/him
+label: She/her
+label: They/them
+label: Xe/xem
+label: Ze/hir
+label: Ey/em
+label: Hir/hir
+label: Fae/faer
+label: Hu/hu
+label: Use name only
+label: Custom
+  text: Let the employer know what pronouns you use so that they can address you correctly.
+label: Email ✱
+label: Phone ✱
+label: Current location ✱
+label: Current company
+# LINKS
+label: LinkedIn URL
+label: GitHub URL
+label: Portfolio URL
+label: Other website
+# JOB SOURCE
+  <select name=cards[0e0cf60a-07b7-43d8-a591-369dcbbf91 required filled options=15>
+# ACCOMMODATIONS REQUEST
+  text: Will you require a reasonable accommodation to complete the hiring process which may include technical testing, virtual and in-person style 
+label: Yes
+label: No
+# VISA - US
+  <select name=cards[6313411a-2152-49df-86d5-2dcb03916e required filled options=3>
+# PRONOUNS
+  <textarea name=cards[9236a45e-b0cf-424b-8ec9-49d261689c filled>
+# MG LOCATION - LOS ANGELES
+label: No, but I'm willing to relocate
+label: No, I would need to work from a different city
+  <select name=cards[18be366e-aecb-47fe-b63c-020fe5edbd required filled options=3>
+# DEMOGRAPHIC SURVEY
+  text: Thank you for your interest in one of our Match Group brands! Match Group's portfolio of dating site brands includes Match, Tinder, Hinge, P
+  text: I identify my ethnicity as
+label: African American/Black
+label: East Asian (Chinese, Japanese, Korean, Mongolian, Tibetan, Taiwanese, etc.)
+label: Hispanic, Latinx, or Spanish origin
+label: Middle Eastern or North African
+label: Native American/Alaska Native/First Nations
+label: Pacific Islander or Native Hawaiian
+label: South Asian (Bangladeshi, Bhutanese, Indian, Nepali, Pakistani, Sri Lankan)
+label: Southeast Asian (Burmese, Cambodian, Filipino, Hmong, Indonesia, Laotian, Malaysian, Mien, Singaporean, Thai, 
+label: White/Caucasian
+label: Bi-Racial/Mixed Race - Having 2 or more racial/ethnic groups
+label: Another race, ethnicity, or origin
+label: I prefer not to disclose
+  text: What gender do you most closely identify as?
+label: Female
+label: Male
+label: Non-binary
+  text: Do you identify as part of the LGBTQIA+ community?
+label: I consent to the retention of my personal data for the purpose of considering me for employment for an additio
+<iframe https://newassets.hcaptcha.com/captcha/v1/aca5f59ac1dedd238fa84e3f3225f622e57359>
+  [button] SUBMIT APPLICATION
 
