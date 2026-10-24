@@ -1,341 +1,3 @@
-=== 2026-10-22 14:21:14  unconfirmed  Client Operations Coordinator - NeuroNav @ pear-vc
-url: https://jobs.ashbyhq.com/pear-vc/687a1f96-bd9e-414a-b1fa-f6b6bdebe872/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 's, which ones (e.g., HubSpot, Salesforce)? Do you have experience with California’s Self-Determination Program (SDP) or Regional Center system? Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Client Operations Coordinator - NeuroNav
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: LinkedIn
-  <input:text #54813181-90c8-46d0-b998-12bd81c90d2b filled>
-label: Phone
-  <input:tel #b803f2c3-cadc-4449-a702-210001ab5ec9 required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Are you currently eligible to work in the United States of America?
-  [button] Yes
-  [button] No
-  <input:checkbox name=036000a2-62d8-450a-8a97-608ee37dd58e question-answered>
-label: Do you now or in the future require visa sponsorship to continue working in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=c10652eb-7913-427d-88fb-d155bd5b1b3d question-unanswered>
-label: Have you used a CRM or ticketing system? If yes, which ones (e.g., HubSpot, Salesforce)?
-  <textarea #9b4796d6-a9e8-4d14-8ba0-c5e74e51b6a3 required filled>
-label: Do you have experience with California’s Self-Determination Program (SDP) or Regional Center system?
-  <textarea #6dfd58ac-fb10-4d93-9106-ec16c05f44ff required filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-10-22 14:25:05  not sent  Analyst @ fanduel
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Address 2*', 'Address 2*', 'This field is required.']
-  text: Interested in building your career at FanDuel? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name*
-  <input:text #preferred_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-label: Location (City)*
-  text: <city>, Colorado, United States
-  <input:text #candidate-location required empty>
-  [button] 
-  [button] Locate me
-  text: <file>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: Website
-  <input:text #question_69660337 filled>
-label: LinkedIn Profile
-  <input:text #question_69660338 filled>
-label: Are you legally authorized to work in the United States?*
-  <input:text #question_69660339 required empty>
-  [button] 
-  [button] 
-label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?*
-  <input:text #question_69660340 required empty>
-  [button] 
-  [button] 
-label: Are you an employee of Flutter or a Flutter brand?*
-  <input:text #question_69660341 required empty>
-  [button] 
-  [button] 
-label: What are your base salary expectations?*
-  <input:text #question_69660342 required filled>
-label: What are your total compensation expectations?*
-  <input:text #question_69660343 required filled>
-label: Are you subject to a non-compete or any other agreements that may prohibit or restrict your employment with Fa
-  <input:text #question_69660344 required empty>
-  [button] 
-  [button] 
-label: Are you located within 120 miles of the New York, Atlanta, Jersey City, Toronto or Los Angeles office? If so, 
-  <input:text #question_69660345 required empty>
-  [button] 
-  [button] 
-label: If you are not located within 120 miles of this location, are you willing to relocate for this opportunity upo
-  <input:text #question_69660346 required empty>
-  [button] 
-  [button] 
-label: How did you hear about this role?*
-  <input:text #question_69660347 required empty>
-  [button] 
-  [button] 
-label: Address 1*
-  <input:text #question_69660348 required filled>
-label: Address 2*
-  <input:text #question_69660349 required INVALID empty>
-label: City*
-  <input:text #question_69660350 required filled>
-label: State*
-  <input:text #question_69660351 required filled>
-label: Zip Code*
-  <input:text #question_69660352 required filled>
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-10-22 14:25:55  skipped  Regulatory Data Analyst @ rb
-url: https://rb.wd5.myworkdayjobs.com/frs/job/New-York-NY/Regulatory-Data-Analyst_R-0000033803-2/apply/applyManually
-stage: Application Questions 2 of 2
-why: can't truthfully answer required: At the New York Fed, we perform our duties with honesty, int
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Federal Reserve System Careers
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Regulatory Data Analyst
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-label: completed step 3 of 6
-label: Application Questions 1 of 2
-{progressBarActiveStep} current step 4 of 6 Application Questions 2 of 2
-label: current step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# Application Questions 2 of 2
-{applyFlowSupplementaryQuestionsPage}
-  text: Please answer the questions below.
- {formField-05c9178514231000ba32ddfff17b0000}
-label: I am one of the following:*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--05c9178514231000ba32ddfff17b0000
- {formField-05c9178514231000ba32de99d2400003}
-label: If you are offered a position, as a condition of employment, you will be required to sign a declaration of int
-  [dropdown] nothing chosen #supplementaryQuestionnaire--05c9178514231000ba32de99d2400003
- {formField-05c9178514231000ba32de99d2400007}
-label: Have you lived in the US consecutively for the last 3 years?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--05c9178514231000ba32de99d2400007
- {formField-05c9178514231000ba32df33b8ae0002}
-label: Please list ALL countries of citizenship:*
-  <textarea #supplementaryQuestionnaire--05c9178514231000ba32df33b8ae0002 required empty>
- {formField-05c9178514231000ba32df33b8ae0003}
-label: Do you have any relatives* or individuals in close personal relationship currently working at the Federal Rese
-  [dropdown] nothing chosen #supplementaryQuestionnaire--05c9178514231000ba32df33b8ae0003
- {formField-05c9178514231000ba32df33b8ae0007}
-label: At the New York Fed, we perform our duties with honesty, integrity, and impartiality, and without improper pre
-  text: - Stocks, bonds, or options to purchase stocks of financial institutions,
-  text: - Mutual funds or other investment funds with a stated policy of concentrating their portfolios in the financial services sector
-  text: - Any of the above through a pension, retirement plan, or other arrangement as a result of prior employment.
-  text: New York Fed employees who are subject to the Personal Trading Compliance Program must also comply with the Designated Broker requirement, w
-  text: Ethics and Conflicts of Interest page
-  text: current value is MM/DD/YYYY
-  <input #supplementaryQuestionnaire--05c9178514231000ba32df33b8ae0007 {dateSectionMonth-input} empty>
-  <input #supplementaryQuestionnaire--05c9178514231000ba32df33b8ae0007 {dateSectionDay-input} empty>
-  <input #supplementaryQuestionnaire--05c9178514231000ba32df33b8ae0007 {dateSectionYear-input} empty>
-  [button]  {dateIcon}
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-22 14:26:45  skipped  Analyst, Business Support (Operations and Strategic Sourcing) @ cardinalhealth
-url: https://cardinalhealth.wd1.myworkdayjobs.com/EXT/job/US-Nationwide-FIELD/Analyst--Business-Support--Operations-and-Strategic-Sourcing-_20189550/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: Are you authorized to work in the country in which you are a
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Analyst, Business Support (Operations and Strategic Sourcing)
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-3d13234ffff31000ac6e117e41ab0000}
-label: Are you willing to submit to a background check? Please note Cardinal Health will conduct a background check o
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e117e41ab0000
- {formField-3d13234ffff31000ac6e121995e20002}
-label: Are you willing to submit to a criminal record check? Please note Cardinal Health will conduct a criminal reco
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e121995e20002
- {formField-3d13234ffff31000ac6e12b4101d0002}
-label: Are you willing to complete a drug screen and/or medical examination? Please note that Cardinal Health will on
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e12b4101d0002
- {formField-3d13234ffff31000ac6e134efbcb0000}
-label: Are you 18 years of age or older? (Applicants under age 18 will be required to submit documentation verifying 
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e134efbcb0000
- {formField-3d13234ffff31000ac6e134efbcb0003}
-label: Are you authorized to work in the country in which you are applying and can you provide documentation supporti
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e134efbcb0003
- {formField-3d13234ffff31000ac6e13e969410002}
-label: Are you willing to take a random drug test if employed by Cardinal Health? Please note that Cardinal Health wi
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e13e969410002
- {formField-3d13234ffff31000ac6e1483e3ba0001}
-label: Do you currently have a non-compete, non-solicitation, or other restrictive covenant agreement that would proh
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e1483e3ba0001
- {formField-3d13234ffff31000ac6e151e5b740000}
-label: Have you ever been an employee, contractor or temporary associate at Cardinal Health?*
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e151e5b740000
- {formField-3d13234ffff31000ac6e151e5b740003}
-label: Please indicate how many years of experience you have in the field in which you are applying.*
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e151e5b740003
- {formField-3d13234ffff31000ac6e15b8f0330003}
-label: Please indicate your highest level of education*
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e15b8f0330003
- {formField-3d13234ffff31000ac6e16ee371f0001}
-label: It is standard policy for Cardinal Health recruiting operations to support the primary language in the country
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e16ee371f0001
- {formField-3d13234ffff31000ac6e17882ccc0004}
-label: Will you require sponsorship to work in the country you are applying for now or in the future?*
-  [dropdown] nothing chosen #primaryQuestionnaire--3d13234ffff31000ac6e17882ccc0004
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  [link] Are you a current Cardinal Health employee? Please use the I {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-10-22 14:29:00  skipped  Strategic Sourcing Specialist, Compute @ crusoe
-url: https://jobs.ashbyhq.com/crusoe/b66ec19f-c7eb-463d-b4c5-42fbd8d5666b/application
-stage: page 1
-why: can't truthfully answer required: Which state, province, or region do you currently live in?
-# Strategic Sourcing Specialist, Compute
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required empty>
-label: Email
-  <input:email #_systemfield_email required empty>
-label: Phone Number
-  <input:tel #aa795dbe-4fe1-4345-90bf-943f58f81ecd empty>
-label: Yes - I consent to receiving text messages
-label: No - I do not consent to receiving text messages
-label: Resume
-  <input:file #_systemfield_resume required no-file>
-  [button] Upload File
-label: Which state, province, or region do you currently live in?
-  <input empty>
-  [button] 
-label: Will you now or in the future require immigration sponsorship to work for Crusoe?
-  [button] Yes
-  [button] No
-  <input:checkbox name=a494b772-61d3-4270-9ec5-b098f7647123 question-unanswered>
-label: Do you currently work for Crusoe, or have you worked for Crusoe in the past?
-  [button] Yes
-  [button] No
-  <input:checkbox name=1ccd8aff-6566-401e-9182-f72e065f4790 question-unanswered>
-label: Linkedin URL
-  <input:text #b21991a7-47a4-41c1-bcc3-761b1a896534 empty>
-label: Github/Portfolio/Twitter/Etc
-  <input:text #e0cc67a2-f1ac-4695-b4f9-289527dc913e empty>
-label: Additional information or a note you want to share
-  <textarea #d19036a4-987f-4237-bdd8-d082505dc8fc empty>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Crusoe provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation,
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_gende question-unanswered>
-label: Male
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_gende question-unanswered>
-label: Female
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_gende question-unanswered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: Hispanic or Latino
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: White (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_race- question-unanswered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: If you believe that you belong to any of the following categories of protected veterans, please indicate by making the appropriate selection
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_veter question-unanswered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_veter question-unanswered>
-label: I am not a protected veteran
-  <input:radio #3095d9dc-5c11-46e4-82a8-a3d7e0e83850__systemfield_eeoc_veter question-unanswered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application
-
 === 2026-10-22 14:43:37  skipped  People Operations Coordinator @ halter
 url: https://jobs.ashbyhq.com/halter/43b658a0-bd71-4bf0-87b9-4f52c93710b7/application
 stage: page 1
@@ -5459,5 +5121,339 @@ label: Yes, I agree*
   [link]  {socialIcon}
   [link]  {socialIcon}
   [link] T-Mobile Workforce Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-24 15:07:46  skipped  Account Executive, Business Sales-Brookfield @ tmobile
+url: https://tmobile.wd1.myworkdayjobs.com/external/job/Remote-Wisconsin/Account-Executive--Business-Sales-Brookfield_REQ379831-1/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Yes, I agree*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# T-MOBILE CAREERS
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] CAREER SITE {navigationItem-CAREER SITE}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Account Executive, Business Sales-Brookfield
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 7 Voluntary Disclosures
+label: current step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Information Statement
+  text: To assist with T-Mobile’s commitment to governmental record keeping and reporting requirements, we invite you to voluntarily self-identify y
+  text: Submitting this information is entirely voluntary. Whether or not you provide it has no effect on your application for T-Mobile U.S. employm
+  text: T-Mobile U.S. is an equal opportunity employer. All decisions concerning the employment relationship are made without regard to sex, race, e
+  text: We are a Government contractor subject to the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended by the Jobs for Veterans
+  text: recently separated veterans
+  text: active duty wartime or campaign badge veterans
+  text: Armed Forces service medal veterans
+  text: A Disabled Veteran is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or
+  text: A Recently Separated Veteran means any veteran during the three-year period beginning on the date of such veteran's discharge or release fro
+  text: An Active Duty Wartime or Campaign Badge Veteran means a veteran who served on active duty in the U.S. military, ground, naval or air servic
+  text: An Armed Forces Service Medal Veteran means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, 
+ {formField-gender}
+label: Please select your Gender*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-ethnicity}
+label: Please select the Race/Ethnicity which most accurately describes how you identify yourself*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Please identify your Veteran status*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Before you go…take a moment to read our quick legal statement.
+  text: By submitting your application, you agree to receive electronic communications from T-Mobile, including email and text messages. You may als
+  text: If I am applying for a job based in the United States, by checking 'Yes, I agree' below and submitting this application, I agree to T-Mobile
+  text: . I have read the Arbitration Agreement and understand that it requires certain claims to be decided in binding arbitration instead of by a 
+  text: I certify that by submitting my application, the information I have provided is true and complete and if I further understand falsification 
+  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
+ {formField-acceptTermsAndAgreements}
+label: Yes, I agree*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] T-Mobile Workforce Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-24 15:10:26  skipped  Account Executive, Business Sales-Waukesha @ tmobile
+url: https://tmobile.wd1.myworkdayjobs.com/external/job/Remote-Wisconsin/Account-Executive--Business-Sales-Waukesha_REQ379816-1/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Yes, I agree*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# T-MOBILE CAREERS
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] CAREER SITE {navigationItem-CAREER SITE}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Account Executive, Business Sales-Waukesha
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 7 Voluntary Disclosures
+label: current step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Self Identify
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Information Statement
+  text: To assist with T-Mobile’s commitment to governmental record keeping and reporting requirements, we invite you to voluntarily self-identify y
+  text: Submitting this information is entirely voluntary. Whether or not you provide it has no effect on your application for T-Mobile U.S. employm
+  text: T-Mobile U.S. is an equal opportunity employer. All decisions concerning the employment relationship are made without regard to sex, race, e
+  text: We are a Government contractor subject to the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended by the Jobs for Veterans
+  text: recently separated veterans
+  text: active duty wartime or campaign badge veterans
+  text: Armed Forces service medal veterans
+  text: A Disabled Veteran is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or
+  text: A Recently Separated Veteran means any veteran during the three-year period beginning on the date of such veteran's discharge or release fro
+  text: An Active Duty Wartime or Campaign Badge Veteran means a veteran who served on active duty in the U.S. military, ground, naval or air servic
+  text: An Armed Forces Service Medal Veteran means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, 
+ {formField-gender}
+label: Please select your Gender*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-ethnicity}
+label: Please select the Race/Ethnicity which most accurately describes how you identify yourself*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Please identify your Veteran status*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: Before you go…take a moment to read our quick legal statement.
+  text: By submitting your application, you agree to receive electronic communications from T-Mobile, including email and text messages. You may als
+  text: If I am applying for a job based in the United States, by checking 'Yes, I agree' below and submitting this application, I agree to T-Mobile
+  text: . I have read the Arbitration Agreement and understand that it requires certain claims to be decided in binding arbitration instead of by a 
+  text: I certify that by submitting my application, the information I have provided is true and complete and if I further understand falsification 
+  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
+ {formField-acceptTermsAndAgreements}
+label: Yes, I agree*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] T-Mobile Workforce Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-24 15:11:38  failed  SEO Content Specialist @ jdgroupnam
+url: about:blank
+why: Page.goto: Timeout 45000ms exceeded.
+(the page could not be read: Page.evaluate: Execution context was destroyed, most likely because of a navigation)
+
+=== 2026-10-24 15:12:47  skipped  Client Service Associate @ spsnorthamerica
+url: https://job-boards.greenhouse.io/spsnorthamerica/jobs/5459794008
+why: posting restricts AI-assisted applications: "may not use AI"
+# Client Service Associate
+  text: Lone Tree, Colorado, United States
+  [button] Apply
+  text: Job Title: Client Services Associate
+  text: Reports To: The Client Services Associate will report to the Client Services Manager, or equivalent leadership.
+  text: The Client Services Associate provides exceptional office and mail services, delivering operational functions in the following areas: shippi
+  text: Overall, this position continuously offers the highest level of service to all client and SPS employees while maintaining a professional ima
+  text: Duties and Responsibilities:
+  text: Travel: None or Negligible
+  text: This job description is not designed to cover or contain a comprehensive listing of activities, duties or responsibilities that are required
+  text: Note: Please inquire with the Human Resources team for benefit offerings per role as regular positions that routinely are under 30 hours/wee
+  text: SPS is a global workplace solutions and business transformation company operating in more than 20 countries
+  text: Our clients include leading organizations across banking, insurance, legal, higher education, professional services, and many Fortune 500 co
+  text: At SPS we embrace the uniqueness of our employees and are committed to the fair and equal treatment of all people, applicants, and employees
+  text: SPS provides equal employment opportunities (EEO) to all employees
+  text: To ensure a fair and authentic interview process, applicants may not use AI tools or any other form of real-time assistance during interview
+  text: SPS team members may use transcription or note-taking technology solely to support accurate interview documentation. No AI or automated deci
+  text: SPS offers reasonable accommodations
+  text: To view our privacy policy, click on the link below:
+  text: Interested in building your career at SPS North America? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name
+  <input:text #preferred_name empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: School
+  <input:text #school--0 empty>
+  [button] 
+label: Degree
+  <input:text #degree--0 empty>
+  [button] 
+  [button] Add another
+label: LinkedIn Profile
+  <input:text #question_19051185008 empty>
+label: Do you have experience with the MS Office Suite, including Excel, Outlook, Teams, and SharePoint? If yes, kind
+  <textarea #question_19051186008 required empty>
+label: Do you have knowledge and understanding of mailroom, shipping & receiving procedures?*
+  <input:text #question_19051187008 required empty>
+label: Do you have working knowledge of MFD equipment?*
+  <input:text #question_19051188008 required empty>
+  [button] 
+  <input required empty>
+label: What is your desired work schedule?*
+  <input:text #question_19051189008 required empty>
+label: Do you have a significant other and/or relative(s) currently working for SPS? Below please write: -"No" if you
+  <input:text #question_19051190008 required empty>
+label: Have you ever worked for Swiss Post Solutions, SPS, or any affiliate companies?*
+  <input:text #question_19051191008 required empty>
+  [button] 
+  <input required empty>
+label: If you have been REFERRED into this position by a current SPS employee, please state their name below. (If you
+  <input:text #question_19051192008 required empty>
+label: Are you currently legally authorized to work in the United States? (Without SPS work sponsorship)*
+  <input:text #question_19051193008 required empty>
+  [button] 
+  <input required empty>
+  text: All new hires will be required to provide proof of their identity and eligibility to work in the United States as required by the Form I-9 p
+label: Will you now or in the future require sponsorship for employment visa status (e.g. H-1B visa status)? *
+  <input:text #question_19051194008 required empty>
+  [button] 
+  <input required empty>
+  text: All employment offers are contingent upon completion of I-9 and verification of employment eligibility.
+# Company Standard Application Demographic Questions
+  text: We invite applicants to share their demographic background. If you choose to complete this survey, your responses may be used to identify ar
+label: How would you describe your gender identity?
+  <input:text #<phone> empty>
+  [button] 
+label: How would you describe your racial/ethnic background?
+  <input:text #<phone> empty>
+  [button] 
+label: Are you a veteran or active member of the United States Armed Forces?
+  <input:text #<phone> empty>
+  [button] 
+label: Are you a former or current military spouse of an active member of the United States Armed Forces?
+  <input:text #<phone> empty>
+  [button] 
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in SPS North America’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status u
+label: Gender
+  <input:text #gender empty>
+  [button] 
+label: Are you Hispanic/Latino?
+  <input:text #hispanic_ethnicity empty>
+  [button] 
+  text: Race & Ethnicity Definitions
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status
+  <input:text #veteran_status empty>
+  [button] 
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-24 15:14:39  skipped  Appeals Specialist @ centene
+url: https://centene.wd5.myworkdayjobs.com/centene_external/job/Remote-NY/Appeals-Specialist_1671580/apply/applyManually
+stage: Application Questions 2 of 2
+why: can't truthfully answer required: Insurance; Medicaid/Medicare; Correspondence; Data Entry; None of the above
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Appeals Specialist
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+{progressBarActiveStep} current step 4 of 7 Application Questions 2 of 2
+label: current step 4 of 7
+label: Application Questions 2 of 2
+label: step 5 of 7
+label: Voluntary Disclosures
+label: step 6 of 7
+label: Take Assessment
+label: step 7 of 7
+label: Review
+# Application Questions 2 of 2
+{applyFlowSecondaryQuestionsPage}
+ {formField-75b0e39a5b921014a923870f300d0001}
+label: What is the highest level of education that you have completed?*
+  [dropdown] nothing chosen #secondaryQuestionnaire--75b0e39a5b921014a923870f300d0001
+ {formField-75b0e39a5b921014a92388429cb70000}
+label: How many years of grievance, appeals, claims or related healthcare experience do you have?*
+  [dropdown] nothing chosen #secondaryQuestionnaire--75b0e39a5b921014a92388429cb70000
+ {formField-75b0e39a5b921014a92388dc46bc0001}
+label: In which of the following do you have experience, proficiency and skills? (Select all that apply)*
+  <input:checkbox #37af99224f6c100150a33a53fdfe0001-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: Healthcare Customer Service
+  <input:checkbox #37af99224f6c100150a33aee3fbc0000-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: Insurance
+  <input:checkbox #37af99224f6c100150a33aee3fbc0001-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: Medicaid/Medicare
+  <input:checkbox #37af99224f6c100150a33aee3fbc0002-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: Correspondence
+  <input:checkbox #37af99224f6c100150a33b8841ae0000-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: Data Entry
+  <input:checkbox #37af99224f6c100150a33b8841ae0001-75b0e39a5b921014a92388dc46b required question-unanswered>
+label: None of the above
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
 
