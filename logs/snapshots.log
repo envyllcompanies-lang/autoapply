@@ -1,159 +1,3 @@
-=== 2026-10-21 15:23:09  unconfirmed  Care Operations Associate @ leap
-url: https://jobs.ashbyhq.com/leap/18f20283-b7e8-4fce-a3a1-393af114de79/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'loyee at Leap? If so, please list their name. Recruiting Privacy Policy Submit Application Leap may use Artificial Intelligence with this application. Learn more. Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Care Operations Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: $51K – $63K • Offers Equity
-  text: At Leap, we are committed to providing competitive total rewards packages including stock options and benefits. Individual pay may vary from
-  text: This job has application limits
-  text: 3 applications in any 90 day period
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone
-  <input:tel #8d8a1cfb-13f1-47f2-a705-bb558509bd19 required filled>
-label: LinkedIn Profile
-  <input:url #3c5bfbc6-284c-4afa-b1b1-c966b6f5e0b4 required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: What is your target compensation range?
-  <input:text #ad5f004d-9532-4ebb-adda-0c2db879138f required filled>
-label: Current location
-  <input filled>
-  [button] 
-label: Are you legally authorized to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=40ba8b62-8f53-4536-bab9-80cc9618f2ee question-answered>
-label: Will you now or in the future require visa sponsorship to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=db22d2d6-f7c1-4a0e-923f-720932aef285 question-unanswered>
-label: What accomplishment are you most proud of achieving in your current or last role? A few lines is best.
-  <textarea #c8882a9c-592c-4818-8a69-a8ca8834011d required filled>
-label: Why Leap Health?
-  <textarea #2be4551f-c57b-412f-807c-88f15c0a923a required filled>
-label: Have been referred by a current employee at Leap? If so, please list their name.
-  <input:text #a2b3df32-628c-4449-a331-10abf8540030 filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-10-21 15:34:44  skipped  Office Coordinator @ esswd
-url: https://esswd.wd501.myworkdayjobs.com/external/job/Denver/Office-Coordinator_JR-3591/apply/applyManually
-stage: My Experience
-why: can't truthfully answer required: Degree*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Office Coordinator
-label: completed step 1 of 5
-label: My Information
-{progressBarActiveStep} current step 2 of 5 My Experience
-label: current step 2 of 5
-label: My Experience
-label: step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# My Experience
-{applyFlowMyExpPage}
-# Work Experience
-  text: Provide accurate and complete information for ALL employment within the past 5-10 years. List most recent first.
-  text: Provide a brief description of the primary purpose of your position and your top three or four most significant job responsibilities.
-# Work Experience 1
- {formField-jobTitle}
-label: Job Title*
-  <input:text #workExperience-46--jobTitle required empty>
- {formField-companyName}
-label: Company*
-  <input:text #workExperience-46--companyName required empty>
- {formField-location}
-label: Location*
-  <input:text #workExperience-46--location required empty>
- {formField-currentlyWorkHere}
-label: I currently work here
-  <input:checkbox #workExperience-46--currentlyWorkHere question-unanswered>
- {formField-startDate}
-label: From*
-  <input #workExperience-46--startDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-46--startDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-endDate}
-label: To*
-  <input #workExperience-46--endDate-dateSectionMonth-input {dateSectionMonth-input} empty>
-  <input #workExperience-46--endDate-dateSectionYear-input {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-roleDescription}
-label: Role Description*
-  <textarea #workExperience-46--roleDescription required empty>
-  [button] Add Another {add-button}
-# Education
-# Enter at least the first four characters of the school or establishment and ENTER on your keyboard to search.
-# If your school is not listed please enter "School Not Listed" in the search and that option will populate.
-  text: For candidates applying in Colorado, please click
-  text: or additional information pursuant to Colorado state law.
-# Education 1
- {formField-school}
-label: School or University*
-{multiSelectContainer}
-  <input #education-47--school required empty>
- {formField-degree}
-label: Degree*
-  [dropdown] nothing chosen #education-47--degree
- {formField-fieldOfStudy}
-label: Field of Study
-{multiSelectContainer}
-  <input #education-47--fieldOfStudy empty>
-  [button] 
- {formField-firstYearAttended}
-  <input #education-47--firstYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
- {formField-lastYearAttended}
-label: To (Actual or Expected)
-  <input #education-47--lastYearAttended-dateSectionYear-input {dateSectionYear-input} empty>
-  [button] Add Another {add-button}
-# Certifications
-  [button] Add {add-button}
-# Skills
-  text: Provide skills that are relevant to the position in which you are applying and that you wish to be considered by Faegre Drinker in the emplo
- {formField-skills}
-label: Type to Add Skills
-{multiSelectContainer}
-  <input #skills--skills empty>
-# Resume and Cover Letter (Resume-Required for All; Cover Letter-Optional)
-  text: Please attach a resume and cover letter.
- {formField-}
-label: Upload a file (5MB max)*
-  [button] Select files {select-files}
-  <input:file {file-upload-input-ref} no-file>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-21 15:42:08  skipped  Program Associate, Public Funding @ nature
 url: https://nature.wd108.myworkdayjobs.com/externalcareers/job/Remote-USA/Program-Associate--Public-Funding_JR104171/apply/applyManually
 stage: My Experience
@@ -5583,4 +5427,114 @@ label: Two or More Races (Not Hispanic or Latino)
 label: Veteran Status
   <input:radio #b032b097-936e-4468-a338-0fbbc02c871b__systemfield_eeoc_veter question-unanswered>
 label: I identify as one or more of the classifications of protected veteran l
+
+=== 2026-10-24 06:47:36  unconfirmed  GTM Enablement - Global Onboarding & Operations @ elevenlabs
+url: https://jobs.ashbyhq.com/elevenlabs/24710bb7-62de-48d4-82c5-748c0d8aade2/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'most proud of, what did you do, and what was the outcome? This could be a any recent project you have built in or outside of your current work. Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# GTM Enablement - Global Onboarding & Operations
+# Location
+# Employment Type
+# Department
+# Deadline to Apply
+  text: November 8, 2026 at 5:00 AM UTC
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Location
+  text: Country you're currently residing in
+  <input empty>
+  [button] 
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: How did you hear about ElevenLabs?
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: I'm a user
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: News article
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: Job board
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: Social media (LinkedIn, Instagram, X etc)
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: In person event
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: Referral
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: I was reached out to
+  <input:radio #39fe1bed-5d4f-4a7e-8893-7c36debb3c7e_6825d01d-72c1-40e3-9617 question-answered>
+label: Other (please specify)
+label: If other, please specify below
+  <input:text #85e5d818-d02f-46c8-8171-3d0227f7c42a filled>
+label: Link to your LinkedIn profile
+  <input:text #cbd5a932-c117-4d0d-83f4-f114fadab5b2 required filled>
+label: What makes you excited about the ElevenLabs mission?
+  <textarea #7c3fc0bb-c30f-412c-9e5c-df5f81de493e empty>
+label: Finally, tell us about a hard problem in your past!
+  text: Which recent achievement are you most proud of, what did you do, and what was the outcome? This could be a any recent project you have built
+  <textarea #86f1c336-4068-4c35-817f-f6525d600266 empty>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-10-24 06:49:43  unconfirmed  Deal Operations Strategist @ elevenlabs
+url: https://jobs.ashbyhq.com/elevenlabs/7d01b1ec-511d-40bf-a6ed-88b212932edb/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: "t the ElevenLabs mission? Deal Desk is all about hard decisions! What's your philosophy on how to balance sales, finance, and legal priorities? Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure"
+# Deal Operations Strategist
+# Location
+  text: United States; New York; San Francisco
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Location
+  <input filled>
+  [button] 
+label: Resume
+  <input:file #_systemfield_resume has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: Link to your LinkedIn
+  <input:text #ed0c1bb8-cca7-4068-8a26-5301c3e3f132 filled>
+label: How did you hear about ElevenLabs?
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: I'm a user
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: News article
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: Job board
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: Social media (LinkedIn, Instagram, X etc)
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: In person event
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: Referral
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: I was reached out to
+  <input:radio #7f0dd4ba-3e76-4747-a75d-575331cb6ea1_9542cb17-9aa1-4359-8e21 question-answered>
+label: Other (please specify)
+label: If other, please specify below
+  <input:text #a8050184-acba-47a0-ace5-ff4c6488954e filled>
+label: What makes you excited about the ElevenLabs mission?
+  <textarea #6871160e-a133-4347-ace6-8fc89f1c8695 empty>
+label: Deal Desk is all about hard decisions! What's your philosophy on how to balance sales, finance, and legal prio
+  <textarea #fdc51615-ded8-480d-b30e-a6a21164dd95 empty>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
 
