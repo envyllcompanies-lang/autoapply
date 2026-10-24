@@ -1,130 +1,3 @@
-=== 2026-10-22 14:43:37  skipped  People Operations Coordinator @ halter
-url: https://jobs.ashbyhq.com/halter/43b658a0-bd71-4bf0-87b9-4f52c93710b7/application
-stage: page 1
-why: can't truthfully answer required: Where are you currently located?
-# People Operations Coordinator
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# Section 1
-label: Name
-  <input:text #_systemfield_name required empty>
-label: Email
-  <input:email #_systemfield_email required empty>
-label: Current company
-  <input:text #currentCompany empty>
-label: Where are you currently located?
-  <input empty>
-  [button] 
-label: Phone
-  <input:tel #phone empty>
-label: Yes - I consent to receiving SMS text messages
-label: No - I do not consent to receiving SMS text messages
-label: Yes - I consent to receiving WhatsApp messages
-label: No - I do not consent to receiving WhatsApp messages
-label: Resume
-  <input:file #_systemfield_resume required no-file>
-  [button] Upload File
-label: Additional information
-  <textarea #additionalInformation empty>
-label: LinkedIn
-  <input:text #LinkedIn empty>
-label: Other
-  <input:text #Other empty>
-# Section 2
-label: What's your expected annual base salary?
-  <input:text #9e6208ef-719c-4d63-9a3d-9d16bd91784b required empty>
-label: What is your notice period with your current employer?
-  <input:text #e32e5d40-5c40-4f5a-9ad9-7be459d6cd3d required empty>
-label: Which of these statements best describes your work eligibility in the USA
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_f6252d62-4043-43a9-9b6c question-unanswered>
-label: I'm a US citizen
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_f6252d62-4043-43a9-9b6c question-unanswered>
-label: I'm a permanent resident of the US
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_f6252d62-4043-43a9-9b6c question-unanswered>
-label: I have a valid work permit for the US
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_f6252d62-4043-43a9-9b6c question-unanswered>
-label: I would require sponsorship in order to work in the US
-label: Can you please share where you found our job posting (LinkedIn, Facebook etc.)?
-  <input:text #ba334764-1fca-44ba-8fca-de02d1c95209 required empty>
-label: This role is based on-site in Boulder, Colorado. If you’re currently elsewhere, would relocating be something 
-  <input:text #dbc6c452-12f0-4ba0-8752-d67799c7865b required empty>
-label: Halter is an equal opportunities employer. Where possible, we will provide reasonable adjustments throughout t
-  <textarea #3eaf3da6-c6a0-4e36-a462-6ef71b81cb49 empty>
-label: Do you hold a valid US driver’s license and have a clean driving record? This role involves regularly moving a
-  <input:text #d0ec0bcd-d07b-4dbe-b220-6317cc019ec4 required empty>
-# Section 3
-label: Why do you want to work at Halter and why would you be a great match for this role?
-  <textarea #9189d490-c1cc-4a90-95b1-6ed17f828aca required empty>
-label: Will you need Halter to sponsor a visa for you to work in the country this role is based, now or in the future
-  text: We hire great people from all over, and this just helps us plan ahead if we need to sort out a visa
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_351053aa-a9c5-41b0-aecb question-unanswered>
-label: Yes
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_351053aa-a9c5-41b0-aecb question-unanswered>
-label: No
-  <input:radio #8fb9fdc7-da07-4b6c-8a80-87b5c7638d03_351053aa-a9c5-41b0-aecb question-unanswered>
-label: Not sure
-# Diversity, Equity and Inclusion
-  text: At Halter, we champion diversity and inclusion to create better outcomes for our people and our customers. We are intentional and engage in 
-  text: You’ll see below that we’re requesting personal information about you. Please consider answering these optional questions to help us underst
-label: What is your current age?
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 17 or younger
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 18-20
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 21-29
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 30-39
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 40-49
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 50-59
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 60 or older
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: Prefer not to say
-label: I identify my ethnicity as
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: New Zealand European (Pākehā)
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Other European (inc. American, Canadian, Australian)
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Māori
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous American
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous Australian
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Pacific Peoples
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian (inc. Chinese, Southeast, Indian, Other)
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Latin American
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Middle Eastern or African
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-  <input:checkbox #ca383448-bdc7-48c5-b906-6fc2cb36212e_1e21d43f-548e-481a-aa5f question-unanswered>
-label: What gender do you identify as?
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-label: Female
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-label: Male
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-label: Non-binary
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-label: Gender diverse
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-label: None of the options offered
-  <input:radio #ca383448-bdc7-48c5-b906-6fc2cb36212e_8d7dcc65-3a0b-476a-b679 question-unanswered>
-  [button] Submit Application
-
 === 2026-10-22 15:12:54  not sent  Analyst @ fanduel
 url: https://job-boards.greenhouse.io/embed/job_app
 stage: page 1
@@ -5455,5 +5328,49 @@ label: None of the above
   [link]  {socialIcon}
   [link]  {socialIcon}
   [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-24 15:34:36  skipped  SEO Content Specialist @ jdgroupnam
+url: https://jdgroupnam.wd1.myworkdayjobs.com/jdfl_corporate_careers/job/FL-Boulder-Colorado/SEO-Content-Specialist_JR139196/apply/applyManually
+stage: Take Assessment
+why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# JD Finish Line Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# SEO Content Specialist
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions 1 of 2
+label: completed step 4 of 7
+label: Application Questions 2 of 2
+label: completed step 5 of 7
+label: Voluntary Disclosures
+{progressBarActiveStep} current step 6 of 7 Take Assessment
+label: current step 6 of 7
+label: Take Assessment
+label: step 7 of 7
+label: Review
+# Take Assessment
+# Errors Found
+! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
+  text: Click the link below to be taken to ADP for WOTC screening. Once complete, you will be returned to this page to complete your application.
+  [button] Take Assessment {inlineAssessmentButton}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
 
