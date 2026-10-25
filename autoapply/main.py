@@ -1316,7 +1316,31 @@ def _prune_hand_list(db: DB, log):
 def _resolve_hand_applied(db: DB, brain: Brain, log):
     """Jobs on your apply-by-hand list that you have applied to: the employer's 'we received your application' email,
     arriving after the job was handed to you, marks it applied (looked at about once an hour)."""
-    if not mailbox.configured() or time.time() - float(db.meta_get("hand_scan") or 0) < 3300:
+    if not mailbox.configured():
+        return
+    if not db.meta_get("once:recheck-hand-applied-2026-10-25"):
+        # until 2026-10-25 a confirmation email was matched loosely ('mesa' inside 'message', a New York Times email for
+        # two other employers' jobs): every job marked 'applied by you' is checked again against the inbox, strictly
+        took = db.conn.execute("SELECT key, company FROM jobs WHERE status='applied' AND reason LIKE 'applied by you (%'").fetchall()
+        if took:
+            since = time.time() - 30 * 86400
+            try:
+                real = mailbox.scan_confirmations_after({r["key"]: (brain._company_name(type("J", (), {"company": r["company"], "extra": {}})()), since)
+                                                         for r in took}, n=400, raise_errors=True)
+            except Exception as e:
+                log(f"  ! could not re-check the jobs marked 'applied by you' (inbox: {str(e)[:80]}); tried again next run")
+                took, real = [], None
+            back = [r["key"] for r in took if r["key"] not in (real or {})]
+            for k in back:
+                db.update(k, status="manual", reason=HANDOFF_PREFIX + "back on your list: the email first taken for its confirmation "
+                          "was from another employer")
+            if real is not None:
+                db.meta_set("once:recheck-hand-applied-2026-10-25", datetime.now().isoformat(timespec="seconds"))
+                log(f"Jobs marked 'applied by you' checked again: {len(took) - len(back)} confirmed by their own employer, "
+                    f"{len(back)} back on your apply-by-hand list (the email taken for them was another employer's)")
+        else:
+            db.meta_set("once:recheck-hand-applied-2026-10-25", datetime.now().isoformat(timespec="seconds"))
+    if time.time() - float(db.meta_get("hand_scan") or 0) < 3300:
         return
     db.meta_set("hand_scan", str(time.time()))
     cutoff = datetime.fromtimestamp(time.time() - 21 * 86400).isoformat(timespec="seconds")

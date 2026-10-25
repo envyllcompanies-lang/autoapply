@@ -76,6 +76,23 @@ try:
 finally:
     M._recent = _old_recent
 
+# ---- which employer an email is from: whole words in the subject or sender, never another employer named in the subject
+# (Oct 20-25: 'mesa' was found inside 'message', a New York Times email marked two other employers' jobs applied)
+_M = lambda s, f="", b="": {"subject": s, "from": f, "body": b}
+for _name, _m, _want in [
+        ("Mesa", _M("Thank you for your interest in The New York Times", "NYT <careers@nytimes.com>", "your message"), False),
+        ("Sila", _M("Thank you for applying to OKX", "OKX <no-reply@ashbyhq.com>", "Sila"), False),
+        ("Halter", _M("Thank You from Patterson Companies", "Patterson <x@patterson.com>"), False),
+        ("Equip", _M("Thank you for applying!", "Acme Equipment <jobs@acmeequipment.com>", "equipment"), False),
+        ("Bloom", _M("Thanks For Applying To Bloomerang!", "Bloomerang <x@bloomerang.co>"), False),
+        ("Ramp", _M("Thank You for Your Application!", "Ramp <no-reply@ashbyhq.com>"), True),
+        ("The New York Times", _M("Thank you for your interest in The New York Times", "NYT <careers@nytimes.com>"), True),
+        ("Kalshi", _M("Thank you for applying", "talent@kalshicareers.com"), True),
+        ("Acme Logistics", _M("Application received", "no-reply@greenhouse.io", "Thank you for applying to the Analyst role at Acme Logistics."), True)]:
+    _got = M.names_employer(_name, _m)
+    print("OK " if _got == _want else "BAD", f"email names {_name!r}: {_m['subject'][:45]!r} ->", _got)
+    bad_mail += _got != _want
+
 try:
     from playwright.sync_api import sync_playwright
 except ImportError:

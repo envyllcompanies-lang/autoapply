@@ -450,10 +450,47 @@ def wait_for_verification(since_ts: float, host_hint: str = "", timeout: int = 1
     return None
 
 
+# words a company slug or name carries that say nothing about which employer it is
+_CO_STOP = {"inc", "llc", "ltd", "corp", "co", "the", "and", "group", "usa", "us", "company", "careers", "jobs", "team", "holdings"}
+# 'Thank you for applying to OKX', 'your interest in The New York Times', 'Thank You from Patterson Companies'
+_NAMED_CO = re.compile(r"(?i:apply(?:ing)?|application|interest|applied)\s+(?i:to|at|with|in)\s+(?i:the\s+)?([A-Z0-9][^!.,:;()\n]{1,60})|"
+                       r"\b(?i:thank you from)\s+([A-Z0-9][^!.,:;()\n]{1,60})|^\s*([A-Z][\w&.'’ -]{1,40}?)\s+[-–|:]\s+(?i:thank)", re.M)
+_MAIL_SUFFIX = r"(careers?|jobs|hr|talent|recruit(ing|ment)?|hiring|inc|corp|group|us|usa|hq|team)?"
+_ROLE_WORDS = re.compile(r"\b(position|role|job|opening|opportunit|team|program|our|your|this|the following)\b", re.I)
+
+
+def names_employer(name: str, m: dict) -> bool:
+    """True when this email is from / about this employer. The name must stand as whole words in the subject or the
+    sender (or, for a longer name, in the body), and a subject that names another employer ('Thank you for applying to
+    OKX') never counts. A loose 'the name appears somewhere' match took 'mesa' from 'message', 'equip' from 'equipment' and
+    a New York Times email for two other employers' jobs (Oct 20-25)."""
+    words = [w for w in re.split(r"[^a-z0-9]+", (name or "").lower()) if w and w not in _CO_STOP]
+    flat_key = "".join(words)
+    if len(flat_key) < 3:
+        return False
+    subj, frm, body = m.get("subject") or "", m.get("from") or "", (m.get("body") or "")[:1500]
+
+    def in_words(text: str) -> bool:
+        t = text.lower()
+        if re.search(r"(?<![a-z0-9])" + r"[^a-z0-9]*".join(map(re.escape, words)) + r"(?![a-z0-9])", t):
+            return True                     # 'gerson lehrman', 'gersonlehrman', 'Gerson-Lehrman'
+        return len(flat_key) >= 6 and re.search(r"(?<![a-z0-9])" + re.escape(flat_key) + r"(?![a-z0-9])", re.sub(r"[^a-z0-9 @.]", "", t)) is not None
+
+    for g in _NAMED_CO.finditer(subj):
+        other = next(x for x in g.groups() if x)
+        if not _ROLE_WORDS.search(other) and not in_words(other):
+            return False                    # the subject names an employer, and it is another one
+    if in_words(subj) or in_words(frm):
+        return True
+    dom = re.search(r"@([\w.-]+)", frm.lower())
+    if dom and len(flat_key) >= 4 and any(re.fullmatch(_MAIL_SUFFIX + re.escape(flat_key) + _MAIL_SUFFIX, re.sub(r"[^a-z0-9]", "", lab))
+                                          for lab in dom.group(1).split(".")[:-1]):
+        return True                         # careers@acme.com / jobs.acme.com / acmecareers.com for Acme
+    return (len(words) >= 2 or len(flat_key) >= 6) and in_words(body)
+
+
 def find_confirmation(company_hint: str, since_ts: float, timeout: int = 90, log=print) -> str | None:
     """Subject of an 'we received your application' email from this employer that arrived after since_ts, else None."""
-    words = [w for w in re.split(r"[^a-z0-9]+", (company_hint or "").lower()) if len(w) > 2]
-    key = re.sub(r"[^a-z0-9]", "", (company_hint or "").lower())
     deadline = time.time() + timeout
     while not _DISABLED:
         try:
@@ -463,8 +500,7 @@ def find_confirmation(company_hint: str, since_ts: float, timeout: int = 90, log
                 subj, text = info["subject"], info["subject"] + " " + info["from"] + " " + info["body"][:1500]
                 if NOT_CONFIRM.search(subj) or not (CONFIRM_SUBJECT.search(subj) or CONFIRM_SUBJECT.search(info["body"][:600])):
                     continue
-                flat = re.sub(r"[^a-z0-9]", "", text.lower())
-                if (key and key in flat) or (words and all(w in text.lower() for w in words[:2])):
+                if names_employer(company_hint, info):
                     return subj
         except Exception as e:
             log(f"      mail: {str(e)[:80]}")
@@ -483,18 +519,14 @@ def scan_confirmations(companies: dict, since_ts: float, n: int = 60) -> dict:
     except Exception:
         return found
     for key, name in companies.items():
-        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
-        words = [w for w in re.split(r"[^a-z0-9]+", (name or "").lower()) if len(w) > 2]
         for m in msgs:
-            text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
-            flat = re.sub(r"[^a-z0-9]", "", text)
-            if (flat_key and flat_key in flat) or (words and all(w in text for w in words[:2])):
+            if names_employer(name, m):
                 found[key] = m["subject"]
                 break
     return found
 
 
-def scan_confirmations_after(companies: dict, n: int = 120) -> dict:
+def scan_confirmations_after(companies: dict, n: int = 120, raise_errors: bool = False) -> dict:
     """Like scan_confirmations, but each company has its own start time: companies = {key: (display name, since_ts)}.
     Used for the jobs handed to you to apply by hand: an 'application received' email from that employer that arrived
     after the job was handed over means you applied. Returns {key: subject}."""
@@ -506,16 +538,16 @@ def scan_confirmations_after(companies: dict, n: int = 120) -> dict:
         msgs = [m for m in _recent(since, n, ("INBOX",)) if not NOT_CONFIRM.search(m["subject"])
                 and (CONFIRM_SUBJECT.search(m["subject"]) or CONFIRM_SUBJECT.search(m["body"][:600]))]
     except Exception:
+        if raise_errors:
+            raise
         return found
+    if raise_errors and not msgs:
+        raise RuntimeError("no confirmation emails could be read")    # an unreadable inbox looks like an empty one
     for key, (name, t0) in companies.items():
-        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
-        words = [w for w in re.split(r"[^a-z0-9]+", (name or "").lower()) if len(w) > 2]
         for m in msgs:
             if m["ts"] < t0:
                 continue
-            text = (m["subject"] + " " + m["from"] + " " + m["body"][:1500]).lower()
-            flat = re.sub(r"[^a-z0-9]", "", text)
-            if (flat_key and len(flat_key) >= 4 and flat_key in flat) or (words and all(w in text for w in words[:2])):
+            if names_employer(name, m):
                 found[key] = m["subject"]
                 break
     return found
@@ -536,12 +568,8 @@ def scan_followups(companies: dict, since_ts: float, n: int = 80) -> dict:
     except Exception:
         return found
     for key, name in companies.items():
-        flat_key = re.sub(r"[^a-z0-9]", "", (name or "").lower())
-        if len(flat_key) < 3:
-            continue
         for m in msgs:
-            flat = re.sub(r"[^a-z0-9]", "", (m["subject"] + " " + m["from"]).lower())
-            if flat_key in flat:
+            if names_employer(name, {"subject": m["subject"], "from": m["from"]}):
                 found[key] = m["subject"]
                 break
     return found
