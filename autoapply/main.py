@@ -526,9 +526,11 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     if not searched:
         listed_boards = set()
     jb_state = {"version": db.meta_get("jobboard_version", "")}
-    jb_tok = hashlib.md5(json.dumps((cfg.get("aggregators") or {}).get("jobboard") or {}, sort_keys=True, default=str).encode()).hexdigest()[:12]
+    jb_tok = hashlib.md5(json.dumps([(cfg.get("aggregators") or {}).get("jobboard") or {}, cfg.get("search") or {}],
+                                    sort_keys=True, default=str).encode()).hexdigest()[:12]
     if db.meta_get("jobboard_settings", "") != jb_tok:
-        jb_state["version"] = ""          # what is read from the snapshot changed (age, levels, sites): read today's again in full
+        jb_state["version"] = ""          # what is taken from the snapshot changed (its age, levels or sites, your titles or
+                                          # places): today's snapshot is read again in full
         db.meta_set("jobboard_settings", jb_tok)
     try:                       # the daily snapshot of 1M+ postings: read whenever it has changed (once a day)
         from .jobboard import discover_jobboard
