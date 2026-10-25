@@ -88,7 +88,7 @@ writer:
   # The Gemini entries need a valid GEMINI_API_KEY secret (free at aistudio.google.com); a key Google rejects is reported
   # in the log and email. On Google's free tier what is sent may be used to improve its products: to keep your answers
   # (which carry your name and background) off it, give gemini-lite 'role: match' instead of 'match_first: true'.
-  match_providers: [groq-20b, groq-qwen]
+  match_providers: [groq-20b, groq-qwen, cerebras]
   match_share: 0.6
   providers:
     - {name: groq, base_url: "https://api.groq.com/openai/v1", model: "openai/gpt-oss-120b",
@@ -97,6 +97,10 @@ writer:
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 8000, tpd: 195000, extra: {reasoning_effort: low}}
     - {name: groq-qwen, base_url: "https://api.groq.com/openai/v1", model: "qwen/qwen3.8-27b", match_share: 0.25,
        api_key_env: GROQ_API_KEY, rpm: 25, tpm: 6000, tpd: 195000, extra: {reasoning_format: hidden}}
+    # Cerebras (free key at cloud.cerebras.ai): about a million tokens a day, so it can carry most of a day's answers
+    # and match checks once its key is in the CEREBRAS_API_KEY secret. Idle until then.
+    - {name: cerebras, base_url: "https://api.cerebras.ai/v1", model: [gpt-oss-120b, qwen-3-235b-a22b-instruct-2507, llama-3.3-70b],
+       match_share: 0.5, api_key_env: CEREBRAS_API_KEY, rpm: 5, tpm: 30000, tpd: 900000, batch: 5}
     # Gemini: new keys (made after mid-2026) only get the 3.x models, so those are named first.
     - {name: gemini-lite, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", match_first: true, match_share: 0.6,
        model: [gemini-3.5-flash-lite, gemini-3.1-flash-lite-preview, gemini-flash-lite-latest], discover: lite,
@@ -104,6 +108,10 @@ writer:
     - {name: gemini-flash, base_url: "https://generativelanguage.googleapis.com/v1beta/openai", role: match,
        model: [gemini-3.5-flash, gemini-3-flash-preview, gemini-flash-latest], discover: flash,
        api_key_env: GEMINI_API_KEY, rpm: 4, rpd: 18, tpm: 200000, batch: 5, extra: {reasoning_effort: low}}
+    # Mistral (free 'Experiment' key at console.mistral.ai, phone check, no card): match checks only, since on the free
+    # plan what is sent may be used for training. Idle until the MISTRAL_API_KEY secret exists.
+    - {name: mistral, base_url: "https://api.mistral.ai/v1", role: match, model: [mistral-small-latest, mistral-medium-latest],
+       api_key_env: MISTRAL_API_KEY, rpm: 20, tpm: 400000, tpd: 3000000, batch: 5}
 
 aggregators:
   jobboard:                 # a public daily snapshot of ~1.4 million open postings on 20,000+ company career sites
