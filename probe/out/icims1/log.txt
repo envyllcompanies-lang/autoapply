@@ -83,3 +83,30 @@ Select a state; buttons: :Remove; infoFirstName:; infoLastName:; i
 [17:46:27]    6 recruiting.paylocity.com (url)              (url)                                    steps=3 empty_req=22 | Unanswerable: stuck on step 4; page says: ['Have you applied for a job with us before? (required)\n--\nPlease select Yes
 [17:46:27]    7 recruiting.paylocity.com (url)              (url)                                    steps=3 empty_req=22 | Unanswerable: stuck on step 4; page says: ['Have you applied for a job with us before? (required)\n--\nPlease select Yes
 [17:46:27]    8 recruiting.paylocity.com (url)              (url)                                    steps=3 empty_req=24 | Unanswerable: stuck on step 4; page says: ['Have you applied for a job with us before? (required)\n--\nPlease select Yes
+[19:13:06] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%)
+[19:13:06] mail: logged in to delgado@alumni.usc.edu OK
+[19:13:07] Groq models open to this key: allam-2-7b, canopylabs/orpheus-arabic-saudi, canopylabs/orpheus-v1-english, meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m, openai/gpt-oss-120b, openai/gpt-oss-20b, openai/gpt-oss-safeguard-20b, qwen/qwen3.8-27b, whisper-large-v3, whisper-large-v3-turbo
+[19:13:07] === probe icims1: 4 forms, fill only, nothing is submitted ===
+[19:13:07] ACCOUNT_PASSWORD meets Workday's usual rules
+[19:13:07] Accounts: ON (password set: True, email set: True, create in probe: True)
+[19:13:07] → [icims] (url) @ (url)  https://careers-stifel.icims.com/jobs/10081/public-finance-analyst/job
+[19:13:20]       step 1: 1 fields (1 required)
+[19:13:25]       account: signing in on login.icims.com (no 'create account' link found)
+[19:13:27]       account: sign-in refused on login.icims.com; resetting the password through your email
+[19:15:37]       account: the password-reset email did not arrive in time
+[19:15:37]     ✗ Blocked: account: sign-in was refused and the password could not be reset through your email
+[19:15:37] → [icims] (url) @ (url)  https://careers-healthedge.icims.com/jobs/8978/project-coordinator/job
+[19:15:44]     ✗ Blocked: hCaptcha (a human check: the bot stops here)
+[19:15:44] → [icims] (url) @ (url)  https://careers-lmi.icims.com/jobs/14679/project-accountant/job
+[19:15:50]     ✗ Blocked: hCaptcha (a human check: the bot stops here)
+[19:15:50] → [icims] (url) @ (url)  https://careers-rws.icims.com/jobs/6618/associate-resource-coordinator/job
+[19:16:04]       step 1: 1 fields (1 required)
+[19:16:08]       account: signing in on login.icims.eu (no 'create account' link found)
+[19:16:11]       account: sign-in refused on login.icims.eu; resetting the password through your email
+[19:18:16]       account: the password-reset email did not arrive in time
+[19:18:16]     ✗ Blocked: account: sign-in was refused and the password could not be reset through your email
+[19:18:17] === probe done ===
+[19:18:17]    1 icims        (url)              (url)                                    steps=1 empty_req=0 | Blocked: account: sign-in was refused and the password could not be reset through your email
+[19:18:17]    2 icims        (url)              (url)                                    steps=0 empty_req=0 | Blocked: hCaptcha (a human check: the bot stops here)
+[19:18:17]    3 icims        (url)              (url)                                    steps=0 empty_req=0 | Blocked: hCaptcha (a human check: the bot stops here)
+[19:18:17]    4 icims        (url)              (url)                                    steps=1 empty_req=0 | Blocked: account: sign-in was refused and the password could not be reset through your email
