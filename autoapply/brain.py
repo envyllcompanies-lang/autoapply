@@ -237,6 +237,19 @@ NEVER_GIVE_RX = re.compile(r"social security|\bssn\b|\bs\.s\.n\b|\bsat\b.{0,12}(
 HUMAN_CHECK_RX = re.compile(r"not a robot|i'?m (a )?human|are you (a )?human|prove you|captcha|verify (that )?you are (a )?(human|person)|human verification", re.I)
 NEG_Q_RX = re.compile(r"\b(are|do|does|did|is|will|would|can|could|have|has)\s+(you\s+|there\s+)?(not|n't)\b|\b(unable to|cannot|can't|cant|won't)\b|\b(are|is)\s+not\b", re.I)
 NEG_TOPIC_RX = re.compile(r"authori[sz]|sponsor|eligible|legally|right to work|on-?site|in[- ]office|relocat|commut|reason\W.{0,30}(cannot|unable)", re.I)
+# clauses that look like a negated question or a forbidden topic but are neither: 'such documents cannot be expired'
+# (Cardinal Health's work-authorization question), 'please do not list your salary history' (Mizuho's pay-expectation
+# question), 'including but not limited to'
+_BENIGN_RX = re.compile(r"(including )?(but )?not limited to|not (just|only) limited to|"
+                        r"(and )?(such |these |the |your )?(documents?|documentation|identification|ids?)\s+(cannot|can't|can not|must not|may not|"
+                        r"should not)\s+be\s+expired|"
+                        r"(please )?(do not|don't|you do not need to|no need to)\s+(list|include|provide|share|disclose|enter|state|give)\s+(us\s+)?"
+                        r"(your\s+)?((current|prior|past|previous)(\s+or\s+(current|prior|past|previous))?\s+)?(salary|pay|wage|compensation)"
+                        r"\s+history[^.?]*", re.I)
+
+
+def _benign(low: str) -> str:
+    return _BENIGN_RX.sub(" ", low)
 
 
 # a race/ethnicity box names the applicant's answer: one pattern per answer, so 'American Indian' never ticks 'Black or African American'
@@ -633,7 +646,7 @@ class Brain:
                 self._log(f"      (ticked {lab[no_lic[0]][:50]!r}: you hold no licenses or certifications)")
                 continue
             if HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
-                    or self._NEVER_GUESS.search(low):
+                    or self._NEVER_GUESS.search(_benign(low)):
                 continue
             pick: list = []
             nones = [i for i, t in lab.items() if self._NONE_OPT.fullmatch(t)]
@@ -710,7 +723,7 @@ class Brain:
         low = f"{f.get('label', '')} {f.get('question', '')}".strip().lower()
         opts = [o for o in (f.get("options") or []) if not re.match(r"\s*(select|choose|--)", o, re.I)]
         if not low or HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
-                or self._NEVER_GUESS.search(low):
+                or self._NEVER_GUESS.search(_benign(low)):
             return None
         if kind == "wddate" and re.search(r"graduat", low):
             return self._grad_date()                   # 'anticipated graduation date': the date you did graduate
@@ -938,9 +951,9 @@ class Brain:
         text = f"{f.get('label', '')} {f.get('question', '')}".strip()
         low = text.lower()
         if not text or HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or AI_WORDS.search(low) \
-                or QUALIFY_CERT_RX.search(low) or self._NEVER_GUESS.search(low):
+                or QUALIFY_CERT_RX.search(low) or self._NEVER_GUESS.search(_benign(low)):
             return None
-        if NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", low)) and NEG_TOPIC_RX.search(low):
+        if NEG_Q_RX.search(_benign(low)) and NEG_TOPIC_RX.search(low):
             return None
         if re.search(r"relocat|commut|on-?site|in[- ]office|in person|hybrid", low) and not self._location_ok(low):
             return None
@@ -1054,6 +1067,15 @@ class Brain:
                 return None          # cover letters are switched off: a form that requires one is skipped
             return letter or self.lazy_letter(self._job, required=bool(f.get("required"))) or None   # optional + no letter: left empty
 
+        if kind in ("combobox", "text") and not opts and re.search(
+                r"where are you (currently )?(located|based|living)|where do you (currently )?(live|reside)|"
+                r"(which|what) (city|state)(, province,? (or|and) region| or region| or province)?,? (do|are) you (currently )?(live|living|reside|located|based)",
+                low[:200]) and not re.search(r"relocat|willing|open to|prefer|plan to|work from|office", low[:200]):
+            # a 'start typing' location picker ('Where are you currently located?', 'Which state, province, or region do
+            # you currently live in?' on Ashby): your town, state; the site's own list then picks the match
+            where = self.facts.get("location_text") or ", ".join(str(x) for x in (self.facts.get("city"), self.facts.get("state")) if x)
+            if where:
+                return where
         if has_opts and opts and re.search(r"\bconvicted\b.{0,40}\b(crime|felony|misdemeanou?r|offen[sc]e)|"
                                            r"released from custody|\bon (bail|probation|parole)\b|pending (criminal )?charges", low[:240]):
             fact = str(self._fact(("criminal_conviction",)) or "").strip().lower()
@@ -1200,7 +1222,7 @@ class Brain:
                 if got:
                     return got
         # 2) facts (Workable draws every free-text question as a textarea: short factual ones get the fact too)
-        short_box = kind != "textarea" or (len(low) < 160 and not re.search(
+        short_box = kind != "textarea" or (len(_benign(low).strip(" .*")) < 160 and not re.search(
             r"\b(why|describe|explain|tell us|walk us|example|share (a|an|your (experience|approach|story))|how (do|did|would|have|will) you)\b", low))
         if short_box:
             for rx, keys, mode in FIELD_RULES:
@@ -1709,7 +1731,7 @@ class Brain:
             if got:
                 return [got] if kind == "checkbox_group" else got
         qpart = low.split("?")[0] if "?" in low[:400] else low
-        if has_opts and NEG_Q_RX.search(re.sub(r"(including )?(but )?not limited to|not (just|only) limited to", " ", qpart)) and NEG_TOPIC_RX.search(low):
+        if has_opts and NEG_Q_RX.search(_benign(qpart)) and NEG_TOPIC_RX.search(low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
         if optionish and re.search(r"investigative consumer report|consumer report|background (check|screening|investigation)|"
                                    r"criminal (background|history) check|employment verification", low) and \
@@ -1989,7 +2011,7 @@ class Brain:
         lab = f.get("label", "")
         open_prompt = kind == "textarea" or (kind == "text" and (
             (len(lab) >= 25 and PROMPT_RX.search(low)) or (len(lab) >= 40 and "?" in lab and len(lab.split()) >= 7)))
-        if not open_prompt or self._NEVER_GUESS.search(low):
+        if not open_prompt or self._NEVER_GUESS.search(_benign(low)):
             return None
         if not f.get("required") and not (self.cfg.get("writer", {}) or {}).get("answer_optional", False):
             return None
