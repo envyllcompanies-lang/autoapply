@@ -1,87 +1,3 @@
-=== 2026-10-22 15:12:54  not sent  Analyst @ fanduel
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: the form was rejected, not sent; page errors: ['Address 2*', 'Address 2*', 'This field is required.']
-  text: Interested in building your career at FanDuel? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required filled>
-label: Last Name*
-  <input:text #last_name required filled>
-label: Preferred First Name*
-  <input:text #preferred_name required filled>
-label: Email*
-  <input:text #email required filled>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input:tel #phone required filled>
-label: Location (City)*
-  text: <city>, Colorado, United States
-  <input:text #candidate-location required empty>
-  [button] 
-  [button] Locate me
-  text: <file>
-  [button] 
-  [button] Attach
-label: Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: Website
-  <input:text #question_69660337 filled>
-label: LinkedIn Profile
-  <input:text #question_69660338 filled>
-label: Are you legally authorized to work in the United States?*
-  <input:text #question_69660339 required empty>
-  [button] 
-  [button] 
-label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?*
-  <input:text #question_69660340 required empty>
-  [button] 
-  [button] 
-label: Are you an employee of Flutter or a Flutter brand?*
-  <input:text #question_69660341 required empty>
-  [button] 
-  [button] 
-label: What are your base salary expectations?*
-  <input:text #question_69660342 required filled>
-label: What are your total compensation expectations?*
-  <input:text #question_69660343 required filled>
-label: Are you subject to a non-compete or any other agreements that may prohibit or restrict your employment with Fa
-  <input:text #question_69660344 required empty>
-  [button] 
-  [button] 
-label: Are you located within 120 miles of the New York, Atlanta, Jersey City, Toronto or Los Angeles office? If so, 
-  <input:text #question_69660345 required empty>
-  [button] 
-  [button] 
-label: If you are not located within 120 miles of this location, are you willing to relocate for this opportunity upo
-  <input:text #question_69660346 required empty>
-  [button] 
-  [button] 
-label: How did you hear about this role?*
-  <input:text #question_69660347 required empty>
-  [button] 
-  [button] 
-label: Address 1*
-  <input:text #question_69660348 required filled>
-label: Address 2*
-  <input:text #question_69660349 required INVALID empty>
-label: City*
-  <input:text #question_69660350 required filled>
-label: State*
-  <input:text #question_69660351 required filled>
-label: Zip Code*
-  <input:text #question_69660352 required filled>
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
 === 2026-10-22 15:20:47  skipped  Regional Production Coordinator @ outfrontmedia
 url: https://outfrontmedia.wd1.myworkdayjobs.com/outfrontmedia/job/NY-New-York-90-Park-Ave-FL-9/Sign-Hanger_R-004890/apply/applyManually
 stage: Application Questions
@@ -5369,6 +5285,133 @@ label: Review
 # Follow Us
   [link]  {socialIcon}
   [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-25 13:48:15  unconfirmed  Operations @ kota
+url: https://jobs.ashbyhq.com/kota/368e6188-e321-492a-8b92-b969e995d2e2/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'o 365 days? Recruiting Privacy Policy I agree Recruiting Privacy Policy Submit Application Kota may use Artificial Intelligence with this application. Learn more. Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Operations
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+# The Basics
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone number
+  <input:tel #8a5ddfc2-91a1-42f0-ab84-b1667a598c7a required filled>
+label: LinkedIn
+  <input:text #740cc486-94c2-4ae9-a1e3-de2dfae9f00a filled>
+label: CV
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+# What are you interested in?
+label: Type of role
+  text: Tick up to two. If nothing here feels like an exact fit but you think you'd be right for Kota, pick the closest.
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Benefits operations: scheme setup, renewals and policy events, owned to resolution
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Customer support: you investigate before you respond
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Insurer and broker partnerships: you build the supply side, new carriers and new markets
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Finance: you build the model rather than maintain it
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Compliance, risk and legal: regulated and multi-country, you make it work rather than slower
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: People and talent: you've built a function rather than inherited one
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Business operations and strategy: you make the whole thing run
+  <input:checkbox #8343d7b4-72ed-4da1-bd28-2a4ec8e53ad0_36de06a3-10e7-43e4-a1fa question-answered>
+label: Something else: your background doesn't match the list but you can see where you'd fit
+label: If something else, what role(s) are you interested in?
+  <input:text #31c072eb-23b9-4028-9aa6-6615dcb6aa7f empty>
+# Your Work
+  text: Your CV tells us where you’ve been. This tells us what you’re actually good at, which is what we’ll be looking for when a role opens that fi
+label: What have you built, fixed or changed that you’re proud of?
+  <textarea #8f6fd37c-121b-409b-bd2d-1ad53580ea18 required filled>
+# Location
+label: Country of Residence
+  <input filled>
+  [button] 
+label: Do you have the right to work in the country you would be working from, without requiring visa sponsorship?
+  [button] Yes
+  [button] No
+  <input:checkbox name=74089314-c5ea-4b45-9a16-d1529715936a question-unanswered>
+  text: Do you agree to allow Yonder Technology Limited trading as Kota to contact you about job opportunities for up to 365 days?
+  <input:checkbox #bb58ebdb-841a-4ff3-9e81-22e69d6bc104__systemfield_data_conse question-answered>
+label: I agree
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-10-25 13:51:05  skipped  Administrative Assistant - Management Consulting @ plantemoran
+url: https://plantemoran.wd1.myworkdayjobs.com/pmexternalcareers/job/Denver-Tech-Center/Administrative-Assistant---Management-Consulting_JR-03479/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: I have reviewed and consent to the information in the link a
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Plante Moran Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Administrative Assistant - Management Consulting
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Voluntary Self-Identification
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-gender}
+label: Please select your gender.*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-veteranStatus}
+label: Please select the veteran status which most accurately describes how you identify yourself.*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: California Notice at Collection
+  text: I understand that any false, misleading, or incomplete information will result in disqualification from employment with Plante & Moran, PLLC
+  text: I authorize the Firm to contact all my former and current employers, educational institutions, and any other references I have provided rega
+  text: I authorize my current and former employers to disclose to the Firm all requested information, whether or not substantiated and whether or n
+  text: I also release the Firm and its employees and agents, and all of my former and current employers, educational institutions, and the other re
+  text: I also understand that the Firm may, as permitted by law, conduct or have conducted by an individual or entity of its choice, a conviction-o
+  text: In submitting your information to our Firm, you acknowledge that Plante Moran may check publicly available sources such as LinkedIn or simil
+  text: I understand and consent that, when I access or submit an application through the Firm's careers site or applicant portal, the Firm and its 
+ {formField-acceptTermsAndAgreements}
+label: I have reviewed and consent to the information in the link above.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
   [link]  {socialIcon}
   [link]  {socialIcon}
   [link] Privacy Policy {privacyLink}
