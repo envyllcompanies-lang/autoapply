@@ -1,0 +1,735 @@
+[
+ {
+  "step": 1,
+  "url": "https://mizuho.wd1.myworkdayjobs.com/mizuhoamericas/job/NYC-1285/Payment-Platform-Implementation-Engineer_R7377-1/apply/applyManually",
+  "fields": [
+   {
+    "id": "f0",
+    "required": true,
+    "label": "First Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--firstName\"]",
+    "key": "formField-legalName--firstName",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f1",
+    "required": true,
+    "label": "Last Name*",
+    "maxlength": null,
+    "sel": "[id=\"name--legalName--lastName\"]",
+    "key": "formField-legalName--lastName",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f2",
+    "required": true,
+    "label": "Address Line 1*",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine1\"]",
+    "key": "formField-addressLine1",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f3",
+    "required": false,
+    "label": "Address Line 2",
+    "maxlength": null,
+    "sel": "[id=\"address--addressLine2\"]",
+    "key": "formField-addressLine2",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f4",
+    "required": true,
+    "label": "City*",
+    "maxlength": null,
+    "sel": "[id=\"address--city\"]",
+    "key": "formField-city",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f5",
+    "required": true,
+    "label": "Postal Code*",
+    "maxlength": null,
+    "sel": "[id=\"address--postalCode\"]",
+    "key": "formField-postalCode",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f6",
+    "required": true,
+    "label": "Email*",
+    "maxlength": null,
+    "sel": "[id=\"emailAddress--emailAddress\"]",
+    "key": "formField-emailAddress",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f7",
+    "required": true,
+    "label": "Country Phone Code*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--countryPhoneCode\"]",
+    "key": "formField-countryPhoneCode",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [
+     "United States of America (+1)"
+    ],
+    "ph": "Search"
+   },
+   {
+    "id": "f8",
+    "required": true,
+    "label": "Phone Number*",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneNumber\"]",
+    "key": "formField-phoneNumber",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f9",
+    "required": false,
+    "label": "Phone Extension",
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--extension\"]",
+    "key": "formField-extension",
+    "has_value": false,
+    "kind": "text"
+   },
+   {
+    "id": "f10",
+    "kind": "checkbox_single",
+    "label": "I have a preferred name",
+    "question": "I have a preferred name",
+    "required": false,
+    "sel": "input[type=\"checkbox\"][name=\"preferredCheck\"]",
+    "key": "formField-preferredCheck",
+    "checked": false,
+    "context": ""
+   },
+   {
+    "id": "f11",
+    "kind": "combobox",
+    "label": "How Did You Hear About Us?*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"source--source\"]",
+    "key": "formField-source",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Agency",
+     "ALPFA",
+     "Campus Recruiting",
+     "Employee Referral",
+     "Glassdoor",
+     "Indeed",
+     "LinkedIn",
+     "Mizuho Career Website",
+     "National Black MBA Association",
+     "Other",
+     "Partner Organizations (AOT, COOP Careers, Marcy Labs, Per Scholas, Pursuit)"
+    ]
+   },
+   {
+    "id": "f12",
+    "kind": "combobox",
+    "label": "Country*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"country--country\"]",
+    "key": "formField-country",
+    "button": true,
+    "cur": "United States of America",
+    "options": []
+   },
+   {
+    "id": "f13",
+    "kind": "combobox",
+    "label": "State*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"address--countryRegion\"]",
+    "key": "formField-countryRegion",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Alabama",
+     "Alaska",
+     "American Samoa",
+     "Arizona",
+     "Arkansas",
+     "Armed Forces Americas",
+     "Armed Forces Europe",
+     "Armed Forces Pacific",
+     "California",
+     "Colorado",
+     "Connecticut",
+     "Delaware",
+     "District of Columbia",
+     "Florida",
+     "Georgia",
+     "Guam",
+     "Hawaii",
+     "Idaho",
+     "Illinois",
+     "Indiana",
+     "Iowa",
+     "Kansas",
+     "Kentucky",
+     "Louisiana",
+     "Maine",
+     "Maryland",
+     "Massachusetts",
+     "Michigan",
+     "Minnesota",
+     "Mississippi",
+     "Missouri",
+     "Montana",
+     "Nebraska",
+     "Nevada",
+     "New Hampshire",
+     "New Jersey",
+     "New Mexico",
+     "New York",
+     "North Carolina",
+     "North Dakota",
+     "Northern Mariana Islands",
+     "Ohio",
+     "Oklahoma",
+     "Oregon",
+     "Pennsylvania",
+     "Puerto Rico",
+     "Rhode Island",
+     "South Carolina",
+     "South Dakota",
+     "Tennessee",
+     "Texas",
+     "United States Minor Outlying Islands",
+     "Utah",
+     "Vermont",
+     "Virginia",
+     "Virgin Islands, U.S.",
+     "Washington",
+     "West Virginia",
+     "Wisconsin",
+     "Wyoming"
+    ]
+   },
+   {
+    "id": "f14",
+    "kind": "combobox",
+    "label": "Phone Device Type*",
+    "required": true,
+    "maxlength": null,
+    "sel": "[id=\"phoneNumber--phoneType\"]",
+    "key": "formField-phoneType",
+    "button": true,
+    "cur": "Select One",
+    "options": [
+     "Select One",
+     "Fax",
+     "Landline",
+     "Mobile",
+     "Pager"
+    ]
+   }
+  ],
+  "answers": {
+   "f11": "LinkedIn",
+   "f12": "United States",
+   "f13": "Colorado",
+   "f14": "Mobile",
+   "f0": "Brian",
+   "f1": "Delgado-Ortega",
+   "f2": "63 Cherry Ct",
+   "f3": "",
+   "f4": "New Castle",
+   "f5": "81647",
+   "f6": "delgado@alumni.usc.edu",
+   "f7": "",
+   "f8": "(970) 366-8832",
+   "f9": ""
+  },
+  "readback": {
+   "f11": {
+    "id": "f11",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "6c507b7295da1079f148a43362ac392b",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "LinkedIn",
+    "cls": "css-16gq7od"
+   },
+   "f12": {
+    "id": "f12",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "bc33aa3152ec42d4995f4791a106ed09",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "United States of America",
+    "cls": "css-16gq7od"
+   },
+   "f10": {
+    "id": "f10",
+    "tag": "INPUT",
+    "type": "checkbox",
+    "value": "on",
+    "checked": false,
+    "pressed": null,
+    "achecked": "false",
+    "text": "",
+    "cls": "css-11e9p6y"
+   },
+   "f3": {
+    "id": "f3",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mdurfk"
+   },
+   "f13": {
+    "id": "f13",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "a83d6eabae3b49718c4ce09eeb66fd0b",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Colorado",
+    "cls": "css-16gq7od"
+   },
+   "f14": {
+    "id": "f14",
+    "tag": "BUTTON",
+    "type": "button",
+    "value": "6c507b7295da1079eea6f5a6ed2d3517",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "Mobile",
+    "cls": "css-16gq7od"
+   },
+   "f7": {
+    "id": "f7",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f8": {
+    "id": "f8",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "(970) 366-8832",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mdurfk"
+   },
+   "f9": {
+    "id": "f9",
+    "tag": "INPUT",
+    "type": "text",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1mdurfk"
+   }
+  },
+  "required_still_empty": [
+   {
+    "id": "f0",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f1",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f2",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f4",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f5",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f6",
+    "html": "(element gone)"
+   },
+   {
+    "id": "f7",
+    "html": "<div data-automation-id=\"multiselectInputContainer\" dir=\"ltr\" color=\"#005CB9\" class=\"css-1j0rjec\"><div data-automation-hiddensearch=\"false\" class=\"css-ujzx5o\"><input enterkeyhint=\"search\" dir=\"ltr\" placeholder=\"Search\" aria-invalid=\"false\" aria-describedby=\"d7f829aa-f854-4fbf-a15b-53261ad01cba\" aria-disabled=\"false\" aria-required=\"true\" autocomplete=\"off\" tabindex=\"0\" data-uxi-element-id=\"selectinput-afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-widget-type=\"selectinput\" data-uxi-multiselect-id=\"afec04b8-8b05-4be9-863b-027aaf49df58\" id=\"phoneNumber--countryPhoneCode\" class=\"css-1rwb1er\" value=\"\" data-aa=\"f7\"><div data-automation-id=\"promptSelectionLabel\" class=\"css-6nc22j\"></div><div id=\"d7f829aa-f854-4fbf-a15b-53261ad01cba\" aria-hidden=\"true\" data-automation-id=\"promptAriaInstruction\" class=\"css-6nc22j\">1 item selected, United States of America (+1)</div></div><div tabindex=\"-1\" class=\"css-14lkp70\"><ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"afec04b8-8b05-4be9-863b-027aaf49df58\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"selectinputlistitem-afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-widget-type=\"selectinputlistitem\" data-uxi-multiselect-id=\"afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-selectinputlistitem-index=\"\" class=\"css-j8lfa5\"><div class=\"mol8wk css-11hacse css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ol8wd: #005CB9;\"><div class=\"css-ol8wp css-ol8wt mol8wt\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColor-ol8wo: var(--cnvs-brand-neutral-dark); --iconHoverColor-ol8wo: var(--cnvs-brand-neutral-darkest);\"><span class=\"css-1o178hw\" style=\"--size-svg-a30d66: 1.25rem; --color-system-icon-9f0d45: currentColor; --accentColor-system-icon-9f0d45: currentColor; --colorHover-fd51fd: currentColor;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-x-small wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"m10.783 12-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588z\" class=\"wd-icon-fill\"></path></g></svg></span></div><p class=\"css-ol8wv css-ol8wz mol8wz\" data-automation-id=\"promptOption\" data-automation-label=\"United States of America (+1)\">United States of America (+1)</p></div></li></ul></div><span class=\"css-12ds82q css-1o178hw\" data-automation-id=\"promptIcon\" aria-hidden=\"true\" aria-invalid=\"false\" tabindex=\"-2\" data-uxi-element-id=\"promptIcon-afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-widget-type=\"selectinputicon\" data-uxi-multiselect-id=\"afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-selectinputicon-type=\"promptIcon\" style=\"--color-system-icon-9f0d45: #7b858f; --accentColor-system-icon-9f0d45: #7b858f; --colorHover-fd51fd: normal;\"><sv"
+   }
+  ],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Sign In",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Sign In Search for Jobs",
+    "html": "<button color=\"#494949\" data-automation-id=\"utilityButtonSignIn\" class=\"css-set3w4\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5v-1.5C4 16 6.246 13.8 8.756 12.684 7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-4s4kl6\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Sign In Search for Jobs",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "legalName--firstName",
+    "context": "First Name* Last Name* I have a preferred name",
+    "html": "<input type=\"text\" id=\"name--legalName--firstName\" name=\"legalName--firstName\" aria-required=\"true\" class=\"css-1mdurfk\" value=\"Brian\">"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "addressLine1",
+    "context": "Address Line 1*",
+    "html": "<input type=\"text\" id=\"address--addressLine1\" name=\"addressLine1\" aria-required=\"true\" class=\"css-1mdurfk\" value=\"63 Cherry Ct\">"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "city",
+    "context": "Address Line 1* Address Line 2 City* State* Colorado Postal Code*",
+    "html": "<input type=\"text\" id=\"address--city\" name=\"city\" aria-required=\"true\" class=\"css-1mdurfk\" value=\"New Castle\">"
+   },
+   {
+    "tag": "INPUT",
+    "role": null,
+    "type": "text",
+    "text": "",
+    "aria": null,
+    "dataui": null,
+    "name": "emailAddress",
+    "context": "Email*",
+    "html": "<input type=\"text\" id=\"emailAddress--emailAddress\" name=\"emailAddress\" aria-required=\"true\" class=\"css-1mdurfk\" value=\"delgado@alumni.usc.edu\">"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-afec04b8-8b05-4be9-863b-027aaf49df58\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"afec04b8-8b05-4be9-863b-027aaf49df58\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "United States of America (+1)",
+    "aria": "United States of America (+1), press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "United States of America (+1)",
+    "html": "<div class=\"mol8wk css-11hacse css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-db8d3ca6446c11de98360015c5e6daf6\" tabindex=\"-1\" aria-label=\"United States of America (+1), press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ol8wd: #005CB9;\"><div class=\"css-ol8wp css-ol8wt mol8wt\" data-automation-id=\"DELETE_charm\" role=\"presentation\""
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Next",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "My Information * Indicates a required field How Did You Hear About Us?* LinkedIn Country* United States of America Legal Name First Name* Last Name* I have a pr",
+    "html": "<button class=\"css-1vz01lv\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Next</button>"
+   }
+  ]
+ },
+ {
+  "step": 2,
+  "url": "https://mizuho.wd1.myworkdayjobs.com/mizuhoamericas/job/NYC-1285/Payment-Platform-Implementation-Engineer_R7377-1/apply/applyManually",
+  "fields": [
+   {
+    "id": "f15",
+    "required": false,
+    "label": "Type to Add Skills",
+    "maxlength": null,
+    "sel": "[id=\"skills--skills\"]",
+    "key": "formField-skills",
+    "has_value": false,
+    "kind": "wdprompt",
+    "selected": [],
+    "ph": "Search"
+   },
+   {
+    "id": "f16",
+    "required": true,
+    "label": "Resume/CV *",
+    "maxlength": null,
+    "sel": "input[data-automation-id=\"file-upload-input-ref\"]",
+    "key": "formField-",
+    "has_value": false,
+    "kind": "file",
+    "accept": "",
+    "has_file": [],
+    "hint": "file-upload-input-ref",
+    "elid": ""
+   }
+  ],
+  "answers": {
+   "f15": [
+    "Excel",
+    "PowerPoint",
+    "Word",
+    "Google Workspace",
+    "SQL",
+    "Python"
+   ],
+   "f16": "RESUME"
+  },
+  "readback": {
+   "f15": {
+    "id": "f15",
+    "tag": "INPUT",
+    "type": "",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1rwb1er"
+   },
+   "f16": {
+    "id": "f16",
+    "tag": "INPUT",
+    "type": "file",
+    "value": "",
+    "checked": false,
+    "pressed": null,
+    "achecked": null,
+    "text": "",
+    "cls": "css-1hyfx7x"
+   }
+  },
+  "required_still_empty": [],
+  "untagged_controls": [
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Sign In",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Sign In Search for Jobs",
+    "html": "<button color=\"#494949\" data-automation-id=\"utilityButtonSignIn\" class=\"css-set3w4\"><span class=\"css-k93hy9\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-user wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g class=\"wd-icon-container\"><path fill-rule=\"evenodd\" d=\"M20 20.496a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5v-1.5C4 16 6.246 13.8 8.756 12.684 7"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Search for Jobs",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Search for Jobs",
+    "html": "<button data-automation-id=\"navigationItem-Search for Jobs\" color=\"#494949\" class=\"css-4s4kl6\">Search for Jobs</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "",
+    "aria": "main menu",
+    "dataui": null,
+    "name": null,
+    "context": "Sign In Search for Jobs",
+    "html": "<button aria-controls=\"hammy-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" aria-label=\"main menu\" id=\"hammyMenuIcon\" data-automation-id=\"hammyMenuIcon\" class=\"css-cs74tw\"><span class=\"css-1gzj9e8\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-reorder-v2 wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-contai"
+   },
+   {
+    "tag": "BUTTON",
+    "role": "link",
+    "type": "button",
+    "text": "Back to Job Posting",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Back to Job Posting",
+    "html": "<button type=\"button\" data-automation-id=\"backToJobPosting\" role=\"link\" class=\"css-1sbi3kp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-arrow-left wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><path d=\"M13.436 5.263a.506.506 0 0 0-.003-.71l-.7-.701a.495.495 0 0 0-.71-.0"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Work Experience Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1s3t9lw\" data-aa-add=\"sec0\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Education Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1s3t9lw\" data-aa-add=\"sec1\">Add</button>"
+   },
+   {
+    "tag": "UL",
+    "role": "listbox",
+    "type": "",
+    "text": "Excel",
+    "aria": "items selected",
+    "dataui": null,
+    "name": null,
+    "context": "1 item selected, Excel Excel",
+    "html": "<ul role=\"listbox\" tabindex=\"0\" data-automation-id=\"selectedItemList\" aria-label=\"items selected\" data-uxi-element-id=\"selectinputlist-9c9a4e07-2179-4bd7-9b42-a416e8929b2b\" data-uxi-widget-type=\"selectinputlist\" data-uxi-multiselect-id=\"9c9a4e07-2179-4bd7-9b42-a416e8929b2b\" class=\"css-0\"><li role=\"presentation\" data-automation-id=\"menuItem\" data-automation-selected=\"false\" data-uxi-element-id=\"sel"
+   },
+   {
+    "tag": "DIV",
+    "role": "option",
+    "type": "",
+    "text": "Excel",
+    "aria": "Excel, press delete to clear value.",
+    "dataui": null,
+    "name": null,
+    "context": "1 item selected, Excel Excel",
+    "html": "<div class=\"mol8wk css-11hacse css-roynbj\" aria-posinset=\"1\" aria-setsize=\"1\" id=\"pill-Excel\" tabindex=\"-1\" aria-label=\"Excel, press delete to clear value.\" role=\"option\" data-automation-id=\"selectedItem\" dir=\"ltr\" style=\"--highlightColor-ol8wd: #005CB9;\"><div class=\"css-ol8wp css-ol8wt mol8wt\" data-automation-id=\"DELETE_charm\" role=\"presentation\" aria-hidden=\"true\" tabindex=\"-1\" style=\"--iconColo"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "Select files",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "or Select files",
+    "html": "<button type=\"button\" data-automation-id=\"select-files\" id=\"resumeAttachments--attachments\" class=\"css-1dcuai9\"><span class=\"css-pplshs\">Select files</span></button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "button",
+    "text": "",
+    "aria": "Delete briandelgado_resume.pdf",
+    "dataui": null,
+    "name": null,
+    "context": "briandelgado_resume.pdf successfully uploaded briandelgado_resume.pdf 63.63 KB Successfully Uploaded!",
+    "html": "<button type=\"button\" data-automation-id=\"delete-file\" aria-label=\"Delete briandelgado_resume.pdf\" title=\"Delete\" class=\"css-p3qbhp\"><span class=\"css-1p727v3\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" class=\"wd-icon-trash wd-icon\" focusable=\"false\" role=\"presentation\" viewBox=\"0 0 24 24\"><g fill-rule=\"evenodd\" class=\"wd-icon-container\"><rect width=\"12\" height=\"14\" x=\"6\" y=\"7\" "
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Add",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "Websites Add any relevant websites. Add",
+    "html": "<button data-automation-id=\"add-button\" font-size=\"14\" height=\"40\" class=\"css-1s3t9lw\" data-aa-add=\"sec2\">Add</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Back",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "My Experience * Indicates a required field Work Experience Add Education Add Skills Type to Add Skills 1 item selected, Excel Excel Resume/CV Upload a file (5MB",
+    "html": "<button class=\"css-ud2pcu\" data-automation-id=\"pageFooterBackButton\" font-size=\"14\" height=\"40\">Back</button>"
+   },
+   {
+    "tag": "BUTTON",
+    "role": null,
+    "type": "",
+    "text": "Next",
+    "aria": null,
+    "dataui": null,
+    "name": null,
+    "context": "My Experience * Indicates a required field Work Experience Add Education Add Skills Type to Add Skills 1 item selected, Excel Excel Resume/CV Upload a file (5MB",
+    "html": "<button class=\"css-1vz01lv\" data-automation-id=\"pageFooterNextButton\" font-size=\"14\" height=\"40\">Next</button>"
+   }
+  ]
+ }
+]

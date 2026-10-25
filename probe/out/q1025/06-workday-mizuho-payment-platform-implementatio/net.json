@@ -1,0 +1,134 @@
+[
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/cxs/mizuho/jobpostings/Payment-Platform-Implementation-Engineer_R7377-1/jobapplications",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd90007784966605050000\",\"descriptor\":\"\u200e-\",\"sessionId\":\"8917e243-c691-4e4e-9812-7a029d491702\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/emailaddress",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/emailAddress\"}],\"definitions\":{\"emailAddress\":{\"required\":[\"emailAddress\"],\"additionalProperties\":false,\"properties\":{\"emailAddress\":{\"hidden\":false,\"label\":\"Email\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/package/57e7d638e7bd90007784966605050000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd900077851a0b69290000\",\"descriptor\":\"Drop Off on My Information page for Mizuho External Career Site: Payment Platform Implementation Engineer\",\"jobApplicationApplyPage\":{\"descriptor\":\"My Information\",\"id\":\"240f3666b68210001e640fc335541649\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/phonenumber",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/phoneNumber\"}],\"definitions\":{\"phoneNumber\":{\"required\":[\"phoneType\",\"countryPhoneCode\",\"phoneNumber\"],\"additionalProperties\":false,\"properties\":{\"extension\":{\"hidden\":false,\"label\":\"Phone Extension\",\"order\":\"d\",\"readOnly\":false,\"type\":\"string\"},\"phoneType\":{\"hidden\":false,\"label\":\"Phone Device Type\",\"promptUrl\":\"/wday/calypso/cxs/jobapplication/mizuho/values/phone/deviceTypes\",\"order\":\"a\",\"readOnly\":false,\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\""
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/source",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/source\"}],\"definitions\":{\"source\":{\"required\":[\"source\"],\"additionalProperties\":false,\"properties\":{\"shareReferenceID\":{\"hidden\":false,\"label\":\"Share Reference ID\",\"readOnly\":false,\"type\":\"string\"},\"referredBy\":{\"hidden\":true,\"label\":\"What's their name or email address?\",\"readOnly\":false,\"type\":\"string\"},\"sourcePopulatedFromUrl\":{\"hidden\":false,\"label\":\"Source Populated From URL\",\"readOnly\":false,\"type\":\"boolean\"},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"},\"source\":{\"hidden\":false,\"label\":\"How Did You Hear About Us?\",\"promptUrl\":\"/wday/calypso/cxs/jo"
+ },
+ {
+  "m": "PUT",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/package/57e7d638e7bd90007784966605050000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"57e7d638e7bd90007784966605050000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/phonenumber",
+  "status": 200,
+  "body": "{\"id\":\"f067f065935c1000778d89a6009e0000\",\"descriptor\":\"(970) 366-8832 (Mobile)\",\"countryPhoneCode\":{\"descriptor\":\"United States of America (+1)\",\"id\":\"db8d3ca6446c11de98360015c5e6daf6\"},\"phoneNumber\":\"(970) 366-8832\",\"phoneType\":{\"descriptor\":\"Mobile\",\"id\":\"6c507b7295da1079eea6f5a6ed2d3517\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/source",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd90007784966605050000\",\"sourcePopulatedFromUrl\":false,\"source\":{\"id\":\"6c507b7295da1079f148a43362ac392b\",\"descriptor\":\"LinkedIn\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/emailaddress",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd1000778707500ede0000\",\"emailAddress\":\"delgado@alumni.usc.edu\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/name",
+  "status": 200,
+  "body": "{\"legalName\":{\"id\":\"f067f065935c1000778d8faede430000\",\"descriptor\":\"Brian Delgado-Ortega\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha2Code\":\"US\",\"alpha3Code\":\"USA\"},\"lastName\":\"Delgado-Ortega\",\"fullyComposedName\":\"Brian Delgado-Ortega\",\"firstName\":\"Brian\",\"deferToLegalName\":false,\"preferredName\":false},\"preferredName\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/address",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd100077870d5741b40000\",\"descriptor\":\"63 Cherry Ct\",\"fullyComposedAddress\":\"63 Cherry Ct&#xa;New Castle, CO 81647&#xa;United States of America\",\"countryRegion\":{\"id\":\"a83d6eabae3b49718c4ce09eeb66fd0b\",\"descriptor\":\"Colorado\",\"alpha2Code\":\"CO\",\"name\":\"Colorado\"},\"addressLine1\":\"63 Cherry Ct\",\"city\":\"New Castle\",\"postalCode\":\"81647\",\"country\":{\"id\":\"bc33aa3152ec42d4995f4791a106ed09\",\"descriptor\":\"United States of America\",\"alpha2Code\":\"US\",\"alpha3Code\":\"USA\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/cxs/mizuho/jobapplication/57e7d638e7bd90007784966605050000/initialize",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd90007784966605050000\",\"descriptor\":\"\u200e-\"}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/resumeattachments",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/resumeAttachments\"}],\"definitions\":{\"resumeAttachments\":{\"required\":[\"attachments\"],\"additionalProperties\":false,\"properties\":{\"attachments\":{\"hidden\":false,\"label\":\"Upload a file (5MB max)\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/attachment\"}},\"id\":{\"hidden\":false,\"readOnly\":true,\"type\":\"string\"}},\"type\":\"object\"},\"attachment\":{\"required\":[\"file\",\"fileLength\"],\"additionalProperties\":false,\"properties\":{\"fileName\":{\"hidden\":false,\"label\":\"File Name\",\"readOnly\":false,\"maxLength\":255,\"type\":\"string\"},\"file\":{\"hidden\":false,\"label\":\"File\",\"r"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/skills",
+  "status": 200,
+  "body": "{\"allOf\":[{\"$ref\":\"#/definitions/skills\"}],\"definitions\":{\"skills\":{\"additionalProperties\":false,\"properties\":{\"skills\":{\"hidden\":false,\"label\":\"Type to Add Skills\",\"readOnly\":false,\"type\":\"array\",\"items\":{\"$ref\":\"#/definitions/candidateSkillItem\"}}},\"type\":\"object\"},\"candidateSkillItem\":{\"additionalProperties\":false,\"properties\":{\"descriptor\":{\"hidden\":false,\"label\":\"Skill Name\",\"readOnly\":false,\"type\":\"string\"},\"id\":{\"hidden\":false,\"label\":\"Reference ID\",\"readOnly\":false,\"type\":\"string\"}},\"type\":\"object\"}},\"additionalProperties\":false}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/package/57e7d638e7bd90007784966605050000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd900077851a0b69290000\",\"descriptor\":\"Drop Off on My Experience page for Mizuho External Career Site: Payment Platform Implementation Engineer\",\"jobApplicationApplyPage\":{\"descriptor\":\"My Experience\",\"id\":\"240f3666b68210001e640fce58ae164a\"}}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/common/mizuho/attachments",
+  "status": 200,
+  "body": "{\"diagnosis\":\"clean\",\"containsMacros\":false,\"id\":\"oms-attachments/a4c4aafc-bec4-4087-9cf9-ca86d47c62dd\",\"contentType\":{\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\",\"descriptor\":\"application/pdf - mime_pdf\"},\"fileLength\":65152,\"fileName\":\"briandelgado_resume.pdf\"}"
+ },
+ {
+  "m": "PUT",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/package/57e7d638e7bd90007784966605050000/validate",
+  "status": 200,
+  "body": "{\"validateActiveJobPosting\":{\"id\":\"57e7d638e7bd90007784966605050000\",\"descriptor\":\"\u200e-\"},\"validateNotSubmitted\":null}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/skills",
+  "status": 200,
+  "body": "{\"skills\":[{\"id\":\"CANDIDATE_SKILL_ITEM-3-3043909\",\"descriptor\":\"Excel\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/jobapplication/57e7d638e7bd90007784966605050000/resumeattachments",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd90007784966605050000\",\"attachments\":[{\"id\":\"57e7d638e7bd900077888eebd6cc0000\",\"descriptor\":\"briandelgado_resume.pdf\",\"file\":\"oms-attachments/a4c4aafc-bec4-4087-9cf9-ca86d47c62dd\",\"fileLength\":65152,\"contentType\":{\"descriptor\":\"application/pdf - mime_pdf\",\"id\":\"d9ae3cc8446c11de98360015c5e6daf6\"},\"fileName\":\"briandelgado_resume.pdf\"}]}"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/common/mizuho/questionnaire/290c65221cc41001143ffce6968c0000/definition?type=primary",
+  "status": 200,
+  "body": "{\"definitions\":{\"primaryQuestionnaire\":{\"required\":[\"290c65221cc41001143ffeb4cb390000\",\"290c65221cc41001144002ebd6510004\",\"290c65221cc41001144002ebd6510003\",\"290c65221cc410011440025219640006\",\"290c65221cc410011440025219640002\",\"290c65221cc41001144001b819a30005\",\"290c65221cc41001144001b819a30001\",\"290c65221cc41001144001b819a30000\",\"290c65221cc410011440011de0420005\",\"290c65221cc410011440011de0420001\",\"290c65221cc41001144000843b9e0005\",\"290c65221cc41001144000843b9e0001\",\"290c65221cc41001143fffe9c2940006\",\"290c65221cc41001143fffe9c2940005\",\"290c65221cc41001143fffe9c2940001\",\"290c65221cc41001144003"
+ },
+ {
+  "m": "POST",
+  "url": "https://mizuho.wd1.myworkdayjobs.com/wday/calypso/cxs/jobapplication/mizuho/package/57e7d638e7bd90007784966605050000/trackdropoff",
+  "status": 200,
+  "body": "{\"id\":\"57e7d638e7bd900077851a0b69290000\",\"descriptor\":\"Drop Off on Primary External Questionnaire page for Mizuho External Career Site: Payment Platform Implementation Engineer\",\"jobApplicationApplyPage\":{\"descriptor\":\"Primary External Questionnaire\",\"id\":\"240f3666b68210001e640fd1cc44164b\"}}"
+ }
+]
