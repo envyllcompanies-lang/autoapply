@@ -149,7 +149,7 @@ aggregators:
   builtin:                  # Built In's regional boards: public pages, no login (a blocked page gives no jobs; nothing is done to get around it)
     enabled: true
     regions: [colorado, nyc, la]
-    categories: [operations, project-management]
+    categories: [operations, project-management, data-analytics, finance, consulting]   # (the last three added 2026-10-25)
     pages: 2
   careerjet:                # free API; idle until the CAREERJET_API_KEY secret exists
     enabled: true
