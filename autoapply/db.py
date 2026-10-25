@@ -176,6 +176,8 @@ class DB:
                 " AND apply_url LIKE '%ashbyhq.com%'",
             # a veteran self-ID whose definitions say 'compensation' was read as a pay question (2026-10-20)
             "a veteran question read as a pay question": "status='skipped' AND reason LIKE 'can''t truthfully answer%Protected Veterans are defined%'",
+            # a Workday list of licenses with 'I do not possess any FINRA licenses' left unticked (2026-10-25)
+            "a license list with a 'none' box": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND reason LIKE '%I do not possess any%'",
         }
         found = {}
         for name, where in rules.items():

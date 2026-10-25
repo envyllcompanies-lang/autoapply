@@ -622,6 +622,16 @@ class Brain:
                     missing[:] = [i for i in missing if i not in gone]
                     self._log(f"      (self-identification {q[:50]!r}: ticked {', '.join(got)[:60]})")
                 continue
+            no_lic = [i for i, t in lab.items() if re.search(r"\bi (do not|don.t) (currently )?(possess|have|hold)( any)?\b|^\W*none\b", t, re.I)]
+            if no_lic and str(self.facts.get("certifications") or "").strip().lower() in ("none", "no") and \
+                    any(re.search(r"\bseries \d+|\bsie\b|finra|licen[cs]e|certif|\bcpa\b|\bcfp\b", t, re.I) for t in lab.values()):
+                # a list of licenses or certifications with 'I do not possess any FINRA licenses': you hold none
+                for i in no_lic[:1]:
+                    answers[i] = True
+                gone = {m["id"] for m in members}
+                missing[:] = [i for i in missing if i not in gone]
+                self._log(f"      (ticked {lab[no_lic[0]][:50]!r}: you hold no licenses or certifications)")
+                continue
             if HUMAN_CHECK_RX.search(low) or LEGAL_RX.search(low) or AI_POLICY_RX.search(low) or QUALIFY_CERT_RX.search(low) \
                     or self._NEVER_GUESS.search(low):
                 continue
