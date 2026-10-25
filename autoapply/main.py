@@ -169,6 +169,10 @@ HUMAN_CHECK = re.compile(r"captcha|turnstile|cloudflare|human check|human verifi
                          r"submission was flagged|flagged as (possible |potential )?(spam|suspicious)", re.I)
 
 
+TYPED_CHECK = re.compile(r"prove (that )?you are (a )?(real |human )?(person|human)|are you (a )?real person|"
+                         r"type the word \w+ (below|here)|not a (robot|bot)\b", re.I)
+
+
 def ats_of(job) -> str:
     """Which application system a posting lives on: workday, greenhouse, lever ... or the site's own host."""
     src = (getattr(job, "source", "") or "").lower()
@@ -468,6 +472,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         if n_h:
             log(f"Apply-by-hand list started: {n_h} good matches that earlier runs lost to a human check")
     _resolve_hand_applied(db, brain, log)
+    _prune_hand_list(db, log)
     _note_followups(db, brain, log)
     n_up = 0
     for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
@@ -1178,6 +1183,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                     dead.add(ck)
                     log("    (on your apply-by-hand list: the form asks you to agree to something you said the bot never agrees to)")
                     continue
+                if handoff_on and not clicked and str(e).startswith("can't truthfully answer") and TYPED_CHECK.search(str(e)):
+                    # 'To prove you are a real person, please type Real below': a human check written as a question
+                    db.update(job.key, status="manual", reason=HANDOFF_PREFIX + "the form asks you to prove you are a person: "
+                              + str(e)[34:300], attempts=row["attempts"] + 1)
+                    dead.add(ck)
+                    log("    (on your apply-by-hand list: the form asks for a human check, which the bot never does)")
+                    continue
                 db.update(job.key, status="skipped", reason=str(e), attempts=row["attempts"] + 1)
                 dead.add(ck)
                 co_fail[co_n] = co_fail.get(co_n, 0) + 1
@@ -1261,6 +1273,42 @@ def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:
     return n
 
 
+def _prune_hand_list(db: DB, log):
+    """Once a day, your apply-by-hand list loses what you no longer need to look at: postings the employer has taken down
+    (its own feed says so) and a second copy of a role already on the list. Nothing is ever applied to from here."""
+    today = date.today().isoformat()
+    if db.meta_get("hand_prune_day") == today:
+        return
+    db.meta_set("hand_prune_day", today)
+    rows = db.conn.execute("SELECT key, company, title, apply_url, url, fit FROM jobs WHERE status='manual' AND reason LIKE ?"
+                           " ORDER BY COALESCE(fit, 0) DESC", (HAND_LIKE,)).fetchall()
+    if not rows:
+        return
+    from concurrent.futures import ThreadPoolExecutor
+
+    def closed(r) -> bool:
+        try:
+            return bool(prescreen.preflight(r["apply_url"] or r["url"] or "", deep=False)["closed"])
+        except Exception:
+            return False              # could not tell: it stays on the list
+    with ThreadPoolExecutor(8) as ex:
+        shut = [r["key"] for r, c in zip(rows, ex.map(closed, rows)) if c]
+    seen, twice = set(), []
+    for r in rows:                    # best match first: that copy stays
+        if r["key"] in shut:
+            continue
+        k = (norm_co(r["company"] or ""), re.sub(r"[^a-z0-9]", "", str(r["title"] or "").lower()))
+        if k in seen:
+            twice.append(r["key"])
+        seen.add(k)
+    for k in shut:
+        db.update(k, status="skipped", reason="posting closed: taken down while on your apply-by-hand list")
+    for k in twice:
+        db.update(k, status="skipped", reason="same role already on your apply-by-hand list")
+    if shut or twice:
+        log(f"Apply-by-hand list tidied: {len(shut)} postings taken down since, {len(twice)} second copies of a role (off the list)")
+
+
 def _resolve_hand_applied(db: DB, brain: Brain, log):
     """Jobs on your apply-by-hand list that you have applied to: the employer's 'we received your application' email,
     arriving after the job was handed to you, marks it applied (looked at about once an hour)."""
@@ -1284,6 +1332,17 @@ def _resolve_hand_applied(db: DB, brain: Brain, log):
         log(f"  ✓ applied by you: {comp[key][0]} confirmed it ({subj[:60]!r})")
 
 
+def _names_role(subj: str, title: str) -> bool:
+    """False when the email names a role ('your application for the Markets Support Specialist ...') that is not this one:
+    one such email from an employer was put on all eight applications there (2026-10-20). True when it names none."""
+    m = re.search(r"application (?:for|to) (?:the |our )?(.+?)(?:\s+(?:position|role|opening|job)\b|\s+at\s|[.,!:;(]|$)", subj or "", re.I)
+    if not m:
+        return True
+    sq = lambda t: re.sub(r"[^a-z0-9]", "", str(t).lower())
+    said, own = sq(m.group(1)), sq(re.sub(r"\(.*?\)|\*.*?\*|[-–,].*$", "", title or ""))
+    return not said or not own or said in sq(title) or own in said
+
+
 def _note_followups(db: DB, brain: Brain, log):
     """An employer that answers an application with 'incomplete application' or 'please complete the assessment' does not
     treat it as finished. The bot cannot do those steps, so you are told about each one, once."""
@@ -1299,6 +1358,8 @@ def _note_followups(db: DB, brain: Brain, log):
     for key, subj in mailbox.scan_followups(names, time.time() - 7 * 86400).items():
         if (by[key]["followup"] or "") == subj:
             continue                                        # already told
+        if not _names_role(subj, by[key]["title"]):
+            continue                                        # the email is about another of your applications there
         db.conn.execute("UPDATE jobs SET followup=? WHERE key=?", (subj, key))      # (not through update(): 'updated' stays as it was)
         db.conn.commit()
         FOLLOWUPS.append(f"{by[key]['title']} @ {names[key]}: the employer emailed \"{subj[:100]}\"")
