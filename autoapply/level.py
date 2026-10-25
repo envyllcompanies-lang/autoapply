@@ -28,7 +28,10 @@ def _n(s: str) -> int:
 
 
 # -------------------------------------------------------------------------------------------------------- title
-T_SENIOR = re.compile(r"\b(senior|sr\.?|snr|principal|staff|lead|head|director|vp|vice president|chief|executive director|"
+# 'Staff' is the entry title in accounting and consulting (Staff Accountant, Staff Auditor, Staff Consultant: the step
+# before Senior), and a senior title elsewhere (Staff Engineer)
+T_SENIOR = re.compile(r"\b(senior|sr\.?|snr|principal|staff(?!\s+(accountant|auditor|accounting|assurance|tax|consultant|"
+                      r"assistant|associate)\b)|lead|head|director|vp|vice president|chief|executive director|"
                       r"partner|architect|supervisor|superintendent)\b", re.I)
 T_MANAGER = re.compile(r"\bmanager\b", re.I)
 T_MANAGER_OK = re.compile(r"\b(associate|assistant|junior|jr\.?|entry[- ]level)\s+([\w&/-]+\s+){0,3}manager\b|"
