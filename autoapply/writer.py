@@ -69,14 +69,26 @@ class WriterUnavailable(Exception):
 _USAGE_FILE = Path("logs") / "usage.json"
 
 
+def _quota_day() -> str:
+    """The free tiers' day: Google resets Gemini's daily requests at midnight Pacific time (07:00 or 08:00 UTC), and Groq's
+    window rolls. Counting the day in UTC kept Gemini 'used up' from early morning until midnight UTC although Google
+    had given it a new day's allowance hours before (Oct 26: idle from 04:22 UTC on)."""
+    try:
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%Y-%m-%d")
+    except Exception:
+        return time.strftime("%Y-%m-%d", time.gmtime(time.time() - 8 * 3600))
+
+
 def _usage() -> dict:
     try:
         d = json.loads(_USAGE_FILE.read_text())
-        if d.get("_day") == time.strftime("%Y-%m-%d"):
-            return d
+        if d.get("_day") == _quota_day() and d.get("_tz") == "pt":
+            return d                  # (a file without '_tz' counted a UTC day: its numbers belong to another Pacific day)
     except Exception:
         pass
-    return {"_day": time.strftime("%Y-%m-%d")}
+    return {"_day": _quota_day(), "_tz": "pt"}
 
 
 def _save_usage(u: dict):

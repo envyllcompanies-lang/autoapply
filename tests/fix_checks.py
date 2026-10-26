@@ -83,7 +83,7 @@ def writer_checks():
         requests.post = old
 
     # per-minute limit with a short wait -> same model after the wait (no provider change)
-    W._save_usage({"_day": time.strftime("%Y-%m-%d")})
+    W._save_usage({"_day": W._quota_day(), "_tz": "pt"})
     w2 = W.Writer(CFG, PROFILE, ROOT)
     w2.providers = [p for p in w2.providers if p["name"] == "groq-llama"]
     calls, slept = [], []
@@ -103,7 +103,7 @@ def writer_checks():
         W.time.sleep = old_sleep
 
     # 413 too large -> next model, not dead
-    W._save_usage({"_day": time.strftime("%Y-%m-%d")})
+    W._save_usage({"_day": W._quota_day(), "_tz": "pt"})
     w3 = W.Writer(CFG, PROFILE, ROOT)
     def post3(url, headers=None, json=None, timeout=None):
         return Resp(413, text="Request too large") if json["model"] == "openai/gpt-oss-120b" else ok("Smaller model answered.")
