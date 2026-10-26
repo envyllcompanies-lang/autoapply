@@ -443,6 +443,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         db.conn.commit()
         if n_dob:
             log(f"Your date of birth is set: {n_dob} jobs that asked for it are tried again")
+    if db.once("unchecked-handoffs-off"):    # (2026-10-26) your list keeps only jobs whose résumé match was checked
+        n_uc = db.conn.execute("UPDATE jobs SET status='skipped', reason='taken off your apply-by-hand list: its résumé match "
+                               "could not be checked' WHERE status='manual' AND reason LIKE '%résumé match not checked%'").rowcount
+        db.conn.commit()
+        if n_uc:
+            log(f"Apply-by-hand list: {n_uc} jobs whose résumé match was never checked taken off it")
     if db.once("paylocity-review-requeue"):    # Paylocity review pages written off as 'no résumé upload' when the résumé went in first
         n_pr = db.conn.execute("UPDATE jobs SET status='queued', attempts=0 WHERE status='blocked' AND reason LIKE 'not a real application form%'"
                                " AND reason LIKE '%resume_uploaded%' AND apply_url LIKE '%paylocity%' AND (submitted_at IS NULL OR submitted_at = '')").rowcount
@@ -978,6 +984,12 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 # this site stops every automated application at a human check: the job goes to your apply-by-hand list
                 fit_h = _fit(db.get(job.key) or row)
                 site_h = _row_ats(row)
+                if match_on and fit_h <= 0:
+                    # its posting text could not be read for the résumé match (Workable answers such reads with 'too many
+                    # requests'): only checked good matches go on your list, so this one is set aside
+                    db.update(job.key, status="skipped", reason=f"{site_h} stops every automated application at a human check, "
+                              "and its posting could not be read for the résumé match")
+                    continue
                 db.update(job.key, status="manual", reason=HANDOFF_PREFIX + f"{site_h} stops every automated application at a human "
                           f"check" + (f"; résumé match {fit_h}%" if fit_h > 0 else "; résumé match not checked"))
                 applied_n[co_n] = applied_n.get(co_n, 0) + 1
