@@ -182,6 +182,10 @@ class DB:
             "a pay, work-authorization or location question the bot reads now": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND ("
                 "reason LIKE '%What is your compensation expectation with respect to salary%' OR reason LIKE '%Are you authorized to work in the country in which%'"
                 " OR reason LIKE '%Where are you currently located%' OR reason LIKE '%Which state, province, or region do you currently live in%')",
+            # handed to you with 'résumé match not checked': BambooHR postings carry no text in the daily snapshot, and the
+            # job went to your list before its page was read. The feed gives the text now, so the match check comes first
+            "a hand-off made before its résumé match": "status='manual' AND reason LIKE '%stops every automated application%'"
+                " AND reason LIKE '%résumé match not checked%'",
             "a license list with a 'none' box": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND reason LIKE '%I do not possess any%'",
         }
         found = {}

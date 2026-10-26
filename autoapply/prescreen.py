@@ -66,7 +66,7 @@ def _ashby_board(org: str):
 
 def preflight(url: str, deep: bool = True) -> dict:
     """Before a browser is opened: is the posting still up, and what does it say? Read from the employer's own public feed
-    (Workday, Greenhouse, Lever, Ashby), which answers in a fraction of a second. Returns {'closed': bool, 'description': str};
+    (Workday, Greenhouse, Lever, Ashby, BambooHR, Paylocity), which answers in a fraction of a second. Returns {'closed': bool, 'description': str};
     'closed' is only True when the employer's feed itself says the job is gone."""
     out = {"closed": False, "description": "", "company_name": ""}
     try:
@@ -123,6 +123,27 @@ def preflight(url: str, deep: bool = True) -> dict:
                     d = r.json()
                     lists = " ".join(f"{x.get('text', '')}: {_text(x.get('content', ''))}" for x in d.get("lists") or [])
                     out["description"] = (str(d.get("descriptionPlain") or "") + "\n" + lists + "\n" + str(d.get("additionalPlain") or ""))[:9000]
+            return out
+        if host.endswith(".bamboohr.com"):
+            m = re.search(r"/careers/(\d+)", u.path)
+            if m:            # BambooHR's own posting feed: 404 'not_found' once the opening is closed
+                r = requests.get(f"https://{host}/careers/{m.group(1)}/detail", headers=UA, timeout=15)
+                if r.status_code in (404, 410) and "not_found" in r.text:
+                    out["closed"] = True
+                elif r.ok:
+                    jo = ((r.json() or {}).get("result") or {}).get("jobOpening") or {}
+                    if str(jo.get("jobOpeningStatus") or "Open").lower() not in ("open", ""):
+                        out["closed"] = True
+                    out["description"] = _text(jo.get("description", ""))[:9000]
+            return out
+        if "recruiting.paylocity.com" in host and "/Jobs/Details/" in u.path:
+            r = requests.get(url, headers={**UA, "Accept": "text/html"}, timeout=15)       # a closed posting redirects to JobNotFound
+            if re.search(r"/JobNotFound\b", r.url, re.I):
+                out["closed"] = True
+            elif r.ok:
+                txt = _text(r.text)
+                if len(txt) > 600:
+                    out["description"] = txt[:9000]
             return out
         if not deep:
             return out
