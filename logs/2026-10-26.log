@@ -4974,3 +4974,263 @@
 [12:10:07] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 3.2 min)
 [12:10:08] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 394 now
 [12:10:08] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-26.md
+[12:32:11] === autoapply run (LIVE) build 2026-10-18-b ===
+[12:32:11] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[12:32:13] mail: logged in to delgado@alumni.usc.edu OK
+[12:32:46] Discovering jobs…
+[12:38:43]   greenhouse/airbnb: 192 open roles
+[12:38:43]   greenhouse/figma: 138 open roles
+[12:38:43]   greenhouse/robinhood: 157 open roles
+[12:38:43]   greenhouse/databricks: 893 open roles
+[12:38:43]   greenhouse/anthropic: 682 open roles
+[12:38:43]   greenhouse/coinbase: 227 open roles
+[12:38:43]   greenhouse/lyft: 181 open roles
+[12:38:43]   greenhouse/pinterest: 163 open roles
+[12:38:43]   greenhouse/reddit: 160 open roles
+[12:38:43]   greenhouse/twilio: 134 open roles
+[12:38:43]   greenhouse/cloudflare: 453 open roles
+[12:38:43]   greenhouse/datadog: 429 open roles
+[12:38:43]   greenhouse/mongodb: 380 open roles
+[12:38:43]   greenhouse/elastic: 402 open roles
+[12:38:43]   greenhouse/gitlab: 239 open roles
+[12:38:43]   greenhouse/asana: 109 open roles
+[12:38:43]   greenhouse/okta: 388 open roles
+[12:38:43]   greenhouse/samsara: 287 open roles
+[12:38:43]   greenhouse/instacart: 111 open roles
+[12:38:43]   greenhouse/affirm: 224 open roles
+[12:38:43]   greenhouse/brex: 259 open roles
+[12:38:43]   greenhouse/gusto: 101 open roles
+[12:38:43]   greenhouse/flexport: 189 open roles
+[12:38:43]   greenhouse/oscar: 232 open roles
+[12:38:43]   greenhouse/spacex: 2813 open roles
+[12:38:43]   greenhouse/toast: 324 open roles
+[12:38:43]   greenhouse/verkada: 330 open roles
+[12:38:43]   greenhouse/scaleai: 170 open roles
+[12:38:43]   greenhouse/lucidmotors: 442 open roles
+[12:38:43]   greenhouse/holderconstruction: 328 open roles
+[12:38:43]   greenhouse/rocketlab: 563 open roles
+[12:38:43]   greenhouse/carvana: 1680 open roles
+[12:38:43]   greenhouse/roblox: 268 open roles
+[12:38:43]   greenhouse/stripe: 718 open roles
+[12:38:43]   greenhouse/doordashusa: 459 open roles
+[12:38:43]   greenhouse/aloyoga: 784 open roles
+[12:38:43]   greenhouse/thenewyorktimes: 146 open roles
+[12:38:43]   greenhouse/janestreet: 220 open roles
+[12:38:43]   greenhouse/onemedical: 391 open roles
+[12:38:43]   greenhouse/gomotive: 159 open roles
+[12:38:43]   greenhouse/reformation: 156 open roles
+[12:38:43]   greenhouse/riotgames: 180 open roles
+[12:38:43]   greenhouse/scopely: 182 open roles
+[12:38:43]   greenhouse/judihealth: 107 open roles
+[12:38:43]   greenhouse/voyagertechnologiesinc: 177 open roles
+[12:38:43]   greenhouse/trueanomalyinc: 207 open roles
+[12:38:43]   greenhouse/charliehealth: 258 open roles
+[12:38:43]   greenhouse/grafanalabs: 146 open roles
+[12:38:43]   greenhouse/vailclinicincdbavailhealthhospital: 130 open roles
+[12:38:43]   greenhouse/fivetran: 172 open roles
+[12:38:43]   greenhouse/olsson: 390 open roles
+[12:38:43]   greenhouse/relativity: 397 open roles
+[12:38:43]   greenhouse/blankstreet: 101 open roles
+[12:38:43]   greenhouse/icapitalnetwork: 223 open roles
+[12:38:43]   greenhouse/lpc: 111 open roles
+[12:38:43]   greenhouse/braze: 338 open roles
+[12:38:43]   greenhouse/addepar1: 111 open roles
+[12:38:43]   greenhouse/divergent: 130 open roles
+[12:38:43]   greenhouse/vardaspace: 115 open roles
+[12:38:43]   greenhouse/crunchyroll: 100 open roles
+[12:38:43]   greenhouse/vast: 187 open roles
+[12:38:43]   greenhouse/cookunity: 163 open roles
+[12:38:43]   greenhouse/fanaticscollectibles: 183 open roles
+[12:38:43]   greenhouse/sonymusicentertainment: 136 open roles
+[12:38:43]   greenhouse/canonical: 314 open roles
+[12:38:43]   greenhouse/betterhelp: 164 open roles
+[12:38:43]   greenhouse/vaynermedia: 101 open roles
+[12:38:43]   greenhouse/adyen: 245 open roles
+[12:38:43]   greenhouse/thetradedesk: 106 open roles
+[12:38:43]   greenhouse/agency: 833 open roles
+[12:38:43]   greenhouse/innodatainc: 115 open roles
+[12:38:43]   greenhouse/prolificacademicltd: 3955 open roles
+[12:38:43]   greenhouse/sumup: 342 open roles
+[12:38:43]   greenhouse/skdse: 155 open roles
+[12:38:43]   greenhouse/nerostechnologies: 109 open roles
+[12:38:43]   greenhouse/bakerhicks: 135 open roles
+[12:38:43]   greenhouse/precisionmedicinegroup: 173 open roles
+[12:38:43]   greenhouse/metropolis: 100 open roles
+[12:38:43]   greenhouse/hellofresh: 387 open roles
+[12:38:43]   greenhouse/asm: 490 open roles
+[12:38:43]   greenhouse/altentechnologyusa: 213 open roles
+[12:38:43]   greenhouse/natera: 223 open roles
+[12:38:43]   greenhouse/woolpert: 127 open roles
+[12:38:43]   greenhouse/quince: 152 open roles
+[12:38:43]   greenhouse/dhpace: 405 open roles
+[12:38:43]   greenhouse/block: 208 open roles
+[12:38:43]   greenhouse/celonis: 220 open roles
+[12:38:43]   greenhouse/nebius: 378 open roles
+[12:38:43]   lever/palantir: 309 open roles
+[12:38:43]   lever/veeva: 918 open roles
+[12:38:43]   lever/jobgether: 4381 open roles
+[12:38:43]   lever/flynncompanies: 176 open roles
+[12:38:43]   lever/gopuff: 789 open roles
+[12:38:43]   lever/buckmason: 250 open roles
+[12:38:43]   lever/arcteryx.com: 269 open roles
+[12:38:43]   lever/thinkahead: 149 open roles
+[12:38:43]   lever/solidcore: 255 open roles
+[12:38:43]   lever/zoox: 236 open roles
+[12:38:43]   lever/insomniacookies: 1252 open roles
+[12:38:43]   lever/shieldai: 670 open roles
+[12:38:43]   lever/Aprio: 224 open roles
+[12:38:43]   lever/amityfdn: 116 open roles
+[12:38:43]   lever/boxlunch: 4343 open roles
+[12:38:43]   lever/rws: 137 open roles
+[12:38:43]   lever/weloglobal: 466 open roles
+[12:38:43]   workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 163 open roles
+[12:38:43]   workday/salesforce/wd12/External_Career_Site/Salesforce: 163 open roles
+[12:38:43]   workday/workday/wd5/Workday/Workday: 141 open roles
+[12:38:43]   workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 133 open roles
+[12:38:43]   workday/autodesk/wd1/Ext/Autodesk: 193 open roles
+[12:38:43]   workday/target/wd5/targetcareers/Target: 168 open roles
+[12:38:43]   workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 114 open roles
+[12:38:43]   workday/pnc/wd5/External/PNC: 169 open roles
+[12:38:43]   workday/williams/wd5/external/Williams: 107 open roles
+[12:38:43]   workday/xcelenergy/wd1/External/Xcel Energy: 120 open roles
+[12:38:43]   workday/usc/wd5/ExternalUSCCareers/University of Southern California: 134 open roles
+[12:38:43]   workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 111 open roles
+[12:38:43]   workday/lmu/wd1/Careers/Loyola Marymount University: 119 open roles
+[12:38:43]   workday/citjpl/wd5/Jobs/NASA JPL: 126 open roles
+[12:38:43]   workday/fox/wd1/Domestic/Fox Corporation: 157 open roles
+[12:38:43]   workday/caa/wd1/Careers/Creative Artists Agency: 101 open roles
+[12:38:43]   workday/livenation/wd503/LNExternalSite/Live Nation: 274 open roles
+[12:38:43]   workday/iheartmedia/wd5/External_iHM/iHeartMedia: 119 open roles
+[12:38:43]   workday/skechers/wd5/One-career-site/Skechers: 100 open roles
+[12:38:43]   workday/amgen/wd1/Careers/Amgen: 212 open roles
+[12:38:43]   workday/huntsman/wd1/Huntsman/Huntsman: 158 open roles
+[12:38:43]   workday/cumminggroup/wd1/CGC/Cumming Group: 163 open roles
+[12:38:43]   workday/jll/wd1/jllcareers/JLL: 317 open roles
+[12:38:43]   workday/cw/wd1/External/Cushman & Wakefield: 220 open roles
+[12:38:43]   workday/msudenver/wd1/MSUDenver/Metropolitan State University of Denver: 128 open roles
+[12:38:43]   workday/davita/wd1/DKC_External/DaVita: 159 open roles
+[12:38:43]   workday/arrow/wd1/AC/Arrow Electronics: 152 open roles
+[12:38:43]   workday/apog/wd1/Apogee/Apogee Enterprises: 104 open roles
+[12:38:43]   workday/wilsonco/wd5/Careers/Wilson & Company: 133 open roles
+[12:38:43]   workday/prologis/wd5/Prologis_External_Careers/Prologis: 108 open roles
+[12:38:43]   workday/nyp/wd1/nypcareers/NewYork-Presbyterian: 132 open roles
+[12:38:43]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 150 open roles
+[12:38:43]   workday/newschool/wd1/External/The New School: 184 open roles
+[12:38:43]   workday/blackstone/wd1/Blackstone_Careers/Blackstone: 147 open roles
+[12:38:43]   workday/brookfield/wd5/brookfield/Brookfield: 141 open roles
+[12:38:43]   workday/avalonbay/wd5/AVBExternal/AvalonBay Communities: 123 open roles
+[12:38:43]   workday/citi/wd5/2/Citi: 270 open roles
+[12:38:43]   workday/spgi/wd5/SPGI_Careers/S&P Global: 123 open roles
+[12:38:43]   workday/nasdaq/wd1/Global_External_Site/Nasdaq: 165 open roles
+[12:38:43]   workday/pvh/wd1/PVH_Careers/PVH: 126 open roles
+[12:38:43]   workday/tapestry/wd108/Tapestry_Careers/Tapestry: 132 open roles
+[12:38:43]   workday/pfizer/wd1/PfizerCareers/Pfizer: 144 open roles
+[12:38:43]   workday/tiaa/wd1/Search/TIAA: 195 open roles
+[12:38:43]   workday/pru/wd5/Careers/Prudential Financial: 164 open roles
+[12:38:43]   workday/mmc/wd1/MMC/Marsh McLennan: 318 open roles
+[12:38:43]   workday/dentsuaegis/wd3/DAN_GLOBAL/dentsu: 128 open roles
+[12:38:43]   workday/wf/wd1/WellsFargoJobs/Wells Fargo: 136 open roles
+[12:38:43]   workday/usbank/wd1/US_Bank_Careers/U.S. Bank: 250 open roles
+[12:38:43]   workday/capitalone/wd12/Capital_One/Capital One: 179 open roles
+[12:38:43]   workday/accenture/wd103/AccentureCareers/Accenture: 479 open roles
+[12:38:43]   workday/allstate/wd5/allstate_careers/Allstate: 193 open roles
+[12:38:43]   workday/humana/wd5/Humana_External_Career_Site/Humana: 135 open roles
+[12:38:43]   workday/cigna/wd5/cignacareers/Cigna: 104 open roles
+[12:38:43]   workday/elevancehealth/wd1/ANT/Elevance Health: 124 open roles
+[12:38:43]   workday/cardinalhealth/wd1/EXT/Cardinal Health: 137 open roles
+[12:38:43]   workday/medtronic/wd1/MedtronicCareers/Medtronic: 231 open roles
+[12:38:43]   workday/thermofisher/wd5/ThermoFisherCareers/Thermo Fisher Scientific: 151 open roles
+[12:38:43]   workday/danaher/wd1/DanaherJobs/Danaher: 210 open roles
+[12:38:43]   workday/chevron/wd5/jobs/Chevron: 142 open roles
+[12:38:43]   ashby/ramp: 167 open roles
+[12:38:43]   ashby/notion: 141 open roles
+[12:38:43]   ashby/openai: 790 open roles
+[12:38:43]   ashby/perplexity: 131 open roles
+[12:38:43]   ashby/plaid: 134 open roles
+[12:38:43]   ashby/zip: 109 open roles
+[12:38:43]   ashby/cohere: 116 open roles
+[12:38:43]   ashby/elevenlabs: 160 open roles
+[12:38:43]   workable/nogigiddy: 1822 open roles
+[12:38:43]   workable/suppliedtalent: 188 open roles
+[12:38:43]   workable/serenity-mental-health-centers: 364 open roles
+[12:38:43]   workable/pacific-health-group: 202 open roles
+[12:38:43]   workable/pm2cm: 125 open roles
+[12:38:43]   workable/behavior-frontiers: 133 open roles
+[12:38:43]   workable/pavago: 2582 open roles
+[12:38:43]   workable/rimkus: 145 open roles
+[12:38:43]   workable/intertek: 209 open roles
+[12:38:43]   workable/yugo: 108 open roles
+[12:38:43]   bamboohr/apaveinc: 105 open roles
+[12:38:43]   breezy/american-logistics-authority: 2760 open roles
+[12:38:43]   smartrecruiters/aspenskiingcompany: 127 open roles
+[12:38:43]   smartrecruiters/equinox: 204 open roles
+[12:38:43]   smartrecruiters/boschgroup: 217 open roles
+[12:38:43]   smartrecruiters/sgs: 167 open roles
+[12:38:43]   smartrecruiters/redbull: 386 open roles
+[12:38:43]   smartrecruiters/AIRCommunities: 141 open roles
+[12:38:43]   smartrecruiters/uniteklearning: 173 open roles
+[12:38:43]   smartrecruiters/mattelinc: 121 open roles
+[12:38:43]   greenhouse: 404 of 414 boards have openings (39151 roles)
+[12:38:43]   lever: 117 of 121 boards have openings (17670 roles)
+[12:38:43]   workday: 114 of 114 boards have openings (12698 roles)
+[12:38:43]   ashby: 69 of 78 boards have openings (3432 roles)
+[12:38:43]   workable: 103 of 109 boards have openings (8109 roles)
+[12:38:43]   bamboohr: 4 of 4 boards have openings (209 roles)
+[12:38:43]   recruitee: 2 of 2 boards have openings (54 roles)
+[12:38:43]   breezy: 6 of 6 boards have openings (2827 roles)
+[12:38:43]   smartrecruiters: 44 of 50 boards have openings (1799 roles)
+[12:38:43]   workable: 1 board names not found (skipped from now on): freelink-interpreting-llc
+[12:38:43]   agg/linkedin: 0 roles (cached)
+[12:38:43]   agg/remoteok: 16 roles (cached)
+[12:38:43]   agg/remotive: 0 roles (cached)
+[12:38:43]   agg/jicy: 13 roles (cached)
+[12:38:43]   agg/himalayas: 1 roles (cached)
+[12:38:43]   agg/wwr: 16 roles (cached)
+[12:38:43]   agg/themuse: 203 roles (cached)
+[12:38:43]   agg/adzuna: 0 roles (cached)
+[12:38:43]   agg/jooble: 0 roles (cached)
+[12:38:53]   agg/workablejobs: 249 fetched, 105 pass the title/location filter
+[12:38:54]   agg/arbeitnow: 900 fetched, 1 pass the title/location filter
+[12:38:54]   agg/workingnomads: 39 fetched, 3 pass the title/location filter
+[12:38:54]   agg/githublists: 317 fetched, 64 pass the title/location filter
+[12:39:08]   agg/builtin: 85 fetched, 58 pass the title/location filter
+[12:39:08]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[12:39:08]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[12:39:09]   agg/hnhiring: 3 fetched, 0 pass the title/location filter
+[12:39:09]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[12:39:10] 82272 open roles, 547 new
+[12:39:10]   ✓  54  Reporting & Data Analyst (6-Month FTC) @ form3 (Remote) — title 'analyst' +22; keywords [workflow, stakeholder, sql, ownership] +16; location 'remote' +16
+[12:39:10]   ✓  49  Junior Analyst @ jobgether (US) — title 'analyst' +22; keywords [stakeholder, excel] +6; location 'remote' +16; pay up to $80,000 +5
+[12:39:10]   ✓  34  Event Planner – Remote Sports, Concerts & Theater @ jobgether (US (Remote)) — keywords [continuous improvement, vendor, stakeholder, excel] +18; location 'remote' +16
+[12:39:10]   ✓  34  Quantitative Research Analyst  - University Graduate (US) @ citadel (New York, NY (In-Office)) — title 'analyst' +22; location 'new york' +12
+[12:39:10]   ✓  16  🌎 Associate Data Partnerships Manager @ xperteez-technology (United States (Remote)) — location 'remote' +16
+[12:39:10]   ✓  12  Recruiter (6 Month Contract) @ brookfield (New York, New York) — location 'new york' +12
+[12:39:10]   ✓  12  Recruiter (6 Month Contract) @ brookfield (New York, New York) — location 'new york' +12
+[12:39:10] Scored 7 new roles: 7 candidates for the résumé check, 0 with nothing going for them, 538 filtered out by title/location (finding and scoring took 7.0 min)
+[12:39:11] 7 jobs queued: 0 already matched to your résumé, 7 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 394 now
+[12:39:11] Time for this run: 50 min in all (17376 of 1850 free Actions minutes used this month)
+[12:39:11] Accounts: ON (delgado@alumni.usc.edu)
+[12:39:12]   match  75%  Reporting & Data Analyst (6-Month FTC) @ form3 — same role at this employer, checked before: can't truthfully answer required: Which business intelli
+[12:39:12] → Reporting & Data Analyst (6-Month FTC) @ form3 (score 54, match 75%)
+[12:39:14]     found the employer's own posting on greenhouse/form3
+[12:39:27]       step 1: 18 fields (16 required)
+[12:39:28]       (writer answered 'Which business intelligence or dash boarding tools have you ' -> "['I have not used a BI or dash boarding platform p")
+[12:39:40]       email: the site asked for a security code after Submit; reading it from the application inbox
+[12:39:50]       mail: found 'Security code for your application to Form3 - External'
+[12:39:55]     ✓ applied (0.7 min)
+[12:40:01] → Quantitative Research Analyst  - University Graduate (US) @ citadel (score 34)
+[12:40:03]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[12:40:03] → 🌎 Associate Data Partnerships Manager @ xperteez-technology (score 16)
+[12:40:06]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[12:40:07]   ✗ Recruiter (6 Month Contract) @ brookfield: above entry level: mid (requires 3+ yrs; pay starts at $105,000)
+[12:40:07]   ✗ Recruiter (6 Month Contract) @ brookfield: not open to you: internship / summer program
+[12:40:42]       writer: gemini-lite: still failing after retries
+[12:41:57]       writer: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=75)
+[12:41:57]   match  30%  Junior Analyst @ jobgether — Candidate lacks emergency management experience and required certifications
+[12:41:57]   match  35%  Event Planner – Remote Sports, Concerts & Theater @ jobgether — Candidate has no event planning or hospitality background
+[12:41:57] Résumé checks this run: 3 (1 passed) in 1 calls. Free writer allowance used today: groq 11k/195k tokens; groq-20b 8k/195k tokens; groq-qwen 4k/195k tokens; gemini-lite 58/480 requests (+8k served from its cache, not counted); gemini-flash 1/18 requests
+[12:41:57] Summary: 1 applied, 2 skipped, 2 low_score, 540 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-26.md
+[12:41:57]   by site  greenhouse: 1 applied
+[12:41:57]   by site  www.builtinnyc.com: 1 skipped
+[12:41:57]   by site  www.builtincolorado.com: 1 skipped
+[12:41:59] Summary emailed to delgado@alumni.usc.edu
