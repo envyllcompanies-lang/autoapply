@@ -74,6 +74,12 @@ def _posted(raw) -> str:
         return ""
 
 
+BOARDS: dict = {}          # {'greenhouse': {board names}, ...} seen in the snapshot read in this run
+_BOARD_ATS = {"Greenhouse": ("greenhouse", re.compile(r"greenhouse\.io/(?:embed/job_app\?for=)?([A-Za-z0-9_-]+)")),
+              "Lever": ("lever", re.compile(r"jobs\.lever\.co/([A-Za-z0-9_-]+)")),
+              "Ashby": ("ashby", re.compile(r"jobs\.ashbyhq\.com/([A-Za-z0-9_.-]+)"))}
+
+
 def rows_to_jobs(rows, search: dict, known_urls: set, known_keys: set, levels=LEVELS, sites=SITES, max_age: int = 30,
                  max_level: int = 1, cap: int = 6000, out: list | None = None, tally: dict | None = None) -> list[Job]:
     """Turn snapshot rows into Jobs: the wanted sites and levels, new enough, passing the title/location filters and the
@@ -87,6 +93,10 @@ def rows_to_jobs(rows, search: dict, known_urls: set, known_keys: set, levels=LE
     sites, levels = set(sites), set(levels)
     for r in rows:
         tally["rows"] = tally.get("rows", 0) + 1
+        if r.get("ats") in _BOARD_ATS:                   # which boards the snapshot covers (for Common Crawl's discovery)
+            m = _BOARD_ATS[r["ats"]][1].search(r.get("url") or "")
+            if m:
+                BOARDS.setdefault(_BOARD_ATS[r["ats"]][0], set()).add(m.group(1).lower())
         lvl = r.get("skill_level")
         if r.get("ats") not in sites or lvl not in levels:
             continue

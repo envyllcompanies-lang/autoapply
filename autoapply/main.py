@@ -545,6 +545,16 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         jobs += discover_jobboard(cfg, base, log, have, set(sources.KNOWN) | {j.key for j in jobs}, jb_state)
     except Exception as e:
         log(f"  agg/jobboard failed: {e}")
+    try:              # once per Common Crawl index (monthly), in a run that read the snapshot: employers' boards it lacks
+        from . import jobboard as _jb, ccboards
+        if _jb.BOARDS and (s.get("ccboards", True) is not False) and not dry_run:
+            idx = ccboards.latest_index()
+            if idx and idx != db.meta_get("ccboards_index", ""):
+                known = {a: set(_jb.BOARDS.get(a, ())) | {str(t).lower() for t in companies.get(a, [])} for a in ccboards.PREFIXES}
+                ccboards.discover(base, known, log, idx, sites=tuple(s.get("ccboards_sites") or ("greenhouse",)))
+                db.meta_set("ccboards_index", idx)          # (boards added now are read from the next search on)
+    except Exception as e:
+        log(f"  ccboards: skipped ({str(e)[:100]})")
     by_key = {j.key: j for j in jobs}
 
     # 2. filter + score only what we've never seen

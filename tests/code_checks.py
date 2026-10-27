@@ -218,4 +218,27 @@ _ok = _got == {"a": f"Portland, ME {_RU}"} and _rit("This is a fully remote posi
 print("OK " if _ok else "BAD", "remote-marked snapshot rows kept for confirmation (US towns only) ->", _got)
 bad_mail += not _ok
 
+# ---- Common Crawl board discovery: names from the index, only new boards with open jobs kept (index and feeds mocked)
+import tempfile as _tf, json as _js
+from autoapply import ccboards as _CC
+class _R:
+    def __init__(self, t, j=None): self.text, self._j, self.status_code = t, j, 200
+    def json(self): return self._j
+_pages = {"job-boards.greenhouse.io/": ['{"url": "https://job-boards.greenhouse.io/newco/jobs/1"}\n{"url": "https://job-boards.greenhouse.io/oldco/jobs/2"}\n'
+                                        '{"url": "https://job-boards.greenhouse.io/emptyco"}'], "boards.greenhouse.io/": []}
+def _fake(url, params=None, **k):
+    if params.get("showNumPages"):
+        return _R("", {"pages": len(_pages[params["url"]])})
+    return _R(_pages[params["url"]][int(params["page"])])
+_old = (_CC._get, _CC._openings, _CC.time.sleep)
+_CC._get, _CC._openings, _CC.time.sleep = _fake, (lambda a, t: 5 if t == "newco" else 0), (lambda s: None)
+try:
+    _b = Path(_tf.mkdtemp())
+    _f = _CC.discover(_b, {"greenhouse": {"oldco"}}, lambda *a: None, index="CC-TEST")
+    _ok = _f == {"greenhouse": ["newco"]} and _js.loads((_b / "discovered_boards.json").read_text()) == {"greenhouse": ["newco"]}
+finally:
+    _CC._get, _CC._openings, _CC.time.sleep = _old
+print("OK " if _ok else "BAD", "Common Crawl discovery keeps only new boards with open jobs ->", _f)
+bad_mail += not _ok
+
 sys.exit(bad + bad_mail)
