@@ -1,71 +1,3 @@
-=== 2026-10-25 22:33:15  skipped  Inside Sales & Enrollment Specialist, West Coast (Bilingual - English/Spanish) @ cambiumlearning
-url: https://cambiumlearning.wd1.myworkdayjobs.com/camb/job/Remote/Inside-Sales---Enrollment-Specialist--West-Coast_REQ-4549/apply/applyManually
-stage: Application Questions 2 of 2
-why: can't truthfully answer required: Do you have a reliable internet connection with a minimum do
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Homepage {navigationItem-Homepage}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Inside Sales & Enrollment Specialist, West Coast (Bilingual - English/Spanish)
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-label: completed step 3 of 6
-label: Application Questions 1 of 2
-{progressBarActiveStep} current step 4 of 6 Application Questions 2 of 2
-label: current step 4 of 6
-label: Application Questions 2 of 2
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-# Application Questions 2 of 2
-{applyFlowSupplementaryQuestionsPage}
- {formField-7be81a4ea49b10010197c48cb5190000}
-label: Do you have at least 2 years of experience handling customer inquiries through phone queues, high-volume outbo
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c48cb5190000
- {formField-7be81a4ea49b10010197c5c0e9e50000}
-label: Do you have admissions or sales experience supporting K-12 schools, educators, or educational technology produ
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c5c0e9e50000
- {formField-7be81a4ea49b10010197c65af98c0000}
-label: Do you have hands-on experience using a customer relationship management (CRM) system (Salesforce)?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0000
- {formField-7be81a4ea49b10010197c65af98c0001}
-label: Do you have a reliable internet connection with a minimum download speed of 7 Mbps?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0001
- {formField-7be81a4ea49b10010197c65af98c0002}
-label: Can you work the scheduled hours outlined in the job posting?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0002
- {formField-7be81a4ea49b10010197c65af98c0003}
-label: Do you have a high school diploma or equivalent?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0003
- {formField-7be81a4ea49b10010197c65af98c0004}
-label: Are you bilingual in English and Spanish?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0004
- {formField-7be81a4ea49b10010197c65af98c0005}
-label: If hired into a full-time position, can you work occasional overtime and Saturdays as business needs require?*
-  [dropdown] nothing chosen #supplementaryQuestionnaire--7be81a4ea49b10010197c65af98c0005
- {formField-7be81a4ea49b10010197c6f49bb70000}
-label: This role requires speaking with families who may be exploring homeschooling or virtual school for the first t
-  <textarea #supplementaryQuestionnaire--7be81a4ea49b10010197c6f49bb70000 required empty>
- {formField-7be81a4ea49b10010197c6f49bb70001}
-label: Describe your experience managing a high volume of leads, inquiries, or customers. How did you stay organized 
-  <textarea #supplementaryQuestionnaire--7be81a4ea49b10010197c6f49bb70001 required empty>
- {formField-7be81a4ea49b10010197c6f49bb70002}
-label: Share an example of a sales or enrollment goal you achieved. What actions did you take to be successful?*
-  <textarea #supplementaryQuestionnaire--7be81a4ea49b10010197c6f49bb70002 required empty>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  [link] Applicant Privacy Statement {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-25 22:36:37  blocked  Analyst, Research & Investments - Private Equity @ stepstone
 url: https://job-boards.greenhouse.io/embed/job_board
 stage: page 1
@@ -5602,4 +5534,45 @@ label: Phone Extension
   [link]  {socialIcon}
   [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-10-27 01:57:59  unconfirmed  Revenue Operations @ tribe-ai
+url: https://jobs.ashbyhq.com/tribe-ai/1f991e53-c9f3-4835-82bb-d83adc5f6cf7/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'l you require sponsorship in the future? Yes No What is your current location? How did you hear about us? Why are you a good fit for this role? Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Revenue Operations
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn
+  <input:text #dee50867-7fa2-42dc-a5a6-cd22a0f257fe required filled>
+label: Are you legally authorized to work where the job is being offered?
+  [button] Yes
+  [button] No
+  <input:checkbox name=d4af060c-0588-486d-aa84-bd6189daa2c5 question-answered>
+label: Will you require sponsorship in the future?
+  [button] Yes
+  [button] No
+  <input:checkbox name=d7e2b122-9043-4bf6-aa93-c3c5c7615b91 question-unanswered>
+label: What is your current location?
+  <input:text #42de99c3-6c7f-49ed-845b-17f03731cb00 required filled>
+label: How did you hear about us?
+  <input:text #218510bb-57d7-426e-be2f-bec5a8973072 required filled>
+label: Why are you a good fit for this role?
+  <input:text #ccc30e1f-d6f5-4295-a460-ced25efd2e07 empty>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
 
