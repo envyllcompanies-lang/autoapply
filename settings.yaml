@@ -174,8 +174,9 @@ facts:                      # answers you gave (2026-10-15), merged into the pri
   restrictive_agreements: "No"   # no non-compete, non-solicit or other restrictive agreement with any current or past employer
   outside_business: "No"         # not involved in other business activities as a proprietor, partner or officer
   certifications: "None"         # no professional certifications or licenses (a driver's license is asked separately)
-  sms_consent: "No"              # (2026-10-27) never agree to be texted: SMS boxes stay unticked, 'may we text you?' -> No,
-                                 # 'how should we contact you?' -> email
+  sms_consent: "No"              # (2026-10-27) no texts unless the form makes it mandatory: optional SMS boxes stay unticked,
+                                 # 'may we text you?' -> No, 'how should we contact you?' -> email; a required consent box
+                                 # is ticked so the job is not skipped
   # date_of_birth is read from the DATE_OF_BIRTH secret, never written here (this repository is public)
 
 consent:                    # sign-offs the bot may give for you on application forms

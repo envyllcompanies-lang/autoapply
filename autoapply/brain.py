@@ -720,15 +720,17 @@ class Brain:
         r"(debarred|excluded|sanctioned|suspended).{0,80}(federal|government|program|health ?care)", re.I)
 
     def _sms_answer(self, f: dict):
-        """_UNSET unless this is a question about texting you and you said no to SMS contact (facts.sms_consent): then the
-        box stays unticked (None) and a list gets its 'No' / 'do not' choice (None when it has none)."""
+        """_UNSET unless this is a question about texting you and you said no to SMS contact (facts.sms_consent): then an
+        optional box stays unticked (None) and a list gets its 'No' / 'do not' choice or email. Only when the form makes the
+        consent itself mandatory (a required box, or a required list with no way to decline) is it given, so the job is
+        not lost over it (your rule, 2026-10-27)."""
         if str(self.facts.get("sms_consent", "")).strip().lower()[:1] not in ("n", "f"):
             return _UNSET
         text = f"{f.get('label', '')} {f.get('question', '')}"
         if not SMS_RX.search(text):
             return _UNSET
         if f.get("kind") == "checkbox_single":
-            return None
+            return True if f.get("required") else None
         opts = [o for o in (f.get("options") or []) if not PLACEHOLDER_OPT.fullmatch(str(o))]
         no = next((o for o in opts if re.match(r"\W*(no\b|i do not|i don.t|do not|don.t|decline|opt[- ]?out|not )", str(o), re.I)), None)
         if no:
@@ -736,6 +738,10 @@ class Brain:
         mail = next((o for o in opts if re.search(r"e-?mail", str(o), re.I) and not SMS_RX.search(str(o)) and not re.search(r"\btext", str(o), re.I)), None)
         if mail:                                   # 'how should we contact you': email, never text
             return [mail] if f.get("kind") == "checkbox_group" else mail
+        if f.get("required") and opts:             # no way to decline and an answer is required: the agreeing choice
+            yes = next((o for o in opts if re.match(r"\W*(yes\b|i agree|agree|i consent|consent|i accept|accept|i understand)", str(o), re.I)), None)
+            if yes:
+                return [yes] if f.get("kind") == "checkbox_group" else yes
         return None
 
     def _plain(self, f: dict):

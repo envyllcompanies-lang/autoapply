@@ -241,16 +241,18 @@ finally:
 print("OK " if _ok else "BAD", "Common Crawl discovery keeps only new boards with open jobs ->", _f)
 bad_mail += not _ok
 
-# ---- no SMS contact: with sms_consent No, SMS boxes stay unticked, 'may we text you' -> No, contact method -> email
+# ---- no SMS contact unless mandatory: optional SMS boxes stay unticked, 'may we text you' -> No, contact method -> email;
+#      a required box (or a required list with no way to decline) is agreed to, so the job is not lost
 from autoapply.brain import Brain as _Br
 _b = _Br({"facts": {"email": "a@b.org", "phone": "1", "full_name": "Pat Doe", "sms_consent": "No"}, "consent": {"sign_attestations": True}},
          {"name": "Pat Doe"}, ".", lambda *a: None)
-_F = lambda lab, kind="checkbox_single", opts=None: {"id": "f1", "kind": kind, "label": lab, "required": True, "options": opts or []}
-_got = [_b._answer(_F("I agree to receive text messages (SMS) at this number"), "", {}),
+_F = lambda lab, kind="checkbox_single", opts=None, req=True: {"id": "f1", "kind": kind, "label": lab, "required": req, "options": opts or []}
+_got = [_b._answer(_F("I agree to receive text messages (SMS) at this number", req=False), "", {}),
         _b._answer(_F("By checking this box, you consent to receive SMS messages from Acme regarding your application."), "", {}),
         _b._answer(_F("Do you give us permission to text you?", "combobox", ["--", "Yes", "No"]), "", {}),
-        _b._answer(_F("Preferred method of contact", "select", ["Email", "Text message", "Email and text"]), "", {})]
-_ok = _got == [None, None, "No", "Email"]
+        _b._answer(_F("Preferred method of contact", "select", ["Email", "Text message", "Email and text"]), "", {}),
+        _b._answer(_F("SMS consent", "select", ["I agree to receive texts"]), "", {})]
+_ok = _got == [None, True, "No", "Email", "I agree to receive texts"]     # mandatory consent given, optional never
 print("OK " if _ok else "BAD", "no SMS contact ->", _got)
 bad_mail += not _ok
 
