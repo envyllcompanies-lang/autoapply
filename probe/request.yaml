@@ -1,11 +1,4 @@
 # Pushing a change to this file on the 'probe' branch starts a probe run (fills real forms, never submits).
-id: q1025
-urls:
-  - https://tmobile.wd1.myworkdayjobs.com/external/job/Remote-Wisconsin/Account-Executive--Business-Sales-Waukesha_REQ379816-1
-  - https://jobs.ashbyhq.com/openai/c9832989-edc1-4f2f-8a79-8fa29f5623e2/application
-  - https://cardinalhealth.wd1.myworkdayjobs.com/EXT/job/US-Nationwide-FIELD/Meeting-Planner--Specialty-Programs--Meetings---Events_20189806
-  - https://jobs.ashbyhq.com/halter/43b658a0-bd71-4bf0-87b9-4f52c93710b7
-  - https://jobs.ashbyhq.com/crusoe/b66ec19f-c7eb-463d-b4c5-42fbd8d5666b
-  - https://mizuho.wd1.myworkdayjobs.com/mizuhoamericas/job/NYC-1285/Payment-Platform-Implementation-Engineer_R7377-1
-create_accounts: true
-max_seconds_per_job: 420
+id: cc1
+fetch:
+  - https://index.commoncrawl.org/collinfo.json
