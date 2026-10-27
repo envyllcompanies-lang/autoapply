@@ -1,4 +1,10 @@
 # Pushing a change to this file on the 'probe' branch starts a probe run (fills real forms, never submits).
-id: cc1
+id: cc2
 fetch:
-  - https://index.commoncrawl.org/collinfo.json
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=job-boards.greenhouse.io/&matchType=prefix&showNumPages=true
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=boards.greenhouse.io/&matchType=prefix&showNumPages=true
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.lever.co/&matchType=prefix&showNumPages=true
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.ashbyhq.com/&matchType=prefix&showNumPages=true
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=job-boards.greenhouse.io/&matchType=prefix&output=json&fl=url&page=0
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.lever.co/&matchType=prefix&output=json&fl=url&page=0
+  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.ashbyhq.com/&matchType=prefix&output=json&fl=url&page=0
