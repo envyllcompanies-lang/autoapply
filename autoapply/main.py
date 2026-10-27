@@ -745,12 +745,24 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                 return "drop", None
             if len(pre["description"]) > len(job.description or ""):
                 job.description = pre["description"]
+            if sources.REMOTE_UNCONFIRMED in (job.location or ""):
+                town = job.location.replace(sources.REMOTE_UNCONFIRMED, "").strip()
+                if sources.remote_in_text(job.description):
+                    job.location = f"{town} (Remote)".strip()
+                    db.update(job.key, location=job.location)          # its own text says remote in the US
+                else:
+                    db.update(job.key, status="filtered", reason=f"on-site in '{town[:60]}': its site marks it remote, but "
+                              "the posting does not say it is remote in the US")
+                    return "drop", None
             if pre.get("company_name") and not (job.extra or {}).get("company_name"):
                 job.extra = {**(job.extra or {}), "company_name": pre["company_name"]}      # the employer's own name for itself
             if len(job.description or "") >= 300 and (why_lv := level_out(job, s)):
                 db.update(job.key, status="filtered", reason=why_lv)
                 log(f"  ✗ {job.title} @ {job.company}: {why_lv[:120]}")
                 return "drop", None
+        if sources.REMOTE_UNCONFIRMED in (job.location or ""):       # its posting text was never read: not confirmed remote
+            db.update(job.key, status="filtered", reason="its site marks it remote, but the posting could not be read to confirm it")
+            return "drop", None
         if not direct and s.get("preflight", True) and url0.startswith("http") and prescreen.gone(url0):
             db.update(job.key, status="skipped", reason="posting closed: its address no longer exists (HTTP 404/410)")
             log(f"  ✗ {job.title} @ {job.company}: the posting is closed (its page is gone; no time spent on it)")

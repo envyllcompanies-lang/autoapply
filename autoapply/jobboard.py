@@ -23,7 +23,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from . import level
-from .sources import Job, prefilter, level_title
+from .sources import Job, prefilter, level_title, foreign_place, us_place, REMOTE_UNCONFIRMED
 
 REPO = "https://github.com/Feashliaa/job-board-data"
 ATS_SOURCE = {"Workday": "workday", "Greenhouse": "greenhouse", "Lever": "lever", "Ashby": "ashby", "BambooHR": "bamboohr",
@@ -117,7 +117,16 @@ def rows_to_jobs(rows, search: dict, known_urls: set, known_keys: set, levels=LE
         desc = f"{title} at {r.get('company', '')}. Location: {r.get('location', '')}." + (" Entry level." if lvl == "entry" else "")
         j = Job(source=src, company=company, job_id=job_id, title=title, location=str(r.get("location") or ""), url=url,
                 apply_url=url, description=desc, extra={"posted": _posted(r.get("first_seen")), "snapshot_level": lvl})
-        if prefilter(j, search):
+        why = prefilter(j, search)
+        if why and r.get("remote") and re.match(r"(on-site in|location ')", why) and not foreign_place(j.location) and \
+                (us_place(j.location) or re.fullmatch(r"\s*(not specified|n/?a)?\s*", j.location, re.I)):
+            # the site marks it remote, but its location field names a town outside your places (or none): kept, and
+            # applied to only if its own text says it is remote in the US
+            j.location = f"{j.location} {REMOTE_UNCONFIRMED}".strip()
+            why = prefilter(j, search)
+            if not why:
+                tally["remote_lead"] = tally.get("remote_lead", 0) + 1
+        if why:
             continue
         lv = level.classify(title)
         if not lv.eligible or lv.level > max_level:
@@ -163,7 +172,8 @@ def discover_jobboard(cfg: dict, base: Path, log=print, known_urls: set | None =
         if len(out) >= cap:
             break
     log(f"  agg/jobboard: {tally.get('rows', 0):,} jobs in today's snapshot, {tally.get('level', 0):,} at your level on sites the bot "
-        f"can fill, {len(out)} new ones pass your title/location filters" + (f" (the first {cap}; the rest next time)" if len(out) >= cap else ""))
+        f"can fill, {len(out)} new ones pass your title/location filters" + (f" (the first {cap}; the rest next time)" if len(out) >= cap else "")
+        + (f"; {tally['remote_lead']} of them marked remote by their site, to be confirmed from the posting itself" if tally.get("remote_lead") else ""))
     if version and len(out) < cap:
         state["version"] = version                 # read in full: no need to look again until it changes
     return out

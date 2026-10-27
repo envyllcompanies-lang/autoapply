@@ -202,4 +202,20 @@ finally:
 _ok = a and b_ and c
 print("OK " if _ok else "BAD", "inbox login: timeouts retried and never switch mail off; a refused login does ->", a, b_, c)
 bad += not _ok
+# ---- snapshot rows marked remote by their site: kept for confirmation only when the town is in the US
+from autoapply import jobboard as _JB
+from autoapply.sources import REMOTE_UNCONFIRMED as _RU, remote_in_text as _rit
+_srch = {"titles_include": ["analyst"], "locations_include": ["denver", "remote"], "_onsite_ok": ["denver"], "us_remote_only": True}
+_rows = [{"ats": "Paylocity", "skill_level": "entry", "title": "Data Analyst", "company": "a", "location": "Portland, ME", "remote": True,
+          "url": "https://recruiting.paylocity.com/recruiting/Jobs/Details/1", "first_seen": "2026-10-20T00:00:00Z"},
+         {"ats": "Paylocity", "skill_level": "entry", "title": "Data Analyst", "company": "b", "location": "Portland, ME", "remote": False,
+          "url": "https://recruiting.paylocity.com/recruiting/Jobs/Details/2", "first_seen": "2026-10-20T00:00:00Z"},
+         {"ats": "Paylocity", "skill_level": "entry", "title": "Data Analyst", "company": "c", "location": "Toronto, Canada", "remote": True,
+          "url": "https://recruiting.paylocity.com/recruiting/Jobs/Details/3", "first_seen": "2026-10-20T00:00:00Z"}]
+_got = {j.company: j.location for j in _JB.rows_to_jobs(_rows, _srch, set(), set(), max_age=3650, cap=10)}
+_ok = _got == {"a": f"Portland, ME {_RU}"} and _rit("This is a fully remote position open to candidates in the United States.") \
+      and not _rit("This is a fully remote role; hybrid schedule with two days a week in our office.")
+print("OK " if _ok else "BAD", "remote-marked snapshot rows kept for confirmation (US towns only) ->", _got)
+bad_mail += not _ok
+
 sys.exit(bad + bad_mail)

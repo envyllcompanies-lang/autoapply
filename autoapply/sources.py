@@ -600,6 +600,11 @@ NOT_REMOTE_TEXT = re.compile(
     r"\b(not|isn.t|is not|no) (a )?(fully )?remote\b|\bnon[- ]remote\b|\bremote work is not\b|\bnot eligible for remote\b", re.I)
 
 
+# A daily-snapshot posting its job site marks remote although its location field names a US town outside your places
+# (or no place): kept with this note, and only applied to once its own text says it is remote in the US (main.judge).
+REMOTE_UNCONFIRMED = "(listed as remote: to be confirmed)"
+
+
 def remote_in_text(text: str) -> bool:
     """True when a posting's description says it is a remote role open in the US."""
     t = " ".join((text or "").split())[:9000]
