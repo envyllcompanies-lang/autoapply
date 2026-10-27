@@ -1497,3 +1497,495 @@
 [13:57:20] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.9 min)
 [13:57:20] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
 [13:57:20] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-27.md
+[14:32:48] === autoapply run (LIVE) build 2026-10-18-b ===
+[14:32:49] Job titles you accept changed: looking again at 57,714 postings that were dropped only for their title
+[14:32:49] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[14:32:52] mail: logged in to delgado@alumni.usc.edu OK
+[14:34:44] Discovering jobs…
+[14:34:44] Job search already ran at 11:59 (searches run every 3 h): this run only applies
+[14:36:10]   agg/jobboard: 1,434,424 jobs in today's snapshot, 811,859 at your level on sites the bot can fill, 1448 new ones pass your title/location filters; 654 of them marked remote by their site, to be confirmed from the posting itself
+[14:36:10] 1448 open roles, 1448 new
+[14:36:12]   ✓  72  Operations Analyst I @ Employee Fiduciary, LLC (Mobile, AL (listed as remote: ) — title 'operations analyst' +50; keywords [entry level] +6; location 'remote' +16
+[14:36:12]   ✓  72  Business Operations – Associate @ fico (Work from Home, Michigan (list) — title 'business operations' +50; keywords [entry level] +6; location 'remote' +16
+[14:36:12]   ✓  72  Technical Project Coordinator I @ Verve Cloud, Inc. (Not specified (listed as remot) — title 'project coordinator' +50; keywords [entry level] +6; location 'remote' +16
+[14:36:12]   ✓  69  Procurement Operations Analyst @ horizon3ai (US, Remote) — title 'operations analyst' +50; keywords [procurement] +3; location 'remote' +16
+[14:36:12]   ✓  66  Behavioral Health Operations Coordinator @ CloseKnit (Not specified (listed as remot) — title 'operations coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  Project Coordinator @ Coordinated Resources Inc (San Francisco, CA (listed as r) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  Project Coordinator (CST) @ EPC POWER CORP. (Not specified (listed as remot) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  GTM Operations Analyst @ Medisolv, Inc. (Clarksville, MD (listed as rem) — title 'operations analyst' +50; location 'remote' +16
+[14:36:12]   ✓  66  Project Coordinator @ Primera Engineers, Ltd. (Not specified (listed as remot) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  Project Coordinator @ SENKO Advanced Components (Poway, CA (listed as remote: t) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  Administrative Project Coordinator, Her PLAN @ Susan B. Anthony List, Inc (Not specified (listed as remot) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  66  Data Analyst, Business Operations (Secret Clearance Required) @ The Clearing Inc (Washington, DC (listed as remo) — title 'business operations' +50; location 'remote' +16
+[14:36:12]   ✓  66  Business Operations Specialist @ Vistra Communications LLC (Washington, DC (listed as remo) — title 'business operations' +50; location 'remote' +16
+[14:36:12]   ✓  66  Project Coordinator, Grants @ VMG Health (Dallas, TX (listed as remote: ) — title 'project coordinator' +50; location 'remote' +16
+[14:36:12]   ✓  65  Jr Data Analyst-Inventory (Remote) @ HALO (Not specified (listed as remot) — title 'inventory' +39; keywords [entry level, inventory] +10; location 'remote' +16
+[14:36:12]   ✓  64  2026 Associate Supply Chain Planning Specialist - Remote @ ngc (United States-Remote) — title 'supply chain' +38; keywords [entry level, supply chain] +10; location 'remote' +16
+[14:36:12]   ✓  63  Business Analyst @ CSpring (Indianapolis, IN (listed as re) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  Business Analyst @ Definiti LLC (Erie, PA (listed as remote: to) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  Business Analyst @ intellistack (Remote/United States) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  LG0115 - Supply Chain Coordinator @ Mindray North America (Mahwah, NJ (listed as remote: ) — title 'supply chain' +43; keywords [supply chain] +4; location 'remote' +16
+[14:36:12]   ✓  63  Business Analyst - AI COE @ National Content & Technology Cooperative (Not specified (listed as remot) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  Technical Business Analyst @ PRECISE SOFTWARE SOLUTIONS INCORPORATED (Rockville, MD (listed as remot) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  Business Analyst @ RxAnte Inc (Sterling, VA (listed as remote) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  ServiceNow Business Analyst @ Bart & Associates (Not specified (listed as remot) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  63  Product Owner / Business Analyst - Cost Containment @ TrueScripts Management Services (Washington (listed as remote: ) — title 'business analyst' +47; location 'remote' +16
+[14:36:12]   ✓  62  Revenue Operations Analyst @ chainalysis-careers (New York Office) — title 'operations analyst' +50; location 'new york' +12
+[14:36:12]   ✓  60  Facilities Associate @ stord (CVG2 - Hebron, KY - 1405 World) — title 'facilities' +38; keywords [entry level] +6; location 'remote' +16
+[14:36:12]   ✓  59  People Operations and Compliance Generalist @ assured (Remote) — title 'people operations' +43; location 'remote' +16
+[14:36:12]   ✓  59  Procurement Planner I @ SENKO Advanced Components (Poway, CA (listed as remote: t) — title 'procurement' +34; keywords [entry level, procurement] +9; location 'remote' +16
+[14:36:12]   ✓  58  Supply Chain Specialist, Service & Warranty @ Hyper (Richmond, VA (listed as remote) — title 'supply chain' +38; keywords [supply chain] +4; location 'remote' +16
+[14:36:12]   ✓  58  Supply Chain Specialist, Service & Warranty @ Hyper Solutions Inc Internal (Richmond, VA (listed as remote) — title 'supply chain' +38; keywords [supply chain] +4; location 'remote' +16
+[14:36:12]   ✓  58  Contracts and Procurement Coordinator @ National Forest Foundation (Not specified (listed as remot) — title 'procurement' +39; keywords [procurement] +3; location 'remote' +16
+[14:36:12]   ✓  58  Procurement Analyst @ socure (Remote - USA) — title 'procurement' +39; keywords [procurement] +3; location 'remote' +16
+[14:36:12]   ✓  58  Receiving / Procurement Coordinator @ Softbank Robotics America Inc (Not specified (listed as remot) — title 'procurement' +39; keywords [procurement] +3; location 'remote' +16
+[14:36:12]   ✓  56  Sales Enablement & Operations Associate @ compassx (Irvine, CA) — title 'operations associate' +50; keywords [entry level] +6
+[14:36:12]   ✓  56  Sales Operations Coordinator @ puffco (Los Angeles, CA) — title 'operations coordinator' +50; location 'los angeles' +6
+[14:36:12]   ✓  56  Flow Inventory Associate @ carmax (CO - Denver - Parker) — title 'inventory' +34; keywords [entry level, inventory] +10; location 'denver' +12
+[14:36:12]   ✓  55  Logistics Coordinator @ Fervo Energy Company (Houston, TX (listed as remote:) — title 'logistics' +39; location 'remote' +16
+[14:36:12]   ✓  55  Logistics Coordinator, Drilling & Completions @ Fervo Energy Company (Houston, TX (listed as remote:) — title 'logistics' +39; location 'remote' +16
+[14:36:12]   ✓  54  Sales Engineer, Facilities @ incidentiq (Remote) — title 'facilities' +38; location 'remote' +16
+[14:36:12]   ✓ … and 1,296 more new candidates (the 40 with the highest keyword score are listed)
+[14:36:12] Scored 1448 new roles: 1336 candidates for the résumé check, 112 with nothing going for them, 0 filtered out by title/location (finding and scoring took 3.4 min)
+[14:36:12] 1336 jobs queued: 0 already matched to your résumé, 1336 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
+[14:36:12] Time for this run: 50 min in all (17781 of 1850 free Actions minutes used this month)
+[14:36:13] Accounts: ON (delgado@alumni.usc.edu)
+[14:36:14]   ✗ Project Coordinator (CST) @ EPC POWER CORP.: the posting is closed (no time spent on it)
+[14:36:14]   ✗ Systems Analyst @ evio: above entry level: mid (requires 5+ yrs)
+[14:36:15]   ✗ Data Analyst @ NexRep, LLC: above entry level: mid (requires 3+ yrs)
+[14:36:15]   ✗ Accounts Payable Coordinator @ Chartwell Law: the posting is closed (no time spent on it)
+[14:36:16]   ✗ Financial Analyst @ ClimeCo LLC: the posting is closed (no time spent on it)
+[14:36:16]   ✗ Analyst, Client Strategy @ sothebys: pays too little: tops out near $60,000 a year (your floor is $65,000)
+[14:36:24]   match  60%  Analyst, Product Marketing – Core Products @ mastercard — Strong general business and analytical background, but lacks the specific 2-5 years of dedicated pro
+[14:36:24]   match  72%  Accounts Payable (“AP”) Accountant @ topsteptrader — Meets core accounting and ERP skills through construction bookkeeping experience, though slightly be
+[14:36:24]   match  85%  Technical Project Coordinator I @ Verve Cloud, Inc. — Strong match for project coordination, operations, and technical tracking utilizing an engineering a
+[14:36:24]   match  30%  Deal Desk Analyst @ alloy — The posting text is mostly website navigation boilerplate with insufficient details to evaluate fit.
+[14:36:24]   match  62%  Business Analyst @ Definiti LLC — Strong process improvement and systems background, but falls short of the 4+ years of dedicated busi
+[14:36:24] → Analyst, Product Marketing – Core Products @ mastercard (score 34, match 60%)
+[14:36:28]       (opening Workday's application form directly)
+[14:36:33]       (account page: creating the account / signing in)
+[14:36:35]       account: signing in on mastercard.wd1.myworkdayjobs.com
+[14:36:41]       1/6 My Information: 12 fields (7 required)
+[14:36:48]       My Information (try 2): Workday said ['Error: The field Have you ever worked for Mastercard as an employee or provided services as a contingent worker (contractor, consultant)? is required and must have a valu', 'Error-Have you ever worked for Mastercard as an employee or provided services as a contingent worker (contractor, consultant)? The field Have you ever worked for Masterca']; redoing ['Have you ever worked for Maste']
+[14:36:51]       2/6 My Experience: 2 fields (0 required)
+[14:37:01]       3/6 Application Questions 1 of 2: 5 fields (5 required)
+[14:37:14]       (writer answered 'In your current role, do you engage with Mastercard employee' -> 'No')
+[14:37:14]       (writer answered 'Are you related to anyone who has the authority to influence' -> 'No')
+[14:37:15]       (writer answered 'Are you or were you recently (in the last six months) an emp' -> 'No')
+[14:37:15]       4/6 Application Questions 2 of 2: 6 fields (6 required)
+[14:37:26]       5/6 Voluntary Disclosures: 12 fields (11 required)
+[14:37:35]       Review: submitting
+[14:37:38]     ✓ applied (1.2 min)
+[14:37:42] → Accounts Payable (“AP”) Accountant @ topsteptrader (score 16, match 72%)
+[14:37:51]       step 1: 20 fields (18 required)
+[14:37:52]       writer: note, the answer mentions a figure or tool that is not in your facts
+[14:38:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[14:38:30]       mail: found 'Security code for your application to Topstep'
+[14:38:36]     ✓ applied (0.9 min)
+[14:38:41] → Technical Project Coordinator I @ Verve Cloud, Inc. (score 72, match 85%)
+[14:38:54]       (résumé given to the site's 'apply with resume' box first)
+[14:39:34]       step 1: 96 fields (78 required)
+[14:39:34]       (writer answered 'Skills (required)' -> 'Excel, SQL, Python, C++, PostgreSQL, SQLite, Flask')
+[14:39:35]       (writer answered 'County' -> 'N/A')
+[14:39:37]       (writer answered 'County' -> 'N/A')
+[14:39:40]       (writer answered 'County' -> 'N/A')
+[14:39:48]       (writer answered 'County' -> 'N/A')
+[14:39:48]       (writer answered 'Area of Study (required)' -> 'Industrial and Systems Engineering')
+[14:39:49]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[14:39:50]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[14:39:51]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[14:39:53]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[14:40:44]       ! NOT FILLED: 'Skills (required)' (wanted 'Excel, SQL, Python, C++, PostgreSQL, SQL')
+[14:40:44]       (filled again: 1 box(es) the page had emptied)
+[14:41:20]       step 2: 112 fields (94 required)
+[14:41:20]       (writer answered 'Skills (required)' -> 'Excel, SQL, Python, C++, PostgreSQL, SQLite, Flask')
+[14:41:22]       (writer answered 'County' -> 'N/A')
+[14:41:22]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:41:24]       (writer answered 'County' -> 'N/A')
+[14:41:25]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:41:29]       (writer answered 'County' -> 'N/A')
+[14:41:29]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:41:34]       (writer answered 'County' -> 'N/A')
+[14:41:36]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:41:41]       (writer answered 'Area of Study (required)' -> 'Industrial and Systems Engineering')
+[14:41:41]       ! could not fill 'Available to Start (required)': Locator.fill: Error: Malformed value
+[14:41:42]       ! NOT FILLED: 'Skills (required)' (wanted 'Excel, SQL, Python, C++, PostgreSQL, SQL')
+[14:41:42]       (filled again: 1 box(es) the page had emptied)
+[14:41:50]       step 3: 15 fields (15 required)
+[14:41:51]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[14:41:52]       (writer answered 'Years Known (required) *' -> '--')
+[14:41:54]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[14:41:56]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[14:42:20]       (writer answered 'Years Known (required) *' -> '--')
+[14:42:20]       ? unanswered: 'Years Known (required) *' kind=combobox options=['--', '1 year', '2 years', '3 years', '4 years', '5 years']
+[14:42:20]     ✗ skipped: can't truthfully answer required: Years Known (required) *
+[14:42:24]   ✗ Jr Data Analyst-Inventory (Remote) @ HALO: the posting is closed (no time spent on it)
+[14:42:27]   match  60%  Product Owner / Business Analyst - Cost Containment @ TrueScripts Management Services — Lacks specific healthcare or pharmacy benefit management experience required for the role.
+[14:42:27]   match  72%  Analyst, Strategy @ keplergroup — Strong analytical and data skills, though digital marketing campaign management is a slight pivot.
+[14:42:27]   match  78%  Operations Analyst I @ Employee Fiduciary, LLC — Good match for general operations analysis, process procedures, and organizational skills.
+[14:42:27]   match  85%  Administrative Project Coordinator, Her PLAN @ Susan B. Anthony List, Inc — Strong fit for project coordination, process tracking, and administrative support tasks.
+[14:42:27]   match  65%  Go To Market Analyst @ navapbc — Requires 2-4 years of specific GTM/RevOps and government contracting experience exceeding candidate'
+[14:42:30] → Business Analyst @ Definiti LLC (score 63, match 62%)
+[14:42:41]       (résumé given to the site's 'apply with resume' box first)
+[14:43:25]       step 1: 98 fields (71 required)
+[14:43:25]       (writer answered 'County' -> 'N/A')
+[14:43:26]       (writer answered 'County' -> 'N/A')
+[14:43:27]       (writer answered 'County' -> 'N/A')
+[14:43:30]       (writer answered 'County' -> 'N/A')
+[14:43:33]       (writer answered 'County' -> 'N/A')
+[14:44:33]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[14:44:33]       (filled again: 1 box(es) the page had emptied)
+[14:44:36]       step 2: 12 fields (12 required)
+[14:44:39]       ? unanswered: 'Please indicate which features you have experience using in Microsoft Teams or a similar p' kind=checkbox_group options=['Video conferencing', 'Chat', 'File sharing and collaboration', 'Team/channel management', 'Integration with other Microso', 'Hosting and participating in v']
+[14:44:39]     ✗ skipped: can't truthfully answer required: Please indicate which features you have experience using in 
+[14:44:46] → Product Owner / Business Analyst - Cost Containment @ TrueScripts Management Services (score 63, match 60%)
+[14:44:58]       (résumé given to the site's 'apply with resume' box first)
+[14:45:41]       step 1: 74 fields (48 required)
+[14:45:41]       (writer answered 'County' -> 'N/A')
+[14:45:43]       (writer answered 'County' -> 'N/A')
+[14:45:43]       (writer answered 'County' -> 'N/A')
+[14:45:43]       (writer answered 'County' -> 'Garfield County')
+[14:45:44]       (writer answered 'County' -> 'N/A')
+[14:46:38]       step 2: 8 fields (7 required)
+[14:46:45]       (writer answered 'Do you have experience in a Business Analyst capacity, scopi' -> 'Yes - Intermediate')
+[14:46:50]       step 3: 8 fields (4 required)
+[14:46:50]       (writer answered 'Personal or Work Reference? (required) *' -> '--')
+[14:46:51]       (writer answered 'Personal or Work Reference? (required) *' -> '--')
+[14:46:52]       ! nothing was picked in 'Personal or Work Reference? (required) *' (wanted '--'; choices: ['--', 'Personal', 'Professional'])
+[14:46:54]       ! nothing was picked in 'Personal or Work Reference? (required) *' (wanted '--'; choices: ['--', 'Personal', 'Professional'])
+[14:46:59]       step 4: 8 fields (4 required)
+[14:46:59]       (writer answered 'Personal or Work Reference? (required) *' -> '--')
+[14:47:00]       (writer answered 'Personal or Work Reference? (required) *' -> '--')
+[14:47:01]       ! nothing was picked in 'Personal or Work Reference? (required) *' (wanted '--'; choices: ['--', 'Personal', 'Professional'])
+[14:47:03]       ! nothing was picked in 'Personal or Work Reference? (required) *' (wanted '--'; choices: ['--', 'Personal', 'Professional'])
+[14:47:08]     ✗ skipped: stuck on step 5; page says: ['Personal or Work Reference? (required)\n--\nReference Type is required', '--', 'Personal or Work Reference? (required)\n--\n--\nPersonal\nProfessional\nReference Typ', '--\n--\nPersonal\nProfessional']; fields flagged: none; buttons: referencesName0:; referencesEmail0:; referencesPhone0:; referencesName1:; referencesEmail1:; referencesPhone1:; :Previous Step; btnNext:Next Step
+[14:47:15] → Analyst, Strategy @ keplergroup (score 34, match 72%)
+[14:47:25]       step 1: 20 fields (12 required)
+[14:47:36]       email: the site asked for a security code after Submit; reading it from the application inbox
+[14:47:46]       mail: found 'Security code for your application to Kepler Group'
+[14:47:51]     ✓ applied (0.6 min)
+[14:47:56] → Operations Analyst I @ Employee Fiduciary, LLC (score 72, match 78%)
+[14:48:08]       (résumé given to the site's 'apply with resume' box first)
+[14:48:11]       step 1: 19 fields (6 required)
+[14:48:23]       step 2: 4 fields (4 required)
+[14:48:24]       (writer answered 'Personal or Work Reference? (required) *' -> 'Personal')
+[14:48:32]       step 3: 2 fields (0 required)
+[14:48:37]       step 4: 2 fields (1 required)
+[14:48:39]     ✓ applied (0.7 min)
+[14:48:44] → Administrative Project Coordinator, Her PLAN @ Susan B. Anthony List, Inc (score 66, match 85%)
+[14:48:55]       (résumé given to the site's 'apply with resume' box first)
+[14:49:40]       step 1: 90 fields (67 required)
+[14:49:41]       (writer answered 'County' -> 'N/A')
+[14:49:41]       (writer answered 'County' -> 'N/A')
+[14:49:42]       (writer answered 'County' -> 'N/A')
+[14:49:42]       (writer answered 'County' -> 'N/A')
+[14:49:42]       (writer answered 'County' -> 'N/A')
+[14:49:43]       (writer answered 'May We Contact for Reference? (required) *' -> 'Yes')
+[14:49:43]       (writer answered 'May We Contact for Reference? (required) *' -> 'No')
+[14:49:43]       (writer answered 'May We Contact for Reference? (required) *' -> 'No')
+[14:49:44]       (writer answered 'May We Contact for Reference? (required) *' -> 'No')
+[14:50:46]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[14:50:46]       (filled again: 1 box(es) the page had emptied)
+[14:51:29]       step 2: 94 fields (71 required)
+[14:51:31]       (writer answered 'County' -> 'N/A')
+[14:51:32]       (writer answered 'County' -> 'N/A')
+[14:51:33]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:51:33]       (writer answered 'County' -> 'N/A')
+[14:51:34]       (writer answered 'County' -> 'N/A')
+[14:51:36]       (writer answered 'County' -> 'N/A')
+[14:51:36]       ! could not fill 'Available to Start': Locator.fill: Error: Malformed value
+[14:51:40]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[14:51:40]       (filled again: 1 box(es) the page had emptied)
+[14:52:23]       step 3: 94 fields (71 required)
+[14:52:23]       (writer answered 'County' -> 'Larimer')
+[14:52:23]       (writer answered 'County' -> 'N/A')
+[14:52:25]       (writer answered 'Supervisor Position (required)' -> 'N/A')
+[14:52:30]       (writer answered 'County' -> 'N/A')
+[14:52:32]       (writer answered 'County' -> 'N/A')
+[14:52:33]       (writer answered 'County' -> 'N/A')
+[14:52:33]       ! could not fill 'Available to Start': Locator.fill: Error: Malformed value
+[14:52:37]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[14:52:37]       (filled again: 1 box(es) the page had emptied)
+[14:53:20]     ✗ skipped: stuck on step 4; page says: ['Upload Cover Letter (required)\nSelect Cover Letter\n.pdf and .doc files only, 10M', 'Upload Cover Letter (required)', 'Cover Letter is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; public-site-address:Country
+United States
+Address ; pub
+[14:53:24]   match  85%  Sales Operations & Business Development Analyst @ pinnaclegroup — Strong match for an industrial engineering graduate with data, analytics, and business operations sk
+[14:53:24]   match  60%  Investment Operations, Analyst or Associate @ tpgcareers — Good analytical skills, but requires 2+ years of specific investment operations or fund accounting e
+[14:53:24]   match  75%  Financial Cash Disbursements Analyst @ ferguson — Good fit leveraging financial tracking, data analysis, and reconciliation skills, though 3 years exp
+[14:53:24]   match  90%  2026 Associate Supply Chain Planning Specialist - Remote @ ngc — Exceptional fit for an Industrial and Systems Engineering graduate matching all educational and entr
+[14:53:24]   match  65%  Financial Analyst @ Culinesse LLC — Relevant analytical and Excel background, but the role asks for 2-3 years of dedicated financial ana
+[14:53:25] → Go To Market Analyst @ navapbc (score 38, match 65%)
+[14:53:40]       step 1: 32 fields (16 required)
+[14:53:41]       (writer answered 'In the last 5 years, how many have you lived in the Continen' -> '5+ years')
+[14:54:00]       email: the site asked for a security code after Submit; reading it from the application inbox
+[14:54:05]       mail: found 'Security code for your application to Nava PBC'
+[14:54:10]     ✓ applied (0.8 min)
+[14:54:15] → Sales Operations & Business Development Analyst @ pinnaclegroup (score 46, match 85%)
+[14:54:19]       (opening Workday's application form directly)
+[14:54:23]       (account page: creating the account / signing in)
+[14:54:23]       account: creating one on pinnaclegroup.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[14:54:32]       account: Workday answered with its sign-in form and no message: signing in
+[14:54:32]       account: signing in on pinnaclegroup.wd1.myworkdayjobs.com
+[14:54:47]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[14:54:53]       account: pressing Sign In once more
+[14:55:02]       1/6 My Information: 16 fields (12 required)
+[14:55:08]       2/6 My Experience: 3 fields (1 required)
+[14:55:13]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[14:55:18]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[14:55:25]       My Experience (try 2): Workday said ['Error-Upload a file (5MB max) The field Upload a file (5MB max) is required and must have a value.', 'brian_alejandro_delgado_ortega_resume.pdf loading', 'Error: The field Upload a file (5MB max) is required and must have a value.']; redoing the required fields
+[14:55:33]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[14:55:42]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[14:55:49]       3/6 Application Questions: 4 fields (4 required)
+[14:55:58]       4/6 Voluntary Disclosures: 12 fields (1 required)
+[14:56:04]       5/6 Self Identify: 7 fields (1 required)
+[14:56:05]       ! NOT FILLED: 'Employee ID (if applicable)' (wanted 'N/A')
+[14:56:08]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[14:56:15]       Review: submitting
+[14:56:18]     ✓ applied (2.0 min)
+[14:56:26] → Investment Operations, Analyst or Associate @ tpgcareers (score 48, match 60%)
+[14:56:35]       step 1: 14 fields (13 required)
+[14:56:46]       email: the site asked for a security code after Submit; reading it from the application inbox
+[14:56:52]       mail: found 'Security code for your application to TPG Careers Page'
+[14:57:00]     ✓ applied (0.6 min)
+[14:57:09] → Financial Cash Disbursements Analyst @ ferguson (score 38, match 75%)
+[14:57:13]       (opening Workday's application form directly)
+[14:57:19]       (account page: creating the account / signing in)
+[14:57:21]       account: signing in on ferguson.wd1.myworkdayjobs.com
+[14:57:28]       1/5 My Information: 16 fields (12 required)
+[14:57:37]       2/5 My Experience: 2 fields (0 required)
+[14:57:41]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[14:57:52]       3/5 Application Questions: 4 fields (4 required)
+[14:58:02]       4/5 Voluntary Disclosures: 5 fields (5 required)
+[14:58:11]       Review: submitting
+[14:58:15]     ✓ applied (1.1 min)
+[14:58:20] → 2026 Associate Supply Chain Planning Specialist - Remote @ ngc (score 64, match 90%)
+[14:58:22]       (opening Workday's application form directly)
+[14:58:27]       (account page: creating the account / signing in)
+[14:58:30]       account: signing in on ngc.wd1.myworkdayjobs.com
+[14:58:38]       1/5 My Information: 17 fields (11 required)
+[14:58:44]       2/5 My Experience: 5 fields (2 required)
+[14:59:04]       3/5 Application Questions: 0 fields (0 required)
+[14:59:25]       (writer answered '1. In the past three years from today’s date, have you been ' -> 'No')
+[14:59:25]       (writer answered 'Have you ever performed services for Northrop Grumman as a c' -> 'No')
+[14:59:26]       (writer answered 'Are you also a citizen of another country?*' -> 'No')
+[14:59:27]       (writer answered 'Have you ever been found liable for a violation of the civil' -> 'No')
+[14:59:27]       Application Questions (try 2): Workday said ['Error: The field 1. In the past three years from today’s date, have you been employed by a private sector organization/company & personally participated in a bid, proposa', 'Error: The field 2. Are you currently employed or have you been employed in the past five years by a state or local government entity (other than temporary summer or part', 'Error: The field 3. In the past five years, have you worked for the U.S. Government in a SETA, A&AS, Special Government Employee, or similar capacity, or as part of the I', 'Error: The field 4. Have you ever been employed by the U.S. Government in either a civilian or military capacity, or served in the Reserve or Guard component of the U.S. ', 'Error: The field Have you ever been employed by Northrop Grumman, its subsidiaries or affiliates (not as a contractor or consultant)? is required and must have a value.', 'Error: The field Have you ever performed services for Northrop Grumman as a contractor/contingent worker; or have you been issued a Northrop Grumman Security Badge or "On', 'Error: The field Are you at least 18 years of age? is required and must have a value.', 'Error: The field Are you willing to relocate? is required and must have a value.']; redoing ['Military Date of Separation/Re', 'Military Terminal Leave Date, ', 'Government Civilian Start Date', 'Government Civilian Separation', 'Government Civilian Transition', '1. In the past three years fro', '2. Are you currently employed ', '3. In the past five years, hav']
+[14:59:44]       4/5 Voluntary Disclosures: 11 fields (10 required)
+[14:59:53]       Review: submitting
+[14:59:56]     ✓ applied (1.6 min)
+[14:59:58]   ✗ Financial Analyst @ U. S. Digestive Health: the posting is closed (no time spent on it)
+[14:59:59]   ✗ Project Coordinator, Grants @ VMG Health: the posting is closed (no time spent on it)
+[15:00:01]   ✗ Procurement Planner I @ SENKO Advanced Components: the posting is closed (no time spent on it)
+[15:00:02]   ✗ Project Controls Specialist @ ineos: above entry level: mid (requires 3+ yrs)
+[15:00:05]   ✗ Project Coordinator @ Primera Engineers, Ltd.: pays too little: tops out near $55,000 a year (your floor is $65,000)
+[15:00:06]   match  60%  Sales Operations Coordinator @ puffco — The candidate has strong process and operations skills but lacks the specific 2+ years of Salesforce
+[15:00:06]   match  72%  Underwriting Analyst @ starrcompanies — The candidate's strong Excel, data entry, and finance tracking skills fit well, though the role asks
+[15:00:06]   match  40%  Unit Development Analyst I @ eqtcorporation — The candidate lacks the required 2+ years of specific oil and gas Division Order and Unit Developmen
+[15:00:06]   match  55%  Hubspot Analyst @ zekelman — The candidate has good analytical and systems skills, but lacks the required 2+ years of hands-on Hu
+[15:00:06] → Financial Analyst @ Culinesse LLC (score 38, match 65%)
+[15:00:17]       (résumé given to the site's 'apply with resume' box first)
+[15:01:04]       step 1: 92 fields (57 required)
+[15:01:05]       (writer answered 'County' -> 'N/A')
+[15:01:08]       (writer answered 'County' -> 'Larimer')
+[15:01:11]       (writer answered 'County' -> 'Garfield')
+[15:02:01]       (writer answered 'County' -> 'N/A')
+[15:02:09]       (writer answered 'County' -> 'N/A')
+[15:03:08]       step 2: 5 fields (5 required)
+[15:03:09]       (writer answered 'Do you have experience with budget variance analysis, labor ' -> '1-3 years')
+[15:03:14]       step 3: 5 fields (2 required)
+[15:03:29]       step 4: 4 fields (0 required)
+[15:03:44]       step 5: 4 fields (3 required)
+[15:03:48]     ✓ applied (3.7 min)
+[15:03:51] → Sales Operations Coordinator @ puffco (score 56, match 60%)
+[15:04:03]       step 1: 19 fields (12 required)
+[15:04:03]       (writer answered 'Have you been involved in order processing or managing accou' -> 'No')
+[15:04:16]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:04:47]       mail: The read operation timed out
+[15:05:23]       mail: The read operation timed out
+[15:05:41]       mail: found 'Security code for your application to Puffco'
+[15:05:47]     ✓ applied (1.9 min)
+[15:05:52] → Underwriting Analyst @ starrcompanies (score 28, match 72%)
+[15:05:56]       (opening Workday's application form directly)
+[15:06:19]       (account page: creating the account / signing in)
+[15:06:21]       account: signing in on starrcompanies.wd1.myworkdayjobs.com
+[15:06:28]       1/6 My Information: 15 fields (12 required)
+[15:06:39]       2/6 My Experience: 7 fields (4 required)
+[15:06:49]       (writer answered 'Overall Comprehension*' -> '5 - Fluent')
+[15:06:49]       My Experience (try 2): Workday said ['Error: The field School or University is required and must have a value.', 'Error: The field Degree is required and must have a value.', 'Error: The field Language is required and must have a value.', 'Error: The field Overall Comprehension is required and must have a value.', 'Error: The field Reading is required and must have a value.', 'Error: The field Speaking is required and must have a value.', 'Error: The field Writing is required and must have a value.', 'Error-School or University The field School or University is required and must have a value. Error-Degree The field Degree is required and must have a value. Error-Langua']; redoing ['From*', 'To*', 'School or University*', 'Field of Study', 'Overall Result (GPA)', 'Resume/CV *', 'I am fluent in this language.', 'Degree*']
+[15:07:12]       3/6 Application Questions: 6 fields (6 required)
+[15:07:21]       (ticked Denver, CO, Los Angeles, CA for 'Please select locations you are willing to relocate to.*')
+[15:07:21]       Application Questions (try 2): Workday said ['Error: The field Work Authorization is required and must have a value.', 'Error: The field Please select locations you are willing to relocate to. is required and must have a value.', 'Error: The field What is your minimum annual salary requirement? is required and must have a value.', 'Error-Work Authorization The field Work Authorization is required and must have a value. Error-Please select locations you are willing to relocate to. The field Please se']; redoing ['What is your minimum annual sa', '399 Park Avenue-New York, NY', 'Atlanta, GA', 'Boston, MA', 'Canada', 'Carpinteria, CA', 'Charlotte, NC', 'Chicago, IL']
+[15:07:22]       ! NOT FILLED: 'What is your minimum annual salary requirement?*' (wanted '75000')
+[15:08:29]       (ticked Denver, CO, Los Angeles, CA for 'Please select locations you are willing to relocate to.*')
+[15:08:29]       Application Questions (try 3): Workday said ['Error: The field What is your minimum annual salary requirement? is required and must have a value.', 'Error-What is your minimum annual salary requirement? The field What is your minimum annual salary requirement? is required and must have a value.']; redoing ['What is your minimum annual sa', '399 Park Avenue-New York, NY', 'Atlanta, GA', 'Boston, MA', 'Canada', 'Carpinteria, CA', 'Charlotte, NC', 'Chicago, IL']
+[15:08:51]     ✗ skipped: stuck on Workday's 'Application Questions' page; Workday says: ['the page did not move on after Next']; fields flagged: none
+[15:08:51]   ✗ Library & Research Analyst @ harborglobal: above entry level: mid (requires 4+ yrs)
+[15:08:51]   ✗ Business Data Analyst - Medicaid @ CSpring: above entry level: senior (requires 8+ yrs)
+[15:08:52]   ✗ Ratings Operations Specialist, Denver, CO @ spgi: pays too little: tops out near $63,000 a year (your floor is $65,000)
+[15:08:53]   ✗ Administrative Assistant, Game Operations & Strategy @ Family Entertainment Group LLC: above entry level: mid (requires 3+ yrs)
+[15:08:55]   ✗ GTM Operations Analyst @ Medisolv, Inc.: the posting is closed (no time spent on it)
+[15:08:56]   ✗ Jr. Systems Analyst @ Spatial Front, Inc: the posting is closed (no time spent on it)
+[15:08:58]   ✗ Recruiting Operations & Enablement Specialist @ geodehealth: above entry level: senior (requires 5+ yrs; manages people)
+[15:09:21]   match  75%  Marketing & Ops Data Analyst @ risepoint — Strong analytical background and degree, but asks for 2+ years of dedicated marketing analytics expe
+[15:09:21]   match  72%  Junior Client Strategist @ sothebys — Relevant business degree and strong skills, though 3 years of experience is a slight stretch for a M
+[15:09:21] → Hubspot Analyst @ zekelman (score 38, match 55%)
+[15:09:24]       (opening Workday's application form directly)
+[15:09:27]       (account page: creating the account / signing in)
+[15:09:27]       account: creating one on zekelman.wd12.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:09:31]       account: Workday answered with its sign-in form and no message: signing in
+[15:09:31]       account: signing in on zekelman.wd12.myworkdayjobs.com
+[15:09:38]       1/6 My Information: 15 fields (12 required)
+[15:09:46]       2/6 My Experience: 11 fields (7 required)
+[15:09:59]       (writer answered 'What is your preferred work arrangement?*' -> 'Hybrid or Flexible (mix of remote and in-office)')
+[15:09:59]       3/6 Application Questions: 10 fields (7 required)
+[15:10:09]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[15:10:15]       5/6 Self Identify: 7 fields (1 required)
+[15:10:23]       Review: submitting
+[15:10:27]     ✓ applied (1.1 min)
+[15:10:33] → Marketing & Ops Data Analyst @ risepoint (score 38, match 75%)
+[15:10:36]       (opening Workday's application form directly)
+[15:10:42]       (account page: creating the account / signing in)
+[15:10:44]       account: creating one on risepoint.wd503.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:10:50]       account: created
+[15:10:52]       account: signing in on risepoint.wd503.myworkdayjobs.com
+[15:11:02]       1/6 My Information: 17 fields (12 required)
+[15:11:09]       2/6 My Experience: 2 fields (1 required)
+[15:11:20]       3/6 Application Questions: 4 fields (3 required)
+[15:11:27]       4/6 Voluntary Disclosures: 5 fields (5 required)
+[15:11:33]       5/6 Self Identify: 7 fields (6 required)
+[15:11:37]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[15:11:44]       Review: submitting
+[15:11:46]     ✓ applied (1.2 min)
+[15:11:48]   ✗ Project Control Analyst @ TDI Technologies: the posting is closed (no time spent on it)
+[15:11:48]   ✗ Workday Financial Systems Analyst @ Aspire General Insurance Company: above entry level: mid (pay starts at $100,000)
+[15:11:49]   ✗ Project Engineer - Chemical Manufacturing @ Pencco, Inc: above entry level: mid (requires 2+ yrs; pay starts at $120,000)
+[15:11:50]   ✗ Receiving / Procurement Coordinator @ Softbank Robotics America Inc: above entry level: mid (requires 5+ yrs)
+[15:11:50]   ✗ Events Coordinator @ amcn: pays too little: tops out near $57,000 a year (your floor is $65,000)
+[15:12:23]   match  55%  Analyst, Geospatial (GIS) @ invenergyllc — Missing required degree in GIS or environmental science, though Python and data skills align partial
+[15:12:23]   match  50%  Contracts Budget Analyst- FMS @ ELLIGO HEALTH RESEARCH INC — Requires 3+ years of clinical research and contract budgeting experience which the candidate lacks.
+[15:12:23]   match  88%  Associate, Product Development @ kissusa — Strong match for an entry-level product development and project coordination role utilizing analytic
+[15:12:23]   match  72%  Accounts Payable Representative @ chaptershealth — Good match for accounting and financial tracking skills, though healthcare-specific billing experien
+[15:12:23]   match  85%  Associate Program Manager @ Bridgetower OPCO — Strong match for project coordination, operations, data management, and spreadsheet skills.
+[15:12:23] → Junior Client Strategist @ sothebys (score 18, match 72%)
+[15:12:36]       step 1: 29 fields (20 required)
+[15:12:54]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:13:02]       mail: found 'Security code for your application to Sotheby's'
+[15:13:09]     ✓ applied (0.8 min)
+[15:13:09]   match  55%  Analyst, Geospatial (GIS) @ invenergyllc — same role at this employer, checked before: Missing required degree in GIS or environmental science,
+[15:13:18] → Analyst, Geospatial (GIS) @ invenergyllc (score 34, match 55%)
+[15:13:21]       (opening Workday's application form directly)
+[15:13:25]       (account page: creating the account / signing in)
+[15:13:27]       account: signing in on invenergyllc.wd1.myworkdayjobs.com
+[15:14:03]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:English
+Settings
+delgado@alumn; logoLink:; logo:; headerTitle:; navigationContainer:English
+Settings
+delgado@alumn; utilityButtonBar:English
+Settings
+delgado@alumn; utilityButtonBarLanguageMenu:English; utilityMenuButton:English; utility-bu
+[15:14:07] → Associate, Product Development @ kissusa (score 18, match 88%)
+[15:14:10]       (opening Workday's application form directly)
+[15:14:14]       (account page: creating the account / signing in)
+[15:14:16]       account: signing in on kissusa.wd12.myworkdayjobs.com
+[15:14:21]       1/6 My Information: 15 fields (12 required)
+[15:14:29]       2/6 My Experience: 15 fields (10 required)
+[15:15:01]       3/6 Application Questions: 8 fields (7 required)
+[15:15:11]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[15:15:15]       5/6 Self Identify: 7 fields (6 required)
+[15:15:16]       ! NOT FILLED: 'Employee ID (if applicable)' (wanted 'N/A')
+[15:15:22]       Review: submitting
+[15:15:24]     ✓ applied (1.3 min)
+[15:15:30] → Accounts Payable Representative @ chaptershealth (score 16, match 72%)
+[15:15:34]       (opening Workday's application form directly)
+[15:15:39]       (account page: creating the account / signing in)
+[15:15:41]       account: signing in on chaptershealth.wd5.myworkdayjobs.com
+[15:15:50]       (writer answered 'County*' -> 'Garfield County')
+[15:15:50]       1/6 My Information: 16 fields (13 required)
+[15:15:58]       2/6 My Experience: 9 fields (4 required)
+[15:16:48]       (writer answered 'Are you over age 18?*' -> 'Yes')
+[15:16:49]       (writer answered 'According to our insurance carrier, the driving records of a' -> 'No')
+[15:16:50]       (writer answered "Have you ever appeared on the office of Inspector General's " -> 'No')
+[15:17:14]       (writer answered 'Chapters Health System, Inc. uses Electronic Medical Records' -> 'No')
+[15:17:20]       (writer answered 'I understand field and direct care positions may be schedule' -> 'Yes')
+[15:17:20]       (writer answered 'I understand that field and direct care positions may requir' -> 'Yes')
+[15:17:21]       (writer answered 'I understand that field and direct care positions may requir' -> 'Yes')
+[15:17:21]       (ticked No for 'Have you ever had your professional license suspended, revoked or othe')
+[15:17:21]       ? unanswered: 'Per Diem/SSP' kind=checkbox_single options=[]
+[15:17:21]     ✗ skipped: can't truthfully answer required: Per Diem/SSP
+[15:17:24]   ✗ Program Operations Assistant @ rfcuny: pays too little: tops out near $55,000 a year (your floor is $65,000)
+[15:17:24]   ✗ Residential Construction Project Analyst @ The Federal Savings Bank: the posting is closed (no time spent on it)
+[15:17:26]   ✗ Credit Analyst @ Blue Sky Bank: the posting is closed (no time spent on it)
+[15:17:26]   ✗ Estimator @ Brook & Whittle: the posting is closed (no time spent on it)
+[15:17:27]   ✗ Data Analyst (AI/ML) @ Initiate Government Solutions: the posting is closed (no time spent on it)
+[15:17:57]   match  85%  Product Associate Product Development/Management @ kissusa — Strong match for product development, project coordination, and cross-functional operations.
+[15:17:57]   match  55%  Recruiting Sourcer @ ryder — Weak match because it is an HR/recruiting sourcer role in a call-center setting, outside target area
+[15:17:57]   match  70%  Quality Engineer (MSS) @ idexcorp — Good match for engineering and continuous improvement skills, though experience level is a slight st
+[15:17:57] → Associate Program Manager @ Bridgetower OPCO (score 38, match 85%)
+[15:18:13]       step 1: 21 fields (10 required)
+[15:18:14]       (writer answered 'County' -> 'N/A')
+[15:18:35]       step 2: 4 fields (4 required)
+[15:18:45]       step 3: 2 fields (0 required)
+[15:18:53]       step 4: 1 fields (0 required)
+[15:18:54]     ✓ applied (1.0 min)
+[15:19:03] → Product Associate Product Development/Management @ kissusa (score 18, match 85%)
+[15:19:05]       (opening Workday's application form directly)
+[15:19:11]       1/6 My Information: 15 fields (12 required)
+[15:19:18]       2/6 My Experience: 15 fields (10 required)
+[15:19:47]       3/6 Application Questions: 8 fields (7 required)
+[15:19:57]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[15:20:01]       5/6 Self Identify: 7 fields (6 required)
+[15:20:05]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[15:20:12]       Review: submitting
+[15:20:14]     ✓ applied (1.2 min)
+[15:20:22] → Recruiting Sourcer @ ryder (score 16, match 55%)
+[15:20:25]       (opening Workday's application form directly)
+[15:20:29]       (account page: creating the account / signing in)
+[15:20:31]       account: signing in on ryder.wd5.myworkdayjobs.com
+[15:20:37]       1/5 My Information: 14 fields (12 required)
+[15:20:45]       2/5 My Experience: 12 fields (10 required)
+[15:21:15]       (writer answered 'Are you currently a Ryder employee?*' -> 'No')
+[15:21:15]       (writer answered 'As a Ryder employee, would you have your own business or wor' -> 'No')
+[15:21:15]       (ticked Not Willing to Relocate for 'What are your relocation preferences?*')
+[15:21:15]       3/5 Application Questions: 20 fields (19 required)
+[15:21:26]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[15:21:32]       Review: submitting
+[15:21:35]     ✓ applied (1.2 min)
+[15:21:36]   ✗ Data Analyst @ TrueScripts Management Services: the posting is closed (no time spent on it)
+[15:21:37]   ✗ Operations Specialist @ HarborChase: the posting is closed (no time spent on it)
+[15:21:37]   ✗ ServiceNow Business Analyst @ Bart & Associates: the posting is closed (no time spent on it)
+[15:21:38]   ✗ Power BI & Business Systems Analyst @ bpcs: above entry level: mid (requires 5+ yrs)
+[15:21:39]   ✗ Administrative Assistant - Bookkeeping & Systems @ UnCommon Farms LLC: not open to you: part-time
+[15:21:39]   ✗ Accountant - Hybrid @ Outreach, Inc.: not open to you: part-time
+[15:21:40]   ✗ Executive Assistant (EA)- Hybrid @ davita: above entry level: mid (requires 4+ yrs)
+[15:21:41]   match  60%  Trading Operations Specialist @ primexbt — Lacks the required 2+ years of dedicated trading operations or brokerage experience.
+[15:21:41]   match  50%  Sourcer, Business Recruiting @ apolloio — Lacks the required 2-4 years of dedicated talent sourcing or recruiting experience.
+[15:21:41]   match  60%  Coordinator @ DBA Media, LLC — Lacks the required 4+ years of influencer management or project coordination experience.
+[15:21:41]   match  40%  Financial Analyst, Financial Systems @ shinvestmentsllc — The job posting text is incomplete and cut off, lacking specific role requirements and duties.
+[15:21:44] → Quality Engineer (MSS) @ idexcorp (score 42, match 70%)
+[15:21:47]       (opening Workday's application form directly)
+[15:21:52]       (account page: creating the account / signing in)
+[15:21:52]       account: signing in on idexcorp.wd5.myworkdayjobs.com
+[15:22:02]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[15:22:20]       account: it had gone through
+[15:22:23]       account: signing in on idexcorp.wd5.myworkdayjobs.com
+[15:22:32]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[15:22:50]       account: it had gone through
+[15:22:52]       account: signing in on idexcorp.wd5.myworkdayjobs.com
+[15:22:55]       account: sign-in refused; Workday says: nothing
+[15:23:57]       account: sign-in refused on idexcorp.wd5.myworkdayjobs.com; resetting the password through your email
+[15:25:23]       mail: The read operation timed out
+[15:25:29]       account: the password-reset email did not arrive in time. If it comes later, the next try uses it
+[15:25:29]       account: no reset email came, so this email probably has no account on idexcorp.wd5.myworkdayjobs.com: creating one
+[15:25:59]       1/5 My Information: 17 fields (8 required)
+[15:26:08]       2/5 My Experience: 1 fields (0 required)
+[15:26:20]       3/5 Application Questions: 7 fields (6 required)
+[15:26:30]       4/5 Voluntary Disclosures: 10 fields (1 required)
+[15:26:38]       Review: submitting
+[15:26:41]     ✓ applied (5.0 min)
+[15:26:48] Run time limit reached (50 min): the rest waits for the next run
+[15:26:48] Résumé checks this run: 34 (29 passed) in 8 calls. Free writer allowance used today: groq 77k/195k tokens (+11k served from its cache, not counted); groq-20b 54k/195k tokens (+0k served from its cache, not counted); groq-qwen 35k/195k tokens; gemini-lite 50/480 requests (+16k served from its cache, not counted); gemini-flash 0/18 requests
+[15:26:48] Summary: 19 applied, 1 blocked, 26 skipped, 1240 queued, 117 low_score, 45 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-27.md
+[15:26:48]   by site  paylocity: 21 skipped, 3 applied
+[15:26:48]   by site  workday: 10 applied, 5 skipped, 1 blocked
+[15:26:48]   by site  greenhouse: 6 applied
+[15:26:50] Summary emailed to delgado@alumni.usc.edu
