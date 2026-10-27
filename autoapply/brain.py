@@ -31,6 +31,9 @@ DECLINE = re.compile(r"decline|prefer not|prefer to not|do not wish|don'?t wish|
                      r"not to (say|answer|disclose|self)|choose not|rather not", re.I)
 CONSENT = re.compile(r"agree|acknowledge|consent|certify|confirm|accept|privacy|terms|policy|true and (correct|accurate)|\bunderstand\b|\battest\b|\baffirm\b|\bdeclare\b", re.I)
 OPTIONAL_CHECK = re.compile(r"marketing|newsletter|updates|receive|sms|text message|future (roles|opportunities)|talent (pool|community)", re.I)
+# a question about texting you (SMS consent, 'may we text you', text-message updates)
+SMS_RX = re.compile(r"\bsms\b|\bmms\b|text[- ]?messag|texts? (to )?(you|me)\b|(via|by) text\b|\btexting\b|"
+                    r"text (alerts?|updates?|notifications?|reminders?)|receive (recurring |automated )?texts?\b|mobile messag", re.I)
 AI_WORDS = re.compile(r"\b(ai|a\.i\.|chatgpt|generative|llm|artificial intelligence)\b", re.I)
 PROMPT_RX = re.compile(
     r"\b(why|describe|tell us|tell me|explain|share|give (us )?an example|walk us|what (makes|excites|motivates|interests|"
@@ -716,9 +719,30 @@ class Brain:
         r"(relatives?|family members?|related to|spouse|domestic partner).{0,80}(work|employ)|"
         r"(debarred|excluded|sanctioned|suspended).{0,80}(federal|government|program|health ?care)", re.I)
 
+    def _sms_answer(self, f: dict):
+        """_UNSET unless this is a question about texting you and you said no to SMS contact (facts.sms_consent): then the
+        box stays unticked (None) and a list gets its 'No' / 'do not' choice (None when it has none)."""
+        if str(self.facts.get("sms_consent", "")).strip().lower()[:1] not in ("n", "f"):
+            return _UNSET
+        text = f"{f.get('label', '')} {f.get('question', '')}"
+        if not SMS_RX.search(text):
+            return _UNSET
+        if f.get("kind") == "checkbox_single":
+            return None
+        opts = [o for o in (f.get("options") or []) if not PLACEHOLDER_OPT.fullmatch(str(o))]
+        no = next((o for o in opts if re.match(r"\W*(no\b|i do not|i don.t|do not|don.t|decline|opt[- ]?out|not )", str(o), re.I)), None)
+        if no:
+            return [no] if f.get("kind") == "checkbox_group" else no
+        mail = next((o for o in opts if re.search(r"e-?mail", str(o), re.I) and not SMS_RX.search(str(o)) and not re.search(r"\btext", str(o), re.I)), None)
+        if mail:                                   # 'how should we contact you': email, never text
+            return [mail] if f.get("kind") == "checkbox_group" else mail
+        return None
+
     def _plain(self, f: dict):
         """Required questions with one plain true answer that the rules above did not reach (seen on real Workday forms).
         Only for a Yes/No list, a relocation list or a date; never a waiver, a certification or a demographic question."""
+        if (sms := self._sms_answer(f)) is not _UNSET:
+            return sms
         kind = f["kind"]
         low = f"{f.get('label', '')} {f.get('question', '')}".strip().lower()
         opts = [o for o in (f.get("options") or []) if not re.match(r"\s*(select|choose|--)", o, re.I)]
@@ -945,6 +969,8 @@ class Brain:
         """Last resort for a REQUIRED field no rule could answer: the writer picks the true option (or writes a few words)
         from your facts, so an ordinary question never ends the application. Never used for human checks, legal waivers,
         AI-policy confirmations, negated authorization questions or demographics."""
+        if (sms := self._sms_answer(f)) is not _UNSET:
+            return sms
         if not (self.writer and self._job is not None):
             return None
         kind = f["kind"]
@@ -1045,6 +1071,9 @@ class Brain:
             return None          # "I'm not a robot" style boxes are the site's human check: never ticked by the bot
         if NEVER_GIVE_RX.search(low[:400]):
             return None          # you said never: Social Security number, SAT / ACT scores, transcripts, writing samples
+        sms = self._sms_answer(f)
+        if sms is not _UNSET:
+            return sms           # you said no to being texted: never ticked, a list answers No (or email)
         has_opts = kind in ("select", "radio", "combobox", "checkbox_group")
         opts = f.get("options") or []
 
