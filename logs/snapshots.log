@@ -5889,3 +5889,38 @@ url: https://jobs.smartrecruiters.com/oneclick-ui/company/AspenSkiingCompany/pub
 why: DataDome check (a human check: the bot stops here)
 <iframe https://geo.captcha-delivery.com/captcha/>
 
+=== 2026-10-28 11:17:40  blocked  Indirect Tax Analyst @ prosci
+url: https://apply.workable.com/prosci/j/7E99C3404F/apply
+stage: page 1
+why: Cloudflare's human check held the submit (the form only talked to the check, not the employer)
+# Indirect Tax Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_EJHy3wByXiSBXjux no-file>
+label: Pronouns (Optional)
+# Profile
+  [link] Clear
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_weFlRxodk9GLhYqM has-file>
+# Details
+  [link] Clear
+label: If referred by a current Prosci employee, please enter their name here. (Optional)
+  [button] Submitting… disabled
+  text: Prosci collects and processes personal data in accordance with applicable data protection laws.
+  text: Prosci does not discriminate on the basis of race, sex, color, religion, age, national origin, marital status, disability, veteran status, g
+  [button] Cookie settings
+
