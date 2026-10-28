@@ -1,139 +1,3 @@
-=== 2026-10-26 03:06:11  skipped  Enrollment Specialist @ Stride Community Health Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4454753
-stage: page 1
-why: can't truthfully answer required: May We Contact for Reference? (required) *; May We Contact for Reference? (required) *; May We Contact for Reference? (required) *
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} empty>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} empty>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} empty>
-label: Have you applied for a job with us before? (required)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State Select a state
-label: Zip Code
-label: Available to Start
-  <input:text #info.dateAvailableToStart empty>
-  [button]  opens-dialog
-(dialog)
-label: Desired Salary (required)
-  <input:text #info.desiredSalaryDescription {infoDesiredSalaryDescription} empty>
-label: How did you hear about us? Online Job Board Company Website Friend or Family Member - Please provide their ful
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} empty>
-label: Have you worked with us before? (required)
-label: Upload Cover Letter
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} empty>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} empty>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date (required)
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date (required)
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving (required)
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference? (required)
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} empty>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} empty>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} empty>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} empty>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} empty>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} empty>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} empty>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: Certifications & Awards Earned
-  <input:text #educationHistory.certificationsAndAwards empty>
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: GPA
-  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
-label: Did you Graduate? (required)
-label: Degree Obtained (required)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} empty>
-label: State
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: Stride Community Health Center: Privacy Policy
-  [button] 
-
 === 2026-10-26 03:08:32  skipped  Field Sales Specialist @ topcon
 url: https://topcon.wd1.myworkdayjobs.com/topconpositioningcareers/job/Remote-NC-US/Field-Sales-Specialist_JR107527/apply/applyManually
 stage: Voluntary Disclosures
@@ -5951,4 +5815,77 @@ label: LinkedIn Profile
   <input:text #question_19106587008 empty>
   [button] Submit application
 <iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-10-28 01:12:01  blocked  Enrollment Coordinator - Amistad @ amityfdn
+url: https://jobs.lever.co/amityfdn/5121f3fb-d116-49fe-a938-e02ba6063e06/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# Enrollment Coordinator - Amistad
+  text: 3316 S. Main St. Los Angeles, CA. 90007
+  text: Amistad – Enrollment Coordinator /
+# SUBMIT YOUR APPLICATION
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: Email ✱
+label: Phone ✱
+label: Current location ✱
+label: Current company
+# LINKS
+label: LinkedIn URL
+label: Twitter URL
+label: GitHub URL
+label: Portfolio URL
+label: Other website
+# ALL APPLICATIONS QUESTION - REFERRAL
+label: Centerpoint
+label: Phoenix House
+label: Neither
+label: Yes
+label: No
+  <input:text name=cards[8b32e69b-8e92-4240-91ff-e737370679 required filled>
+  <textarea name=cards[8b32e69b-8e92-4240-91ff-e737370679 required filled>
+# U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION (Completion is voluntary and will not subject you to adverse tre
+  text: Amity Foundation provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual or
+  text: Amity Foundation is a federal contractor or subcontractor subject to certain governmental recordkeeping and reporting requirements for the a
+  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and/or gender. Submission of the information on this form is st
+label: Gender Select ... Male Female Decline to self-identify
+label: Race Select ... Hispanic or Latino White (Not Hispanic or Latino) Black or African American (Not Hispanic or L
+# SELF-IDENTIFICATION OF VETERAN STATUS (Completion is voluntary and will not subject you to adverse treatment)
+  text: Amity Foundation is a Government contractor subject to the Section 4212 of the Vietnam Era Veterans’ Readjustment Assistance Act of 1974, as
+label: Veteran status Select ... I identify as one or more of the classifications of protected veteran listed above I
+# VOLUNTARY SELF-IDENTIFICATION OF DISABILITY
+  text: Form CC-305 / OMB Control Number 1250-0005 / Expires 04/30/2026
+# Why are you being asked to complete this form?
+  text: We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilit
+# How do you know if you have a disability?
+  text: Disabilities include, but are not limited to:
+  text: Alcohol or other substance use disorder (not currently using drugs illegally)
+  text: Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS
+  text: Cardiovascular or heart disease
+  text: Deaf or serious difficulty hearing
+  text: Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
+  text: Epilepsy or other seizure disorder
+  text: Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome
+  text: Intellectual or developmental disability
+  text: Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
+  text: Missing limbs or partially missing limbs
+  text: Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
+  text: Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
+  text: Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning
+  text: Partial or complete paralysis (any cause)
+  text: Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema
+label: Disability status Select ... Yes, I have a disability, or have had one in the past No, I do not have a disabil
+  text: PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information 
+label: Name
+label: Date
+  text: Note: Name and date are only required if you filled out Disability status.
+<iframe https://newassets.hcaptcha.com/captcha/v1/b4ffb616128b326eb735c84bb136bbbbddd55d>
+  [button] SUBMIT APPLICATION
+  text: Amity Foundation Home Page
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
+
+=== 2026-10-28 01:12:12  blocked  Food & Beverage Office Administrative Assistant - The Little Nell - Winter @ AspenSkiingCompany
+url: https://jobs.smartrecruiters.com/oneclick-ui/company/AspenSkiingCompany/publication/6e7cc858-e2ba-4a2d-9598-fd31d57de64b
+why: DataDome check (a human check: the bot stops here)
+<iframe https://geo.captcha-delivery.com/captcha/>
 
