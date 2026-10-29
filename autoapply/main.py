@@ -545,14 +545,20 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         jobs += discover_jobboard(cfg, base, log, have, set(sources.KNOWN) | {j.key for j in jobs}, jb_state)
     except Exception as e:
         log(f"  agg/jobboard failed: {e}")
-    try:              # once per Common Crawl index (monthly), in a run that read the snapshot: employers' boards it lacks
+    try:              # once per Common Crawl index (monthly), tried at each search until it works: employers' boards we lack
         from . import jobboard as _jb, ccboards
-        if _jb.BOARDS and (s.get("ccboards", True) is not False) and not dry_run:
+        if searched and (s.get("ccboards", True) is not False) and not dry_run:
             idx = ccboards.latest_index()
-            if idx and idx != db.meta_get("ccboards_index", ""):
-                known = {a: set(_jb.BOARDS.get(a, ())) | {str(t).lower() for t in companies.get(a, [])} for a in ccboards.PREFIXES}
-                ccboards.discover(base, known, log, idx, sites=tuple(s.get("ccboards_sites") or ("greenhouse",)))
-                db.meta_set("ccboards_index", idx)          # (boards added now are read from the next search on)
+            if not idx:
+                log("  ccboards: Common Crawl's list of indexes could not be read (busy); tried again at the next search")
+            elif idx != db.meta_get("ccboards_index", ""):
+                snap = _jb.snapshot_boards(base, log)           # the snapshot's boards (read now if this run has not)
+                if not snap:
+                    log("  ccboards: the snapshot's board list could not be read; tried again at the next search")
+                else:
+                    known = {a: set(snap.get(a, ())) | {str(t).lower() for t in companies.get(a, [])} for a in ccboards.PREFIXES}
+                    if ccboards.discover(base, known, log, idx, sites=tuple(s.get("ccboards_sites") or ("greenhouse",))) is not None:
+                        db.meta_set("ccboards_index", idx)  # (boards added now are read from the next search on)
     except Exception as e:
         log(f"  ccboards: skipped ({str(e)[:100]})")
     by_key = {j.key: j for j in jobs}

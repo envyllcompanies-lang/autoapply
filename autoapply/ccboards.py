@@ -97,12 +97,13 @@ def _openings(ats: str, token: str) -> int:
 
 def discover(base: Path, known: dict, log=print, index: str = "", minutes: float = 6.0, max_new: int = 600,
              sites: tuple = ("greenhouse",)) -> dict:
-    """{ats: [new board names with open jobs]} from this Common Crawl index, written into discovered_boards.json.
+    """{ats: [new board names with open jobs]} from this Common Crawl index, written into discovered_boards.json; None
+    when nothing could be read from the index (it is tried again later).
     known: {ats: set of board names already read (your lists, earlier discoveries, the daily snapshot)}."""
     index = index or latest_index()
     if not index:
         log("  ccboards: Common Crawl's index list could not be read (tried again next run)")
-        return {}
+        return None
     deadline = time.time() + minutes * 60
     path = Path(base) / "discovered_boards.json"
     try:
@@ -110,11 +111,17 @@ def discover(base: Path, known: dict, log=print, index: str = "", minutes: float
     except Exception:
         saved = {}
     found: dict = {}
+    read_any = False
     for ats in [a for a in PREFIXES if a in sites]:
         names = board_names(index, ats, deadline, log)
+        read_any = read_any or bool(names)
+        if not names:
+            log(f"  ccboards: {ats}: no board addresses could be read from Common Crawl's {index} (busy); tried again later")
         have = {str(x).lower() for x in (known.get(ats) or ())} | {str(x).lower() for x in saved.get(ats, [])}
         fresh = sorted(names - have)[:max_new]
         if not fresh:
+            if names:
+                log(f"  ccboards: {ats}: {len(names)} boards in Common Crawl's {index}, none new to the bot")
             continue
         with ThreadPoolExecutor(8) as ex:
             counts = list(ex.map(lambda t: _openings(ats, t), fresh))
@@ -126,4 +133,4 @@ def discover(base: Path, known: dict, log=print, index: str = "", minutes: float
             lst = saved.setdefault(ats, [])
             lst += [t for t in live if t not in lst]
             path.write_text(json.dumps(saved, indent=1))
-    return found
+    return found if read_any else None

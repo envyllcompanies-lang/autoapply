@@ -148,6 +148,27 @@ def rows_to_jobs(rows, search: dict, known_urls: set, known_keys: set, levels=LE
     return out
 
 
+def snapshot_boards(base: Path, log=print) -> dict:
+    """{'greenhouse': {board names}, ...} in the daily snapshot: what this run collected while reading it, else read
+    from the snapshot now (downloaded if needed). {} when it cannot be had."""
+    if BOARDS:
+        return BOARDS
+    dest = Path(base) / "logs" / "jobboard"
+    if not _fetch(dest, log):
+        return {}
+    for f in sorted((dest / "data" / "chunks").glob("*.json.gz")):
+        try:
+            rows = json.load(gzip.open(f))
+        except Exception:
+            continue
+        for r in rows:
+            if r.get("ats") in _BOARD_ATS:
+                m = _BOARD_ATS[r["ats"]][1].search(r.get("url") or "")
+                if m:
+                    BOARDS.setdefault(_BOARD_ATS[r["ats"]][0], set()).add(m.group(1).lower())
+    return BOARDS
+
+
 def discover_jobboard(cfg: dict, base: Path, log=print, known_urls: set | None = None, known_keys: set | None = None,
                       state: dict | None = None) -> list[Job]:
     """state: {'version': <the snapshot version that was last read in full>}. When the snapshot has not changed since,
