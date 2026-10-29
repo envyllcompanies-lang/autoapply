@@ -295,3 +295,13 @@
 [00:49:57]   by site  workday: 2 applied
 [00:49:57]   by site  www.builtinnyc.com: 1 skipped
 [00:49:59] Summary emailed to delgado@alumni.usc.edu
+[01:05:15] === autoapply run (LIVE) build 2026-10-18-b ===
+[01:05:16] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[01:05:17] mail: logged in to delgado@alumni.usc.edu OK
+[01:05:42] Discovering jobs…
+[01:05:42] Job search already ran at 00:46 (searches run every 3 h): this run only applies
+[01:05:42]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[01:05:42] 0 open roles, 0 new
+[01:05:42] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.4 min)
+[01:05:43] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 498 now
+[01:05:43] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-29.md
