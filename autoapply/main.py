@@ -547,6 +547,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         log(f"  agg/jobboard failed: {e}")
     try:              # once per Common Crawl index (monthly), tried at each search until it works: employers' boards we lack
         from . import jobboard as _jb, ccboards
+        if db.once("ccboards-redo-2026-10-29"):
+            db.meta_set("ccboards_index", "")      # Oct 28: an attempt that read nothing (the index was busy) was marked done
         if searched and (s.get("ccboards", True) is not False) and not dry_run:
             idx = ccboards.latest_index()
             if not idx:
