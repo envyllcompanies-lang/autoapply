@@ -95,7 +95,7 @@ def _openings(ats: str, token: str) -> int:
     return 0
 
 
-def discover(base: Path, known: dict, log=print, index: str = "", minutes: float = 6.0, max_new: int = 600,
+def discover(base: Path, known: dict, log=print, index: str = "", minutes: float = 6.0, max_new: int = 4000,
              sites: tuple = ("greenhouse",)) -> dict:
     """{ats: [new board names with open jobs]} from this Common Crawl index, written into discovered_boards.json; None
     when nothing could be read from the index (it is tried again later).
