@@ -1101,3 +1101,502 @@
 [07:06:42] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.7 min)
 [07:06:43] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 468 now
 [07:06:43] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-30.md
+[07:31:13] === autoapply run (LIVE) build 2026-10-18-b ===
+[07:31:14] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[07:31:23] mail: logged in to delgado@alumni.usc.edu OK
+[07:31:51] Discovering jobs…
+[07:38:22]   greenhouse/airbnb: 197 open roles
+[07:38:22]   greenhouse/figma: 141 open roles
+[07:38:22]   greenhouse/robinhood: 167 open roles
+[07:38:22]   greenhouse/databricks: 901 open roles
+[07:38:22]   greenhouse/anthropic: 669 open roles
+[07:38:22]   greenhouse/coinbase: 234 open roles
+[07:38:22]   greenhouse/lyft: 173 open roles
+[07:38:22]   greenhouse/pinterest: 165 open roles
+[07:38:22]   greenhouse/reddit: 163 open roles
+[07:38:22]   greenhouse/twilio: 131 open roles
+[07:38:22]   greenhouse/cloudflare: 463 open roles
+[07:38:22]   greenhouse/datadog: 398 open roles
+[07:38:22]   greenhouse/mongodb: 368 open roles
+[07:38:22]   greenhouse/elastic: 402 open roles
+[07:38:22]   greenhouse/gitlab: 236 open roles
+[07:38:22]   greenhouse/asana: 111 open roles
+[07:38:22]   greenhouse/okta: 387 open roles
+[07:38:22]   greenhouse/samsara: 319 open roles
+[07:38:22]   greenhouse/affirm: 237 open roles
+[07:38:22]   greenhouse/brex: 264 open roles
+[07:38:22]   greenhouse/flexport: 191 open roles
+[07:38:22]   greenhouse/oscar: 213 open roles
+[07:38:22]   greenhouse/spacex: 2848 open roles
+[07:38:22]   greenhouse/toast: 337 open roles
+[07:38:22]   greenhouse/verkada: 335 open roles
+[07:38:22]   greenhouse/scaleai: 169 open roles
+[07:38:22]   greenhouse/lucidmotors: 448 open roles
+[07:38:22]   greenhouse/holderconstruction: 326 open roles
+[07:38:22]   greenhouse/rocketlab: 556 open roles
+[07:38:22]   greenhouse/carvana: 1692 open roles
+[07:38:22]   greenhouse/roblox: 268 open roles
+[07:38:22]   greenhouse/stripe: 738 open roles
+[07:38:22]   greenhouse/doordashusa: 441 open roles
+[07:38:22]   greenhouse/aloyoga: 789 open roles
+[07:38:22]   greenhouse/thenewyorktimes: 147 open roles
+[07:38:22]   greenhouse/janestreet: 221 open roles
+[07:38:22]   greenhouse/onemedical: 383 open roles
+[07:38:22]   greenhouse/gomotive: 167 open roles
+[07:38:22]   greenhouse/reformation: 156 open roles
+[07:38:22]   greenhouse/justworks: 101 open roles
+[07:38:22]   greenhouse/riotgames: 183 open roles
+[07:38:22]   greenhouse/scopely: 177 open roles
+[07:38:22]   greenhouse/voyagertechnologiesinc: 184 open roles
+[07:38:22]   greenhouse/trueanomalyinc: 204 open roles
+[07:38:22]   greenhouse/charliehealth: 254 open roles
+[07:38:22]   greenhouse/grafanalabs: 128 open roles
+[07:38:22]   greenhouse/vailclinicincdbavailhealthhospital: 118 open roles
+[07:38:22]   greenhouse/fivetran: 160 open roles
+[07:38:22]   greenhouse/olsson: 378 open roles
+[07:38:22]   greenhouse/relativity: 412 open roles
+[07:38:22]   greenhouse/blankstreet: 104 open roles
+[07:38:22]   greenhouse/icapitalnetwork: 214 open roles
+[07:38:22]   greenhouse/lpc: 111 open roles
+[07:38:22]   greenhouse/braze: 344 open roles
+[07:38:22]   greenhouse/addepar1: 113 open roles
+[07:38:22]   greenhouse/divergent: 139 open roles
+[07:38:22]   greenhouse/vardaspace: 119 open roles
+[07:38:22]   greenhouse/crunchyroll: 102 open roles
+[07:38:22]   greenhouse/vast: 180 open roles
+[07:38:22]   greenhouse/cookunity: 159 open roles
+[07:38:22]   greenhouse/fanaticscollectibles: 229 open roles
+[07:38:22]   greenhouse/sonymusicentertainment: 144 open roles
+[07:38:22]   greenhouse/canonical: 314 open roles
+[07:38:22]   greenhouse/betterhelp: 164 open roles
+[07:38:22]   greenhouse/adyen: 239 open roles
+[07:38:22]   greenhouse/thetradedesk: 110 open roles
+[07:38:22]   greenhouse/agency: 827 open roles
+[07:38:22]   greenhouse/innodatainc: 107 open roles
+[07:38:22]   greenhouse/prolificacademicltd: 4119 open roles
+[07:38:22]   greenhouse/sumup: 360 open roles
+[07:38:22]   greenhouse/skdse: 157 open roles
+[07:38:22]   greenhouse/nerostechnologies: 113 open roles
+[07:38:22]   greenhouse/bakerhicks: 130 open roles
+[07:38:22]   greenhouse/precisionmedicinegroup: 173 open roles
+[07:38:22]   greenhouse/hellofresh: 396 open roles
+[07:38:22]   greenhouse/asm: 500 open roles
+[07:38:22]   greenhouse/ripple: 108 open roles
+[07:38:22]   greenhouse/altentechnologyusa: 235 open roles
+[07:38:22]   greenhouse/natera: 236 open roles
+[07:38:22]   greenhouse/woolpert: 125 open roles
+[07:38:22]   greenhouse/quince: 150 open roles
+[07:38:22]   greenhouse/dhpace: 403 open roles
+[07:38:22]   greenhouse/block: 204 open roles
+[07:38:22]   greenhouse/celonis: 232 open roles
+[07:38:22]   greenhouse/nebius: 371 open roles
+[07:38:22]   greenhouse/alixpartners: 123 open roles
+[07:38:22]   greenhouse/apexcompanies: 179 open roles
+[07:38:22]   greenhouse/alphasense: 207 open roles
+[07:38:22]   greenhouse/alfredbeneschco: 151 open roles
+[07:38:22]   greenhouse/anthromededucation: 152 open roles
+[07:38:22]   greenhouse/axiomtalentplatform: 201 open roles
+[07:38:22]   greenhouse/bybit: 154 open roles
+[07:38:22]   greenhouse/cannondesign: 151 open roles
+[07:38:22]   greenhouse/comprehensivemobilecare: 277 open roles
+[07:38:22]   greenhouse/coreweave: 309 open roles
+[07:38:22]   greenhouse/datavant2: 155 open roles
+[07:38:22]   greenhouse/epicgames: 141 open roles
+[07:38:22]   greenhouse/equipmentsharecom: 1031 open roles
+[07:38:22]   greenhouse/esri: 504 open roles
+[07:38:22]   greenhouse/flyzipline: 360 open roles
+[07:38:22]   greenhouse/formlabs: 236 open roles
+[07:38:22]   greenhouse/ixllearning: 120 open roles
+[07:38:22]   greenhouse/justmarkets: 126 open roles
+[07:38:22]   greenhouse/kaseya: 100 open roles
+[07:38:22]   greenhouse/klaviyo: 154 open roles
+[07:38:22]   greenhouse/langanengineeringandenvironmentalservicesllc: 554 open roles
+[07:38:22]   greenhouse/luxinfusion: 126 open roles
+[07:38:22]   greenhouse/missionhealthcare: 136 open roles
+[07:38:22]   greenhouse/modernanimal: 103 open roles
+[07:38:22]   greenhouse/moneymart: 114 open roles
+[07:38:22]   greenhouse/monks: 344 open roles
+[07:38:22]   greenhouse/monsterenergy: 169 open roles
+[07:38:22]   greenhouse/netskope: 122 open roles
+[07:38:22]   greenhouse/nscaleoperationsukltd: 279 open roles
+[07:38:22]   greenhouse/astspacemobile: 272 open roles
+[07:38:22]   greenhouse/cssmerge: 339 open roles
+[07:38:22]   greenhouse/drayerpt: 135 open roles
+[07:38:22]   greenhouse/ecpcareers: 473 open roles
+[07:38:22]   greenhouse/eosfitness: 2810 open roles
+[07:38:22]   greenhouse/fanaticscommerce: 215 open roles
+[07:38:22]   greenhouse/flix: 125 open roles
+[07:38:22]   greenhouse/hasbro: 118 open roles
+[07:38:22]   greenhouse/helsing: 159 open roles
+[07:38:22]   greenhouse/revolutionmedicines: 323 open roles
+[07:38:22]   greenhouse/sentinellabs: 287 open roles
+[07:38:22]   greenhouse/ursamajor: 123 open roles
+[07:38:22]   greenhouse/zoominfo: 101 open roles
+[07:38:22]   lever/palantir: 302 open roles
+[07:38:22]   lever/veeva: 888 open roles
+[07:38:22]   lever/jobgether: 4007 open roles
+[07:38:22]   lever/flynncompanies: 175 open roles
+[07:38:22]   lever/gopuff: 778 open roles
+[07:38:22]   lever/buckmason: 257 open roles
+[07:38:22]   lever/arcteryx.com: 259 open roles
+[07:38:22]   lever/thinkahead: 152 open roles
+[07:38:22]   lever/solidcore: 260 open roles
+[07:38:22]   lever/zoox: 231 open roles
+[07:38:22]   lever/insomniacookies: 1109 open roles
+[07:38:22]   lever/crypto: 103 open roles
+[07:38:22]   lever/shieldai: 652 open roles
+[07:38:22]   lever/dnb: 101 open roles
+[07:38:22]   lever/Aprio: 215 open roles
+[07:38:22]   lever/amityfdn: 119 open roles
+[07:38:22]   lever/boxlunch: 4604 open roles
+[07:38:22]   lever/rws: 154 open roles
+[07:38:22]   lever/weloglobal: 466 open roles
+[07:38:22]   workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 167 open roles
+[07:38:22]   workday/salesforce/wd12/External_Career_Site/Salesforce: 158 open roles
+[07:38:22]   workday/workday/wd5/Workday/Workday: 147 open roles
+[07:38:22]   workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 130 open roles
+[07:38:22]   workday/target/wd5/targetcareers/Target: 167 open roles
+[07:38:22]   workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 114 open roles
+[07:38:22]   workday/pnc/wd5/External/PNC: 177 open roles
+[07:38:22]   workday/williams/wd5/external/Williams: 109 open roles
+[07:38:22]   workday/xcelenergy/wd1/External/Xcel Energy: 116 open roles
+[07:38:22]   workday/usc/wd5/ExternalUSCCareers/University of Southern California: 131 open roles
+[07:38:22]   workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 116 open roles
+[07:38:22]   workday/lmu/wd1/Careers/Loyola Marymount University: 123 open roles
+[07:38:22]   workday/citjpl/wd5/Jobs/NASA JPL: 128 open roles
+[07:38:22]   workday/fox/wd1/Domestic/Fox Corporation: 152 open roles
+[07:38:22]   workday/caa/wd1/Careers/Creative Artists Agency: 103 open roles
+[07:38:22]   workday/livenation/wd503/LNExternalSite/Live Nation: 270 open roles
+[07:38:22]   workday/iheartmedia/wd5/External_iHM/iHeartMedia: 111 open roles
+[07:38:22]   workday/asmglobal/wd1/careers/ASM Global: 100 open roles
+[07:38:22]   workday/skechers/wd5/One-career-site/Skechers: 105 open roles
+[07:38:22]   workday/amgen/wd1/Careers/Amgen: 220 open roles
+[07:38:22]   workday/huntsman/wd1/Huntsman/Huntsman: 157 open roles
+[07:38:22]   workday/cumminggroup/wd1/CGC/Cumming Group: 167 open roles
+[07:38:22]   workday/jll/wd1/jllcareers/JLL: 315 open roles
+[07:38:22]   workday/cw/wd1/External/Cushman & Wakefield: 217 open roles
+[07:38:22]   workday/msudenver/wd1/MSUDenver/Metropolitan State University of Denver: 128 open roles
+[07:38:22]   workday/denverhealth/wd1/DHHA-Main/Denver Health: 100 open roles
+[07:38:22]   workday/davita/wd1/DKC_External/DaVita: 159 open roles
+[07:38:22]   workday/arrow/wd1/AC/Arrow Electronics: 162 open roles
+[07:38:22]   workday/apog/wd1/Apogee/Apogee Enterprises: 112 open roles
+[07:38:22]   workday/wilsonco/wd5/Careers/Wilson & Company: 136 open roles
+[07:38:22]   workday/prologis/wd5/Prologis_External_Careers/Prologis: 103 open roles
+[07:38:22]   workday/nyp/wd1/nypcareers/NewYork-Presbyterian: 139 open roles
+[07:38:22]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 135 open roles
+[07:38:22]   workday/newschool/wd1/External/The New School: 184 open roles
+[07:38:22]   workday/blackstone/wd1/Blackstone_Careers/Blackstone: 134 open roles
+[07:38:22]   workday/brookfield/wd5/brookfield/Brookfield: 140 open roles
+[07:38:22]   workday/brookfield/wd5/brookfieldproperties/Brookfield Properties: 200 open roles
+[07:38:22]   workday/avalonbay/wd5/AVBExternal/AvalonBay Communities: 141 open roles
+[07:38:22]   workday/citi/wd5/2/Citi: 272 open roles
+[07:38:22]   workday/spgi/wd5/SPGI_Careers/S&P Global: 120 open roles
+[07:38:22]   workday/nasdaq/wd1/Global_External_Site/Nasdaq: 163 open roles
+[07:38:22]   workday/pvh/wd1/PVH_Careers/PVH: 130 open roles
+[07:38:22]   workday/tapestry/wd108/Tapestry_Careers/Tapestry: 137 open roles
+[07:38:22]   workday/pfizer/wd1/PfizerCareers/Pfizer: 148 open roles
+[07:38:22]   workday/tiaa/wd1/Search/TIAA: 160 open roles
+[07:38:22]   workday/pru/wd5/Careers/Prudential Financial: 181 open roles
+[07:38:22]   workday/mmc/wd1/MMC/Marsh McLennan: 315 open roles
+[07:38:22]   workday/dentsuaegis/wd3/DAN_GLOBAL/dentsu: 137 open roles
+[07:38:22]   workday/wf/wd1/WellsFargoJobs/Wells Fargo: 136 open roles
+[07:38:22]   workday/usbank/wd1/US_Bank_Careers/U.S. Bank: 250 open roles
+[07:38:22]   workday/capitalone/wd12/Capital_One/Capital One: 194 open roles
+[07:38:22]   workday/accenture/wd103/AccentureCareers/Accenture: 477 open roles
+[07:38:22]   workday/allstate/wd5/allstate_careers/Allstate: 194 open roles
+[07:38:22]   workday/humana/wd5/Humana_External_Career_Site/Humana: 150 open roles
+[07:38:22]   workday/cigna/wd5/cignacareers/Cigna: 110 open roles
+[07:38:22]   workday/elevancehealth/wd1/ANT/Elevance Health: 135 open roles
+[07:38:22]   workday/cardinalhealth/wd1/EXT/Cardinal Health: 141 open roles
+[07:38:22]   workday/medtronic/wd1/MedtronicCareers/Medtronic: 242 open roles
+[07:38:22]   workday/thermofisher/wd5/ThermoFisherCareers/Thermo Fisher Scientific: 152 open roles
+[07:38:22]   workday/danaher/wd1/DanaherJobs/Danaher: 223 open roles
+[07:38:22]   workday/chevron/wd5/jobs/Chevron: 144 open roles
+[07:38:22]   ashby/ramp: 168 open roles
+[07:38:22]   ashby/notion: 145 open roles
+[07:38:22]   ashby/openai: 814 open roles
+[07:38:22]   ashby/perplexity: 134 open roles
+[07:38:22]   ashby/plaid: 130 open roles
+[07:38:22]   ashby/zip: 103 open roles
+[07:38:22]   ashby/cohere: 122 open roles
+[07:38:22]   ashby/elevenlabs: 150 open roles
+[07:38:22]   workable/nogigiddy: 1822 open roles
+[07:38:22]   workable/suppliedtalent: 190 open roles
+[07:38:22]   workable/serenity-mental-health-centers: 374 open roles
+[07:38:22]   workable/pacific-health-group: 195 open roles
+[07:38:22]   workable/pm2cm: 125 open roles
+[07:38:22]   workable/behavior-frontiers: 137 open roles
+[07:38:22]   workable/pavago: 2564 open roles
+[07:38:22]   workable/rimkus: 147 open roles
+[07:38:22]   workable/intertek: 210 open roles
+[07:38:22]   workable/yugo: 110 open roles
+[07:38:22]   workable/volga-partners: 128 open roles
+[07:38:22]   workable/weekday-1: 884 open roles
+[07:38:22]   workable/raydar: 1009 open roles
+[07:38:22]   breezy/american-logistics-authority: 2760 open roles
+[07:38:22]   smartrecruiters/aspenskiingcompany: 120 open roles
+[07:38:22]   smartrecruiters/equinox: 212 open roles
+[07:38:22]   smartrecruiters/boschgroup: 222 open roles
+[07:38:22]   smartrecruiters/sgs: 176 open roles
+[07:38:22]   smartrecruiters/redbull: 394 open roles
+[07:38:22]   smartrecruiters/AIRCommunities: 136 open roles
+[07:38:22]   smartrecruiters/uniteklearning: 170 open roles
+[07:38:22]   smartrecruiters/mattelinc: 113 open roles
+[07:38:22]   smartrecruiters/thewonderfulcompany: 134 open roles
+[07:38:22]   greenhouse: 808 of 822 boards have openings (59062 roles)
+[07:38:22]   lever: 120 of 124 boards have openings (17404 roles)
+[07:38:22]   workday: 114 of 114 boards have openings (12772 roles)
+[07:38:22]   ashby: 76 of 82 boards have openings (3558 roles)
+[07:38:22]   workable: 119 of 125 boards have openings (10358 roles)
+[07:38:22]   bamboohr: 4 of 4 boards have openings (202 roles)
+[07:38:22]   recruitee: 2 of 2 boards have openings (57 roles)
+[07:38:22]   breezy: 6 of 6 boards have openings (2821 roles)
+[07:38:22]   smartrecruiters: 45 of 52 boards have openings (1941 roles)
+[07:38:22]   agg/linkedin: 0 roles (cached)
+[07:38:22]   agg/remoteok: 16 roles (cached)
+[07:38:22]   agg/remotive: 0 roles (cached)
+[07:38:22]   agg/jicy: 13 roles (cached)
+[07:38:22]   agg/himalayas: 1 roles (cached)
+[07:38:22]   agg/wwr: 16 roles (cached)
+[07:38:22]   agg/themuse: 203 roles (cached)
+[07:38:22]   agg/adzuna: 0 roles (cached)
+[07:38:22]   agg/jooble: 0 roles (cached)
+[07:38:34]   agg/workablejobs: 259 fetched, 99 pass the title/location filter
+[07:38:35]   agg/arbeitnow: 900 fetched, 6 pass the title/location filter
+[07:38:35]   agg/workingnomads: 38 fetched, 3 pass the title/location filter
+[07:38:36]   agg/githublists: 371 fetched, 70 pass the title/location filter
+[07:38:46]   agg/builtin: 91 fetched, 65 pass the title/location filter
+[07:38:46]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[07:38:46]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[07:38:47]   agg/hnhiring: 3 fetched, 0 pass the title/location filter
+[07:38:52]   found 1 new company boards from aggregator listings: workable/fidus
+[07:38:52]   workable: 1 of 1 boards have openings (23 roles)
+[07:38:53]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[07:38:54] 104081 open roles, 8520 new
+[07:39:02]   ✓  96  Product Operations Specialist @ comfrt (United States (Remote)) — title 'product operations' +45; keywords [process improvement, sop, standard operating, supply chain] +35; location 'remote' +16
+[07:39:02]   ✓  74  Facility Maintenance Coordinator, Operations @ bseglobal (Brooklyn, NY 11232) — title 'operations' +30; keywords [project management, vendor, inventory, bilingual] +32; location 'new york' +12
+[07:39:02]   ✓  69  Quality Assurance Coordinator @ certifiedgroup (Burbank, CA) — title 'quality' +35; keywords [process improvement, continuous improvement, workflow, cross-functional] +28; location 'burbank' +6
+[07:39:02]   ✓  69  Marketing Operations Specialist (Data & Systems) @ sentinellabs (United States - Remote) — title 'operations' +25; keywords [optimization, workflow, data analysis, lean] +23; location 'remote' +16; pay up to $128,000 +5
+[07:39:02]   ✓  66  Publications Coordinator @ cogresearchfoundation (Remote) — title 'coordinator' +22; keywords [sop, standard operating, workflow, stakeholder] +23; location 'remote' +16; pay up to $101,911 +5
+[07:39:02]   ✓  65  Coordinator, Operations - Brooklyn Basketball Training Center @ bseglobal (Brooklyn, NY 11232) — title 'operations' +30; keywords [standard operating, project management, vendor, lean] +23; location 'new york' +12
+[07:39:02]   ✓  58  Site Merchandising Coordinator  @ comfrt (United States (Remote)) — title 'coordinator' +22; keywords [optimization, cross-functional, vendor, inventory] +20; location 'remote' +16
+[07:39:02]   ✓  57  Loan Review Analyst @ firstwestern (Denver, CO) — title 'analyst' +22; keywords [continuous improvement, cross-functional, excel, ownership] +18; location 'denver' +12; pay up to $76,800 +5
+[07:39:02]   ✓  56  OWA Member Support Specialist @ thltestcareers (Full-Time - Location:  US, UK,) — keywords [sop, standard operating, continuous improvement, workflow] +35; location 'remote' +16; pay up to $112,572 +5
+[07:39:02]   ✓  54  Regulatory Audit Coordinator @ cogresearchfoundation (Remote) — title 'coordinator' +22; keywords [sop, excel, documentation] +11; location 'remote' +16; pay up to $101,911 +5
+[07:39:02]   ✓  51  Project Engineer @ colovore (Remote) — keywords [construction, continuous improvement, cross-functional, project management] +35; location 'remote' +16
+[07:39:02]   ✓  50  Social Commerce Coordinator @ comfrt (Remote) — title 'coordinator' +22; keywords [optimization, project management, excel] +12; location 'remote' +16
+[07:39:02]   ✓  45  Client Success Coordinator @ ciazumano (Remote) — title 'coordinator' +22; keywords [vendor, stakeholder] +7; location 'remote' +16
+[07:39:02]   ✓  44  Athlete Relations Signings Associate - WWE/UFC @ fanaticscommerce (Miramar, FL, United States (Re) — keywords [process improvement, continuous improvement, cross-functional, vendor] +28; location 'remote' +16
+[07:39:02]   ✓  44  Treatment Coordinator @ hellotend (Manhattan, NY) — title 'coordinator' +22; keywords [lean, excel, ownership] +10; location 'new york' +12
+[07:39:02]   ✓  42  Real Estate Development Analyst @ cssmerge (New York, NY) — title 'analyst' +22; keywords [construction, workflow, excel, scheduling] +18; location 'new york' +12; 'healthcare' -15; pay up to $102,000 +5
+[07:39:02]   ✓  38  Corporate Development Associate @ googlefiber (Remote) — keywords [sop, optimization, cross-functional, excel] +17; location 'remote' +16; pay up to $149,600 +5
+[07:39:02]   ✓  38  Process Analyst (100% Remote) @ v-outsourcing (USA (Remote)) — title 'analyst' +22; location 'remote' +16
+[07:39:02]   ✓  37  Office Coordinator (Commerce City, Colorado) @ charliehealthbehavioralhealthoperations (Commerce City, Colorado) — title 'coordinator' +22; keywords [workflow, cross-functional, bilingual, scheduling] +18; location 'colorado' +12; 'healthcare' -15
+[07:39:02]   ✓  37  Office Coordinator (Levittown, New York) @ charliehealthbehavioralhealthoperations (Levittown, New York) — title 'coordinator' +22; keywords [workflow, cross-functional, bilingual, scheduling] +18; location 'new york' +12; 'healthcare' -15
+[07:39:02]   ✓  37  Office Coordinator (Syracuse, New York) @ charliehealthbehavioralhealthoperations (Syracuse, New York) — title 'coordinator' +22; keywords [workflow, cross-functional, bilingual, scheduling] +18; location 'new york' +12; 'healthcare' -15
+[07:39:02]   ✓  37  Associate Manager, Research & Insights @ kargo22 (New York, NY) — keywords [optimization, cross-functional, data analysis, vendor] +20; location 'new york' +12; pay up to $80,000 +5
+[07:39:02]   ✓  34  Organizing Coordinator, North Carolina and Georgia @ couriernewsroom (Remote, USA) — title 'coordinator' +22; keywords [cross-functional, project management, stakeholder] +11; location 'remote' +16; 'cold call' -20; pay up to $70,000 +
+[07:39:02]   ✓  34  Licensing Administrator @ fanaticscommerce (New York, NY, United States) — keywords [continuous improvement, workflow, inventory, stakeholder] +22; location 'new york' +12
+[07:39:02]   ✓  34  Field Engineer @ guidewheel (Remote) — keywords [inventory, lean, spanish, draw] +18; location 'remote' +16
+[07:39:02]   ✓  33  Service Associate @ eosfitness (Casa Grande, AZ: Colorado St /) — keywords [sop, standard operating, inventory, lean] +21; location 'colorado' +12
+[07:39:02]   ✓  33  Service Associate - Night @ eosfitness (Casa Grande, AZ: Colorado St /) — keywords [sop, standard operating, inventory, lean] +21; location 'colorado' +12
+[07:39:02]   ✓  32  Product Support Specialist, Major Events @ fanaticscommerce (Los Angeles, CA, United States) — keywords [continuous improvement, cross-functional, excel, scheduling] +21; location 'los angeles' +6; pay up to $75,000 +5
+[07:39:02]   ✓  30  Triage Specialist  @ ecpcareers (Blue Ash, OH (Remote)) — keywords [vendor, lean, excel, documentation] +14; location 'remote' +16
+[07:39:02]   ✓  30  AI Production Designer @ fanaticscommerce (Irvine, CA, United States; Sea) — keywords [continuous improvement, workflow, cross-functional, project management] +30
+[07:39:02]   ✓  30  Client Service Specialist @ jambalaya-group (New York, New York, United Sta) — keywords [workflow, excel, ownership, documentation] +13; location 'new york' +12; pay up to $110,000 +5
+[07:39:02]   ✓  29  Associate Manager, Client Services @ kargo22 (New York, NY) — keywords [optimization, cross-functional, excel] +12; location 'new york' +12; pay up to $70,000 +5
+[07:39:02]   ✓  29  Contracts Specialist @ fidus-systems (TELECOMMUTE, United States (Re) — keywords [vendor, stakeholder, procurement, ownership] +13; location 'remote' +16
+[07:39:02]   ✓  29  Contracts Specialist @ fidus (United States (Remote)) — keywords [vendor, stakeholder, procurement, ownership] +13; location 'remote' +16
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Glendale: N Central Ave / WBro) — keywords [sop, standard operating, inventory, lean] +21; location 'glendale' +6
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Los Angeles: S Figueroa St/ 8t) — keywords [sop, standard operating, inventory, lean] +21; location 'los angeles' +6
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Los Angeles: La Cienga Blvd / ) — keywords [sop, standard operating, inventory, lean] +21; location 'los angeles' +6
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Long Beach: Pine Ave / W Shore) — keywords [sop, standard operating, inventory, lean] +21; location 'long beach' +6
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Simi Valley: First St / E Los ) — keywords [sop, standard operating, inventory, lean] +21; location 'los angeles' +6
+[07:39:02]   ✓  27  Service Associate @ eosfitness (Los Angeles, California, Unite) — keywords [sop, standard operating, inventory, lean] +21; location 'los angeles' +6
+[07:39:02]   ✓ … and 42 more new candidates (the 40 with the highest keyword score are listed)
+[07:39:02] Scored 96 new roles: 82 candidates for the résumé check, 14 with nothing going for them, 8421 filtered out by title/location (finding and scoring took 7.8 min)
+[07:39:02] 82 jobs queued: 0 already matched to your résumé, 82 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 468 now
+[07:39:03] Time for this run: 50 min in all (19117 of 1850 free Actions minutes used this month)
+[07:39:03] Accounts: ON (delgado@alumni.usc.edu)
+[07:39:05]   match  75%  Project Engineer @ colovore — Strong engineering and project coordination background, though slightly light on the 2-5 years of di
+[07:39:05]   match  70%  Product Operations Specialist @ comfrt — Good analytical and supply chain skills, though lacking specific ERP/NetSuite experience.
+[07:39:05]   match  68%  Client Success Coordinator @ ciazumano — Meets general analytical and coordination needs, but lacks specific travel industry experience.
+[07:39:05]   match  80%  Real Estate Development Analyst @ cssmerge — Strong fit for real estate development and operations with solid Excel and project tracking skills.
+[07:39:05]   match  60%  Loan Review Analyst @ firstwestern — Meets basic analytical requirements with an engineering degree, but lacks targeted finance or bankin
+[07:39:05] → Project Engineer @ colovore (score 51, match 75%)
+[07:39:15]       step 1: 16 fields (10 required)
+[07:39:31]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:39:33]       mail: found 'Security code for your application to Colovore'
+[07:39:38]     ✓ applied (0.5 min)
+[07:39:46] → Product Operations Specialist @ comfrt (score 96, match 70%)
+[07:39:53]       step 1: 20 fields (14 required)
+[07:39:55]       writer: note, the answer mentions a figure or tool that is not in your facts
+[07:40:21]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:40:41]       mail: found 'Security code for your application to Comfrt'
+[07:40:51]     ✓ applied (1.1 min)
+[07:40:56] → Client Success Coordinator @ ciazumano (score 45, match 68%)
+[07:41:13]       step 1: 33 fields (21 required)
+[07:41:13]       (writer answered 'Do you identify as an enrolled member of the Seneca Nation?*' -> 'No')
+[07:41:33]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:41:45]       mail: found 'Security code for your application to CI Azumano'
+[07:41:50]     ✓ applied (0.9 min)
+[07:41:57] → Real Estate Development Analyst @ cssmerge (score 42, match 80%)
+[07:42:07]       step 1: 16 fields (7 required)
+[07:42:18]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:42:20]       mail: found 'Security code for your application to ATOMS Careers page'
+[07:42:25]     ✓ applied (0.5 min)
+[07:42:26]   match  82%  Corporate Development Associate @ googlefiber — same role at this employer, checked before: can't truthfully answer required: [AI-generated transcri
+[07:42:28]   match  68%  Social Commerce Coordinator @ comfrt — Good match for e-commerce operations and logistics, though light on specific influencer marketing ba
+[07:42:28]   match  78%  Site Merchandising Coordinator  @ comfrt — Strong fit for e-commerce operations, product data management, and analytical execution on Shopify p
+[07:42:28]   match  52%  Publications Coordinator @ cogresearchfoundation — Weak match due to a focus on medical journal publications and writing rather than general business o
+[07:42:28]   match  75%  Licensing Administrator @ fanaticscommerce — Good fit for contract compliance, administrative operations, and analytical tracking in a sports com
+[07:42:28]   match  62%  Athlete Relations Signings Associate - WWE/UFC @ fanaticscommerce — Decent fit for project coordination and event logistics, though heavy travel and athlete relations a
+[07:42:29] → Loan Review Analyst @ firstwestern (score 57, match 60%)
+[07:42:39]       step 1: 18 fields (13 required)
+[07:42:40]       (writer answered 'Does the salary range listed in the job posting meet your sa' -> 'No')
+[07:42:41]       (writer answered 'When are you available?*' -> 'Two weeks after an offer.')
+[07:42:55]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:43:05]       mail: found 'Security code for your application to First Western'
+[07:43:10]     ✓ applied (0.7 min)
+[07:43:18] → Social Commerce Coordinator @ comfrt (score 50, match 68%)
+[07:43:27]       step 1: 15 fields (9 required)
+[07:43:37]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:43:43]       mail: found 'Security code for your application to Comfrt'
+[07:43:49]     ✓ applied (0.5 min)
+[07:43:54] → Site Merchandising Coordinator  @ comfrt (score 58, match 78%)
+[07:44:01]       step 1: 14 fields (8 required)
+[07:44:10]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:44:20]       mail: found 'Security code for your application to Comfrt'
+[07:44:26]     ✓ applied (0.5 min)
+[07:44:34] → Process Analyst (100% Remote) @ v-outsourcing (score 38)
+[07:44:37]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[07:44:37] → Licensing Administrator @ fanaticscommerce (score 34, match 75%)
+[07:44:48]       step 1: 21 fields (13 required)
+[07:45:05]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:45:09]       mail: found 'Security code for your application to Fanatics Commerce'
+[07:45:14]     ✓ applied (0.6 min)
+[07:45:21] → Corporate Development Associate @ googlefiber (score 38, match 82%)
+[07:45:25]     (on your apply-by-hand list: the site asks for a human check, which the bot never does)
+[07:45:25]     ✗ blocked: reCAPTCHA checkbox (a human check: the bot stops here)
+[07:45:25]   match  45%  Trading Operations Associate @ towerresearchcapital — same role at this employer, checked before: lacks direct trading/finance operations experience
+[07:45:26]   match  50%  Associate Manager, Client Services @ kargo22 — same role at this employer, checked before: The candidate has transferable client-facing experience 
+[07:45:27]   match  55%  Associate Manager, Research & Insights @ kargo22 — Missing required direct experience with digital brand lift measurement and ad research services like
+[07:45:27]   match  75%  Business Development Associate @ cssmerge — Strong match for business development and analytical skills, though focused more on outbound sales t
+[07:45:27]   match  90%  Product Support Specialist, Major Events @ fanaticscommerce — Exceptional fit for an entry-level operations coordination and product support role matching an indu
+[07:45:27]   match  88%  Leadership Development Program @ griffisresidential — Great fit for property operations and business management rotations, aligning well with the candidat
+[07:45:27]   match  85%  Quality Assurance Coordinator @ certifiedgroup — Strong fit for quality assurance and process improvement duties, leveraging systems engineering and 
+[07:45:35] → Athlete Relations Signings Associate - WWE/UFC @ fanaticscommerce (score 44, match 62%)
+[07:45:47]       step 1: 21 fields (13 required)
+[07:46:03]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:46:13]       mail: found 'Security code for your application to Fanatics Commerce'
+[07:46:19]     ✓ applied (0.7 min)
+[07:46:24] → Associate Manager, Research & Insights @ kargo22 (score 37, match 55%)
+[07:46:57]     ✗ blocked: no application form found on page
+[07:47:00] → Business Development Associate @ cssmerge (score 19, match 75%)
+[07:47:09]       step 1: 14 fields (10 required)
+[07:47:19]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:47:23]       mail: found 'Security code for your application to ATOMS Careers page'
+[07:47:29]     ✓ applied (0.5 min)
+[07:47:38] → Product Support Specialist, Major Events @ fanaticscommerce (score 32, match 90%)
+[07:47:52]       step 1: 23 fields (16 required)
+[07:47:53]       (writer answered 'Which best describes your availability during the home game ' -> 'I have open availability, including evenings, week')
+[07:47:53]       (writer answered 'Are you comfortable working in a fast-paced, high-energy eve' -> 'Yes')
+[07:47:54]       (writer answered 'Do you have previous retail, sales, hospitality, or other cu' -> '1+ year')
+[07:47:54]       (writer answered 'Are you a fan of sports?*' -> 'No')
+[07:48:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:48:26]       mail: found 'Security code for your application to Fanatics Commerce'
+[07:48:31]     ✓ applied (0.9 min)
+[07:48:41] → Leadership Development Program @ griffisresidential (score 25, match 88%)
+[07:49:05]       step 1: 30 fields (17 required)
+[07:49:06]       (writer answered 'If hired, do you have any accommodation needs that might hel' -> 'No')
+[07:49:06]       (writer answered 'Do you currently work at Griffis Residential?*' -> 'No')
+[07:49:28]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:49:31]       mail: found 'Security code for your application to Griffis Residential'
+[07:49:37]     ✓ applied (0.9 min)
+[07:49:37]   match  40%  OWA Member Support Specialist @ thltestcareers — same role at this employer, checked before: General customer support role requiring specific non-pro
+[07:49:37]   match  40%  Field Engineer @ guidewheel — same role at this employer, checked before: The job board page text lacks a clear specific role desc
+[07:49:38]   match  50%  Executive Administrator  @ kargo22 — same role at this employer, checked before: Requires 3-5+ years of C-suite executive administrative 
+[07:49:39]   match  20%  Regulatory Audit Coordinator @ cogresearchfoundation — Missing required 2+ years of clinical trials and FDA regulatory experience.
+[07:49:39]   match  75%  Organizing Coordinator, North Carolina and Georgia @ couriernewsroom — Good match for project management, communications, and organizational skills, though lighter on dire
+[07:49:39]   match  40%  Associate Financial Planner @ edelmanfinancialenginesllc — Lacks required FINRA Series 65 license and 1-3 years of dedicated financial services/advisor experie
+[07:49:39]   match  45%  Precision Technology Specialist (Illinois/Indiana/Kentucky) @ farmersmutualhailinsurancecompany — Requires specific crop insurance experience and physical field inspection capabilities that do not m
+[07:49:39]   match  50%  Accountant @ cssmerge — Strong systems and analytical skills, but lacks dedicated corporate accounting experience and ERP/Wo
+[07:49:45] → Quality Assurance Coordinator @ certifiedgroup (score 69, match 85%)
+[07:49:55]       step 1: 19 fields (14 required)
+[07:50:10]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:50:12]       mail: found 'Security code for your application to Certified Group'
+[07:50:17]     ✓ applied (0.5 min)
+[07:50:18]   match  40%  Treatment Coordinator @ hellotend — same role at this employer, checked before: same role at this employer, checked before: This is a fr
+[07:50:20]   match  30%  Wellness & Recovery Specialist @ eosfitness — This fitness center role is below the criteria for a professional office job a business graduate wou
+[07:50:20]   match  40%  Property Caretaker @ firstchairoperatingcompany — This hands-on property caretaker and maintenance role is too operational and labor-intensive for the
+[07:50:20]   match  35%  Contract Reporter, New Hampshire @ couriernewsroom — The candidate lacks the required 3+ years of professional journalism and reporting experience.
+[07:50:20]   match  40%  Triage Specialist  @ ecpcareers — The candidate lacks the required ophthalmic or optometric medical office experience and healthcare l
+[07:50:20]   match  82%  Payroll/Benefits Specialist @ griffisresidential — A good fit for an office-based finance and operations role, matching the candidate's financial track
+[07:50:25] → Organizing Coordinator, North Carolina and Georgia @ couriernewsroom (score 34, match 75%)
+[07:50:35]       step 1: 19 fields (8 required)
+[07:50:49]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:50:57]       mail: found 'Security code for your application to Courier Newsroom'
+[07:51:03]     ✓ applied (0.6 min)
+[07:51:05]   match  50%  Sample Login Associate @ certifiedgroup — Laboratory sample processing role is a weak match for an industrial engineering graduate.
+[07:51:05]   match  55%  Affiliate Specialist @ comfrt — Requires 2-4 years of specific affiliate marketing experience, which exceeds the candidate's backgro
+[07:51:05]   match  20%  Kids Club Associate  @ eosfitness — Kids club childcare role in a gym scores under 60 as a non-professional entry job.
+[07:51:05]   match  20%  Service Associate @ eosfitness — Gym service associate role scores under 60 as a customer-facing front desk position.
+[07:51:05]   match  20%  Service Associate - Night @ eosfitness — Gym front desk night shift role scores under 60 as a hospitality/recreation position.
+[07:51:08] → Payroll/Benefits Specialist @ griffisresidential (score 23, match 82%)
+[07:51:28]       step 1: 22 fields (17 required)
+[07:51:28]       (writer answered 'If hired, do you have any accommodation needs that might hel' -> 'No')
+[07:51:29]       (writer answered 'Do you currently work at Griffis Residential?*' -> 'No')
+[07:51:44]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:51:54]       mail: found 'Security code for your application to Griffis Residential'
+[07:51:59]     ✓ applied (0.9 min)
+[07:51:59]   match  20%  Kids Club Associate  @ eosfitness — same role at this employer, checked before: Kids club childcare role in a gym scores under 60 as a n
+[07:52:00]   match  20%  Kids Club Associate  @ eosfitness — same role at this employer, checked before: same role at this employer, checked before: Kids club ch
+[07:52:02]   match  60%  Front Office Specialist - Training Provided! @ ecpcareers — Medical front office role is a poor match for an engineering graduate, though customer service exper
+[07:52:02]   match  55%  Patient Care Specialist  @ charliehealthbehavioralhealthoperations — Requires 1-2 years of specific CRM and contact center software experience which the candidate lacks.
+[07:52:02]   match  10%  Cicero Animal Clinic - Associate Veterinarian  @ ciceroanimalclinic — Requires a Doctor of Veterinary Medicine degree, making it completely irrelevant.
+[07:52:02]   match  75%  Dispatcher @ certifiedgroup — Good fit for supply chain and operations background, though location and specific dispatching experi
+[07:52:02]   match  40%  AI Production Designer @ fanaticscommerce — Requires 4+ years of professional graphic production design experience and advanced generative AI de
+[07:52:03] → Affiliate Specialist @ comfrt (score 22, match 55%)
+[07:52:11]       step 1: 19 fields (13 required)
+[07:53:07]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:53:09]       mail: found 'Security code for your application to Comfrt'
+[07:53:14]     ✓ applied (1.2 min)
+[07:53:20] → Front Office Specialist - Training Provided! @ ecpcareers (score 10, match 60%)
+[07:53:42]       step 1: 32 fields (21 required)
+[07:53:43]       (writer answered 'Have you obtained a High School Diploma or GED?*' -> 'Yes')
+[07:53:43]       (writer answered 'Have you ever been terminated from employment or asked to re' -> 'No')
+[07:53:45]       writer: note, the answer mentions a figure or tool that is not in your facts
+[07:54:03]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:54:05]       mail: found 'Security code for your application to Eye Care Partners Care'
+[07:54:10]     ✓ applied (0.8 min)
+[07:54:17] → Patient Care Specialist  @ charliehealthbehavioralhealthoperations (score 14, match 55%)
+[07:54:35]       step 1: 29 fields (23 required)
+[07:54:45]       (writer answered "Have you completed your Associate's Degree or Bachelor's Deg" -> 'Yes')
+[07:55:05]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:55:17]       mail: found 'Security code for your application to Charlie Health Behavio'
+[07:55:23]     ✓ applied (1.1 min)
+[07:55:33] → Especialista de Recursos Humanos @ v-outsourcing (score 16)
+[07:55:42]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[07:55:42] → Dispatcher @ certifiedgroup (score 26, match 75%)
+[07:55:52]       step 1: 19 fields (15 required)
+[07:56:07]       email: the site asked for a security code after Submit; reading it from the application inbox
+[07:56:14]       mail: found 'Security code for your application to Certified Group'
+[07:56:20]     ✓ applied (0.6 min)
+[07:56:20]   match  20%  Target security specialist @ target — same role at this employer, checked before: same role at this employer, checked before: same role at
+[07:56:22]   match  20%  Linen Specialist for Vacation Homes @ firstchairoperatingcompany — This hospitality/linen operations role is below the criteria for a salaried professional business of
+[07:56:22]   match  40%  AML/Compliance Analyst @ jobgether — Requires 2-5 years of specific AML and financial crime compliance experience which the new graduate 
+[07:56:22]   match  55%  Contracts Specialist @ fidus-systems — The candidate has a relevant business degree and operations background, but lacks professional contr
+[07:56:22]   match  55%  Contracts Specialist @ fidus — Duplicate posting; the candidate has a business background but lacks professional contract drafting 
+[07:56:22]   match  65%  Onboarding & Member Success Coach @ jobgether — A good entry-level client success and onboarding role matching the candidate's business graduate pro
+[07:56:29] → Contracts Specialist @ fidus-systems (match 55%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[07:56:29] → Contracts Specialist @ fidus (match 55%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[07:56:29] → Onboarding & Member Success Coach @ jobgether (match 65%): on your apply-by-hand list (lever asks every applicant to pass a human check)
+[07:56:33]   match  68%  Client Service Specialist @ jambalaya-group — Good match for administrative and client support skills, though it prefers 3+ years of specific weal
+[07:56:33] → Client Service Specialist @ jambalaya-group (match 68%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[07:56:34] Résumé checks this run: 51 (25 passed) in 9 calls. Free writer allowance used today: groq 27k/195k tokens (+1k served from its cache, not counted); groq-20b 18k/195k tokens; groq-qwen 14k/195k tokens; gemini-lite 19/480 requests (+7k served from its cache, not counted); gemini-flash 0/18 requests
+[07:56:34] Summary: 19 applied, 1 blocked, 9 skipped, 22 queued, 40 low_score, 8421 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-30.md
+[07:56:34]   by site  greenhouse: 19 applied, 7 skipped, 1 blocked, 1 manual
+[07:56:34]   by site  workable: 3 manual
+[07:56:34]   by site  www.builtincolorado.com: 2 skipped
+[07:56:34]   by site  lever: 1 manual
+[07:56:35] Summary emailed to delgado@alumni.usc.edu
