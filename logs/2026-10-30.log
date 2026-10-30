@@ -3293,3 +3293,465 @@
 [17:15:32] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.7 min)
 [17:15:32] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 407 now
 [17:15:32] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-30.md
+[17:40:17] === autoapply run (LIVE) build 2026-10-18-b ===
+[17:40:17] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[17:40:19] mail: logged in to delgado@alumni.usc.edu OK
+[17:41:58] Discovering jobs…
+[17:48:49]   greenhouse/airbnb: 201 open roles
+[17:48:49]   greenhouse/figma: 140 open roles
+[17:48:49]   greenhouse/robinhood: 163 open roles
+[17:48:49]   greenhouse/databricks: 901 open roles
+[17:48:49]   greenhouse/anthropic: 674 open roles
+[17:48:49]   greenhouse/coinbase: 242 open roles
+[17:48:49]   greenhouse/lyft: 170 open roles
+[17:48:49]   greenhouse/pinterest: 166 open roles
+[17:48:49]   greenhouse/reddit: 162 open roles
+[17:48:49]   greenhouse/twilio: 133 open roles
+[17:48:49]   greenhouse/cloudflare: 460 open roles
+[17:48:49]   greenhouse/datadog: 397 open roles
+[17:48:49]   greenhouse/mongodb: 368 open roles
+[17:48:49]   greenhouse/elastic: 402 open roles
+[17:48:49]   greenhouse/gitlab: 238 open roles
+[17:48:49]   greenhouse/asana: 111 open roles
+[17:48:49]   greenhouse/okta: 388 open roles
+[17:48:49]   greenhouse/samsara: 322 open roles
+[17:48:49]   greenhouse/affirm: 245 open roles
+[17:48:49]   greenhouse/brex: 260 open roles
+[17:48:49]   greenhouse/flexport: 189 open roles
+[17:48:49]   greenhouse/oscar: 217 open roles
+[17:48:49]   greenhouse/spacex: 2860 open roles
+[17:48:49]   greenhouse/toast: 337 open roles
+[17:48:49]   greenhouse/verkada: 335 open roles
+[17:48:49]   greenhouse/scaleai: 169 open roles
+[17:48:49]   greenhouse/lucidmotors: 452 open roles
+[17:48:49]   greenhouse/holderconstruction: 326 open roles
+[17:48:49]   greenhouse/rocketlab: 557 open roles
+[17:48:49]   greenhouse/carvana: 1691 open roles
+[17:48:49]   greenhouse/roblox: 269 open roles
+[17:48:49]   greenhouse/stripe: 747 open roles
+[17:48:49]   greenhouse/doordashusa: 441 open roles
+[17:48:49]   greenhouse/aloyoga: 786 open roles
+[17:48:49]   greenhouse/thenewyorktimes: 146 open roles
+[17:48:49]   greenhouse/janestreet: 218 open roles
+[17:48:49]   greenhouse/onemedical: 383 open roles
+[17:48:49]   greenhouse/gomotive: 169 open roles
+[17:48:49]   greenhouse/reformation: 158 open roles
+[17:48:49]   greenhouse/justworks: 104 open roles
+[17:48:49]   greenhouse/riotgames: 184 open roles
+[17:48:49]   greenhouse/scopely: 178 open roles
+[17:48:49]   greenhouse/voyagertechnologiesinc: 189 open roles
+[17:48:49]   greenhouse/trueanomalyinc: 205 open roles
+[17:48:49]   greenhouse/charliehealth: 253 open roles
+[17:48:49]   greenhouse/grafanalabs: 124 open roles
+[17:48:49]   greenhouse/vailclinicincdbavailhealthhospital: 115 open roles
+[17:48:49]   greenhouse/fivetran: 159 open roles
+[17:48:49]   greenhouse/olsson: 376 open roles
+[17:48:49]   greenhouse/relativity: 412 open roles
+[17:48:49]   greenhouse/blankstreet: 104 open roles
+[17:48:49]   greenhouse/icapitalnetwork: 214 open roles
+[17:48:49]   greenhouse/lpc: 110 open roles
+[17:48:49]   greenhouse/braze: 345 open roles
+[17:48:49]   greenhouse/addepar1: 113 open roles
+[17:48:49]   greenhouse/divergent: 137 open roles
+[17:48:49]   greenhouse/vardaspace: 119 open roles
+[17:48:49]   greenhouse/crunchyroll: 101 open roles
+[17:48:49]   greenhouse/vast: 183 open roles
+[17:48:49]   greenhouse/cookunity: 159 open roles
+[17:48:49]   greenhouse/fanaticscollectibles: 230 open roles
+[17:48:49]   greenhouse/sonymusicentertainment: 142 open roles
+[17:48:49]   greenhouse/canonical: 314 open roles
+[17:48:49]   greenhouse/betterhelp: 164 open roles
+[17:48:49]   greenhouse/adyen: 238 open roles
+[17:48:49]   greenhouse/thetradedesk: 109 open roles
+[17:48:49]   greenhouse/agency: 827 open roles
+[17:48:49]   greenhouse/innodatainc: 107 open roles
+[17:48:49]   greenhouse/prolificacademicltd: 4119 open roles
+[17:48:49]   greenhouse/sumup: 357 open roles
+[17:48:49]   greenhouse/skdse: 160 open roles
+[17:48:49]   greenhouse/nerostechnologies: 113 open roles
+[17:48:49]   greenhouse/bakerhicks: 130 open roles
+[17:48:49]   greenhouse/precisionmedicinegroup: 174 open roles
+[17:48:49]   greenhouse/hellofresh: 394 open roles
+[17:48:49]   greenhouse/asm: 496 open roles
+[17:48:49]   greenhouse/ripple: 110 open roles
+[17:48:49]   greenhouse/altentechnologyusa: 237 open roles
+[17:48:49]   greenhouse/natera: 226 open roles
+[17:48:49]   greenhouse/woolpert: 124 open roles
+[17:48:49]   greenhouse/quince: 150 open roles
+[17:48:49]   greenhouse/dhpace: 403 open roles
+[17:48:49]   greenhouse/block: 205 open roles
+[17:48:49]   greenhouse/celonis: 232 open roles
+[17:48:49]   greenhouse/nebius: 376 open roles
+[17:48:49]   greenhouse/alixpartners: 120 open roles
+[17:48:49]   greenhouse/apexcompanies: 182 open roles
+[17:48:49]   greenhouse/alphasense: 205 open roles
+[17:48:49]   greenhouse/alfredbeneschco: 150 open roles
+[17:48:49]   greenhouse/anthromededucation: 152 open roles
+[17:48:49]   greenhouse/axiomtalentplatform: 201 open roles
+[17:48:49]   greenhouse/bybit: 153 open roles
+[17:48:49]   greenhouse/cannondesign: 149 open roles
+[17:48:49]   greenhouse/comprehensivemobilecare: 278 open roles
+[17:48:49]   greenhouse/coreweave: 308 open roles
+[17:48:49]   greenhouse/datavant2: 152 open roles
+[17:48:49]   greenhouse/epicgames: 139 open roles
+[17:48:49]   greenhouse/equipmentsharecom: 1032 open roles
+[17:48:49]   greenhouse/esri: 495 open roles
+[17:48:49]   greenhouse/flyzipline: 361 open roles
+[17:48:49]   greenhouse/formlabs: 236 open roles
+[17:48:49]   greenhouse/ixllearning: 119 open roles
+[17:48:49]   greenhouse/justmarkets: 128 open roles
+[17:48:49]   greenhouse/klaviyo: 157 open roles
+[17:48:49]   greenhouse/langanengineeringandenvironmentalservicesllc: 554 open roles
+[17:48:49]   greenhouse/luxinfusion: 130 open roles
+[17:48:49]   greenhouse/missionhealthcare: 135 open roles
+[17:48:49]   greenhouse/modernanimal: 103 open roles
+[17:48:49]   greenhouse/moneymart: 115 open roles
+[17:48:49]   greenhouse/monks: 341 open roles
+[17:48:49]   greenhouse/monsterenergy: 169 open roles
+[17:48:49]   greenhouse/netskope: 121 open roles
+[17:48:49]   greenhouse/nscaleoperationsukltd: 276 open roles
+[17:48:49]   greenhouse/astspacemobile: 276 open roles
+[17:48:49]   greenhouse/cssmerge: 341 open roles
+[17:48:49]   greenhouse/drayerpt: 135 open roles
+[17:48:49]   greenhouse/ecpcareers: 472 open roles
+[17:48:49]   greenhouse/eosfitness: 2810 open roles
+[17:48:49]   greenhouse/fanaticscommerce: 213 open roles
+[17:48:49]   greenhouse/flix: 127 open roles
+[17:48:49]   greenhouse/hasbro: 122 open roles
+[17:48:49]   greenhouse/helsing: 160 open roles
+[17:48:49]   greenhouse/revolutionmedicines: 323 open roles
+[17:48:49]   greenhouse/sentinellabs: 290 open roles
+[17:48:49]   greenhouse/ursamajor: 120 open roles
+[17:48:49]   lever/palantir: 299 open roles
+[17:48:49]   lever/veeva: 892 open roles
+[17:48:49]   lever/jobgether: 4457 open roles
+[17:48:49]   lever/flynncompanies: 171 open roles
+[17:48:49]   lever/gopuff: 778 open roles
+[17:48:49]   lever/buckmason: 259 open roles
+[17:48:49]   lever/arcteryx.com: 261 open roles
+[17:48:49]   lever/thinkahead: 153 open roles
+[17:48:49]   lever/solidcore: 260 open roles
+[17:48:49]   lever/zoox: 229 open roles
+[17:48:49]   lever/insomniacookies: 1110 open roles
+[17:48:49]   lever/crypto: 102 open roles
+[17:48:49]   lever/shieldai: 655 open roles
+[17:48:49]   lever/Aprio: 213 open roles
+[17:48:49]   lever/amityfdn: 118 open roles
+[17:48:49]   lever/boxlunch: 4604 open roles
+[17:48:49]   lever/rws: 153 open roles
+[17:48:49]   lever/weloglobal: 460 open roles
+[17:48:49]   workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 166 open roles
+[17:48:49]   workday/salesforce/wd12/External_Career_Site/Salesforce: 158 open roles
+[17:48:49]   workday/workday/wd5/Workday/Workday: 144 open roles
+[17:48:49]   workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 130 open roles
+[17:48:49]   workday/target/wd5/targetcareers/Target: 172 open roles
+[17:48:49]   workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 116 open roles
+[17:48:49]   workday/pnc/wd5/External/PNC: 168 open roles
+[17:48:49]   workday/williams/wd5/external/Williams: 113 open roles
+[17:48:49]   workday/xcelenergy/wd1/External/Xcel Energy: 123 open roles
+[17:48:49]   workday/usc/wd5/ExternalUSCCareers/University of Southern California: 131 open roles
+[17:48:49]   workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 116 open roles
+[17:48:49]   workday/lmu/wd1/Careers/Loyola Marymount University: 123 open roles
+[17:48:49]   workday/citjpl/wd5/Jobs/NASA JPL: 128 open roles
+[17:48:49]   workday/fox/wd1/Domestic/Fox Corporation: 151 open roles
+[17:48:49]   workday/caa/wd1/Careers/Creative Artists Agency: 107 open roles
+[17:48:49]   workday/livenation/wd503/LNExternalSite/Live Nation: 274 open roles
+[17:48:49]   workday/iheartmedia/wd5/External_iHM/iHeartMedia: 111 open roles
+[17:48:49]   workday/skechers/wd5/One-career-site/Skechers: 105 open roles
+[17:48:49]   workday/amgen/wd1/Careers/Amgen: 221 open roles
+[17:48:49]   workday/huntsman/wd1/Huntsman/Huntsman: 152 open roles
+[17:48:49]   workday/cumminggroup/wd1/CGC/Cumming Group: 173 open roles
+[17:48:49]   workday/jll/wd1/jllcareers/JLL: 306 open roles
+[17:48:49]   workday/cw/wd1/External/Cushman & Wakefield: 217 open roles
+[17:48:49]   workday/msudenver/wd1/MSUDenver/Metropolitan State University of Denver: 128 open roles
+[17:48:49]   workday/denverhealth/wd1/DHHA-Main/Denver Health: 102 open roles
+[17:48:49]   workday/davita/wd1/DKC_External/DaVita: 162 open roles
+[17:48:49]   workday/arrow/wd1/AC/Arrow Electronics: 168 open roles
+[17:48:49]   workday/apog/wd1/Apogee/Apogee Enterprises: 112 open roles
+[17:48:49]   workday/wilsonco/wd5/Careers/Wilson & Company: 136 open roles
+[17:48:49]   workday/prologis/wd5/Prologis_External_Careers/Prologis: 108 open roles
+[17:48:49]   workday/nyp/wd1/nypcareers/NewYork-Presbyterian: 131 open roles
+[17:48:49]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 135 open roles
+[17:48:49]   workday/newschool/wd1/External/The New School: 183 open roles
+[17:48:49]   workday/blackstone/wd1/Blackstone_Careers/Blackstone: 133 open roles
+[17:48:49]   workday/brookfield/wd5/brookfield/Brookfield: 141 open roles
+[17:48:49]   workday/avalonbay/wd5/AVBExternal/AvalonBay Communities: 142 open roles
+[17:48:49]   workday/citi/wd5/2/Citi: 271 open roles
+[17:48:49]   workday/spgi/wd5/SPGI_Careers/S&P Global: 121 open roles
+[17:48:49]   workday/nasdaq/wd1/Global_External_Site/Nasdaq: 163 open roles
+[17:48:49]   workday/pvh/wd1/PVH_Careers/PVH: 129 open roles
+[17:48:49]   workday/tapestry/wd108/Tapestry_Careers/Tapestry: 132 open roles
+[17:48:49]   workday/pfizer/wd1/PfizerCareers/Pfizer: 153 open roles
+[17:48:49]   workday/tiaa/wd1/Search/TIAA: 166 open roles
+[17:48:49]   workday/pru/wd5/Careers/Prudential Financial: 183 open roles
+[17:48:49]   workday/mmc/wd1/MMC/Marsh McLennan: 317 open roles
+[17:48:49]   workday/dentsuaegis/wd3/DAN_GLOBAL/dentsu: 137 open roles
+[17:48:49]   workday/wf/wd1/WellsFargoJobs/Wells Fargo: 140 open roles
+[17:48:49]   workday/usbank/wd1/US_Bank_Careers/U.S. Bank: 250 open roles
+[17:48:49]   workday/capitalone/wd12/Capital_One/Capital One: 194 open roles
+[17:48:49]   workday/accenture/wd103/AccentureCareers/Accenture: 486 open roles
+[17:48:49]   workday/allstate/wd5/allstate_careers/Allstate: 200 open roles
+[17:48:49]   workday/humana/wd5/Humana_External_Career_Site/Humana: 146 open roles
+[17:48:49]   workday/cigna/wd5/cignacareers/Cigna: 115 open roles
+[17:48:49]   workday/elevancehealth/wd1/ANT/Elevance Health: 133 open roles
+[17:48:49]   workday/cardinalhealth/wd1/EXT/Cardinal Health: 139 open roles
+[17:48:49]   workday/medtronic/wd1/MedtronicCareers/Medtronic: 239 open roles
+[17:48:49]   workday/thermofisher/wd5/ThermoFisherCareers/Thermo Fisher Scientific: 149 open roles
+[17:48:49]   workday/danaher/wd1/DanaherJobs/Danaher: 218 open roles
+[17:48:49]   workday/chevron/wd5/jobs/Chevron: 145 open roles
+[17:48:49]   ashby/ramp: 168 open roles
+[17:48:49]   ashby/notion: 147 open roles
+[17:48:49]   ashby/openai: 816 open roles
+[17:48:49]   ashby/perplexity: 135 open roles
+[17:48:49]   ashby/plaid: 131 open roles
+[17:48:49]   ashby/zip: 101 open roles
+[17:48:49]   ashby/cohere: 122 open roles
+[17:48:49]   ashby/elevenlabs: 150 open roles
+[17:48:49]   workable/nogigiddy: 1822 open roles
+[17:48:49]   workable/suppliedtalent: 190 open roles
+[17:48:49]   workable/serenity-mental-health-centers: 364 open roles
+[17:48:49]   workable/pacific-health-group: 195 open roles
+[17:48:49]   workable/pm2cm: 125 open roles
+[17:48:49]   workable/behavior-frontiers: 137 open roles
+[17:48:49]   workable/pavago: 2564 open roles
+[17:48:49]   workable/rimkus: 147 open roles
+[17:48:49]   workable/intertek: 211 open roles
+[17:48:49]   workable/yugo: 108 open roles
+[17:48:49]   workable/volga-partners: 128 open roles
+[17:48:49]   workable/weekday-1: 912 open roles
+[17:48:49]   workable/raydar: 996 open roles
+[17:48:49]   breezy/american-logistics-authority: 2760 open roles
+[17:48:49]   smartrecruiters/aspenskiingcompany: 119 open roles
+[17:48:49]   smartrecruiters/equinox: 211 open roles
+[17:48:49]   smartrecruiters/boschgroup: 222 open roles
+[17:48:49]   smartrecruiters/sgs: 177 open roles
+[17:48:49]   smartrecruiters/redbull: 394 open roles
+[17:48:49]   smartrecruiters/AIRCommunities: 133 open roles
+[17:48:49]   smartrecruiters/uniteklearning: 172 open roles
+[17:48:49]   smartrecruiters/mattelinc: 119 open roles
+[17:48:49]   smartrecruiters/thewonderfulcompany: 134 open roles
+[17:48:49]   greenhouse: 807 of 822 boards have openings (59055 roles)
+[17:48:49]   lever: 120 of 124 boards have openings (17835 roles)
+[17:48:49]   workday: 114 of 114 boards have openings (12668 roles)
+[17:48:49]   ashby: 75 of 81 boards have openings (3482 roles)
+[17:48:49]   workable: 120 of 126 boards have openings (10381 roles)
+[17:48:49]   bamboohr: 4 of 4 boards have openings (200 roles)
+[17:48:49]   recruitee: 2 of 2 boards have openings (58 roles)
+[17:48:49]   breezy: 6 of 6 boards have openings (2821 roles)
+[17:48:49]   smartrecruiters: 45 of 52 boards have openings (1944 roles)
+[17:48:49]   ashby: 1 board names not found (skipped from now on): carta
+[17:48:49]   agg/linkedin: 0 roles (cached)
+[17:48:49]   agg/remoteok: 16 roles (cached)
+[17:48:49]   agg/remotive: 0 roles (cached)
+[17:48:49]   agg/jicy: 13 roles (cached)
+[17:48:49]   agg/himalayas: 1 roles (cached)
+[17:48:49]   agg/wwr: 16 roles (cached)
+[17:48:49]   agg/themuse: 203 roles (cached)
+[17:48:49]   agg/adzuna: 0 roles (cached)
+[17:48:49]   agg/jooble: 0 roles (cached)
+[17:49:01]   agg/workablejobs: 260 fetched, 101 pass the title/location filter
+[17:49:02]   agg/arbeitnow: 900 fetched, 6 pass the title/location filter
+[17:49:03]   agg/workingnomads: 38 fetched, 3 pass the title/location filter
+[17:49:03]   agg/githublists: 370 fetched, 71 pass the title/location filter
+[17:49:19]   agg/builtin: 88 fetched, 61 pass the title/location filter
+[17:49:19]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[17:49:19]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[17:49:21]   agg/hnhiring: 3 fetched, 0 pass the title/location filter
+[17:49:25]   found 2 new company boards from aggregator listings: workable/a2z-sync, workable/ebatiz-associates-inc
+[17:49:25]   workable: 2 of 2 boards have openings (30 roles)
+[17:49:26]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[17:49:27] 104337 open roles, 1063 new
+[17:49:28]   ✓  82  Accounts Receivable Operations Analyst @ geostabilizationinternational (Westminster, Colorado) — title 'operations analyst' +50; keywords [construction, lean, excel, ownership] +15; location 'colorado' +12; pay up to $88,000 +5
+[17:49:28]   ✓  69  Business Analyst I (Remote) @ businessolver (Remote - United States) — title 'business analyst' +47; keywords [data analysis, stakeholder, excel, sql] +16; location 'remote' +16; 'hris' -10
+[17:49:28]   ✓  64  Procurement Clerk Assistant @ ebatiz-associates-inc (Bronx, New York, United States) — title 'procurement' +34; keywords [vendor, supply chain, inventory, excel] +18; location 'new york' +12
+[17:49:28]   ✓  63  Business Analyst I (Remote) @ businessolver (United States (Remote)) — title 'business analyst' +47; location 'remote' +16
+[17:49:28]   ✓  61  Critical Facilities Engineer @ jll (Colorado City, TX) — title 'facilities' +38; keywords [vendor, lean, excel] +11; location 'colorado' +12
+[17:49:28]   ✓  59  Commercial Analyst I @ thermofisher (Remote, Wisconsin, USA) — title 'analyst' +22; keywords [cross-functional, stakeholder, excel, ownership] +16; location 'remote' +16; pay up to $75,000 +5
+[17:49:28]   ✓  58  Product Analyst @ fanduel (New York City) — title 'analyst' +22; keywords [cross-functional, stakeholder, excel, sql] +19; location 'new york' +12; pay up to $112,000 +5
+[17:49:28]   ✓  57  TPA Operations Associate  @ judihealth (Charlotte, North Carolina, Uni) — title 'operations associate' +50; keywords [cross-functional, stakeholder, excel] +10; location 'new york' +12; 'healthcare' -15
+[17:49:28]   ✓  52  Security Analyst, 2nd Shift @ nuharborsecurity (Remote) — title 'analyst' +22; keywords [process improvement, documentation] +9; location 'remote' +16; pay up to $118,000 +5
+[17:49:28]   ✓  51  Quality Operations Specialist 1, Flex @ carrum-health (Colorado (Remote)) — title 'quality' +35; location 'remote' +16
+[17:49:28]   ✓  47  People Analytics Analyst @ davita (05555 - Casa del Mundo Office ) — title 'analyst' +22; keywords [data analysis, lean, stakeholder, draw] +23; location 'denver' +12; 'healthcare' -15; pay up to $85,000 +5
+[17:49:28]   ✓  45  Peer Navigator/ Ryan White Program @ ebatiz-associates-inc (New York, New York, United Sta) — title 'program' +22; keywords [bilingual, spanish, excel] +11; location 'new york' +12
+[17:49:28]   ✓  43  Conflicts Analyst @ wilsonelser (New York, New York) — title 'analyst' +22; keywords [spanish] +4; location 'new york' +12; pay up to $80,000 +5
+[17:49:28]   ✓  41  A&R Coordinator @ sonymusicentertainment (United States, New York, New Y) — title 'coordinator' +22; keywords [project coordination, scheduling] +7; location 'new york' +12
+[17:49:28]   ✓  40  Proposal Development Analyst @ judihealth (Charlotte, North Carolina, Uni) — title 'analyst' +22; keywords [sop, cross-functional, project management, stakeholder] +16; location 'new york' +12; 'healthcare' -15; pay up to $92,5
+[17:49:28]   ✓  40  CRO Specialist @ comfrt (Remote) — keywords [workflow, project management, vendor, lean] +19; location 'remote' +16; pay up to $100,000 +5
+[17:49:28]   ✓  39  Bilingual Customer Experience T3 Specialist (Spanish) @ instacart (United States - Remote) — keywords [continuous improvement, workflow, bilingual, spanish] +23; location 'remote' +16
+[17:49:28]   ✓  31  Customer Experience T3 Specialist @ instacart (United States - Remote) — keywords [continuous improvement, workflow, excel, ownership] +15; location 'remote' +16
+[17:49:28]   ✓  29  Administrative Assistant @ ebatiz-associates-inc (Far Rockaway, New York, United) — keywords [vendor, inventory, excel, procurement] +17; location 'new york' +12
+[17:49:28]   ✓  29  Administrative Assistant @ ebatiz-associates-inc (New York, New York, United Sta) — keywords [vendor, inventory, excel, procurement] +17; location 'new york' +12
+[17:49:28]   ✓  29  Administrative Assistant @ ebatiz-associates-inc (Far Rockaway, New York, United) — keywords [vendor, inventory, excel, procurement] +17; location 'new york' +12
+[17:49:28]   ✓  28  HR Coordinator @ caa (New York, NY) — title 'coordinator' +22; keywords [cross-functional] +4; location 'new york' +12; 'hris' -10
+[17:49:28]   ✓  26  Property Accountant - Owned Assets @ greystar (City Office Houston, Houston, ) — keywords [construction] +5; location 'remote' +16; pay up to $70,000 +5
+[17:49:28]   ✓  20  Associate, Registered Fund Financial Reporting   @ pineadvisorsolutions (Denver, CO) — keywords [sop, excel] +8; location 'denver' +12
+[17:49:28]   ✓  18  Field Property Adjuster - MA @ allstate (USA - MA (Remote); MA - Boston) — keywords [process improvement, excel, ownership] +12; location 'remote' +16; 'healthcare' -15; pay up to $70,100 +5
+[17:49:28]   ✓  18  On-Premise Sales Trainee - Brooklyn, NY @ RedBull (New York, NY, United States) — keywords [entry level] +6; location 'new york' +12
+[17:49:28]   ✓  18  Associate Electrical Design Engineer @ moog (Buffalo, NY) — keywords [entry level] +6; location 'new york' +12
+[17:49:28]   ✓  18  Housing Specialist @ ebatiz-associates-inc (Bronx, New York, United States) — keywords [scheduling, documentation] +6; location 'new york' +12
+[17:49:28]   ✓  16  Revenue Specialist I (ROPS) @ davita (01789 - Arizona Remote) — location 'remote' +16
+[17:49:28]   ✓  16  Field Property Adjuster - New Jersey @ allstate (USA - NJ (Remote)) — location 'remote' +16
+[17:49:28]   ✓  12  Administrative Assistant, A&R @ umusic (New York, New York) — location 'new york' +12
+[17:49:28]   ✓  12  Business Development Executive - Institutional Client Group (CO/NM) @ usbank (Denver, CO) — location 'denver' +12
+[17:49:28]   ✓  12  BTIG: Investment Banking, Investment Banking Associate, Associate (M&A) @ usbank (New York, NY) — location 'new york' +12
+[17:49:28] Scored 35 new roles: 33 candidates for the résumé check, 2 with nothing going for them, 1025 filtered out by title/location (finding and scoring took 9.2 min)
+[17:49:29] 33 jobs queued: 0 already matched to your résumé, 33 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 407 now
+[17:49:29] Time for this run: 50 min in all (19322 of 1850 free Actions minutes used this month)
+[17:49:30] Accounts: ON (delgado@alumni.usc.edu)
+[17:49:32]   match  88%  People Analytics Analyst @ davita — Strong match for an Industrial Engineering graduate with quantitative analytics skills and corporate
+[17:49:32]   match  86%  Accounts Receivable Operations Analyst @ geostabilizationinternational — Excellent fit given candidate's construction background, financial tracking experience, and project 
+[17:49:32]   match  75%  Product Analyst @ fanduel — Good analytical match, though it leans more toward digital product analytics than general operations
+[17:49:32]   match  70%  TPA Operations Associate  @ judihealth — Solid entry-level operations role matching business degree and general administrative background.
+[17:49:32]   match  78%  Proposal Development Analyst @ judihealth — Strong project coordination and proposal management fit, though it prefers 2-4 years of specific exp
+[17:49:32] → People Analytics Analyst @ davita (score 47, match 88%)
+[17:49:36]       (opening Workday's application form directly)
+[17:49:41]       (account page: creating the account / signing in)
+[17:49:43]       account: signing in on davita.wd1.myworkdayjobs.com
+[17:49:51]       (writer answered 'How Did You Hear About Us?*' -> 'Select One')
+[17:49:51]       1/5 My Information: 13 fields (11 required)
+[17:49:56]       ! nothing was picked in 'How Did You Hear About Us?*' (wanted 'Select One'; choices: ['Select One', 'ANNA', 'Atlas Sourcer B', 'Better Jobs', 'Campus Job Fair', 'Campus to Careers Presentation'])
+[17:50:03]       My Information (try 2): Workday said ['Error: The field How Did You Hear About Us? is required and must have a value.', 'Error: The field Have you previously been employed by DaVita? is required and must have a value.', 'Error-How Did You Hear About Us? The field How Did You Hear About Us? is required and must have a value. Error-Have you previously been employed by DaVita? The field Have']; redoing ['Have you previously been emplo', 'How Did You Hear About Us?*']
+[17:50:07]       2/5 My Experience: 2 fields (0 required)
+[17:50:18]       (writer answered 'With or without accommodation, can you perform the duties ou' -> 'Yes')
+[17:50:19]       (writer answered 'Do you have clinical dialysis experience?*' -> 'No')
+[17:50:19]       (writer answered 'What best describes your current or most recent place of wor' -> 'Non Healthcare')
+[17:50:19]       3/5 Application Questions: 8 fields (8 required)
+[17:50:30]       ? unanswered: 'Select one:*' kind=combobox options=['Select One', 'Amazon', 'Walmart', 'Target', 'Walgreens', 'CVS']
+[17:50:30]     ✗ skipped: can't truthfully answer required: Select one:*
+[17:50:35] → Accounts Receivable Operations Analyst @ geostabilizationinternational (score 82, match 86%)
+[17:50:55]       step 1: 25 fields (12 required)
+[17:51:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:51:26]       mail: found 'Security code for your application to GeoStabilization Inter'
+[17:51:31]     ✓ applied (0.9 min)
+[17:51:40] → Product Analyst @ fanduel (score 58, match 75%)
+[17:51:46]     (on your apply-by-hand list: the site asks for a human check, which the bot never does)
+[17:51:46]     ✗ blocked: reCAPTCHA checkbox (a human check: the bot stops here)
+[17:51:55] → TPA Operations Associate  @ judihealth (score 57, match 70%)
+[17:52:06]       step 1: 21 fields (15 required)
+[17:52:07]       (writer answered 'Which of the following best describes your ability to meet o' -> 'I am willing to relocate to one of these locations')
+[17:52:24]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:52:27]       mail: found 'Security code for your application to Judi Health'
+[17:52:33]     ✓ applied (0.6 min)
+[17:52:36]   match  68%  Conflicts Analyst @ wilsonelser — Meets educational requirements and analytical background, but lacks specific legal or compliance wor
+[17:52:36]   match  72%  Business Analyst I (Remote) @ businessolver — Strong analytical and Excel skills, though short of the 2+ years of specific HRIS/benefits experienc
+[17:52:36]   match  25%  Critical Facilities Engineer @ jll — Hands-on critical facilities engineering and technical trades role requiring physical work and speci
+[17:52:36]   match  42%  HR Coordinator @ caa — Hourly pay rate equivalent to under $60,000 annually and requires specific corporate HR experience.
+[17:52:36]   match  88%  Commercial Analyst I @ thermofisher — Strong match for financial tracking, budgeting, pricing, and contract management skills from an engi
+[17:52:42] → Proposal Development Analyst @ judihealth (score 40, match 78%)
+[17:52:53]       step 1: 20 fields (11 required)
+[17:53:10]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:53:20]       mail: found 'Security code for your application to Judi Health'
+[17:53:25]     ✓ applied (0.7 min)
+[17:53:30] → Conflicts Analyst @ wilsonelser (score 43, match 68%)
+[17:53:37]       step 1: 12 fields (8 required)
+[17:53:43]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:53:55]       mail: found 'Security code for your application to Wilson Elser - Busines'
+[17:54:00]     ✓ applied (0.5 min)
+[17:54:07] → Business Analyst I (Remote) @ businessolver (score 69, match 72%)
+[17:54:26]       step 1: 33 fields (28 required)
+[17:54:27]       (writer answered '2.5 Do you currently work for a client of Businessolver?*' -> 'No')
+[17:54:55]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:55:08]       mail: found 'Security code for your application to Businessolver'
+[17:55:14]     ✓ applied (1.1 min)
+[17:55:15]   ✗ Revenue Specialist I (ROPS) @ davita: pays too little: tops out near $47,840 a year (your floor is $65,000)
+[17:55:19]   match  60%  Property Accountant - Owned Assets @ greystar — The candidate has financial tracking and Excel skills, but lacks dedicated degree or deep profession
+[17:55:19]   match  75%  CRO Specialist @ comfrt — The candidate has strong analytical skills and e-commerce/operations background, though CRO-specific
+[17:55:19]   match  50%  A&R Coordinator @ sonymusicentertainment — The role requires specific music industry administrative experience which the candidate lacks outsid
+[17:55:19]   match  70%  Field Property Adjuster - MA @ allstate — The candidate has strong property operations and construction background, but lacks formal claims ad
+[17:55:19]   match  78%  Associate, Registered Fund Financial Reporting   @ pineadvisorsolutions — Fits well as an entry-level finance role requiring a bachelor's degree and basic analytical or fund-
+[17:55:20] → Commercial Analyst I @ thermofisher (score 59, match 88%)
+[17:55:24]       (opening Workday's application form directly)
+[17:55:28]       (account page: creating the account / signing in)
+[17:55:30]       account: signing in on thermofisher.wd5.myworkdayjobs.com
+[17:55:38]       1/6 My Information: 18 fields (11 required)
+[17:55:43]       2/6 My Experience: 2 fields (1 required)
+[17:55:48]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[17:56:02]       (writer answered 'Are you currently a member of an Institutional Review Board/' -> 'No')
+[17:56:02]       (ticked None of these for 'Please indicate which, if any, where you are a citizen.*')
+[17:56:02]       3/6 Application Questions: 13 fields (13 required)
+[17:56:11]       (writer answered 'Are you currently participating in any matter involving Ther' -> 'No')
+[17:56:11]       (ticked None of these for 'Please indicate which, if any, where you are a citizen.*')
+[17:56:11]       Application Questions (try 2): Workday said ['Error: The field Are you currently participating in any matter involving Thermo Fisher Scientific or any of its affiliates? is required and must have a value.', 'Error-Are you currently participating in any matter involving Thermo Fisher Scientific or any of its affiliates? The field Are you currently participating in any matter i']; redoing ['Cuba', 'Syria', 'North Korea', 'Iran', 'Sudan', 'None of these', 'Are you currently participatin']
+[17:56:17]       (writer answered 'Did you have any U.S. Government employment prior to your cu' -> 'No')
+[17:56:17]       (ticked None of these for 'Please indicate which, if any, where you are a citizen.*')
+[17:56:17]       Application Questions (try 3): Workday said ['Error: The field Did you have any U.S. Government employment prior to your current employment? is required and must have a value.', 'Error-Did you have any U.S. Government employment prior to your current employment? The field Did you have any U.S. Government employment prior to your current employment']; redoing ['Cuba', 'Syria', 'North Korea', 'Iran', 'Sudan', 'None of these', 'Did you have any U.S. Governme']
+[17:56:24]       4/6 Voluntary Disclosures: 4 fields (4 required)
+[17:56:29]       5/6 Self Identify: 7 fields (6 required)
+[17:56:37]       Review: submitting
+[17:56:40]     ✓ applied (1.3 min)
+[17:56:46] → Property Accountant - Owned Assets @ greystar (score 26, match 60%)
+[17:56:50]       (opening Workday's application form directly)
+[17:56:57]       (account page: creating the account / signing in)
+[17:56:57]       account: signing in on greystar.wd1.myworkdayjobs.com
+[17:57:06]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[17:57:27]       account: it had gone through
+[17:57:29]       account: signing in on greystar.wd1.myworkdayjobs.com
+[17:57:39]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[17:57:57]       account: it had gone through
+[17:58:00]       account: signing in on greystar.wd1.myworkdayjobs.com
+[17:58:03]       account: sign-in refused; Workday says: nothing
+[17:58:13]       account: sign-in refused on greystar.wd1.myworkdayjobs.com; resetting the password through your email
+[17:59:39]       account: the password-reset email did not arrive in time. If it comes later, the next try uses it
+[17:59:39]       account: no reset email came, so this email probably has no account on greystar.wd1.myworkdayjobs.com: creating one
+[18:00:11]       1/6 My Information: 16 fields (12 required)
+[18:00:23]       2/6 My Experience: 5 fields (0 required)
+[18:00:40]       3/6 Application Questions: 13 fields (12 required)
+[18:00:57]       ? unanswered: 'I consent for my information to be used by the company according to the company policy.*' kind=checkbox_single options=[]
+[18:00:57]     ✗ skipped: can't truthfully answer required: I consent for my information to be used by the company accor
+[18:01:03] → CRO Specialist @ comfrt (score 40, match 75%)
+[18:01:12]       step 1: 22 fields (15 required)
+[18:01:52]       email: the site asked for a security code after Submit; reading it from the application inbox
+[18:02:03]       mail: found 'Security code for your application to Comfrt'
+[18:02:08]     ✓ applied (1.1 min)
+[18:02:12] → Quality Operations Specialist 1, Flex @ carrum-health (score 51)
+[18:02:18]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[18:02:18] → Field Property Adjuster - MA @ allstate (score 18, match 70%)
+[18:02:23]       (opening Workday's application form directly)
+[18:02:27]       (account page: creating the account / signing in)
+[18:02:29]       account: signing in on allstate.wd5.myworkdayjobs.com
+[18:02:43]       1/5 My Information: 14 fields (11 required)
+[18:02:52]       2/5 My Experience: 2 fields (1 required)
+[18:03:04]       3/5 Application Questions: 5 fields (4 required)
+[18:03:11]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[18:03:18]       Review: submitting
+[18:03:22]     ✓ applied (1.1 min)
+[18:03:23]   ✗ Administrative Assistant, A&R @ umusic: pays too little: tops out near $45,000 a year (your floor is $65,000)
+[18:03:24]   ✗ Business Development Executive - Institutional Client Group (CO/NM) @ usbank: above entry level: senior (requires 10+ yrs; pay starts at $225,000)
+[18:03:25]   ✗ BTIG: Investment Banking, Investment Banking Associate, Associate (M&A) @ usbank: above entry level: mid (requires 5+ yrs; pay starts at $110,000)
+[18:03:26]   match  20%  Associate Electrical Design Engineer @ moog — same role at this employer, checked before: The candidate has an industrial engineering background r
+[18:03:27]   match  72%  Field Property Adjuster - New Jersey @ allstate — Relevant construction and property background, though missing specific insurance adjusting licenses.
+[18:03:27]   match  40%  Customer Experience T3 Specialist @ instacart — Call center role with pay and structure below the professional office threshold.
+[18:03:27]   match  40%  Bilingual Customer Experience T3 Specialist (Spanish) @ instacart — Call center role with pay and structure below the professional office threshold.
+[18:03:27]   match  45%  Security Analyst, 2nd Shift @ nuharborsecurity — Requires specialized cybersecurity operations background that the engineering graduate lacks.
+[18:03:27]   match  88%  Procurement Clerk Assistant @ ebatiz-associates-inc — Strong match for procurement, inventory, and supply chain operations using Excel and vendor coordina
+[18:03:27] → Associate, Registered Fund Financial Reporting   @ pineadvisorsolutions (score 20, match 78%)
+[18:03:35]       step 1: 17 fields (10 required)
+[18:03:36]       (writer answered 'Are you able and willing to work in our Denver, CO office 2-' -> 'Yes')
+[18:03:48]       email: the site asked for a security code after Submit; reading it from the application inbox
+[18:03:59]       mail: found 'Security code for your application to PINE Advisor Solutions'
+[18:04:04]     ✓ applied (0.6 min)
+[18:04:09] → Field Property Adjuster - New Jersey @ allstate (score 16, match 72%)
+[18:04:12]       (opening Workday's application form directly)
+[18:04:20]       1/5 My Information: 14 fields (11 required)
+[18:04:28]       2/5 My Experience: 2 fields (1 required)
+[18:04:39]       3/5 Application Questions: 5 fields (4 required)
+[18:04:46]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[18:04:52]       Review: submitting
+[18:04:57]     ✓ applied (0.8 min)
+[18:04:58]   ✗ On-Premise Sales Trainee - Brooklyn, NY @ RedBull: pays too little: tops out near $60,486 a year (your floor is $65,000)
+[18:04:59]   match  68%  Administrative Assistant @ ebatiz-associates-inc — The candidate's administrative and financial tracking experience fits the procurement and documentat
+[18:04:59]   match  45%  Housing Specialist @ ebatiz-associates-inc — The role requires a degree in social work or human services and specific housing case management exp
+[18:04:59]   match  40%  Peer Navigator/ Ryan White Program @ ebatiz-associates-inc — The position requires specific health/peer certifications and experience in social services and subs
+[18:05:02] → Procurement Clerk Assistant @ ebatiz-associates-inc (match 88%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[18:05:02] → Administrative Assistant @ ebatiz-associates-inc (match 68%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[18:05:02]   match  68%  Administrative Assistant @ ebatiz-associates-inc — same role at this employer, checked before: apply by hand (human check): workable stops every automa
+[18:05:02] → Administrative Assistant @ ebatiz-associates-inc (match 68%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[18:05:02]   match  68%  Administrative Assistant @ ebatiz-associates-inc — same role at this employer, checked before: apply by hand (human check): workable stops every automa
+[18:05:02] → Administrative Assistant @ ebatiz-associates-inc (match 68%): on your apply-by-hand list (workable asks every applicant to pass a human check)
+[18:05:02] Résumé checks this run: 26 (17 passed) in 5 calls. Free writer allowance used today: groq 107k/195k tokens (+18k served from its cache, not counted); groq-20b 52k/195k tokens; groq-qwen 41k/195k tokens; gemini-lite 69/480 requests (+19k served from its cache, not counted); gemini-flash 0/18 requests
+[18:05:02] Summary: 10 applied, 4 skipped, 11 low_score, 1030 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-10-30.md
+[18:05:02]   by site  greenhouse: 7 applied, 1 manual
+[18:05:02]   by site  workday: 3 applied, 2 skipped
+[18:05:02]   by site  workable: 4 manual
+[18:05:02]   by site  www.builtincolorado.com: 2 skipped
+[18:05:04] Summary emailed to delgado@alumni.usc.edu
