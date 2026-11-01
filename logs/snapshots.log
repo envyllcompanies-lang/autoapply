@@ -5125,3 +5125,28 @@ label: I understand
   text: NASA Federal Credit Union Home Page
   text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
 
+=== 2026-11-01 15:30:28  unconfirmed  Sales Operations Analyst @ roboflow
+url: https://jobs.ashbyhq.com/roboflow/34c551fd-890b-4ee8-acc0-ba199d677988/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://jobs.ashbyhq.com/api/non-user-graphql -> 200; POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ' here to autofill key application fields. Upload file Name Email Resume <file> Replace or drag and drop here Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Sales Operations Analyst
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
