@@ -3456,3 +3456,13 @@
 [19:21:31] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 116k/195k tokens (+35k served from its cache, not counted); groq-20b 75k/195k tokens (+0k served from its cache, not counted); groq-qwen 45k/195k tokens; gemini-lite 81/480 requests (+10k served from its cache, not counted); gemini-flash 0/18 requests
 [19:21:31] Summary: 1 failed. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-03.md
 [19:21:31]   by site  greenhouse: 1 failed
+[19:45:01] === autoapply run (LIVE) build 2026-10-18-b ===
+[19:45:02] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[19:45:03] mail: logged in to delgado@alumni.usc.edu OK
+[19:45:49] Discovering jobs…
+[19:45:49] Job search already ran at 19:02 (searches run every 3 h): this run only applies
+[19:45:58]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[19:45:58] 0 open roles, 0 new
+[19:45:58] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.0 min)
+[19:45:59] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 441 now
+[19:45:59] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-03.md
