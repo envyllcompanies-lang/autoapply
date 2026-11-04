@@ -1,69 +1,3 @@
-=== 2026-10-30 17:50:30  skipped  People Analytics Analyst @ davita
-url: https://davita.wd1.myworkdayjobs.com/DKC_External/job/05555---Casa-del-Mundo-Office-Denver-HQ/People-Analytics-Analyst_R0483553/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: Select one:*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] DaVita {navigationItem-DaVita}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# People Analytics Analyst
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-{progressBarActiveStep} current step 3 of 5 Application Questions
-label: current step 3 of 5
-label: Application Questions
-label: step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Application Questions
-# Errors Found
-! Error-Please list your desired pay expectations rounded to the nearest dollar.(To calculate an hourly pay expectation, take annual desired salary before taxes and divide by 2080)Desired Pay Rate Amoun {errorHeading}
-{applyFlowPrimaryQuestionsPage}
- {formField-b831311d6f6d1001568f0356d7d40001}
-label: With or without accommodation, can you perform the duties outlined in the job posting on the careers.davita.co
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0356d7d40001
- {formField-b831311d6f6d1001568f048ac95a0004}
-label: Can you provide legal documentation establishing your identity and eligibility to be legally employed in the U
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0004
- {formField-b831311d6f6d1001568f048ac95a0001}
-label: Are you legally authorized to work in the United States for DaVita without requiring employment visa sponsorsh
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0001
- {formField-b831311d6f6d1001568f03f0dbea0002}
-label: Desired Pay Rate Type:*
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0002
- {formField-b831311d6f6d1001568f03f0dbea0004}
-label: Please list your desired pay expectations rounded to the nearest dollar.(To calculate an hourly pay expectatio
-  <input:text #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0004 required INVALID empty>
-! Error: The field Please list your desired pay expectations rounded to the nearest dollar.(To calculate an hourly pay expectation, take annual desired salary before taxes and divide by 2080)Desired Pay {inputAlert}
- {formField-b831311d6f6d1001568f03f0dbea0007}
-label: Are you open to relocation?*
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0007
- {formField-b831311d6f6d1001568f048ac95a0007}
-label: Do you have clinical dialysis experience?*
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0007
- {formField-b831311d6f6d1001568f0524b6ec0002}
-label: What qualifications did we not ask you about that you wish we had in considering you for this role?*
-  <textarea #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0002 required filled>
- {formField-b831311d6f6d1001568f0524b6ec0003}
-label: What best describes your current or most recent place of work?*
-  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0003
- {formField-b831311d6f6d1001568f06f285cb0007}
-label: Select one:*
-  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f06f285cb0007 INVALID
-! Error: The field Select one: is required and must have a value. {inputAlert}
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-10-30 17:51:46  blocked  Product Analyst @ fanduel
 url: https://www.fanduel.careers/jobs/fanduel/product-analyst-2/
 why: reCAPTCHA checkbox (a human check: the bot stops here)
@@ -5443,4 +5377,78 @@ label: I am not a protected veteran
 label: I decline to self-identify for protected veteran status
   [button] Submit Application disabled
 <iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-04 05:05:56  unconfirmed  Scheduler @ dvj-consulting-engineers
+url: https://apply.workable.com/dvj-consulting-engineers/j/7BA08CF505/apply
+stage: page 1
+why: no confirmation after submit; server said: POST 7leTUGXrBqyTM_PJfwwQnZpgUndsNWw8Vfa1c9FS-4ofLN5Aw8bi34azWza_WdNj_6m4uE6nqVzSDY6tEo6l9FVJtQ -> 200; POST 7leTUGXrBqyTM_PJfwwQnZpgUndsNWw8Vfa1c9FS-4ofLN5Aw8bi34azWza_WdNj_6m4uE6nqVzSDY6tEo6l9FVJtQ -> 200; page ends: 'o_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Desired salary (Optional) Submitting… V
+# Scheduler
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+label: * Address
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_O9K3AXcs5ZFUvLXc no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_hVRXj1aeeeV2gP3X has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+label: Desired salary (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-04 05:07:45  unconfirmed  Construction Inspector I @ dvj-consulting-engineers
+url: https://apply.workable.com/dvj-consulting-engineers/j/550FD4D0C3/apply
+stage: page 1
+why: no confirmation after submit; server said: POST iTJC5dgOMGwLRNEPcoQFYRtO8Z3C3O9oPlm23KXUw4z-6vI1Q5Vx57tQZVwHhjxo3XrG6WvWKx-7iC4aJfYBRSUEAA -> 200; POST iTJC5dgOMGwLRNEPcoQFYRtO8Z3C3O9oPlm23KXUw4z-6vI1Q5Vx57tQZVwHhjxo3XrG6WvWKx-7iC4aJfYBRSUEAA -> 200; page ends: 'o_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Desired salary (Optional) Submitting… V
+# Construction Inspector I
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+label: * Address
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_JQ9n8BuPqFo1Hz7s no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_taqdjeipjlI0VVXo has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+label: Desired salary (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
 
