@@ -5604,3 +5604,67 @@ label: Yes, I have read and consent to the terms and conditions.*
   [button] Save and Continue {pageFooterNextButton}
   text: © 2026 Workday, Inc. All rights reserved.
 
+=== 2026-11-05 07:50:14  skipped  Logistics Associate - Westchester (Day shift) @ msk
+url: https://msk.wd108.myworkdayjobs.com/MSKCC_Careers_Primary/job/Westchester-NY/Logistics-Associate---Westchester--Day-shift-_103539/apply/applyManually
+stage: Application Questions
+why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.', 'Error-Desired Annual Pay: The number entered is too large.']; fields flagged: ['Desired Annual Pay:']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Logistics Associate - Westchester (Day shift)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+# Errors Found
+! Error-Desired Annual Pay: The number entered is too large. {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-602e5b1032dd1000b49c59e15d730000}
+label: Pronoun
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c59e15d730000
+ {formField-602e5b1032dd1000b49c5baf54150001}
+label: Desired Annual Pay:*
+  <input:text #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150001 required INVALID filled>
+! Error: The number entered is too large. {inputAlert}
+ {formField-602e5b1032dd1000b49c5baf54150002}
+label: Are you willing to relocate?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150002
+ {formField-602e5b1032dd1000b49c5baf54150005}
+label: Do you have relatives employed here?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150005
+ {formField-602e5b1032dd1000b49c5c4940100002}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100002
+ {formField-602e5b1032dd1000b49c5c4940100005}
+label: Will you now or in the future (e.g., post-OPT) require sponsorship for employment visa status (e.g., H-1B, TN,
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100005
+ {formField-602e5b1032dd1000b49c5ce328200000}
+label: At MSK, we use an AI feature that helps compare the experience and skills in your application to the minimum r
+  text: A recruiter will always review your application.
+  text: Would you like to opt out of this feature?
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5ce328200000
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] MSKCC Privacy Practices {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
