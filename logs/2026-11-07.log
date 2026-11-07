@@ -1852,3 +1852,622 @@
 [14:53:54] Summary: 10 applied, 1 skipped, 1 queued, 80 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-07.md
 [14:53:54]   by site  ashby: 10 applied, 1 skipped
 [14:53:55] Summary emailed to delgado@alumni.usc.edu
+[15:10:23] === autoapply run (LIVE) build 2026-10-18-b ===
+[15:10:24] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[15:10:25] mail: logged in to delgado@alumni.usc.edu OK
+[15:12:37] Discovering jobs…
+[15:12:37] Job search already ran at 14:51 (searches run every 3 h): this run only applies
+[15:14:26]   agg/jobboard: 1,432,835 jobs in today's snapshot, 809,614 at your level on sites the bot can fill, 230 new ones pass your title/location filters; 95 of them marked remote by their site, to be confirmed from the posting itself
+[15:14:26] 230 open roles, 230 new
+[15:14:26]   ✓  68  Operations Associate @ hss (New York, NY) — title 'operations associate' +50; keywords [entry level] +6; location 'new york' +12
+[15:14:26]   ✓  66  Southern Sierra Project Coordinator @ National Forest Foundation (Fresno, CA (listed as remote: ) — title 'project coordinator' +50; location 'remote' +16
+[15:14:26]   ✓  66  Risk Operations Analyst @ southstatebank (Remote Worker) — title 'operations analyst' +50; location 'remote' +16
+[15:14:26]   ✓  66  Business Operations & Workforce Management Analyst, Styling @ stitchfix (Remote, USA) — title 'business operations' +50; location 'remote' +16
+[15:14:26]   ✓  63  Business Analyst @ pcg (US HI Remote) — title 'business analyst' +47; location 'remote' +16
+[15:14:26]   ✓  62  Retail Logistics Operations Analyst @ fastretailing (UNIQLO SSC - New York) — title 'operations analyst' +50; location 'new york' +12
+[15:14:26]   ✓  62  EHS Project Coordinator @ moog (Buffalo, NY) — title 'project coordinator' +50; location 'new york' +12
+[15:14:26]   ✓  57  Process Improvement Leader @ ineos (Underwood Dr, Pasadena, TX) — title 'process improvement' +45; keywords [process improvement] +6; location 'pasadena' +6
+[15:14:26]   ✓  56  Hospital Operations Coordinator @ agiliti (Los Angeles - Hospital Site) — title 'operations coordinator' +50; location 'los angeles' +6
+[15:14:26]   ✓  56  Hospital Operations Coordinator @ agiliti (Los Angeles - Hospital Site) — title 'operations coordinator' +50; location 'los angeles' +6
+[15:14:26]   ✓  56  FACILITIES MAINTENANCE TECH 11-2026 @ Colorado Jet Center Inc (Colorado Springs, CO) — title 'facilities' +38; keywords [entry level] +6; location 'colorado' +12
+[15:14:26]   ✓  55  Logistics Analyst (Requirements) @ Delta Point Family of Companies (Wright-Patterson AFB, OH (list) — title 'logistics' +39; location 'remote' +16
+[15:14:26]   ✓  55  Construction and Facilities Specialist @ heyrowan (Larchmont, NY) — title 'facilities' +38; keywords [construction] +5; location 'new york' +12
+[15:14:26]   ✓  50  Digital Commerce Inventory Planner @ fastretailing (UNIQLO SSC - New York) — title 'inventory' +34; keywords [inventory] +4; location 'new york' +12
+[15:14:26]   ✓  50  Annuity Operations Analyst @ keybank (Brooklyn, OH) — title 'operations analyst' +50
+[15:14:26]   ✓  50  Associate Buyer-Commodity Professional @ saabusa (East Syracuse, NY (Enterprise)) — title 'buyer' +32; keywords [entry level] +6; location 'new york' +12
+[15:14:26]   ✓  47  ServiceNow Business Analyst @ lightfeatheriollc (United States) — title 'business analyst' +47
+[15:14:26]   ✓  47  Patient Care Coordinator/Scheduler @ ccpsa (Lakewood, Colorado) — title 'scheduler' +35; location 'colorado' +12
+[15:14:26]   ✓  46  Accounts Receivable Quality Assurance Auditor @ EGO Inc DBA Brault (San Dimas, CA (listed as remot) — title 'quality' +30; location 'remote' +16
+[15:14:26]   ✓  46  Financial Analyst - Financial Operations @ mcw (Remote-Wisconsin) — title 'operations' +30; location 'remote' +16
+[15:14:26]   ✓  46  Patient Services, Scheduler @ REVCO SOLUTIONS INC (Remote Worker - N/A) — title 'scheduler' +30; location 'remote' +16
+[15:14:26]   ✓  44  Data Strategy & Sourcing @ pdtpartners (New York, NY) — title 'sourcing' +32; location 'new york' +12
+[15:14:26]   ✓  44  BUYER-ONSITE @ Schneider Packaging Equipment (Brewerton, NY) — title 'buyer' +32; location 'new york' +12
+[15:14:26]   ✓  43  Purchasing Coordinator @ icarus (El Segundo) — title 'purchasing' +37; location 'el segundo' +6
+[15:14:26]   ✓  43  Executive Assistant, Corporate Governance & Board Operations @ meredith (New York, NY - 225 Liberty Str) — title 'operations' +25; keywords [entry level] +6; location 'new york' +12
+[15:14:26]   ✓  42  Quality Control Microbiology testing @ sanofi (Pearl River, NY) — title 'quality' +30; location 'new york' +12
+[15:14:26]   ✓  42  Quality Control Technician @ solidpower (Thornton, CO) — title 'quality' +30; location 'colorado' +12
+[15:14:26]   ✓  41  Campaign Operations Specialist @ lastpass (Remote - US) — title 'operations' +25; location 'remote' +16
+[15:14:26]   ✓  41  Associate Manager, Toxicology Operations @ regeneron (Remote - United States) — title 'operations' +25; location 'remote' +16
+[15:14:26]   ✓  40  Early Career Recruiting Coordinator @ coreweave (Livingston, NJ / New York, NY ) — title 'coordinator' +22; keywords [early career] +6; location 'new york' +12
+[15:14:26]   ✓  40  Product Support SME (Logistics) @ ensco (El Segundo, California, United) — title 'logistics' +34; location 'el segundo' +6
+[15:14:26]   ✓  40  Equities Portfolio Analyst I @ ameriprise (New York, New York) — title 'analyst' +22; keywords [entry level] +6; location 'new york' +12
+[15:14:26]   ✓  40  Assistant, Programmatic @ horizonmedia (New York, New York) — title 'program' +22; keywords [entry level] +6; location 'new york' +12
+[15:14:26]   ✓  40  Resident Services Coordinator @ Housing Catalyst (Fort Collins, CO) — title 'coordinator' +22; keywords [entry level] +6; location 'colorado' +12
+[15:14:26]   ✓  38  HR Data Analyst @ connexuscu (Remote) — title 'analyst' +22; location 'remote' +16
+[15:14:26]   ✓  38  Card Product Analyst @ forbrightbank (Remote) — title 'analyst' +22; location 'remote' +16
+[15:14:26]   ✓  38  Product Analyst, Digital Banking @ forbrightbank (Remote) — title 'analyst' +22; location 'remote' +16
+[15:14:26]   ✓  38  Product Compliance Analyst @ horacemannservicecorporation (Remote ) — title 'analyst' +22; location 'remote' +16
+[15:14:26]   ✓  38  Buyer/Planner, Electrical @ icarus (El Segundo) — title 'buyer' +32; location 'el segundo' +6
+[15:14:26]   ✓  38  Buyer/Planner, Mechanical & Composites @ icarus (El Segundo) — title 'buyer' +32; location 'el segundo' +6
+[15:14:26]   ✓ … and 169 more new candidates (the 40 with the highest keyword score are listed)
+[15:14:26] Scored 230 new roles: 209 candidates for the résumé check, 21 with nothing going for them, 0 filtered out by title/location (finding and scoring took 4.1 min)
+[15:14:27] 210 jobs queued: 0 already matched to your résumé, 210 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 481 now
+[15:14:27] Time for this run: 50 min in all (2253 of 1850 free Actions minutes used this month)
+[15:14:28] Accounts: ON (delgado@alumni.usc.edu)
+[15:14:28]   ✗ Financial Analyst - Financial Operations @ mcw: above entry level: mid (requires 5+ yrs)
+[15:14:30]   ✗ Financial Analyst @ Universal Community Health Center: above entry level: mid (requires 3+ yrs)
+[15:14:31]   ✗ Equities Portfolio Analyst I @ ameriprise: above entry level: mid (requires 2+ yrs; pay starts at $115,000)
+[15:14:31]   ✗ Product Support SME (Logistics) @ ensco: not open to you: needs a security clearance
+[15:14:31]   ✗ Oracle Application Systems Analyst (US Citizen) @ JOIN OUR TEAM: above entry level: senior (requires 7+ yrs)
+[15:14:32]   ✗ Logistics Analyst (Requirements) @ Delta Point Family of Companies: above entry level: mid (requires 3+ yrs)
+[15:14:33]   ✗ Product Analyst, Digital Transformation - Remote US @ mckesson: above entry level: mid (requires 3+ yrs)
+[15:14:35]   match  65%  Retail Logistics Operations Analyst @ fastretailing — Strong supply chain and analytical background, but lacks the explicitly required 2 years of dedicate
+[15:14:35]   match  45%  Quantitative Analyst, Private Credit @ point72 — Quantitative risk analysis role requiring specialized finance background rather than industrial engi
+[15:14:35]   match  45%  Operations Associate @ hss — Requires 5 years of healthcare operations experience and Epic software expertise which the candidate
+[15:14:35]   match  55%  Risk Operations Analyst @ southstatebank — Relevant business degree and analytical skills, but lacks the preferred 1-3 years of banking risk ma
+[15:14:35]   match  60%  Development Coordinator @ pacnyc — Good general organization and analytical skills, but lacks specific nonprofit development and CRM so
+[15:14:35] → Retail Logistics Operations Analyst @ fastretailing (score 62, match 65%)
+[15:14:41]       (opening Workday's application form directly)
+[15:14:46]       (account page: creating the account / signing in)
+[15:14:46]       account: creating one on fastretailing.wd3.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:14:50]       account: created
+[15:14:53]       1/5 My Information: 12 fields (7 required)
+[15:15:00]       2/5 My Experience: 4 fields (0 required)
+[15:15:07]       3/5 Voluntary Disclosures: 1 fields (1 required)
+[15:15:13]       4/5 Take Assessment: 0 fields (0 required)
+[15:15:23]       Take Assessment (try 2): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[15:15:33]       Take Assessment (try 3): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[15:15:43]     ✗ skipped: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+[15:15:51] → Risk Operations Analyst @ southstatebank (score 66, match 55%)
+[15:15:54]       (opening Workday's application form directly)
+[15:15:57]       (account page: creating the account / signing in)
+[15:15:59]       account: signing in on southstatebank.wd5.myworkdayjobs.com
+[15:16:06]       1/6 My Information: 17 fields (12 required)
+[15:16:12]       2/6 My Experience: 9 fields (6 required)
+[15:16:27]       writer: note, the answer mentions a figure or tool that is not in your facts
+[15:16:36]       (writer answered 'Share any relationship you have with SouthState?*' -> 'None')
+[15:16:36]       3/6 Application Questions: 8 fields (8 required)
+[15:16:36]       ! nothing was picked in 'Share any relationship you have with SouthState?*' (wanted 'None'; choices: ['Select One', 'None', 'I am related to someone who is employed or is a board member at SouthState.', 'I am currently employed with SouthState', 'I have been previously employed by SouthState.'])
+[15:16:45]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[15:16:51]       5/6 Self Identify: 7 fields (1 required)
+[15:16:55]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[15:17:01]       Review: submitting
+[15:17:05]     ✓ applied (1.2 min)
+[15:17:06]   ✗ Digital Commerce Inventory Planner @ fastretailing: above entry level: senior (requires 3+ yrs; pay starts at $140,000)
+[15:17:07]   ✗ Legal Analyst @ medimpact: above entry level: mid (requires 3+ yrs)
+[15:17:09]   match  35%  Associate Manager, Toxicology Operations @ regeneron — Requires 6-8+ years of post-degree experience in pharmaceutical toxicology and drug development, far
+[15:17:09]   match  78%  Associate Account Manager @ rain — Good fit for the 0-3 year experience window with strong alignment in business operations, client com
+[15:17:09]   match  40%  Events Coordinator @ mymvw — Scores under 60 because it is a hospitality and resort guest-experience role paying $30/hr, which do
+[15:17:09]   match  75%  Account Coordinator, Paid Search @ dept — Strong analytical skills and quantitative background align well with an entry-level digital marketin
+[15:17:09]   match  70%  Sales Executive, Small Business, New Construction @ zillow — Meets education requirements and fits the construction/real-estate sales operations target, though i
+[15:17:15] → Development Coordinator @ pacnyc (score 34, match 60%)
+[15:17:23]       step 1: 14 fields (9 required)
+[15:17:27]       writer: groq-qwen: rate limited for 30s
+[15:17:56]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:18:09]       mail: found 'Security code for your application to PAC NYC'
+[15:18:14]     ✓ applied (1.0 min)
+[15:18:19] → Associate Account Manager @ rain (score 12, match 78%)
+[15:18:27]       step 1: 20 fields (15 required)
+[15:18:29]       ? unanswered: 'How many years of industry experience do you have? Exclude internships or personal project' kind=radio options=['1-3 years', '3-5 years', '5-8 years', '8-10+ years']
+[15:18:29]     ✗ skipped: can't truthfully answer required: How many years of industry experience do you have? Exclude i
+[15:18:38] → Account Coordinator, Paid Search @ dept (score 34, match 75%)
+[15:18:49]       step 1: 24 fields (14 required)
+[15:19:25]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:19:39]       mail: found 'Security code for your application to DEPT®'
+[15:19:44]     ✓ applied (1.1 min)
+[15:19:46]   ✗ Operations Leader- Insulation Systems @ jm: above entry level: senior (requires 5+ yrs; pay starts at $203,000)
+[15:19:46]   ✗ ServiceNow Business Analyst @ lightfeatheriollc: above entry level: mid (requires 3+ yrs; pay starts at $110,000)
+[15:19:46]   ✗ Business Systems Analyst - Core Banking Technology @ mtb: above entry level: mid (requires 5+ yrs)
+[15:19:47]   ✗ Analyst, Application Support Engineer @ santander: above entry level: mid (requires 3+ yrs)
+[15:19:49]   match  88%  Purchasing Coordinator @ icarus — Strong match for an entry-level purchasing and supply chain role given candidate's operations and ve
+[15:19:49]   match  62%  Annuity Operations Analyst @ keybank — Requires 3-5 years of banking or brokerage experience, which is a stretch for a 2025 graduate.
+[15:19:49]   match  55%  Campaign Operations Specialist @ lastpass — Requires specific hands-on experience in Marketo and Salesforce data structures which the candidate 
+[15:19:49]   match  50%  Product Compliance Analyst @ horacemannservicecorporation — Requires specific insurance industry experience and regulatory compliance background.
+[15:19:49]   match  78%  Brand Coordinator - Entertainment @ authenticbrandsgroup — Good entry-level administrative and operational brand coordination role fitting a recent business gr
+[15:19:49] → Sales Executive, Small Business, New Construction @ zillow (score 21, match 70%)
+[15:19:52]       (opening Workday's application form directly)
+[15:19:55]       (account page: creating the account / signing in)
+[15:19:57]       account: signing in on zillow.wd5.myworkdayjobs.com
+[15:20:03]       (writer answered 'Are you a previous employee of Zillow Group? (Zillow, Trulia' -> 'No')
+[15:20:03]       1/5 My Information: 15 fields (10 required)
+[15:20:08]       2/5 My Experience: 3 fields (1 required)
+[15:20:17]       3/5 Application Questions: 2 fields (2 required)
+[15:20:23]       4/5 Voluntary Disclosures: 11 fields (1 required)
+[15:20:31]       Review: submitting
+[15:20:33]     ✓ applied (0.7 min)
+[15:20:38] → Purchasing Coordinator @ icarus (score 43, match 88%)
+[15:20:48]       step 1: 16 fields (10 required)
+[15:20:49]       (writer answered 'What is your timeline for starting a new role?*' -> 'Approx. 2 weeks')
+[15:21:00]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:21:20]       mail: found 'Security code for your application to Icarus'
+[15:21:29]     ✓ applied (0.9 min)
+[15:21:34] → Annuity Operations Analyst @ keybank (score 50, match 62%)
+[15:21:37]       (opening Workday's application form directly)
+[15:21:42]       (account page: creating the account / signing in)
+[15:21:44]       account: signing in on keybank.wd5.myworkdayjobs.com
+[15:21:50]       (writer answered 'County*' -> 'Garfield County')
+[15:21:50]       1/5 My Information: 16 fields (12 required)
+[15:21:58]       2/5 My Experience: 13 fields (8 required)
+[15:22:38]       (writer answered 'Have you ever been discharged, asked to resign, or resigned ' -> 'No')
+[15:22:38]       (writer answered 'Select yes if you: (1) are under investigation by your curre' -> 'No')
+[15:22:38]       3/5 Application Questions: 19 fields (15 required)
+[15:22:55]       ? unanswered: 'I agree to the Arbitration Agreement and the Agreement to Sever.*' kind=checkbox_single options=[]
+[15:22:55]     (on your apply-by-hand list: the form asks you to agree to something you said the bot never agrees to)
+[15:22:55] → Campaign Operations Specialist @ lastpass (score 41, match 55%)
+[15:23:04]       step 1: 17 fields (14 required)
+[15:23:04]       (writer answered 'Time Zone*' -> 'N/A')
+[15:23:04]       (writer answered "Interested in learning more about LastPass' products and ser" -> 'No')
+[15:23:16]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:23:29]       mail: found 'Security code for your application to LastPass'
+[15:23:34]     ✓ applied (0.7 min)
+[15:23:43] → Business Operations & Workforce Management Analyst, Styling @ stitchfix (score 66)
+[15:23:46]     ✗ skipped: above entry level: mid (requires 5+ yrs)
+[15:23:46] → Brand Coordinator - Entertainment @ authenticbrandsgroup (score 28, match 78%)
+[15:23:55]       step 1: 14 fields (8 required)
+[15:24:04]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:24:16]       mail: found 'Security code for your application to Authentic Brands Group'
+[15:24:21]     ✓ applied (0.6 min)
+[15:24:21]   ✗ Founding Product Designer @ finch-legal: above entry level: mid (requires 4+ yrs)
+[15:24:22]   ✗ Implementation Engineer @ keepersecurity: above entry level: mid (requires 5+ yrs)
+[15:24:22]   ✗ Credit Associate @ axos: above entry level: mid (requires 5+ yrs)
+[15:24:22]   ✗ Financial Analyst - Semiconductor Business Units @ broadcom: above entry level: mid (requires 5+ yrs)
+[15:24:23]   ✗ HR Data Analyst @ connexuscu: above entry level: mid (requires 5+ yrs)
+[15:24:24]   ✗ Accounts Receivable Specialist @ wizinc: above entry level: mid (requires 5+ yrs; pay starts at $116,000)
+[15:24:24]   ✗ EHS Project Coordinator @ moog: above entry level: mid (requires 3+ yrs)
+[15:24:25]   ✗ Assistant, Programmatic @ horizonmedia: pays too little: tops out near $50,000 a year (your floor is $65,000)
+[15:24:29]   match  82%  Data Strategy & Sourcing @ pdtpartners — Strong quantitative and data background, though the role specifically targets quantitative finance a
+[15:24:29]   match  42%  Executive Assistant, Corporate Governance & Board Operations @ meredith — Requires 5+ years of executive administrative experience supporting C-suite and legal teams, which e
+[15:24:29]   match  55%  Accounts Receivable Representative I @ hss — An entry-level accounts receivable role that is below the candidate's engineering and operations pro
+[15:24:29]   match  78%  Associate Customer Success Manager @ medely — Meets the 1-3 years of operations/customer-facing experience and offers a good match for business op
+[15:24:29] → Data Strategy & Sourcing @ pdtpartners (score 44, match 82%)
+[15:24:39]       step 1: 19 fields (12 required)
+[15:24:55]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:24:58]       mail: found 'Security code for your application to PDT Partners'
+[15:25:03]     ✓ applied (0.6 min)
+[15:25:07] → Accounts Receivable Representative I @ hss (score 18, match 55%)
+[15:25:11]       (opening Workday's application form directly)
+[15:25:16]       (account page: creating the account / signing in)
+[15:25:18]       account: signing in on hss.wd1.myworkdayjobs.com
+[15:25:24]       1/5 My Information: 14 fields (12 required)
+[15:25:32]       2/5 My Experience: 12 fields (9 required)
+[15:25:53]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[15:25:59]       ! could not pick an option in 'Field of Study' (wanted 'Industrial Engineering'): left as it was
+[15:26:12]       (writer answered 'Are you authorized to be lawfully employed in the U.S.?*' -> 'Yes')
+[15:26:12]       3/5 Application Questions: 10 fields (10 required)
+[15:26:25]       4/5 Voluntary Disclosures: 4 fields (3 required)
+[15:26:34]       Review: submitting
+[15:26:37]     ✓ applied (1.5 min)
+[15:26:37]   ✗ Buyer/Planner, Electrical @ icarus: above entry level: mid (requires 3+ yrs; pay starts at $100,000)
+[15:26:37]   ✗ QA/QC Document Control Coordinator @ loenbro: above entry level: mid (requires 3+ yrs)
+[15:26:37]   ✗ Buyer/Planner, Mechanical & Composites @ icarus: above entry level: mid (requires 3+ yrs; pay starts at $100,000)
+[15:26:38]   ✗ PA, Scheduler @ ovationhealthcare: pays too little: tops out near $55,902 a year (your floor is $65,000)
+[15:26:38]   ✗ Supplier Quality & Readiness Engineer @ parallel: above entry level: mid (requires 5+ yrs)
+[15:26:39]   ✗ BSA Analyst @ Pathfinder Bank: pays too little: tops out near $56,160 a year (your floor is $65,000)
+[15:26:39]   ✗ Supplier Quality Engineer - Sentry @ andurilindustries: not open to you: needs a security clearance
+[15:26:39]   ✗ Quality Engineer @ icarus: above entry level: mid (pay starts at $100,000)
+[15:26:41]   ✗ Business Solution Engineer @ morganfranklinconsultingllc: above entry level: mid (requires 5+ yrs; pay starts at $123,988)
+[15:26:41]   ✗ FACILITIES MAINTENANCE TECH 11-2026 @ Colorado Jet Center Inc: above entry level: mid (requires 3+ yrs)
+[15:26:41]   ✗ Operations Specialist @ css: pays too little: tops out near $41,600 a year (your floor is $65,000)
+[15:26:43]   match  78%  Associate Product Manager, Nutrition @ twinhealth — Strong analytical and operational background, though lacks direct product management experience.
+[15:26:43]   match  35%  🎯 GSOC Operations Specialist – (Experience Required) @ marksman — Physical security operations center role that does not align with a business and engineering graduat
+[15:26:43]   match  85%  Associate Buyer-Commodity Professional @ saabusa — Meets supply chain, analytical, and business degree requirements well for an entry-level buyer role.
+[15:26:43]   match  45%  Corporate Paralegal, Business & Legal Affairs @ horizonmedia — Requires specific paralegal experience and legal administration background that the candidate lacks.
+[15:26:43]   match  60%  Administrative Team Assistant, Investment Management @ iconiq — General administrative support role; candidate is qualified academically but overqualified/misaligne
+[15:26:46] → Associate Customer Success Manager @ medely (score 16, match 78%)
+[15:26:55]       step 1: 18 fields (7 required)
+[15:26:55]       (writer answered 'Work Location Medely requires all employees to be US based. ' -> 'Yes')
+[15:28:42]     (on your apply-by-hand list: the site's human check held the submit)
+[15:28:42]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e of the classifications of protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran s
+[15:28:48] → Associate Product Manager, Nutrition @ twinhealth (score 16, match 78%)
+[15:28:58]       step 1: 19 fields (15 required)
+[15:29:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:29:27]       mail: found 'Security code for your application to Twin Health'
+[15:29:32]     ✓ applied (0.7 min)
+[15:29:38] → Associate Buyer-Commodity Professional @ saabusa (score 50, match 85%)
+[15:29:42]       (opening Workday's application form directly)
+[15:29:45]       (account page: creating the account / signing in)
+[15:29:47]       account: signing in on saabusa.wd1.myworkdayjobs.com
+[15:29:53]       1/5 My Information: 15 fields (12 required)
+[15:30:00]       2/5 My Experience: 3 fields (0 required)
+[15:30:18]       (writer answered 'Are you a:*' -> 'U.S. Citizen')
+[15:30:18]       (writer answered 'Do you now or have you ever held a Dual Citizenship with ano' -> 'No')
+[15:30:19]       (writer answered "Are you currently on 'layoff' status and subject to recall?*" -> 'No')
+[15:30:19]       3/5 Application Questions: 15 fields (15 required)
+[15:30:36]       4/5 Voluntary Disclosures: 5 fields (1 required)
+[15:30:45]       Review: submitting
+[15:30:48]     ✓ applied (1.2 min)
+[15:30:50]   ✗ Field Services Enablement Specialist, Technical Consulting @ ridgeline: above entry level: senior (requires 5+ yrs; pay starts at $143,000)
+[15:30:52]   match  50%  Associate Civil Engineer @ atwellgroup — Requires civil engineering experience and technical design tools like Civil 3D that the candidate la
+[15:30:52]   match  30%  Employee Relations Specialist @ Solaris Health Holdings — Requires dedicated HR and employee relations experience and HR certifications.
+[15:30:52]   match  40%  Customer Success Engineer, West Region @ cribl — Requires technical customer success or site reliability engineering background in cloud/SIEM infrast
+[15:30:52]   match  40%  Sales Support Specialist @ vsp — Pay translates to roughly $37k-$60k, and it falls under the commission-oriented sales support catego
+[15:30:52]   match  35%  Business Development Representative @ DemandZen LLC — Role is primarily commission-based cold-calling sales and BDR work, which is outside target professi
+[15:30:53]   ✗ Merchandising Planner @ fastretailing: above entry level: mid (requires 2+ yrs; pay starts at $114,000)
+[15:30:54]   ✗ EC Merchandising Planner @ fastretailing: above entry level: mid (requires 3+ yrs; pay starts at $114,000)
+[15:30:54]   ✗ Associate Product Management Specialist - Commercial Modifications @ boeing: above entry level: senior (requires 2+ yrs; manages people)
+[15:30:54]   ✗ Capital Markets Associate @ hadrian-automation: above entry level: senior (requires 3+ yrs; pay starts at $130,000)
+[15:30:55]   ✗ Associate, Strategy, AIS @ aresmgmt: above entry level: mid (pay starts at $125,000)
+[15:30:56]   ✗ BUYER-ONSITE @ Schneider Packaging Equipment: above entry level: senior (manages people)
+[15:30:58]   match  72%  Business Development Representative @ elemica — Matches candidate's business development experience, though technical SaaS enterprise sales differs 
+[15:30:58]   match  70%  Business Development Representative @ juno — Good fit for entry-level business development and account management, matching general commercial ex
+[15:30:58]   match  55%  Executive Administrative Assistant - Investment Banking and Capital Markets @ db — Administrative support role that is below the engineering and analytical level suited for an Industr
+[15:30:58]   match  48%  Associate/Specialist, K-12 English @ successacademycharterschool — Requires specific expertise in K-12 English curriculum and literature, which does not align with an 
+[15:30:58]   match  60%  Research Coordinator - CHASM Department @ rfcuny — Research coordination role with some overlap in data tracking, but focused on public health rather t
+[15:30:58] → Administrative Team Assistant, Investment Management @ iconiq (score 18, match 60%)
+[15:31:11]       step 1: 27 fields (19 required)
+[15:31:11]       (writer answered 'Are you or have you ever been retained as a consultant to, o' -> 'No')
+[15:31:29]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:31:38]       mail: found 'Security code for your application to ICONIQ'
+[15:31:43]     ✓ applied (0.8 min)
+[15:31:51] → Business Development Representative @ elemica (score 16, match 72%)
+[15:31:54]       (opening Workday's application form directly)
+[15:31:56]       (account page: creating the account / signing in)
+[15:31:56]       account: creating one on elemica.wd501.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:32:00]       account: created
+[15:32:02]       1/6 My Information: 14 fields (8 required)
+[15:32:08]       2/6 My Experience: 2 fields (0 required)
+[15:32:19]       (writer answered 'Are you currently a contractor through a third party for Ele' -> 'No')
+[15:32:19]       3/6 Application Questions: 8 fields (8 required)
+[15:32:28]       4/6 Voluntary Disclosures: 10 fields (10 required)
+[15:32:33]       5/6 Self Identify: 7 fields (6 required)
+[15:32:37]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[15:32:43]       Review: submitting
+[15:32:46]     ✓ applied (0.9 min)
+[15:32:53] → Business Development Representative @ juno (score 16, match 70%)
+[15:33:04]       step 1: 9 fields (6 required)
+[15:33:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:33:21]       mail: found 'Security code for your application to Juno'
+[15:33:26]     ✓ applied (0.6 min)
+[15:33:32] → Executive Administrative Assistant - Investment Banking and Capital Markets @ db (score 18, match 55%)
+[15:33:37]       (opening Workday's application form directly)
+[15:33:46]       1/5 My Information: 15 fields (9 required)
+[15:33:52]       2/5 My Experience: 2 fields (1 required)
+[15:34:03]       (writer answered 'Please select one of the following options:*' -> 'I would like my personal information to be deleted')
+[15:34:03]       3/5 Application Questions: 5 fields (3 required)
+[15:34:13]       4/5 Voluntary Disclosures: 4 fields (3 required)
+[15:34:21]       Review: submitting
+[15:34:23]     ✓ applied (0.9 min)
+[15:34:24]   ✗ Accounts Receivable Quality Assurance Auditor @ EGO Inc DBA Brault: above entry level: mid (requires 3+ yrs)
+[15:34:24]   ✗ Accounting Associate @ markmorrisdancegroup: not open to you: part-time; says entry level / new grad
+[15:34:28]   match  88%  Account Specialist, Ohio @ everdriven — Strong match for an operations and account coordination role requiring a bachelor's degree and stron
+[15:34:28]   match  75%  Hospital Operations Coordinator @ agiliti — Good fit for operations coordination and asset management, though it prefers medical background expe
+[15:34:28]   match  45%  Founding Product Marketer @ reflow — Weak fit because it requires 2+ years of dedicated B2B product marketing experience, which is outsid
+[15:34:28]   match  50%  Data Collection Coordinator @ augmodo — Weak fit because it is an independent contractor, hourly gig role which falls below the salaried pro
+[15:34:28]   match  60%  Technical Platform Administrator, Enablement Systems @ okta — Decent technical and systems overlap, but lacks the specific systems administrator and sales enablem
+[15:34:28] → Research Coordinator - CHASM Department @ rfcuny (score 34, match 60%)
+[15:34:32]       (opening Workday's application form directly)
+[15:34:35]       (account page: creating the account / signing in)
+[15:34:37]       account: signing in on rfcuny.wd108.myworkdayjobs.com
+[15:34:42]       1/6 My Information: 17 fields (12 required)
+[15:34:54]       2/6 My Experience: 1 fields (0 required)
+[15:35:07]       (writer answered 'Do you have prior work experience?*' -> 'Yes')
+[15:35:08]       (writer answered 'Are you a CUNY student?*' -> 'No')
+[15:35:08]       (writer answered 'Are you a post-doctoral trainee?*' -> 'No')
+[15:35:08]       (writer answered 'Are you a retired state or local employee, receiving a servi' -> 'No')
+[15:35:08]       3/6 Application Questions: 10 fields (8 required)
+[15:35:19]       Application Questions (try 2): Workday said ['Error: The field How many years of relevant experience do you have? is required and must have a value.', 'Error-How many years of relevant experience do you have? The field How many years of relevant experience do you have? is required and must have a value.']; redoing ['What is your desired start dat', 'Saturday', 'Sunday', 'How many years of relevant exp']
+[15:35:26]       4/6 Voluntary Disclosures: 4 fields (0 required)
+[15:35:31]       5/6 Self Identify: 7 fields (1 required)
+[15:35:38]       Review: submitting
+[15:35:41]     ✓ applied (1.2 min)
+[15:35:48] → Account Specialist, Ohio @ everdriven (score 16, match 88%)
+[15:35:57]       step 1: 17 fields (10 required)
+[15:36:07]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:36:22]       mail: found 'Security code for your application to EverDriven'
+[15:36:28]     ✓ applied (0.7 min)
+[15:36:28]   match  75%  Hospital Operations Coordinator @ agiliti — same role at this employer, checked before: Good fit for operations coordination and asset managemen
+[15:36:31] → Hospital Operations Coordinator @ agiliti (score 56, match 75%)
+[15:36:35]       (opening Workday's application form directly)
+[15:36:38]       (account page: creating the account / signing in)
+[15:36:38]       account: creating one on agiliti.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:36:42]       account: created
+[15:36:46]       (writer answered 'County*' -> 'Garfield County')
+[15:36:47]       (writer answered 'Are you a prior Agiliti or UHS employee?*' -> 'No')
+[15:36:47]       1/6 My Information: 19 fields (13 required)
+[15:36:52]       2/6 My Experience: 4 fields (1 required)
+[15:37:03]       3/6 Application Questions 1 of 2: 6 fields (5 required)
+[15:37:15]       (writer answered 'Have you obtained a high school diploma or GED equivalent?*' -> 'Yes')
+[15:37:16]       (writer answered 'Are you flexible in your schedule to work after hours/on cal' -> 'No')
+[15:37:16]       (writer answered 'How many years of experience do you have in a healthcare/hos' -> '0 Years')
+[15:37:17]       (writer answered 'How many years of customer service experience do you have?*' -> '5 or more years')
+[15:37:17]       4/6 Application Questions 2 of 2: 7 fields (7 required)
+[15:37:29]       5/6 Voluntary Disclosures: 5 fields (4 required)
+[15:37:38]       Review: submitting
+[15:37:42]     ✓ applied (1.2 min)
+[15:37:42]   ✗ Patient Services, Scheduler @ REVCO SOLUTIONS INC: pays too little: tops out near $41,600 a year (your floor is $65,000)
+[15:37:43]   ✗ Junior Technical Editor @ agecareers: not open to you: needs a security clearance
+[15:37:46]   match  68%  Workplace Incident and Coordination Specialist, Hybrid Role @ mercy — Good match for process improvement and operations background, though specific healthcare workers' co
+[15:37:46]   match  48%  Resident Services Coordinator @ Housing Catalyst — Weak match as the role requires human services and social work background rather than industrial eng
+[15:37:46]   match  45%  Regional Business Development AE, Northeast @ clearchanneloutdoor — Weak match due to the requirement for 3+ years of dedicated B2B advertising or media sales experienc
+[15:37:46]   match  52%  Surgical Coordinator - Dr. Alex Anatone @ hss — Weak match given the specialized healthcare/surgical coordination focus, which does not closely alig
+[15:37:46]   match  88%  Manager Trainee - Operational Strength Program @ avisbudget — Strong match for an operations management trainee program, leveraging the candidate's industrial eng
+[15:37:47] → Technical Platform Administrator, Enablement Systems @ okta (score 12, match 60%)
+[15:37:50]     ✗ skipped: above entry level: mid (pay starts at $117,000)
+[15:37:50] → Workplace Incident and Coordination Specialist, Hybrid Role @ mercy (score 16, match 68%)
+[15:37:54]       (opening Workday's application form directly)
+[15:38:04]       (account page: creating the account / signing in)
+[15:38:06]       account: creating one on mercy.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:38:16]       account: created
+[15:38:19]       account: signing in on mercy.wd1.myworkdayjobs.com
+[15:38:30]       1/6 My Information: 16 fields (12 required)
+[15:38:38]       2/6 My Experience: 13 fields (6 required)
+[15:39:04]       (writer answered 'Have you previously participated in a learning experience or' -> 'No')
+[15:39:05]       (writer answered 'Have you ever been involved in the substantiated abuse or ne' -> 'No')
+[15:39:05]       3/6 Application Questions: 7 fields (7 required)
+[15:39:16]       4/6 Voluntary Disclosures: 5 fields (4 required)
+[15:39:22]       5/6 Self Identify: 7 fields (1 required)
+[15:39:29]       Review: submitting
+[15:39:33]     ✓ applied (1.7 min)
+[15:39:33]   ✗ Collaboration Platform Specialist @ horizonmedia: above entry level: mid (requires 3+ yrs)
+[15:39:34]   ✗ Hybrid SLA Analyst - Albany, NY @ mks2technologies: above entry level: senior (requires 6+ yrs)
+[15:39:35]   ✗ Executive Assistant @ aresmgmt: above entry level: senior (requires 10+ yrs)
+[15:39:35]   ✗ Executive Assistant @ massmutual: above entry level: mid (requires 5+ yrs)
+[15:39:48]   match  75%  Specialist, Accountant - SFS @ makeawishamerica — Strong finance and Excel background from engineering studies, though lacks the explicit 2+ years of 
+[15:39:48]   match  60%  Founding Growth Marketer @ adaption — Has strong data and analytical skills and built own venture projects, but lacks the specific 2-5 yea
+[15:39:48]   match  55%  Customer Marketing Specialist @ ddome — Lacks the specific customer marketing and B2B SaaS advocacy background requested for the role.
+[15:39:48]   match  65%  Junior Account Executive @ css — Meets general business/sales aptitude, but lacks the explicit 6+ months of formal B2B sales/SDR expe
+[15:39:48]   match  45%  Ops Recruiter @ claylabs — Requires 5+ years of dedicated recruiting experience, which far exceeds the candidate's background.
+[15:39:48] → Manager Trainee - Operational Strength Program @ avisbudget (score 34, match 88%)
+[15:39:53]       (opening Workday's application form directly)
+[15:39:57]       (account page: creating the account / signing in)
+[15:39:59]       account: signing in on avisbudget.wd1.myworkdayjobs.com
+[15:40:05]       1/6 My Information: 15 fields (12 required)
+[15:40:12]       2/6 My Experience: 14 fields (9 required)
+[15:40:31]       (writer answered 'Depending on the role, driving may be required. Do you hold ' -> 'Yes')
+[15:40:31]       3/6 Application Questions 1 of 2: 5 fields (5 required)
+[15:40:38]       4/6 Application Questions 2 of 2: 1 fields (1 required)
+[15:40:45]       ? unanswered: 'I fully read, understand and agree to the Terms and Conditions and Candidate Privacy Notic' kind=checkbox_single options=[]
+[15:40:45]     ✗ skipped: can't truthfully answer required: I fully read, understand and agree to the Terms and Conditio
+[15:40:51] → Specialist, Accountant - SFS @ makeawishamerica (score 16, match 75%)
+[15:40:54]     ✗ skipped: pays too little: tops out near $57,000 a year (your floor is $65,000)
+[15:40:54] → Founding Growth Marketer @ adaption (score 25, match 60%)
+[15:41:02]       step 1: 8 fields (6 required)
+[15:42:53]     (on your apply-by-hand list: the site's human check held the submit)
+[15:42:53]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ' you owned end-to-end. What was the hypothesis, what did you ship, what moved (with real numbers), and what would you do differently next 
+[15:42:59] → Customer Marketing Specialist @ ddome (score 12, match 55%)
+[15:43:04]       step 1: 11 fields (6 required)
+[15:43:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:43:46]       mail: found 'Security code for your application to DataDome'
+[15:43:58]     ✓ applied (1.0 min)
+[15:43:59]   ✗ Process Improvement Leader @ ineos: above entry level: senior (manages people)
+[15:43:59]   ✗ HR Assistant @ markmorrisdancegroup: not open to you: part-time
+[15:44:00]   ✗ Compliance Coordinator @ HEALTHY KIDS PROGRAMS: not open to you: part-time
+[15:44:01]   ✗ Linux System and Security Analyst @ motorolasolutions: above entry level: mid (requires 3+ yrs)
+[15:44:02]   match  30%  Promotional Review and Production Specialist @ praxisprecisionmedicines — Requires specific hands-on experience with Veeva PromoMats and biopharmaceutical promotional review 
+[15:44:02]   match  20%  Early Career Recruiting Coordinator @ coreweave — The posting is truncated and primarily describes infrastructure and cloud products rather than a rec
+[15:44:02]   match  65%  Disability Income Underwriting Specialist @ northwesternmutual — Strong analytical and communication skills match well, though it's an entry-level insurance underwri
+[15:44:02]   match  45%  Associate Territory Manager OTS - Fracture - San Francisco @ orthofix — Requires at least 1 year of direct business-to-business sales experience which is outside the candid
+[15:44:02]   match  50%  Compliance Specialist @ zippymh — Requires 3+ years of specific mortgage lending and servicing compliance experience, which exceeds th
+[15:44:07] → Junior Account Executive @ css (score 18, match 65%)
+[15:44:16]       step 1: 14 fields (9 required)
+[15:44:26]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:44:38]       mail: found 'Security code for your application to CloudKitchens'
+[15:44:44]     ✓ applied (0.6 min)
+[15:44:44]   match  50%  Benefits Coordinator @ PuzzleHR — same role at this employer, checked before: Requires 3+ years of specific payroll and benefits exper
+[15:44:45]   ✗ Technical Recruiter @ rain: above entry level: mid (requires 5+ yrs)
+[15:44:46]   ✗ Product Sales Specialist- Cardiovascular Ultrasound @ gehc: above entry level: senior (requires 8+ yrs)
+[15:44:47]   match  50%  Insurance Verification Coordinator @ lifestance — Medical insurance verification requires healthcare revenue cycle experience the candidate lacks.
+[15:44:47]   match  72%  Life Underwriting Specialist @ northwesternmutual — Strong analytical and communication skills match the underwriting role, though it requires learning 
+[15:44:47]   match  45%  Quality Control Microbiology testing @ sanofi — Requires a degree in Life Sciences, Biology, or Chemistry which the candidate does not possess.
+[15:44:47]   match  40%  Office Assistant-LH Orthopedics Odenton @ luminishealth — Clerical medical office assistant role is below the professional business level suited for an engine
+[15:44:47]   match  55%  Sales Support Specialist @ vitalant — Sales support and donor recruitment focus is misaligned with the candidate's engineering and operati
+[15:44:49] → Disability Income Underwriting Specialist @ northwesternmutual (score 16, match 65%)
+[15:44:52]       (opening Workday's application form directly)
+[15:44:56]       (account page: creating the account / signing in)
+[15:44:56]       account: creating one on northwesternmutual.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:45:00]       account: created
+[15:45:02]       1/5 My Information: 15 fields (12 required)
+[15:45:10]       2/5 My Experience: 13 fields (7 required)
+[15:45:41]       (writer answered 'Do you have experience working at Northwestern Mutual?*' -> 'No')
+[15:45:41]       ? unanswered: 'All in Milwaukee' kind=checkbox_single options=[]
+[15:45:41]       ? unanswered: 'Boys & Girls Club Grad Plus' kind=checkbox_single options=[]
+[15:45:41]       ? unanswered: 'College Possible' kind=checkbox_single options=[]
+[15:45:41]       ? unanswered: 'i.c.stars Milwaukee' kind=checkbox_single options=[]
+[15:45:41]       ? unanswered: 'MARS Returnship' kind=checkbox_single options=[]
+[15:45:41]       ? unanswered: 'No' kind=checkbox_single options=[]
+[15:45:41]     ✗ skipped: can't truthfully answer required: All in Milwaukee; Boys & Girls Club Grad Plus; College Possible; i.c.stars Milwaukee; MARS Returnship; No
+[15:45:49] → Life Underwriting Specialist @ northwesternmutual (score 16, match 72%)
+[15:45:52]       (opening Workday's application form directly)
+[15:45:58]       1/5 My Information: 15 fields (12 required)
+[15:46:09]       2/5 My Experience: 13 fields (7 required)
+[15:46:41]       (writer answered 'Do you have experience working at Northwestern Mutual?*' -> 'No')
+[15:46:41]       ? unanswered: 'All in Milwaukee' kind=checkbox_single options=[]
+[15:46:41]       ? unanswered: 'Boys & Girls Club Grad Plus' kind=checkbox_single options=[]
+[15:46:41]       ? unanswered: 'College Possible' kind=checkbox_single options=[]
+[15:46:41]       ? unanswered: 'i.c.stars Milwaukee' kind=checkbox_single options=[]
+[15:46:41]       ? unanswered: 'MARS Returnship' kind=checkbox_single options=[]
+[15:46:41]       ? unanswered: 'No' kind=checkbox_single options=[]
+[15:46:41]     ✗ skipped: can't truthfully answer required: All in Milwaukee; Boys & Girls Club Grad Plus; College Possible; i.c.stars Milwaukee; MARS Returnship; No
+[15:46:42]   ✗ Medicare Products Document Specialist @ bcbst: above entry level: senior (requires 5+ yrs; manages people)
+[15:46:44]   match  35%  Specialist WO & Compl @ oxy — Requires extensive senior field experience in oil and gas well interventions and completions.
+[15:46:44]   match  78%  Central Planner @ Select Division Career Page — Good match for supply chain planning, data analysis, and inventory simulation skills.
+[15:46:44]   match  55%  Foundation Coordinator @ oneoncology — Administrative and grant coordination role, but lacks direct non-profit experience.
+[15:46:44]   match  40%  Founding Recruiter, GTM @ formance — Recruiting role requiring full-cycle GTM hiring experience, which falls outside the candidate's targ
+[15:46:44]   match  82%  Customer Support Specialist (Integrations & Accounting) @ miter — Strong fit leveraging construction background, accounting software skills, and technical troubleshoo
+[15:46:47] → Sales Support Specialist @ vitalant (score 12, match 55%)
+[15:46:50]       (opening Workday's application form directly)
+[15:46:54]       (account page: creating the account / signing in)
+[15:46:54]       account: creating one on vitalant.wd12.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:46:57]       account: created
+[15:46:59]       1/7 My Information: 14 fields (12 required)
+[15:47:06]       2/7 My Experience: 2 fields (1 required)
+[15:47:16]       ? unanswered: 'No related experience' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Less than 1 year related experience' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: '3-5 years related experience' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: '5 or more years related experience' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'None' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'High School/GED' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Associates Degree' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Bachelors Degree' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Masters Degree' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Doctorate/PDH' kind=checkbox_single options=[]
+[15:47:16]       ? unanswered: 'Professional Degree (MD, JD, DDS, etc)' kind=checkbox_single options=[]
+[15:47:16]     ✗ skipped: can't truthfully answer required: No related experience; Less than 1 year related experience; 3-5 years related experience; 5 or more years related experience; None; High School/GED; Associates Degree; Bachelors Degree; Masters Degree; Doctorate/PDH; Professional Degree (MD, JD, DDS, etc)
+[15:47:22] → Central Planner @ Select Division Career Page (score 12, match 78%)
+[15:47:34]       (résumé given to the site's 'apply with resume' box first)
+[15:47:46]       step 1: 22 fields (13 required)
+[15:47:46]       (writer answered 'County' -> 'N/A')
+[15:48:07]       step 2: 4 fields (4 required)
+[15:48:12]       step 3: 3 fields (3 required)
+[15:48:18]       step 4: 2 fields (1 required)
+[15:48:21]     ✓ applied (1.0 min)
+[15:48:26] → Foundation Coordinator @ oneoncology (score 34, match 55%)
+[15:48:29]       (opening Workday's application form directly)
+[15:48:36]       1/5 My Information: 15 fields (9 required)
+[15:48:43]       2/5 My Experience: 8 fields (3 required)
+[15:49:08]       (writer answered 'Can you perform the essential duties of the job you are appl' -> 'Yes')
+[15:49:08]       3/5 Application Questions: 8 fields (8 required)
+[15:49:16]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[15:49:22]       Review: submitting
+[15:49:24]     ✓ applied (1.0 min)
+[15:49:26]   match  78%  Associate Business Specialist @ bnl — same role at this employer, checked before: no Next or Submit button found on Workday's 'Create Acco
+[15:49:26]   ✗ Instructional Specialist @ Participate Learning: above entry level: mid (requires 3+ yrs)
+[15:49:28]   match  50%  Patient Access Specialist @ hss — Patient access role is lower-level administrative healthcare work that does not fit the candidate's 
+[15:49:28]   match  60%  LHCSA Credentialing & Office Operations Specialist (Albany, NY / Office Based) @ freedomcare — Credentialing and office operations is administrative and lacks the strategic engineering or analyti
+[15:49:28]   match  75%  Founding Engineer (Python / FastAPI / Next.js) — (US Based) @ sierra-studio — Founding engineer role matches technical skills like Python, FastAPI, and PostgreSQL, though it lean
+[15:49:28]   match  55%  CX Specialist @ prosperhealth — Customer/client experience support role is largely a call center / support function below the candid
+[15:49:28]   match  85%  Technical Client Associate @ Altvia Solutions LLC — Technical client associate role combines technical troubleshooting, client relations, and analytical
+[15:49:31] → Customer Support Specialist (Integrations & Accounting) @ miter (score 16, match 82%)
+[15:49:39]       step 1: 16 fields (13 required)
+[15:51:29]     (on your apply-by-hand list: the site's human check held the submit)
+[15:51:29]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'g Process policy in the job description footer. I acknowledge the above Very serious question: would you prefer to be a dog or a ghost and
+[15:51:29]   match  60%  LHCSA Credentialing & Office Operations Specialist (Albany, NY / Office Based) @ freedomcare — same role at this employer, checked before: Credentialing and office operations is administrative an
+[15:51:36] → LHCSA Credentialing & Office Operations Specialist (Albany, NY / Office Based) @ freedomcare (score 37, match 60%)
+[15:51:46]       step 1: 22 fields (13 required)
+[15:52:00]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:52:02]       mail: found 'Security code for your application to FreedomCare'
+[15:52:07]     ✓ applied (0.5 min)
+[15:52:15] → Associate Business Specialist @ bnl (score 18, match 78%)
+[15:52:19]       (opening Workday's application form directly)
+[15:52:23]       (account page: creating the account / signing in)
+[15:52:25]       account: signing in on bnl.wd1.myworkdayjobs.com
+[15:52:29]       1/5 My Information: 16 fields (8 required)
+[15:52:41]       2/5 My Experience: 1 fields (1 required)
+[15:52:51]       (writer answered 'Do you wish to be considered for other opportunities?*' -> 'No')
+[15:52:51]       3/5 Application Questions: 7 fields (7 required)
+[15:53:03]       4/5 Voluntary Disclosures: 5 fields (5 required)
+[15:53:12]       Review: submitting
+[15:53:16]     ✓ applied (1.0 min)
+[15:53:25] → Founding Engineer (Python / FastAPI / Next.js) — (US Based) @ sierra-studio (score 25, match 75%)
+[15:53:32]       step 1: 10 fields (8 required)
+[15:53:38]     ✓ applied (0.2 min)
+[15:53:43] → CX Specialist @ prosperhealth (score 16, match 55%)
+[15:53:50]       step 1: 12 fields (10 required)
+[15:53:52]       (writer answered 'Will you be working hybrid out of our NYC office or remote?*' -> 'Remote')
+[15:53:59]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:54:03]       mail: found 'Security code for your application to Prosper Health'
+[15:54:08]     ✓ applied (0.4 min)
+[15:54:08]   ✗ Associate Sales Representative - Denver - Acute Care @ stryker: not open to you: internship / summer program
+[15:54:09]   ✗ Judicial Services Coordinator - Orange County @ nc: pays too little: tops out near $57,117 a year (your floor is $65,000)
+[15:54:10]   ✗ Compliance & Automation Specialist @ HEALTHY KIDS PROGRAMS: not open to you: part-time
+[15:54:10]   ✗ CHOICES Care Coordinator- Maury County @ bcbst: above entry level: senior (requires 3+ yrs; manages people)
+[15:54:11]   ✗ Accounting Support Specialist @ Hermes Worldwide Inc: pays too little: tops out near $54,080 a year (your floor is $65,000)
+[15:54:12]   match  40%  Mental Health Patient Coordinator - Remote - Full Time @ pmpediatrics — same role at this employer, checked before: same role at this employer, checked before: The pay is b
+[15:54:12]   ✗ Dispatch Specialist @ cableone: above entry level: senior (manages people)
+[15:54:13]   ✗ Orchestrade Specialist @ xantium: above entry level: senior (pay starts at $150,000)
+[15:54:13]   ✗ Child Care Policy Specialist @ guidehouse: above entry level: mid (requires 4+ yrs)
+[15:54:13]   ✗ Patient Coordinator (Full Time) @ schweigerderm: not open to you: part-time
+[15:54:14]   match  65%  Quality Control Technician @ solidpower — The candidate has a relevant engineering degree and process background, though it is a hands-on manu
+[15:54:14]   match  55%  Patient Care Coordinator @ CareMetx — The role requires specific healthcare call center or social service experience that the candidate la
+[15:54:14]   match  40%  Production, R2M @ signetjewelers — This is a hands-on jewelry cleaning and retail manufacturing role with an hourly pay rate below the 
+[15:54:16] → Technical Client Associate @ Altvia Solutions LLC (score 18, match 85%)
+[15:54:28]       (résumé given to the site's 'apply with resume' box first)
+[15:54:30]       step 1: 11 fields (5 required)
+[15:54:37]       step 2: 4 fields (2 required)
+[15:54:43]       step 3: 4 fields (0 required)
+[15:55:00]       step 4: 4 fields (0 required)
+[15:55:15]       step 5: 2 fields (0 required)
+[15:55:17]     ✓ applied (1.0 min)
+[15:55:21] → Quality Control Technician @ solidpower (score 42, match 65%)
+[15:55:33]       step 1: 21 fields (8 required)
+[15:55:48]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:55:58]       mail: found 'Security code for your application to Solid Power'
+[15:56:04]     ✓ applied (0.7 min)
+[15:56:04]   match  40%  Mental Health Patient Coordinator - Remote - Full Time @ pmpediatrics — same role at this employer, checked before: same role at this employer, checked before: same role at
+[15:56:04]   ✗ Infinite Campus Remote Administrator @ customcomputerspecialists: above entry level: mid (requires 5+ yrs)
+[15:56:05]   ✗ Cardiovascular Specialist, Health and Science Professional - Boston,MA @ pfizer: above entry level: senior (requires 8+ yrs)
+[15:56:05]   ✗ Founding Recruiter @ icarus: above entry level: senior (requires 3+ yrs; pay starts at $130,000)
+[15:56:06]   ✗ Patient Care Coordinator @ gn: not open to you: part-time
+[15:56:07]   ✗ Patient Care Coordinator @ gn: not open to you: part-time
+[15:56:07]   match  30%  Executive Assistant @ coreweave — same role at this employer, checked before: Incomplete job posting text lacks specific role requirem
+[15:56:08]   ✗ Entry Level Behavioral Specialist (Paid Training) @ allcareers: not open to you: part-time; says entry level / new grad
+[15:56:08]   match  60%  Document Retrieval Specialist (Remote) @ abclegalservices — same role at this employer, checked before: no application form found on page
+[15:56:09]   ✗ Research Associate – Coherent X-ray Scattering, Quantum Materials @ bnl: not open to you: MBA / PhD / grad-school program
+[15:56:09]   ✗ Customer Experience Associate @ weis: pays too little: tops out near $47,840 a year (your floor is $65,000)
+[15:56:10]   ✗ Patient Care Associate C7 Peds 36 hours/week 7pm-7:30am @ albanymed: pays too little: tops out near $54,500 a year (your floor is $65,000)
+[15:56:10]   ✗ Clean Utility Specialist / HSE Champion @ sanofi: above entry level: senior (requires 8+ yrs)
+[15:56:11]   ✗ Patient Care Coordinator @ gn: pays too little: tops out near $45,760 a year (your floor is $65,000)
+[15:56:13]   match  30%  Contract Recruiter, High Volume @ formenergy — Requires 2+ years of full-cycle high-volume recruiting experience which the candidate lacks.
+[15:56:13]   match  35%  Recruiter @ endex — Requires dedicated full-cycle recruiting and talent acquisition experience.
+[15:56:13]   match  40%  Customer Experience Specialist @ polymarket — Requires 2+ years of dedicated customer support experience, which is not the candidate's primary bac
+[15:56:13]   match  30%  Early Careers Recruiter @ coreweave — Requires dedicated early careers recruiting experience rather than an operations or engineering back
+[15:56:13] → Patient Care Coordinator @ CareMetx (score 38, match 55%)
+[15:56:24]       (résumé given to the site's 'apply with resume' box first)
+[15:56:36]       step 1: 52 fields (28 required)
+[15:56:36]       (writer answered 'County' -> 'N/A')
+[15:57:06]       step 2: 12 fields (12 required)
+[15:57:06]       (writer answered 'Personal or Work Reference? (required) *' -> '--')
+[15:57:07]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[15:57:08]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[15:57:09]       ! nothing was picked in 'Personal or Work Reference? (required) *' (wanted '--'; choices: ['--', 'Personal', 'Professional'])
+[15:57:15]       step 3: 12 fields (12 required)
+[15:57:15]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[15:57:21]       step 4: 3 fields (0 required)
+[15:57:34]       step 5: 3 fields (0 required)
+[15:57:44]       step 6: 2 fields (1 required)
+[15:57:46]     ✓ applied (1.6 min)
+[15:57:47]   ✗ Patient Care Coordinator @ gn: pays too little: tops out near $45,760 a year (your floor is $65,000)
+[15:57:47]   ✗ Patient Care Associate C7 Peds 20 hours/week night shift @ albanymed: pays too little: tops out near $54,500 a year (your floor is $65,000)
+[15:57:49]   ✗ Personal Care Specialist (12-month contract) @ myhrabc: above entry level: mid (requires 3+ yrs)
+[15:57:49]   ✗ Dry Etch Process Develop Engineer @ micron: above entry level: senior (requires 3+ yrs; pay starts at $159,000)
+[15:57:50]   ✗ Bilingual Patient Service Representative (Burbank) @ Orthodontic Experts: above entry level: mid (requires 3+ yrs)
+[15:57:52]   match  75%  Dispatcher @ gobeacon — Good fit for dispatch and scheduling operations, though candidate has an engineering degree.
+[15:57:52]   match  50%  RCM Specialists (Payment Posting) @ amperos — Weak fit due to lack of the required 2-4 years of dedicated medical billing and RCM experience.
+[15:57:52]   match  60%  Safety, Security & Compliance Leader @ Pet Food Experts Inc — Weak-to-good stretch in safety and compliance, but lacks the specific 3+ years of distribution safet
+[15:57:52]   match  45%  Retention Specialist @ centerforemploymentopportunities — Weak fit for a social work/case management retention role.
+[15:57:52]   match  55%  Data Entry Specialist - Medical Records (Remote) @ sharecare — Weak fit for a routine medical records data entry role given candidate's engineering background.
+[15:57:55] → Document Retrieval Specialist (Remote) @ abclegalservices (score 16, match 60%)
+[15:58:08]       step 1: 24 fields (15 required)
+[15:58:09]       (writer answered 'Which statement best describes your experience working in a ' -> 'I have worked in an in-person role that required m')
+[15:58:29]       email: the site asked for a security code after Submit; reading it from the application inbox
+[15:58:40]       mail: found 'Security code for your application to ABC Legal Services'
+[15:58:46]     ✓ applied (0.8 min)
+[15:58:51] → Dispatcher @ gobeacon (score 12, match 75%)
+[15:58:54]       (opening Workday's application form directly)
+[15:58:59]       (account page: creating the account / signing in)
+[15:58:59]       account: creating one on gobeacon.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[15:59:03]       account: created
+[15:59:06]       1/6 My Information: 14 fields (12 required)
+[15:59:15]       2/6 My Experience: 13 fields (6 required)
+[15:59:34]       3/6 Application Questions: 3 fields (3 required)
+[15:59:43]       ? unanswered: 'Yes, I have read and consent to the terms and conditions.*' kind=checkbox_single options=[]
+[15:59:43]     ✗ skipped: can't truthfully answer required: Yes, I have read and consent to the terms and conditions.*
+[15:59:52] → Safety, Security & Compliance Leader @ Pet Food Experts Inc (score 12, match 60%)
+[16:00:04]       (résumé given to the site's 'apply with resume' box first)
+[16:00:16]       step 1: 58 fields (15 required)
+[16:00:16]       (writer answered 'County' -> 'N/A')
+[16:00:37]       step 2: 5 fields (4 required)
+[16:00:39]       ? unanswered: 'Do you have experience with any of the following? (Choose all that apply) (required)' kind=checkbox_group options=['OSHA Regulations', 'FDA Regulations', 'EPA Regulations', 'DOT Regulations']
+[16:00:39]     ✗ skipped: can't truthfully answer required: Do you have experience with any of the following? (Choose al
+[16:00:40]   ✗ Customer Experience & Automation Specialist @ HEALTHY KIDS PROGRAMS: not open to you: part-time
+[16:00:41]   match  35%  Program Monitor (Full Time/Sun-Thurs 3p-11p) @ Cazenovia Recovery Systems Inc — The position is a residential program monitor role with hourly pay under the salary threshold and is
+[16:00:41]   ✗ Regulatory Compliance Specialist @ HEALTHY KIDS PROGRAMS: not open to you: part-time
+[16:00:43]   match  55%  Recruiter @ Martin/Martin, Inc. — The candidate has a strong engineering and business background, but this HR recruiter role is outsid
+[16:00:46] Run time limit reached (50 min): the rest waits for the next run
+[16:00:46] Résumé checks this run: 91 (49 passed) in 19 calls. Free writer allowance used today: groq 96k/195k tokens (+22k served from its cache, not counted); groq-20b 49k/195k tokens (+9k served from its cache, not counted); groq-qwen 18k/195k tokens; gemini-lite 34/480 requests (+4k served from its cache, not counted); gemini-flash 0/18 requests
+[16:00:46] Summary: 31 applied, 23 skipped, 23 queued, 63 low_score, 87 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-07.md
+[16:00:46]   by site  workday: 18 skipped, 11 applied, 1 manual
+[16:00:46]   by site  greenhouse: 16 applied, 3 skipped
+[16:00:46]   by site  ashby: 3 manual, 1 applied, 1 skipped
+[16:00:46]   by site  paylocity: 3 applied, 1 skipped
+[16:00:48] Summary emailed to delgado@alumni.usc.edu
