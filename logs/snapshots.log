@@ -1,67 +1,3 @@
-=== 2026-11-05 07:50:14  skipped  Logistics Associate - Westchester (Day shift) @ msk
-url: https://msk.wd108.myworkdayjobs.com/MSKCC_Careers_Primary/job/Westchester-NY/Logistics-Associate---Westchester--Day-shift-_103539/apply/applyManually
-stage: Application Questions
-why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.', 'Error-Desired Annual Pay: The number entered is too large.']; fields flagged: ['Desired Annual Pay:']
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Logistics Associate - Westchester (Day shift)
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-# Errors Found
-! Error-Desired Annual Pay: The number entered is too large. {errorHeading}
-{applyFlowPrimaryQuestionsPage}
- {formField-602e5b1032dd1000b49c59e15d730000}
-label: Pronoun
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c59e15d730000
- {formField-602e5b1032dd1000b49c5baf54150001}
-label: Desired Annual Pay:*
-  <input:text #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150001 required INVALID filled>
-! Error: The number entered is too large. {inputAlert}
- {formField-602e5b1032dd1000b49c5baf54150002}
-label: Are you willing to relocate?*
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150002
- {formField-602e5b1032dd1000b49c5baf54150005}
-label: Do you have relatives employed here?*
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150005
- {formField-602e5b1032dd1000b49c5c4940100002}
-label: Are you legally authorized to work in the United States?*
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100002
- {formField-602e5b1032dd1000b49c5c4940100005}
-label: Will you now or in the future (e.g., post-OPT) require sponsorship for employment visa status (e.g., H-1B, TN,
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100005
- {formField-602e5b1032dd1000b49c5ce328200000}
-label: At MSK, we use an AI feature that helps compare the experience and skills in your application to the minimum r
-  text: A recruiter will always review your application.
-  text: Would you like to opt out of this feature?
-  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5ce328200000
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] MSKCC Privacy Practices {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-11-05 14:34:35  blocked  Financial Systems Project Coordinator @ equipmentsharecom
 url: https://www.equipmentshare.com/careers/openings/8306068/financial-systems-project-coordinator-at-corporate
 why: reCAPTCHA checkbox (a human check: the bot stops here)
@@ -4986,4 +4922,107 @@ label: Review
   [link]  {socialIcon}
   [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-08 21:05:00  skipped  Recruiting Coordinator @ usenourish
+url: https://job-boards.greenhouse.io/usenourish/jobs/5476383008
+stage: page 1
+why: can't truthfully answer required: Do you have experience using any of the following tools? *
+# Recruiting Coordinator
+  [button] Apply
+# About Us
+  text: Health is the most important thing in life, and the American healthcare system is completely broken - poor outcomes, high cost, bad patient 
+  text: Our mission is to improve people’s health by making it easy to live a healthy lifestyle.
+  text: Nourish is the country's largest dietitian-led metabolic health clinic. We’re an AI-native digital health system matching patients with 10,0
+  text: J.P. Morgan Growth Equity Partners
+# About the role
+  text: We’re looking for a Recruiting Coordinator to keep our hiring running smoothly. You’ll own the scheduling and logistics that keep pipeline m
+  text: Talent Acquisition Operations Manager
+# Key responsibilities:
+  text: Own end-to-end interview scheduling and logistics, virtual and onsite, managing complex, high-volume calendars across candidates, interviewe
+  text: Deliver clear, timely communication and seamless coordination at every stage, contributing to a white-glove candidate experience
+  text: Partner closely with recruiters and hiring managers to keep pipelines moving, anticipating conflicts and bottlenecks and resolving them befo
+  text: Become deeply fluent in our recruiting tools and processes (e.g. ATS, scheduling, and interview platforms), ensuring consistency across all 
+  text: Identify and lead process improvements (SOPs, tooling guides, interviewer and HM enablement) that reduce manual work and make hiring faster 
+# What you’ll bring:
+  text: 1-2 years of experience in a coordination, operations, or executive assistant role; recruiting coordination or recruiting operations experie
+  text: Experience managing high-volume, multi-stakeholder calendars across multiple workstreams at once
+  text: Tech-savvy and comfortable with change, able to learn new systems quickly (experience with Greenhouse/Ashby, ModernLoop, BrightHire or simil
+  text: You’ve owned or contributed to process improvement or RecOps initiatives beyond day-to-day scheduling (and loved it!)
+  text: Meticulous attention to detail:
+  text: Collaborative and low-ego:
+# More information
+  text: Mission & Vision & Success
+  text: Nourish Clinical Philosophy
+  text: Please note that you must be legally authorized to work in the U.S. for this position.
+  text: Interested in building your career at Nourish? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name*
+  <input:text #preferred_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Are you located in NYC, or open to relocating to NYC, and able to be in the office 3-4 days per week? Our offi
+  <input:text #question_19220621008 required empty>
+  [button] 
+  <input required empty>
+label: Do you have experience with Greenhouse or Ashby? If so, at what level? *
+  <input:text #question_19220622008 required empty>
+  [button] 
+  <input required empty>
+label: Do you have experience using any of the following tools? *
+  <input:checkbox #question_19220623008[]_46608782008 required question-unanswered>
+label: ModernLoop
+  <input:checkbox #question_19220623008[]_46608783008 required question-unanswered>
+label: Brighthire
+  <input:checkbox #question_19220623008[]_46608784008 required question-unanswered>
+label: LinkedIn Recruiter
+  <input:checkbox #question_19220623008[]_46608785008 required question-unanswered>
+label: Gem
+  <input:checkbox #question_19220623008[]_46608786008 required question-unanswered>
+label: Noon
+  <input:checkbox #question_19220623008[]_46608787008 required question-unanswered>
+label: Juicebox
+  <input:checkbox #question_19220623008[]_46608788008 required question-unanswered>
+label: BuiltIn
+  <input:checkbox #question_19220623008[]_46608789008 required question-unanswered>
+label: Other
+label: Why are you interested in a Recruiting Coordinator role at Nourish? *
+  <textarea #question_19220624008 required empty>
+label: Do you have any startup experience? If yes, tell us your favorite part.*
+  <textarea #question_19220625008 required empty>
+label: Will you require visa sponsorship (now or in the future) for continued employment?*
+  <input:text #question_19220626008 required empty>
+  [button] 
+  <input required empty>
+label: LinkedIn Profile*
+  <input:text #question_19220627008 required empty>
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
 
