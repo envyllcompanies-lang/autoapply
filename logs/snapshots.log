@@ -5107,3 +5107,79 @@ label: I have read and accept the above acknowledgement (required)
   text: SMS Terms and Conditions and Privacy Policy
   [button] 
 
+=== 2026-11-09 21:00:45  unconfirmed  Legal & Privacy Operations Associate @ ramp
+url: https://jobs.ashbyhq.com/ramp/31bd9e9e-102f-4051-abc1-22cdd7d9617a/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ased in the New York City or San Francisco Bay Area and able to work from our office at least 3 days per week? Yes No Recruiting Privacy Policy Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Legal & Privacy Operations Associate
+# Location
+# Employment Type
+# Location Type
+# Department
+# Compensation
+  text: Target Base Salary $110K – $155K • Offers Equity
+  text: The final compensation will depend on the location and level at which the candidate is hired.
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Legal Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Phone
+  <input:tel #05445e43-3639-4c13-8c65-e0eb26aeb727 required filled>
+label: Yes - I consent to receiving text messages
+label: No - I do not consent to receiving text messages
+label: Where do you plan on working from (for payroll tax purposes)?
+  <input filled>
+  [button] 
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn Profile
+  <input:text #76ca9776-02f6-4c28-9d5e-4b0a33d45513 required filled>
+label: Are you currently based in the New York City or San Francisco Bay Area and able to work from our office at lea
+  [button] Yes
+  [button] No
+  <input:checkbox name=8951c56a-dd0b-4c1e-8ff8-c95630a13e67 question-unanswered>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-09 21:02:54  blocked  Associate, Business Audit @ blackrock
+url: https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional/job/New-York-NY/Associate--Business-Audit_R267146-1/apply/applyManually
+stage: Create Account/Sign In
+why: no Next or Submit button found on Workday's 'Create Account/Sign In' page; page shows: accessibilitySkipToMainContent:Skip to main content; header:Sign In
+Search for Jobs; logoLink:; logo:; headerTitle:; navigationContainer:Sign In
+Search for Jobs; utilityButtonBar:Sign In; utilityButtonSignIn:Sign In; navigationItem-Search for Jobs:Search for Jobs; applyFlowPage:Back to Job Posting
+A
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Associate, Business Audit
+{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
+label: current step 1 of 6
+label: Create Account/Sign In
+label: step 2 of 6
+label: My Information
+label: step 3 of 6
+label: My Experience
+label: step 4 of 6
+label: Application Questions
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+{applyFlowLoadingPage}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
