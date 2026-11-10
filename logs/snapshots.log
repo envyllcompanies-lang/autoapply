@@ -1,140 +1,3 @@
-=== 2026-11-05 19:54:31  skipped  Associate, Vaccine Demand & Implementation (VDI) @ Albert B Sabin Vaccine Institute Inc
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4642816
-stage: page 4
-why: stuck on step 4; page says: ['Upload Cover Letter (required)\nSelect Cover Letter\<file> and .doc files only, 10M', 'Upload Cover Letter (required)', 'Cover Letter is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: Associate, Vaccine Demand & Implementation (VDI)
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Desired Salary (required)
-  <input:text #info.desiredSalaryDescription {infoDesiredSalaryDescription} filled>
-label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} filled>
-label: Have you worked with us before?
-label: Upload Cover Letter (required)
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-label: May We Contact for Reference?
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-    (choice) --
-    (choice) Yes
-    (choice) No
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-label: Area of Study
-  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
-label: School Type
-label: Did you Graduate?
-label: Degree Obtained
-label: Graduation Date
-  <input:text #txt-educationHistory-graduationDate-0 {txt-educationHistory-graduationDate-0} filled>
-  [button]  {educationHistory.graduationDate.0.picker-button} opens-dialog
-(dialog)
-label: Country
-  <input:text #educationHistory.city.0 {educationHistoryCity0} filled>
-label: State
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  text: Albert B Sabin Vaccine Institute Inc: Privacy Policy
-  [button] 
-
 === 2026-11-05 19:58:34  skipped  Master Production Planner @ jm
 url: https://jm.wd103.myworkdayjobs.com/external/job/Littleton-CO-JMTC/Master-Production-Planner_R26_1984/apply/applyManually
 stage: Application Questions
@@ -5182,4 +5045,136 @@ label: Review
   [link]  {socialIcon}
   [link]  {socialIcon}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-10 00:25:01  unconfirmed  Asset/Move Coordinator I @ thetsuigroup
+url: https://apply.workable.com/thetsuigroup/j/6FE1BAE624/apply
+stage: page 1
+why: no confirmation after submit; server said: POST JcJrULwfn6QtI6tYjgmOPqoeQ4nPeT8Ss9xDRt8P8wSHJAzghtGIty1Eai4gUIvAueIhDK5abH4xMsh3j8DJ5in-Kw -> 200; POST JcJrULwfn6QtI6tYjgmOPqoeQ4nPeT8Ss9xDRt8P8wSHJAzghtGIty1Eai4gUIvAueIhDK5abH4xMsh3j8DJ5in-Kw -> 200; page ends: ' and equipment placement, relocations, and/or asset management? YES NO * Are you currently located in the United States? YES NO Submittin
+# Asset/Move Coordinator I
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+label: * Address
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_BZLI0MI6BsijEY7E no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_VOiTGmAPocPxAsC4 has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Do you have a bachelor’s degree in a related field?
+label: YES
+label: NO
+  text: Do you have a minimum of 1 year of related experience in construction related projects including furniture, fixture and equipment placement,
+  text: Are you currently located in the United States?
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-10 00:27:14  unconfirmed  Asset/Move Coordinator I @ the-tsui-group
+url: https://jobs.workable.com/view/7y6KZxo48CjJpwXydkh9Bj/asset%2Fmove-coordinator-i-in-los-angeles-at-the-tsui-group
+stage: page 1
+why: no confirmation after submit; server said: POST kDrowtPrSoouaEmp1gDPWLvQZxiVufr4VUbPiJ_VoJN66qR_UjqBzJT3O6ejU1TCIpztFDSbNdmVAdEX9GbDwqm3Pw -> 200; POST kDrowtPrSoouaEmp1gDPWLvQZxiVufr4VUbPiJ_VoJN66qR_UjqBzJT3O6ejU1TCIpztFDSbNdmVAdEX9GbDwqm3Pw -> 200; page ends: ' related experience in construction related projects including furniture, fixture and equipment placement, relocations, and/or asset mana
+  [button] Search for jobs
+  [link] Log in / Sign up
+# Asset/Move Coordinator I
+# at The Tsui Group
+  text: Los Angeles, California, United States
+  [button] Share job
+  [button] Apply now
+# Description
+  text: The Tsui Group is seeking a candidate who is qualified and experienced in educational facility construction projects to serve as an Asset/Mo
+  text: Provide support to the Relocation Project Management (RPM) team at multiple campuses as needed in Furniture, Fixtures, and Equipment (FF&E) 
+  text: Support the Furniture/Equipment/Relocation Project Management Services with emphasis in FF&E selection, procurement coordination and purchas
+  text: Assist with the procurement and purchasing of FF&E using best-value and/or low bid public contracting.
+  text: Support budget and schedule tracking efforts for FF&E and moves, and meet with relevant Project Architects (A/E), Project Managers, and BUGs
+  text: Assist with the timely and successful onsite FF&E installation, punch-list sign-off and transition during swing space, relocation and/or mov
+  text: Support the procurement of specialty contractors or Movers for installations, delivery, and/or connections not covered by the FF&E vendors. 
+  text: Support the RPM in the working with the Project Interior Designer and the BUG user groups to select and prepare a list of all furniture and 
+  text: Assist in the onsite unlocking of all areas requiring access by the movers and others during the Pre-Move, Move, Installation and Post Move/
+  text: Assist in the onsite coordination of all furniture and equipment deliveries with PMs, CPDs, Facility Directors, and BUGs if applicable; work
+  text: Maintain all FF&E, move management, moving and storage related documents, including proposals, purchase orders, packing slips, time cards, s
+# Requirements
+  text: Minimum Required Qualifications:
+  text: 1 year of related experience in Interior Design, Construction, Engineering, Moves/Relocations, Facilities, or Furniture, Fixture and Equipme
+  text: Ability to read architectural and furniture drawings.
+  text: Knowledge of furniture and equipment specifications and procurement.
+  text: Strong written and oral communication, organizational, and interpersonal skills.
+  text: Ability to be onsite at multiple colleges.
+  text: Proficiency Microsoft Office and related word processing, spreadsheet, and database software.
+  text: Flexibility in schedule and transportation to work at multiple locations based on assigned schedule.
+  text: 4 year Degree in the areas of Architecture, Interior Architecture, Interior Design, Construction/Project Management, Facilities Management o
+  text: Procurement, sourcing or asset management experience.
+  text: Knowledge/proficiency in AutoCAD software.
+  text: Certification/Membership with CID, IIDA, AIA, IFMA, LEED.
+# Benefits
+  text: Salary Range: $85,000-$90,500
+  text: Medical, Vision, & Dental – 100% covered for the employee*
+  text: Life and Disability Insurance
+  text: 10.5 days of Vacation pay (Accrued)
+  text: 6 days of Sick pay (Available Immediately)
+  text: 10 days of Holiday pay (9 Holidays, 1 Personal Day)
+  text: 3% Employer Contribution 401k (After 1 year of service)
+  text: Monthly Stipend for Cell Phone
+# Visit website
+  text: Program / Project / Construction Management Firm Specializing in Program Delivery
+  text: © Workable Technology Limited 2012-2026
+  [button] Cookie Settings
+  [button] Feedback
+label: How was your experience on this website today?
+  [button] Next disabled
+(dialog)
+# Apply for Asset/Move Coordinator I
+  [button] Cancel
+  [button] Submit application disabled
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone required filled>
+  text: The hiring team may use this number to contact you about this job.
+label: * Address
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_dZvVWBSpxmETwhn0 no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_GKDc7walsLvs45fw has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Do you have a bachelor’s degree in a related field?
+label: YES
+label: NO
+  text: Do you have a minimum of 1 year of related experience in construction related projects including furniture, fixture and equipment placement,
+  text: Are you currently located in the United States?
+  [button] Submitting… disabled
 
