@@ -1,73 +1,3 @@
-=== 2026-11-05 19:58:34  skipped  Master Production Planner @ jm
-url: https://jm.wd103.myworkdayjobs.com/external/job/Littleton-CO-JMTC/Master-Production-Planner_R26_1984/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: If required, would you be willing to sign a Confidentiality,
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# JM Careers
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Master Production Planner
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-0585a13c2c6c1001e7059278736c0000}
-label: The hiring process will consist of a phone interview, manager interview, drug screen, reference checks, and po
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e7059278736c0000
- {formField-0585a13c2c6c1001e70593126d260000}
-label: If required, would you be willing to sign a Confidentiality, Nondisclosure and Invention Assignment Agreement?
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260000
- {formField-0585a13c2c6c1001e70593126d260003}
-label: Are you at least 18 years of age?*
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260003
- {formField-0585a13c2c6c1001e70593126d260006}
-label: Are you legally eligible to work in the country to which you are applying?*
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593126d260006
- {formField-0585a13c2c6c1001e70593ae64da0000}
-label: Will you now or in the future require sponsorship for employment visa status?*
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0000
- {formField-0585a13c2c6c1001e70593ae64da0003}
-label: Salary Expected:
-  <input:text #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0003 empty>
- {formField-0585a13c2c6c1001e70593ae64da0004}
-label: Do you know a current JM employee that would recommend you for hire?
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e70593ae64da0004
- {formField-0585a13c2c6c1001e7059448205b0000}
-label: Do you agree to allow text messages relating to reference checks in our recruiting process to be sent on behal
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e7059448205b0000
- {formField-0585a13c2c6c1001e76435c089400000}
-label: If you are not local to the position you are applying too, are you willing to relocate?*
-  [dropdown] nothing chosen #primaryQuestionnaire--0585a13c2c6c1001e76435c089400000
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-11-05 19:59:38  skipped  2027 Enterprise Operations Development Program- The Contact Center Analysis Track @ mtb
 url: https://mtb.wd5.myworkdayjobs.com/campus/job/Buffalo-NY/XMLNAME-2027-Enterprise-Operations-Development-Program--The-Contact-Center-Analysis-Track_R91914/apply/applyManually
 stage: Voluntary Disclosures
@@ -5177,4 +5107,43 @@ label: NO
   text: Do you have a minimum of 1 year of related experience in construction related projects including furniture, fixture and equipment placement,
   text: Are you currently located in the United States?
   [button] Submitting… disabled
+
+=== 2026-11-10 03:41:01  unconfirmed  Executive Assistant & Operations Associate @ nidus-technologies
+url: https://jobs.ashbyhq.com/nidus-technologies/106ae0f0-f34d-4c85-be8e-2badd0306b29/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'on of a background check as a condition of employment. Are you willing to undergo a background check as part of the application process? Yes No Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Executive Assistant & Operations Associate
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn Profile
+  <input:url #ae74130f-94d5-4c33-9832-4647472e4b3e filled>
+label: Are you legally authorized to work in the United States without sponsorship now or in the future?
+  [button] Yes
+  [button] No
+  <input:checkbox name=8c3aa358-d780-471d-a08a-51f7dde25165 question-unanswered>
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B)?
+  [button] Yes
+  [button] No
+  <input:checkbox name=b8eeffe9-b0da-4a91-a986-aa0b47409bce question-unanswered>
+label: This position requires a successful completion of a background check as a condition of employment. Are you wil
+  [button] Yes
+  [button] No
+  <input:checkbox name=d8da7f58-f160-48be-b1ef-49491e102367 question-answered>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
 
