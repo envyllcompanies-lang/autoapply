@@ -5394,3 +5394,57 @@ label: * Please provide a link to your LinkedIn profile:
   [button] Submitting… disabled
   [button] Cookie settings
 
+=== 2026-11-11 06:35:05  unconfirmed  Technical Delivery Analyst @ reactive-markets
+url: https://jobs.ashbyhq.com/reactivemarkets/cc52eaeb-8795-4572-b6db-1b4f815a7e34/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e to start a new role below Right To Work in UK Please confirm your eligibility and right to work in the UK and if any sponsorship is required. Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Technical Delivery Analyst
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: CV / Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn Profile
+  text: Please add your LinkedIn URL below
+  <input:url #c9985982-e704-4fe7-b9c7-d78b9abbcac8 filled>
+label: Salary Expectations
+  text: Please provide your salary expectations below
+  <input:text #d657262d-8e1f-4210-be92-bf4b77a2cb56 required filled>
+label: Availability
+  text: Please either confirm your notice period or when you are available to start a new role below
+  <input:text #73a5a52e-2d01-4b2b-819b-621df92e022d required filled>
+label: Right To Work in UK
+  text: Please confirm your eligibility and right to work in the UK and if any sponsorship is required.
+  <input:text #f315346a-fbbd-4177-bc23-fb6e9029cb14 required filled>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-11 06:36:49  blocked  Associate Mid-Market Account Manager @ jobgether
+url: https://jobs.lever.co/jobgether/8c75c315-33e0-49f4-a0b6-0bfdf7018385/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# Associate Mid-Market Account Manager
+  text: Sales – Account Executive /
+# SUBMIT YOUR APPLICATION
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: Email ✱
+label: Phone
+label: Current location
+label: Current company
+<iframe https://newassets.hcaptcha.com/captcha/v1/b7cb55144cfb1f79ab8b18a24ea5786dc17837>
+  [button] SUBMIT APPLICATION
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
+
