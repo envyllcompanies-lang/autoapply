@@ -1,58 +1,3 @@
-=== 2026-11-07 15:59:43  skipped  Dispatcher @ gobeacon
-url: https://gobeacon.wd1.myworkdayjobs.com/beaconmobilitycareers/job/Hempstead-NY/Dispatcher_REQ-2026-4605-2/apply/applyManually
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions.*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Beacon Mobility Homepage {navigationItem-Beacon Mobility Homepage}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Dispatcher
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-label: completed step 3 of 6
-label: Application Questions
-{progressBarActiveStep} current step 4 of 6 Voluntary Disclosures
-label: current step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Please enter your personal information
- {formField-ethnicity}
-label: Please select the ethnicity which most accurately describes how you identify yourself.*
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
- {formField-hispanicOrLatino}
-label: Please indicate if you are Hispanic or Latino.
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-gender}
-label: Please select your gender.*
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-veteranStatus}
-label: Please select the veteran status which most accurately describes your status.*
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
-# Terms and Conditions
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions.*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link] Beacon Mobility Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-11-07 16:00:39  skipped  Safety, Security & Compliance Leader @ Pet Food Experts Inc
 url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4579808
 stage: page 2
@@ -5492,6 +5437,91 @@ label: * Please provide a link to your LinkedIn profile, if available:
 label: * Please leave your GitHub or portfolio link if you have one:
   text: Please upload a file containing 2–3 professional references, if available:
   <input:file #input_files_input_Acipswke4XGq7jqY required no-file>
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-12 07:40:36  blocked  Strategic Finance Analyst @ posthog
+url: https://jobs.ashbyhq.com/PostHog/b0362f5c-ce12-42cd-9e8d-f2d3085b00a0/application
+why: no application form found on page
+# Page not found
+  text: The page you requested was not found
+
+=== 2026-11-12 07:42:08  unconfirmed  Data Analyst-DLN Consulting @ dln-consulting-group
+url: https://apply.workable.com/dln-consulting-group/j/A474F7532A/apply
+stage: page 1
+why: no confirmation after submit; server said: POST DoZwJieRO9HDeea9aTzk_Q1zqk1WHwGlC0hHgSLow758Nsz0vKThPTY1XebS4qFjZJpO8beopOAxDPfCq2cpKj41Bg -> 200; POST DoZwJieRO9HDeea9aTzk_Q1zqk1WHwGlC0hHgSLow758Nsz0vKThPTY1XebS4qFjZJpO8beopOAxDPfCq2cpKj41Bg -> 200; page ends: ' (Optional) <first>_<middle>_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… 
+# Data Analyst-DLN Consulting
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_OB6ht2oPuoV2mTDP no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_Es6tuXvGYVA01mQF has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-12 07:43:59  skipped  Junior Design Engineer @ bask-health
+url: https://apply.workable.com/bask-health-1/j/E8EA53DF48/apply/
+stage: page 1
+why: can't truthfully answer required: Please upload a file containing 2–3 professional references,
+# Junior Design Engineer
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_TDXIZUKRU7ZnmzMH no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_UBGsG93VYIuO3GAH required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Do you have hands-on frontend development experience through employment, internships, academic projects, bootcamps, or independent projects?
+label: YES
+label: NO
+  text: Have you built responsive websites or user interfaces using HTML, CSS, JavaScript, React, or comparable frontend technologies?
+label: * What are your salary expectations? Please include the amount and currency:
+  text: Will you now or in the future require visa sponsorship?
+label: * Please provide a link to your LinkedIn profile, if available:
+label: * Please leave your GitHub or portfolio link if you have one:
+  text: Please upload a file containing 2–3 professional references, if available:
+  <input:file #input_files_input_xfTspv2kldOwY58N required no-file>
   [button] Submit application
   [button] Cookie settings
 
