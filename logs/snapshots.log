@@ -1,114 +1,3 @@
-=== 2026-11-09 20:36:40  unconfirmed  Founders Associate @ kaizenlabs
-url: https://jobs.ashbyhq.com/kaizenlabs/9d51beb2-299b-4c66-b919-e9d66fc6ab4a/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e of the classifications of protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran status Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Founders Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: LinkedIn Profile
-  <input:text #1c8b66ed-9b5e-498e-afdf-2a0a5e77af5b required filled>
-label: Education History
-  [button] Delete disabled
-label: School
-  <input filled>
-  [button] 
-  [button] + Add Education disabled
-label: What are your preferred pronouns?
-  <input:checkbox #6d50577f-56ef-45e8-867b-0f4eede3d6ce_596e42eb-8e5a-49e7-9a51 question-unanswered>
-label: She/her
-  <input:checkbox #6d50577f-56ef-45e8-867b-0f4eede3d6ce_596e42eb-8e5a-49e7-9a51 question-unanswered>
-label: He/him
-  <input:checkbox #6d50577f-56ef-45e8-867b-0f4eede3d6ce_596e42eb-8e5a-49e7-9a51 question-unanswered>
-label: They/them
-  <input:checkbox #6d50577f-56ef-45e8-867b-0f4eede3d6ce_596e42eb-8e5a-49e7-9a51 question-unanswered>
-label: Prefer not to say
-  <input:checkbox #6d50577f-56ef-45e8-867b-0f4eede3d6ce_596e42eb-8e5a-49e7-9a51 question-unanswered>
-label: Other
-label: Are you willing to work in our NYC HQ 3 days/week?
-  text: Applications from candidates unable to meet this requirement will not be considered.
-  [button] Yes
-  [button] No
-  <input:checkbox name=0b475786-4ea2-44bf-9466-ddde21cef066 question-answered>
-label: Why do you want to work at Kaizen?
-  <textarea #b09af0d9-3672-43c9-90ce-a30a1a5c5185 required filled>
-label: Are you legally authorized to work in the country for which you are applying?
-  [button] Yes
-  [button] No
-  <input:checkbox name=cbed0063-1c00-471a-95fa-6cf0b2c88765 question-answered>
-label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B)?
-  <input:radio #6d50577f-56ef-45e8-867b-0f4eede3d6ce_2de3e787-a10c-43a1-8d42 question-answered>
-label: Yes
-  <input:radio #6d50577f-56ef-45e8-867b-0f4eede3d6ce_2de3e787-a10c-43a1-8d42 question-answered>
-label: No
-label: Are you open to contributing to projects across all levels of government, including federal?
-  text: Kaizen builds technology for government agencies at every level — local, state, and federal — with a focus on high-stakes services where per
-  text: We take the mission seriously. Many of us came from environments where the work carried weight — where decisions had consequences, and the m
-  text: We actively seek teammates with a range of viewpoints and political backgrounds — diverse perspectives make the work sharper and the solutio
-  <input:radio #6d50577f-56ef-45e8-867b-0f4eede3d6ce_191b7cb4-1d55-43f1-b97b question-answered>
-  <input:radio #6d50577f-56ef-45e8-867b-0f4eede3d6ce_191b7cb4-1d55-43f1-b97b question-answered>
-label: Do you have any deadlines or timeline considerations we should be aware of?
-  <input:text #29841645-774b-402f-92d4-b96edd203b3a empty>
-label: Do you want to tell us anything else about yourself?
-  <textarea #fd33f055-9578-4950-97b3-5eb4128446b1 empty>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Kaizen provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientation,
-  text: Kaizen is a federal contractor or subcontractor subject to certain governmental recordkeeping and reporting requirements for the administrat
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_race- question-answered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: Kaizen is a Government contractor subject to Section 4212 of the Vietnam Era Veterans’ Readjustment Assistance Act of 1974, as amended by th
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_veter question-answered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_veter question-answered>
-label: I am not a protected veteran
-  <input:radio #aabab2a3-1c06-46bf-92bb-3393c15db05c__systemfield_eeoc_veter question-answered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-11-09 20:40:40  skipped  Enterprise Account Provisioning Specialist — Federal Health IT @ rackner
 url: https://job-boards.greenhouse.io/rackner/jobs/4752621005
 stage: page 1
@@ -5526,6 +5415,71 @@ label: Gender Select ... Male Female Decline to self-identify
 label: Race Select ... Hispanic or Latino White (Not Hispanic or Latino) Black or African American (Not Hispanic or L
 label: Veteran status Select ... I am a veteran I am not a veteran Decline to self-identify
 label: Yes, Outreach can contact me about future job opportunities for up to 1 year Privacy policy
+<iframe https://newassets.hcaptcha.com/captcha/v1/221126bfaff10f69f5e2c60a7ff42e4b9f16ae>
+  [button] SUBMIT APPLICATION
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
+
+=== 2026-11-13 07:14:12  skipped  Operations Specialist @ appen-2
+url: https://jobs.lever.co/appen-2/c3358b13-70eb-44b8-9db7-0f0e11f5297e/apply
+stage: page 1
+why: can't truthfully answer required: Which AI tools have you used professionally (e.g. Claude, Ch; Have you designed, built, or implemented AI agents or automa
+# Operations Specialist
+  text: Crowd – Crowd Operations /
+  text: Permanent - Regular Full-Time /
+# SUBMIT YOUR APPLICATION
+  <select name=opportunityLocationId required empty options=4>
+label: Resume/CV ✱ ATTACH RESUME/CV
+label: Full name ✱
+label: Email ✱
+label: Phone ✱
+label: Current location ✱
+label: Current company
+# LINKS
+label: LinkedIn URL ✱
+label: Other website
+# OPERATIONS SPECIALIST, FULFILLMENT - LATAM
+  <input:text name=cards[7002bb66-f91f-441c-9d0d-b0faab63cc required empty>
+label: ChatGPT / OpenAI
+label: Claude / Claude Code
+label: Google Gemini
+label: Grok
+label: Microsoft Copilot
+label: DeepSeek
+label: Cursor / GitHub Copilot
+label: Other
+label: None
+  text: Briefly describe how you've used them to automate or improve a business process.
+  <textarea name=cards[7002bb66-f91f-441c-9d0d-b0faab63cc empty>
+label: Yes
+label: No
+  text: If yes, briefly describe one example and its impact.
+  <textarea name=cards[7002bb66-f91f-441c-9d0d-b0faab63cc empty>
+  text: If yes, please describe your experience integrating Model Context Protocol (MCP) tools into automation workflows.
+  <textarea name=cards[7002bb66-f91f-441c-9d0d-b0faab63cc empty>
+label: Python / JavaScript
+label: Zapier / Make / n8n
+label: Google Apps Script
+label: SQL
+label: Excel / Power BI
+label: APIs / JSON
+label: Git / GitHub
+  <textarea name=cards[7002bb66-f91f-441c-9d0d-b0faab63cc required empty>
+label: Yes, Appen can contact me about future job opportunities for up to 3 years Privacy policy
+  [button] SUBMIT APPLICATION
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
+
+=== 2026-11-13 07:14:35  blocked  SEO Outreach & Brand Marketing Specialist @ jobgether
+url: https://jobs.lever.co/jobgether/bab62b54-9866-49d2-b886-6b5d210556b1/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# SEO Outreach & Brand Marketing Specialist
+# SUBMIT YOUR APPLICATION
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: Email ✱
+label: Phone
+label: Current location
+label: Current company
 <iframe https://newassets.hcaptcha.com/captcha/v1/221126bfaff10f69f5e2c60a7ff42e4b9f16ae>
   [button] SUBMIT APPLICATION
   text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
