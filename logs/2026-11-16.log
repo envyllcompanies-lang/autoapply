@@ -1794,3 +1794,527 @@
 [18:20:01] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
 [18:20:01] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 497 now
 [18:20:01] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-16.md
+[18:44:57] === autoapply run (LIVE) build 2026-10-18-b ===
+[18:44:58] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[18:44:59] mail: logged in to delgado@alumni.usc.edu OK
+[18:45:28] Discovering jobs…
+[18:52:35]   greenhouse/airbnb: 206 open roles
+[18:52:35]   greenhouse/figma: 139 open roles
+[18:52:35]   greenhouse/robinhood: 166 open roles
+[18:52:35]   greenhouse/databricks: 887 open roles
+[18:52:35]   greenhouse/anthropic: 662 open roles
+[18:52:35]   greenhouse/coinbase: 261 open roles
+[18:52:35]   greenhouse/lyft: 146 open roles
+[18:52:35]   greenhouse/pinterest: 162 open roles
+[18:52:35]   greenhouse/reddit: 149 open roles
+[18:52:35]   greenhouse/twilio: 108 open roles
+[18:52:35]   greenhouse/cloudflare: 471 open roles
+[18:52:35]   greenhouse/datadog: 381 open roles
+[18:52:35]   greenhouse/mongodb: 396 open roles
+[18:52:35]   greenhouse/elastic: 405 open roles
+[18:52:35]   greenhouse/gitlab: 250 open roles
+[18:52:35]   greenhouse/asana: 111 open roles
+[18:52:35]   greenhouse/okta: 359 open roles
+[18:52:35]   greenhouse/samsara: 317 open roles
+[18:52:35]   greenhouse/affirm: 217 open roles
+[18:52:35]   greenhouse/brex: 278 open roles
+[18:52:35]   greenhouse/flexport: 203 open roles
+[18:52:35]   greenhouse/oscar: 183 open roles
+[18:52:35]   greenhouse/spacex: 2764 open roles
+[18:52:35]   greenhouse/toast: 348 open roles
+[18:52:35]   greenhouse/verkada: 344 open roles
+[18:52:35]   greenhouse/nuro: 100 open roles
+[18:52:35]   greenhouse/scaleai: 170 open roles
+[18:52:35]   greenhouse/lucidmotors: 477 open roles
+[18:52:35]   greenhouse/holderconstruction: 303 open roles
+[18:52:35]   greenhouse/rocketlab: 538 open roles
+[18:52:35]   greenhouse/carvana: 1645 open roles
+[18:52:35]   greenhouse/roblox: 263 open roles
+[18:52:35]   greenhouse/stripe: 789 open roles
+[18:52:35]   greenhouse/doordashusa: 425 open roles
+[18:52:35]   greenhouse/aloyoga: 759 open roles
+[18:52:35]   greenhouse/thenewyorktimes: 157 open roles
+[18:52:35]   greenhouse/janestreet: 216 open roles
+[18:52:35]   greenhouse/onemedical: 346 open roles
+[18:52:35]   greenhouse/gomotive: 180 open roles
+[18:52:35]   greenhouse/reformation: 149 open roles
+[18:52:35]   greenhouse/justworks: 111 open roles
+[18:52:35]   greenhouse/riotgames: 195 open roles
+[18:52:35]   greenhouse/scopely: 178 open roles
+[18:52:35]   greenhouse/fanaticsfbg: 103 open roles
+[18:52:35]   greenhouse/voyagertechnologiesinc: 187 open roles
+[18:52:35]   greenhouse/trueanomalyinc: 217 open roles
+[18:52:35]   greenhouse/charliehealth: 281 open roles
+[18:52:35]   greenhouse/trace3: 103 open roles
+[18:52:35]   greenhouse/grafanalabs: 136 open roles
+[18:52:35]   greenhouse/vailclinicincdbavailhealthhospital: 108 open roles
+[18:52:35]   greenhouse/fivetran: 193 open roles
+[18:52:35]   greenhouse/olsson: 349 open roles
+[18:52:35]   greenhouse/relativity: 393 open roles
+[18:52:35]   greenhouse/blankstreet: 103 open roles
+[18:52:35]   greenhouse/icapitalnetwork: 222 open roles
+[18:52:35]   greenhouse/lpc: 111 open roles
+[18:52:35]   greenhouse/braze: 338 open roles
+[18:52:35]   greenhouse/addepar1: 116 open roles
+[18:52:35]   greenhouse/divergent: 142 open roles
+[18:52:35]   greenhouse/vardaspace: 131 open roles
+[18:52:35]   greenhouse/crunchyroll: 101 open roles
+[18:52:35]   greenhouse/vast: 200 open roles
+[18:52:35]   greenhouse/cookunity: 149 open roles
+[18:52:35]   greenhouse/fanaticscollectibles: 250 open roles
+[18:52:35]   greenhouse/sonymusicentertainment: 126 open roles
+[18:52:35]   greenhouse/canonical: 316 open roles
+[18:52:35]   greenhouse/betterhelp: 175 open roles
+[18:52:35]   greenhouse/adyen: 245 open roles
+[18:52:35]   greenhouse/thetradedesk: 101 open roles
+[18:52:35]   greenhouse/agency: 827 open roles
+[18:52:35]   greenhouse/innodatainc: 107 open roles
+[18:52:35]   greenhouse/prolificacademicltd: 4174 open roles
+[18:52:35]   greenhouse/sumup: 314 open roles
+[18:52:35]   greenhouse/skdse: 153 open roles
+[18:52:35]   greenhouse/nerostechnologies: 112 open roles
+[18:52:35]   greenhouse/bakerhicks: 134 open roles
+[18:52:35]   greenhouse/precisionmedicinegroup: 153 open roles
+[18:52:35]   greenhouse/hellofresh: 366 open roles
+[18:52:35]   greenhouse/asm: 533 open roles
+[18:52:35]   greenhouse/ripple: 112 open roles
+[18:52:35]   greenhouse/altentechnologyusa: 228 open roles
+[18:52:35]   greenhouse/natera: 212 open roles
+[18:52:35]   greenhouse/woolpert: 112 open roles
+[18:52:35]   greenhouse/quince: 153 open roles
+[18:52:35]   greenhouse/dhpace: 399 open roles
+[18:52:35]   greenhouse/block: 184 open roles
+[18:52:35]   greenhouse/celonis: 265 open roles
+[18:52:35]   greenhouse/nebius: 372 open roles
+[18:52:35]   greenhouse/alixpartners: 131 open roles
+[18:52:35]   greenhouse/apexcompanies: 162 open roles
+[18:52:35]   greenhouse/alphasense: 178 open roles
+[18:52:35]   greenhouse/alfredbeneschco: 146 open roles
+[18:52:35]   greenhouse/anthromededucation: 149 open roles
+[18:52:35]   greenhouse/axiomtalentplatform: 214 open roles
+[18:52:35]   greenhouse/bybit: 161 open roles
+[18:52:35]   greenhouse/cannondesign: 128 open roles
+[18:52:35]   greenhouse/comprehensivemobilecare: 270 open roles
+[18:52:35]   greenhouse/coreweave: 306 open roles
+[18:52:35]   greenhouse/datavant2: 139 open roles
+[18:52:35]   greenhouse/epicgames: 139 open roles
+[18:52:35]   greenhouse/equipmentsharecom: 1061 open roles
+[18:52:35]   greenhouse/erc8585757pathlight53t353: 106 open roles
+[18:52:35]   greenhouse/esri: 487 open roles
+[18:52:35]   greenhouse/flyzipline: 344 open roles
+[18:52:35]   greenhouse/formlabs: 260 open roles
+[18:52:35]   greenhouse/hubspotjobs: 139 open roles
+[18:52:35]   greenhouse/ixllearning: 112 open roles
+[18:52:35]   greenhouse/justmarkets: 134 open roles
+[18:52:35]   greenhouse/klaviyo: 146 open roles
+[18:52:35]   greenhouse/langanengineeringandenvironmentalservicesllc: 586 open roles
+[18:52:35]   greenhouse/luxinfusion: 116 open roles
+[18:52:35]   greenhouse/missionhealthcare: 125 open roles
+[18:52:35]   greenhouse/modernanimal: 118 open roles
+[18:52:35]   greenhouse/monks: 342 open roles
+[18:52:35]   greenhouse/monsterenergy: 168 open roles
+[18:52:35]   greenhouse/netskope: 121 open roles
+[18:52:35]   greenhouse/nscaleoperationsukltd: 278 open roles
+[18:52:35]   greenhouse/astspacemobile: 280 open roles
+[18:52:35]   greenhouse/cssmerge: 344 open roles
+[18:52:35]   greenhouse/drayerpt: 135 open roles
+[18:52:35]   greenhouse/ecpcareers: 459 open roles
+[18:52:35]   greenhouse/eosfitness: 2828 open roles
+[18:52:35]   greenhouse/fanaticscommerce: 204 open roles
+[18:52:35]   greenhouse/flix: 173 open roles
+[18:52:35]   greenhouse/helsing: 172 open roles
+[18:52:35]   greenhouse/psiquantum: 102 open roles
+[18:52:35]   greenhouse/revolutionmedicines: 331 open roles
+[18:52:35]   greenhouse/sentinellabs: 253 open roles
+[18:52:35]   greenhouse/ursamajor: 123 open roles
+[18:52:35]   greenhouse/capco: 699 open roles
+[18:52:35]   greenhouse/guidepoint: 104 open roles
+[18:52:35]   greenhouse/zscaler: 378 open roles
+[18:52:35]   lever/palantir: 302 open roles
+[18:52:35]   lever/veeva: 855 open roles
+[18:52:35]   lever/jobgether: 4585 open roles
+[18:52:35]   lever/flynncompanies: 161 open roles
+[18:52:35]   lever/gopuff: 775 open roles
+[18:52:35]   lever/buckmason: 252 open roles
+[18:52:35]   lever/arcteryx.com: 228 open roles
+[18:52:35]   lever/thinkahead: 139 open roles
+[18:52:35]   lever/solidcore: 253 open roles
+[18:52:35]   lever/zoox: 239 open roles
+[18:52:35]   lever/insomniacookies: 1133 open roles
+[18:52:35]   lever/Aprio: 191 open roles
+[18:52:35]   lever/amityfdn: 115 open roles
+[18:52:35]   lever/boxlunch: 4662 open roles
+[18:52:35]   lever/rws: 140 open roles
+[18:52:35]   lever/weloglobal: 441 open roles
+[18:52:35]   ashby/ramp: 178 open roles
+[18:52:35]   ashby/notion: 165 open roles
+[18:52:35]   ashby/openai: 835 open roles
+[18:52:35]   ashby/perplexity: 144 open roles
+[18:52:35]   ashby/plaid: 141 open roles
+[18:52:35]   ashby/zip: 100 open roles
+[18:52:35]   ashby/cohere: 122 open roles
+[18:52:35]   ashby/elevenlabs: 125 open roles
+[18:52:35]   ashby/EliseAI: 109 open roles
+[18:52:35]   ashby/neko-health: 126 open roles
+[18:52:35]   workable/nogigiddy: 1822 open roles
+[18:52:35]   workable/suppliedtalent: 187 open roles
+[18:52:35]   workable/serenity-mental-health-centers: 370 open roles
+[18:52:35]   workable/pacific-health-group: 187 open roles
+[18:52:35]   workable/pm2cm: 125 open roles
+[18:52:35]   workable/obran: 103 open roles
+[18:52:35]   workable/behavior-frontiers: 132 open roles
+[18:52:35]   workable/pavago: 2601 open roles
+[18:52:35]   workable/rimkus: 160 open roles
+[18:52:35]   workable/continuum-resource-network: 105 open roles
+[18:52:35]   workable/intertek: 218 open roles
+[18:52:35]   workable/yugo: 121 open roles
+[18:52:35]   workable/weekday-1: 822 open roles
+[18:52:35]   workable/raydar: 982 open roles
+[18:52:35]   workable/keller-executive-search: 146 open roles
+[18:52:35]   workable/bask-health-1: 283 open roles
+[18:52:35]   workable/kurtgeiger: 187 open roles
+[18:52:35]   workable/g-mass: 142 open roles
+[18:52:35]   breezy/american-logistics-authority: 2760 open roles
+[18:52:35]   smartrecruiters/aspenskiingcompany: 103 open roles
+[18:52:35]   smartrecruiters/equinox: 225 open roles
+[18:52:35]   smartrecruiters/boschgroup: 220 open roles
+[18:52:35]   smartrecruiters/sgs: 166 open roles
+[18:52:35]   smartrecruiters/redbull: 371 open roles
+[18:52:35]   smartrecruiters/AIRCommunities: 156 open roles
+[18:52:35]   smartrecruiters/uniteklearning: 171 open roles
+[18:52:35]   smartrecruiters/mattelinc: 100 open roles
+[18:52:35]   smartrecruiters/thewonderfulcompany: 136 open roles
+[18:52:35]   greenhouse: 801 of 831 boards have openings (59784 roles)
+[18:52:35]   lever: 124 of 130 boards have openings (17157 roles)
+[18:52:35]   workday: 15 of 15 boards have openings (330 roles)
+[18:52:35]   ashby: 85 of 92 boards have openings (3886 roles)
+[18:52:35]   workable: 150 of 159 boards have openings (11641 roles)
+[18:52:35]   bamboohr: 4 of 4 boards have openings (195 roles)
+[18:52:35]   recruitee: 2 of 2 boards have openings (57 roles)
+[18:52:35]   breezy: 6 of 6 boards have openings (2821 roles)
+[18:52:35]   smartrecruiters: 47 of 55 boards have openings (1907 roles)
+[18:52:35]   greenhouse: 1 board names not found (skipped from now on): aninebing
+[18:52:35]   ! workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 429 Client Error: Too Many Requests for url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs
+[18:52:35]   ! workday/salesforce/wd12/External_Career_Site/Salesforce: 429 Client Error: Too Many Requests for url: https://salesforce.wd12.myworkdayjobs.com/wda
+[18:52:35]   ! workday/adobe/wd5/external_experienced/Adobe: 429 Client Error: Too Many Requests for url: https://adobe.wd5.myworkdayjobs.com/wday/cxs/
+[18:52:35]   ! workday/workday/wd5/Workday/Workday: 429 Client Error: Too Many Requests for url: https://workday.wd5.myworkdayjobs.com/wday/cx
+[18:52:35]   ! workday/intel/wd1/External/Intel: 429 Client Error: Too Many Requests for url: https://intel.wd1.myworkdayjobs.com/wday/cxs/
+[18:52:35]   ! workday/paypal/wd1/jobs/PayPal: 429 Client Error: Too Many Requests for url: https://paypal.wd1.myworkdayjobs.com/wday/cxs
+[18:52:35]   ! workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 429 Client Error: Too Many Requests for url: https://crowdstrike.wd5.myworkdayjobs.com/wda
+[18:52:35]   ! workday/autodesk/wd1/Ext/Autodesk: 429 Client Error: Too Many Requests for url: https://autodesk.wd1.myworkdayjobs.com/wday/c
+[18:52:35]   ! workday/target/wd5/targetcareers/Target: 429 Client Error: Too Many Requests for url: https://target.wd5.myworkdayjobs.com/wday/cxs
+[18:52:35]   ! workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 429 Client Error: Too Many Requests for url: https://cvshealth.wd1.myworkdayjobs.com/wday/
+[18:52:35]   ! workday/pnc/wd5/External/PNC: 429 Client Error: Too Many Requests for url: https://pnc.wd5.myworkdayjobs.com/wday/cxs/pn
+[18:52:35]   ! workday/zoom/wd5/Zoom/Zoom: 429 Client Error: Too Many Requests for url: https://zoom.wd5.myworkdayjobs.com/wday/cxs/z
+[18:52:35]   ! …and 87 more board errors
+[18:52:35]   agg/linkedin: 0 roles (cached)
+[18:52:35]   agg/remoteok: 16 roles (cached)
+[18:52:35]   agg/remotive: 0 roles (cached)
+[18:52:35]   agg/jicy: 13 roles (cached)
+[18:52:35]   agg/himalayas: 1 roles (cached)
+[18:52:35]   agg/wwr: 16 roles (cached)
+[18:52:35]   agg/themuse: 203 roles (cached)
+[18:52:35]   agg/adzuna: 0 roles (cached)
+[18:52:35]   agg/jooble: 0 roles (cached)
+[18:52:48]   agg/workablejobs: 257 fetched, 121 pass the title/location filter
+[18:52:49]   agg/arbeitnow: 900 fetched, 2 pass the title/location filter
+[18:52:49]   agg/workingnomads: 35 fetched, 2 pass the title/location filter
+[18:52:50]   agg/githublists: 370 fetched, 68 pass the title/location filter
+[18:53:01]   agg/builtin: 96 fetched, 69 pass the title/location filter
+[18:53:01]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[18:53:01]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[18:53:02]   agg/hnhiring: 6 fetched, 1 pass the title/location filter
+[18:53:06]   found 3 new company boards from aggregator listings: greenhouse/uniteus, greenhouse/galaxy, lever/compassx
+[18:53:08]   greenhouse: 2 of 2 boards have openings (14 roles)
+[18:53:08]   lever: 1 of 1 boards have openings (11 roles)
+[18:54:54]   agg/jobboard: 1,408,244 jobs in today's snapshot, 774,284 at your level on sites the bot can fill, 76 new ones pass your title/location filters; 99 of them marked remote by their site, to be confirmed from the posting itself
+[18:54:55] 93512 open roles, 590 new
+[18:54:56]   ✓  77  IT Business Analyst - Aviation @ hire-digital (TELECOMMUTE, New York, New Yor) — title 'business analyst' +47; keywords [workflow, project management, stakeholder, documentation] +14; location 'remote' +16
+[18:54:56]   ✓  72  Corporate & Integration Operations Associate @ 3y-health (Remote - US) — title 'operations associate' +50; keywords [entry level] +6; location 'remote' +16
+[18:54:56]   ✓  66  Operations Analyst @ unite-us (Colorado (Remote)) — title 'operations analyst' +50; location 'remote' +16
+[18:54:56]   ✓  62  Project Coordinator – Community Engagement to Reduce Victimization (CERV) @ Coordinated Care Services, Inc. (CCSI) (Rochester, NY) — title 'project coordinator' +50; location 'new york' +12
+[18:54:56]   ✓  61  Operations Associate, Bronx @ nycedc (New York, New York, United Sta) — title 'operations associate' +50; keywords [stakeholder, excel, inspection] +9; location 'new york' +12; 'healthcare' -15; pay up to $72,000 +5
+[18:54:56]   ✓  59  People Operations -HR Specialist @ Sage Clinical RCM, LLC (Remote Worker - N/A) — title 'people operations' +43; location 'remote' +16
+[18:54:56]   ✓  57  Addegrad - Client Solutions Analyst (NYC) - 2027 @ addepar1 (New York, NY) — title 'analyst' +22; keywords [workflow, cross-functional, project management, stakeholder] +18; location 'new york' +12; pay up to $85,000 +5
+[18:54:56]   ✓  56  Solutions Delivery Analyst I  @ uniteus (United States (Remote)) — title 'analyst' +22; keywords [optimization, vendor, lean, stakeholder] +28; location 'remote' +16; 'healthcare' -15; pay up to $90,000 +5
+[18:54:56]   ✓  49  Crisis Management Data Coordinator @ jobgether (US (Remote)) — title 'coordinator' +22; keywords [continuous improvement, workflow, data analysis, lean] +26; location 'remote' +16; 'healthcare' -15
+[18:54:56]   ✓  47  Manufacturing Engineer, Soft Goods @ vast (Long Beach, California, United) — title 'manufacturing' +28; keywords [process improvement, continuous improvement, project management, supply chain] +35; location 'long beach' +6; 'he
+[18:54:56]   ✓  47  Implementation Specialist @ restaurant365 (Irvine, CA, Austin, TX, San Fr) — keywords [continuous improvement, workflow, cross-functional, project management] +30; location 'denver' +12; pay up to $84,000 +5
+[18:54:56]   ✓  47  Quality Assurance Coordinator @ Coordinated Care Services, Inc. (CCSI) (Rochester, NY) — title 'quality' +35; location 'new york' +12
+[18:54:56]   ✓  43  Associate, Global Swag & Event Operations - Marketing @ stepstone (New York) — title 'operations' +25; keywords [entry level] +6; location 'new york' +12
+[18:54:56]   ✓  42  Analyst, Client Services & Operations @ galaxy (New York, NY (In-Office)) — title 'operations' +30; location 'new york' +12
+[18:54:56]   ✓  42  Quality Specialist / Mystery Shopper - NYC @ wheely (New York, New York, United Sta) — title 'quality' +30; location 'new york' +12
+[18:54:56]   ✓  42  Quality Lab Technician - Consumer Products @ CAYUGA MILK INGREDIENTS LLC (Auburn, NY) — title 'quality' +30; location 'new york' +12
+[18:54:56]   ✓  42  Quality Assurance Engineer @ Centrotherm Eco Systems, LLC. (Waterford, NY) — title 'quality' +30; location 'new york' +12
+[18:54:56]   ✓  41  Revenue Operations Specialist @ shift5 (Rosslyn, VA or Remote) — title 'operations' +25; location 'remote' +16
+[18:54:56]   ✓  40  Product Analyst @ Equinox (New York, NY, United States) — title 'analyst' +22; keywords [entry level] +6; location 'new york' +12
+[18:54:56]   ✓  40  Single Point of Access Program Associate @ Coordinated Care Services, Inc. (CCSI) (Johnson City, NY) — title 'program' +22; keywords [entry level] +6; location 'new york' +12
+[18:54:56]   ✓  38  Compliance Investigations Associate @ coinbase (Remote - USA) — keywords [workflow, cross-functional, stakeholder, sql] +17; location 'remote' +16; pay up to $116,900 +5
+[18:54:56]   ✓  38  RCM System Analyst @ AdaptHealth LLC (Remote Worker) — title 'analyst' +22; location 'remote' +16
+[18:54:56]   ✓  38  Mortgage Servicing Analyst @ elend (Remote) — title 'analyst' +22; location 'remote' +16
+[18:54:56]   ✓  38  Service Center Analyst @ makpar (Remote, US-Based) — title 'analyst' +22; location 'remote' +16
+[18:54:56]   ✓  38  Account Coordinator - Post Repo (M-F, 10am-7pm EST) @ openlane (Remote, United States) — title 'coordinator' +22; location 'remote' +16
+[18:54:56]   ✓  38  Medicare Appeals Coordinator @ centene (Remote-AZ) — title 'coordinator' +22; location 'remote' +16
+[18:54:56]   ✓  37  Company Operations, Denver @ ambrook (Denver) — title 'operations' +25; location 'denver' +12
+[18:54:56]   ✓  34  Data and Research Analyst (Management Analyst II) - Denver Human Services @ denver (Greater Denver Area) — title 'analyst' +22; location 'denver' +12
+[18:54:56]   ✓  34  Residence Program Specialist - Bronx (Tues-Sat, 3pm-11pm) @ ADAPT Community Network (Bronx, NY) — title 'program' +22; location 'new york' +12
+[18:54:56]   ✓  34  Residence Program Specialist - Manhattan (Sat-Wed 3pm-11pm) @ ADAPT Community Network (New York, NY) — title 'program' +22; location 'new york' +12
+[18:54:56]   ✓  34  Residence Program Specialist - Manhattan (Sun-Thurs 3pm-11pm) @ ADAPT Community Network (New York, NY) — title 'program' +22; location 'new york' +12
+[18:54:56]   ✓  34  Residence Program Specialist: Mon-Wed, 3pm-11pm & Sat-Sun 9am-3pm @ ADAPT Community Network (Brooklyn, NY) — title 'program' +22; location 'new york' +12
+[18:54:56]   ✓  34  Analyst, Surveys @ alphasights (New York) — title 'analyst' +22; location 'new york' +12
+[18:54:56]   ✓  34  Residence Program Specialist - Queens (Fri-Mon 12am-8am) @ Human First Inc (Queens Village, NY) — title 'program' +22; location 'new york' +12
+[18:54:56]   ✓  34  Analyst Relations Specialist @ legora (New York City) — title 'analyst' +22; location 'new york' +12
+[18:54:56]   ✓  34  Aftercare Coordinator @ northpointrecoveryholdingsllc (Loveland, CO) — title 'coordinator' +22; location 'colorado' +12
+[18:54:56]   ✓  34  WIC Breastfeeding Coordinator @ Oak Orchard Community Health Center (Batavia, NY) — title 'coordinator' +22; location 'new york' +12
+[18:54:56]   ✓  34  Medical Secretary/Patient Care Coordinator @ Rochester Hearing & Speech Center (Rochester, NY) — title 'coordinator' +22; location 'new york' +12
+[18:54:56]   ✓  34  Events Coordinator @ wehrtyou (New York, NY, United States) — title 'coordinator' +22; location 'new york' +12
+[18:54:56]   ✓  34  Care Coordinator - Brooklyn - Williamsburg @ bondvet (Brooklyn, NY) — title 'coordinator' +22; location 'new york' +12
+[18:54:56]   ✓ … and 49 more new candidates (the 40 with the highest keyword score are listed)
+[18:54:56] Scored 94 new roles: 89 candidates for the résumé check, 5 with nothing going for them, 493 filtered out by title/location (finding and scoring took 10.0 min)
+[18:54:57] 89 jobs queued: 0 already matched to your résumé, 89 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 497 now
+[18:54:58] Time for this run: 50 min in all (5296 of 1850 free Actions minutes used this month)
+[18:55:00] Accounts: ON (delgado@alumni.usc.edu)
+[18:55:19]   match  40%  Revenue Operations Specialist @ shift5 — Requires 3+ years of specific Revenue Operations experience and Salesforce mastery which the candida
+[18:55:19]   match  65%  Corporate & Integration Operations Associate @ 3y-health — Good fit for operational coordination and project management, though slightly light on the 2-5 years
+[18:55:19]   match  85%  Operations Associate, Bronx @ nycedc — Strong fit for facilities and operations coordination with a relevant Industrial Engineering degree 
+[18:55:19]   match  55%  Manufacturing Engineer, Soft Goods @ vast — Candidate has an IE degree but lacks the required 2+ years of dedicated soft goods manufacturing exp
+[18:55:19]   match  35%  Revenue Operations @ modal — Requires 3-7 years of Sales/RevOps experience and deep CRM architecture background that a fresh grad
+[18:55:19] → Operations Analyst @ unite-us (score 66)
+[18:55:20]     found the employer's own posting on greenhouse/uniteus
+[18:55:22]     ✗ skipped: pays too little: tops out near $62,000 a year (your floor is $65,000)
+[18:55:23] → Corporate & Integration Operations Associate @ 3y-health (score 72, match 65%)
+[18:55:30]       step 1: 6 fields (3 required)
+[18:57:21]     (on your apply-by-hand list: the site's human check held the submit)
+[18:57:21]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'esume brian_alejandro_delgado_ortega_resume.pdf Replace or drag and drop here Are you authorized to work in the US? Yes No Where are you b
+[18:57:30] → Operations Associate, Bronx @ nycedc (score 61, match 85%)
+[18:57:33]     ✗ skipped: posting restricts AI-assisted applications: "do not use artificial intelligence (AI"
+[18:57:39] → Manufacturing Engineer, Soft Goods @ vast (score 47, match 55%)
+[18:57:52]       step 1: 21 fields (11 required)
+[18:57:53]       (writer answered 'ITAR Compliance*' -> 'U.S. person. This ITAR/EAR status includes U.S. ci')
+[18:58:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[18:58:22]       mail: found 'Security code for your application to Vast'
+[18:58:27]     ✓ applied (0.8 min)
+[18:58:35]   match  60%  People Operations -HR Specialist @ Sage Clinical RCM, LLC — General HR role, which is a stretch from candidate's operations and supply chain background.
+[18:58:35]   match  70%  Project Coordinator – Community Engagement to Reduce Victimization (CERV) @ Coordinated Care Services, Inc. (CCSI) — Project coordination role matches skills, though lacks specific local community background requested
+[18:58:35]   match  75%  Product Development and Packaging Coordinator @ Anastasia Beverly Hills LLC — Packaging and project coordination role aligns well with operational tracking and process skills.
+[18:58:35]   match  80%  Mortgage Servicing Analyst @ elend — Analyst role matches data validation, financial tracking, and operational systems experience.
+[18:58:35]   match  90%  Addegrad - Client Solutions Analyst (NYC) - 2027 @ addepar1 — Strong fit for an analytical and technical client-facing role utilizing Python, finance, and problem
+[18:58:35] → Analyst, Surveys @ alphasights (score 34)
+[18:58:39]     match 80% — Strong match for an entry-level analyst role given the candidate's data analysis and business background, thou
+[18:58:56]       step 1: 32 fields (25 required)
+[18:58:56]       (writer answered 'Category of your major*' -> 'Science, Technology, Engineering, Math (STEM)')
+[18:58:57]       (writer answered 'Full-time work experience completed after your undergraduate' -> '1-23 Months')
+[18:58:57]       (writer answered 'AlphaSights values your trust and is committed to the respon' -> 'I consent.')
+[18:59:16]       email: the site asked for a security code after Submit; reading it from the application inbox
+[18:59:26]       mail: found 'Security code for your application to AlphaSights'
+[18:59:31]     ✓ applied (0.9 min)
+[18:59:40] → People Operations -HR Specialist @ Sage Clinical RCM, LLC (score 59, match 60%)
+[19:00:09]       (résumé given to the site's 'apply with resume' box first)
+[19:00:55]       step 1: 104 fields (45 required)
+[19:00:56]       (writer answered 'County' -> 'N/A')
+[19:00:56]       (writer answered 'Skills (required)' -> 'Excel, SQL, Python, data analysis, workflow design')
+[19:00:57]       (writer answered 'County' -> 'N/A')
+[19:00:58]       (writer answered 'County' -> 'Garfield County')
+[19:00:58]       (writer answered 'County' -> 'N/A')
+[19:00:59]       (writer answered 'County' -> 'Garfield County')
+[19:01:41]       ! NOT FILLED: 'Skills (required)' (wanted 'Excel, SQL, Python, data analysis, workf')
+[19:01:41]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[19:01:45]       step 2: 12 fields (12 required)
+[19:01:58]       (writer answered 'How many hours per week can you work? (required)' -> '40')
+[19:01:59]       (writer answered 'What is your availability? (required)' -> 'Mon-Fri')
+[19:01:59]       (writer answered 'Any issues working with a Set Schedule? (required)' -> 'No')
+[19:02:00]       (writer answered 'How many years experience do you have in RCM? (required)' -> 'Under 3 years')
+[19:02:00]       ? unanswered: 'What System(s) are you familiar with? (required)' kind=checkbox_group options=['Cerner', 'EPIC', 'MediTech', 'Other']
+[19:02:00]     ✗ skipped: can't truthfully answer required: What System(s) are you familiar with? (required)
+[19:02:04] → Project Coordinator – Community Engagement to Reduce Victimization (CERV) @ Coordinated Care Services, Inc. (CCSI) (score 62, match 70%)
+[19:02:25]       (résumé given to the site's 'apply with resume' box first)
+[19:03:12]       step 1: 105 fields (60 required)
+[19:03:13]       (writer answered 'County' -> 'N/A')
+[19:03:13]       (writer answered 'County' -> 'N/A')
+[19:03:14]       (writer answered 'County' -> 'N/A')
+[19:03:15]       (writer answered 'County' -> 'N/A')
+[19:03:15]       (writer answered 'County' -> 'N/A')
+[19:04:13]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[19:04:13]       (filled again: 1 box(es) the page had emptied)
+[19:04:16]       step 2: 8 fields (7 required)
+[19:04:27]       step 3: 12 fields (12 required)
+[19:04:27]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[19:04:29]       (writer answered 'Personal or Work Reference? (required) *' -> 'Professional')
+[19:04:29]       ? unanswered: 'Personal or Work Reference? (required) *' kind=combobox options=['--', 'Personal', 'Professional']
+[19:04:29]     ✗ skipped: can't truthfully answer required: Personal or Work Reference? (required) *
+[19:04:36] → Product Development and Packaging Coordinator @ Anastasia Beverly Hills LLC (score 28, match 75%)
+[19:04:48]       (résumé given to the site's 'apply with resume' box first)
+[19:05:34]       step 1: 95 fields (53 required)
+[19:05:34]       (writer answered 'County' -> 'N/A')
+[19:05:35]       (writer answered 'County' -> 'N/A')
+[19:05:35]       (writer answered 'County' -> 'N/A')
+[19:05:35]       (writer answered 'County' -> 'N/A')
+[19:05:36]       (writer answered 'County' -> 'N/A')
+[19:06:32]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[19:06:32]       (filled again: 1 box(es) the page had emptied)
+[19:06:36]       step 2: 5 fields (5 required)
+[19:06:52]       step 3: 2 fields (0 required)
+[19:06:55]     ✓ applied (2.3 min)
+[19:07:01] → Mortgage Servicing Analyst @ elend (score 38, match 80%)
+[19:07:10]       step 1: 16 fields (6 required)
+[19:07:21]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:07:39]       mail: found 'Security code for your application to eLEND'
+[19:07:44]     ✓ applied (0.7 min)
+[19:08:28]   match  85%  Solutions Delivery Analyst I  @ uniteus — Strong match for data analysis, requirements documentation, and cross-functional technical delivery.
+[19:08:28]   match  20%  Associate, Global Swag & Event Operations - Marketing @ stepstone — Job posting is incomplete/scraped web navigation text rather than a valid professional job descripti
+[19:08:28]   match  82%  Technical Project Engineer @ greenthumbindustries — Good match for project engineering, scoping, budgeting, and operations ownership coming from an ISE 
+[19:08:28]   match  70%  Analyst Relations Specialist @ legora — Good match for operational coordination, data collection, and market analysis, though lacks specific
+[19:08:28]   match  65%  IT Business Analyst - Aviation @ hire-digital — Good match for general IT business analysis and requirements gathering, but lacks specific aviation 
+[19:08:28] → Addegrad - Client Solutions Analyst (NYC) - 2027 @ addepar1 (score 57, match 90%)
+[19:08:39]       step 1: 20 fields (12 required)
+[19:08:39]       (writer answered 'Are you interested in a technical track role involving Pytho' -> "['Unsure']")
+[19:08:39]       ? unanswered: 'Applicants must be currently authorized to work in the United States without the need for ' kind=combobox options=['Yes', 'No']
+[19:08:39]     ✗ skipped: can't truthfully answer required: Applicants must be currently authorized to work in the Unite
+[19:08:48] → Solutions Delivery Analyst I  @ uniteus (score 56, match 85%)
+[19:08:57]       step 1: 14 fields (10 required)
+[19:09:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:09:19]       mail: found 'Security code for your application to Unite Us'
+[19:09:24]     ✓ applied (0.6 min)
+[19:09:28] → Technical Project Engineer @ greenthumbindustries (score 16, match 82%)
+[19:09:30]     ✗ skipped: above entry level: mid (pay starts at $100,000)
+[19:09:30] → Analyst Relations Specialist @ legora (score 34, match 70%)
+[19:09:39]       step 1: 32 fields (9 required)
+[19:11:21]     (on your apply-by-hand list: the site's human check held the submit)
+[19:11:21]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'asts for 2 years I agree Recruiting Privacy Policy Submit Application Legora may use Artificial Intelligence with this application. Learn 
+[19:11:28] → Data and Research Analyst (Management Analyst II) - Denver Human Services @ denver (score 34)
+[19:11:35]     match 75% — Strong data and analytics background, but requires two years of professional analytical experience which is a 
+[19:11:36]       (opening Workday's application form directly)
+[19:12:05]       (account page: creating the account / signing in)
+[19:12:07]       account: signing in on denver.wd1.myworkdayjobs.com
+[19:12:38]       account: signing in on denver.wd1.myworkdayjobs.com
+[19:12:55]       1/5 My Information: 0 fields (0 required)
+[19:13:09]       (Workday has not drawn the form yet: loading it again)
+[19:13:17]       (opening Workday's application form directly)
+[19:13:55]     ✗ blocked: not a real application form: could not reach Workday's form; page shows: accessibilitySkipToMainContent:Skip to main content; header:Settings
+delgado@alumni.usc.ed; logoLink:; logo:; headerTitle:; navigationContainer:Settings
+delgado@alumni.usc.ed; utilityButtonBar:Settings
+delgado@alumni.usc.ed; utilityButtonBarSettingsMenu:Settings; utilityMenuButton:Settings; utility-
+[19:13:57]   match  72%  Deployment Strategist @ raydar — same role at this employer, checked before: apply by hand (human check): workable stops every automa
+[19:14:01]   match  30%  Deal Desk Analyst @ openspace — The posting is just a website navigation menu/footer for OpenSpace and contains no actual job descri
+[19:14:01]   match  45%  Deal Operations, AMER @ openai — Requires 8+ years of experience in Deal Desk or commercial finance, far exceeding the candidate's en
+[19:14:01]   match  40%  Account Coordinator - Post Repo (M-F, 10am-7pm EST) @ openlane — The role pays under $40,000 annualized ($19/hour), failing the salary threshold for professional off
+[19:14:01]   match  60%  Business Development Representative @ archive — Requires 2+ years of dedicated sales development experience, which is a stretch for a recent graduat
+[19:14:01]   match  75%  Integration Associate, Clinic Acquisitions @ 3y-health — Strong operations and project coordination match, though it asks for 2-5 years of healthcare-specifi
+[19:14:01] → IT Business Analyst - Aviation @ hire-digital (score 77, match 65%)
+[19:14:46]     ✗ blocked: could not find the employer's application page
+[19:14:50] → Analyst, Client Services & Operations @ galaxy (score 42)
+[19:14:51]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[19:14:51] → Deployment Strategist @ raydar (score 10, match 72%)
+[19:14:57]       step 1: 13 fields (7 required)
+[19:16:43]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST IFIQWgGr1XQi7HkgKoWssSWYsJS6QPCtx_c4a67c20WtY6YyqL4lpWCrIK-PwJLHHMliLxxeMHXBc_tsMkvyGeboow -> 200; POST IFIQWgGr1XQi7HkgKoWssSWYsJS6QPCtx_c4a67c20WtY6YyqL4lpWCrIK-PwJLHHMliLxxeMHXBc_tsMkvyGeboow -> 200; page ends
+[19:16:46] → Business Development Representative @ archive (score 16, match 60%)
+[19:16:53]       step 1: 10 fields (8 required)
+[19:18:49]     (on your apply-by-hand list: the site's human check held the submit)
+[19:18:49]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ',000+ employees)? If yes, what titles did you most often reach? How often do you use AI tools in your prospecting? Which tools do you use 
+[19:18:53] → Integration Associate, Clinic Acquisitions @ 3y-health (score 22, match 75%)
+[19:19:00]       step 1: 6 fields (3 required)
+[19:20:54]     (on your apply-by-hand list: the site's human check held the submit)
+[19:20:54]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'esume brian_alejandro_delgado_ortega_resume.pdf Replace or drag and drop here Are you authorized to work in the US? Yes No Where are you b
+[19:21:06] → Events Coordinator @ wehrtyou (score 34)
+[19:21:09]     ✗ skipped: above entry level: mid (requires 3+ yrs)
+[19:21:10]   ✗ Associate, Pricing Configuration @ oscar: above entry level: mid (requires 4+ yrs)
+[19:21:12]   ✗ Single Point of Access Program Associate @ Coordinated Care Services, Inc. (CCSI): above entry level: mid (requires 3+ yrs)
+[19:21:16]   match  35%  Compliance Investigations Associate @ coinbase — Lacks the required 5+ years of dedicated crypto financial crime investigation experience.
+[19:21:16]   match  75%  Quality Specialist / Mystery Shopper - NYC @ wheely — Matches luxury client service background, though candidate's primary experience is operational/engin
+[19:21:16]   match  60%  Aftercare Coordinator @ northpointrecoveryholdingsllc — Meets bachelor's requirement and organizational skills, but lacks direct patient care or healthcare 
+[19:21:16]   match  70%  Customer Success Specialist @ constellationsoftwareinc — Meets education and project management/client-facing skills, but lacks specific digital marketing an
+[19:21:16]   match  40%  Revenue Cycle Associate @ terniumrevenuecyclemanagement — The role is primarily a healthcare claims and medical billing administrative position lacking direct
+[19:21:16] → Quality Specialist / Mystery Shopper - NYC @ wheely (score 42, match 75%)
+[19:21:23]       step 1: 12 fields (12 required)
+[19:21:37]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:21:46]       mail: found 'Security code for your application to Wheely'
+[19:21:51]     ✓ applied (0.6 min)
+[19:21:56] → Aftercare Coordinator @ northpointrecoveryholdingsllc (score 34, match 60%)
+[19:22:07]       step 1: 20 fields (15 required)
+[19:22:08]       (writer answered 'Have you completed the Culture Index survey?*' -> 'No')
+[19:22:08]       (writer answered 'Are you a previous employee of Northpoint Recovery or Imagin' -> 'No')
+[19:22:21]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:22:31]       mail: found 'Security code for your application to Northpoint Recovery Ho'
+[19:22:36]     ✓ applied (0.7 min)
+[19:22:39]   ✗ RCM System Analyst @ AdaptHealth LLC: above entry level: mid (requires 3+ yrs)
+[19:22:41]   match  50%  Quality Assurance Coordinator @ Coordinated Care Services, Inc. (CCSI) — Missing required healthcare/behavioral science degree and years of clinical QA experience.
+[19:22:41]   match  60%  Executive Assistant @ prosek — Strong administrative skills, but lacks the specific executive assistant experience requested.
+[19:22:41]   match  65%  Quality Lab Technician - Consumer Products @ CAYUGA MILK INGREDIENTS LLC — Good analytical skills and technical background, though lacking dairy/food lab specific experience.
+[19:22:41]   match  75%  Quality Assurance Engineer @ Centrotherm Eco Systems, LLC. — Engineering background and process improvement skills fit well, though slightly short on the 2-4 yea
+[19:22:41]   match  65%  Technical Support Engineer, Spanish Bilingual (6 Month Contract, Remote) @ braincorporation — Bilingual and technical skills match well, but it's a temporary support contract rather than a core 
+[19:22:46] → Customer Success Specialist @ constellationsoftwareinc (score 12, match 70%)
+[19:22:58]       step 1: 19 fields (8 required)
+[19:23:11]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:23:21]       mail: found 'Security code for your application to Constellation Software'
+[19:23:26]     ✓ applied (0.7 min)
+[19:23:33] → Executive Assistant @ prosek (score 18, match 60%)
+[19:23:42]       step 1: 14 fields (7 required)
+[19:23:51]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:24:01]       mail: found 'Security code for your application to Prosek Partners'
+[19:24:06]     ✓ applied (0.6 min)
+[19:24:13] → Quality Lab Technician - Consumer Products @ CAYUGA MILK INGREDIENTS LLC (score 42, match 65%)
+[19:24:36]       step 1: 24 fields (10 required)
+[19:24:37]       (writer answered 'County' -> 'N/A')
+[19:25:19]       step 2: 3 fields (3 required)
+[19:25:27]       step 3: 6 fields (4 required)
+[19:25:32]     ✓ applied (1.3 min)
+[19:25:37] → Quality Assurance Engineer @ Centrotherm Eco Systems, LLC. (score 42, match 75%)
+[19:26:07]       step 1: 46 fields (24 required)
+[19:26:07]       (writer answered 'County' -> 'N/A')
+[19:26:09]       (writer answered 'County' -> 'N/A')
+[19:27:34]       step 2: 94 fields (60 required)
+[19:27:35]       (writer answered 'County' -> 'N/A')
+[19:27:36]       (writer answered 'County' -> 'N/A')
+[19:27:38]       (writer answered 'County' -> 'N/A')
+[19:28:18]       (writer answered 'County' -> 'N/A')
+[19:28:22]       (writer answered 'County' -> 'N/A')
+[19:28:45]       step 3: 6 fields (4 required)
+[19:28:46]       (writer answered 'How many years of Quality Engineering Experience do you have' -> '0-2')
+[19:28:53]       step 4: 2 fields (0 required)
+[19:28:58]       step 5: 2 fields (1 required)
+[19:29:08]     ✓ applied (3.5 min)
+[19:29:15] → Medicare Appeals Coordinator @ centene (score 38)
+[19:29:19]     match 52% — Lacks the required 2+ years of grievance, appeals, or managed care experience.
+[19:29:19]     ✗ set aside: under the 55% match bar
+[19:29:19] → Technical Support Engineer, Spanish Bilingual (6 Month Contract, Remote) @ braincorporation (score 24, match 65%)
+[19:29:22]     ✗ skipped: above entry level: mid (requires 3+ yrs)
+[19:29:23]   match  35%  Compliance Investigations Associate @ coinbase — same role at this employer, checked before: Lacks the required 5+ years of dedicated crypto financia
+[19:29:25]   ✗ COB Specialist, Payment Integrity @ oscar: above entry level: mid (requires 4+ yrs)
+[19:29:27]   ✗ Environmental, Health & Safety Specialist @ asm: above entry level: mid (requires 4+ yrs)
+[19:29:35]   match  15%  WIC Breastfeeding Coordinator @ Oak Orchard Community Health Center — Requires specialized healthcare credentials like an IBCLC or nutrition degree, which the candidate l
+[19:29:35]   match  72%  Company Operations, Denver @ ambrook — Matches well with operations, systems improvement, and project management skills for a startup envir
+[19:29:35]   match  30%  Site Associate [FT-OVERNIGHT] @ Safe Place For Youth — Social services and overnight youth shelter work do not align with the candidate's business and engi
+[19:29:35]   match  65%  Executive Assistant to the Co-Founder  (New York) @ conveo — Requires 3+ years of executive assistant experience, which is a stretch for a recent graduate.
+[19:29:35]   match  25%  Student Engagement Specialist @ Coordinated Care Services, Inc. (CCSI) — Human services and student engagement role focused on social and mental health supports lacks releva
+[19:29:35] → Company Operations, Denver @ ambrook (score 37, match 72%)
+[19:29:43]       step 1: 10 fields (9 required)
+[19:32:31]     (on your apply-by-hand list: the site's human check held the submit)
+[19:32:31]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: "d in Denver that you're proud of? What made it special? Or if you're new around here, the last place you lived! How did you hear about Amb
+[19:32:37] → Executive Assistant to the Co-Founder  (New York) @ conveo (score 18, match 65%)
+[19:32:44]       step 1: 10 fields (7 required)
+[19:34:27]     (on your apply-by-hand list: the site's human check held the submit)
+[19:34:27]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ' work today? Give one specific example. Founder schedules change last minute, sometimes on a Friday night. How do you handle that kind of 
+[19:34:32]   ✗ Community Habilitation Specialist - Staten Island @ Human First Inc: not open to you: part-time
+[19:34:32]   ✗ Job Development Specialist @ Coordinated Care Services, Inc. (CCSI): above entry level: mid (requires 3+ yrs)
+[19:34:33] → Compliance Officer - New Hampshire @ centene (score 16)
+[19:34:35]     ✗ skipped: above entry level: senior (requires 5+ yrs; manages people; pay starts at $107,700)
+[19:34:49]   match  20%  Associate Manager, New Concepts (Product Development) @ hellofresh — The job posting indicates the position has already been filled.
+[19:34:49]   match  40%  Casting Specialist @ physicsx — Requires specialized industry experience in casting simulation solver packages and foundry operation
+[19:34:49]   match  30%  Field Service Engineer - Davenport, IA @ Russells Technical Products — Requires at least 2 years of hands-on commercial refrigeration and HVAC/R experience, which the cand
+[19:34:49]   match  30%  Field Service Engineer - Detroit MI @ Russells Technical Products — Requires at least 2 years of hands-on commercial refrigeration and HVAC/R experience, which the cand
+[19:34:49]   match  30%  Field Service Engineer - Cedar Rapids, IA @ Russells Technical Products — Requires at least 2 years of hands-on commercial refrigeration and HVAC/R experience, which the cand
+[19:35:15]   match  20%  Field Service Engineer - Des Moines, IA @ Russells Technical Products — Requires 2+ years of commercial refrigeration and HVAC/R experience, which the candidate lacks.
+[19:35:15]   match  20%  Field Service Engineer - Boise, ID @ Russells Technical Products — Requires 2+ years of commercial refrigeration and HVAC/R experience, which the candidate lacks.
+[19:35:15]   match  40%  Payor Credentialing Specialist I @ genedx — The job posting is cut off and incomplete, lacking clear requirements and details.
+[19:35:15]   match  75%  Talent Recruiter @ traba — The candidate has a relevant business and operations background that aligns with this startup recrui
+[19:35:15]   match  30%  Residence Program Specialist - Queens (Fri-Mon 12am-8am) @ Human First Inc — This is a direct-care residential support role paying under $60k, which does not match an engineerin
+[19:35:15] Run time limit reached (50 min): the rest waits for the next run
+[19:35:15] Résumé checks this run: 47 (25 passed) in 9 calls. Free writer allowance used today: groq 52k/195k tokens (+5k served from its cache, not counted); groq-20b 28k/195k tokens; groq-qwen 15k/195k tokens; gemini-lite 27/480 requests (+4k served from its cache, not counted); gemini-flash 0/18 requests
+[19:35:15] Summary: 11 applied, 1 unconfirmed, 2 blocked, 5 skipped, 26 queued, 28 low_score, 508 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-16.md
+[19:35:15]   by site  greenhouse: 8 applied, 2 skipped
+[19:35:15]   by site  ashby: 6 manual
+[19:35:15]   by site  paylocity: 3 applied, 2 skipped
+[19:35:15]   by site  workable: 1 blocked, 1 unconfirmed
+[19:35:15]   by site  workday: 1 blocked
+[19:35:15]   by site  www.builtinnyc.com: 1 skipped
+[19:35:18] Summary emailed to delgado@alumni.usc.edu
