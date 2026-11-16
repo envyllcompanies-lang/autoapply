@@ -1,130 +1,3 @@
-=== 2026-11-13 19:08:01  blocked  Relationship Associate, Loan Operations @ firstnational
-url: https://firstnational.wd12.myworkdayjobs.com/fnbocareers/job/Greeley-CO---West-Greeley-Branch/Relationship-Associate--Loan-Operations_R-20261988/apply/applyManually
-stage: account
-why: account: still at Workday's sign-in after 5 tries; page shows: accessibilitySkipToMainContent:Skip to main content; header:Sign In
-FNBO Careers
-Search fo; logoLink:; logo:; headerTitle:; navigationContainer:Sign In
-FNBO Careers
-Search fo; utilityButtonBar:Sign In; utilityButtonSignIn:Sign In; navigationItem-FNBO Careers:FNBO Careers; navigationItem-Search for J
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Sign In {utilityButtonSignIn}
-  [button] FNBO Careers {navigationItem-FNBO Careers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Relationship Associate, Loan Operations
-{progressBarActiveStep} current step 1 of 6 Create Account/Sign In
-label: current step 1 of 6
-label: Create Account/Sign In
-label: step 2 of 6
-label: My Information
-label: step 3 of 6
-label: My Experience
-label: step 4 of 6
-label: Application Questions
-label: step 5 of 6
-label: Voluntary Disclosures
-label: step 6 of 6
-label: Review
-{signInContent}
-# Sign In
- {formField-email}
-label: Email Address*
-  <input:text #input-6 {email} required empty>
- {formField-password}
-label: Password*
-  <input:password #input-7 {password} required>
-  [button]  {click_filter}
-  [button] Sign In {signInSubmitButton}
-  [button] Create Account {createAccountLink}
-  [button] Forgot your password? {forgotPasswordLink}
-label: Enter website. This input is for robots only, do not enter if you're human.
-  <input:text #38e3cd2e-0401-4b2f-afde-ea94918c29ce {beecatcher} empty>
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] FNBO Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-11-13 19:08:40  unconfirmed  Customer Onboarding Specialist @ topline-pro
-url: https://jobs.ashbyhq.com/topline-pro/809f322f-9be8-4afc-be86-ff8c110fd1af/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'LinkedIn Glassdoor Handshake BuiltIn VentureFizz Topline Pro Employee Professional Network YCombinator Job Board Indeed Other If "other" please specify: If you were referred, please let us know by who! Submit Application'
-# Customer Onboarding Specialist
-# Location
-# Employment Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Full Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #766c444f-2cf5-4e97-9e5c-16a4e1c2cb8f required filled>
-label: LinkedIn
-  <input:text #3fa666a0-2c55-43a6-80e5-9da7a9d8ef42 required filled>
-label: What are your preferred pronouns?
-  <input:text #5c11c336-f817-4a2d-bf6a-d8deb55445dd filled>
-label: Are you legally authorized to work in the United States for Topline Pro?
-  [button] Yes
-  [button] No
-  <input:checkbox name=78ce6b91-6982-4e16-85b3-016dcbc1f741 question-answered>
-label: Do you now, or will you in the future, require sponsorship for employment visa status (e.g., OPT, H-1B, O-1, J
-  [button] Yes
-  [button] No
-  <input:checkbox name=62c35fce-15ed-42cc-9c81-d590e0991544 question-unanswered>
-label: Are you able to work from our Brooklyn office five days a week, Monday–Friday, 9:00A-6:30P EST?
-  [button] Yes
-  [button] No
-  <input:checkbox name=ce4eab0c-20a9-494d-b153-6c605e21a01f question-answered>
-label: Are you within a 45 minute commute to Williamsburg, Brooklyn?
-  [button] Yes
-  [button] No
-  <input:checkbox name=1f6aa37a-151c-4c63-a8e4-2ce0a13f15ab question-answered>
-label: If no to the prior question, are you willing to relocate to within a 45 minute commute?
-  [button] Yes
-  [button] No
-  <input:checkbox name=d9fb89df-4001-431a-a942-e511adb434d5 question-answered>
-label: How did you hear about this opportunity?
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Topline Pro careers page
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Glassdoor
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Handshake
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: BuiltIn
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: VentureFizz
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Topline Pro Employee
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Professional Network
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: YCombinator Job Board
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Indeed
-  <input:checkbox #0e37b711-97ae-40af-8b6e-e88485d38156_a30b48e0-ca56-448d-9e7f question-unanswered>
-label: Other
-label: If "other" please specify:
-  <input:text #ebfbb1d1-44ec-4f88-ada4-bc4309650c2d empty>
-label: If you were referred, please let us know by who!
-  <input:text #c7325ef1-20e2-4a34-8f0a-2042f79d30cb filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-11-13 19:23:50  skipped  Operations Team Leader @ nbtbancorp
 url: https://nbtbancorp.wd12.myworkdayjobs.com/nbt-b/job/Canajoharie-New-York/Operations-Team-Leader_JR5227/apply/applyManually
 stage: Application Questions 2 of 2
@@ -5437,4 +5310,208 @@ label: Founder schedules change last minute, sometimes on a Friday night. How do
   <textarea #e5d48ca5-7a68-4ed4-8bca-cd39d0d2bd01 empty>
   [button] Submit Application disabled
 <iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-16 22:02:19  unconfirmed  Strategy & Operations @ codes-health
+url: https://jobs.ashbyhq.com/codes-health/95de684a-7c13-4210-bb94-dbfc5a972f0e/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'plication fields. Upload file Name Email Resume <file> Replace or drag and drop here Linkedin Profile (Link) Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Strategy & Operations
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: Linkedin Profile (Link)
+  <input:text #aa585a39-7dae-4155-98b7-dc0488998565 required filled>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-16 22:05:41  skipped  Billing Operations Analyst @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/04109B2FBB/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Billing Operations Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_K3djH2gMGFf1LZvM no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_SE35TwET9MyDnRwc required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Do you have at least 2 years of experience in billing operations, financial operations, accounts receivable, or a related field?
+label: YES
+label: NO
+  text: Have you directly reviewed invoices, reconciled billing records, or investigated discrepancies between billed amounts and agreed-upon rates?
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_c9Kw2Us9ydV16ZZI required no-file>
+label: * Please provide your LinkedIn profile URL, if available.
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-16 22:05:50  skipped  Commercial Operations Analyst, Billing @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/D78C10BF49/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Commercial Operations Analyst, Billing
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_o97uzaiSzH2dacTf no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_ZCwxnqfFmcf90nSx required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Do you have at least 2 years of experience in commercial operations, revenue operations, billing operations, sales operations, or a related 
+label: YES
+label: NO
+  text: Have you directly coordinated the handoff of commercial agreements, pricing changes, or contract terms into billing or financial operations?
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_Gv2V278J3DAYtI7R required no-file>
+label: * Please provide your LinkedIn profile URL, if available.
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-16 22:06:10  skipped  Pricing Activation Specialist @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/DCB74CC777/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Pricing Activation Specialist
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_hHTQEyp5qm0Je9ak no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_o73NeeDFMgCgFaJH required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+label: * Do you have at least 2 years of experience in billing operations, pricing operations, revenue operations, or
+  text: Have you directly implemented or validated pricing configurations, including contracted rates, discounts, or effective dates, in a billing s
+label: YES
+label: NO
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_NQ63Ro7nhxNUTrNR required no-file>
+label: * Please provide your LinkedIn profile URL, if available.
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-16 22:07:30  skipped  LN Venues, Assistant Production Manager - Gramercy @ livenation
+url: https://livenation.wd503.myworkdayjobs.com/LNExternalSite/job/New-York-NY-USA/LN-Venues--Assistant-Production-Manager---Gramercy_JR-94288-3/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: By submitting my application, I certify that I have read and
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# LN Venues, Assistant Production Manager - Gramercy
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+label: completed step 4 of 6
+label: Application Questions 2 of 2
+{progressBarActiveStep} current step 5 of 6 Voluntary Disclosures
+label: current step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Terms and Conditions
+# Hiring Practices Statements
+  text: Live Nation is an equal opportunity employer. It hires and promotes employees based on their experience, talent, and qualifications for the 
+  text: Live Nation affords equal employment opportunities to qualified individuals with a disability. For this reason, Live Nation will make reason
+  text: I certify that all of the information on this application and attachments is true, correct and complete. I have not withheld any information
+  text: I understand that any offer of employment by Live Nation is conditioned on successful completion of all employment requirements, including, 
+  text: I understand that this application is not a job offer or employment contract with Live Nation for any specific time period. I understand tha
+  text: If I am hired, I agree to comply with all of Live Nation’s employment policies and code of conduct, as they are amended from time to time, a
+  text: I acknowledge that the above statements will become a part of the terms and conditions of my employment if I am hired, and that they cannot 
+ {formField-acceptTermsAndAgreements}
+label: By submitting my application, I certify that I have read and agree to the above statements.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
 
