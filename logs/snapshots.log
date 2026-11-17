@@ -1,259 +1,3 @@
-=== 2026-11-13 19:26:41  unconfirmed  Offline Media Buyer @ elevenlabs
-url: https://jobs.ashbyhq.com/ElevenLabs/e2bc0a9f-15b5-49a1-a796-2dc9b2f5b7ac/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'w it worked? What did success actually look like? Have you used ElevenLabs - even in a personal or side project? What did you build or explore? Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Offline Media Buyer
-# Location
-  text: United States; Canada; Croatia; India; Ireland; Italy; Japan; Mexico; Poland; Singapore; UAE ; United Kingdom
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Location
-  text: Country you're currently residing in
-  <input empty>
-  [button] 
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: How did you hear about ElevenLabs?
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: I'm a user
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: News article
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: Job board
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: Social media (LinkedIn, Instagram, X etc)
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: In person event
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: Referral
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: I was reached out to
-  <input:radio #d56eedc2-7319-4d01-8478-9862b4eea09d_9ea8b1bb-a272-4352-9e26 question-answered>
-label: Other (please specify)
-label: If other, please specify below
-  <input:text #f1d7e277-0c8f-4ff9-87d1-3d17914a8063 filled>
-label: Link to your Github profile
-  <input:text #e4a64e8d-f4aa-4cc5-964f-38a42480fc66 required filled>
-label: Link to your LinkedIn profile
-  <input:text #c4f15582-25b5-49d8-a22c-b994689cb957 required filled>
-label: Why ElevenLabs, and why now?
-  <textarea #29e8435d-6a3d-4cd4-91b4-8e82afa0c1f3 empty>
-label: What's the most impactful thing you've built? What was your specific contribution?
-  <textarea #94b85326-2bf1-445f-ab41-7f2d316ca9f8 empty>
-label: How did you know it worked? What did success actually look like?
-  <textarea #832af6e6-f4c6-49de-b4d6-e6d3c7041863 empty>
-label: Have you used ElevenLabs - even in a personal or side project? What did you build or explore?
-  <textarea #81600888-8c3f-43e6-a3cf-13d5166f5f6c empty>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-13 19:28:57  skipped  Purchasing Technician, Hospital Dept. @ corrohealth
-url: https://corrohealth.wd1.myworkdayjobs.com/corro/job/US---Remote/Purchasing-Technician--Hospital-Dept_JR106752/apply/applyManually
-stage: Application Questions
-why: can't truthfully answer required: Full time or Part time
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-# Careers
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Home {navigationItem-Home}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Purchasing Technician, Hospital Dept.
-label: completed step 1 of 6
-label: My Information
-label: completed step 2 of 6
-label: My Experience
-{progressBarActiveStep} current step 3 of 6 Application Questions
-label: current step 3 of 6
-label: Application Questions
-label: step 4 of 6
-label: Voluntary Disclosures
-label: step 5 of 6
-label: Self Identify
-label: step 6 of 6
-label: Review
-# Application Questions
-{applyFlowPrimaryQuestionsPage}
- {formField-ac03144c512c1001b67afc7727120000}
-label: Are you authorized to work in the United States?*
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afc7727120000
- {formField-ac03144c512c1001b67afd11bdbc0008}
-label: Do you have any type of certification?*
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afd11bdbc0008
- {formField-ac03144c512c1001b67afdabe0560001}
-label: Do you have a secure remote work location?*
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afdabe0560001
- {formField-ac03144c512c1001b67afdabe0560004}
-label: Are you 18 years of age or older?*
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afdabe0560004
- {formField-ac03144c512c1001b67afdabe0560007}
-label: What is your desired start date?
-  text: current value is MM/DD/YYYY
-  <input #primaryQuestionnaire--ac03144c512c1001b67afdabe0560007-dateS {dateSectionMonth-input} empty>
-  <input #primaryQuestionnaire--ac03144c512c1001b67afdabe0560007-dateS {dateSectionDay-input} empty>
-  <input #primaryQuestionnaire--ac03144c512c1001b67afdabe0560007-dateS {dateSectionYear-input} empty>
-  [button]  {dateIcon}
- {formField-ac03144c512c1001b67afdabe0560008}
-label: What is your desired Annual Salary or Hourly Rate?
-  <input:text #primaryQuestionnaire--ac03144c512c1001b67afdabe0560008 empty>
- {formField-ac03144c512c1001b67afe45da030000}
-label: Are you seeking full time or part time?*
-  <input:checkbox #c6c8365ace0c1001624080c5c99e0001-ac03144c512c1001b67afe45da0 required question-unanswered>
-label: Full Time
-  <input:checkbox #c6c8365ace0c10016240815fc0a10000-ac03144c512c1001b67afe45da0 required question-unanswered>
-label: Part Time
-  <input:checkbox #c6c8365ace0c10016240815fc0a10001-ac03144c512c1001b67afe45da0 required question-unanswered>
-label: Full time or Part time
- {formField-ac03144c512c1001b67afe45da030004}
-label: Are there certain hours that you are unable to work?*
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afe45da030004
- {formField-ac03144c512c1001b67afe45da030008}
-label: By submitting your application, you acknowledge that we may use artificial intelligence in our applicant track
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afe45da030008
- {formField-ac03144c512c1001b67afedf9fb40002}
-label: Do you wish to opt out of our AI sourcing tool that would recommend you for other roles at CorroHealth based o
-  [dropdown] nothing chosen #primaryQuestionnaire--ac03144c512c1001b67afedf9fb40002
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  [link] Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-11-13 19:31:47  skipped  Customer Support Specialist @ sift
-url: https://jobs.ashbyhq.com/sift/e2d59988-60e4-45ba-8f60-ca9b7ddb8208/application
-stage: page 1
-why: can't truthfully answer required: Sift is unable to sponsor candidates who require new/initial
-# Customer Support Specialist
-# Location
-# Employment Type
-# Location Type
-# Department
-# Deadline to Apply
-  text: December 31, 2026 at 6:00 AM UTC
-# Compensation
-label: Full Name
-  <input:text #_systemfield_name required empty>
-label: Preferred First Name
-  <input:text #fa5cff9a-f37b-4e33-be4d-f13f19288c65 required empty>
-label: Preferred Last Name (if applicable)
-  <input:text #bd60eead-8635-49a3-bc95-fb158adf653d empty>
-label: Email
-  <input:email #_systemfield_email required empty>
-label: Phone
-  <input:tel #590673a0-fa46-4476-9aaa-50c323ec8b5e empty>
-label: Resume
-  <input:file #_systemfield_resume required no-file>
-  [button] Upload File
-label: Most recent company
-  <input:text #e70c2729-da3e-4924-a5b8-4f36d44ad994 required empty>
-label: Most recent title
-  <input:text #f225da84-191b-461b-93f4-40ab389dadff required empty>
-label: Linkedin, GitHub, Personal website or portfolio
-  <input:text #bea3b129-2ac2-48e1-ac58-23755db6aec6 required empty>
-# Location & sponsorship
-  text: Sift is registered as an employer in many, but not all, states. To be eligible for employment, you must live in and be authorized to work fr
-label: Intended work location (city, state, country)
-  text: Please list the location where you expect to work.
-  <input empty>
-  [button] 
-label: Are you eligible to work in the country in which you are applying?
-  [button] Yes
-  [button] No
-  <input:checkbox name=38ff8501-e9ee-46dd-8cb6-fdde88ec6ff2 question-unanswered>
-label: Will you now or in the future require visa sponsorship for employment at Sift?
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_ab0c0fdf-b6ad-43b4-bc52 question-unanswered>
-label: Yes, I will require visa sponsorship for employment with Sift now or in the future
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_ab0c0fdf-b6ad-43b4-bc52 question-unanswered>
-label: No, I will not require visa sponsorship for employment with Sift now or in the future
-label: Sift is unable to sponsor candidates who require new/initial H-1B visa sponsorship for this role. We can consi
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_c8c4551e-4862-4700-9beb question-unanswered>
-label: Yes
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_c8c4551e-4862-4700-9beb question-unanswered>
-label: No
-# Trust & Safety for all
-  text: At Sift, we are intentionally building a diverse, equitable, and inclusive workplace. We believe that diversity drives innovation, equity is
-label: What are your racial, ethnic, and origin identities?
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: American Indian or Alaskan Native
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: Black or African American
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: East Asian
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: Hispanic or Latinx
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: White
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: Native Hawaiian or Other Pacific Islander
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: Middle Eastern
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: South Asian
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: Southeast Asian
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: I prefer not to say
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_8e480081-f841-43bf-bc16 question-unanswered>
-label: A race, ethnicity, or origin not shown
-label: What gender do you identify as?
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_f6844cb5-5974-404c-a1fe question-unanswered>
-label: Woman
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_f6844cb5-5974-404c-a1fe question-unanswered>
-label: Man
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_f6844cb5-5974-404c-a1fe question-unanswered>
-label: Non-binary
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_f6844cb5-5974-404c-a1fe question-unanswered>
-label: Trans
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_f6844cb5-5974-404c-a1fe question-unanswered>
-label: My gender identity is not listed
-label: What are your pronouns?
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_99c0bbd4-8b17-4a2a-b5c1 question-unanswered>
-label: She/Her/Hers
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_99c0bbd4-8b17-4a2a-b5c1 question-unanswered>
-label: He/Him/His
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_99c0bbd4-8b17-4a2a-b5c1 question-unanswered>
-label: They/Them/Theirs
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_99c0bbd4-8b17-4a2a-b5c1 question-unanswered>
-label: Ze/Zir/Zirs
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_99c0bbd4-8b17-4a2a-b5c1 question-unanswered>
-label: Prefer not to say
-label: Veteran status
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_aeb1b9a7-0e8c-43cd-a72e question-unanswered>
-label: I am not a protected veteran
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_aeb1b9a7-0e8c-43cd-a72e question-unanswered>
-label: I identify as one or more of the classifications of a protected veteran
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_aeb1b9a7-0e8c-43cd-a72e question-unanswered>
-label: Disability status
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_f3c0e232-792d-4350-a0c3 question-unanswered>
-label: Yes, I have a disability or previously had a disability
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_f3c0e232-792d-4350-a0c3 question-unanswered>
-label: No, I don't have a disability
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_f3c0e232-792d-4350-a0c3 question-unanswered>
-label: Point of data transfer
-  text: This document provides transparency around the way in which Sift handles personal data of job applicants:
-  text: https://sift.com/legal-and-compliance/sift-global-recruitment-notice
-  <input:radio #e26fb28e-0664-4580-87a9-c55ec38bce90_a0f6f140-9fc2-4fa1-aa80 question-unanswered>
-label: Yes, I acknowledge Sift’s Global Recruitment Privacy Notice
-label: Application Acknowledgement
-  <input:checkbox #e26fb28e-0664-4580-87a9-c55ec38bce90_07f4f8dc-0798-4fd5-8ca4 question-unanswered>
-label: I certify that all information provided in this application and accompanying documents, including my resume, a
-  [button] Submit Application
-
 === 2026-11-13 19:36:54  skipped  Production Technician [C] @ novanta
 url: https://novanta.wd5.myworkdayjobs.com/novanta-careers/job/North-Syracuse-NY/Production-Technician--C-_R009910/apply/applyManually
 stage: Application Questions 1 of 2
@@ -5423,4 +5167,386 @@ label: What were your undergrad and grad school (if applicable) GPAs? *
   text: Copyright © 2026 Carvana, LLC. All Rights Reserved.
   text: Financial and Other Privacy Notices
   text: Do Not Sell or Share My Personal Information
+
+=== 2026-11-17 04:45:04  unconfirmed  Junior Revenue Operations Analyst @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/D35EDCC191/apply
+stage: page 1
+why: no confirmation after submit; server said: POST DRGqsr-AQbiF-ztU36CQ1xQogDSAWn4Xlk6322FKBTzpYwbrtFHPxpYJZmdFDwBaiLxQDGMuoOpQhPtQFMDmS_ZWVQ -> 200; POST DRGqsr-AQbiF-ztU36CQ1xQogDSAWn4Xlk6322FKBTzpYwbrtFHPxpYJZmdFDwBaiLxQDGMuoOpQhPtQFMDmS_ZWVQ -> 200; page ends: 'ncy. * Will you now or in the future require visa sponsorship? YES NO * Please provide your LinkedIn profile URL, if available. Submittin
+# Junior Revenue Operations Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_OjYm8a4u1qfxE2Yn no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_LRu91VETD6en1Pf6 has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Are you comfortable using Excel or Google Sheets to organize datasets, create reports, and identify inconsistencies?
+label: YES
+label: NO
+label: * Tell us about a time you worked with data for a class, internship, project, or job. What were you analyzing,
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+label: * Please provide your LinkedIn profile URL, if available.
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-17 04:46:48  skipped  Pricing Analyst, New Grad @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/1AC4AEEA15/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Pricing Analyst, New Grad
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_YCKwCGEWBBDEsqd8 no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_FBCKWJfqBymZIBBA required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Are you comfortable using Excel or Google Sheets to analyze pricing, calculate margins, and compare different financial scenarios?
+label: YES
+label: NO
+label: * Tell us about a class project, internship, or personal experience where you analyzed pricing, costs, revenue
+label: * What are your salary expectations? Please include the amount and currency.
+label: * Please provide your LinkedIn profile URL, if available.
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_ovNcWkmuYw2Z93ek required no-file>
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-17 04:47:00  skipped  Junior Billing & Reconciliation Analyst @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/F54035774C/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Junior Billing & Reconciliation Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_EpjHLaavrNuaelUu no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_AYYlDCvXyPU5T0Go required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Are you comfortable using Excel or Google Sheets to review financial information, compare records, and identify discrepancies?
+label: YES
+label: NO
+label: * Tell us about a time you reviewed numbers, invoices, spreadsheets, or financial records for accuracy. How di
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_SKrq2nVl6Ij05j2G required no-file>
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-17 04:47:48  skipped  Junior Deal Desk Analyst @ bask-health-1
+url: https://apply.workable.com/bask-health-1/j/E7F5D12E2D/apply
+stage: page 1
+why: can't truthfully answer required: Please upload a document containing 2–3 professional referen
+# Junior Deal Desk Analyst
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone empty>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_Ww8VrkZV6fB51IDx no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  <input:file #input_files_input_JffnpETkWfpLLz77 required no-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  text: Are you comfortable using Excel or Google Sheets to review pricing information, organize commercial records, and track approvals?
+label: YES
+label: NO
+label: * Tell us about a time you coordinated a process involving multiple people, reviewed documents for accuracy, o
+label: * What are your salary expectations? Please include the amount and currency.
+  text: Will you now or in the future require visa sponsorship?
+  text: Please upload a document containing 2–3 professional references.
+  <input:file #input_files_input_LifOlYClf33oojip required no-file>
+label: * Please provide your LinkedIn profile URL, if available.
+  [button] Submit application
+  [button] Cookie settings
+
+=== 2026-11-17 04:48:56  skipped  Physical Production Coordinator @ usc
+url: https://usc.wd5.myworkdayjobs.com/ExternalUSCCareers/job/Los-Angeles-CA---University-Park-Campus/Physical-Production-Coordinator_REQ20182876/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Physical Production Coordinator
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Information Data
+  text: Background Screening Policy Appendix D
+  text: Notice of Non-discrimination
+  text: Read USC's Clery Act Annual Security Report
+  text: USC is a smoke-free environment
+  text: Please use the following ethnicity definitions to define your ethnicity:
+  text: White (Not Hispanic or Latino)
+  text: Black or African American (Not Hispanic or Latino)
+  text: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
+  text: Asian (Not Hispanic or Latino)
+  text: American Indian or Alaska Native (Not Hispanic or Latino)
+  text: Two or More Races (Not Hispanic or Latino)
+  text: The University of Southern California is subject to the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended by the Jobs fo
+  text: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired
+  text: person who was discharged or released from active duty because of a service-connected disability.
+  text: “Recently Separated Veteran”
+  text: “Active Duty Wartime or Campaign Badge Veteran”
+  text: “Armed Forces Service Medal Veteran”
+ {formField-veteranStatus}
+label: Please select a veteran status:
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+ {formField-gender}
+label: USC recognizes that the categories listed below are not exhaustive and may not include the categorie(s) with w
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicityMulti}
+label: Please use the following ethnicity definitions to define your ethnicity.
+  <input:checkbox #95a7385831f510108ce3b517493c179f-ethnicityMulti question-unanswered>
+label: American Indian or Alaska Native (United States of America)
+  <input:checkbox #95a7385831f510108ce3b6fdd3ec17a0-ethnicityMulti question-unanswered>
+label: Asian (United States of America)
+  <input:checkbox #95a7385831f510108ce3b8599f1417a1-ethnicityMulti question-unanswered>
+label: Black or African American (United States of America)
+  <input:checkbox #3507b5614b3c10ea3da75ec0bc71698d-ethnicityMulti question-unanswered>
+label: Decline to Answer (United States of America)
+  <input:checkbox #95a7385831f510108ce3c83f81b417ab-ethnicityMulti question-unanswered>
+label: Filipino or Malaysian (United States of America)
+  <input:checkbox #95a7385831f510108ce3ba341bd417a2-ethnicityMulti question-unanswered>
+label: Hispanic or Latino (United States of America)
+  <input:checkbox #95a7385831f510108ce3c6d25d2417aa-ethnicityMulti question-unanswered>
+label: India, Pakistan, or other Indian Subcontinent (United States of America)
+  <input:checkbox #95a7385831f510108ce3c4eec45c17a9-ethnicityMulti question-unanswered>
+label: Indigenous people from North, South, or Central America (United States of America)
+  <input:checkbox #95a7385831f510108ce3c39c192417a8-ethnicityMulti question-unanswered>
+label: Middle Eastern (United States of America)
+  <input:checkbox #95a7385831f510108ce3bb903cec17a3-ethnicityMulti question-unanswered>
+label: Native Hawaiian or Other Pacific Islander (United States of America)
+  <input:checkbox #95a7385831f510108ce3c1eb3ca417a7-ethnicityMulti question-unanswered>
+label: North African (United States of America)
+  <input:checkbox #95a7385831f510108ce3c013bd8417a6-ethnicityMulti question-unanswered>
+label: Southeast Asian (United States of America)
+  <input:checkbox #95a7385831f510108ce3beb8f04417a5-ethnicityMulti question-unanswered>
+label: White/Caucasian (United States of America)
+# Terms and Conditions
+  text: I certify that I have read and agree with these statements.
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-17 04:49:42  skipped  Quality Assurance Technician @ huntsman
+url: https://huntsman.wd1.myworkdayjobs.com/Huntsman/job/USA---CA---Los-Angeles/Quality-Assurance-Technician_J-020498/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Do you meet the minimum years of experience requirements for; If you are a California resident, please acknowledge: I furt
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Quality Assurance Technician
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-0c89ef85901b1000f54a1d10df0a0001}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1d10df0a0001
+ {formField-0c89ef85901b1000f54a1daacf930000}
+label: Will you now or in the future require “sponsorship for an immigration-related employment benefit”?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1daacf930000
+ {formField-0c89ef85901b1000f54a1daacf930003}
+label: Do you meet the minimum years of experience requirements for this position, as described in the job descriptio
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1daacf930003
+ {formField-0c89ef85901b1000f54a1daacf930006}
+label: Do you satisfy the minimum education requirements for this position, as described in the job description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1daacf930006
+ {formField-0c89ef85901b1000f54a1e44a9580001}
+label: Are you willing to meet the travel requirements for this position, as described in the job description?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1e44a9580001
+ {formField-0c89ef85901b1000f54a1e44a9580004}
+label: What is your annual base salary expectation?*
+  <textarea #primaryQuestionnaire--0c89ef85901b1000f54a1e44a9580004 required empty>
+ {formField-0c89ef85901b1000f54a1ede57260000}
+label: If you are a Maryland resident, please acknowledge: UNDER MARYLAND LAW, AN EMPLOYER MAY NOT REQUIRE OR DEMAND,
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1ede57260000
+ {formField-0c89ef85901b1000f54a1ede57260003}
+label: If you are a California resident, please acknowledge: I further understand Huntsman may obtain Public Records 
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54a1ede57260003
+ {formField-0c89ef85901b1000f54e940d84780000}
+label: Do you hold a non-compete that would cause you not to be able to work for Huntsman?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54e940d84780000
+ {formField-0c89ef85901b1000f54e940d84780003}
+label: Do you have a partner, spouse, or any family member who works for Huntsman?*
+  [dropdown] nothing chosen #primaryQuestionnaire--0c89ef85901b1000f54e940d84780003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-17 04:50:27  skipped  Grant Facilitator, Ag Business Center (ABC) @ csusystem
+url: https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers/job/Fort-Collins-CO/Grant-Facilitator--Ag-Business-Center--ABC-_R2026108307/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: To help ensure your application receives full consideration,
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers at CSU
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] colostate.edu {navigationItem-colostate.edu}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Grant Facilitator, Ag Business Center (ABC)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-bcfc5f240ca9100147f091e8976c0000}
+label: To help ensure your application receives full consideration, please confirm that you've included all required 
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f091e8976c0000
+ {formField-bcfc5f240ca9100147f0928263430001}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0928263430001
+ {formField-bcfc5f240ca9100147f0931c9a930000}
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0931c9a930000
+ {formField-bcfc5f240ca9100147f0931c9a930003}
+label: I confirm that I have reviewed and agree to the Conditions of Employment for this position and that I meet all
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0931c9a930003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
