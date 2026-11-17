@@ -2981,3 +2981,26 @@
 [21:45:32]   by site  ashby: 1 manual
 [21:45:32]   by site  www.builtinnyc.com: 1 skipped
 [21:45:33] Summary emailed to delgado@alumni.usc.edu
+[21:49:46] === autoapply run (LIVE) build 2026-10-18-b ===
+[21:49:47] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[21:49:48] mail: logged in to delgado@alumni.usc.edu OK
+[21:50:46] Discovering jobs…
+[21:50:46] Job search already ran at 21:32 (searches run every 3 h): this run only applies
+[21:50:46]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[21:50:46] 0 open roles, 0 new
+[21:50:46] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.0 min)
+[21:50:47] 4 jobs queued: 0 already matched to your résumé, 4 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 454 now
+[21:50:47] Time for this run: 50 min in all (5740 of 1850 free Actions minutes used this month)
+[21:50:48] Accounts: ON (delgado@alumni.usc.edu)
+[21:50:49] → Remote Real Estate & Property Law Specialist @ turing-enterprise-inc (score 19)
+[21:50:53]     match 20% — The posting is a generic application portal page lacking specific job descriptions or legal credentials the ca
+[21:50:53]     ✗ set aside: under the 55% match bar
+[21:50:53] → Remote Securities & Financial Regulation Specialist @ turing-enterprise-inc (score 19)
+[21:51:00]     match 20% — The posting is an incomplete job application form page rather than a valid job description.
+[21:51:00]     ✗ set aside: under the 55% match bar
+[21:51:00] → Remote Public Compliance Officer @ turing-enterprise-inc (score 14)
+[21:51:22]     match 42% — The candidate lacks the required 4+ years of experience as a Compliance Officer, Legal Associate, Risk Analyst
+[21:51:22]     ✗ set aside: under the 55% match bar
+[21:51:22]   match  42%  Remote Public Compliance Officer @ turing-enterprise-inc — same role at this employer, checked before: The candidate lacks the required 4+ years of experience 
+[21:51:22] Résumé checks this run: 1 (0 passed) in 0 calls. Free writer allowance used today: groq 78k/195k tokens (+7k served from its cache, not counted); groq-20b 38k/195k tokens (+0k served from its cache, not counted); groq-qwen 28k/195k tokens; gemini-lite 53/480 requests (+4k served from its cache, not counted); gemini-flash 0/18 requests
+[21:51:22] Summary: 4 low_score. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-17.md
