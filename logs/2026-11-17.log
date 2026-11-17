@@ -2661,3 +2661,323 @@
 [20:59:58] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.4 min)
 [20:59:58] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 460 now
 [20:59:58] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-17.md
+[21:24:58] === autoapply run (LIVE) build 2026-10-18-b ===
+[21:24:58] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[21:24:59] mail: logged in to delgado@alumni.usc.edu OK
+[21:25:23] Discovering jobs…
+[21:31:56]   greenhouse/airbnb: 200 open roles
+[21:31:56]   greenhouse/figma: 139 open roles
+[21:31:56]   greenhouse/robinhood: 166 open roles
+[21:31:56]   greenhouse/databricks: 902 open roles
+[21:31:56]   greenhouse/anthropic: 659 open roles
+[21:31:56]   greenhouse/coinbase: 259 open roles
+[21:31:56]   greenhouse/lyft: 144 open roles
+[21:31:56]   greenhouse/pinterest: 173 open roles
+[21:31:56]   greenhouse/reddit: 148 open roles
+[21:31:56]   greenhouse/twilio: 111 open roles
+[21:31:56]   greenhouse/cloudflare: 477 open roles
+[21:31:56]   greenhouse/datadog: 382 open roles
+[21:31:56]   greenhouse/mongodb: 394 open roles
+[21:31:56]   greenhouse/elastic: 383 open roles
+[21:31:56]   greenhouse/gitlab: 255 open roles
+[21:31:56]   greenhouse/asana: 114 open roles
+[21:31:56]   greenhouse/okta: 358 open roles
+[21:31:56]   greenhouse/samsara: 316 open roles
+[21:31:56]   greenhouse/affirm: 221 open roles
+[21:31:56]   greenhouse/brex: 264 open roles
+[21:31:56]   greenhouse/flexport: 206 open roles
+[21:31:56]   greenhouse/oscar: 180 open roles
+[21:31:56]   greenhouse/spacex: 2798 open roles
+[21:31:56]   greenhouse/toast: 323 open roles
+[21:31:56]   greenhouse/verkada: 346 open roles
+[21:31:56]   greenhouse/nuro: 102 open roles
+[21:31:56]   greenhouse/scaleai: 167 open roles
+[21:31:56]   greenhouse/lucidmotors: 481 open roles
+[21:31:56]   greenhouse/holderconstruction: 306 open roles
+[21:31:56]   greenhouse/rocketlab: 534 open roles
+[21:31:56]   greenhouse/carvana: 1669 open roles
+[21:31:56]   greenhouse/roblox: 267 open roles
+[21:31:56]   greenhouse/stripe: 789 open roles
+[21:31:56]   greenhouse/doordashusa: 427 open roles
+[21:31:56]   greenhouse/aloyoga: 766 open roles
+[21:31:56]   greenhouse/thenewyorktimes: 161 open roles
+[21:31:56]   greenhouse/janestreet: 215 open roles
+[21:31:56]   greenhouse/onemedical: 347 open roles
+[21:31:56]   greenhouse/gomotive: 184 open roles
+[21:31:56]   greenhouse/reformation: 148 open roles
+[21:31:56]   greenhouse/justworks: 108 open roles
+[21:31:56]   greenhouse/riotgames: 203 open roles
+[21:31:56]   greenhouse/scopely: 172 open roles
+[21:31:56]   greenhouse/fanaticsfbg: 103 open roles
+[21:31:56]   greenhouse/voyagertechnologiesinc: 183 open roles
+[21:31:56]   greenhouse/trueanomalyinc: 215 open roles
+[21:31:56]   greenhouse/charliehealth: 277 open roles
+[21:31:56]   greenhouse/grafanalabs: 135 open roles
+[21:31:56]   greenhouse/vailclinicincdbavailhealthhospital: 106 open roles
+[21:31:56]   greenhouse/fivetran: 188 open roles
+[21:31:56]   greenhouse/olsson: 348 open roles
+[21:31:56]   greenhouse/relativity: 398 open roles
+[21:31:56]   greenhouse/blankstreet: 104 open roles
+[21:31:56]   greenhouse/icapitalnetwork: 226 open roles
+[21:31:56]   greenhouse/lpc: 106 open roles
+[21:31:56]   greenhouse/braze: 338 open roles
+[21:31:56]   greenhouse/addepar1: 118 open roles
+[21:31:56]   greenhouse/divergent: 145 open roles
+[21:31:56]   greenhouse/vardaspace: 138 open roles
+[21:31:56]   greenhouse/vast: 203 open roles
+[21:31:56]   greenhouse/cookunity: 139 open roles
+[21:31:56]   greenhouse/fanaticscollectibles: 235 open roles
+[21:31:56]   greenhouse/sonymusicentertainment: 126 open roles
+[21:31:56]   greenhouse/canonical: 316 open roles
+[21:31:56]   greenhouse/betterhelp: 175 open roles
+[21:31:56]   greenhouse/adyen: 238 open roles
+[21:31:56]   greenhouse/thetradedesk: 105 open roles
+[21:31:56]   greenhouse/agency: 827 open roles
+[21:31:56]   greenhouse/innodatainc: 107 open roles
+[21:31:56]   greenhouse/prolificacademicltd: 4220 open roles
+[21:31:56]   greenhouse/sumup: 317 open roles
+[21:31:56]   greenhouse/skdse: 153 open roles
+[21:31:56]   greenhouse/nerostechnologies: 111 open roles
+[21:31:56]   greenhouse/bakerhicks: 137 open roles
+[21:31:56]   greenhouse/precisionmedicinegroup: 154 open roles
+[21:31:56]   greenhouse/hellofresh: 368 open roles
+[21:31:56]   greenhouse/asm: 535 open roles
+[21:31:56]   greenhouse/ripple: 113 open roles
+[21:31:56]   greenhouse/altentechnologyusa: 229 open roles
+[21:31:56]   greenhouse/natera: 215 open roles
+[21:31:56]   greenhouse/woolpert: 111 open roles
+[21:31:56]   greenhouse/quince: 153 open roles
+[21:31:56]   greenhouse/dhpace: 403 open roles
+[21:31:56]   greenhouse/block: 189 open roles
+[21:31:56]   greenhouse/celonis: 260 open roles
+[21:31:56]   greenhouse/nebius: 371 open roles
+[21:31:56]   greenhouse/alixpartners: 132 open roles
+[21:31:56]   greenhouse/apexcompanies: 163 open roles
+[21:31:56]   greenhouse/alphasense: 178 open roles
+[21:31:56]   greenhouse/alfredbeneschco: 145 open roles
+[21:31:56]   greenhouse/anthromededucation: 151 open roles
+[21:31:56]   greenhouse/axiomtalentplatform: 205 open roles
+[21:31:56]   greenhouse/bybit: 162 open roles
+[21:31:56]   greenhouse/cannondesign: 127 open roles
+[21:31:56]   greenhouse/comprehensivemobilecare: 265 open roles
+[21:31:56]   greenhouse/coreweave: 308 open roles
+[21:31:56]   greenhouse/datavant2: 151 open roles
+[21:31:56]   greenhouse/epicgames: 139 open roles
+[21:31:56]   greenhouse/equipmentsharecom: 1065 open roles
+[21:31:56]   greenhouse/erc8585757pathlight53t353: 107 open roles
+[21:31:56]   greenhouse/esri: 477 open roles
+[21:31:56]   greenhouse/fanduel: 102 open roles
+[21:31:56]   greenhouse/flyzipline: 327 open roles
+[21:31:56]   greenhouse/formlabs: 264 open roles
+[21:31:56]   greenhouse/hubspotjobs: 137 open roles
+[21:31:56]   greenhouse/ixllearning: 111 open roles
+[21:31:56]   greenhouse/justmarkets: 135 open roles
+[21:31:56]   greenhouse/klaviyo: 141 open roles
+[21:31:56]   greenhouse/langanengineeringandenvironmentalservicesllc: 581 open roles
+[21:31:56]   greenhouse/luxinfusion: 115 open roles
+[21:31:56]   greenhouse/missionhealthcare: 123 open roles
+[21:31:56]   greenhouse/modernanimal: 117 open roles
+[21:31:56]   greenhouse/monks: 346 open roles
+[21:31:56]   greenhouse/monsterenergy: 165 open roles
+[21:31:56]   greenhouse/netskope: 125 open roles
+[21:31:56]   greenhouse/nscaleoperationsukltd: 279 open roles
+[21:31:56]   greenhouse/astspacemobile: 280 open roles
+[21:31:56]   greenhouse/cssmerge: 347 open roles
+[21:31:56]   greenhouse/drayerpt: 134 open roles
+[21:31:56]   greenhouse/ecpcareers: 466 open roles
+[21:31:56]   greenhouse/eosfitness: 2827 open roles
+[21:31:56]   greenhouse/fanaticscommerce: 199 open roles
+[21:31:56]   greenhouse/flix: 172 open roles
+[21:31:56]   greenhouse/helsing: 176 open roles
+[21:31:56]   greenhouse/psiquantum: 103 open roles
+[21:31:56]   greenhouse/revolutionmedicines: 335 open roles
+[21:31:56]   greenhouse/sentinellabs: 254 open roles
+[21:31:56]   greenhouse/ursamajor: 127 open roles
+[21:31:56]   greenhouse/capco: 711 open roles
+[21:31:56]   greenhouse/guidepoint: 108 open roles
+[21:31:56]   greenhouse/zscaler: 376 open roles
+[21:31:56]   lever/palantir: 301 open roles
+[21:31:56]   lever/veeva: 862 open roles
+[21:31:56]   lever/jobgether: 3839 open roles
+[21:31:56]   lever/flynncompanies: 153 open roles
+[21:31:56]   lever/gopuff: 755 open roles
+[21:31:56]   lever/buckmason: 251 open roles
+[21:31:56]   lever/arcteryx.com: 231 open roles
+[21:31:56]   lever/thinkahead: 135 open roles
+[21:31:56]   lever/solidcore: 246 open roles
+[21:31:56]   lever/zoox: 240 open roles
+[21:31:56]   lever/insomniacookies: 1137 open roles
+[21:31:56]   lever/Aprio: 190 open roles
+[21:31:56]   lever/amityfdn: 114 open roles
+[21:31:56]   lever/boxlunch: 4662 open roles
+[21:31:56]   lever/rws: 148 open roles
+[21:31:56]   lever/weloglobal: 451 open roles
+[21:31:56]   workday/livenation/wd503/LNExternalSite/Live Nation: 108 open roles
+[21:31:56]   workday/msk/wd108/MSKCC_Careers_Primary/Memorial Sloan Kettering: 100 open roles
+[21:31:56]   ashby/ramp: 181 open roles
+[21:31:56]   ashby/notion: 166 open roles
+[21:31:56]   ashby/openai: 840 open roles
+[21:31:56]   ashby/perplexity: 148 open roles
+[21:31:56]   ashby/plaid: 141 open roles
+[21:31:56]   ashby/zip: 100 open roles
+[21:31:56]   ashby/cohere: 127 open roles
+[21:31:56]   ashby/elevenlabs: 128 open roles
+[21:31:56]   ashby/EliseAI: 108 open roles
+[21:31:56]   ashby/neko-health: 124 open roles
+[21:31:56]   workable/nogigiddy: 1822 open roles
+[21:31:56]   workable/suppliedtalent: 191 open roles
+[21:31:56]   workable/serenity-mental-health-centers: 369 open roles
+[21:31:56]   workable/pacific-health-group: 189 open roles
+[21:31:56]   workable/pm2cm: 125 open roles
+[21:31:56]   workable/obran: 103 open roles
+[21:31:56]   workable/behavior-frontiers: 124 open roles
+[21:31:56]   workable/pavago: 2606 open roles
+[21:31:56]   workable/rimkus: 162 open roles
+[21:31:56]   workable/continuum-resource-network: 107 open roles
+[21:31:56]   workable/intertek: 220 open roles
+[21:31:56]   workable/yugo: 121 open roles
+[21:31:56]   workable/weekday-1: 886 open roles
+[21:31:56]   workable/raydar: 996 open roles
+[21:31:56]   workable/keller-executive-search: 146 open roles
+[21:31:56]   workable/bask-health-1: 351 open roles
+[21:31:56]   workable/kurtgeiger: 190 open roles
+[21:31:56]   workable/g-mass: 145 open roles
+[21:31:56]   workable/dln-consulting-group: 116 open roles
+[21:31:56]   breezy/american-logistics-authority: 2760 open roles
+[21:31:56]   smartrecruiters/aspenskiingcompany: 104 open roles
+[21:31:56]   smartrecruiters/equinox: 223 open roles
+[21:31:56]   smartrecruiters/boschgroup: 223 open roles
+[21:31:56]   smartrecruiters/sgs: 161 open roles
+[21:31:56]   smartrecruiters/redbull: 345 open roles
+[21:31:56]   smartrecruiters/AIRCommunities: 159 open roles
+[21:31:56]   smartrecruiters/uniteklearning: 171 open roles
+[21:31:56]   smartrecruiters/thewonderfulcompany: 137 open roles
+[21:31:56]   greenhouse: 803 of 833 boards have openings (59783 roles)
+[21:31:56]   lever: 125 of 131 boards have openings (16353 roles)
+[21:31:56]   workday: 31 of 31 boards have openings (1153 roles)
+[21:31:56]   ashby: 85 of 92 boards have openings (3890 roles)
+[21:31:56]   workable: 151 of 161 boards have openings (11893 roles)
+[21:31:56]   bamboohr: 4 of 4 boards have openings (196 roles)
+[21:31:56]   recruitee: 2 of 2 boards have openings (57 roles)
+[21:31:56]   breezy: 6 of 6 boards have openings (2820 roles)
+[21:31:56]   smartrecruiters: 47 of 56 boards have openings (1878 roles)
+[21:31:56]   greenhouse: 1 board names not found (skipped from now on): hubspot
+[21:31:56]   ! workday/nvidia/wd5/NVIDIAExternalCareerSite/NVIDIA: 429 Client Error: Too Many Requests for url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs
+[21:31:56]   ! workday/adobe/wd5/external_experienced/Adobe: 429 Client Error: Too Many Requests for url: https://adobe.wd5.myworkdayjobs.com/wday/cxs/
+[21:31:56]   ! workday/intel/wd1/External/Intel: 429 Client Error: Too Many Requests for url: https://intel.wd1.myworkdayjobs.com/wday/cxs/
+[21:31:56]   ! workday/paypal/wd1/jobs/PayPal: 429 Client Error: Too Many Requests for url: https://paypal.wd1.myworkdayjobs.com/wday/cxs
+[21:31:56]   ! workday/autodesk/wd1/Ext/Autodesk: 429 Client Error: Too Many Requests for url: https://autodesk.wd1.myworkdayjobs.com/wday/c
+[21:31:56]   ! workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 429 Client Error: Too Many Requests for url: https://cvshealth.wd1.myworkdayjobs.com/wday/
+[21:31:56]   ! workday/pnc/wd5/External/PNC: 429 Client Error: Too Many Requests for url: https://pnc.wd5.myworkdayjobs.com/wday/cxs/pn
+[21:31:56]   ! workday/zoom/wd5/Zoom/Zoom: 429 Client Error: Too Many Requests for url: https://zoom.wd5.myworkdayjobs.com/wday/cxs/z
+[21:31:56]   ! workday/williams/wd5/external/Williams: 429 Client Error: Too Many Requests for url: https://williams.wd5.myworkdayjobs.com/wday/c
+[21:31:56]   ! workday/xcelenergy/wd1/External/Xcel Energy: 429 Client Error: Too Many Requests for url: https://xcelenergy.wd1.myworkdayjobs.com/wday
+[21:31:56]   ! workday/usc/wd5/ExternalUSCCareers/University of Southern California: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[21:31:56]   ! workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[21:31:56]   ! …and 71 more board errors
+[21:31:56]   agg/linkedin: 0 roles (cached)
+[21:31:56]   agg/remoteok: 16 roles (cached)
+[21:31:56]   agg/remotive: 0 roles (cached)
+[21:31:56]   agg/jicy: 13 roles (cached)
+[21:31:56]   agg/himalayas: 1 roles (cached)
+[21:31:56]   agg/wwr: 16 roles (cached)
+[21:31:56]   agg/themuse: 203 roles (cached)
+[21:31:56]   agg/adzuna: 0 roles (cached)
+[21:31:56]   agg/jooble: 0 roles (cached)
+[21:32:08]   agg/workablejobs: 262 fetched, 127 pass the title/location filter
+[21:32:08]   agg/arbeitnow: 900 fetched, 2 pass the title/location filter
+[21:32:09]   agg/workingnomads: 35 fetched, 2 pass the title/location filter
+[21:32:09]   agg/githublists: 359 fetched, 67 pass the title/location filter
+[21:32:20]   agg/builtin: 88 fetched, 62 pass the title/location filter
+[21:32:20]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[21:32:20]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[21:32:21]   agg/hnhiring: 6 fetched, 1 pass the title/location filter
+[21:32:34]   found 3 new company boards from aggregator listings: greenhouse/dsi, lever/dsi, workable/turing-enterprise-inc
+[21:32:35]   workable/turing-enterprise-inc: 264 open roles
+[21:32:35]   greenhouse: 1 of 1 boards have openings (1 roles)
+[21:32:35]   lever: 1 of 1 boards have openings (6 roles)
+[21:32:35]   workable: 1 of 1 boards have openings (264 roles)
+[21:32:35]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[21:32:36] 93704 open roles, 730 new
+[21:32:36]   ✓  77  Logistics Associate - Manufacturing Operations @ continuum-resource-network (Los Angeles, California, Unite) — title 'logistics' +44; keywords [process improvement, workflow, cross-functional, inventory] +27; location 'los angeles' +6
+[21:32:36]   ✓  77  Logistics Associate - Manufacturing Operations @ continuum-resource-network (Los Angeles, California, Unite) — title 'logistics' +44; keywords [process improvement, workflow, cross-functional, inventory] +27; location 'los angeles' +6
+[21:32:36]   ✓  56  Implementation Analyst, Discretionary @ mangroup (New York) — title 'analyst' +22; keywords [process improvement, sop, stakeholder, documentation] +17; location 'new york' +12; pay up to $110,000 +5
+[21:32:36]   ✓  50  Remote Quantitative Finance Analyst @ turing-enterprise-inc (Seattle, Washington, United St) — title 'analyst' +22; keywords [construction, simulation, excel] +12; location 'remote' +16
+[21:32:36]   ✓  49  Remote Venture Capital Analyst @ turing-enterprise-inc (Seattle, Washington, United St) — title 'analyst' +22; keywords [construction, excel, startup] +11; location 'remote' +16
+[21:32:36]   ✓  44  Remote Finance & Research Analyst @ turing-enterprise-inc (Seattle, Washington, United St) — title 'analyst' +22; keywords [excel, forecast] +6; location 'remote' +16
+[21:32:36]   ✓  43  Talent Coordinator @ modal (San Francisco (Remote)) — title 'coordinator' +22; location 'remote' +16; pay up to $120,000 +5
+[21:32:36]   ✓  41  Remote Equity Research Analyst @ turing-enterprise-inc (Seattle, Washington, United St) — title 'analyst' +22; keywords [excel] +3; location 'remote' +16
+[21:32:36]   ✓  41  Remote Growth Equity Analyst @ turing-enterprise-inc (Seattle, Washington, United St) — title 'analyst' +22; keywords [excel] +3; location 'remote' +16
+[21:32:36]   ✓  34  Finance & Business Management - United States - 2027 ReEntry Program @ jpmorganchase (New York, NY (Hybrid)) — title 'program' +22; location 'new york' +12
+[21:32:36]   ✓  30  Junior Accountant @ aretum (McLean, Virginia, United State) — keywords [stakeholder, excel, documentation] +9; location 'remote' +16; pay up to $105,000 +5
+[21:32:36]   ✓  25  Safety Operations @ fal-ai (Remote) — title 'operations' +25; keywords [sop, workflow, stakeholder, sql] +15; location 'remote' +16; pay up to $240,000 +5; pay starts at $180,000, far abov
+[21:32:36]   ✓  19  Remote Real Estate & Property Law Specialist @ turing-enterprise-inc (Seattle, Washington, United St) — keywords [excel] +3; location 'remote' +16
+[21:32:36]   ✓  19  Remote Securities & Financial Regulation Specialist @ turing-enterprise-inc (Seattle, Washington, United St) — keywords [excel] +3; location 'remote' +16
+[21:32:36]   ✓  15  Briefings and Research Associate @ clintonfoundation (New York, New York) — keywords [scheduling] +3; location 'new york' +12
+[21:32:36]   ✓  14  Remote Public Compliance Officer @ turing-enterprise-inc (TELECOMMUTE, New York, New Yor) — keywords [workflow, procurement, documentation] +10; location 'remote' +16; asks 4+ yrs -12
+[21:32:36]   ✓  14  Remote Public Compliance Officer @ turing-enterprise-inc (Seattle, Washington, United St) — keywords [workflow, procurement, documentation] +10; location 'remote' +16; asks 4+ yrs -12
+[21:32:36]   ✓  12  Concessions Associate @ msgentertainmentholdingsllc (New York City, NY) — keywords [inventory, excel, scheduling] +10; location 'new york' +12; 'hris' -10
+[21:32:36]   ✓  12  Early Career Recruiter @ caa (Los Angeles, CA) — keywords [early career] +6; location 'los angeles' +6
+[21:32:36]   ✓  12  Assistant/Associate Attending Surgeon, Gastric Mixed Tumor Service, Department of Surgery, Memorial Sloan Kettering Cancer Center @ msk (New York, NY) — location 'new york' +12
+[21:32:36]   ✓  12  2027 Account Associate (New York) @ joele-frank (New York, NY, USA (In-Office)) — location 'new york' +12
+[21:32:36] Scored 24 new roles: 21 candidates for the résumé check, 3 with nothing going for them, 700 filtered out by title/location (finding and scoring took 7.6 min)
+[21:32:37] 21 jobs queued: 0 already matched to your résumé, 21 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 460 now
+[21:32:37] Time for this run: 50 min in all (5716 of 1850 free Actions minutes used this month)
+[21:32:41] Accounts: ON (delgado@alumni.usc.edu)
+[21:32:43]   match  72%  Implementation Analyst, Discretionary @ mangroup — Strong analytical and systems background, though lacks direct financial asset management experience.
+[21:32:43]   match  68%  Talent Coordinator @ modal — Good operational and coordination skills, though the role focuses on HR recruiting logistics rather 
+[21:32:43]   match  45%  Safety Operations @ fal-ai — Requires 4+ years of dedicated trust and safety operations experience, which exceeds the candidate's
+[21:32:43]   match  50%  Remote Quantitative Finance Analyst @ turing-enterprise-inc — Requires 2+ years of professional quantitative finance experience which the new graduate lacks.
+[21:32:43]   match  60%  Remote Finance & Research Analyst @ turing-enterprise-inc — Requires 2+ years of full-time finance or corporate experience, though technical skills and financia
+[21:32:43] → Implementation Analyst, Discretionary @ mangroup (score 56, match 72%)
+[21:32:51]       step 1: 13 fields (10 required)
+[21:32:58]       email: the site asked for a security code after Submit; reading it from the application inbox
+[21:33:10]       mail: found 'Security code for your application to Man Group'
+[21:33:15]     ✓ applied (0.5 min)
+[21:33:24] → Talent Coordinator @ modal (score 43, match 68%)
+[21:33:28]       step 1: 5 fields (4 required)
+[21:35:13]     (on your apply-by-hand list: the site's human check held the submit)
+[21:35:13]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ail Resume brian_alejandro_delgado_ortega_resume.pdf Replace or drag and drop here Are you excited and able to work from our NYC office? Y
+[21:35:17] → Finance & Business Management - United States - 2027 ReEntry Program @ jpmorganchase (score 34)
+[21:35:18]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[21:35:18] → Remote Finance & Research Analyst @ turing-enterprise-inc (score 44, match 60%)
+[21:35:24]       step 1: 10 fields (4 required)
+[21:37:08]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST tiaUaDsARttRvtxTJOP0fR3G017iYlbuF5vrndJ_o3aVJL23sWlr5E7NPgsHQWtUcHMztXI5QvnIaRugQ0NYp_i1EQ -> 200; POST tiaUaDsARttRvtxTJOP0fR3G017iYlbuF5vrndJ_o3aVJL23sWlr5E7NPgsHQWtUcHMztXI5QvnIaRugQ0NYp_i1EQ -> 200; page ends
+[21:37:09]   match  60%  Junior Accountant @ aretum — Requires 2+ years of specific federal accounting experience which the candidate lacks.
+[21:37:09]   match  40%  Logistics Associate - Manufacturing Operations @ continuum-resource-network — Requires heavy warehouse equipment operation and forklift certification which does not align with an
+[21:37:09]   match  55%  Remote Equity Research Analyst @ turing-enterprise-inc — Requires 2+ years of dedicated equity research or credit research experience.
+[21:37:09]   match  55%  Remote Venture Capital Analyst @ turing-enterprise-inc — Requires 2+ years of venture capital experience.
+[21:37:09]   match  55%  Remote Growth Equity Analyst @ turing-enterprise-inc — Requires 2+ years of growth equity or late-stage investing experience.
+[21:37:09]   match  40%  Logistics Associate - Manufacturing Operations @ continuum-resource-network — same role at this employer, checked before: Requires heavy warehouse equipment operation and forklif
+[21:37:16] → Junior Accountant @ aretum (score 30, match 60%)
+[21:37:21]       step 1: 12 fields (8 required)
+[21:37:21]       (writer answered "Bachelor's degree in Finance, Accounting, Business Administr" -> 'NO')
+[21:39:07]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST LK2fwoRuEqJcfGSU-4pNDvg61L5Wtlr8Y0ctvNPg6p3ydevcBe7mzW0-5rhYw1tfHXE9SgWBgjBeazx2AoQ2Wtj3Yw -> 200; POST LK2fwoRuEqJcfGSU-4pNDvg61L5Wtlr8Y0ctvNPg6p3ydevcBe7mzW0-5rhYw1tfHXE9SgWBgjBeazx2AoQ2Wtj3Yw -> 200; page ends
+[21:39:17] → Remote Equity Research Analyst @ turing-enterprise-inc (score 41, match 55%)
+[21:39:21]       step 1: 10 fields (4 required)
+[21:41:04]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST 9Xh-sqfSRFDZUWyI0Wyr09HcTuAvIGxle1qyWbOADb9DiLahqfpa2NRvz9UI66yL7WDvYPPDJNbF75ZwFjawj_ZO1g -> 200; POST 9Xh-sqfSRFDZUWyI0Wyr09HcTuAvIGxle1qyWbOADb9DiLahqfpa2NRvz9UI66yL7WDvYPPDJNbF75ZwFjawj_ZO1g -> 200; page ends
+[21:41:12] → Remote Venture Capital Analyst @ turing-enterprise-inc (score 49, match 55%)
+[21:41:17]       step 1: 10 fields (4 required)
+[21:43:05]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST we59BpDkpc3-NBuVLQ9c6CDAvFYjlbKyDuBXnz8beiwKEvjOcQr_c6IuPGyGqYmWN3evi29UXwkhfbvrwOYecEUgnw -> 200; POST we59BpDkpc3-NBuVLQ9c6CDAvFYjlbKyDuBXnz8beiwKEvjOcQr_c6IuPGyGqYmWN3evi29UXwkhfbvrwOYecEUgnw -> 200; page ends
+[21:43:10] → Early Career Recruiter @ caa (score 12)
+[21:43:13]     ✗ skipped: not open to you: internship / summer program; says entry level / new grad
+[21:43:13] → Remote Growth Equity Analyst @ turing-enterprise-inc (score 41, match 55%)
+[21:43:18]       step 1: 10 fields (4 required)
+[21:45:00]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST BSkHAA6ljwi8cxxkIRU4_G0vIvzbLbOb--XsYb0QT4MeM8ffEb0oR3Y-nKKaZg5pXcjLFHNg6qyHDW9VS1TTZKEVZg -> 200; POST BSkHAA6ljwi8cxxkIRU4_G0vIvzbLbOb--XsYb0QT4MeM8ffEb0oR3Y-nKKaZg5pXcjLFHNg6qyHDW9VS1TTZKEVZg -> 200; page ends
+[21:45:01]   ✗ Assistant/Associate Attending Surgeon, Gastric Mixed Tumor Service, Department of Surgery, Memorial Sloan Kettering Cancer Center @ msk: above entry level: senior (pay starts at $421,689)
+[21:45:01]   match  55%  Briefings and Research Associate @ clintonfoundation — Pay is under $60,000 and the role focuses on communications rather than industrial engineering or op
+[21:45:01]   match  20%  Concessions Associate @ msgentertainmentholdingsllc — Concessions role in hospitality/retail with pay below the professional office threshold.
+[21:45:09] → 2027 Account Associate (New York) @ joele-frank (score 12)
+[21:45:09]     found the employer's own posting on lever/joelefrank
+[21:45:14]     match 50% — The candidate's background is in industrial engineering and operations, which is a weak match for a public rel
+[21:45:14]     ✗ set aside: under the 55% match bar
+[21:45:14] → Briefings and Research Associate @ clintonfoundation (score 15, match 55%)
+[21:45:23]       step 1: 0 fields (0 required)
+[21:45:23]     ✗ blocked: not a real application form (0 fields, no résumé upload); page shows: :VIEW MORE
+[21:45:32] Résumé checks this run: 13 (8 passed) in 3 calls. Free writer allowance used today: groq 78k/195k tokens (+7k served from its cache, not counted); groq-20b 38k/195k tokens (+0k served from its cache, not counted); groq-qwen 28k/195k tokens; gemini-lite 50/480 requests (+4k served from its cache, not counted); gemini-flash 0/18 requests
+[21:45:32] Summary: 1 applied, 5 unconfirmed, 1 blocked, 1 skipped, 4 queued, 9 low_score, 702 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-17.md
+[21:45:32]   by site  workable: 5 unconfirmed
+[21:45:32]   by site  greenhouse: 1 applied, 1 blocked
+[21:45:32]   by site  ashby: 1 manual
+[21:45:32]   by site  www.builtinnyc.com: 1 skipped
+[21:45:33] Summary emailed to delgado@alumni.usc.edu
