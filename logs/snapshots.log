@@ -1,132 +1,3 @@
-=== 2026-11-14 16:17:26  unconfirmed  Product Support Specialist @ claylabs
-url: https://jobs.ashbyhq.com/claylabs/8b990516-43f9-4f12-b3fa-eeb980e69be6/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ed veteran I decline to self-identify for protected veteran status Submit Application Clay Labs may use Artificial Intelligence with this application. Learn more. Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Product Support Specialist
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: $80K – $100K • Offers Equity
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# About you
-label: Full Name
-  <input:text #_systemfield_name required filled>
-label: Preferred Name
-  text: Feel free to add pronunciation!
-  <textarea #9eb938ea-1c37-4a2d-86a3-376d26557171 filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:tel #1dcdd713-d6b4-4786-838b-fdb9872f1fe8 required filled>
-label: Yes - I consent to receiving text messages
-label: No - I do not consent to receiving text messages
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: LinkedIn Profile
-  <input:text #7a634cb8-4156-4c98-a9dd-6afae63c592e filled>
-label: Other Website
-  <input:text #c72b9ab6-46e2-4d83-85df-c6250ee5d7a9 filled>
-label: Are you currently legally authorized to work in the US for Clay?
-  [button] Yes
-  [button] No
-  <input:checkbox name=e6383bf8-4a02-4d37-967c-f83b6c5720ab question-answered>
-label: Will you now, or in the future, require sponsorship (i.e. H-1B visa, etc.) to legally work in the US?
-  [button] Yes
-  [button] No
-  <input:checkbox name=ab67e2cc-ae77-4935-8007-5585bc8a19ca question-unanswered>
-label: This role can be based in either NYC or SF. Are you located in one of these cities, open to relocating, or see
-  <input:radio #8077d114-8377-4d23-a24e-d1989f9fc8df_ac20e29c-bd0b-4d5c-8eb8 question-answered>
-label: I live in / am willing to relocate to NYC
-  <input:radio #8077d114-8377-4d23-a24e-d1989f9fc8df_ac20e29c-bd0b-4d5c-8eb8 question-answered>
-label: I live in / am willing to relocate to SF
-  <input:radio #8077d114-8377-4d23-a24e-d1989f9fc8df_ac20e29c-bd0b-4d5c-8eb8 question-answered>
-label: I'd need to be fully remote
-label: Most Clay employees are in office 3+ days a week. Does that work for you?
-  [button] Yes
-  [button] No
-  <input:checkbox name=181cb6ec-9fa5-403e-a7bd-1ddd621f04e1 question-answered>
-label: How did you hear about us?
-  <textarea #e0f3a11a-076d-4b42-8f33-11beabe2a413 empty>
-# Evaluation: this is a required part of the application, so dive in, play around, and enjoy the process! (Time 
-  text: You will need a Clay account for the evaluation, follow the instructions below:
-  text: Sign up with your email (no credit card required)
-  text: You’ll land in a new workspace — use a blank table or a starter template
-  text: Use Clay to approach the assignment in whatever way makes sense to you
-  text: Make sure your work is saved; you’ll share the table link below
-  text: Some resources to help you get started!
-  text: Beginner Guide from Clay Expert
-  text: Your take home will be evaluated on:
-  text: Clear, customer-friendly communication
-  text: Creative problem-solving and technical aptitude
-  text: Ability to spot issues and work well with other teams
-  text: Strong product sense and awareness of where the experience could be smooth
-label: Customer Support Simulation
-  text: We’ve developed a GPT to help simulate a real customer conversation. Your goal is to work through this conversation to help solve the “user’
-  text: Click "Share" on the top right corner → "Create link" in ChatGPT
-  text: Paste your "share link" below
-  <input:text #6ceb7d7d-b019-4580-9a4e-108e42bbfe57 required filled>
-label: Distinguishing between bug and user error
-  text: Based on your conclusion, write either:
-  text: A message to the customer (if user error), OR
-  text: A bug report for engineering + customer response (if it's a bug)
-  <textarea #2eb21cb0-4786-49f3-a1ae-80310484e501 required filled>
-label: Clay table build!
-  text: Imagine the following scenario: You have a list of LinkedIn profiles and want to reach out to sell them your startup's finance product (a sp
-  text: https://app.clay.com/workspaces/4515/workbooks/wb_0t17hbmv34Jd3munv4d/tables/t_0t17hbmENuThGJszp9C/views/gv_0t17hbnSdaYq3cFSSfJ
-  <input:text #a8357c3d-d08b-4631-a456-3da731637629 required filled>
-label: Please confirm the following before submitting:
-  text: I understand that incomplete or inaccurate submissions may result in my application not being reviewed
-  text: My Clay table link is correct and accessible
-  text: I have completed all required sections of the bug/user error assignment and inputted as a text field I have tested that my shared GPT link i
-  <input:checkbox #8077d114-8377-4d23-a24e-d1989f9fc8df_5cf6555b-242d-49d9-b8ba question-answered>
-label: Yes
-# Diversity Survey
-  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
-label: What is your gender identity?
-  <input:radio #c230a853-170f-47cf-8526-c89f149515aa_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Man
-  <input:radio #c230a853-170f-47cf-8526-c89f149515aa_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Woman
-  <input:radio #c230a853-170f-47cf-8526-c89f149515aa_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Non-Binary
-  <input:radio #c230a853-170f-47cf-8526-c89f149515aa_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Another Gender Identity
-  <input:radio #c230a853-170f-47cf-8526-c89f149515aa_8d7dcc65-3a0b-476a-b679 question-answered>
-label: I prefer not to answer
-label: How do you identify your sexual orientation? Please select all that apply.
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Bisexual
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Lesbian
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Gay
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Queer
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Heterosexual / straight
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Other
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_a63b6f87-d090-40f0-a462 question-answered>
-label: Which ethnicity(ies) do you identify with? Please select all that apply.
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian or Asian American
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Black or African American
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Hispanic or Latino
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous or Native American
-  <input:checkbox #c230a853-170f-47cf-8526-c89f149515aa_1e21d43f-548e-481a-aa5f question-unanswered>
-lab
-
 === 2026-11-14 16:22:51  skipped  Student Services Coordinator @ Colorado Outward Bound School
 url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4666530
 stage: page 4
@@ -5499,4 +5370,200 @@ label: Link to This Job
   [button] 
   [button] Submit Application
   [button] Cancel
+
+=== 2026-11-18 18:54:10  skipped  Enrollment Specialist - Bilingual English/Spanish Required @ Stride Community Health Center
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4343580
+stage: page 4
+why: can't truthfully answer required: Years Known (required) *; Years Known (required) *
+  text: Enrollment Specialist - Bilingual English/Spanish Required
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address (required)
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number (required)
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  <input:text #references.name.2 {referencesName2} empty>
+  <input:text #references.email.2 {referencesEmail2} empty>
+  <input:text #references.phone.2 {referencesPhone2} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: Stride Community Health Center: Privacy Policy
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-11-18 18:54:22  skipped  Client Service Associate / Floor Ambassador @ spsnorthamerica
+url: https://job-boards.greenhouse.io/spsnorthamerica/jobs/5483826008
+why: posting restricts AI-assisted applications: "may not use AI"
+# Client Service Associate / Floor Ambassador
+  text: New York, New York, United States
+  [button] Apply
+# Client Services Associate / Floor Ambassador
+# Create a Welcoming, Well-Maintained Workplace
+  text: Client Services Associate / Floor Ambassador
+  text: You will play an important role in ensuring that workplace services run smoothly while responding to employee requests and coordinating with
+# Why This Role Matters
+  text: A well-maintained workplace helps employees stay productive and creates a positive experience for everyone who visits the office. Through at
+# What You'll Do
+  text: Distribute newspapers to employees each morning and review emails for early-morning or pending service requests.
+  text: Receive and distribute UPS, FedEx, and messenger packages to employees on assigned floors in a timely manner.
+  text: Obtain legible signatures for all accountable packages.
+  text: Transport messenger packages to and from the mailroom as needed.
+  text: Routinely check outgoing package bins and coordinate their delivery to the mailroom for processing.
+  text: Complete the required end-of-day outgoing package sweep at 5:00 PM, turn over designated bins, and sign the log sheet.
+  text: Conference Room & Hospitality Support
+  text: Inspect conference rooms to ensure chairs are properly arranged, tables are clean, and rooms are meeting-ready.
+  text: Set up conference rooms according to meeting requirements and restore them after meetings.
+  text: Remove trash, dust equipment as needed, and maintain clean and presentable meeting spaces.
+  text: Assist executive assistants with workplace and hospitality requests as needed.
+  text: Report exposed wires and other potential safety or maintenance concerns to management.
+  text: Pantry & Housekeeping Support
+  text: Restock pantries with company-provided coffee, tea, sweeteners, milk, and other refreshments.
+  text: Monitor inventory and notify management when supplies are running low or unavailable.
+  text: Check milk expiration dates and promptly discard expired products.
+  text: Maintain adequate supplies of cups, lids, utensils, napkins, hand towels, plates, dish soap, and other pantry essentials.
+  text: Wipe down counters, tables, appliances, and glass lobby doors.
+  text: Swiffer wood floors in elevator lobby and pantry areas.
+  text: Ensure cleaning supplies, including 409 and Magic Erasers, are available on assigned floors.
+  text: Check coffee, water, and ice machines to ensure they are functioning properly.
+  text: Run the dishwasher each evening when full.
+  text: Clean refrigerators on Fridays only, starting no earlier than 3:30 PM.
+  text: Restroom & Facilities Support
+  text: Keep restrooms clean, neat, and properly stocked with toilet paper, C-fold napkins, and hand soap.
+  text: Refill soap dispensers and wipe down counters when necessary.
+  text: Check for burnt-out light bulbs and replace them as needed.
+  text: Ensure access doors remain closed at all times.
+  text: Maintain clean and organized copy areas, including restocking paper in standard sizes (8.5" x 11", 8.5" x 14", and 11" x 17") and shipping s
+  text: Ensure Parcel and Messenger Authorization forms are readily available.
+  text: Keep copy room counters clear of leftover papers and trash.
+  text: Maintain a clean freight area and remove boxes, breaking them down and placing them in the designated freight area when available.
+  text: Assist with furniture repairs and moving boxes as requested.
+  text: Report maintenance concerns, equipment issues, and repairs requiring Facilities, IT, or third-party vendor assistance to management.
+  text: Client Service & Cross-Functional Support
+  text: Respond promptly and professionally to employee requests and daily office service needs.
+  text: Coordinate with management to address supply shortages, maintenance concerns, and operational issues.
+  text: Escalate issues requiring specialized assistance from Facilities, IT, or third-party vendors.
+  text: Provide general office and facilities support to help maintain efficient day-to-day operations.
+# What You Bring
+  text: A dependable, service-oriented attitude and willingness to support daily office operations.
+  text: Strong attention to detail and the ability to maintain clean, organized, and professional workspaces.
+  text: Good communication skills and the ability to interact professionally with employees, visitors, and management.
+  text: Ability to manage recurring responsibilities while responding to changing priorities and requests.
+  text: A proactive approach to identifying and reporting maintenance, supply, and workplace concerns.
+  text: Ability to work independently while coordinating with different teams.
+# Qualifications
+  text: Previous experience in office services, mailroom operations, facilities support, housekeeping, hospitality, or a related role is preferred.
+  text: Basic organizational and time-management skills.
+  text: Ability to follow established procedures and complete daily checklists and documentation.
+  text: Professional demeanor and commitment to providing quality workplace support.
+# Physical Requirements
+  text: Ability to lift and carry boxes weighing approximately 25–35 lbs.
+  text: Ability to stand, walk, bend, reach, and move throughout the office during the workday.
+  text: Ability to perform routine cleaning, stocking, and office setup tasks.
+# Travel
+  text: No regular travel required.
+# Other Duties
+  text: Perform additional office services, hospitality, and facilities-related responsibilities as assigned by management.
+  text: Note: Please inquire with the Human Resources team for benefit offerings per role as regular positions that routinely are under 30 hours/wee
+  text: SPS is a global workplace solutions and business transformation company operating in more than 20 countries
+  text: Our clients include leading organizations across banking, insurance, legal, higher education, professional services, and many Fortune 500 co
+  text: At SPS we embrace the uniqueness of our employees and are committed to the fair and equal treatment of all people, applicants, and employees
+  text: SPS provides equal employment opportunities (EEO) to all employees
+  text: To ensure a fair and authentic interview process, applicants may not use AI tools or any other form of real-time assistance during interview
+  text: SPS team members may use transcription or note-taking technology solely to support accurate interview documentation. No AI or automated deci
+  text: SPS offers reasonable accommodations
+  text: To view our privacy policy, click on the link below:
+  text: Interested in building your career at SPS North America? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name
+  <input:text #
+
+=== 2026-11-18 18:57:13  unconfirmed  Reservation Specialist @ ADVANCED AIR, LLC
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4670677
+stage: page 4
+why: no confirmation after submit; page errors: ['I have read and accept the above acknowledgement (required)\nPlease accept the ac']; page ends: 'applications. To learn more or opt-out, click here. Submit Edit Application Powered by Paylocity Privacy Policy|Payroll & HR Software ADVANCED AIR, LLC: Privacy Policy SMS Terms and Conditions and Privacy Policy success:'
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+# My Information
+# <first> <last>
+# Address
+# Preferred First Name
+# Middle Name
+# Referred By
+# How did you hear about us?
+# Do you give us permission to text you?
+# Skills
+  text: Word, Excel (advanced), PowerPoint, Google Workspace, SQL, Python, C++, Microsoft Project, QuickBooks, PostgreSQL, SQLite, Flask, Git/GitHub
+# Have you worked with us before?
+# Resume (required)
+# Work History
+# Company
+  text: Roaring Fork Property Group
+# Position
+# Dates
+# Company URL
+# Contact
+# Responsibilities
+  text: Designed standard operating procedures for maintenance, property management, and housekeeping departments. Responded to client concerns duri
+# Company
+# Position
+# Dates
+# Company URL
+# Contact
+# Responsibilities
+  text: Generated revenue growth through competitive analysis, customer segmentation, and cross-selling to existing repair clients. Established a du
+# Company
+# Position
+  text: Data Clerk & Community Volunteer
+# Dates
+# Company URL
+# Contact
+# Responsibilities
+  text: Produced resource-allocation reports directing funding and services to underserved communities across the Roaring Fork Valley. Designed comm
+# Company
+  text: A. Hernandez Construction Inc.
+# Position
+# Dates
+# Company URL
+# Contact
+# Responsibilities
+  text: Developed financial tracking systems in QuickBooks and Excel to automate invoicing, payroll, and receipt management. Maintained accounts for
+# Education History
+# School Name
+  text: University of Southern California
+# Location
+# School Type
+# Graduated
+# Degree Obtained
+# Graduation Date
+# Area of Study
+  text: Industrial and Systems Engineering
+# GPA
+# Additional Questions
+# Are you located within a reasonable commuting distance of this position, or willing to relocate prior to your 
+# Are you available and able to work the schedule outlined in the job posting?
+# Do you know anyone currently employed by Advanced Air? If yes, please share who.
+  <input:checkbox #applyAcknowledgement question-unanswered>
+label: I have read and accept the above acknowledgement (required)
+  text: Please accept the acknowledgement
+  [button] Submit {btnSubmit}
+  text: ADVANCED AIR, LLC: Privacy Policy
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
 
