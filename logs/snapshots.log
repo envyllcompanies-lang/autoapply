@@ -1,32 +1,3 @@
-=== 2026-11-14 16:32:20  skipped  Policy, Procedure, and Credentialing Coordinator @ Stride Community Health Center
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4660027
-stage: page 4
-why: can't truthfully answer required: Personal or Work Reference? (required) *; Years Known (required) *; Personal or Work Reference? (required) *; Years Known (required) *; Years Known (required) *
-  text: Policy, Procedure, and Credentialing Coordinator
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-label: Name (required)
-  <input:text #references.name.0 {referencesName0} empty>
-label: Email Address (required)
-  <input:text #references.email.0 {referencesEmail0} empty>
-label: Phone Number (required)
-  <input:text #references.phone.0 {referencesPhone0} empty>
-label: Personal or Work Reference? (required)
-label: Years Known (required)
-  <input:text #references.name.1 {referencesName1} empty>
-  <input:text #references.email.1 {referencesEmail1} empty>
-  <input:text #references.phone.1 {referencesPhone1} empty>
-  <input:text #references.name.2 {referencesName2} empty>
-  <input:text #references.email.2 {referencesEmail2} empty>
-  <input:text #references.phone.2 {referencesPhone2} empty>
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: Stride Community Health Center: Privacy Policy
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
 === 2026-11-14 16:32:57  unconfirmed  Field Support Specialist - Southern CA @ eyebot
 url: https://jobs.ashbyhq.com/eyebot/72e663f5-347b-4e4b-ab5b-bdbeb6ede65b/application
 stage: page 1
@@ -5520,4 +5491,56 @@ label: NO
   [button] Submitting… disabled
   text: University of Mount Saint Vincent does not discriminate on the basis of race, sex, color, religion, age, national origin, marital status, di
   [button] Cookie settings
+
+=== 2026-11-19 00:30:47  skipped  1678: CE Digital Marketing and Content Coordinator @ csusystem
+url: https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers/job/Fort-Collins-CO/XMLNAME-1678--CE-Digital-Marketing-and-Content-Coordinator_R2026106802/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: To help ensure your application receives full consideration,
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers at CSU
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] colostate.edu {navigationItem-colostate.edu}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# 1678: CE Digital Marketing and Content Coordinator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-bcfc5f240ca9100147f091e8976c0000}
+label: To help ensure your application receives full consideration, please confirm that you've included all required 
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f091e8976c0000
+ {formField-bcfc5f240ca9100147f0928263430001}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0928263430001
+ {formField-bcfc5f240ca9100147f0931c9a930000}
+label: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B status)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0931c9a930000
+ {formField-bcfc5f240ca9100147f0931c9a930003}
+label: I confirm that I have reviewed and agree to the Conditions of Employment for this position and that I meet all
+  [dropdown] nothing chosen #primaryQuestionnaire--bcfc5f240ca9100147f0931c9a930003
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
