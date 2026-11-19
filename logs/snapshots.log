@@ -1,101 +1,3 @@
-=== 2026-11-14 16:35:34  unconfirmed  Field Support Specialist - Bay Area @ eyebot
-url: https://jobs.ashbyhq.com/eyebot/a95c7f74-04f4-4186-bc6b-c09e943de754/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ease enter their name Are you legally authorized to work in the United States? Yes No Will you now or in the future require sponsorship? Yes No Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Field Support Specialist - Bay Area
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# Basics
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Are you able to work on-site at our Boston office?
-  <input:radio #831ee81c-f1e3-4ece-8bcf-1a4d3a8e60b0_98ce4dc7-4c5f-4bd4-be52 question-answered>
-label: Yes
-  <input:radio #831ee81c-f1e3-4ece-8bcf-1a4d3a8e60b0_98ce4dc7-4c5f-4bd4-be52 question-answered>
-label: No
-label: How did you hear about this role?
-  <input:text #b2f76c39-ee2b-47fb-a116-31fb20a9556f required filled>
-label: If you referred by someone, please enter their name
-  <input:text #bae7a7e9-cc4d-428f-9439-11b6dbce80b5 filled>
-label: Are you legally authorized to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=d49fac50-2d63-413f-b2c3-eb26085fb9f7 question-answered>
-label: Will you now or in the future require sponsorship?
-  [button] Yes
-  [button] No
-  <input:checkbox name=85c0c37d-4233-4b82-b048-592aa0437b69 question-unanswered>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-14 16:37:26  skipped  Global Recruiter @ Propio
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4665998
-stage: page 1
-why: can't truthfully answer required: We may use SMS during the hiring process. Do you give us per
-(dialog)
-(dialog)
-# Apply with resume
-  text: Upload your resume and we'll automatically fill out your application
-  <input:file #btn-forceResume no-file>
-  [button] Upload Resume {btn-forceResume}
-label: Offshore (International) Remote Worker, COL
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  <input:file #btn-resume no-file>
-  [button] Select Resume to Upload {btn-resume}
-  <input:checkbox #useAttachedResumeToFillOutApplication question-answered>
-label: Fill out application with my resume
-  text: Propio is an Equal Opportunity Employer. All applicants will be considered for employment without attention to race, color, religion, sex, s
-  text: All applicants must be able to complete onboarding requirements (if selected) which may include any/all of the following: criminal backgroun
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} empty>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} empty>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} empty>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} empty>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} empty>
-label: Mobile Number (required)
-  <input:text #info.cellPhone {infoCellPhone} empty>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State Select a state
-label: Zip Code
-label: LinkedIn Profile URL
-  <input:text #info.linkedIn {infoLinkedIn} empty>
-label: Desired Salary (required)
-  <input:text #info.desiredSalaryDescription {infoDesiredSalaryDescription} empty>
-label: How did you hear about us?(optional) I was referred by a current Propio employee (other than a Recruiter).
-label: Referred by
-  <input:text #info.referredBy {infoReferredBy} empty>
-  [button] Add Work History {btnAddWorkHistory}
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
 === 2026-11-14 16:37:46  skipped  Customer Experience Specialist at Antero Apartments @ cottonwoodresidential
 url: https://job-boards.greenhouse.io/cottonwoodresidential/jobs/6261745004
 stage: page 1
@@ -5537,4 +5439,69 @@ label: Current company
 url: https://jobs.smartrecruiters.com/oneclick-ui/company/Altisource/publication/9c8e8c31-edbd-47b4-9798-d6e5b372a6d3
 why: DataDome check (a human check: the bot stops here)
 <iframe https://geo.captcha-delivery.com/captcha/>
+
+=== 2026-11-19 13:53:51  skipped  Business Analyst - Revenue Operations @ davita
+url: https://davita.wd1.myworkdayjobs.com/DKC_External/job/09507---Colorado-Remote/Business-Analyst---Revenue-Operations_R0486765/apply/applyManually
+stage: Application Questions
+why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The field Select one: is required and must have a value.', 'Error-Select one: The field Select one: is required and must have a value.']; fields flagged: ['Select one:']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] DaVita {navigationItem-DaVita}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Business Analyst - Revenue Operations
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+# Errors Found
+! Error-Select one: The field Select one: is required and must have a value. {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-b831311d6f6d1001568f0356d7d40001}
+label: With or without accommodation, can you perform the duties outlined in the job posting on the careers.davita.co
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0356d7d40001
+ {formField-b831311d6f6d1001568f048ac95a0004}
+label: Can you provide legal documentation establishing your identity and eligibility to be legally employed in the U
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0004
+ {formField-b831311d6f6d1001568f048ac95a0001}
+label: Are you legally authorized to work in the United States for DaVita without requiring employment visa sponsorsh
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0001
+ {formField-b831311d6f6d1001568f03f0dbea0002}
+label: Desired Pay Rate Type:*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0002
+ {formField-b831311d6f6d1001568f03f0dbea0004}
+label: Please list your desired pay expectations rounded to the nearest dollar.(To calculate an hourly pay expectatio
+  <input:text #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0004 required filled>
+ {formField-b831311d6f6d1001568f03f0dbea0007}
+label: Are you open to relocation?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f03f0dbea0007
+ {formField-b831311d6f6d1001568f048ac95a0007}
+label: Do you have clinical dialysis experience?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f048ac95a0007
+ {formField-b831311d6f6d1001568f0524b6ec0002}
+label: What qualifications did we not ask you about that you wish we had in considering you for this role?*
+  <textarea #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0002 required filled>
+ {formField-b831311d6f6d1001568f0524b6ec0003}
+label: What best describes your current or most recent place of work?*
+  [dropdown] chosen #primaryQuestionnaire--b831311d6f6d1001568f0524b6ec0003
+ {formField-b831311d6f6d1001568f06f285cb0007}
+label: Select one:*
+  [dropdown] nothing chosen #primaryQuestionnaire--b831311d6f6d1001568f06f285cb0007 INVALID
+! Error: The field Select one: is required and must have a value. {inputAlert}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
 
