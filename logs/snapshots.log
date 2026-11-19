@@ -1,46 +1,3 @@
-=== 2026-11-14 16:32:57  unconfirmed  Field Support Specialist - Southern CA @ eyebot
-url: https://jobs.ashbyhq.com/eyebot/72e663f5-347b-4e4b-ab5b-bdbeb6ede65b/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ease enter their name Are you legally authorized to work in the United States? Yes No Will you now or in the future require sponsorship? Yes No Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Field Support Specialist - Southern CA
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# Basics
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Are you able to work on-site at our Boston office?
-  <input:radio #32730008-11e6-41db-b453-30ae58d92434_98ce4dc7-4c5f-4bd4-be52 question-answered>
-label: Yes
-  <input:radio #32730008-11e6-41db-b453-30ae58d92434_98ce4dc7-4c5f-4bd4-be52 question-answered>
-label: No
-label: How did you hear about this role?
-  <input:text #b2f76c39-ee2b-47fb-a116-31fb20a9556f required filled>
-label: If you referred by someone, please enter their name
-  <input:text #bae7a7e9-cc4d-428f-9439-11b6dbce80b5 filled>
-label: Are you legally authorized to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=d49fac50-2d63-413f-b2c3-eb26085fb9f7 question-answered>
-label: Will you now or in the future require sponsorship?
-  [button] Yes
-  [button] No
-  <input:checkbox name=85c0c37d-4233-4b82-b048-592aa0437b69 question-unanswered>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-11-14 16:35:34  unconfirmed  Field Support Specialist - Bay Area @ eyebot
 url: https://jobs.ashbyhq.com/eyebot/a95c7f74-04f4-4186-bc6b-c09e943de754/application
 stage: page 1
@@ -5543,4 +5500,36 @@ label: I confirm that I have reviewed and agree to the Conditions of Employment 
   [link]  {socialIcon}
   [link] Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-19 03:54:42  blocked  Revenue Data Analyst @ jobgether
+url: https://jobs.lever.co/jobgether/266770d8-0df9-48a3-ad14-61c68e7a2312/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# Revenue Data Analyst
+# SUBMIT YOUR APPLICATION
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: Email ✱
+label: Phone
+label: Current location
+label: Current company
+<iframe https://newassets.hcaptcha.com/captcha/v1/221126bfaff10f69f5e2c60a7ff42e4b9f16ae>
+  [button] SUBMIT APPLICATION
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
+
+=== 2026-11-19 03:55:06  blocked  Analyst, Growth Generalist @ jobgether
+url: https://jobs.lever.co/jobgether/a0d069b5-a668-498a-a5ca-5dac3b097df6/apply
+stage: page 1
+why: hCaptcha (a human check: the bot stops here) after submit
+# Analyst, Growth Generalist
+# SUBMIT YOUR APPLICATION
+label: Resume/CV ✱ <file> Success!
+label: Full name ✱
+label: Email ✱
+label: Phone
+label: Current location
+label: Current company
+<iframe https://newassets.hcaptcha.com/captcha/v1/221126bfaff10f69f5e2c60a7ff42e4b9f16ae>
+  [button] SUBMIT APPLICATION
+  text: We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or 
 
