@@ -1,85 +1,3 @@
-=== 2026-11-16 19:02:00  skipped  People Operations -HR Specialist @ Sage Clinical RCM, LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4667095
-stage: page 2
-why: can't truthfully answer required: What System(s) are you familiar with? (required)
-  text: People Operations -HR Specialist
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: Do you currently live in the United States?
-  <input:radio #multiQuestionAnswer703404_0 question-unanswered>
-label: Yes
-  <input:radio #multiQuestionAnswer703404_1 question-unanswered>
-label: No
-label: Which state do you currently live in?
-  <textarea:text #screener-question-1-textarea empty>
-  text: How many hours per week can you work?
-  <input:radio #multiQuestionAnswer703406_0 question-unanswered>
-label: 40
-  <input:radio #multiQuestionAnswer703406_1 question-unanswered>
-label: 36
-  <input:radio #multiQuestionAnswer703406_2 question-unanswered>
-label: 32
-  <input:radio #multiQuestionAnswer703406_3 question-unanswered>
-label: 30
-  <input:radio #multiQuestionAnswer703406_4 question-unanswered>
-label: 28
-  <input:radio #multiQuestionAnswer703406_5 question-unanswered>
-label: 24
-  <input:radio #multiQuestionAnswer703406_6 question-unanswered>
-label: 20
-  text: What is your availability?
-  <input:radio #multiQuestionAnswer703407_0 question-unanswered>
-label: Mon-Fri
-  <input:radio #multiQuestionAnswer703407_1 question-unanswered>
-label: Sun-Thur
-  <input:radio #multiQuestionAnswer703407_2 question-unanswered>
-label: Tues-Sat
-  <input:radio #multiQuestionAnswer703407_3 question-unanswered>
-label: other
-  text: Are you willing to work Overtime/Weekends?
-  <input:radio #multiQuestionAnswer703408_0 question-unanswered>
-  <input:radio #multiQuestionAnswer703408_1 question-unanswered>
-  text: Any issues working with a Set Schedule?
-  <input:radio #multiQuestionAnswer703412_0 question-unanswered>
-  <input:radio #multiQuestionAnswer703412_1 question-unanswered>
-  text: How many years experience do you have in RCM?
-  <input:radio #multiQuestionAnswer703455_0 question-unanswered>
-label: 11+ years
-  <input:radio #multiQuestionAnswer703455_1 question-unanswered>
-label: 9 - 10 years
-  <input:radio #multiQuestionAnswer703455_2 question-unanswered>
-label: 7 - 8 years
-  <input:radio #multiQuestionAnswer703455_3 question-unanswered>
-label: 5 - 6 years
-  <input:radio #multiQuestionAnswer703455_4 question-unanswered>
-label: 3 - 4 years
-  <input:radio #multiQuestionAnswer703455_5 question-unanswered>
-label: Under 3 years
-  text: What System(s) are you familiar with?
-  <input:checkbox #multiQuestionAnswer703461_0 question-unanswered>
-label: Cerner
-  <input:checkbox #multiQuestionAnswer703461_1 question-unanswered>
-label: EPIC
-  <input:checkbox #multiQuestionAnswer703461_2 question-unanswered>
-label: MediTech
-  <input:checkbox #multiQuestionAnswer703461_3 question-unanswered>
-label: Other
-label: What is your desired salary?
-  <textarea:text #screener-question-8-textarea empty>
-label: How much notice would you need to give to your current employer?
-  <textarea:text #screener-question-9-textarea empty>
-label: Do you have experience working remotely / Secure area and High-Speed Internet:
-  <textarea:text #screener-question-10-textarea empty>
-label: On a scale of 1-10 with 10 being a perfect match for this position, how would you rate yourself from a "techni
-  <textarea:text #screener-question-11-textarea empty>
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: Sage Clinical RCM, LLC: Privacy Policy
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
 === 2026-11-16 19:04:29  skipped  Project Coordinator – Community Engagement to Reduce Victimization (CERV) @ Coordinated Care Services, Inc. (CCSI)
 url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4667803
 stage: page 3
@@ -5580,4 +5498,84 @@ label: Please provide your Telegram nickname for quick communication
   <input:text #aeb0dfba-bdea-427e-819c-79d937996427 required filled>
   [button] Submit Application disabled
 <iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-19 20:47:51  skipped  Workforce Coordinator @ msk
+url: https://msk.wd108.myworkdayjobs.com/MSKCC_Careers_Primary/job/New-York-NY/Coordinator--Staff-Records_104193-1/apply/applyManually
+stage: Application Questions
+why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The number entered is too large.', 'Error-Desired Annual Pay: The number entered is too large.']; fields flagged: ['Desired Annual Pay:']
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Workforce Coordinator
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions
+label: current step 3 of 6
+label: Application Questions
+label: step 4 of 6
+label: Voluntary Disclosures
+label: step 5 of 6
+label: Self Identify
+label: step 6 of 6
+label: Review
+# Application Questions
+# Errors Found
+! Error-Desired Annual Pay: The number entered is too large. {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+ {formField-602e5b1032dd1000b49c59e15d730000}
+label: Pronoun
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c59e15d730000
+ {formField-602e5b1032dd1000b49c5baf54150001}
+label: Desired Annual Pay:*
+  <input:text #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150001 required INVALID filled>
+! Error: The number entered is too large. {inputAlert}
+ {formField-602e5b1032dd1000b49c5baf54150002}
+label: Are you willing to relocate?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150002
+ {formField-602e5b1032dd1000b49c5baf54150005}
+label: Do you have relatives employed here?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5baf54150005
+ {formField-602e5b1032dd1000b49c5c4940100002}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100002
+ {formField-602e5b1032dd1000b49c5c4940100005}
+label: Will you now or in the future (e.g., post-OPT) require sponsorship for employment visa status (e.g., H-1B, TN,
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5c4940100005
+ {formField-602e5b1032dd1000b49c5ce328200000}
+label: At MSK, we use an AI feature that helps compare the experience and skills in your application to the minimum r
+  text: A recruiter will always review your application.
+  text: Would you like to opt out of this feature?
+  [dropdown] chosen #primaryQuestionnaire--602e5b1032dd1000b49c5ce328200000
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] MSKCC Privacy Practices {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-19 20:48:08  blocked  Revenue Operations Specialist @ adaptivebiotechnologies
+url: https://www.adaptivebiotech.com/career-listings/listing/
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: :Read More; :MRD; :IMMUNE MEDICINE; :NEWS & EVENTS; :ABOUT US; :Cookie Preferences
+# Adaptive Highlights clonoSEQ’s Central Role in Advancing MRD-Guided Care Across Hematology at ASH 2026
+  [link] Read More
+  [button] MRD
+  [button] IMMUNE MEDICINE
+  [button] NEWS & EVENTS
+  [button] ABOUT US
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+  text: Powering the Age of Immune Medicine
+  text: Do Not Sell or Share My Info
+  text: © Adaptive Biotechnologies. All Rights Reserved.
+  [button] Cookie Preferences
 
