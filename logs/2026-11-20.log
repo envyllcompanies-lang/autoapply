@@ -1163,3 +1163,274 @@
 [12:57:59] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.3 min)
 [12:57:59] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
 [12:57:59] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-20.md
+[13:22:52] === autoapply run (LIVE) build 2026-10-18-b ===
+[13:22:52] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[13:22:54] mail: logged in to delgado@alumni.usc.edu OK
+[13:23:40] Discovering jobs…
+[13:29:58]   greenhouse/airbnb: 201 open roles
+[13:29:58]   greenhouse/figma: 146 open roles
+[13:29:58]   greenhouse/robinhood: 166 open roles
+[13:29:58]   greenhouse/databricks: 897 open roles
+[13:29:58]   greenhouse/anthropic: 637 open roles
+[13:29:58]   greenhouse/coinbase: 253 open roles
+[13:29:58]   greenhouse/lyft: 144 open roles
+[13:29:58]   greenhouse/pinterest: 175 open roles
+[13:29:58]   greenhouse/reddit: 143 open roles
+[13:29:58]   greenhouse/twilio: 106 open roles
+[13:29:58]   greenhouse/cloudflare: 496 open roles
+[13:29:58]   greenhouse/datadog: 382 open roles
+[13:29:58]   greenhouse/mongodb: 413 open roles
+[13:29:58]   greenhouse/elastic: 373 open roles
+[13:29:58]   greenhouse/gitlab: 246 open roles
+[13:29:58]   greenhouse/asana: 113 open roles
+[13:29:58]   greenhouse/okta: 368 open roles
+[13:29:58]   greenhouse/samsara: 304 open roles
+[13:29:58]   greenhouse/affirm: 224 open roles
+[13:29:58]   greenhouse/brex: 249 open roles
+[13:29:58]   greenhouse/flexport: 211 open roles
+[13:29:58]   greenhouse/oscar: 188 open roles
+[13:29:58]   greenhouse/spacex: 2777 open roles
+[13:29:58]   greenhouse/toast: 331 open roles
+[13:29:58]   greenhouse/verkada: 348 open roles
+[13:29:58]   greenhouse/nuro: 103 open roles
+[13:29:58]   greenhouse/scaleai: 167 open roles
+[13:29:58]   greenhouse/lucidmotors: 485 open roles
+[13:29:58]   greenhouse/holderconstruction: 308 open roles
+[13:29:58]   greenhouse/rocketlab: 551 open roles
+[13:29:58]   greenhouse/carvana: 1643 open roles
+[13:29:58]   greenhouse/roblox: 264 open roles
+[13:29:58]   greenhouse/stripe: 772 open roles
+[13:29:58]   greenhouse/doordashusa: 414 open roles
+[13:29:58]   greenhouse/aloyoga: 734 open roles
+[13:29:58]   greenhouse/thenewyorktimes: 144 open roles
+[13:29:58]   greenhouse/janestreet: 216 open roles
+[13:29:58]   greenhouse/onemedical: 359 open roles
+[13:29:58]   greenhouse/gomotive: 186 open roles
+[13:29:58]   greenhouse/reformation: 150 open roles
+[13:29:58]   greenhouse/justworks: 107 open roles
+[13:29:58]   greenhouse/riotgames: 203 open roles
+[13:29:58]   greenhouse/scopely: 173 open roles
+[13:29:58]   greenhouse/fanaticsfbg: 101 open roles
+[13:29:58]   greenhouse/voyagertechnologiesinc: 179 open roles
+[13:29:58]   greenhouse/trueanomalyinc: 215 open roles
+[13:29:58]   greenhouse/charliehealth: 275 open roles
+[13:29:58]   greenhouse/grafanalabs: 134 open roles
+[13:29:58]   greenhouse/vailclinicincdbavailhealthhospital: 102 open roles
+[13:29:58]   greenhouse/fivetran: 187 open roles
+[13:29:58]   greenhouse/olsson: 346 open roles
+[13:29:58]   greenhouse/relativity: 403 open roles
+[13:29:58]   greenhouse/blankstreet: 105 open roles
+[13:29:58]   greenhouse/icapitalnetwork: 233 open roles
+[13:29:58]   greenhouse/lpc: 110 open roles
+[13:29:58]   greenhouse/braze: 329 open roles
+[13:29:58]   greenhouse/addepar1: 121 open roles
+[13:29:58]   greenhouse/divergent: 148 open roles
+[13:29:58]   greenhouse/vardaspace: 141 open roles
+[13:29:58]   greenhouse/crunchyroll: 103 open roles
+[13:29:58]   greenhouse/vast: 203 open roles
+[13:29:58]   greenhouse/cookunity: 140 open roles
+[13:29:58]   greenhouse/fanaticscollectibles: 228 open roles
+[13:29:58]   greenhouse/sonymusicentertainment: 125 open roles
+[13:29:58]   greenhouse/canonical: 317 open roles
+[13:29:58]   greenhouse/betterhelp: 101 open roles
+[13:29:58]   greenhouse/adyen: 243 open roles
+[13:29:58]   greenhouse/thetradedesk: 114 open roles
+[13:29:58]   greenhouse/agency: 827 open roles
+[13:29:58]   greenhouse/innodatainc: 108 open roles
+[13:29:58]   greenhouse/prolificacademicltd: 4259 open roles
+[13:29:58]   greenhouse/sumup: 307 open roles
+[13:29:58]   greenhouse/skdse: 165 open roles
+[13:29:58]   greenhouse/nerostechnologies: 110 open roles
+[13:29:58]   greenhouse/bakerhicks: 139 open roles
+[13:29:58]   greenhouse/precisionmedicinegroup: 137 open roles
+[13:29:58]   greenhouse/hellofresh: 379 open roles
+[13:29:58]   greenhouse/asm: 536 open roles
+[13:29:58]   greenhouse/ripple: 108 open roles
+[13:29:58]   greenhouse/altentechnologyusa: 233 open roles
+[13:29:58]   greenhouse/natera: 203 open roles
+[13:29:58]   greenhouse/woolpert: 114 open roles
+[13:29:58]   greenhouse/quince: 150 open roles
+[13:29:58]   greenhouse/dhpace: 402 open roles
+[13:29:58]   greenhouse/block: 184 open roles
+[13:29:58]   greenhouse/celonis: 265 open roles
+[13:29:58]   greenhouse/nebius: 369 open roles
+[13:29:58]   greenhouse/alixpartners: 132 open roles
+[13:29:58]   greenhouse/apexcompanies: 162 open roles
+[13:29:58]   greenhouse/alphasense: 170 open roles
+[13:29:58]   greenhouse/alfredbeneschco: 145 open roles
+[13:29:58]   greenhouse/anthromededucation: 145 open roles
+[13:29:58]   greenhouse/axiomtalentplatform: 205 open roles
+[13:29:58]   greenhouse/bybit: 169 open roles
+[13:29:58]   greenhouse/cannondesign: 126 open roles
+[13:29:58]   greenhouse/comprehensivemobilecare: 265 open roles
+[13:29:58]   greenhouse/coreweave: 320 open roles
+[13:29:58]   greenhouse/datavant2: 157 open roles
+[13:29:58]   greenhouse/epicgames: 140 open roles
+[13:29:58]   greenhouse/equipmentsharecom: 1069 open roles
+[13:29:58]   greenhouse/erc8585757pathlight53t353: 103 open roles
+[13:29:58]   greenhouse/esri: 482 open roles
+[13:29:58]   greenhouse/fanduel: 106 open roles
+[13:29:58]   greenhouse/flyzipline: 320 open roles
+[13:29:58]   greenhouse/formlabs: 277 open roles
+[13:29:58]   greenhouse/hubspotjobs: 139 open roles
+[13:29:58]   greenhouse/ixllearning: 111 open roles
+[13:29:58]   greenhouse/justmarkets: 138 open roles
+[13:29:58]   greenhouse/klaviyo: 127 open roles
+[13:29:58]   greenhouse/langanengineeringandenvironmentalservicesllc: 585 open roles
+[13:29:58]   greenhouse/luxinfusion: 121 open roles
+[13:29:58]   greenhouse/missionhealthcare: 119 open roles
+[13:29:58]   greenhouse/modernanimal: 118 open roles
+[13:29:58]   greenhouse/monks: 345 open roles
+[13:29:58]   greenhouse/monsterenergy: 170 open roles
+[13:29:58]   greenhouse/netskope: 126 open roles
+[13:29:58]   greenhouse/nscaleoperationsukltd: 228 open roles
+[13:29:58]   greenhouse/astspacemobile: 275 open roles
+[13:29:58]   greenhouse/cssmerge: 361 open roles
+[13:29:58]   greenhouse/drayerpt: 137 open roles
+[13:29:58]   greenhouse/ecpcareers: 461 open roles
+[13:29:58]   greenhouse/eosfitness: 2875 open roles
+[13:29:58]   greenhouse/fanaticscommerce: 200 open roles
+[13:29:58]   greenhouse/flix: 185 open roles
+[13:29:58]   greenhouse/helsing: 175 open roles
+[13:29:58]   greenhouse/psiquantum: 103 open roles
+[13:29:58]   greenhouse/revolutionmedicines: 349 open roles
+[13:29:58]   greenhouse/sentinellabs: 263 open roles
+[13:29:58]   greenhouse/ursamajor: 134 open roles
+[13:29:58]   greenhouse/capco: 697 open roles
+[13:29:58]   greenhouse/guidepoint: 106 open roles
+[13:29:58]   greenhouse/zscaler: 378 open roles
+[13:29:58]   lever/palantir: 307 open roles
+[13:29:58]   lever/veeva: 865 open roles
+[13:29:58]   lever/jobgether: 4793 open roles
+[13:29:58]   lever/flynncompanies: 153 open roles
+[13:29:58]   lever/gopuff: 755 open roles
+[13:29:58]   lever/buckmason: 252 open roles
+[13:29:58]   lever/arcteryx.com: 225 open roles
+[13:29:58]   lever/thinkahead: 128 open roles
+[13:29:58]   lever/solidcore: 251 open roles
+[13:29:58]   lever/zoox: 246 open roles
+[13:29:58]   lever/insomniacookies: 1144 open roles
+[13:29:58]   lever/Aprio: 177 open roles
+[13:29:58]   lever/amityfdn: 115 open roles
+[13:29:58]   lever/boxlunch: 4663 open roles
+[13:29:58]   lever/rws: 136 open roles
+[13:29:58]   lever/weloglobal: 463 open roles
+[13:29:58]   workday/livenation/wd503/LNExternalSite/Live Nation: 107 open roles
+[13:29:58]   ashby/ramp: 185 open roles
+[13:29:58]   ashby/notion: 169 open roles
+[13:29:58]   ashby/openai: 854 open roles
+[13:29:58]   ashby/perplexity: 148 open roles
+[13:29:58]   ashby/plaid: 146 open roles
+[13:29:58]   ashby/zip: 106 open roles
+[13:29:58]   ashby/cohere: 125 open roles
+[13:29:58]   ashby/elevenlabs: 125 open roles
+[13:29:58]   ashby/EliseAI: 105 open roles
+[13:29:58]   ashby/neko-health: 117 open roles
+[13:29:58]   workable/nogigiddy: 1822 open roles
+[13:29:58]   workable/suppliedtalent: 192 open roles
+[13:29:58]   workable/serenity-mental-health-centers: 372 open roles
+[13:29:58]   workable/braven: 101 open roles
+[13:29:58]   workable/pacific-health-group: 187 open roles
+[13:29:58]   workable/pm2cm: 125 open roles
+[13:29:58]   workable/obran: 104 open roles
+[13:29:58]   workable/behavior-frontiers: 120 open roles
+[13:29:58]   workable/pavago: 2617 open roles
+[13:29:58]   workable/rimkus: 164 open roles
+[13:29:58]   workable/continuum-resource-network: 110 open roles
+[13:29:58]   workable/intertek: 233 open roles
+[13:29:58]   workable/yugo: 114 open roles
+[13:29:58]   workable/weekday-1: 966 open roles
+[13:29:58]   workable/raydar: 1010 open roles
+[13:29:58]   workable/keller-executive-search: 152 open roles
+[13:29:58]   workable/bask-health-1: 351 open roles
+[13:29:58]   workable/kurtgeiger: 188 open roles
+[13:29:58]   workable/g-mass: 150 open roles
+[13:29:58]   workable/dln-consulting-group: 149 open roles
+[13:29:58]   workable/turing-enterprise-inc: 264 open roles
+[13:29:58]   breezy/american-logistics-authority: 2760 open roles
+[13:29:58]   smartrecruiters/aspenskiingcompany: 100 open roles
+[13:29:58]   smartrecruiters/equinox: 228 open roles
+[13:29:58]   smartrecruiters/boschgroup: 213 open roles
+[13:29:58]   smartrecruiters/sgs: 155 open roles
+[13:29:58]   smartrecruiters/redbull: 339 open roles
+[13:29:58]   smartrecruiters/AIRCommunities: 148 open roles
+[13:29:58]   smartrecruiters/uniteklearning: 170 open roles
+[13:29:58]   smartrecruiters/thewonderfulcompany: 135 open roles
+[13:29:58]   greenhouse: 808 of 836 boards have openings (59719 roles)
+[13:29:58]   lever: 129 of 136 boards have openings (17330 roles)
+[13:29:58]   workday: 31 of 31 boards have openings (893 roles)
+[13:29:58]   ashby: 87 of 94 boards have openings (3946 roles)
+[13:29:58]   workable: 154 of 164 boards have openings (12307 roles)
+[13:29:58]   bamboohr: 4 of 4 boards have openings (197 roles)
+[13:29:58]   recruitee: 2 of 2 boards have openings (57 roles)
+[13:29:58]   breezy: 6 of 6 boards have openings (2819 roles)
+[13:29:58]   smartrecruiters: 48 of 57 boards have openings (1848 roles)
+[13:29:58]   ! workday/adobe/wd5/external_experienced/Adobe: 429 Client Error: Too Many Requests for url: https://adobe.wd5.myworkdayjobs.com/wday/cxs/
+[13:29:58]   ! workday/intel/wd1/External/Intel: 429 Client Error: Too Many Requests for url: https://intel.wd1.myworkdayjobs.com/wday/cxs/
+[13:29:58]   ! workday/paypal/wd1/jobs/PayPal: 429 Client Error: Too Many Requests for url: https://paypal.wd1.myworkdayjobs.com/wday/cxs
+[13:29:58]   ! workday/crowdstrike/wd5/crowdstrikecareers/CrowdStrike: 429 Client Error: Too Many Requests for url: https://crowdstrike.wd5.myworkdayjobs.com/wda
+[13:29:58]   ! workday/autodesk/wd1/Ext/Autodesk: 429 Client Error: Too Many Requests for url: https://autodesk.wd1.myworkdayjobs.com/wday/c
+[13:29:58]   ! workday/target/wd5/targetcareers/Target: 429 Client Error: Too Many Requests for url: https://target.wd5.myworkdayjobs.com/wday/cxs
+[13:29:58]   ! workday/cvshealth/wd1/CVS_Health_Careers/CVS Health: 429 Client Error: Too Many Requests for url: https://cvshealth.wd1.myworkdayjobs.com/wday/
+[13:29:58]   ! workday/williams/wd5/external/Williams: 429 Client Error: Too Many Requests for url: https://williams.wd5.myworkdayjobs.com/wday/c
+[13:29:58]   ! workday/xcelenergy/wd1/External/Xcel Energy: 429 Client Error: Too Many Requests for url: https://xcelenergy.wd1.myworkdayjobs.com/wday
+[13:29:58]   ! workday/usc/wd5/ExternalUSCCareers/University of Southern California: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[13:29:58]   ! workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[13:29:58]   ! workday/usc/wd5/USCAdvancementCareers/USC Advancement: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[13:29:58]   ! …and 71 more board errors
+[13:29:58]   agg/linkedin: 0 roles (cached)
+[13:29:58]   agg/remoteok: 16 roles (cached)
+[13:29:58]   agg/remotive: 0 roles (cached)
+[13:29:58]   agg/jicy: 13 roles (cached)
+[13:29:58]   agg/himalayas: 1 roles (cached)
+[13:29:58]   agg/wwr: 16 roles (cached)
+[13:29:58]   agg/themuse: 203 roles (cached)
+[13:29:58]   agg/adzuna: 0 roles (cached)
+[13:29:58]   agg/jooble: 0 roles (cached)
+[13:30:05]   agg/workablejobs: 271 fetched, 130 pass the title/location filter
+[13:30:06]   agg/arbeitnow: 900 fetched, 5 pass the title/location filter
+[13:30:06]   agg/workingnomads: 36 fetched, 2 pass the title/location filter
+[13:30:06]   agg/githublists: 336 fetched, 63 pass the title/location filter
+[13:30:17]   agg/builtin: 120 fetched, 85 pass the title/location filter
+[13:30:17]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[13:30:17]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[13:30:25]   agg/hnhiring: 6 fetched, 1 pass the title/location filter
+[13:30:30]   found 1 new company boards from aggregator listings: smartrecruiters/lewisassociates
+[13:30:31]   smartrecruiters/lewisassociates: 113 open roles
+[13:30:31]   smartrecruiters: 1 of 1 boards have openings (113 roles)
+[13:30:31]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[13:31:02]   ccboards: Common Crawl's list of indexes could not be read (busy); tried again at the next search
+[13:31:02] 94578 open roles, 488 new
+[13:31:02]   ✓  38  Coordinator, Technology Solutions @ foundationccc (California Remote) — title 'coordinator' +22; location 'remote' +16
+[13:31:02]   ✓  20  Review Support Specialist @ jobgether (US (Remote)) — keywords [cross-functional] +4; location 'remote' +16
+[13:31:02]   ✓  18  Bankruptcy and Financial Restructuring Associate - Transactional @ LewisAssociates (New York, NY, United States) — keywords [entry level] +6; location 'new york' +12
+[13:31:02]   ✓  12  Hedge Fund Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12   Corporate Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Associate 3rd-4th Year @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  IP Litigation Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Corporate Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Trial Associate @ LewisAssociates (Denver, CO, United States) — location 'denver' +12
+[13:31:02]   ✓  12  Associate 2nd-4th Year @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Personal Injury Defense Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02]   ✓  12  Corporate & Securities Associate @ LewisAssociates (New York, NY, United States) — location 'new york' +12
+[13:31:02] Scored 18 new roles: 13 candidates for the résumé check, 5 with nothing going for them, 467 filtered out by title/location (finding and scoring took 8.2 min)
+[13:31:03] 13 jobs queued: 0 already matched to your résumé, 13 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
+[13:31:03] Time for this run: 50 min in all (6657 of 1850 free Actions minutes used this month)
+[13:31:06] Accounts: ON (delgado@alumni.usc.edu)
+[13:31:06] → Coordinator, Technology Solutions @ foundationccc (score 38)
+[13:31:09]     ✗ skipped: above entry level: mid (requires 3+ yrs)
+[13:31:11]   ✗  Corporate Associate @ LewisAssociates: above entry level: mid (requires 4+ yrs)
+[13:31:12]   ✗ Associate @ LewisAssociates: above entry level: mid (requires 4+ yrs)
+[13:31:13]   match  40%  Review Support Specialist @ jobgether — Customer support role that lacks alignment with engineering background and requires location in Indi
+[13:31:13]   match  15%  Corporate & Securities Associate @ LewisAssociates — Requires a law degree and bar admission to practice as a corporate and securities attorney.
+[13:31:13]   match  15%  Bankruptcy and Financial Restructuring Associate - Transactional @ LewisAssociates — Requires a JD and post-law school experience for a legal restructuring associate position.
+[13:31:13]   match  15%  Hedge Fund Associate @ LewisAssociates — Requires legal experience and background as a practicing attorney for an investment management role.
+[13:31:13]   match  20%  IP Litigation Associate @ LewisAssociates — Requires a Juris Doctor (JD) degree and bar admission for a patent litigation attorney position.
+[13:31:14]   ✗ Corporate Associate @ LewisAssociates: above entry level: mid (requires 4+ yrs)
+[13:31:15]   ✗ Associate 3rd-4th Year @ LewisAssociates: above entry level: mid (requires 3+ yrs)
+[13:31:19]   match  10%  Trial Associate @ LewisAssociates — The candidate is an engineering graduate, not a licensed attorney required for this litigation role.
+[13:31:19]   match  10%  Personal Injury Defense Associate @ LewisAssociates — This position requires a law degree and bar admission, which the engineering candidate does not have
+[13:31:19]   match  10%  Associate 2nd-4th Year @ LewisAssociates — This legal role requires a JD and New York bar membership, neither of which the candidate possesses.
+[13:31:19] Résumé checks this run: 8 (0 passed) in 2 calls. Free writer allowance used today: groq 0k/195k tokens; groq-20b 0k/195k tokens; groq-qwen 0k/195k tokens; gemini-lite 4/480 requests; gemini-flash 0/18 requests
+[13:31:19] Summary: 13 low_score, 472 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-20.md
