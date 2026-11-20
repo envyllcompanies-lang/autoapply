@@ -1,187 +1,3 @@
-=== 2026-11-17 18:41:47  blocked  US Business Development Coordinator - Plugin Boutique @ beatport
-url: https://beatport.bamboohr.com/careers/266
-why: reCAPTCHA checkbox (a human check: the bot stops here)
-# US Business Development Coordinator - Plugin Boutique
-  text: Plugin Boutique - Los Angeles /, California (Hybrid)
-label: Please leave this field blank
-  <input:text #nickname_hpcsaf empty>
-label: First Name *
-  <input:text #firstName empty>
-label: Last Name *
-  <input:text #lastName empty>
-label: Email *
-  <input:text #email empty>
-label: Phone *
-  <input:text #phone empty>
-label: Address *
-  <input:text #FabricTextField-96 empty>
-label: City *
-  <input:text #FabricTextField-97 empty>
-label: State *
-  [button] –Select– opens-true
-label: ZIP *
-  <input:text #FabricTextField-99 empty>
-label: Country *
-  [button] United States opens-true
-  [button] 
-  [button] Choose File
-  <input:file no-file>
-  [button] Choose File*
-  <input:file required no-file>
-label: Date Available
-  <input:text #FabricTextField-80 empty>
-  [button]  opens-dialog
-label: Desired Pay *
-  <input:text #desiredPay empty>
-label: Website, Blog or Portfolio
-  <input:text #websiteUrl empty>
-label: LinkedIn URL
-  <input:text #linkedinUrl empty>
-label: Who referred you for this position?
-  <input:text #referredBy empty>
-label: Do you have the right to live and work in the USA? *
-label: Yes
-label: No
-label: This role requires working on a hybrid basis from our LA office (90021), at least 3 days per week. Which of th
-label: I currently live in the LA area and can commute to the office 3 days per week.
-label: I currently live in another state but would relocate to LA if successful.
-label: I currently live in another state and am not looking to relocate, so would be unable to meet the hybrid workin
-label: Other
-label: What music content creator do you think people should be watching and why? *
-  <textarea #customQuestionAnswers.long_683 empty>
-label: What five artists are you listening to right now? *
-  <input:text #customQuestionAnswers.short_684 empty>
-label: Please tell us why you'd particularly like to work in this role at Plugin Boutique? (please no chat gpt, we re
-  <textarea #customQuestionAnswers.long_685 empty>
-  text: Your answers to the following three questions are entirely optional.
-  text: This information will not be used as selection criteria. If you'd rather not share this information, feel free to select "Decline to Answer"
-label: Gender
-  [button] –Select– opens-true
-label: Ethnicity
-  [button] –Select– opens-true
-label: Veteran Status
-label: Decline to Answer
-label: Not a Veteran
-label: Veteran
-<iframe https://www.google.com/recaptcha/api2/anchor>
-  [button] View Job Description
-label: Link to This Job
-  <input:text #FabricTextField-71 filled>
-  [button] 
-  [button] 
-  [button] 
-  text: Los Angeles /, California (Hybrid)
-  text: $45k - $47k per annum (depending on experience) plus bonus programme.
-  [button] Submit Application
-  [button] Cancel
-
-=== 2026-11-17 18:42:38  skipped  Travel & Customer Service Coordinator (English & French) @ suvoda
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: can't truthfully answer required: Please rate your level of French language proficiency (writt
-# Travel & Customer Service Coordinator (English & French)
-  [button] Apply
-  text: We know why you are reading about this opportunity. You are driven to achieve goals. You are looking to make a direct impact. You want to wo
-  text: The Global Studies Coordinator (based in the United States) is responsible for supporting the team of Global Study Managers in the planning 
-  text: Please note: The internal title for this role is 'Global Study Coordinator.' This is a contract position. It is part-time, potentially up to
-  text: Manages travel and transportation budget for trial participants
-  text: Participates in discussions with vendors and internal team members regarding trial participant requirements
-  text: Supports hospital or clinical staff relating to trial participant enrollments and visit schedules
-  text: Promptly responds to all inquiries of the trial participants and hospital/clinical staff
-  text: Contributes to managing projects to profitable level through efficient work process
-  text: Acts as point of contact for patient communication regarding air, hotel and ground accommodations
-  text: Maintains accurate data including setting up databases and transferring data between internal operating systems
-  text: Aids in producing reports as required
-  text: Works with Global Study Manager to outline needs and requests of clients and patients
-  text: Bachelor’s Degree or equivalent work experience
-  text: Fluent French and fluent English required, multi-lingual preferred
-  text: 2+ years of experience in the travel industry and/or pharma industry preferred
-  text: Working knowledge of Microsoft Office
-  text: Ability to learn new procedures quickly and efficiently
-  text: Highly organized and plan-oriented; adept at prioritization and follow-up
-  text: Excels in cross-departmental communication
-  text: Confidence and follow through in decision-making
-  text: Primary work environment is from a home office with personal computer and telephone
-  text: Minimum technology required, including updated operating system, anti-virus software and password protected devices. Chromebook is not suppo
-  text: As set forth in Suvoda’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any ap
-  text: Interested in building your career at Suvoda? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Preferred First Name
-  <input:text #preferred_name empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-label: Location (City)*
-  <input:text #candidate-location required empty>
-  <input required empty>
-  [button] Locate me
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: If available, please provide a link to your LinkedIn Profile.
-  <input:text #question_39265809002 empty>
-label: How did you hear about Suvoda?*
-  <textarea #question_39265810002 required empty>
-label: Are you related to anyone who works for Suvoda? If yes, who?*
-  <input:text #question_39265811002 required empty>
-label: If offered a position, when would you be available to start?*
-  <input:text #question_39265812002 required empty>
-label: Please indicate your current city & state of residence.*
-  <input:text #question_39265813002 required empty>
-label: Please confirm the highest level of education that you have completed.*
-  <textarea #question_39265814002 required empty>
-label: Are you available to work on a part-time non-employee basis (up to 25 hours per week, hours not guaranteed)?*
-  <input:text #question_39265815002 required empty>
-  [button] 
-  <input required empty>
-  text: The first 6-8 weeks of your onboarding will be for orientation, so you will start at approximately 5 hours per week until clinical trials ar
-label: This position pays $25.00/hr USD. Please confirm if the hourly amount is suitable.*
-  <input:text #question_39265816002 required empty>
-  [button] 
-  <input required empty>
-  text: We ask that coordinators have availability during regular business hours and also have some flexibility during non-business hours for emerge
-label: Please rate your level of English language proficiency (written and verbal) on a scale of 1 to 10.*
-  <input:text #question_39265817002 required empty>
-  [button] 
-  <input required empty>
-label: Please rate your level of French language proficiency (written and verbal) on a scale of 1 to 10.*
-  <input:text #question_39265818002 required empty>
-  [button] 
-  <input required empty>
-label: Please list any additional languages you currently speak and write fluently. Please only include languages tha
-  <textarea #question_39265819002 required empty>
-label: This is a remote position that requires the use of your personal computer equipment. Could you confirm what co
-  <textarea #question_39265820002 required empty>
-label: Are you currently authorized to work lawfully for Suvoda in the United States?*
-  <input:text #question_39265821002 required empty>
-label: Will you now or in the future require Suvoda to commence (“sponsor”) an immigration case in order to employ yo
-  <input:text #question_39265822002 required empty>
-  [button] 
-  <input required empty>
-label: Please confirm your full legal name (first, middle if applicable, and last name).*
-  <input:text #question_39265823002 required empty>
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
 === 2026-11-17 18:43:20  unconfirmed  Enterprise AI Associate @ mercor
 url: https://jobs.ashbyhq.com/mercor/5b32468f-6f91-40ba-9398-eacb6416a882/application
 stage: page 1
@@ -5611,4 +5427,99 @@ label: Are you located in (or willing to relocate to) NYC and work out of our Br
   <input:checkbox name=08de6fbf-d471-4147-b2fb-b3577ccfc1f9 question-answered>
   [button] Submit Application disabled
 <iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-20 18:33:18  skipped  Publication Ethics Associate Editor - 12 Month FTC @ plos
+url: https://job-boards.eu.greenhouse.io/plos/jobs/4994386101
+stage: page 1
+why: can't truthfully answer required: PLOS currently hires in 8 states. Please note below which of
+# Publication Ethics Associate Editor - 12 Month FTC
+  [button] Apply Now
+# *This position is fully remote/home based. Applications will be accepted from candidates based in the UK and t
+  text: In the US, this is a union represented position as part of the Pacific Media Workers Guild, Local 39521 of the NewsGuild-Communication Worke
+# Role Summary
+  text: The PLOS Publication Ethics team works to uphold the integrity and reliability of PLOS publications and supports PLOS journals in publicatio
+  text: We are hiring an Associate Editor on the Publication Ethics team. This role’s primary responsibility is to investigate and resolve publicati
+  text: You will report to a Senior Editor, Team Manager for the PLOS Publication Ethics team.
+# Responsibilities
+  text: Resolve publication ethics cases efficiently and in line with PLOS standards and COPE guidance; prevent reputational damage to PLOS journals
+  text: Contribute to triage of incoming publication ethics cases
+  text: With other Publication Ethics team members, develop workflow and policy updates as needed to optimize detection and/or handling of publicati
+  text: Support journal editors in resolving publication ethics issues that arise during manuscript handling, peer review, or post-publication.
+  text: Communicate rapidly and effectively about ethics cases with involved/affected stakeholders, including the journal’s editorial leads, Editori
+  text: Contribute to internal discussions about publication ethics, research integrity, and related issues in team-level and interdepartmental/cros
+  text: You may be asked to provide cover or support for the team’s operational needs.
+  text: You may be asked to represent PLOS Publication Ethics at meetings, workshops, and/or other forums relevant to publication ethics and researc
+  text: Help to recruit and train for vacant team positions and help to train staff on other PLOS teams in publication ethics case management and st
+  text: Uphold high standards of professionalism in all internal and external communications about publication ethics issues.
+# Knowledge and Skills
+  text: Excellent communication skills, both written and verbal
+  text: Highly organized and efficient self-starter with excellent attention to detail and keen problem-solving and analytical skills
+  text: A collaborative team player who is comfortable working with a remote team
+  text: A commitment to open access and research integrity
+  text: (Preferred) Familiarity with Committee on Publication Ethics (COPE) guidance, aptitude for and/or experience in image forensic analysis
+# Qualifications
+  text: Master’s or PhD degree, or equivalent (preferably in a scientific discipline)
+  text: Demonstrated record of discretion and good judgement
+  text: (Preferred) Post-graduate research experience in a scientific, clinical, or social sciences discipline
+  text: (Preferred) 1+ year experience in STM publishing, either in an editorial role or in a publication ethics role with primary case investigatio
+# Physical Requirements and Work Environment
+  text: Prolonged periods stationary at a desk and working on a computer.
+  text: Some national and international travel may be required.
+  text: Some flexibility to work across time zones.
+  text: US): $67,000- $73,500 or (UK) £35,000- £38,000
+  text: PLOS also offers a comprehensive benefits package summarized below.
+  text: Employee sponsored health, dental and vision insurance (Dental and Vision 100% employer paid)
+  text: Paid Vacation, 11 public holidays and sick leave
+  text: Birthday and three winter holidays days off
+  text: Short term and long term disability insurance
+  text: 2 days paid time off for volunteering per year
+  text: Fully remote work environment with stipend on joining for home office
+  text: Personal accident insurance
+  text: Pension with up to 10% employer match
+  text: 25 days holidays, market competitive Maternity and Paternity leave
+  text: Building on a strong legacy of pioneering innovation, PLOS continues to be a catalyst in open science, reimagining models to meet open scien
+  text: Our work is supported by a highly skilled global in-house team, partnerships with local scholarly organizations, and the valued contribution
+  text: We’re committed to equal opportunity
+  text: We’re working to create a more equitable system of scientific knowledge and understanding. Removing barriers to inclusion and facilitating b
+  text: Beyond accepting distinct perspectives, we seek and support divergent backgrounds among our staff because we know differences strengthen our
+  text: Interested in building your career at Public Library of Science? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country
+  <input:text #country empty>
+  [button] 
+  <input:tel #phone empty>
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Will you need visa sponsorship to work in the US now or in the future? *
+  <input:text #question_9753842101 required empty>
+  [button] 
+  <input required empty>
+label: PLOS currently hires in 8 states. Please note below which of these states you currently reside in. Please note
+  <input:text #question_9753843101 required empty>
+  [button] 
+  <input required empty>
+label: LinkedIn Profile
+  <input:text #question_9753844101 empty>
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
 
