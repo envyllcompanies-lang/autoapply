@@ -1,97 +1,3 @@
-=== 2026-11-18 18:31:35  unconfirmed  Recruiting Coordinator @ apex-technology-inc
-url: https://jobs.ashbyhq.com/apex-technology-inc/f52ab306-80e3-409b-aa90-09149f664731/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e of the classifications of protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran status Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Recruiting Coordinator
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: The stated compensation range reflects only the targeted base salary range and excludes additional benefits. If your salary requirements fal
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# About You
-label: Full Name
-  <input:text #_systemfield_name required filled>
-label: Preferred First Name
-  <input:text #e4615b8f-9ee1-4b82-9fa7-b5137f590f47 filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone
-  <input:tel #83bdb849-ffd7-47b7-a4d3-f42be696d446 required filled>
-label: Location
-  text: We work on-site in Playa Vista, Los Angeles. If you're not in LA, let us know. We offer relocation assistance.
-  <input filled>
-  [button] 
-label: Current Employer
-  <input:text #2609964a-3b8b-4849-8622-0c95c6d59725 filled>
-# Links
-label: LinkedIn URL
-  <input:text #6aacc249-b2f4-4445-ad04-c050d277a439 required filled>
-label: GitHub URL
-  <input:text #f8bff2f7-6d2f-4b99-a76e-085f7c2240a5 filled>
-# Export Control Eligibility
-label: You must be a U.S. Person because this position requires access to information that is subject to U.S export c
-  [button] Yes
-  [button] No
-  <input:checkbox name=a54f9477-4dda-44d5-8ca2-ba4c087da760 question-answered>
-# Why Apex
-label: Why are you interested in working at Apex?
-  <textarea #33af21cf-3dff-41fe-b045-9d4a4b5f99c8 empty>
-label: Additional Information: Paste your cover letter or anything else you would like to share.
-  <textarea #3da38a32-71f1-41c2-a4bf-8340d4926a8f empty>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Apex Technology, Inc. provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexu
-  text: Apex Technology, Inc. is a federal contractor or subcontractor subject to certain governmental recordkeeping and reporting requirements for 
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: Native Hawaiian or Other Pacific Islander
-  text: American Indian or Alaska Native
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: Asian (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: American Indian or Alaska Native (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-label: Two or More Races (Not Hispanic or Latino)
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_race- question-answered>
-  text: SELF-IDENTIFICATION OF VETERAN STATUS
-  text: Apex Technology, Inc. is a Government contractor subject to Section 4212 of the Vietnam Era Veterans’ Readjustment Assistance Act of 1974, a
-  text: Recently separated veteran
-  text: Active duty wartime or campaign badge veteran
-  text: Armed forces service medal veteran
-label: Veteran Status
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_veter question-answered>
-label: I identify as one or more of the classifications of protected veteran listed above
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_veter question-answered>
-label: I am not a protected veteran
-  <input:radio #56f85674-7660-4c3c-9835-6f49b4264c73__systemfield_eeoc_veter question-answered>
-label: I decline to self-identify for protected veteran status
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-11-18 18:43:53  blocked  Executive Coordinator @ smosh
 url: https://smosh.bamboohr.com/careers/205
 why: reCAPTCHA checkbox (a human check: the bot stops here)
@@ -5602,4 +5508,112 @@ label: I understand and agree that this checkbox is as legally binding as an ink
   [button] Save and Continue {pageFooterNextButton}
   [link] Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-22 05:50:40  unconfirmed  Operations Support Specialist-40$/H @ dln-consulting-group
+url: https://apply.workable.com/dln-consulting-group/j/F0C997A7A2/apply
+stage: page 1
+why: no confirmation after submit; server said: POST xtnq76IoDT3YyMkD8e-XvmscNCStKPr3BMSPUgcprCxk8J7h4VWOGOgVtQ3ovo7KUcQsA4NZjLcHKNW2bK11MFfWHg -> 200; POST xtnq76IoDT3YyMkD8e-XvmscNCStKPr3BMSPUgcprCxk8J7h4VWOGOgVtQ3ovo7KUcQsA4NZjLcHKNW2bK11MFfWHg -> 200; page ends: ' (Optional) <first>_<middle>_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… 
+# Operations Support Specialist-40$/H
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_Ad539uluGLC6JzSX no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_P93AIsBZoyjd9FA6 has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-22 05:52:37  unconfirmed  Billing Specialist-35$/H @ dln-consulting-group
+url: https://apply.workable.com/dln-consulting-group/j/698ABE4382/apply
+stage: page 1
+why: no confirmation after submit; server said: POST yZuEiC7wkZHAiMjtC6t5qwGRrCbEh6XlEFFyjav0BAoSIkyNoprAGzhlOzEUxLGFktVqQeEQw4ilzMLoH32MQjAVbQ -> 200; POST yZuEiC7wkZHAiMjtC6t5qwGRrCbEh6XlEFFyjav0BAoSIkyNoprAGzhlOzEUxLGFktVqQeEQw4ilzMLoH32MQjAVbQ -> 200; page ends: ' (Optional) <first>_<middle>_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… 
+# Billing Specialist-35$/H
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_VSZ8ta0RjUIq5ePg no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_g6FrXoWGvJbNKuhG has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
+
+=== 2026-11-22 05:54:30  unconfirmed  AI Data Quality Specialist-Entry Level @ dln-consulting-group
+url: https://apply.workable.com/dln-consulting-group/j/7765574FF2/apply
+stage: page 1
+why: no confirmation after submit; server said: POST SrbuN6UcgKYrRZhniN5YtuzGrhgjUByWgTRxo8c2ff7lqKJ5le22i95lYMkjcJ2mDVQeyg-fqwSXKZ9ZetBWY7L_Fg -> 200; POST SrbuN6UcgKYrRZhniN5YtuzGrhgjUByWgTRxo8c2ff7lqKJ5le22i95lYMkjcJ2mDVQeyg-fqwSXKZ9ZetBWY7L_Fg -> 200; page ends: ' (Optional) <first>_<middle>_delgado_ortega_ <file> Replace file or drag and drop here Details Clear Cover letter (Optional) Submitting… 
+# AI Data Quality Specialist-Entry Level
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+label: Headline (Optional)
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+label: Address (Optional)
+  text: Include your city, region, and country, so that employers can easily manage your application.
+label: SVGs not supported by this browser.
+label: Choose file
+  <input:file #input_files_input_vlpq7LTmemCHWcLm no-file>
+# Profile
+  [link] Clear
+  [button] + Add
+  [button] + Add
+label: Summary (Optional)
+  text: <first>_<middle>_delgado_ortega_
+  [button] SVGs not supported by this browser.
+label: Replace file
+  <input:file #input_files_input_P71ITlJRPliRXzIp has-file>
+# Details
+  [link] Clear
+label: Cover letter (Optional)
+  [button] Submitting… disabled
+  [button] Cookie settings
 
