@@ -1655,3 +1655,415 @@
 [16:11:13] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 0.8 min)
 [16:11:13] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
 [16:11:13] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-22.md
+[16:35:26] === autoapply run (LIVE) build 2026-10-18-b ===
+[16:35:26] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[16:35:28] mail: logged in to delgado@alumni.usc.edu OK
+[16:36:01] Discovering jobs…
+[16:36:02] Job search already ran at 15:52 (searches run every 3 h): this run only applies
+[16:38:20]   agg/jobboard: 1,359,920 jobs in today's snapshot, 735,581 at your level on sites the bot can fill, 71 new ones pass your title/location filters; 87 of them marked remote by their site, to be confirmed from the posting itself
+[16:38:20] 71 open roles, 71 new
+[16:38:20]   ✓  66  Operations Analyst, Plan Loading @ oscar (Remote) — title 'operations analyst' +50; location 'remote' +16
+[16:38:20]   ✓  59  ACA Strategy & Operations Process Leader @ nebraskablue (Remote flexibility for candida) — title 'strategy & operations' +43; location 'remote' +16
+[16:38:20]   ✓  51  Project Controls Specialist @ hargroveepc (Pasadena, TX) — title 'project controls' +45; location 'pasadena' +6
+[16:38:20]   ✓  50  Operations Coordinator @ essex (Orange County - South) — title 'operations coordinator' +50
+[16:38:20]   ✓  48  Plant Buyer @ jabil (Remote - USA) — title 'buyer' +32; location 'remote' +16
+[16:38:20]   ✓  48  Indirect Procurement Coordinator @ radiant-industries (El Segundo, CA) — title 'procurement' +39; keywords [procurement] +3; location 'el segundo' +6
+[16:38:20]   ✓  43  Biomed Program Coordinator @ gehc (Remote) — title 'program' +27; location 'remote' +16
+[16:38:20]   ✓  42  Quality Assurance Auditor - OSV @ moog (Buffalo, NY) — title 'quality' +30; location 'new york' +12
+[16:38:20]   ✓  40  Junior Analyst, Search Engine Marketing @ horizonmedia (New York, New York) — title 'analyst' +22; keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓  39  Engineering Program Coordinator @ coreweave (Livingston, NJ / New York, NY ) — title 'program' +27; location 'new york' +12
+[16:38:20]   ✓  38  Global Forwarding Coordinator @ chrobinson (Remote) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  38  Account Coordinator, Paid Search @ dept (US (Remote)) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  38  Patient Engagement Coordinator @ docgo (Remote) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  38  AI Solutions Analyst @ formfactor (Remote, KY) — title 'analyst' +22; location 'remote' +16
+[16:38:20]   ✓  38  Partnerships Analyst @ navient (Remote Location (Recruiting - ) — title 'analyst' +22; location 'remote' +16
+[16:38:20]   ✓  38  CHOICES Care Coordinator- Montgomery/Robertson Counties @ bcbst (USA, TN, Nashville, Remote) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  38  ECF Choices Support Coordinator - Jefferson County @ bcbst (USA, TN, Jefferson County, Rem) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  38  ECF Choices Support Coordinator- Bledsoe County @ bcbst (USA, TN, Bledsoe County, Remot) — title 'coordinator' +22; location 'remote' +16
+[16:38:20]   ✓  36  Asset Management Associate - Multifamily @ mbk (CA - Irvine: MBK Rental Living) — title 'asset manag' +30; keywords [entry level] +6
+[16:38:20]   ✓  34  Investigator & Deputy Title IX Coordinator @ csusystem (Pueblo, CO) — title 'coordinator' +22; location 'colorado' +12
+[16:38:20]   ✓  34  EHS Coordinator @ millerknoll (NY - Buffalo) — title 'coordinator' +22; location 'new york' +12
+[16:38:20]   ✓  34  Consulting Analyst @ ogilvy (New York, New York) — title 'analyst' +22; location 'new york' +12
+[16:38:20]   ✓  34  HRA Domestic Violence Services (DVS) Coordinated Entry Coordinator @ rfcuny (New York, NY) — title 'coordinator' +22; location 'new york' +12
+[16:38:20]   ✓  34  Billing Coordinator @ som (New York) — title 'coordinator' +22; location 'new york' +12
+[16:38:20]   ✓  34  Accounts Receivable Analyst @ stripe (SEA, NYC) — title 'analyst' +22; location 'nyc' +12
+[16:38:20]   ✓  34  Inclusion Coordinator @ troutman (New York) — title 'coordinator' +22; location 'new york' +12
+[16:38:20]   ✓  34  Marketing Data Analyst @ cais (New York, New York) — title 'analyst' +22; location 'new york' +12
+[16:38:20]   ✓  28  Analyst, Search Engine Marketing @ horizonmedia (Los Angeles, California) — title 'analyst' +22; location 'los angeles' +6
+[16:38:20]   ✓  25  Vehicle Operations Administrator @ toyota (Irvine, California) — title 'operations' +25
+[16:38:20]   ✓  22  Premium Audit Associate I @ emcins (Remote in US) — keywords [entry level] +6; location 'remote' +16
+[16:38:20]   ✓  22  Underwriting Associate-Specialty @ emcins (Remote in US) — keywords [entry level] +6; location 'remote' +16
+[16:38:20]   ✓  22  Brokerage Trading Associate @ empower (Nationwide Remote) — keywords [entry level] +6; location 'remote' +16
+[16:38:20]   ✓  20  Inside Sales Representative - Exports (English/Spanish Required) @ henryschein (United States - Remote) — keywords [spanish] +4; location 'remote' +16
+[16:38:20]   ✓  18  Associate Production Technician - 2nd shift @ integer (Alden Plant Alden, NY) — keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓  18  Phlebotomist / Administrative Assistant (Float) @ onemedical (White Plains, NY) — keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓  18  Client Services Associate @ tbkbank (Mead, CO) — keywords [entry level] +6; location 'colorado' +12
+[16:38:20]   ✓  18  Client Services Associate @ tbkbank (Fairplay, CO) — keywords [entry level] +6; location 'colorado' +12
+[16:38:20]   ✓  18  Associate - Corporate Finance - Turnaround & Restructuring @ thinkbrg (New York, NY) — keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓  18  Events Associate @ cais (New York, New York) — keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓  18  Executive Assistant to the Co-President @ cais (New York City) — keywords [entry level] +6; location 'new york' +12
+[16:38:20]   ✓ … and 28 more new candidates (the 40 with the highest keyword score are listed)
+[16:38:20] Scored 71 new roles: 68 candidates for the résumé check, 3 with nothing going for them, 0 filtered out by title/location (finding and scoring took 2.9 min)
+[16:38:21] 68 jobs queued: 0 already matched to your résumé, 68 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 496 now
+[16:38:21] Time for this run: 50 min in all (7383 of 1850 free Actions minutes used this month)
+[16:38:22] Accounts: ON (delgado@alumni.usc.edu)
+[16:38:24]   match  50%  Operations Analyst, Plan Loading @ oscar — same role at this employer, checked before: Requires 1+ years of working knowledge of health plan be
+[16:38:29]   match  72%  Partnerships Analyst @ navient — Matches analytical and operational background well, though 2-4 years of specific partnership experie
+[16:38:29]   match  60%  Plant Buyer @ jabil — Relevant supply chain and negotiation skills, but asks for 3+ years of dedicated procurement experie
+[16:38:29]   match  45%  Project Controls Specialist @ hargroveepc — Requires 15+ years of industrial experience, which far exceeds the candidate's new graduate profile.
+[16:38:29]   match  82%  Marketing Data Analyst @ cais — Strong fit combining an Industrial Engineering and analytics background with data modeling, reportin
+[16:38:29]   match  65%  ACA Strategy & Operations Process Leader @ nebraskablue — Good project coordination and operations skills, but lacks the specific healthcare insurance industr
+[16:38:29] → Partnerships Analyst @ navient (score 38, match 72%)
+[16:38:33]       (opening Workday's application form directly)
+[16:38:37]       (account page: creating the account / signing in)
+[16:38:37]       account: creating one on navient.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:38:48]       account: waiting for the verification email…
+[16:39:08]       mail: found 'Verify your candidate account'
+[16:39:09]       account: opening the verify link (it leads straight to the application)
+[16:39:18]       account: signing in on navient.wd1.myworkdayjobs.com
+[16:39:24]       1/5 My Information: 15 fields (12 required)
+[16:39:31]       2/5 My Experience: 16 fields (8 required)
+[16:39:56]       (writer answered 'Do you have a high school diploma, GED, or equivalent?*' -> 'Yes')
+[16:39:56]       3/5 Application Questions: 12 fields (11 required)
+[16:40:06]       Application Questions (try 2): Workday said ['Error: The field Please explain: is required and must have a value.', 'Error-Please explain: The field Please explain: is required and must have a value.']; redoing ['Please explain:*', 'Please explain if necessary an', 'Full-time', 'Part-time']
+[16:40:13]       ? unanswered: 'Yes, I have read and consent to the terms and conditions*' kind=checkbox_single options=[]
+[16:40:13]     ✗ skipped: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
+[16:40:19] → Plant Buyer @ jabil (score 48, match 60%)
+[16:40:23]       (opening Workday's application form directly)
+[16:40:28]       (account page: creating the account / signing in)
+[16:40:28]       account: signing in on jabil.wd5.myworkdayjobs.com
+[16:40:37]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:40:55]       account: it had gone through
+[16:40:58]       account: signing in on jabil.wd5.myworkdayjobs.com
+[16:41:07]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:41:25]       account: it had gone through
+[16:41:27]       account: signing in on jabil.wd5.myworkdayjobs.com
+[16:41:30]       account: sign-in refused; Workday says: nothing
+[16:41:35]       account: sign-in refused on jabil.wd5.myworkdayjobs.com; resetting the password through your email
+[16:44:22]       account: the password-reset email did not arrive in time. If it comes later, the next try uses it
+[16:44:22]       account: no reset email came, so this email probably has no account on jabil.wd5.myworkdayjobs.com: creating one
+[16:44:48]       1/6 My Information: 16 fields (12 required)
+[16:44:57]       2/6 My Experience: 14 fields (7 required)
+[16:45:20]       (writer answered 'What is your experience working at Jabil?*' -> 'No Experience at Jabil')
+[16:45:20]       3/6 Application Questions: 7 fields (5 required)
+[16:45:28]       Application Questions (try 2): Workday said ['Error: The field Will you need relocation assistance? is required and must have a value.', 'Error-Will you need relocation assistance? The field Will you need relocation assistance? is required and must have a value.']; redoing ['Will you need relocation assis']
+[16:45:35]       4/6 Voluntary Disclosures: 12 fields (1 required)
+[16:45:40]       5/6 Self Identify: 7 fields (1 required)
+[16:45:47]       Review: submitting
+[16:45:50]     ✓ applied (5.5 min)
+[16:45:55] → Marketing Data Analyst @ cais (score 34, match 82%)
+[16:46:06]       step 1: 21 fields (16 required)
+[16:46:22]       email: the site asked for a security code after Submit; reading it from the application inbox
+[16:46:26]       mail: found 'Security code for your application to CAIS'
+[16:46:31]     ✓ applied (0.6 min)
+[16:46:32]   ✗ Accounts Receivable Analyst @ stripe: above entry level: senior (requires 8+ yrs; pay starts at $132,800)
+[16:46:39] → ACA Strategy & Operations Process Leader @ nebraskablue (score 59, match 65%)
+[16:46:44]       (opening Workday's application form directly)
+[16:46:47]       (account page: creating the account / signing in)
+[16:46:47]       account: creating one on nebraskablue.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:46:56]       account: waiting for the verification email…
+[16:47:08]       mail: found 'Verify your candidate account'
+[16:47:08]       account: opening the verify link (it leads straight to the application)
+[16:47:17]       account: signing in on nebraskablue.wd1.myworkdayjobs.com
+[16:47:22]       1/6 My Information: 16 fields (11 required)
+[16:47:28]       My Information (try 2): Workday said ['0 items selected', 'Error-How Did You Hear About Us? The field How Did You Hear About Us? is required and must have a value.', 'Error: The field How Did You Hear About Us? is required and must have a value.']; redoing ['How Did You Hear About Us?*']
+[16:47:35]       2/6 My Experience: 4 fields (1 required)
+[16:47:47]       (writer answered 'Are you at least 19 years of age?*' -> 'Yes')
+[16:47:47]       3/6 Application Questions: 8 fields (7 required)
+[16:47:58]       4/6 Voluntary Disclosures: 5 fields (1 required)
+[16:48:04]       5/6 Self Identify: 7 fields (1 required)
+[16:48:08]       Self Identify (try 2): Workday said ['Error: The field Please check one of the boxes below: is required and must have a value.', 'Error-Please check one of the boxes below: The field Please check one of the boxes below: is required and must have a value.']; redoing ['Date*', 'Yes, I have a disability, or h', 'No, I do not have a disability', 'I do not want to answer']
+[16:48:14]       Review: submitting
+[16:48:18]     ✓ applied (1.6 min)
+[16:48:22] → Operations Coordinator @ essex (score 50)
+[16:48:25]     ✗ skipped: pays too little: tops out near $60,507 a year (your floor is $65,000)
+[16:48:25] → Junior Analyst, Search Engine Marketing @ horizonmedia (score 40)
+[16:48:29]     ✗ skipped: pays too little: tops out near $50,000 a year (your floor is $65,000)
+[16:48:29] → Billing Coordinator @ som (score 34)
+[16:48:33]     ✗ skipped: pays too little: tops out near $62,000 a year (your floor is $65,000)
+[16:48:33] → AI Solutions Analyst @ formfactor (score 38)
+[16:48:38]     match 92% — The candidate has an Industrial Engineering degree and direct experience in process improvement and systems, p
+[16:48:38]       (opening Workday's application form directly)
+[16:48:43]       (account page: creating the account / signing in)
+[16:48:43]       account: creating one on formfactor.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:48:55]       account: waiting for the verification email…
+[16:49:00]       mail: found 'Verify your candidate account'
+[16:49:02]       account: opening the verify link (it leads straight to the application)
+[16:49:12]       account: signing in on formfactor.wd1.myworkdayjobs.com
+[16:49:17]       1/5 My Information: 16 fields (12 required)
+[16:49:23]       2/5 My Experience: 3 fields (1 required)
+[16:49:34]       (writer answered 'English Language Proficiency: (Please select the level that ' -> 'Fluent')
+[16:49:34]       3/5 Application Questions: 4 fields (4 required)
+[16:49:44]       4/5 Voluntary Disclosures: 4 fields (4 required)
+[16:49:52]       Review: submitting
+[16:49:56]     ✓ applied (1.4 min)
+[16:49:57]   ✗ Events Associate @ cais: above entry level: mid (requires 3+ yrs)
+[16:49:57]   ✗ Biomed Program Coordinator @ gehc: above entry level: senior (requires 6+ yrs)
+[16:50:00]   match  55%  Asset Management Associate - Multifamily @ mbk — Requires 4+ years of multifamily real estate experience, exceeding the candidate's recent graduate l
+[16:50:00]   match  85%  Global Forwarding Coordinator @ chrobinson — Strong entry-level supply chain and logistics role that matches the candidate's operational backgrou
+[16:50:00]   match  30%  Brokerage Trading Associate @ empower — Requires active FINRA Series 7 and Series 63 licenses which the candidate does not possess.
+[16:50:00]   match  75%  Inclusion Coordinator @ troutman — Good administrative and project coordination role matching the candidate's general analytical and or
+[16:50:00]   match  90%  Vehicle Operations Administrator @ toyota — Excellent fit for an operations and data analysis role in the automotive sector, matching the candid
+[16:50:00] → Asset Management Associate - Multifamily @ mbk (score 36, match 55%)
+[16:50:04]       (opening Workday's application form directly)
+[16:50:07]       (account page: creating the account / signing in)
+[16:50:07]       account: creating one on mbk.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:50:11]       account: Workday answered with its sign-in form and no message: signing in
+[16:50:11]       account: signing in on mbk.wd5.myworkdayjobs.com
+[16:50:26]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:50:31]       account: pressing Sign In once more
+[16:50:38]       1/5 My Information: 15 fields (11 required)
+[16:50:45]       2/5 My Experience: 8 fields (5 required)
+[16:50:55]       3/5 Application Questions: 7 fields (7 required)
+[16:51:02]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[16:51:09]       Review: submitting
+[16:51:12]     ✓ applied (1.2 min)
+[16:51:16] → Global Forwarding Coordinator @ chrobinson (score 38, match 85%)
+[16:51:20]       (opening Workday's application form directly)
+[16:51:25]       (account page: creating the account / signing in)
+[16:51:27]       account: signing in on chrobinson.wd5.myworkdayjobs.com
+[16:51:31]       1/5 My Information: 16 fields (12 required)
+[16:51:42]       2/5 My Experience: 5 fields (3 required)
+[16:51:49]       (writer answered 'C.H. Robinson has partnered with Survale to help us understa' -> 'Yes')
+[16:51:49]       3/5 Application Questions: 4 fields (3 required)
+[16:51:56]       4/5 Voluntary Disclosures: 11 fields (11 required)
+[16:52:04]       Review: submitting
+[16:52:07]     ✓ applied (0.9 min)
+[16:52:11] → Analyst, Search Engine Marketing @ horizonmedia (score 28)
+[16:52:17]     match 75% — Strong analytical and Excel skills match the role, though specific SEM experience is a minor gap.
+[16:52:18]       (opening Workday's application form directly)
+[16:52:21]       (account page: creating the account / signing in)
+[16:52:23]       account: signing in on horizonmedia.wd1.myworkdayjobs.com
+[16:52:27]       1/6 My Information: 14 fields (7 required)
+[16:52:36]       2/6 My Experience: 10 fields (5 required)
+[16:52:51]       (writer answered 'Employment Desired: Full Time or Part Time?*' -> 'Full Time')
+[16:52:51]       3/6 Application Questions: 9 fields (9 required)
+[16:53:04]       4/6 Voluntary Disclosures: 5 fields (5 required)
+[16:53:09]       5/6 Self Identify: 7 fields (6 required)
+[16:53:17]       Review: submitting
+[16:53:20]     ✓ applied (1.2 min)
+[16:53:27] → Inclusion Coordinator @ troutman (score 34, match 75%)
+[16:53:31]       (opening Workday's application form directly)
+[16:53:35]       (account page: creating the account / signing in)
+[16:53:35]       account: creating one on troutman.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:53:38]       account: created
+[16:53:41]       1/5 My Information: 16 fields (12 required)
+[16:53:47]       2/5 My Experience: 2 fields (1 required)
+[16:53:58]       (writer answered 'Are you under 18?*' -> 'No')
+[16:53:58]       (writer answered 'Are you currently authorized to work in the U.S.? (Proof of ' -> 'Yes')
+[16:53:59]       (writer answered 'Have you ever been involuntarily discharged?*' -> 'No')
+[16:53:59]       3/5 Application Questions: 6 fields (6 required)
+[16:54:05]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[16:54:12]       Review: submitting
+[16:54:15]     ✓ applied (0.8 min)
+[16:54:23]   match  55%  Customer Success Specialist, Renewals & Growth @ leveltenenergy — Requires 3+ years of SaaS account management and Salesforce experience, which exceeds the candidate'
+[16:54:23]   match  40%  Consulting Analyst @ ogilvy — The posting text is incomplete and lacks specific job duties or requirements for an evaluation.
+[16:54:23] → Vehicle Operations Administrator @ toyota (score 25, match 90%)
+[16:54:27]       (opening Workday's application form directly)
+[16:54:31]       (account page: creating the account / signing in)
+[16:54:31]       account: creating one on toyota.wd503.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:54:36]       account: Workday answered with its sign-in form and no message: signing in
+[16:54:36]       account: signing in on toyota.wd503.myworkdayjobs.com
+[16:54:43]       (writer answered 'County*' -> 'Garfield County')
+[16:54:43]       1/6 My Information: 16 fields (13 required)
+[16:54:52]       2/6 My Experience: 12 fields (7 required)
+[16:55:19]       (writer answered 'Are you related to (including in-laws), are or were in a rel' -> 'No')
+[16:55:19]       3/6 Application Questions 1 of 2: 8 fields (8 required)
+[16:55:34]       (writer answered 'Do you have a High School Diploma?*' -> 'Yes')
+[16:55:34]       (writer answered 'Within the past 3 years, what role did the following play in' -> 'Moderate component of my job all or most of the ti')
+[16:55:34]       (writer answered 'Do you have Automotive field experience?*' -> 'Yes')
+[16:55:35]       (writer answered 'Do you have knowledge of Dealership operations?*' -> 'No')
+[16:55:35]       4/6 Application Questions 2 of 2: 7 fields (7 required)
+[16:55:46]       ? unanswered: 'I understand and agree to the terms of the One Toyota Arbitration Agreement and Assessment' kind=checkbox_single options=[]
+[16:55:46]     ✗ skipped: can't truthfully answer required: I understand and agree to the terms of the One Toyota Arbitr
+[16:55:54] → Customer Success Specialist, Renewals & Growth @ leveltenenergy (score 16, match 55%)
+[16:56:03]       step 1: 14 fields (12 required)
+[16:56:03]       (writer answered 'Which best describes your background?*' -> 'Other B2B sales or services')
+[16:56:03]       (writer answered 'How many years have you worked in a role that owned customer' -> 'No direct experience')
+[16:56:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[16:56:27]       mail: found 'Security code for your application to LevelTen Energy'
+[16:56:32]     ✓ applied (0.6 min)
+[16:56:40] → Patient Engagement Coordinator @ docgo (score 38)
+[16:56:44]     ✗ skipped: pays too little: tops out near $47,840 a year (your floor is $65,000)
+[16:56:44] → Underwriting Associate-Specialty @ emcins (score 22)
+[16:56:48]     match 75% — The candidate meets the education and analytical requirements for an entry-level corporate role, though lacks 
+[16:56:49]       (opening Workday's application form directly)
+[16:56:53]       (account page: creating the account / signing in)
+[16:56:55]       account: signing in on emcins.wd5.myworkdayjobs.com
+[16:57:00]       1/6 My Information: 14 fields (12 required)
+[16:57:06]       2/6 My Experience: 2 fields (0 required)
+[16:57:20]       (writer answered 'Do you have any secondary employment or other potential conf' -> 'No')
+[16:57:20]       3/6 Application Questions: 8 fields (8 required)
+[16:57:31]       4/6 Voluntary Disclosures: 5 fields (1 required)
+[16:57:40]       5/6 Take Assessment: 0 fields (0 required)
+[16:57:50]       Take Assessment (try 2): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[16:58:00]       Take Assessment (try 3): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[16:58:10]     ✗ skipped: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+[16:58:15] → Inside Sales Representative - Exports (English/Spanish Required) @ henryschein (score 20)
+[16:58:18]     ✗ skipped: pays too little: tops out near $48,000 a year (your floor is $65,000)
+[16:58:18] → SVP, Client Strategy @ horizonmedia (score 12)
+[16:58:21]     ✗ skipped: above entry level: senior (pay starts at $250,000)
+[16:58:21] → Associate - Corporate Finance - Turnaround & Restructuring @ thinkbrg (score 18)
+[16:58:31]     match 85% — Strong match for financial modeling, data analysis, and operational turnaround skills from an industrial engin
+[16:58:31]       (opening Workday's application form directly)
+[16:58:34]       (account page: creating the account / signing in)
+[16:58:34]       account: creating one on thinkbrg.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[16:58:41]       account: Workday answered with its sign-in form and no message: signing in
+[16:58:41]       account: signing in on thinkbrg.wd5.myworkdayjobs.com
+[16:58:56]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[16:59:01]       account: pressing Sign In once more
+[16:59:09]       1/5 My Information: 14 fields (12 required)
+[16:59:19]       2/5 My Experience: 1 fields (1 required)
+[16:59:29]       (ticked Los Angeles , CA, New York , NY, Pasadena , CA for 'Location Preference*')
+[16:59:29]       3/5 Application Questions: 31 fields (31 required)
+[16:59:39]       4/5 Voluntary Disclosures: 10 fields (0 required)
+[16:59:48]       Review: submitting
+[16:59:51]     ✓ applied (1.5 min)
+[16:59:57] → Specialist, Project Facility Management @ kissusa (score 12)
+[17:00:07]     match 78% — Matches the facility and project operations background well, though hourly pay and B.A. preference are minor m
+[17:00:07]       (opening Workday's application form directly)
+[17:00:10]       (account page: creating the account / signing in)
+[17:00:12]       account: signing in on kissusa.wd12.myworkdayjobs.com
+[17:00:17]       1/6 My Information: 15 fields (12 required)
+[17:00:24]       2/6 My Experience: 15 fields (10 required)
+[17:00:53]       3/6 Application Questions: 8 fields (7 required)
+[17:01:02]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[17:01:07]       5/6 Self Identify: 7 fields (6 required)
+[17:01:14]       Review: submitting
+[17:01:17]     ✓ applied (1.3 min)
+[17:01:21] → SVP, Integrated Business Solutions & Commerce Media @ horizonmedia (score 12)
+[17:01:24]     ✗ skipped: above entry level: senior (manages people; pay starts at $230,000)
+[17:01:24] → Specialist, Accounting @ kissusa (score 12)
+[17:01:27]     match 72% — The candidate has strong Excel and financial tracking experience, but lacks the specific Accounting or Finance
+[17:01:27]       (opening Workday's application form directly)
+[17:01:33]       1/6 My Information: 15 fields (12 required)
+[17:01:39]       2/6 My Experience: 15 fields (10 required)
+[17:02:09]       3/6 Application Questions: 8 fields (7 required)
+[17:02:19]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[17:02:24]       5/6 Self Identify: 7 fields (6 required)
+[17:02:31]       Review: submitting
+[17:02:33]     ✓ applied (1.2 min)
+[17:02:34]   match  40%  Business Development Representative @ birch — same role at this employer, checked before: same role at this employer, checked before: This is a he
+[17:02:40] → Retirement Service and Support Specialist @ empower (score 16)
+[17:02:44]     match 55% — The role involves a high volume of inbound and outbound calls and customer service tasks, which is less aligne
+[17:02:44]       (opening Workday's application form directly)
+[17:02:47]       (account page: creating the account / signing in)
+[17:02:49]       account: signing in on empower.wd12.myworkdayjobs.com
+[17:02:52]       1/5 My Information: 2 fields (2 required)
+[17:02:57]       2/5 My Experience: 3 fields (1 required)
+[17:03:10]       (writer answered 'What is the minimum acceptable hourly wage you would accept?' -> '$36.00-40.00')
+[17:03:10]       (writer answered 'In the last 10 years, have you been involuntarily terminated' -> 'No')
+[17:03:10]       3/5 Application Questions: 7 fields (7 required)
+[17:03:20]       4/5 Voluntary Disclosures: 4 fields (1 required)
+[17:03:29]       Review: submitting
+[17:03:31]     ✓ applied (0.8 min)
+[17:03:37] → HRA Domestic Violence Services (DVS) Coordinated Entry Coordinator @ rfcuny (score 34)
+[17:03:46]     match 52% — Weak fit due to lack of required background or experience in domestic and gender-based violence services.
+[17:03:46]     ✗ set aside: under the 55% match bar
+[17:03:46] → Tax Administrator @ bbh (score 12)
+[17:03:55]     match 75% — Good match for analytical and Excel skills in a professional finance role, though tax administration is a bit 
+[17:03:55]       (opening Workday's application form directly)
+[17:04:01]       1/6 My Information: 14 fields (9 required)
+[17:04:09]       2/6 My Experience: 2 fields (0 required)
+[17:04:18]       3/6 Application Questions: 3 fields (3 required)
+[17:04:25]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[17:04:30]       5/6 Self Identify: 7 fields (6 required)
+[17:04:37]       Review: submitting
+[17:06:31]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; POST https://www.linkedin.com/li/track -> 200; page ends: "aracter A lower
+[17:06:32]   ✗ ECF Choices Support Coordinator - Jefferson County @ bcbst: above entry level: senior (requires 5+ yrs; manages people)
+[17:06:35]   match  60%  Executive Assistant to the Co-President @ cais — The candidate has a Bachelor's degree and strong organizational skills, but lacks the specific exper
+[17:06:35]   match  20%  Capex Accountant @ googlefiber — The posting text is incomplete and appears to be a webpage footer rather than a valid job descriptio
+[17:06:35]   match  50%  508 Compliance Specialist @ oddball — The candidate has a technical degree and programming background, but lacks specific professional exp
+[17:06:35]   match  75%  Engineering Program Coordinator @ coreweave — The candidate's industrial engineering background, project management, and operational skills align 
+[17:06:35] → Investigator & Deputy Title IX Coordinator @ csusystem (score 34)
+[17:06:43]     match 42% — The role requires specialized legal and compliance knowledge in Title IX and civil rights investigations, whic
+[17:06:43]     ✗ set aside: under the 55% match bar
+[17:06:43] → Executive Assistant to the Co-President @ cais (score 18, match 60%)
+[17:06:54]       step 1: 20 fields (16 required)
+[17:07:10]       email: the site asked for a security code after Submit; reading it from the application inbox
+[17:07:22]       mail: found 'Security code for your application to CAIS'
+[17:07:27]     ✓ applied (0.7 min)
+[17:07:33] → ECF Choices Support Coordinator- Bledsoe County @ bcbst (score 38)
+[17:07:37]     ✗ skipped: above entry level: senior (requires 5+ yrs; manages people)
+[17:07:37] → Business Development Executive, Climate & Sustainability @ issgovernance (score 12)
+[17:07:40]     ✗ skipped: above entry level: senior (requires 7+ yrs; pay starts at $100,000)
+[17:07:40] → Workers' Compensation Risk Control Technical Specialist @ emcins (score 16)
+[17:07:43]     ✗ skipped: above entry level: senior (requires 10+ yrs; pay starts at $103,954)
+[17:07:43] → AR & Chargeback Recovery Specialist @ kissusa (score 12)
+[17:07:50]     match 72% — Good match for finance and operations skills, though slightly short on the exact 2-4 years of AR experience re
+[17:07:51]       (opening Workday's application form directly)
+[17:07:56]       1/6 My Information: 15 fields (12 required)
+[17:08:03]       2/6 My Experience: 15 fields (10 required)
+[17:08:32]       3/6 Application Questions: 8 fields (7 required)
+[17:08:41]       4/6 Voluntary Disclosures: 4 fields (1 required)
+[17:08:46]       5/6 Self Identify: 7 fields (6 required)
+[17:08:53]       Review: submitting
+[17:08:55]     ✓ applied (1.2 min)
+[17:09:03] → Engineering Program Coordinator @ coreweave (score 39, match 75%)
+[17:09:06]     ✗ skipped: above entry level: senior (requires 4+ yrs; pay starts at $134,000)
+[17:09:06] → Premium Audit Associate I @ emcins (score 22)
+[17:09:08]     ✗ skipped: pays too little: tops out near $54,608 a year (your floor is $65,000)
+[17:09:08] → EHS Coordinator @ millerknoll (score 34)
+[17:09:18]     match 75% — The candidate has a relevant engineering background and operations experience, but lacks the specific 2-3 year
+[17:09:18]       (opening Workday's application form directly)
+[17:09:22]       (account page: creating the account / signing in)
+[17:09:22]       account: creating one on millerknoll.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[17:09:25]       account: Workday answered with its sign-in form and no message: signing in
+[17:09:25]       account: signing in on millerknoll.wd1.myworkdayjobs.com
+[17:09:41]       account: Workday showed nothing after Sign In: loading the application again to see whether it went through
+[17:09:46]       account: pressing Sign In once more
+[17:09:53]       1/7 My Information: 16 fields (12 required)
+[17:10:02]       2/7 My Experience: 14 fields (10 required)
+[17:10:27]       3/7 Application Questions: 7 fields (7 required)
+[17:10:39]       4/7 Voluntary Disclosures: 5 fields (5 required)
+[17:10:45]       5/7 Self Identify: 7 fields (6 required)
+[17:10:52]       6/7 Take Assessment: 0 fields (0 required)
+[17:11:02]       Take Assessment (try 2): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[17:11:12]       Take Assessment (try 3): Workday said ['Error-Page Error You must complete the assessment test to continue with your job application.']; redoing the required fields
+[17:11:22]     ✗ skipped: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+[17:11:22]   ✗ Advisement/Career Specialist @ rfcuny: not open to you: part-time
+[17:11:23]   ✗ Contract and Billing Specialist - USA @ samsara: above entry level: mid (requires 4+ yrs)
+[17:11:23]   ✗ Video Production Associate @ cais: above entry level: mid (requires 3+ yrs)
+[17:11:23]   match  50%  Onboarding Specialist @ exactcare — same role at this employer, checked before: same role at this employer, checked before: same role at
+[17:11:23]   match  50%  Onboarding Specialist @ exactcare — same role at this employer, checked before: same role at this employer, checked before: same role at
+[17:11:29] → Quality Assurance Auditor - OSV @ moog (score 42)
+[17:11:32]     ✗ skipped: above entry level: mid (requires 5+ yrs)
+[17:11:32] → Admissions CRM Database Administrator @ csusystem (score 12)
+[17:11:35]     match 60% — Meets education and salary requirements, but lacks the specific 1 year of dedicated database administration ex
+[17:11:35]       (opening Workday's application form directly)
+[17:11:38]       (account page: creating the account / signing in)
+[17:11:40]       account: signing in on csusystem.wd12.myworkdayjobs.com
+[17:11:46]       1/5 My Information: 16 fields (12 required)
+[17:11:56]       2/5 My Experience: 1 fields (1 required)
+[17:12:06]       (writer answered 'I confirm that I have reviewed and agree to the Conditions o' -> 'Yes, I confirm')
+[17:12:06]       ? unanswered: "To help ensure your application receives full consideration, please confirm that you've in" kind=combobox options=['Select One', 'I confirm that I’ve reviewed t', 'I have not reviewed the job po']
+[17:12:06]     ✗ skipped: can't truthfully answer required: To help ensure your application receives full consideration,
+[17:12:13] → CHOICES Care Coordinator- Montgomery/Robertson Counties @ bcbst (score 38)
+[17:12:16]     ✗ skipped: above entry level: senior (requires 3+ yrs; manages people)
+[17:12:16] → Production Artist @ thrivent (score 16)
+[17:12:19]     match 40% — The role requires graphic arts and Adobe Creative Suite experience, which does not align with the candidate's 
+[17:12:19]     ✗ set aside: under the 55% match bar
+[17:12:20]   ✗ Scotty Cameron Fitting Specialist (Charlotte, NC) | Scotty Cameron @ acushnetgolf: above entry level: mid (requires 3+ yrs)
+[17:12:20]   ✗ Scotty Cameron Fitting Specialist (Chicago, IL) | Scotty Cameron @ acushnetgolf: above entry level: mid (requires 3+ yrs)
+[17:12:20]   ✗ Scotty Cameron Fitting Specialist (Philadelphia, PA) | Scotty Cameron @ acushnetgolf: above entry level: mid (requires 3+ yrs)
+[17:12:20] → Scotty Cameron Fitting Specialist (San Francisco, CA) | Scotty Cameron @ acushnetgolf (score 16)
+[17:12:23]     ✗ skipped: above entry level: mid (requires 3+ yrs)
+[17:12:23] → Fitting Specialist (Dallas-Fort Worth, TX) | Titleist @ acushnetgolf (score 16)
+[17:12:25]     ✗ skipped: not open to you: part-time
+[17:12:25]   match  30%  Fitting Specialist (Jacksonville, FL) | Titleist @ acushnetgolf — same role at this employer, checked before: This is a specialized field sales/fitting role requiring
+[17:12:25]   match  35%  Client Services Associate @ tbkbank — same role at this employer, checked before: same role at this employer, checked before: same role at
+[17:12:25]   match  35%  Client Services Associate @ tbkbank — same role at this employer, checked before: same role at this employer, checked before: same role at
+[17:12:26]   ✗ Phlebotomist / Administrative Assistant (Float) @ onemedical: pays too little: tops out near $57,720 a year (your floor is $65,000)
+[17:12:26] → Associate Production Technician - 2nd shift @ integer (score 18)
+[17:12:29]     ✗ skipped: above entry level: mid (requires 3+ yrs)
+[17:12:32]   match  88%  Indirect Procurement Coordinator @ radiant-industries — Strong match for an Industrial and Systems Engineering graduate with supply chain, operations, and t
+[17:12:32] → Indirect Procurement Coordinator @ radiant-industries (score 48, match 88%)
+[17:12:39]       step 1: 12 fields (6 required)
+[17:14:19]     (on your apply-by-hand list: the site's human check held the submit)
+[17:14:19]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'f protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran status Recruiting Privacy P
+[17:14:26] Résumé checks this run: 24 (12 passed) in 5 calls. Free writer allowance used today: groq 21k/195k tokens (+3k served from its cache, not counted); groq-20b 1k/195k tokens; groq-qwen 4k/195k tokens; gemini-lite 21/480 requests; gemini-flash 0/18 requests
+[17:14:26] Summary: 15 applied, 1 unconfirmed, 8 skipped, 18 low_score, 28 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-22.md
+[17:14:26]   by site  workday: 12 applied, 7 skipped, 1 unconfirmed
+[17:14:26]   by site  greenhouse: 3 applied, 1 skipped
+[17:14:26]   by site  ashby: 1 manual
+[17:14:28] Summary emailed to delgado@alumni.usc.edu
