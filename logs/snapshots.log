@@ -1,534 +1,3 @@
-=== 2026-11-19 18:15:09  unconfirmed  Revenue Cycle Strategy & Operations @ stedi
-url: https://jobs.ashbyhq.com/stedi/9dee36d5-98f7-4841-9a11-76742898812b/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'd States-based applicants: Do you now or in the future require a visa to continue working in the United States? Yes No I am not based in the US Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Revenue Cycle Strategy & Operations
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# About you
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: LinkedIn profile
-  <input:text #0776d204-d3bf-45a5-a016-738c0d617e94 required filled>
-# Stedi
-label: How did you find us?
-  <textarea #f911b34d-d5be-4875-be82-fab5b430b8e8 required filled>
-label: What interests you in working at Stedi?
-  <textarea #0f5fd07d-8a2e-4b77-bb0f-9b4e91837d23 required filled>
-# Work authorization
-label: For United States-based applicants: Are you currently authorized to work in the US?
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_f661c3ca-0a97-4ad2-be53 question-answered>
-label: Yes
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_f661c3ca-0a97-4ad2-be53 question-answered>
-label: No
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_f661c3ca-0a97-4ad2-be53 question-answered>
-label: I am not based in the US
-label: For United States-based applicants: Do you now or in the future require a visa to continue working in the Unit
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_c737b386-e7fb-4c98-9c37 question-answered>
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_c737b386-e7fb-4c98-9c37 question-answered>
-  <input:radio #df8dcdcd-bf42-403d-8d28-7223a0d47d05_c737b386-e7fb-4c98-9c37 question-answered>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-19 18:18:27  skipped  Supplier Operations @ mcmastercarr
-url: https://job-boards.greenhouse.io/mcmastercarr/jobs/4139216009
-stage: page 1
-why: can't truthfully answer required: School*
-# Supplier Operations
-  text: Los Angeles, CA (Santa Fe Springs)
-  [button] Apply
-  text: This is a hybrid role based in our Elmhurst office.
-  text: Total cash compensation ranges from $106,000 - $132,000 and includes annual cash profit sharing based on company profitability.
-  text: In this role, you will have the opportunity to directly impact the information presented about the products we sell. We look for people who 
-  text: Make an impact and grow your professional skillset through experiences like:
-  text: Communicating with suppliers, evaluating the market, and leveraging guidelines to set pricing for products.
-  text: Reading product literature, gathering specifications, and updating our database with product information.
-  text: Making decisions about how to organize product information so that customers can quickly choose the right products for their needs.
-  text: A bachelor's degree is required for this role.
-  text: We offer comprehensive benefits to support employees and their dependents, such as:
-  text: 100% tuition reimbursement
-  text: Medical, dental, pharmacy, and vision plans with no monthly premiums
-  text: Industry-leading company-funded retirement accounts
-  text: Inclusive, all-gender benefits
-  text: First-time home buyer assistance
-  text: Paid parental leave for all new parents
-  text: Adoption and surrogacy assistance
-  text: Paid time off for vacation and personal time
-  text: McMaster-Carr is a trusted e-commerce company that keeps industry in motion. Every day, hundreds of thousands of customers turn to our websi
-  text: We serve industries that touch nearly every part of daily life: aerospace, agriculture, entertainment, marine, medical, automotive, food and
-  text: Our customers not only rely on us to maintain what matters, they also look to us to help them imagine what’s next. Through tools like 3D CAD
-  text: Equal Opportunity Employer
-  text: We are proud to be an Equal Opportunity Employer and dedicated to providing employees a workplace with reasonable accommodations and free of
-  text: This position is not eligible for work authorization sponsorship by McMaster-Carr.
-# Apply for this job
-  text: indicates a required field
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Preferred First Name
-  <input:text #preferred_name empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-label: School*
-  <input:text #school--0 required empty>
-  [button] 
-  <input required empty>
-label: Degree*
-  <input:text #degree--0 required empty>
-  [button] 
-  <input required empty>
-  [button] Add another
-label: Highest Level of Education Completed*
-  <input:text #question_5163898009 required empty>
-  [button] 
-  <input required empty>
-label: Name Pronunciation
-  <input:text #question_5163899009 empty>
-label: Personal Pronouns
-  <input:text #question_5163900009 empty>
-label: Address Line 1*
-  <input:text #question_5163901009 required empty>
-label: Address Line 2
-  <input:text #question_5163902009 empty>
-label: City*
-  <input:text #question_5163903009 required empty>
-label: State*
-  <input:text #question_5163904009 required empty>
-  [button] 
-  <input required empty>
-label: Zip Code*
-  <input:text #question_5163905009 required empty>
-label: LinkedIn Profile URL*
-  <input:text #question_5163906009 required empty>
-label: List your undergraduate GPA:*
-  <input:text #question_5163907009 required empty>
-label: How did you learn about this opportunity? *
-  <input:text #question_5163908009 required empty>
-  [button] 
-  <input required empty>
-label: If you selected 'Employee referral' in the previous question, please provide the employee name and your person
-  <input:text #question_5163909009 empty>
-label: Have you already scheduled or had a phone or in-person conversation with a McMaster-Carr recruiter?*
-  <input:text #question_5163910009 required empty>
-  [button] 
-  <input required empty>
-label: Have you filed an application at McMaster-Carr in the past?*
-  <input:text #question_5163911009 required empty>
-  [button] 
-  <input required empty>
-label: Please list any family members or significant others who are currently employed by McMaster-Carr and your rela
-  <input:text #question_5163912009 required empty>
-label: Are you over 18 years of age and have the ability to furnish proof if hired? *
-  <input:text #question_5163913009 required empty>
-  [button] 
-  <input required empty>
-label: Do you have the legal right to work for McMaster-Carr in the United States today?*
-  <input:text #question_5163914009 required empty>
-  [button] 
-  <input required empty>
-label: Will you now or in the future require sponsorship from McMaster-Carr for work authorization? For example, if y
-  <input:text #question_5163915009 required empty>
-  [button] 
-  <input required empty>
-label: Can you provide documentary proof today that you will never require sponsorship from McMaster-Carr for the pur
-  <input:text #question_5163916009 required empty>
-  [button] 
-  <input required empty>
-label: Have you ever been discharged or forced to resign from employment? Please explain any instances.*
-  <input:text #question_5163917009 required empty>
-# Applicant Statement
-  text: I certify that all information and the resume I have provided in order to apply for and secure work with McMaster-Carr is true, complete and
-  text: McMaster-Carr is an Equal Opportunity Employer. I understand that McMaster-Carr does not unlawfully discriminate in employment, and no quest
-  text: If I am hired, I understand I am free to resign at any time, with or without cause and without prior notice, and McMaster-Carr reserves the 
-  text: DO NOT SIGN UNTIL YOU HAVE READ THIS APPLICANT STATEMENT.
-  text: I certify that I have read, fully understand and accept all terms of the foregoing Applicant Statement.
-  text: I understand that this application remains current for only 30 days. At the conclusion of that time, if I have not heard from McMaster-Carr 
-label: Legal First Name*
-  <input:text #question_5693815009 required empty>
-label: Middle Initial
-  <input:text #question_7390480009 empty>
-label: Legal Last Name*
-  <input:text #question_5693816009 required empty>
-label: Please sign your legal first and last name to certify that you have read and fully understand and accept all t
-  <textarea #question_5163918009 required empty>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in McMaster-Carr’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group stat
-
-=== 2026-11-19 18:19:08  unconfirmed  Deployment Associate - Accounting Solutions @ rillet
-url: https://jobs.ashbyhq.com/rillet/5f0fd982-6366-4609-a59d-a3d28712fdfa/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'one or two examples of exceptional performance you want to highlight? Submit Application Rillet may use Artificial Intelligence with this application. Learn more. Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Deployment Associate - Accounting Solutions
-# Location
-  text: New York City; Chicago; San Francisco
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  text: $90K – $110K • Offers Equity
-  text: Rillet is committed to equitable and competitive compensation. The base salary ranges for this role reflect the market for companies of our 
-  text: Individual compensation within the applicable range is determined based on factors including the role’s scope and level, relevant experience
-  text: Base salary is one component of Rillet’s total compensation package, which also includes equity and benefits. Variable compensation may also
-  text: We may consider candidates at different levels. If the scope or level of the role changes during the interview process, we will clearly comm
-  text: This job has application limits
-  text: Please note that candidates may only apply to the same role once within a 45-day period.
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Phone
-  <input:tel #4f16f5c8-f0a0-4376-b7de-ab785fd29825 required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: LinkedIn Profile
-  <input:text #fa397f65-e3b7-46f6-8836-34ead20b30fa required filled>
-label: Website
-  <input:text #2fcb8fc7-14fc-45ad-9f74-2f18e6ea3311 filled>
-label: Are you legally authorized to work in the USA?
-  [button] Yes
-  [button] No
-  <input:checkbox name=6bd32fc4-e7af-4757-8e0b-8383f33eb53b question-answered>
-label: Do you now or will you in the future require sponsorship for work authorization to work in the USA?
-  [button] Yes
-  [button] No
-  <input:checkbox name=0bab6e88-162b-4f9b-8b45-6d5863101539 question-unanswered>
-label: Are you open to commuting to our NYC or San Francisco office, or willing to relocate to either location?
-  [button] Yes
-  [button] No
-  <input:checkbox name=2383c1d4-9b39-4e40-9a6b-2bced2cd52b8 question-answered>
-label: We're a high-growth startup looking to work with ambitious people with a history of exceptional performance. D
-  <textarea #840b5809-7438-4dbe-a29e-c78ce5b475f6 required filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-19 18:21:13  unconfirmed  Solutions Associate @ allium
-url: https://jobs.ashbyhq.com/allium/4f05bef8-d46c-4d93-8d8d-f03030bc9065/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'you now, or in the future, require visa work sponsorship? Yes No Desired Salary Desired Annual Salary in USD (please provide a specific number) Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Solutions Associate
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Location
-  <input filled>
-  [button] 
-label: LinkedIn URL
-  <input:text #ccdf3f1a-6019-425a-b69c-da91e0875215 required filled>
-label: U.S. Work Eligibility
-  text: Are you eligible to work in the United States?
-  [button] Yes
-  [button] No
-  <input:checkbox name=ff99ced1-b299-4d39-ade1-d4e926dd9c98 question-answered>
-label: Visa Sponsorship
-  text: Will you now, or in the future, require visa work sponsorship?
-  [button] Yes
-  [button] No
-  <input:checkbox name=ec73ea2e-5a57-4dde-a6ca-1e887f7a7314 question-unanswered>
-label: Desired Salary
-  text: Desired Annual Salary in USD (please provide a specific number)
-  <input:text #33e96cc5-1360-42b7-8dd2-aefc4e41f8bb filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-19 18:24:46  skipped  Flight Coordinator @ Pilatus Aircraft USA Ltd
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4677149
-stage: page 2
-why: can't truthfully answer required: Do you have a high school diploma or equivalent? (required)
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: Do you have a high school diploma or equivalent?
-  <input:radio #multiQuestionAnswer1953207_0 question-unanswered>
-label: Yes
-  <input:radio #multiQuestionAnswer1953207_1 question-unanswered>
-label: No
-  text: How many years of experience do you have in flight scheduling, dispatch, or aviation operations, or a closely related role?
-  <input:radio #multiQuestionAnswer1953208_0 question-unanswered>
-label: Less than 2 years
-  <input:radio #multiQuestionAnswer1953208_1 question-unanswered>
-label: 2-3 years
-  <input:radio #multiQuestionAnswer1953208_2 question-unanswered>
-label: 4-5 years
-  <input:radio #multiQuestionAnswer1953208_3 question-unanswered>
-label: 6+ years
-  text: Can you work evenings, weekends, holidays, and after-hours as operational needs require?
-  <input:radio #multiQuestionAnswer1953209_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953209_1 question-unanswered>
-  text: Are you able to work full-time onsite in Broomfield, CO?
-  <input:radio #multiQuestionAnswer1953210_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953210_1 question-unanswered>
-  text: Will you now or in the future require sponsorship for employment visa status?
-  <input:radio #multiQuestionAnswer1953211_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953211_1 question-unanswered>
-  text: Do you have experience supporting FAA Part 91, 135, or 121 operations?
-  <input:radio #multiQuestionAnswer1953212_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953212_1 question-unanswered>
-  text: Do you currently hold an FAA Aircraft Dispatcher Certificate?
-  <input:radio #multiQuestionAnswer1953214_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953214_1 question-unanswered>
-  text: Have you used flight scheduling or dispatch software such as AirplaneManager, ForeFlight Dispatch, CAMP, or a similar system?
-  <input:radio #multiQuestionAnswer1953219_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953219_1 question-unanswered>
-  text: Are you legally authorized to work in the United States?
-  <input:radio #multiQuestionAnswer1953216_0 question-unanswered>
-  <input:radio #multiQuestionAnswer1953216_1 question-unanswered>
-  [button] Previous Step
-  [button] Next Step {btnNext}
-  text: Pilatus Aircraft USA Ltd: Privacy Policy
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-11-19 18:33:00  unconfirmed  Customer Operations Specialist @ Izzio Artisan Bakery LLC
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4677671
-stage: page 4
-why: no confirmation after submit; page errors: ['I have read and accept the above acknowledgement (required)\nPlease accept the ac']; page ends: ' This employer uses AI to analyze applications. To learn more or opt-out, click here. Submit Edit Application Powered by Paylocity Privacy Policy|Payroll & HR Software SMS Terms and Conditions and Privacy Policy success:'
-  text: Customer Operations Specialist
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-# My Information
-# <first> <last>
-# Address
-# Preferred First Name
-# Middle Name
-# Referred By
-# How did you hear about us?
-# Do you give us permission to text you?
-# Skills
-  text: Excel (advanced), PowerPoint, Word, Google Workspace, SQL, Python, C++, Microsoft Project, QuickBooks, PostgreSQL, SQLite, Flask, Git/GitHub
-# Resume (required)
-# Education History
-# School Name
-  text: University of Southern California
-# Location
-# School Type
-# Area of Study
-  text: Industrial and Systems Engineering
-# Additional Questions
-# Can you supply proof of eligibility to work in the United States?
-# If you are under 18 years old, can you provide a work permit if required?
-# how many years of Customer Service experience do you have?
-# Do you have experience in Order Fulfillment & Management, Pricing Structure, and the Credit and Returns proces
-  text: I understand and agree that should an employment offer be extended to me and accepted, I will fully adhere to adhere to the company’s polici
-  text: We support a drug-free workplace, where the use, possession, or influence of illegal drugs or alcohol while on company time is prohibited. T
-  <input:checkbox #applyAcknowledgement question-unanswered>
-label: I have read and accept the above acknowledgement (required)
-  text: Please accept the acknowledgement
-  [button] Submit {btnSubmit}
-  text: SMS Terms and Conditions and Privacy Policy
-  [button] 
-
-=== 2026-11-19 18:37:01  unconfirmed  Compliance Associate @ lgtcp
-url: https://lgtcp.wd502.myworkdayjobs.com/en-US/lgtcpcurrentvacancies
-stage: Review
-why: no confirmation after submit; page errors: ['Search for Jobs page is loaded']; server said: POST https://lgtcp.wd502.myworkdayjobs.com/en-US/lgtcpcurrentvacancies/clientPostData -> 303; POST https://wd502.myworkday.com/wday/microscope/prelogin/mscp_error_kit_logs -> 202; POST https://lgtcp.wd502.myworkdayjobs.com/wday/cxs/lgtcp/lgtcpcurrentvacancies/jobs -> 200; page ends: "aracter A lowercase cha
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Sign In {utilityButtonSignIn}
-  [button] LGT Capital Partners {navigationItem-LGT Capital Partners}
-  <input:text #rs6q2 {keywordSearchInput} empty>
-  [button] Search {keywordSearchButton}
-label: Filters
-  [button] Location {distanceLocation}
-  [button] Full/Part-time {employmentType}
-  [button] Job Category {jobFamilyGroup}
-  [button] More {more}
-! Search for Jobs page is loaded
-# Investment Professional
-  text: New York, United States of America
-# Investment Professional
-# Compliance Associate
-# Private Markets Fund Counsel
-# Senior Transfer Agency Associate (Supervisor) 12 MONTH FIXED TERM CONTRACT
-# Junior Business Analyst – Private Markets Platform
-# Company Secretarial, Technology & AI Analyst (18 month fixed term contract, In House Role)
-# RFP Data Analyst
-# Student Support – Finance (60-80%)
-# Accountant (70–100%, Fixed-Term 9–12 Months)
-# Investment Operations Analyst
-# IT Security Engineer
-# Private Market - Infrastructure Secondaries Professional
-# Senior Payment Analyst
-# Investment Professional - Hedge Funds
-# AML Manager
-# M365 Collaboration engineer
-# Tax Operations Associate
-# Team Lead - Private Markets Investment Controlling
-# Associate, Private Equity, Primaries (San Francisco)
-  text: San Francisco, United States of America
-  [button] 1
-# About Us
-  text: LGT Capital Partners is a leading global specialist in alternative investing with over USD 110 billion in assets under management and more t
-  [button] Read More {readMore}
-# Follow Us
-  [link]  {socialIcon}
-  [link] Job Applicants Privacy Notice {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-(dialog)
-  [button] 
-{signInContent}
-# Congratulations!
-  text: Your application has been successfully uploaded.
-  text: Thank you for your interest in becoming a part of LGT Capital Partners! You now have the possibility to create your personal applicant accou
- {formField-email}
-label: Email Address*
-  <input:text #input-10 {email} required filled>
- {formField-password}
-label: Password*
-  <input:password #input-11 {password} required>
- {formField-verifyPassword}
-label: Verify New Password*
-  <input:password #input-12 {verifyPassword} required>
-  [button]  {click_filter}
-  [button] Create Account {createAccountSubmitButton}
-  [button] Sign In {signInLink}
-  [button] Forgot your password? {forgotPasswordLink}
-label: Enter website. This input is for robots only, do not enter if you're human.
-  <input:text #ee921d9e-9d3f-4a9e-b276-0f08cc31b1a6 {beecatcher} empty>
-
-=== 2026-11-19 18:41:03  unconfirmed  New Grad - Business Functions @ eightsleep
-url: https://jobs.ashbyhq.com/eightsleep/80518ba7-3b58-4131-b5c2-78c1b660b9ef/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'why we should create one. Tell us what you’d take ownership of here, why you’re the person to do it, and what you’d ship in your first 30 days. Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# New Grad - Business Functions
-# Location
-  text: New York City; Boston Area; Milan; San Francisco
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Where are you currently located?
-  <input filled>
-  [button] 
-label: Phone
-  <input:tel #4d64889b-d3fe-4b95-9c59-4072daad8daf filled>
-label: LinkedIn
-  <input:text #325f167e-f03a-4f2d-92a3-cc27c5056995 required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Website / Portfolio
-  <input:text #f62eb2c3-dcfe-4738-a474-4be4045326e0 filled>
-label: Which locations are you legally authorized to work?
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_3df46aa3-01db-4da1-9586 question-answered>
-label: EU | Milan
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_3df46aa3-01db-4da1-9586 question-answered>
-label: US | SF, NYC and Boston
-label: Will you now or in the future need visa sponsorship?
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_4675e237-69c1-43bf-a64e question-unanswered>
-label: Yes, for EU
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_4675e237-69c1-43bf-a64e question-unanswered>
-label: Yes, for US
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_4675e237-69c1-43bf-a64e question-unanswered>
-label: No
-label: Are you looking for full-time, an internship, or either?
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_3e626354-1ab6-487d-ac54 question-answered>
-label: Full-time
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_3e626354-1ab6-487d-ac54 question-answered>
-label: Internship
-label: How did you first hear about Eight Sleep?
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Referral (Friend or Colleague)
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Recruiter Outreach
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Job board (Indeed, Wellfound, etc.)
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Advertisement
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Event or Conference
-  <input:radio #ba1330ef-a0c8-4131-bd68-27550ef8c75c_f04fbea7-ebe2-432d-b222 question-answered>
-label: Other
-label: What are your compensation expectations?
-  <input:text #99c5cbec-798e-447e-8ce7-5fb72a7833ed filled>
-label: If you were to receive an offer, what is the earliest you would be available to join Eight Sleep?
-  <input:text empty>
-label: Eight Sleep works across multiple fields. Which part of what we do interests you most?
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Product and design
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: People
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Operations
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Growth & marketing
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Finance
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Legal
-  <input:checkbox #ba1330ef-a0c8-4131-bd68-27550ef8c75c_0f49b971-963a-4c46-aefd question-unanswered>
-label: Not sure yet, or have something else in mind? Tell us more below
-label: Why do you want to work at Eight Sleep?
-  text: The maximum length is 50 characters
-  <textarea #97cf863b-c8da-40b1-bdcd-4c3d0c1eb781 required filled>
-label: What’s the most impressive thing you’ve built or achieved?
-  <textarea #4887c76a-943c-4939-b032-70e974490a95 empty>
-label: We don’t have a role open for you yet. Make the case for why we should create one.
-  text: Tell us what you’d take ownership of here, why you’re the person to do it, and what you’d ship in your first 30 days.
-  <textarea #9bf96a2c-ce37-43db-a037-503b51d58168 required filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
 === 2026-11-19 18:43:05  unconfirmed  Conversational Designer & AI Coordinator @ skydropx
 url: https://jobs.ashbyhq.com/skydropx/078e564f-a6aa-456f-ad13-ee31a6ee21a2/application
 stage: page 1
@@ -5503,4 +4972,507 @@ label: Are you related to an active NYCEDC employee?*
   [button] 
   <input required empty>
 label: What are your salary 
+
+=== 2026-11-23 21:06:12  skipped  EverHealth - AI Automation Analyst (Remote, US) @ evercommerce
+url: https://evercommerce.wd1.myworkdayjobs.com/evercommerce_careers/job/Remote--US/EverHealth---AI-Automation-Analyst--Remote--US-_R-106693/apply/applyManually
+stage: Application Questions 1 of 2
+why: can't truthfully answer required: List out at least two of our company values and describe how
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Sign In {utilityButtonSignIn}
+  [button] Evercommerce.com {navigationItem-Evercommerce.com}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Introduce Yourself {navigationItem-Introduce Yourself}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# EverHealth - AI Automation Analyst (Remote, US)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+{progressBarActiveStep} current step 3 of 6 Application Questions 1 of 2
+label: current step 3 of 6
+label: Application Questions 1 of 2
+label: step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 1 of 2
+{applyFlowPrimaryQuestionsPage}
+ {formField-637d40f517c61001b59fda4eb2c10001}
+label: Do/will you require immigration sponsorship for work authorization (for example, an H-1B visa), either now or 
+  [dropdown] nothing chosen #primaryQuestionnaire--637d40f517c61001b59fda4eb2c10001
+ {formField-637d40f517c61001b59fdae870460002}
+label: Are you legally authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--637d40f517c61001b59fdae870460002
+ {formField-637d40f517c61001b59fdae870460005}
+label: What is your desired start date?
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--637d40f517c61001b59fdae870460005-dateS {dateSectionMonth-input} empty>
+  <input #primaryQuestionnaire--637d40f517c61001b59fdae870460005-dateS {dateSectionDay-input} empty>
+  <input #primaryQuestionnaire--637d40f517c61001b59fdae870460005-dateS {dateSectionYear-input} empty>
+  [button]  {dateIcon}
+ {formField-637d40f517c61001b59fdae870460006}
+label: What are your preferred pronouns?
+  <textarea #primaryQuestionnaire--637d40f517c61001b59fdae870460006 empty>
+ {formField-637d40f517c61001b59fdb8219080000}
+label: Please specify your Highest Education details*
+  [dropdown] nothing chosen #primaryQuestionnaire--637d40f517c61001b59fdb8219080000
+ {formField-637d40f517c61001b5bf435627230000}
+label: Are you willing to submit to a background check if you receive an offer of employment?*
+  [dropdown] nothing chosen #primaryQuestionnaire--637d40f517c61001b5bf435627230000
+ {formField-637d40f517c61001b5bf435627230001}
+label: List out at least two of our company values and describe how you would incorporate these into future positions
+  <textarea #primaryQuestionnaire--637d40f517c61001b5bf435627230001 required empty>
+ {formField-637d40f517c61001b5bf435627230002}
+label: What is your definition of success in this role?*
+  <textarea #primaryQuestionnaire--637d40f517c61001b5bf435627230002 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Next {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:10:13  skipped  Education Civil Rights Program Associate @ National Center For Youth Law
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4686514
+why: posting restricts AI-assisted applications: "do not use AI"
+(dialog)
+(dialog)
+# Apply with resume
+  text: Upload your resume and we'll automatically fill out your application
+  <input:file #btn-forceResume no-file>
+  [button] Upload Resume {btn-forceResume}
+  text: Education Civil Rights Program Associate
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  <input:file #btn-resume no-file>
+  [button] Select Resume to Upload {btn-resume}
+  <input:checkbox #useAttachedResumeToFillOutApplication question-answered>
+label: Fill out application with my resume
+label: First Name (required)
+  <input:text #info.firstName {infoFirstName} empty>
+label: Last Name (required)
+  <input:text #info.lastName {infoLastName} empty>
+label: Middle Name
+  <input:text #info.middleName {infoMiddleName} empty>
+label: Preferred First Name
+  <input:text #info.preferredName {infoPreferredName} empty>
+label: Email Address (required)
+  <input:text #info.email {infoEmail} empty>
+label: Mobile Number (required)
+  <input:text #info.cellPhone {infoCellPhone} empty>
+  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
+label: Have you applied for a job with us before?
+label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
+  text: SMS Terms and Conditions and Privacy Policy
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+label: County
+label: State Select a state
+label: Zip Code
+label: Available to Start
+  <input:text #info.dateAvailableToStart empty>
+  [button]  opens-dialog
+(dialog)
+label: How did you hear about us? Company Website Friend or Family Member Current Employee LinkedIn Idealist Work for
+label: Referred by
+  <input:text #info.referredBy {infoReferredBy} empty>
+label: Have you worked with us before? (required)
+label: Upload Cover Letter (required)
+  <input:file #btn-coverLetter no-file>
+  [button] Select Cover Letter {btn-coverLetter}
+  text: .pdf and .doc files only, 10MB file size limit
+label: Upload Additional Files
+  <input:file #btn-additionalFiles no-file>
+  [button] Select File(s) {btn-additionalFiles}
+  [button] Next Step {btnNext}
+  text: National Center For Youth Law: Privacy Policy
+  [button] 
+
+=== 2026-11-23 21:11:03  skipped  Oregon Program Specialist @ clearesult
+url: https://clearesult.wd1.myworkdayjobs.com/clearesult_external_careers/job/Remote---Oregon/Oregon-Program-Specialist_R0018557/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Oregon Program Specialist
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+label: completed step 3 of 5
+label: Application Questions
+{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
+label: current step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Voluntary Personal Information
+# EEO Statement:
+  text: CLEAResult is dedicated to the goal of providing equal opportunity for all persons without regard to age, race, creed, color, religion, disa
+  text: In an effort to implement our voluntary government affirmative action program recordkeeping and reporting requirements, we ask that you comp
+# Self-Identify Protected Veteran Status:
+  text: A ‘‘recently separated veteran’’ means any veteran during the three-year period beginning on the date of such veteran’s discharge or release
+  text: An ‘‘active duty wartime or campaign badge veteran’’ means a veteran who served on active duty in the U.S. military, ground, naval or air se
+  text: An ‘‘Armed forces service medal veteran’’ means a veteran who, while serving on active duty in the U.S. military, ground, naval or air servi
+  text: *If you believe you belong to any of the categories of protected veterans listed above, please indicate by checking the appropriate box belo
+ {formField-veteranStatus}
+label: Please select your veterans status. See above for classification definitions:
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+ {formField-gender}
+label: Please select your gender:
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicity}
+label: Please select the ethnicity which most accurately describes how you identify yourself:
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+# Terms and Conditions
+  text: WE ARE AN EQUAL OPPORTUNITY EMPLOYER. Applicants and employees are considered for positions and are evaluated without regard to mental or ph
+  text: Please answer all questions completely. Please do not provide any information not specifically requested on this Employment Application form
+  text: I understand that the organization will rely, in part, on the information I provide in this Employment Application in considering whether to
+  text: The organization is committed to compliance with the provisions of this nation's immigration laws regarding verification of employment eligi
+  text: I authorize the organization to contact anyone that it deems appropriate to verify the information I have provided or to further investigate
+  text: I understand that this Employment Application is not an offer of employment. I understand that nothing contained in this Employment Applicat
+  text: I understand that if I am hired, I will be an employee "at will," meaning I am not hired for any definite length of time and either I or the
+  text: If employed, I understand and agree that the organization retains the sole right in its business judgment to modify, suspend, interpret, or 
+  text: If employed, I understand that I may be required to comply with federal and/or state Drug Free Workplace Laws and regulations. I understand 
+  text: If employed, I understand that as a condition of employment that I may be required to agree to and sign the organization’s confidentiality, 
+  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
+  text: We are committed to keeping you informed throughout your candidate journey. By applying, you agree to receive SMS/text messages from CLEARes
+ {formField-acceptTermsAndAgreements}
+label: Yes, I have read and consent to the terms and conditions*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:15:01  skipped  Healthcare Quality Improvement Analyst, HEDIS & Provider Performance @ centene
+url: https://centene.wd5.myworkdayjobs.com/centene_external/job/Remote-MO/Quality-Improvement-Analyst_1672963-1/apply/applyManually
+stage: Take Assessment
+why: stuck on Workday's 'Take Assessment' page; Workday says: ['Error-Page Error You must complete the assessment test to continue with your job application.']; fields flagged: none
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Healthcare Quality Improvement Analyst, HEDIS & Provider Performance
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions
+label: completed step 4 of 6
+label: Voluntary Disclosures
+{progressBarActiveStep} current step 5 of 6 Take Assessment
+label: current step 5 of 6
+label: Take Assessment
+label: step 6 of 6
+label: Review
+# Take Assessment
+# Errors Found
+! Error-Page Error You must complete the assessment test to continue with your job application. {errorHeading}
+  text: Please take a moment to support Centene’s participation in the Work Opportunity Tax Credit and other federal and state tax credit programs.
+  text: Participation is voluntary and confidential and will take 1-2 minutes.
+  text: Your answers will not affect your job application with Centene.
+  text: Note: To opt-out, please select Take Assessment and
+  text: click the opt-out button in the lower right corner
+  text: on the questionnaire page.
+  [button] Take Assessment {inlineAssessmentButton}
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:16:21  skipped  Marine Claims Analyst MCD @ tmnas
+url: https://tmnas.wd5.myworkdayjobs.com/externalcareerstma/job/Los-Angeles-CA/Marine-Claims-Analyst-MCD_10001200/apply/applyManually
+stage: Application Questions 2 of 2
+why: can't truthfully answer required: 4. If you answered Yes to Question #3, have you obtained a w
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# TMA Careers
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] TMA Home {navigationItem-TMA Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Marine Claims Analyst MCD
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+{progressBarActiveStep} current step 4 of 6 Application Questions 2 of 2
+label: current step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 2 of 2
+{applyFlowSecondaryQuestionsPage}
+  text: *A conviction record or pending criminal charges will not automatically result in your disqualification from employment; felony and misdemea
+ {formField-568e3625a9e1103d9c80fd51ff920001}
+label: If you are applying for a position in California, Massachusetts, Hawaii, Illinois, New Jersey, Rhode Island, M
+  [dropdown] nothing chosen #secondaryQuestionnaire--568e3625a9e1103d9c80fd51ff920001
+ {formField-568e3625a9e1103d9c80fd51ff920005}
+label: 2. Are there any pending criminal charges against you involving dishonesty or breach of trust?*
+  [dropdown] nothing chosen #secondaryQuestionnaire--568e3625a9e1103d9c80fd51ff920005
+ {formField-568e3625a9e1103d9c80fdebd8430003}
+label: 3. Have you ever been convicted in any jurisdiction of a crime involving breach of trust or dishonesty? Under 
+  [dropdown] nothing chosen #secondaryQuestionnaire--568e3625a9e1103d9c80fdebd8430003
+ {formField-568e3625a9e1103d9c80fdebd8430006}
+label: 4. If you answered Yes to Question #3, have you obtained a waiver from a department of insurance for this conv
+  [dropdown] nothing chosen #secondaryQuestionnaire--568e3625a9e1103d9c80fdebd8430006
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:18:56  skipped  Regional Benefits Coordinator @ THE HELPER BEES INC
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4685999
+stage: page 2
+why: can't truthfully answer required: Is there any reason you would be unable to provide two profe
+  text: Regional Benefits Coordinator
+  text: Corporate - Network Success
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: What is your desired Salary?
+  <textarea:text #screener-question-0-textarea empty>
+label: Please perform a speed test using the link https://fast.com/ Does your internet connection meets the minimum r
+  <textarea:text #screener-question-1-textarea empty>
+  text: Are you 18 years of age or older and authorized to work lawfully in the United States for The Helper Bees?
+  <input:radio #multiQuestionAnswer704748_0 question-unanswered>
+label: Yes
+  <input:radio #multiQuestionAnswer704748_1 question-unanswered>
+label: No
+  text: Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?
+  <input:radio #multiQuestionAnswer704760_0 question-unanswered>
+  <input:radio #multiQuestionAnswer704760_1 question-unanswered>
+  text: Are you willing to complete a pre-employment background check and drug screening?
+  <input:radio #multiQuestionAnswer799402_0 question-unanswered>
+  <input:radio #multiQuestionAnswer799402_1 question-unanswered>
+  text: Is there any reason you would be unable to provide two professional references?
+  <input:radio #multiQuestionAnswer1120466_0 question-unanswered>
+  <input:radio #multiQuestionAnswer1120466_1 question-unanswered>
+label: Do you have any known relation to one of our customers or vendors?
+  <textarea:text #screener-question-6-textarea empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: THE HELPER BEES INC: Privacy Policy
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-11-23 21:27:09  skipped  Legal Executive Assistant @ dlapiper
+url: https://dlapiper.wd1.myworkdayjobs.com/dlapiper/job/New-York-NY/Legal-Executive-Assistant_R2026-3125/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Have you been personally accused by any employee, partner, c
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Legal Executive Assistant
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-5ad9317eeb35100158f62d55c2c00000}
+label: Are you currently authorized to work in the United States?*
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62d55c2c00000
+ {formField-5ad9317eeb35100158f62d55c2c00003}
+label: Do you now, or will you in the future, require any immigration-related support or sponsorship to obtain and ma
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62d55c2c00003
+ {formField-5ad9317eeb35100158f62d55c2c00006}
+label: Are you over the age of 18?*
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62d55c2c00006
+ {formField-5ad9317eeb35100158f62defca5a0001}
+label: As outlined in the job posting, can you perform the essential functions of the job?*
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62defca5a0001
+ {formField-5ad9317eeb35100158f62defca5a0004}
+label: Have you ever worked for DLA Piper LLP (US) or any of our legacy firms (Piper & Marbury, Rudnick & Wolfe, Pipe
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62defca5a0004
+ {formField-5ad9317eeb35100158f62defca5a0007}
+label: Are you currently engaged as a contingent or contract worker, or have you previously held a contingent or cont
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62defca5a0007
+ {formField-5ad9317eeb35100158f62e89d8da0002}
+label: Do you have a familial relationship or share a household with any current or former DLA Piper employees or par
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62e89d8da0002
+ {formField-5ad9317eeb35100158f62e89d8da0006}
+label: Have you been personally accused by any employee, partner, client or other person of misconduct at any prior e
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62e89d8da0006
+ {formField-5ad9317eeb35100158f62f24667e0001}
+label: Has your employment or partnership ever ended, or are you anticipating leaving your current employer or partne
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62f24667e0001
+ {formField-5ad9317eeb35100158f62f24667e0005}
+label: Are you presently, or have you ever been, a defendant or respondent or the subject of a complaint or referral 
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62f24667e0005
+ {formField-5ad9317eeb35100158f62fbe9f960003}
+label: Are there any facts or circumstances which, in the interest of full disclosure, DLA Piper would want to know w
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62fbe9f960003
+ {formField-5ad9317eeb35100158f62fbe9f960007}
+label: Is there any employment, business activity, consulting / contracting engagement, sponsorship / promotional arr
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f62fbe9f960007
+ {formField-5ad9317eeb35100158f630586d140002}
+label: Please confirm that your complete 10-year employment history is included in your resume. This includes all emp
+  [dropdown] nothing chosen #primaryQuestionnaire--5ad9317eeb35100158f630586d140002
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:34:30  skipped  Service Representative (Bilingual) @ tti
+url: https://tti.wd1.myworkdayjobs.com/milwaukee/job/New-York-NY/Service-Representative_R79907/apply/applyManually
+stage: Application Questions 2 of 2
+why: can't truthfully answer required: 1st Shift; 2nd Shift; 3rd Shift; Weekend; Both
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Careers
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Milwaukee Tool {navigationItem-Milwaukee Tool}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Service Representative (Bilingual)
+label: completed step 1 of 6
+label: My Information
+label: completed step 2 of 6
+label: My Experience
+label: completed step 3 of 6
+label: Application Questions 1 of 2
+{progressBarActiveStep} current step 4 of 6 Application Questions 2 of 2
+label: current step 4 of 6
+label: Application Questions 2 of 2
+label: step 5 of 6
+label: Voluntary Disclosures
+label: step 6 of 6
+label: Review
+# Application Questions 2 of 2
+{applyFlowSecondaryQuestionsPage}
+ {formField-7e6f5addfaac1001f7a5f62bedfa0000}
+label: Can you perform the essential functions of the job, with or without accommodation?*
+  [dropdown] nothing chosen #secondaryQuestionnaire--7e6f5addfaac1001f7a5f62bedfa0000
+ {formField-7e6f5addfaac1001f7a5f62bedfa0003}
+label: What is your shift preference?*
+  <input:checkbox #7e6f5addfaac1001f7323ed6c1500000-7e6f5addfaac1001f7a5f62bedf required question-unanswered>
+label: 1st Shift
+  <input:checkbox #7e6f5addfaac1001f7323ed6c1500002-7e6f5addfaac1001f7a5f62bedf required question-unanswered>
+label: 2nd Shift
+  <input:checkbox #7e6f5addfaac1001f7323ed6c1500004-7e6f5addfaac1001f7a5f62bedf required question-unanswered>
+label: 3rd Shift
+  <input:checkbox #7e6f5addfaac1001f7323f7097b30001-7e6f5addfaac1001f7a5f62bedf required question-unanswered>
+label: Weekend
+ {formField-7e6f5addfaac1001f7a5f6c6a5c70004}
+label: Are you open to working full-time, part-time, or both?*
+  <input:checkbox #9c5893b728901001f77858aa54090002-7e6f5addfaac1001f7a5f6c6a5c required question-unanswered>
+label: Full-Time
+  <input:checkbox #9c5893b728901001f77858aa54090004-7e6f5addfaac1001f7a5f6c6a5c required question-unanswered>
+label: Part-Time
+  <input:checkbox #9c5893b728901001f778594421a90001-7e6f5addfaac1001f7a5f6c6a5c required question-unanswered>
+label: Both
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-23 21:40:36  skipped  Maintenance Parts & CMMS Specialist [Full Time] @ Bread Alone Bakery
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4686457
+stage: page 7
+why: stuck on step 7; page says: ['Personal or Work Reference? (required)\n--\nReference Type is required', '--']; fields flagged: none; buttons: referencesName0:; referencesEmail0:; referencesPhone0:; public-site-reference:Country
+United States
+Address ; public-site-reference-country-wrapper:Country
+Unit
+  text: Maintenance Parts & CMMS Specialist [Full Time]
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+label: Name
+  <input:text #references.name.0 {referencesName0} filled>
+label: Email Address (required)
+  <input:text #references.email.0 {referencesEmail0} filled>
+label: Phone Number
+  <input:text #references.phone.0 {referencesPhone0} filled>
+label: Personal or Work Reference? (required)
+  text: Reference Type is required
+label: Years Known
+    (choice) --
+    (choice) 1 year
+    (choice) 2 years
+    (choice) 3 years
+    (choice) 4 years
+    (choice) 5 years
+    (choice) 6 years
+    (choice) 7 years
+    (choice) 8 years
+    (choice) 9 years
+    (choice) 10 years
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+label: County
+label: State CO
+label: Zip Code
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
 
