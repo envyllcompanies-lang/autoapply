@@ -4746,3 +4746,207 @@ Submit Appl
 [18:45:33]   by site  www.builtinla.com: 1 skipped
 [18:45:33]   by site  www.builtincolorado.com: 1 skipped
 [18:45:34] Summary emailed to delgado@alumni.usc.edu
+[18:46:34] === autoapply run (LIVE) build 2026-10-18-b ===
+[18:46:35] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[18:46:36] mail: logged in to delgado@alumni.usc.edu OK
+[18:48:34] Employer replies: 2 rejections, 1 assessment (details in your email)
+[18:48:37]   outreach: Standishmanagement (standishmanagement.com): no hiring or general address on its site (it may use a contact form)
+[18:48:40]   outreach: Wilsonelser (wilsonelser.com): no hiring or general address on its site (it may use a contact form)
+[18:48:44]   outreach: Ieqcapital (ieqcapital.com): no hiring or general address on its site (it may use a contact form)
+[18:48:48]   outreach: Faradayfuture (ff.com): no hiring or general address on its site (it may use a contact form)
+[18:48:51]   outreach: Jennikayne (jennikayne.com): no hiring or general address on its site (it may use a contact form)
+[18:49:21]   outreach: Bakertilly (a-c.com.vn): no hiring or general address on its site (it may use a contact form)
+[18:49:21] Discovering jobs…
+[18:49:21] Job search already ran at 17:59 (searches run every 3 h): this run only applies
+[18:49:21]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[18:49:21] 0 open roles, 0 new
+[18:49:21] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 2.8 min)
+[18:49:22] 304 jobs queued: 5 already matched to your résumé, 299 waiting for that check (best prospects first; the bar is a match of 50% in Los Angeles, 65% remote, 60% elsewhere). Applying to up to 345 now
+[18:49:22] Time for this run: 50 min in all (8393 of 1850 free Actions minutes used this month)
+[18:49:23] Accounts: ON (delgado@alumni.usc.edu)
+[18:49:23] → Talent Acquisition Coordinator (Contract) @ tailscale (score 49, match 72%)
+[18:49:33]       step 1: 23 fields (18 required)
+[18:49:57]       ? unanswered: "We're always curious - have you used Tailscale before?*" kind=combobox options=['Yes, on my personal devices.', 'Yes, at work.', 'Yes, both personally and at wo', 'I haven’t used it, but I’m exc']
+[18:49:57]       ? unanswered: 'I have read and understand Tailscale\'s "Candidate Privacy Policy" and "AI Guidelines" rega' kind=combobox options=['Yes']
+[18:49:57]     ✗ skipped: can't truthfully answer required: We're always curious - have you used Tailscale before?*; I have read and understand Tailscale's "Candidate Privacy Po
+[18:50:05] → Production Engineer @ senrasystems (score 30, match 65%)
+[18:50:18]       step 1: 26 fields (13 required)
+[18:51:16]       writer: gemini-lite: still failing after retries
+[18:51:16]       writer unavailable: gemini-lite: still failing after retries
+[18:52:27]       writer: gemini-lite: still failing after retries
+[18:52:27]       writer unavailable: gemini-lite: still failing after retries
+[18:53:48]       writer: gemini-lite: still failing after retries
+[18:53:48]       ? unanswered: 'Why do you want to work at Senra Systems?*' kind=textarea options=[]
+[18:53:48]       ? unanswered: "Why do you think you're a great fit for this position?*" kind=textarea options=[]
+[18:53:48]       ? unanswered: 'Please list three professional references — a current or former manager, a colleague or pe' kind=textarea options=[]
+[18:53:48]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[18:53:48] → Benefits Specialist (Hybrid in CA) @ firstam (score 30, match 60%)
+[18:53:51]       (opening Workday's application form directly)
+[18:53:59]       (account page: creating the account / signing in)
+[18:54:01]       account: signing in on firstam.wd1.myworkdayjobs.com
+[18:54:07]       1/6 My Information: 17 fields (12 required)
+[18:54:12]       2/6 My Experience: 2 fields (0 required)
+[18:54:21]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[18:54:29]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[18:54:58]       3/6 Application Questions 1 of 2: 8 fields (3 required)
+[18:55:49]       (writer answered 'Desired Hours (per week)*' -> 'N/A')
+[18:55:50]       (writer answered 'How soon can you start?*' -> '2 weeks')
+[18:55:50]       4/6 Application Questions 2 of 2: 8 fields (5 required)
+[18:55:53]       ! NOT FILLED: 'Desired Hours (per week)*' (wanted 'N/A')
+[18:55:57]       (writer answered 'Desired Hours (per week)*' -> 'N/A')
+[18:55:57]       Application Questions 2 of 2 (try 2): Workday said ['Error: The field Desired Hours (per week) is required and must have a value.', 'Error-Desired Hours (per week) The field Desired Hours (per week) is required and must have a value.']; redoing ['Desired Hours (per week)*']
+[18:55:57]       ! NOT FILLED: 'Desired Hours (per week)*' (wanted 'N/A')
+[18:56:35]       (writer answered 'Desired Hours (per week)*' -> 'N/A')
+[18:56:35]       Application Questions 2 of 2 (try 3): Workday said ['Error: The field Desired Hours (per week) is required and must have a value.', 'Error-Desired Hours (per week) The field Desired Hours (per week) is required and must have a value.']; redoing ['Desired Hours (per week)*']
+[18:56:35]       ! NOT FILLED: 'Desired Hours (per week)*' (wanted 'N/A')
+[18:56:38]     ✗ skipped: stuck on Workday's 'Application Questions 2 of 2' page; Workday says: ['Error: The field Desired Hours (per week) is required and must have a value.', 'Error-Desired Hours (per week) The field Desired Hours (per week) is required and must have a value.']; fields flagged: ['Desired Hours (per week)']
+[18:56:45] → Patient Care Coordinator @ BMR Partners Inc. (score 52, match 50%)
+[18:56:57]       (résumé given to the site's 'apply with resume' box first)
+[18:57:10]       step 1: 46 fields (26 required)
+[18:57:37]       ? unanswered: 'May We Contact for Reference? (required) *' kind=combobox options=['--', 'Yes', 'No']
+[18:57:37]     ✗ skipped: can't truthfully answer required: May We Contact for Reference? (required) *
+[18:57:38]   match  20%  Customer Service Associate @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[18:57:39]   match  20%  Customer Service Associate I @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[18:57:41]   match  68%  Production Coordinator - 2nd Shift @ machindustries — Good operational background, but requires 2+ years of dedicated production coordination experience w
+[18:57:41]   match  78%  Field Operations Specialist @ machindustries — Strong fit for logistics, operations, and coordination in a defense/technical environment aligning w
+[18:57:41]   match   0%  New ER Doctor (NERD) Program: Starts July 2027, Practicing Veterinarians - Torrance, CA @ veterinaryemergencygroupst — Requires a DVM degree and practicing veterinary experience, which the candidate completely lacks.
+[18:57:43] → Project Finance, Analyst (Remote) @ solamerica-energy (score 52, match 78%)
+[18:57:51]       step 1: 9 fields (7 required)
+[18:59:39]     ? submitted but NOT confirmed (will not retry; checked the inbox too): no confirmation after submit; server said: POST eTj7SPQwtEDjPN9e__PidmKdIKn-w4WA2jwHLWMVIfoKd4dWeXJaYBGvssQQz2rWdFNb6kD3kOeAjS15Wt3q597WlA -> 200; POST eTj7SPQwtEDjPN9e__PidmKdIKn-w4WA2jwHLWMVIfoKd4dWeXJaYBGvssQQz2rWdFNb6kD3kOeAjS15Wt3q597WlA -> 200; page ends
+[18:59:44] → Production Coordinator - 2nd Shift @ machindustries (score 72, match 68%)
+[19:00:02]       step 1: 33 fields (16 required)
+[19:00:03]       (writer answered 'SAT Score*' -> 'Did not take/Do not recall')
+[19:00:10]       ? unanswered: 'ACT Score*' kind=combobox options=['Did not take/Do not recall', '36 out of 36', '35 out of 36', '34 out of 36', '33 out of 36', '32 out of 36']
+[19:00:10]     ✗ skipped: can't truthfully answer required: ACT Score*
+[19:00:10]   match  20%  Customer Service Associate @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:11]   match  20%  Customer Service Associate @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:11]   match  20%  Customer Service Associate @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:12]   match  20%  Customer Service Associate @ dollartree — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:12]   match  20%  Delivery Specialist @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:12]   match  20%  Delivery Specialist @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:12]   match  20%  Delivery Specialist @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:12]   match  20%  Delivery Specialist @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:13]   match  30%  Parts Specialist-1 @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: This is a re
+[19:00:13]   match  30%  Parts Specialist @ oreillyauto — same role at this employer, checked before: same role at this employer, checked before: same role at
+[19:00:13]   ✗ Quality Inspection Technician, PCBA @ northwoodspace: the posting is closed (no time spent on it)
+[19:00:13]   ✗ Electronics Specialist (Prism) @ northwoodspace: above entry level: senior (requires 6+ yrs)
+[19:00:13]   ✗ Ground Site Specialist @ northwoodspace: above entry level: mid (requires 5+ yrs)
+[19:00:13]   ✗ Accountant (Contract) @ retell-ai: the posting is closed (no time spent on it)
+[19:00:13]   ✗ Borescope Quality Inspector @ sqaservices: the posting is closed (no time spent on it)
+[19:00:13]   ✗ Sales Executive - New Business Development - Furniture Sales Experience Required - Los Angeles, CA @ tangraminteriors: above entry level: mid (requires 3+ yrs)
+[19:00:13]   ✗ Marketing Operations Associate (Contract) - NY @ nerdwallet: the posting is closed (no time spent on it)
+[19:00:14]   ✗ Inside Sales Representative (Contract) @ ambrook: the posting is closed (no time spent on it)
+[19:00:14]   ✗ HR Systems & Payroll Data Specialist (Contractor) @ equip: the posting is closed (no time spent on it)
+[19:00:14]   ✗ Member Growth Operations Contractor @ virtahealth: the posting is closed (no time spent on it)
+[19:00:15]   ✗ City Rise Traffic - Traffic Control Associate: North Hollywood @ cityrisesafety: pays too little: tops out near $60,237 a year (your floor is $72,800)
+[19:00:16]   ✗ Account Executive - Studio City, CA - Bilingual Spanish Required @ accelion: pays too little: tops out near $65,000 a year (your floor is $72,800)
+[19:00:16]   ✗ Tax Associate @ gursey: the posting is closed (no time spent on it)
+[19:00:16]   ✗ Technical Collections Specialist - Santa Fe Springs, CA @ tangraminteriors: the posting is closed (no time spent on it)
+[19:00:17]   ✗ Facilities Maintenance Worker @ occboyscouts: not open to you: part-time
+[19:00:18]   ✗ Facilities Team Member @ aoarchitects: the posting is closed (no time spent on it)
+[19:00:18]   ✗ Learning Specialist, Aseptic Processing @ hims-and-hers: above entry level: mid (requires 5+ yrs)
+[19:00:18]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:00:18]   ✗ Paid Social Media Specialist @ bloomadsglobalmedia: pays too little: tops out near $60,000 a year (your floor is $72,800)
+[19:00:19]   ✗ Technical Recruiter - Engineering & Production (Contract) @ apex-technology-inc: above entry level: mid (requires 4+ yrs)
+[19:00:19]   ✗ City Rise Utility- Traffic Control Trainee: North Hollywood @ cityrisesafety: pays too little: tops out near $59,946 a year (your floor is $72,800)
+[19:00:19]   ✗ Patient Flow Coordinator @ pppsgv: the posting is closed (no time spent on it)
+[19:00:21]   match  75%  Multilingual Data Annotation Specialist, Spanish @ zefr — Matches language skills and digital fluency, though data annotation is slightly below typical ISE ro
+[19:00:21]   match  55%  CONTRACTOR- Jr. Relationship Manager @ sohodragon — Candidate lacks the required specific banking, AML, and KYC experience for a financial institution r
+[19:00:21] → Field Operations Specialist @ machindustries (score 45, match 78%)
+[19:00:39]       step 1: 33 fields (16 required)
+[19:00:47]       (writer answered 'SAT Score*' -> 'Did not take/Do not recall')
+[19:00:48]       (writer answered 'ACT Score*' -> 'Did not take/Do not recall')
+[19:01:23]       writer: gemini-lite: still failing after retries
+[19:01:23]       writer unavailable for cover letter (gemini-lite: still failing after retries)
+[19:01:23]       (no cover letter could be written; it is optional, applying with the résumé only)
+[19:01:47]       email: the site asked for a security code after Submit; reading it from the application inbox
+[19:02:09]       mail: found 'Security code for your application to Mach Industries'
+[19:02:14]     ✓ applied (1.9 min)
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:14]   ✗ Child Development Specialist @ positive-development: the posting is closed (no time spent on it)
+[19:02:16]   ✗ City Rise Traffic - Traffic Control Associate: Westminster @ cityrisesafety: pays too little: tops out near $60,237 a year (your floor is $72,800)
+[19:02:17]   ✗ Bilingual Child Development Specialist (English/Spanish) @ positive-development: not open to you: part-time; manages people
+[19:02:17]   ✗ Extended Learning Program Leader, #1361: Ingenium Charter School, Canoga Park, CA @ ingeniumschools: not open to you: part-time
+[19:02:19]   match  20%  CAP Assistant Dance Instructor - Montebello USD In-School Programs @ calartscap — Dance instruction role is completely unrelated to candidate's engineering and business background.
+[19:02:19]   match  40%  Reimbursement Specialist lll (Laguna Hills, CA) @ ameripharma — Reimbursement specialist role lacks direct healthcare collections experience, though analytical skil
+[19:02:19]   match  25%  Research Associate @ terasakiinstitute — Research associate position requires a biology or chemistry degree and wet lab experience the candid
+[19:02:19]   match  45%  Surgical Services Coordinator  (Van Nuys) @ clinicaromero — Surgical coordinator role requires specific healthcare administration and medical scheduling experie
+[19:02:19]   match  35%  Business Development (Contractor) @ creatordeck — BDR role is heavily phone-outbound sales focused and contract-based, missing the target engineering 
+[19:02:19]   ✗ Bilingual Child Development Specialist @ positive-development: not open to you: part-time; manages people
+[19:02:20]   ✗ Junior Production Designer @ alpinestars: not open to you: internship / summer program; says entry level / new grad
+[19:02:20] → Multilingual Data Annotation Specialist, Spanish @ zefr (match 75%): on your apply-by-hand list (ashby asks every applicant to pass a human check)
+[19:02:21]   ✗ Support Engineer (Contract) @ retell-ai: the posting is closed (no time spent on it)
+[19:02:21]   ✗ Customer Service Associate / Inside Sales Support @ envirocheck: the posting is closed (no time spent on it)
+[19:02:22]   ✗ Intake Specialist - Substance Use Disorder Treatment Center @ crihelp: pays too little: tops out near $68,640 a year (your floor is $72,800)
+[19:02:23]   ✗ Front Office Specialist, Float @ pppsgv: the posting is closed (no time spent on it)
+[19:02:24]   ✗ Paid Social Media Specialist @ bloomadsglobalmedia: the posting is closed (no time spent on it)
+[19:02:27]   ✗ Lab Operations Associate Scientist/Scientist I (Contract) @ lexeotx: above entry level: mid (requires 5+ yrs)
+[19:02:27]   ✗ Customer Care Associate @ rbanw: the posting is closed (no time spent on it)
+[19:02:27]   ✗ Bilingual Intake Specialist (English / Spanish) - Substance Use Disorder Treatment Center @ crihelp: the posting is closed (no time spent on it)
+[19:02:28]   ✗ Junior Interior Designer @ morrisoninteriors: not open to you: internship / summer program
+[19:02:28]   ✗ Entry Level Job with Training @ throttleandthrive: the posting is closed (no time spent on it)
+[19:02:29]   ✗ Quality Inspector - 1st/2nd Shift @ sqaservices: above entry level: mid (requires 3+ yrs)
+[19:02:31]   match  50%  Insurance Verification Coordinator l @ ameripharma — Medical insurance verification and billing focus is misaligned with the candidate's industrial engin
+[19:02:31]   match  45%  Junior Service Desk Technician @ gursey — IT help desk and desktop support role does not match the candidate's business operations and systems
+[19:02:31]   match  40%  (Contract) GTM Recruiter @ plaid — Requires dedicated professional recruiting experience which the candidate lacks.
+[19:02:31] → Insurance Verification Coordinator l @ ameripharma (match 50%): on your apply-by-hand list (bamboohr asks every applicant to pass a human check)
+[19:02:31]   ✗ Behavioral Therapists -Entry Level Role @ buildingblockresolutions: the posting is closed (no time spent on it)
+[19:02:31]   ✗ Executive Assistant Contractor @ alltrails: the posting is closed (no time spent on it)
+[19:02:32]   ✗ Group Facilitator - Bilingual (English / Spanish) SUD Treatment @ crihelp: pays too little: tops out near $68,640 a year (your floor is $72,800)
+[19:02:32]   ✗ Mandarin-speaking: Customer Success Engineer (Contract) @ retell-ai: the posting is closed (no time spent on it)
+[19:02:33]   ✗ (USA) Logistics Customer Service @ morrisonexpress: above entry level: mid (requires 3+ yrs)
+[19:02:34]   ✗ Client Associate or Registered Client Associate @ dadavidson: pays too little: tops out near $66,560 a year (your floor is $72,800)
+[19:02:35]   ✗ Independent Contractor - MAT Assessor Clinician @ counseling4kids: the posting is closed (no time spent on it)
+[19:02:35]   ✗ Clubhouse Associate, New York (Contract) @ chief: the posting is closed (no time spent on it)
+[19:02:57]   match  35%  Creative Generalist (Contract) @ flora — The role is for a creative generalist and artist, which does not align with the candidate's industri
+[19:02:57]   match  20%  Program Leader/Instructor - School Year 2026-2027 @ occboyscouts — The job is an outdoor youth instructor and camp role, which falls outside professional office career
+[19:02:57]   match  75%  Credentialing Specialist @ ameripharma — The candidate has a business bachelor's degree and strong organizational skills, though lacks direct
+[19:02:57]   match  60%  Technical Recruiter @ sqaservices — The technical recruiter position requires communication and organization skills, but lacks direct al
+[19:02:57]   match  65%  Patient Care Coordinator @ ameripharma — The patient care coordinator role requires customer service and administration, and the candidate of
+[19:02:57] → Credentialing Specialist @ ameripharma (match 75%): on your apply-by-hand list (bamboohr asks every applicant to pass a human check)
+[19:02:57] → Technical Recruiter @ sqaservices (match 60%): on your apply-by-hand list (lever asks every applicant to pass a human check)
+[19:02:57] → Patient Care Coordinator @ ameripharma (match 65%): on your apply-by-hand list (bamboohr asks every applicant to pass a human check)
+[19:02:57]   ✗ Designer: Women's Cut & Sew Knits (CONTRACTOR) @ buckmason: the posting is closed (no time spent on it)
+[19:02:58]   ✗ MedBox Processor I @ ameripharma: pays too little: tops out near $58,240 a year (your floor is $72,800)
+[19:02:58]   ✗ Marketing Designer, Performance Creative (Contractor) @ suno: the posting is closed (no time spent on it)
+[19:02:58]   ✗ Recruiter, GTM (Contract) @ crusoe: above entry level: mid (requires 5+ yrs)
+[19:02:59]   ✗ Remote Inside Sales Rep - AI-Enabled, Flexible Hours (Independent Contractor) @ sellfire: the posting is closed (no time spent on it)
+[19:03:01]   match  35%  (Contract) Recruiter @ plaid — The candidate has an engineering and operations background, not the 3+ years of professional recruit
+[19:03:01]   match  70%  Quantitative Economic Modeler - Contractor @ jupiterintel — The candidate has strong Python, data, and quantitative skills from an engineering degree, though la
+[19:03:01]   match  20%  Mail Processing Specialist (Independent Contractor) @ stable — Mail processing and fulfillment contractor role is manual operations work well below a professional 
+[19:03:01]   match  65%  GNC Model-Based Design Engineer (Contract) @ pivotal — The candidate has a systems engineering degree and Python/programming skills, but lacks the speciali
+[19:03:01]   match  30%  Technical Recruiter @ reflect-orbital — The role requires 2-5 years of dedicated aerospace technical recruiting experience, which does not m
+[19:03:01] → Quantitative Economic Modeler - Contractor @ jupiterintel (match 70%): on your apply-by-hand list (lever asks every applicant to pass a human check)
+[19:03:01] → GNC Model-Based Design Engineer (Contract) @ pivotal (match 65%): on your apply-by-hand list (lever asks every applicant to pass a human check)
+[19:03:01]   ✗ Recruiter @ beamca: the posting is closed (no time spent on it)
+[19:03:01]   ✗ Motion Designer, Paid Social (Contract) @ suno: the posting is closed (no time spent on it)
+[19:03:02]   ✗ Production Design Contractor @ alltrails: the posting is closed (no time spent on it)
+[19:03:03]   ✗ Professional Learning Facilitator (Contract) @ magicschool: above entry level: mid (requires 3+ yrs)
+[19:03:03]   ✗ Specialist, Cell Therapy Patient Operations - 6 month contractor role @ brainchildbio: the posting is closed (no time spent on it)
+[19:03:03]   ✗ Graphic Designer, Performance Marketing (Contractor) @ suno: the posting is closed (no time spent on it)
+[19:03:03]   ✗ Hydrogeologist (Contract) @ blumen: the posting is closed (no time spent on it)
+[19:03:03]   ✗ Customer Experience Support Specialist (temp to perm) @ todaytixgroup: the posting is closed (no time spent on it)
+[19:03:04]   ✗ Video Editor - Contractor @ kit: not open to you: part-time
+[19:03:04]   ✗ Learning Designer (Contract) @ noodle: the posting is closed (no time spent on it)
+[19:03:04]   ✗ Field Service Representative (Contract) @ conductorai: not open to you: needs a security clearance
+[19:03:06]   match  25%  Recruiter, Legal (Contract) @ livinghr — Requires 7+ years of executive and legal search experience, which the candidate lacks.
+[19:03:06]   match  35%  Recruiter (Contract) @ hinge-health — Requires dedicated recruiting and talent acquisition experience that is outside the candidate's back
+[19:03:06]   match  20%  Social Media Creative (Contract) @ flora — Focuses on social media management and creative content production, which does not match the candida
+[19:03:06]   match  40%  Curriculum Designer - Pursuits (Contractor) @ primer — Curriculum design and K-8 education development are misaligned with the candidate's industrial engin
+[19:03:06]   match  10%  Registered Dietitian Contractor @ foodsmart — Requires a Registered Dietitian (RD) credential and medical nutrition therapy experience the candida
+[19:03:22]   match  35%  Motion Designer (Contract) @ flora — The role is a freelance/contract motion design and AI video role, which does not match the candidate
+[19:03:22] Résumé checks this run: 41 (9 passed) in 8 calls. Free writer allowance used today: groq 195k/195k tokens (+56k served from its cache, not counted); groq-20b 195k/195k tokens (+16k served from its cache, not counted); groq-qwen 196k/195k tokens (+12k served from its cache, not counted); gemini-lite 426/480 requests (+24k served from its cache, not counted); gemini-flash 14/18 requests
+[19:03:22] Summary: 1 applied, 1 unconfirmed, 42 skipped, 1 queued, 32 low_score, 34 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-24.md
+[19:03:22]   by site  lever: 15 skipped, 3 manual
+[19:03:22]   by site  ashby: 15 skipped, 1 manual
+[19:03:22]   by site  bamboohr: 8 skipped, 3 manual
+[19:03:22]   by site  greenhouse: 2 skipped, 1 applied
+[19:03:22]   by site  paylocity: 1 skipped
+[19:03:22]   by site  workday: 1 skipped
+[19:03:22]   by site  workable: 1 unconfirmed
+[19:03:25] Summary emailed to delgado@alumni.usc.edu
