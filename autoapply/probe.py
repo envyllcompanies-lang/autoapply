@@ -157,6 +157,8 @@ def main():
                         r"\bca\b.{0,20}(la|l\.a\.)|\bla\b", re.I)
         hdr = {"User-Agent": "Mozilla/5.0", "Content-Type": "application/json", "Accept": "application/json"}
         rep = {}
+        T_START = _tm.time()
+        gap = float(req.get("wd_gap", 2))
 
         def walk(facets, path=""):
             out = []
@@ -173,8 +175,13 @@ def main():
             api = f"https://{tenant}.{wd}.myworkdayjobs.com/wday/cxs/{tenant}/{site}/jobs"
             one = {}
             try:
+                t0 = _tm.time()
                 r = _rq.post(api, json={"appliedFacets": {}, "limit": 20, "offset": 0, "searchText": ""}, headers=hdr, timeout=30)
                 one["status"] = r.status_code
+                one["at_s"] = round(t0 - T_START, 1)
+                if r.status_code == 429:
+                    one["headers"] = {k: v for k, v in r.headers.items() if re.search(r"retry|rate|limit|server|cf-|x-", k, re.I)}
+                    one["body"] = r.text[:300]
                 d = r.json() if r.ok else {}
                 one["total"] = d.get("total")
                 vals = walk(d.get("facets"))
@@ -183,7 +190,7 @@ def main():
                 one["n_location_values"] = len(locs)
                 pick = [v for v in locs if v[2] and la.search(v[2])]
                 one["la_values"] = [v[2] + f" ({v[3]})" for v in pick][:60]
-                _tm.sleep(2)
+                _tm.sleep(gap)
                 if pick:
                     by: dict = {}
                     for v in pick:
@@ -192,7 +199,7 @@ def main():
                     d2 = r2.json() if r2.ok else {}
                     one["la_query"] = {"status": r2.status_code, "applied": {k: len(v) for k, v in by.items()}, "total": d2.get("total"),
                                        "sample": [[p.get("title"), p.get("locationsText")] for p in (d2.get("jobPostings") or [])[:12]]}
-                    _tm.sleep(2)
+                    _tm.sleep(gap)
             except Exception as e:
                 one["error"] = str(e)[:300]
             rep[spec] = one
