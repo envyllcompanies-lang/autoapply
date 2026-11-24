@@ -187,6 +187,20 @@ class DB:
             "a hand-off made before its résumé match": "status='manual' AND reason LIKE '%stops every automated application%'"
                 " AND reason LIKE '%résumé match not checked%'",
             "a license list with a 'none' box": "status='skipped' AND reason LIKE 'can''t truthfully answer%' AND reason LIKE '%I do not possess any%'",
+            # (2026-11-25) set aside by the 3-per-employer cap of Nov 24, now 8: looked at again (an employer over 8 is set aside again)
+            "set aside by the per-employer cap of 3": "status='skipped' AND reason LIKE 'already applied to % roles at this company%'",
+            # (2026-11-25) questions answered now: references, 'how did you hear' (any choice), phone type, desired hours, shifts,
+            # ACT ('did not take'), a candidate-pool consent, 'what attracted you', employment type and weekday boxes, a security
+            # clearance 'none', work authorization worded with 'without sponsorship', drug test / background check / transportation /
+            # driver's license, and commute questions
+            "an everyday question the bot answers now (Nov 25)": "status='skipped' AND (reason LIKE 'can''t truthfully answer%' OR "
+                "reason LIKE 'stuck on%') AND (reason LIKE '%Reference%' OR reason LIKE '%Hear About%' OR reason LIKE '%hear about%' OR "
+                "reason LIKE '%Phone Device%' OR reason LIKE '%Phone Type%' OR reason LIKE '%Desired Hours%' OR reason LIKE '%Shift%' OR "
+                "reason LIKE '%ACT Score%' OR reason LIKE '%candidate pool%' OR reason LIKE '%attracted you%' OR reason LIKE '%Temporary%' OR "
+                "reason LIKE '%Saturday%' OR reason LIKE '%Monday%' OR reason LIKE '%clearance%' OR reason LIKE '%Top Secret%' OR "
+                "reason LIKE '%authorized to work%' OR reason LIKE '%sponsorship%' OR reason LIKE '%drug%' OR reason LIKE '%background%' OR "
+                "reason LIKE '%transportation%' OR reason LIKE '%driver%' OR reason LIKE '%commut%' OR reason LIKE '%Full-Time%' OR "
+                "reason LIKE '%full time%')",
         }
         found = {}
         for name, where in rules.items():

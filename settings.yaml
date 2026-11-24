@@ -25,10 +25,11 @@ search:
                               # allowance now runs out every day by design, and unchecked jobs should not slip through then.
   daily_cap_unlimited: 500    # most applications in one day while the bot runs non-stop (300 until 2026-10-08): with thousands of candidates
                               # the limit should be the résumé check, not this number
-  max_per_company: 3          # (2026-11-24) at most 3 applications to one employer in company_window_days. With no limit it
-                              # had reached 36 at JLL and 33 at Allstate: a recruiter sees every one, and dozens read as
-                              # unfocused and sink them all. The best 3 matches go (they are checked best prospects first).
-  company_window_days: 120    # the 3 count the last 120 days; after that an employer can get new applications again
+  max_per_company: 8          # at most 8 applications to one employer in company_window_days. With no limit it had reached
+                              # 36 at JLL and 33 at Allstate (dozens read as unfocused). 3 (Nov 24) set aside 304 jobs in a
+                              # day, most at big employers with many separate teams (Anduril, USC, Northrop): 8 since Nov 25
+                              # ('there should be almost no reason I shouldn't be able to apply to a job').
+  company_window_days: 120    # the 8 count the last 120 days; after that an employer can get new applications again
   max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
   max_human_check_tries_per_day: 3      # tries per day on sites where every recent try ended at a human check (CAPTCHA);
                                         # their other good matches go to your apply-by-hand list
@@ -193,6 +194,16 @@ facts:                      # answers you gave (2026-10-15), merged into the pri
   outside_business: "No"         # not involved in other business activities as a proprietor, partner or officer
   certifications: "None"         # no professional certifications or licenses (a driver's license is asked separately)
   salary_expectation: "$75,000 to $85,000"   # (2026-11-24) $36-41 an hour, just above your $35 floor
+  # (2026-11-25) your answers: you have never failed a drug test or a background check and consent to both, you have reliable
+  # transportation and a valid driver's license, and you want a regular full-time position
+  drug_test_consent: "Yes"
+  background_check_consent: "Yes"
+  failed_drug_test: "No"
+  failed_background_check: "No"
+  reliable_transportation: "Yes"
+  has_drivers_license: "Yes"
+  available_full_time: "Yes"
+  desired_hours: "Regular full-time (40 hours per week)"
   salary_number: 78000           # a number-only pay box; an hourly box gets this / 2,080 = $38
   sms_consent: "No"              # (2026-10-27) no texts unless the form makes it mandatory: optional SMS boxes stay unticked,
                                  # 'may we text you?' -> No, 'how should we contact you?' -> email; a required consent box

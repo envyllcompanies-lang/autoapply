@@ -112,6 +112,39 @@ _UNSET = object()
 #   mode: None = normal | "choice" = only for option fields (select/radio/checkbox group) | "demo" = voluntary self-ID
 _AI_Q = (r"\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b.{0,60}\b(use[ds]?|using|assist\w*|generat\w*|tools?|help\w*)\b|"
          r"\b(use[ds]?|using|assist\w*|help\w*)\b.{0,60}\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b")
+def asked_sentence(low: str) -> str:
+    """The sentence that asks: the last one ending in '?' ('Read carefully. This role requires X. Are you X?' -> 'Are you X?'),
+    else the whole text."""
+    t = re.sub(r"\b(u\.s\.a\.|u\.s\.|e\.g\.|i\.e\.|etc\.|inc\.|no\.|vs\.|st\.|dr\.|mr\.|ms\.|mrs\.)", lambda m: m.group(0).replace(".", ""),
+               low or "", flags=re.I)                         # 'the U.S. without...' is one sentence, not two
+    parts = [p.strip() for p in re.split(r"(?<=[.!?])\s+", t) if p.strip()]
+    asks = [p for p in parts if p.endswith("?") or "?" in p]
+    return asks[-1] if asks else (low or "")
+
+
+_AUTH_Q = re.compile(r"authori[sz]ed|eligible to work|legally|right to work|able to (legally |lawfully )?work|permitted to work|lawfully", re.I)
+_NEED_SPONSOR = re.compile(r"(will|do|would|does|might|may)\W+(you\W+)?(now\W+or\W+in\W+the\W+future\W+|currently\W+|ever\W+)?"
+                           r"(require|need)\W+(\w+\W+){0,5}sponsor|(require|need)s?\W+(\w+\W+){0,3}sponsorship\W*\*?\W*$", re.I)
+
+
+def work_auth_kind(low: str) -> str | None:
+    """Which question this is: 'authorized_to_work_in_us' ('Are you legally authorized to work in the US without the need
+    for sponsorship?' -> Yes) or 'requires_sponsorship_now_or_future' ('Will you now or in the future require sponsorship?'
+    -> No). A sponsorship word in a preamble or after 'without' does not turn an authorization question into a sponsorship
+    one (it was answered No: a rejection). None when it asks both at once or neither."""
+    a = asked_sentence(low)
+    # 'without (the need for / requiring / employer) sponsorship' is part of an authorization question, not a need
+    a_need = re.sub(r"without\W+(\w+\W+){0,4}sponsorship", " ", a)
+    auth, need = bool(_AUTH_Q.search(a)), bool(_NEED_SPONSOR.search(a_need))
+    if auth and need:
+        return None                      # 'Are you authorized, and will you require sponsorship?': two answers in one box
+    if auth:
+        return "authorized_to_work_in_us"
+    if need or re.search(r"sponsor", a):
+        return "requires_sponsorship_now_or_future"
+    return None
+
+
 # (2026-11-24: 'any option for how did you hear about is okay ... just infer a lot of these answers') an answer where any
 # sensible choice will do: the choices in order of preference, then any real choice (submit.ANY). Only for questions where
 # every choice is harmless: how you heard of the job, the kind of phone.
@@ -187,6 +220,13 @@ FIELD_RULES = [
     (r"(comfortable|able|thrive|enjoy|excel|experienced)\W.{0,40}(fast.?paced|deadline|multi-?task|dynamic environment|changing priorit|ambiguity|under pressure)", ("comfortable_general",), "choice"),
     (r"currently (employed|working)", ("currently_employed",), None),
     (r"contact .{0,30}employer", ("may_contact_employer",), None),
+    # (2026-11-25) your history: never failed a drug test or a background check (these come first: 'Have you ever failed a drug
+    # test?' must never be read as 'will you take one?')
+    (r"(ever|previously|in the past)\W+(\w+\W+){0,4}(fail\w*|refus\w*|test(ed)? positive|positive (results?|tests?))\W+(\w+\W+){0,5}(drug|"
+     r"alcohol|substance)|drug (test|screen)\w*\W+(\w+\W+){0,6}(fail|refus|positive)|(ever|previously)\W+(\w+\W+){0,4}positive\W+"
+     r"(\w+\W+){0,2}(drug|alcohol|substance)", ("failed_drug_test",), None),
+    (r"(ever|previously)\W+(\w+\W+){0,4}(fail\w*|did not pass|not pass\w*)\W+(\w+\W+){0,4}background|background (check|screen|investigation)"
+     r"\w*\W+(\w+\W+){0,8}(fail|reveal|disqualif|adverse|negative)|anything (in|on) your background", ("failed_background_check",), None),
     (r"background (check|screen|investigation)|consent to .{0,30}(check|screening)", ("background_check_consent",), None),
     (r"drug (test|screen)", ("drug_test_consent",), None),
     (r"convict|felony|misdemeanor|criminal", ("criminal_conviction",), None),
@@ -731,8 +771,15 @@ class Brain:
                 pick = [i for i, t in lab.items() if (re.search(r"remote|virtual", t, re.I) and ok_re)
                         or (re.search(r"hybrid|in[- ]?person|on-?site|office", t, re.I) and ok_on)]
             elif nones and re.search(r"citizen|national|countr|employed by|served|military|government|relative|apply to you|"
-                                     r"any of the following|following (apply|statements)|affiliat|sanction|embargo|export", low):
-                pick = nones[:1]
+                                     r"any of the following|following (apply|statements)|affiliat|sanction|embargo|export|clearance", low):
+                pick = nones[:1]                           # (a security clearance list: you hold none)
+            elif any(re.search(r"full[- ]?time", t, re.I) for t in lab.values()) and \
+                    (re.search(r"(type|kind) of (employment|position|job|work)|employment type|seeking|looking for|interested in|desired", low)
+                     or sum(bool(re.search(r"full[- ]?time|part[- ]?time|temporary|seasonal|contract|per diem|intern", t, re.I))
+                            for t in lab.values()) >= 2):
+                from . import level as _lvl                # the kind of job you want: regular full-time (and temp/contract-to-hire)
+                pick = [i for i, t in lab.items() if re.search(r"full[- ]?time|permanent|regular", t, re.I) and not re.search(r"part", t, re.I)
+                        or (_lvl.ALLOW_CONTRACT and re.search(r"contract[- ]to[- ](hire|perm)|temp(orary)?[- ]to[- ](hire|perm)", t, re.I))]
             elif (re.search(r"locat|office|cit(y|ies)|where .{0,30}work|site", low) and not re.search(r"relocat", low)) or \
                     (len(lab) >= 4 and sum(bool(_PLACE_OPT.match(t)) and len(t) < 45 for t in lab.values()) >= 0.8 * len(lab)
                      and self._place_options(list(lab.values()))):
@@ -1160,6 +1207,11 @@ class Brain:
         if HUMAN_CHECK_RX.search(low):
             return None          # "I'm not a robot" style boxes are the site's human check: never ticked by the bot
         if NEVER_GIVE_RX.search(low[:400]):
+            if kind in ("select", "radio", "combobox", "checkbox_group") and re.search(r"\bsat\b|\bact\b", low[:400]):
+                got = next((o for o in (f.get("options") or []) if re.search(r"did not take|didn.t take|not taken|do not recall|don.t recall|"
+                                                                            r"prefer not|decline|n/?a\b|not applicable", str(o), re.I)), None)
+                if got:
+                    return [got] if kind == "checkbox_group" else got     # the list's own way to give no score
             return None          # you said never: Social Security number, SAT / ACT scores, transcripts, writing samples
         sms = self._sms_answer(f)
         if sms is not _UNSET:
@@ -1356,6 +1408,13 @@ class Brain:
                     continue
                 if mode == "salary" and re.search(r"\bveterans?\b", low):
                     continue         # a veteran self-ID whose definitions mention 'compensation' is not a pay question
+                if keys[0] in ("requires_sponsorship_now_or_future", "authorized_to_work_in_us"):
+                    wk = work_auth_kind(low)
+                    a_s = asked_sentence(low)
+                    if wk is None and _AUTH_Q.search(a_s) and _NEED_SPONSOR.search(re.sub(r"without\W+(\w+\W+){0,4}sponsorship", " ", a_s)):
+                        return None  # authorization and sponsorship asked in one Yes/No box: no single true answer
+                    if wk and wk != keys[0]:
+                        continue     # the question asked is the other one (see work_auth_kind)
                 if keys[0] in ("background_check_consent", "drug_test_consent") and PAST_RX.search(low):
                     continue         # a question about your past ('ever failed a drug test?'), not whether you would take one
                 if mode == "loc" and not self._location_ok(low):
@@ -1500,7 +1559,26 @@ class Brain:
                 return got
         if kind in ("text", "number") and re.search(r"how many hours\W+(\w+\W+){0,4}(week|weekly)|hours\W{1,3}(per|a|each)\W+week|"
                                                     r"weekly hours|(desired|preferred|available) (work )?hours", q):
-            return "40"
+            # (2026-11-25) a regular full-time position
+            return "40" if kind == "number" or re.search(r"per week|weekly|how many|number", q) else \
+                str(self.facts.get("desired_hours") or "Regular full-time (40 hours per week)")
+        if has_opts and real and not yn and re.search(r"(desired|preferred) (work )?hours|hours (desired|preferred|wanted)|work hours", q):
+            got = choose(r"full[- ]?time|^\W*40\b|regular|35\s*-\s*40|40\s*\+", r"no preference|\bany\b|flexible")
+            if got:
+                return got
+        # a required consent to keep your data for other openings (a 'candidate pool'): harmless, agreed to
+        if has_opts and real and f.get("required") and re.search(r"candidate pool|talent (pool|community|network)|future (opportunit|roles?|"
+                                                                  r"positions?|openings?)", q) and re.search(r"consent|agree|keep|retain|store", q):
+            got = choose(r"^\W*(i )?(agree|consent|accept|yes)\b", avoid=r"\b(dis|not|don.t|do not)")
+            if got:
+                return got
+        # 'what attracted you to us?': the growth the job offers
+        if has_opts and real and not yn and re.search(r"attract|drew you|draws you|interest(s|ed)? you (most )?(in|about)|why (do you want|are you "
+                                                      r"interested)|motivat", q):
+            got = choose(r"learning|development|growth|career|advancement", r"mission|culture|values|impact", r"brand|reputation|products?",
+                         avoid=r"friend|family|know someone")
+            if got:
+                return got
         # where you would work: no preference, else hybrid, else on-site, else remote
         if has_opts and real and not yn and re.search(r"(work|working) (arrangement|environment|model|setting|style) ?(preference|preferred|do you prefer)?|"
                                                       r"(prefer|preference)\W+(\w+\W+){0,4}(remote|hybrid|on-?site|in[- ]office)", q):

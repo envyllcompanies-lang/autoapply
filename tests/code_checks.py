@@ -557,4 +557,47 @@ _ok = _past == [None, None, None] and _will == ["Yes", "Yes"]
 print("OK " if _ok else "BAD", "questions about your past stay unanswered; willingness to be checked is Yes ->", _past, _will)
 bad += not _ok
 
+# ---- work authorization vs sponsorship, read from the sentence that asks (a 'without sponsorship' or a preamble about
+#      sponsorship once turned 'Are you authorized to work?' into a sponsorship question answered No: a rejection)
+_b = _Br({"facts": {"email": "a@b.org", "full_name": "Pat Doe", "authorized_to_work_in_us": "Yes", "requires_sponsorship_now_or_future": "No",
+                    "graduation_date": "May 2025", "drug_test_consent": "Yes", "background_check_consent": "Yes", "failed_drug_test": "No",
+                    "failed_background_check": "No", "has_drivers_license": "Yes", "reliable_transportation": "Yes",
+                    "desired_hours": "Regular full-time (40 hours per week)"}, "consent": {"sign_attestations": True}},
+         {"name": "Pat Doe"}, ".", lambda *a: None)
+_wa = [("Are you legally authorized to work in the United States without the need for sponsorship?", "Yes"),
+       ("Are you able to work in the U.S. without employer sponsorship?", "Yes"),
+       ("Read and answer this question carefully. This position requires that you are legally authorized to work in the United "
+        "States without sponsorship. Are you legally authorized to work in the U.S.?", "Yes"),
+       ("Will you now or in the future require sponsorship for employment visa status (e.g., H-1B)?", "No"),
+       ("Read and answer this question carefully. A current or future need for employment visa sponsorship may impact your "
+        "eligibility. Will you now or in the future require visa sponsorship?", "No"),
+       ("Are you legally authorized to work in the U.S., and will you require sponsorship?", None)]
+_got = [_b._answer(_F(q, "radio", ["Yes", "No"]), "", {}) for q, _w in _wa]
+_ok = _got == [w for _q, w in _wa]
+print("OK " if _ok else "BAD", "work authorization vs sponsorship read from the question asked ->", _got)
+bad += not _ok
+# your answers of Nov 25: never failed a drug test / background check, consent to both, license, transportation, full-time
+_qs = [("Have you ever failed a drug test?", "radio", ["Yes", "No"], "No"),
+       ("Have you ever had a positive drug test result?", "radio", ["Yes", "No"], "No"),
+       ("Have you ever failed a background check?", "radio", ["Yes", "No"], "No"),
+       ("Will you consent to a drug screen?", "radio", ["Yes", "No"], "Yes"),
+       ("Do you have a valid driver's license?", "radio", ["Yes", "No"], "Yes"),
+       ("Desired work hours", "select", ["Part-time (20 hours)", "Full-time (40 hours)", "Either"], "Full-time (40 hours)"),
+       ("Desired work hours", "text", [], "Regular full-time (40 hours per week)"),
+       ("ACT Score*", "combobox", ["Did not take/Do not recall", "36 out of 36"], "Did not take/Do not recall"),
+       ("Do you consent to processing your personal data for a candidate pool?", "combobox", ["Select One", "I agree", "I disagree"], "I agree"),
+       ("What attracted you to J.Crew?*", "combobox", ["Select One", "I have friends who work there", "Learning and Development"], "Learning and Development")]
+_got = [_b._answer(_F(q, k, o), "", {}) for q, k, o, _w in _qs]
+_ok = _got == [w for *_x, w in _qs]
+def _grp(q, labels):
+    fs = [{"id": f"g{i}", "kind": "checkbox_single", "label": l, "question": q, "required": True, "options": [], "key": "formField-g"}
+          for i, l in enumerate(labels)]
+    a, m = {}, [x["id"] for x in fs]
+    _b._pick_in_groups(fs, a, m)
+    return sorted(labels[int(k[1:])] for k, v in a.items() if v is True)
+_ok = _ok and _grp("What type of employment are you seeking?*", ["Full-Time", "Part-Time", "Temporary/Seasonal"]) == ["Full-Time"] \
+    and _grp("Current security clearance level*", ["NA", "Secret", "Top Secret"]) == ["NA"]
+print("OK " if _ok else "BAD", "your Nov 25 answers (drug test, background check, license, full-time) and everyday lists ->", _got)
+bad += not _ok
+
 sys.exit(bad + bad_mail)
