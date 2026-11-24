@@ -1,325 +1,3 @@
-=== 2026-11-20 18:05:28  unconfirmed  Associate, Growth @ united-talent-agency
-url: https://jobs.ashbyhq.com/united-talent-agency/25e5ca95-d9ff-4e2a-960e-eb4dcf69030b/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 's role? Yes No What is your desired annual salary? (include currency symbol) How did you hear about this opportunity? Recruiting Privacy Policy Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Associate, Growth
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Full Legal Name
-  <input:text #_systemfield_name required filled>
-label: Preferred Name
-  <input:text #4cf9f50c-c7ac-459a-90be-ddd8cf3bb035 filled>
-label: Email Address
-  <input:email #_systemfield_email required filled>
-label: Phone Number
-  <input:text #9c736901-e938-49c3-92f8-1250b020670b required filled>
-label: Location
-  <input filled>
-  [button] 
-label: Full Permanent Address
-  <textarea #692f0f61-cc0b-4888-95a3-c21a06486f0c required filled>
-label: LinkedIn Profile Link/Handle
-  <input:text #6ca30510-295e-4e0b-b6a2-899d16e668a4 filled>
-label: Website Link (github, portfolio, other..)
-  <input:text #2a9bed12-5bd6-4431-acab-3977fb458384 filled>
-label: When are you available to start?
-  <input:text filled>
-label: Are you authorized to work lawfully in the United States for United Talent Agency?
-  [button] Yes
-  [button] No
-  <input:checkbox name=73045f53-6c90-46f6-90a5-f7992e88b05a question-answered>
-label: Will you now, or in the future, require sponsorship (i.e. H-1B visa, etc.) to legally work in the U.S.? If hir
-  [button] Yes
-  [button] No
-  <input:checkbox name=7e1e1d4c-e0ea-4fa4-a8f2-73305925d612 question-unanswered>
-label: Unless otherwise posted in writing, relocation assistance will not be provided for this role. Are you willing 
-  [button] Yes
-  [button] No
-  <input:checkbox name=4a6990c4-b54d-46a1-9b2b-b9c57a5c1735 question-unanswered>
-label: What is your desired annual salary? (include currency symbol)
-  <input:text #22960a52-de56-4e57-9887-2df074f298be filled>
-label: How did you hear about this opportunity?
-  <input filled>
-  [button] 
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-20 18:07:39  unconfirmed  Associate, Client Solutions @ jobs-valence
-url: https://jobs.ashbyhq.com/jobs-valence/bd07eab4-e0f6-4966-b39c-2d54ab5739ce/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'tations Please describe your personal and professional AI usage How many years of relevant experience do you have? 1-2 yrs 3-5 years 6-10 years Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Associate, Client Solutions
-# Location
-  text: Toronto / New York; London, UK
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-# Valence Application Form
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Location
-  <input filled>
-  [button] 
-label: Please confirm which countries you are authorized to work in without requiring employer sponsorship, either no
-  <input:text #a02730d4-46e4-4b73-b213-d877b4add4b1 required filled>
-label: Please share your compensation expectations
-  <input:text #5d2be74f-a9d3-4ec5-8df8-2672f1cf545d filled>
-label: Please describe your personal and professional AI usage
-  <textarea #bdabf382-9739-449b-83d1-2ffc54a926eb required filled>
-label: How many years of relevant experience do you have?
-  <input:checkbox #8af2c64e-0028-45ce-b47f-5082699c94c3_372bb819-3f1f-4f0e-8319 question-unanswered>
-label: 1-2 yrs
-  <input:checkbox #8af2c64e-0028-45ce-b47f-5082699c94c3_372bb819-3f1f-4f0e-8319 question-unanswered>
-label: 3-5 years
-  <input:checkbox #8af2c64e-0028-45ce-b47f-5082699c94c3_372bb819-3f1f-4f0e-8319 question-unanswered>
-label: 6-10 years
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-20 18:13:01  skipped  Finance & People Coordinator @ Colorado Outward Bound School
-url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4680100
-stage: page 4
-why: stuck on step 4; page says: ['Upload Cover Letter (required)\nSelect Cover Letter\<file> and .doc files only, 10M', 'Upload Cover Letter (required)', 'Cover Letter is required']; fields flagged: none; buttons: :Remove; infoFirstName:; infoLastName:; infoMiddleName:; infoPreferredName:; infoEmail:; infoCellPhone:; infoPhone:; public-site-address:Country
-United States
-A
-  text: Finance & People Coordinator
-  [button] 
-  [button] 
-  [button] 
-  [button] 
-  text: <file>
-  [button] Remove
-label: First Name (required)
-  <input:text #info.firstName {infoFirstName} filled>
-label: Last Name (required)
-  <input:text #info.lastName {infoLastName} filled>
-label: Middle Name
-  <input:text #info.middleName {infoMiddleName} filled>
-label: Preferred First Name
-  <input:text #info.preferredName {infoPreferredName} filled>
-label: Email Address (required)
-  <input:text #info.email {infoEmail} filled>
-label: Mobile Number
-  <input:text #info.cellPhone {infoCellPhone} filled>
-  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
-label: Home Phone Number
-  <input:text #info.phone {infoPhone} filled>
-label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
-  text: SMS Terms and Conditions and Privacy Policy
-label: Country United States
-label: Address Line 1
-label: Address Line 2(optional)
-label: City
-label: County
-label: State CO
-label: Zip Code
-label: Upload Cover Letter (required)
-  <input:file #btn-coverLetter no-file>
-  [button] Select Cover Letter {btn-coverLetter}
-  text: .pdf and .doc files only, 10MB file size limit
-label: Upload Additional Files
-  <input:file #btn-additionalFiles no-file>
-  [button] Select File(s) {btn-additionalFiles}
-label: Company Name (required)
-  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
-label: Position (required)
-  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
-label: Company Website
-  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} filled>
-label: Company Phone Number
-  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} filled>
-label: Responsibilities
-  <textarea:text #workHistory.responsibilities.0 filled>
-label: Start Date
-  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
-  [button]  {workHistory.startDate.0.picker-button} opens-dialog
-(dialog)
-label: End Date
-  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
-  [button]  {workHistory.endDate.0.picker-button} opens-dialog
-(dialog)
-label: Reason for Leaving
-  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
-label: Currently Working Here
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
-  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
-  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} filled>
-  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} filled>
-  <textarea:text #workHistory.responsibilities.1 filled>
-  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
-  [button]  {workHistory.startDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
-  [button]  {workHistory.endDate.1.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
-  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
-  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} filled>
-  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} filled>
-  <textarea:text #workHistory.responsibilities.2 filled>
-  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
-  [button]  {workHistory.startDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
-  [button]  {workHistory.endDate.2.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
-  [button] Delete This Work History
-  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
-  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
-  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} filled>
-  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} filled>
-  <textarea:text #workHistory.responsibilities.3 filled>
-  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
-  [button]  {workHistory.startDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
-  [button]  {workHistory.endDate.3.picker-button} opens-dialog
-(dialog)
-  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} filled>
-  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
-  [button] Delete This Work History
-  [button] Add Work History {btnAddWorkHistory}
-label: School Name (required)
-  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
-  [button] Delete This Education History
-  [button] Add Education {btnAddEducationHistory}
-  [button] Next Step {btnNext}
-  [button] 
-
-=== 2026-11-20 18:13:23  skipped  Implementation Specialist @ keepersecurity
-url: https://job-boards.greenhouse.io/keepersecurity/jobs/4515480009
-stage: page 1
-why: can't truthfully answer required: Will you now or at any time in the future require our compan
-# Implementation Specialist
-  [button] Apply
-  text: Keeper is hiring a driven Implementation Specialist to join our B2B Support team. This can be a 100% remote position from select locations, 
-  text: Keeper’s cybersecurity software is trusted by millions of people and thousands of organizations, globally. Keeper is published in 23 languag
-  text: As an Implementation Specialist at Keeper Security, your role will be pivotal in guaranteeing the successful onboarding and adoption of our 
-  text: Oversee the delivery of Keeper’s software for all customers including initial deployments of new customers and expansion deployments of exis
-  text: Tailor our solutions to meet the specific needs and objectives of each customer, ensuring a personalized and effective experience
-  text: Offer continuous technical support to customers, adeptly troubleshooting issues and efficiently resolving any concerns as they arise. Furthe
-  text: Maintain accurate records of customer configurations, customizations, and communication to ensure a comprehensive understanding of each impl
-  text: Gather feedback from customers and collaborate with the product development team to improve the functionality and usability of our solutions
-  text: Effectively oversee multiple implementation projects concurrently, ensuring their timely delivery within predefined scope
-  text: Maintain consistent and transparent communication of project status and progress to internal stakeholders and customers, promptly addressing
-  text: 2+ years of progressive experience in SaaS support and/or implementation
-  text: Experience with Salesforce
-  text: Experience with Google docs and MS-office tools
-  text: Experience in SaaS deployment with security software experience preferred
-  text: Proficiency in leading external customer engagements
-  text: Excellent communication and interpersonal skills, with the ability to effectively manage customer relationships
-  text: Strong analytical and problem-solving skills
-  text: Ability to work independently and as part of a team, across global regions and time zones
-  text: Bachelor's degree in finance, business administration (or a field related to project management) or equivalent work experience
-  text: Medical, Dental & Vision (Inclusive of domestic partnerships)
-  text: Employer Paid Life Insurance & Employee/Spouse/Child Supplemental life
-  text: Voluntary Short/Long Term Disability Insurance
-  text: A generous PTO plan that celebrates your commitment and seniority (including paid Bereavement/Jury Duty, etc)
-  text: Above market annual bonuses
-  text: Keeper Security, Inc. is an equal opportunity employer and participant in the U.S. Federal E-Verify program. We celebrate diversity and are 
-  text: Keeper Candidate Privacy Notice
-  text: This notice explains how Keeper Security processes your personal data during recruitment. Depending on the role and location, the Controller
-  text: Contact details, CV/resume, cover letter
-  text: Employment history, qualifications, work eligibility
-  text: Application responses and uploaded documents
-  text: Interview notes, assessments, communications
-  text: Recruiter/referral information who submit your profile
-  text: References (with your consent, before final offer)
-  text: Public professional profiles
-  text: Background verification (post offer)
-  text: Voluntary Diversity and Equal Opportunity Information
-  text: We may ask you to voluntarily provide diversity information including race/ethnicity, gender, disability status and veteran status (US). Pro
-  text: Assess your application and suitability
-  text: Manage interviews and recruitment workflow
-  text: Consider you for other/future roles (we may seek your consent to keep your information on our systems beyond the retention period specified)
-  text: Comply with employment law obligations
-  text: Legitimate Interests (recruitment management, security and integrity of the hiring process)
-  text: Contracting steps (for progressed candidates)
-  text: Legal and regulatory compliance obligations; explicit consent where required
-  text: Who We Share Information With
-  text: HR, hiring managers, interviewers*, IT support for system administration
-  text: *Note - diversity and equal opportunity data is not shared with hiring managers.
-  text: Service providers who assist with:
-  text: Applicant tracking, recruitment systems and assessment providers
-  text: Background verification vendors (post offer)
-  text: Recruitment agencies (where applicable)
-  text: Tools to support communication, collaboration and to securely store your data
-  text: Keeper ensures that all our third parties are contractually bound to protect your personal data with adequate safeguards in place.
-  text: Your data may be accessed by Keeper entities globally as needed for the purposes of hiring and decision making. We protect any such data tra
-  text: We implement appropriate technical and organizational measures to protect your data, consistent with our industry leading security standards
-  text: We keep your data for 24 months from your last application activity, then delete or anonymize it.
-  text: You opt into our talent database for further retention by providing consent (extended retention)
-  text: You're hired (transfers to employee records)
-  text: You have the following rights and can contact us at the email below to exercise them:
-  text: Access, correct, or delete your data, subject to applicable law and retention requirements
-  text: Object to or restrict processing
-  text: Withdraw consent (where applicable)
-  text: Lodge a complaint with your data protection authority
-  text: If you become an employee, your rights regarding your employee record are governed by our internal Employee Privacy Notice and certain data 
-  text: When you request access to your personal data, some information may be redacted if it includes the personal data of other individuals or inf
-  text: Keeper does not make hiring decisions using solely automated processing.
-  text: - Candidates can send privacy questions to: <email>
-  text: Interested in building your career at Keeper Security? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Preferred First Name
-  <input:text #preferred_name empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-label: Location (City)*
-  <input:text #candidate-location required empty>
-  <input required empty>
-  [button] Locate me
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Google Drive
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button
-
 === 2026-11-20 18:16:43  skipped  Associate Product Manager @ jcrew
 url: https://jcrew.wd1.myworkdayjobs.com/friendsfamilycareers/job/New-York-NY-USA-Headquarters/Associate-Product-Manager_126672/apply/applyManually
 stage: Application Questions
@@ -5477,4 +5155,307 @@ label: I consent to the above terms and conditions.*
   [link]  {socialIcon}
   [link] Privacy Policy {privacyLink}
   text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-24 15:41:41  skipped  Planner/Buyer @ curtisswright
+url: https://curtisswright.wd1.myworkdayjobs.com/cw_external_career_site/job/US-CA-Brea-Nuclear/Planner-Buyer_JR14048-1/apply/applyManually
+stage: Application Questions
+why: stuck on Workday's 'Application Questions' page; Workday says: ['Error: The field Please provide base salary requirement. Please ENTER a NUMBER value, do NOT put Negotiable or leave blank as your answer. is required and must have a val', 'Error-Please provide base salary requirement. Please ENTER a NUMBER value, do NOT put Negotiable or leave blank as your answer. The field Please provide base sal
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# Join the WRIGHT Team!
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Curtiss Wright Home Page {navigationItem-Curtiss Wright Home Page}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Planner/Buyer
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+# Errors Found
+! Error-Please provide base salary requirement. Please ENTER a NUMBER value, do NOT put Negotiable or leave blank as your answer. The field Please provide base salary requirement. Please ENTER a NUMBER  {errorHeading}
+{applyFlowPrimaryQuestionsPage}
+  text: Thank you for taking a moment to answer these few questions.
+ {formField-cfd533c718d0100b864842885df40000}
+label: Are you at least 18 years of age?*
+  [dropdown] chosen #primaryQuestionnaire--cfd533c718d0100b864842885df40000
+ {formField-cfd533c718d0100b864842885df40003}
+label: Have you ever been employed by Curtiss-Wright Corporation or a subsidiary or affiliate of Curtiss-Wright Corpo
+  [dropdown] chosen #primaryQuestionnaire--cfd533c718d0100b864842885df40003
+ {formField-cfd533c718d0100b864843233bc30002}
+label: If hired, can you provide proof of your legal right to work and remain in the country you are applying to?*
+  [dropdown] chosen #primaryQuestionnaire--cfd533c718d0100b864843233bc30002
+ {formField-cfd533c718d0100b864843be2e6b0002}
+label: Please provide base salary requirement. Please ENTER a NUMBER value, do NOT put Negotiable or leave blank as y
+  <input:text #primaryQuestionnaire--cfd533c718d0100b864843be2e6b0002 required INVALID empty>
+! Error: The field Please provide base salary requirement. Please ENTER a NUMBER value, do NOT put Negotiable or leave blank as your answer. is required and must have a value. {inputAlert}
+ {formField-cfd533c718d0100b864844590c0b0000}
+label: If successful in the process, you may be required to undergo a background check which may include employment v
+  [dropdown] chosen #primaryQuestionnaire--cfd533c718d0100b864844590c0b0000
+ {formField-cfd533c718d0100b864844590c0b0003}
+label: I certify that all information I have provided to Curtiss-Wright in support of my application for employment i
+  [dropdown] chosen #primaryQuestionnaire--cfd533c718d0100b864844590c0b0003
+ {formField-cfd533c718d0100b864844f3cb960002}
+label: Please state your name and current date in the box below .*
+  <textarea #primaryQuestionnaire--cfd533c718d0100b864844f3cb960002 required filled>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+  [link] Privacy Notice {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-24 15:58:34  skipped  Project Engineer @ jjsnackfoods
+url: https://job-boards.greenhouse.io/jjsnackfoods/jobs/5445546008
+stage: page 1
+why: can't truthfully answer required: Shift applied for*
+# Project Engineer
+  [button] Apply
+  text: As a leader and innovator in the snack food industry for over 50 years, J&J Snack Foods provides branded snack foods to foodservice and reta
+  text: The Project Engineer is responsible for planning, coordinating, and executing engineering projects within a large-scale food manufacturing f
+  text: Projects may include equipment installation and upgrades, process improvements, facility modifications, utilities, automation, packaging sys
+  text: Lead engineering projects from initial concept and scope development through design, procurement, installation, commissioning, and project c
+  text: Develop project scopes, schedules, budgets, capital expenditure estimates, and project documentation.
+  text: Coordinate with Operations and Maintenance to identify opportunities for improved safety, reliability, quality, capacity, efficiency, and co
+  text: Prepare and review engineering drawings, equipment specifications, layouts, process flow diagrams, and technical documentation.
+  text: Manage contractors, engineering consultants, equipment suppliers, and other external partners.
+  text: Coordinate equipment installation, construction, commissioning, startup, and acceptance activities while minimizing disruption to production
+  text: Ensure projects comply with applicable building codes, electrical and mechanical requirements, environmental regulations, food safety standa
+  text: Incorporate hygienic design principles into equipment, piping, facility, and process modifications.
+  text: Partner with Food Safety and Quality teams to ensure projects meet sanitation, allergen-control, product-quality, and regulatory requirement
+  text: Support the development and execution of equipment qualification, commissioning, startup, and validation activities as applicable.
+  text: Conduct project risk assessments and ensure appropriate safety controls are incorporated into project designs and execution plans.
+  text: Track project costs, schedules, risks, issues, and change orders; communicate status and escalations to plant and corporate leadership.
+  text: Develop and maintain project documentation, including scopes of work, RFQs, equipment specifications, drawings, commissioning records, and a
+  text: Lead or support continuous-improvement initiatives involving throughput, OEE, labor efficiency, waste reduction, energy consumption, and pro
+  text: Work with Maintenance and Reliability teams to improve equipment maintainability, spare-parts requirements, preventive maintenance, and asse
+  text: Support troubleshooting and root-cause analysis for engineering-related production and equipment issues.
+  text: Participate in capital planning and help develop multi-year facility and equipment improvement plans.
+  text: Ensure contractors and project personnel follow plant safety, GMP, sanitation, lockout/tagout, and site-specific requirements.
+  text: Participate in project post-mortems and implement lessons learned on future projects.
+  text: The Project Engineer may support projects involving:
+  text: Production and processing equipment
+  text: Packaging and material-handling systems
+  text: Steam, compressed air, water, and other utilities
+  text: Wastewater and environmental systems
+  text: Electrical distribution and power systems
+  text: Facility expansions and building modifications
+  text: Sanitary piping and process systems
+  text: CIP and sanitation systems
+  text: Energy and water reduction projects
+  text: Safety and ergonomic improvements
+  text: Capacity expansion and new production lines
+  text: Equipment replacement and modernization
+  text: Engineering problem-solving
+  text: Contractor and vendor management
+  text: Manufacturing process improvement
+  text: Safety and risk management
+  text: Cross-functional collaboration
+  text: Budget and schedule management
+  text: Bachelor's degree in Mechanical Engineering, Electrical Engineering, Chemical Engineering, Industrial Engineering, or a related engineering 
+  text: 3+ years of engineering or project engineering experience, preferably in food, beverage, consumer products, pharmaceutical, chemical, or oth
+  text: Experience managing multiple engineering projects from concept through implementation.
+  text: Strong understanding of manufacturing equipment, industrial processes, and facility systems.
+  text: Ability to read and interpret engineering drawings, specifications, and equipment documentation.
+  text: Strong project management, communication, organizational, and problem-solving skills.
+  text: Ability to work effectively with cross-functional teams, contractors, vendors, and plant leadership.
+  text: Demonstrated commitment to workplace safety and regulatory compliance.
+  text: Experience in a high-volume food or beverage manufacturing facility.
+  text: Experience with capital projects and CAPEX budgeting.
+  text: Knowledge of GMPs, HACCP, sanitation, hygienic design, and food safety requirements.
+  text: Experience with automated production and packaging equipment.
+  text: Familiarity with PLCs, industrial controls, robotics, or manufacturing automation.
+  text: Experience with CAD and project management software.
+  text: Lean Manufacturing, Six Sigma, or continuous-improvement experience.
+  text: Professional Engineer (PE) license or Engineer-in-Training (EIT) certification.
+  text: BA/BS Engineering and 5 years related experience or 10 years related experience in bakery plant engineering position.
+  text: Strong engineering skills and mechanical aptitude.
+  text: Excellent planning/organizational skills.
+  text: Able to read and draw electrical schematics (line)
+  text: Ability to troubleshoot, diagnose, and make programming changes to AB PLC500, PLC5, PanelView, PanelView+
+  text: Contract negotiation skills.
+  text: Troubleshoot equipment & machinery.
+  text: Ability to work effectively with regulatory agencies.
+  text: Excellent management skills.
+  text: Effective communication skills.
+  text: Familiar with AutoCAD, Machine Design, and Parts Drafting.
+  text: Ability to work with deadlines/schedules.
+  text: Self-starter. Requires minimum supervision.
+  text: Disclaimer: This position description is not designed to cover or contain a comprehensive listing of activities, duties or responsibilities 
+  text: EEO Statement: J&J Snack Foods Corp.is an equal opportunity employer and prohibits discriminatory employment actions against, and treatment 
+  text: Interested in building your career at J&J Snack Foods? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name*
+  <input:text #preferred_name required empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <inpu
+
+=== 2026-11-24 16:08:01  skipped  Human Resource Administrator @ SONANCE
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4284739
+stage: page 1
+why: can't truthfully answer required: May We Contact for Reference? (required) *; May We Contact for Reference? (required) *
+  text: Human Resource Administrator
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: <file>
+  [button] Remove
+label: First Name (required)
+  <input:text #info.firstName {infoFirstName} filled>
+label: Last Name (required)
+  <input:text #info.lastName {infoLastName} filled>
+label: Middle Name
+  <input:text #info.middleName {infoMiddleName} empty>
+label: Preferred First Name
+  <input:text #info.preferredName {infoPreferredName} empty>
+label: Email Address (required)
+  <input:text #info.email {infoEmail} filled>
+label: Mobile Number
+  <input:text #info.cellPhone {infoCellPhone} filled>
+  text: For international numbers, start with a + and then the country code (e.g., +57 for Colombia)
+label: Home Phone Number
+  <input:text #info.phone {infoPhone} empty>
+label: Have you applied for a job with us before?
+label: We may use SMS during the hiring process. Do you give us permission to text you? (required)
+  text: SMS Terms and Conditions and Privacy Policy
+label: Country United States
+label: Address Line 1
+label: Address Line 2(optional)
+label: City
+label: County
+label: State Select a state
+label: Zip Code
+label: Available to Start
+  <input:text #info.dateAvailableToStart empty>
+  [button]  opens-dialog
+(dialog)
+label: LinkedIn Profile URL
+  <input:text #info.linkedIn {infoLinkedIn} empty>
+label: Desired Salary Type (required)
+label: Salary Range (required)
+  <input:text #info.minimumDesiredSalary {infoMinimumDesiredSalary} empty>
+label: to
+  <input:text #info.maximumDesiredSalary {infoMaximumDesiredSalary} empty>
+label: How did you hear about us?(optional) Online Job Board Company Website Friend or Family Member Current Employee
+label: Referred by
+  <input:text #info.referredBy {infoReferredBy} empty>
+label: Skills
+  <input:text #info.skills empty>
+label: Have you worked with us before?
+label: Upload Cover Letter
+  <input:file #btn-coverLetter no-file>
+  [button] Select Cover Letter {btn-coverLetter}
+  text: .pdf and .doc files only, 10MB file size limit
+label: Upload Additional Files
+  <input:file #btn-additionalFiles no-file>
+  [button] Select File(s) {btn-additionalFiles}
+label: Company Name (required)
+  <input:text #workHistory.companyName.0 {workHistoryCompanyName0} filled>
+label: Position (required)
+  <input:text #workHistory.position.0 {workHistoryPosition0} filled>
+label: Company Website
+  <input:text #workHistory.companyUrl.0 {workHistoryCompanyUrl0} empty>
+label: Company Phone Number
+  <input:text #workHistory.companyPhone.0 {workHistoryCompanyPhone0} empty>
+label: Responsibilities (required)
+  <textarea:text #workHistory.responsibilities.0 filled>
+label: Start Date (required)
+  <input:text #txt-workHistory-startDate-0 {txt-workHistory-startDate-0} filled>
+  [button]  {workHistory.startDate.0.picker-button} opens-dialog
+(dialog)
+label: End Date (required)
+  <input:text #txt-workHistory-endDate-0 {txt-workHistory-endDate-0} filled>
+  [button]  {workHistory.endDate.0.picker-button} opens-dialog
+(dialog)
+label: Reason for Leaving (required)
+  <input:text #workHistory.reasonForLeaving.0 {workHistoryReasonForLeaving0} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.0 question-unanswered>
+label: Currently Working Here
+label: May We Contact for Reference? (required)
+  <input:text #workHistory.companyName.1 {workHistoryCompanyName1} filled>
+  <input:text #workHistory.position.1 {workHistoryPosition1} filled>
+  <input:text #workHistory.companyUrl.1 {workHistoryCompanyUrl1} empty>
+  <input:text #workHistory.companyPhone.1 {workHistoryCompanyPhone1} empty>
+  <textarea:text #workHistory.responsibilities.1 filled>
+  <input:text #txt-workHistory-startDate-1 {txt-workHistory-startDate-1} filled>
+  [button]  {workHistory.startDate.1.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-1 {txt-workHistory-endDate-1} filled>
+  [button]  {workHistory.endDate.1.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.1 {workHistoryReasonForLeaving1} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.1 question-unanswered>
+  [button] Delete This Work History
+  <input:text #workHistory.companyName.2 {workHistoryCompanyName2} filled>
+  <input:text #workHistory.position.2 {workHistoryPosition2} filled>
+  <input:text #workHistory.companyUrl.2 {workHistoryCompanyUrl2} empty>
+  <input:text #workHistory.companyPhone.2 {workHistoryCompanyPhone2} empty>
+  <textarea:text #workHistory.responsibilities.2 filled>
+  <input:text #txt-workHistory-startDate-2 {txt-workHistory-startDate-2} filled>
+  [button]  {workHistory.startDate.2.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-2 {txt-workHistory-endDate-2} filled>
+  [button]  {workHistory.endDate.2.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.2 {workHistoryReasonForLeaving2} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.2 question-unanswered>
+  [button] Delete This Work History
+  <input:text #workHistory.companyName.3 {workHistoryCompanyName3} filled>
+  <input:text #workHistory.position.3 {workHistoryPosition3} filled>
+  <input:text #workHistory.companyUrl.3 {workHistoryCompanyUrl3} empty>
+  <input:text #workHistory.companyPhone.3 {workHistoryCompanyPhone3} empty>
+  <textarea:text #workHistory.responsibilities.3 filled>
+  <input:text #txt-workHistory-startDate-3 {txt-workHistory-startDate-3} filled>
+  [button]  {workHistory.startDate.3.picker-button} opens-dialog
+(dialog)
+  <input:text #txt-workHistory-endDate-3 {txt-workHistory-endDate-3} filled>
+  [button]  {workHistory.endDate.3.picker-button} opens-dialog
+(dialog)
+  <input:text #workHistory.reasonForLeaving.3 {workHistoryReasonForLeaving3} empty>
+  <input:checkbox #workHistory.currentlyWorkingHere.3 question-unanswered>
+  [button] Delete This Work History
+  [button] Add Work History {btnAddWorkHistory}
+label: Certifications & Awards Earned
+  <input:text #educationHistory.certificationsAndAwards empty>
+label: School Name (required)
+  <input:text #educationHistory.name.0 {educationHistoryName0} filled>
+label: Area of Study
+  <input:text #educationHistory.areaOfStudy.0 {educationHistoryAreaOfStudy0} filled>
+label: School Type
+label: GPA
+  <input:text #educationHistory.gpa.0 {educationHistoryGpa0} empty>
+label: Did you Graduate? (required)
+label: Degree Obtained (required)
+label: Graduation Date (required)
+  <input:text #txt-educationHistory-graduationDate-0 {txt-educationHistory-graduationDate-0} filled>
+  [button]  {educationHistory.graduationDate.0.picker-button} opens-dialog
+(dialog)
+label: Country
+  <input:text #educationHistory.city.0 {educationHistoryCity0} empty>
+label: State
+  [button] Add Education {btnAddEducationHistory}
+  [button] Next Step {btnNext}
+  [button] 
 
