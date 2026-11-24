@@ -897,7 +897,7 @@ class Brain:
                 return out(pick(r"^yes\b"))
             return out(pick(r"permanent resident|lawful permanent", r"currently a .{0,3}u\.?s\.? person", r"^u\.?s\.? person", avoid=r"\bnot\b|foreign"))
         if re.search(r"phone (device )?type|device type", q) and c.get("phone_type"):
-            return out(pick(r"mobile|cell"))
+            return out(pick(r"mobile|cell", r"personal (primary|mobile|cell)", r"^\W*personal\b", avoid=r"business|work|office"))
         if re.search(r"time ?zone", q) and c.get("timezone"):
             tz = str(c["timezone"])
             return out(pick(r"\b" + re.escape(tz) + r"\b", {"MST": r"mountain"}.get(tz, r"$^")))
@@ -1368,7 +1368,8 @@ class Brain:
                     got = self._resolve(f, str(val), opts) or self._semantic(keys[0], val, opts, f["kind"], low)
                     if got:
                         return got
-                    if kind == "combobox" and mode is None and len(low) < 40 and keys[0] in ("country", "state", "city", "location", "county"):
+                    if kind == "combobox" and mode is None and len(low) < 40 and keys[0] in ("country", "state", "city", "location", "county",
+                                                                                              "how_did_you_hear"):
                         # a long list the page loads as you scroll (Workday's 250 countries): type the real value and
                         # let the list find it, never settle for whatever option happened to be loaded
                         return "United States of America" if keys[0] == "country" and re.match(r"(united states|us|usa)$", str(val), re.I) else str(val)
