@@ -102,10 +102,14 @@ def merge_settings(cfg: dict, base: Path) -> dict:
                 a[k] = v
     drop = set(((over.get("writer") or {}).pop("drop_providers", None)) or [])
     add = ((over.get("search") or {}).pop("titles_include_add", None)) or []
+    add_exc = ((over.get("search") or {}).pop("titles_exclude_add", None)) or []
     deep(cfg, over)
     if add:          # titles added to the private list, never replacing it
         se = cfg.setdefault("search", {})
         se["titles_include"] = list(dict.fromkeys([*(se.get("titles_include") or []), *(str(x) for x in add)]))
+    if add_exc:      # words added to the private list of excluded titles, never replacing it
+        se = cfg.setdefault("search", {})
+        se["titles_exclude"] = list(dict.fromkeys([*(se.get("titles_exclude") or []), *(str(x) for x in add_exc)]))
     w = cfg.get("writer") or {}
     if drop and isinstance(w.get("providers"), list):
         w["providers"] = [x for x in w["providers"] if x.get("name") not in drop]

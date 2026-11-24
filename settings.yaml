@@ -80,6 +80,17 @@ search:
     - accounts payable
     - accounts receivable
     - field service engineer
+  titles_exclude_add:         # (2026-11-24) added to your private exclude list: behavior-therapy roles ('Board Certified Behavior
+    - behavior analyst        # Analyst', 'Behavior Technician') matched 'analyst' / 'technician' and took 36 of the 73 failed
+    - behavioral analyst      # résumé checks on Nov 24; they need clinical certification
+    - behavior technician
+    - behavioral technician
+    - bcba
+    - registered behavior
+    - " rbt"
+    - "(rbt"
+    - aba paraprofessional
+    - aba therapist
 
 # A cover letter only where the form requires one (true: on every form that has a cover-letter box; false: never,
 # and a form that requires one is skipped). Overrides config.yaml.
