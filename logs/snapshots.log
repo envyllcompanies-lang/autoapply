@@ -1,582 +1,3 @@
-=== 2026-11-20 17:55:08  unconfirmed  Talent Coordinator @ inbeat-agency
-url: https://jobs.ashbyhq.com/inbeat-agency/a60d0257-22e1-403d-ad37-95a8b2f48b71/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'and production coordination, and what experience (from school, internships, side projects, or elsewhere) you think would help you in this role. Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Talent Coordinator
-# Location
-  text: Remote; EMEA; Lithuania; Poland; Romania; Serbia; South Africa
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Where did you first hear about this role?
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Linkedin
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Indeed
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Referral (friend, colleague, etc.)
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Company's Career Page
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Social media
-  <input:radio #902f9e39-a86e-4c3e-abf1-5ad4760440f9_a06cf005-c162-494f-bbc3 question-answered>
-label: Other
-label: Your Linkedin Page
-  <input:text #ac78513d-5037-40f7-85f6-e5505ade0422 required filled>
-label: Location
-  text: What is your primary country of residence (Note: you should hold citizenship or permanent right to work in this country)
-  <input filled>
-  [button] 
-label: Your salary expectations
-  <input:number #fe5fc672-aa57-4fca-9d28-9d748c8226f1 required filled>
-label: Tell us about a project where you coordinated people, tasks, schedules, or bookings. What was your role, and w
-  <textarea #d99e1d60-cf65-477d-85f8-1e4491ac5479 required filled>
-label: Have you been involved in casting or sourcing talent (creators, models, actors, UGC creators)? If so, tell us 
-  <textarea #8ba3c689-e658-4352-af61-87564a34ca02 required filled>
-  [button] Submit Application disabled
-<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
-
-=== 2026-11-20 17:56:45  skipped  FleetShare Operations Specialist (Harrisburg, PA) @ merchantsfleetmanagement
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: can't truthfully answer required: This position is not eligible for employment visa sponsorshi
-  text: Interested in building your career at Merchants Fleet? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: What is the highest level of education you have completed? *
-  <input:text #question_35457378003 required empty>
-  [button] 
-  <input required empty>
-label: Are you legally authorized to work in the United States for our Company?*
-  <input:text #question_35457379003 required empty>
-  [button] 
-  <input required empty>
-label: This position is not eligible for employment visa sponsorship now or in the future. Applicants who may require
-  <input:text #question_35473229003 required empty>
-  [button] 
-  <input required empty>
-label: If you answered "yes" to the previous question, please describe your current work authorization status or visa
-  <input:text #question_35457381003 empty>
-label: What starting salary are you targeting? Please enter a dollar amount or range. *
-  <input:text #question_35457382003 required empty>
-label: Have you previously worked for Merchants?*
-  <input:text #question_35457383003 required empty>
-  [button] 
-  <input required empty>
-label: Do you know someone who currently works at Merchants? If yes, please provide their name and describe your rela
-  <input:text #question_35457384003 empty>
-label: Are you under a non-compete agreement?* *Your answer will not impact your consideration for opportunities at M
-  <input:text #question_35457386003 required empty>
-  [button] 
-  <input required empty>
-label: Are you a resident of the State of Pennsylvania with the ability to drive to Client locations within the State
-  <input:text #question_35473230003 required empty>
-  [button] 
-  <input required empty>
-label: Do you hold a valid Driver's License? *
-  <input:text #question_35473231003 required empty>
-  [button] 
-  <input required empty>
-label: Do you have your own vehicle? *
-  <input:text #question_35473232003 required empty>
-  [button] 
-  <input required empty>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Merchants Fleet’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status und
-label: Gender
-  <input:text #gender empty>
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  <input:text #veteran_status empty>
-  [button] 
-# Voluntary Self-Identification of Disability
-  text: OMB Control Number 1250-0005
-  text: Why are you being asked to complete this form?
-  text: We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilit
-  text: How do you know if you have a disability?
-  text: Disabilities include, but are not limited to:
-  text: Alcohol or other substance use disorder (not currently using drugs illegally)
-  text: Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS
-  text: Cardiovascular or heart disease
-  text: Deaf or serious difficulty hearing
-  text: Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
-  text: Epilepsy or other seizure disorder
-  text: Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome
-  text: Intellectual or developmental disability
-  text: Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
-  text: Missing limbs or partially missing limbs
-  text: Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
-  text: Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
-  text: Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning
-  text: Partial or complete paralysis (any cause)
-  text: Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema
-label: Disability Status
-  <input:text #disability_status empty>
-  [button] 
-  text: PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information 
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-11-20 17:57:07  skipped  FleetShare Operations Specialist (Hauppauge, NY) @ merchantsfleetmanagement
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: can't truthfully answer required: This position is not eligible for employment visa sponsorshi
-  text: Interested in building your career at Merchants Fleet? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: What is the highest level of education you have completed? *
-  <input:text #question_35475273003 required empty>
-  [button] 
-  <input required empty>
-label: Are you legally authorized to work in the United States for our Company?*
-  <input:text #question_35475274003 required empty>
-  [button] 
-  <input required empty>
-label: This position is not eligible for employment visa sponsorship now or in the future. Applicants who may require
-  <input:text #question_35475275003 required empty>
-  [button] 
-  <input required empty>
-label: If you answered "yes" to the previous question, please describe your current work authorization status or visa
-  <input:text #question_35475276003 empty>
-label: What starting salary are you targeting? Please enter a dollar amount or range. *
-  <input:text #question_35475277003 required empty>
-label: Have you previously worked for Merchants?*
-  <input:text #question_35475278003 required empty>
-  [button] 
-  <input required empty>
-label: Do you know someone who currently works at Merchants? If yes, please provide their name and describe your rela
-  <input:text #question_35475279003 empty>
-label: Are you under a non-compete agreement?* *Your answer will not impact your consideration for opportunities at M
-  <input:text #question_35475280003 required empty>
-  [button] 
-  <input required empty>
-label: Are you a resident of the State of New York with the ability to drive to Client locations within the State of 
-  <input:text #question_35475281003 required empty>
-  [button] 
-  <input required empty>
-label: Do you hold a valid Driver's License? *
-  <input:text #question_35475282003 required empty>
-  [button] 
-  <input required empty>
-label: Do you have your own vehicle? *
-  <input:text #question_35475283003 required empty>
-  [button] 
-  <input required empty>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Merchants Fleet’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status und
-label: Gender
-  <input:text #gender empty>
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  <input:text #veteran_status empty>
-  [button] 
-# Voluntary Self-Identification of Disability
-  text: OMB Control Number 1250-0005
-  text: Why are you being asked to complete this form?
-  text: We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilit
-  text: How do you know if you have a disability?
-  text: Disabilities include, but are not limited to:
-  text: Alcohol or other substance use disorder (not currently using drugs illegally)
-  text: Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS
-  text: Cardiovascular or heart disease
-  text: Deaf or serious difficulty hearing
-  text: Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
-  text: Epilepsy or other seizure disorder
-  text: Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome
-  text: Intellectual or developmental disability
-  text: Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
-  text: Missing limbs or partially missing limbs
-  text: Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
-  text: Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
-  text: Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning
-  text: Partial or complete paralysis (any cause)
-  text: Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema
-label: Disability Status
-  <input:text #disability_status empty>
-  [button] 
-  text: PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information 
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-11-20 17:57:27  skipped  FleetShare Operations Specialist (Memphis, TN) @ merchantsfleetmanagement
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: can't truthfully answer required: This position is not eligible for employment visa sponsorshi
-  text: Interested in building your career at Merchants Fleet? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: What is the highest level of education you have completed? *
-  <input:text #question_35476861003 required empty>
-  [button] 
-  <input required empty>
-label: Are you legally authorized to work in the United States for our Company?*
-  <input:text #question_35476862003 required empty>
-  [button] 
-  <input required empty>
-label: This position is not eligible for employment visa sponsorship now or in the future. Applicants who may require
-  <input:text #question_35476863003 required empty>
-  [button] 
-  <input required empty>
-label: If you answered "yes" to the previous question, please describe your current work authorization status or visa
-  <input:text #question_35476864003 empty>
-label: What starting salary are you targeting? Please enter a dollar amount or range. *
-  <input:text #question_35476865003 required empty>
-label: Have you previously worked for Merchants?*
-  <input:text #question_35476866003 required empty>
-  [button] 
-  <input required empty>
-label: Do you know someone who currently works at Merchants? If yes, please provide their name and describe your rela
-  <input:text #question_35476867003 empty>
-label: Are you under a non-compete agreement?* *Your answer will not impact your consideration for opportunities at M
-  <input:text #question_35476868003 required empty>
-  [button] 
-  <input required empty>
-label: Are you a resident of the State of Tennessee with the ability to drive to Client locations within the State of
-  <input:text #question_35476869003 required empty>
-  [button] 
-  <input required empty>
-label: Do you hold a valid Driver's License? *
-  <input:text #question_35476870003 required empty>
-  [button] 
-  <input required empty>
-label: Do you have your own vehicle? *
-  <input:text #question_35476871003 required empty>
-  [button] 
-  <input required empty>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Merchants Fleet’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status und
-label: Gender
-  <input:text #gender empty>
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  <input:text #veteran_status empty>
-  [button] 
-# Voluntary Self-Identification of Disability
-  text: OMB Control Number 1250-0005
-  text: Why are you being asked to complete this form?
-  text: We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilit
-  text: How do you know if you have a disability?
-  text: Disabilities include, but are not limited to:
-  text: Alcohol or other substance use disorder (not currently using drugs illegally)
-  text: Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS
-  text: Cardiovascular or heart disease
-  text: Deaf or serious difficulty hearing
-  text: Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
-  text: Epilepsy or other seizure disorder
-  text: Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome
-  text: Intellectual or developmental disability
-  text: Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
-  text: Missing limbs or partially missing limbs
-  text: Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
-  text: Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
-  text: Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning
-  text: Partial or complete paralysis (any cause)
-  text: Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema
-label: Disability Status
-  <input:text #disability_status empty>
-  [button] 
-  text: PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information 
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-11-20 17:57:45  skipped  FleetShare Operations Specialist (Shreveport, LA) @ merchantsfleetmanagement
-url: https://job-boards.greenhouse.io/embed/job_app
-stage: page 1
-why: can't truthfully answer required: This position is not eligible for employment visa sponsorshi
-  text: Interested in building your career at Merchants Fleet? Get future opportunities sent straight to your email.
-# Apply for this job
-  text: indicates a required field
-  [button] Autofill my application
-label: First Name*
-  <input:text #first_name required empty>
-label: Last Name*
-  <input:text #last_name required empty>
-label: Email*
-  <input:text #email required empty>
-label: Phone
-label: Country*
-  <input:text #country required empty>
-  [button] 
-  <input required empty>
-  <input:tel #phone required empty>
-  [button] Attach
-label: Attach
-  <input:file #resume no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: Enter manually
-  text: Accepted file types: pdf, doc, docx, txt, rtf
-  [button] Attach
-  <input:file #cover_letter no-file>
-  [button] Dropbox
-  [button] Enter manually
-label: What is the highest level of education you have completed? *
-  <input:text #question_35477075003 required empty>
-  [button] 
-  <input required empty>
-label: Are you legally authorized to work in the United States for our Company?*
-  <input:text #question_35477076003 required empty>
-  [button] 
-  <input required empty>
-label: This position is not eligible for employment visa sponsorship now or in the future. Applicants who may require
-  <input:text #question_35477077003 required empty>
-  [button] 
-  <input required empty>
-label: If you answered "yes" to the previous question, please describe your current work authorization status or visa
-  <input:text #question_35477078003 empty>
-label: What starting salary are you targeting? Please enter a dollar amount or range. *
-  <input:text #question_35477079003 required empty>
-label: Have you previously worked for Merchants?*
-  <input:text #question_35477080003 required empty>
-  [button] 
-  <input required empty>
-label: Do you know someone who currently works at Merchants? If yes, please provide their name and describe your rela
-  <input:text #question_35477081003 empty>
-label: Are you under a non-compete agreement?* *Your answer will not impact your consideration for opportunities at M
-  <input:text #question_35477082003 required empty>
-  [button] 
-  <input required empty>
-label: Are you a resident of the State of Louisiana with the ability to drive to Client locations within the State of
-  <input:text #question_35477083003 required empty>
-  [button] 
-  <input required empty>
-label: Do you hold a valid Driver's License? *
-  <input:text #question_35477084003 required empty>
-  [button] 
-  <input required empty>
-label: Do you have your own vehicle? *
-  <input:text #question_35477085003 required empty>
-  [button] 
-  <input required empty>
-# Voluntary Self-Identification
-  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
-  text: As set forth in Merchants Fleet’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status und
-label: Gender
-  <input:text #gender empty>
-  [button] 
-label: Are you Hispanic/Latino?
-  <input:text #hispanic_ethnicity empty>
-  [button] 
-  text: Race & Ethnicity Definitions
-  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
-  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
-  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
-  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
-  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
-label: Veteran Status
-  <input:text #veteran_status empty>
-  [button] 
-# Voluntary Self-Identification of Disability
-  text: OMB Control Number 1250-0005
-  text: Why are you being asked to complete this form?
-  text: We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilit
-  text: How do you know if you have a disability?
-  text: Disabilities include, but are not limited to:
-  text: Alcohol or other substance use disorder (not currently using drugs illegally)
-  text: Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS
-  text: Cardiovascular or heart disease
-  text: Deaf or serious difficulty hearing
-  text: Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders
-  text: Epilepsy or other seizure disorder
-  text: Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome
-  text: Intellectual or developmental disability
-  text: Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD
-  text: Missing limbs or partially missing limbs
-  text: Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports
-  text: Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)
-  text: Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning
-  text: Partial or complete paralysis (any cause)
-  text: Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema
-label: Disability Status
-  <input:text #disability_status empty>
-  [button] 
-  text: PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information 
-  [button] Submit application
-<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
-
-=== 2026-11-20 18:00:13  skipped  The North Face: Merchandising Coordinator, Collaborations, Energy & Speed @ vfc
-url: https://vfc.wd5.myworkdayjobs.com/northface_careers/job/USCA--USA--Colorado--Denver-HQ---VFC/The-North-Face--Merchandising-Coordinator--Collaborations--Energy---Speed_R-20261115-0006-1/apply/applyManu
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] English #languageSelectorButton {utilityMenuButton}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] VF Careers {navigationItem-VF Careers}
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# The North Face: Merchandising Coordinator, Collaborations, Energy & Speed
-label: completed step 1 of 8
-label: My Information
-label: completed step 2 of 8
-label: My Experience
-label: completed step 3 of 8
-label: Application Questions 1 of 2
-label: completed step 4 of 8
-label: Application Questions 2 of 2
-{progressBarActiveStep} current step 5 of 8 Voluntary Disclosures
-label: current step 5 of 8
-label: Voluntary Disclosures
-label: step 6 of 8
-label: Self Identify
-label: step 7 of 8
-label: Take Assessment
-label: step 8 of 8
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# VF Corporation Privacy Statement
-  text: VF Corporation ("VF") recognizes that you care how information about you is used and shared and respects your privacy. This Privacy Policy d
-  text: <email>
-  text: This Privacy Policy was last updated on October 7, 2015. This Privacy Policy may be updated from time to time. Please check back periodicall
-  text: Collection and Use of Information.
-  text: "Personal Information" means any information relating to your use of this website and that specifically identifies you. We may collect, gene
-  text: We use your IP address to help diagnose problems with our server and to administer our website. Your IP address is used to gather broad demo
-  text: We use cookies, when needed, to deliver content specific to your interests and when applicable to save your password or sign-up information 
-  text: Your Personal Information will not be sold, rented, shared, disseminated, or otherwise disclosed except as described in this Privacy Policy 
-  text: We may share your information with the VF Corporation family of brands (including, for example, Supreme®, The North Face®, Vans®, Timberland
-  text: We may share information with certain third parties that perform services on our behalf. We use third-party companies to provide Internet da
-  text: Data security is important to VF and we have instituted security procedures and measures to protect our servers and networks that store pers
-  text: This website may contain links to or from websites to which this Privacy Policy does not apply ("Linked Websites"). Please be advised that t
-# Voluntary Disclosures
-  text: Answering these questions is voluntary. If you do not wish to answer these questions, please just leave them blank.
-# Terms and Conditions
-  text: I understand that if hired, unless I am employed under a specific written contract or collective bargaining agreement, my employment with VF
-  text: I authorize VF to investigate my references and communicate with my former employers concerning my employment unless specifically stated oth
-  text: I further understand that the completion of an application with VF is a preliminary step to employment. It does not obligate VF to offer emp
-  text: FOR MASSACHUSETTS APPLICANTS
-  text: FOR RHODE ISLAND APPLICANTS
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link] VF North America Employee Privacy Policy {privacyLink}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-11-20 18:05:28  unconfirmed  Associate, Growth @ united-talent-agency
 url: https://jobs.ashbyhq.com/united-talent-agency/25e5ca95-d9ff-4e2a-960e-eb4dcf69030b/application
 stage: page 1
@@ -5435,4 +4856,625 @@ why: not a real application form (0 fields, no résumé upload); page shows:
 <iframe https://job-boards.greenhouse.io/embed/job_app>
   text: Fried, Frank, Harris, Shriver & Jacobson LLP
   text: Subscribe to the latest updates from Fried Frank
+
+=== 2026-11-24 14:45:34  skipped  Mechanical Process Engineer (New Grad) @ generalmatter
+url: https://job-boards.greenhouse.io/generalmatter/jobs/5485524008
+stage: page 1
+why: can't truthfully answer required: Academic Transcript*
+# Mechanical Process Engineer (New Grad)
+  [button] Apply
+  text: General Matter is enriching uranium in America.
+  text: Our goal is to design, build, and operate the world's lowest-cost enrichment services in the United States.
+  text: Our mission is to restore America's ability to produce nuclear fuel—fuel that will power AI, advanced manufacturing, critical industries, an
+  text: Ultimately, our work will help power national ambitions and enable a high-energy society.
+  text: We were incubated by Founders Fund, like Anduril and Palantir before us, and are backed by top-tier investors. Our lean, world-class team of
+  text: We are a mission-driven company with a culture of urgency, accountability, and transparency.
+  text: Help us build a high-energy society by making the cleanest, safest form of baseload energy the most affordable.
+  text: America stopped being able to make its own nuclear fuel. We're changing that, and we need engineers who want to put their hands on the hardw
+  text: As a Mechanical Process Engineer at General Matter, you'll help design, build, and test the mechanical process systems at the heart of domes
+  text: This is not a role where you hand off a drawing and never see it again. You'll spend as much time on the test floor as at your desk, working
+  text: Preferred Skills and Experience
+  text: • Ability to work extended hours and weekends as necessary.
+  text: Equal Opportunity Employer
+  text: General Matter is an Equal Opportunity Employer; employment with General Matter is governed on the basis of merit, competence and qualificat
+  text: Interested in building your career at General Matter? Get future opportunities sent straight to your email.
+# Apply for this job
+  text: indicates a required field
+  [button] Autofill my application
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name
+  <input:text #preferred_name empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Google Drive
+  [button] Enter manually
+label: LinkedIn Profile
+  <input:text #question_19320581008 empty>
+  [button] Attach
+  <input:file #question_19320582008 no-file>
+  [button] Google Drive
+  [button] Attach
+  <input:file #question_19320583008 no-file>
+  [button] Google Drive
+label: GPA*
+  <input:text #question_19320585008 required empty>
+label: Graduation Month/Year*
+  <input:text #question_19411022008 required empty>
+label: How did you hear about this job?*
+  <input:text #question_19320584008 required empty>
+label: This job requires a US Q security clearance—a minimum requirement of which is to be a US Citizen. Can you conf
+  <input:text #question_19320588008 required empty>
+  [button] 
+  <input required empty>
+  text: This position requires eligibility to obtain and maintain a U.S. Q security clearance. This includes, but is not limited to, the following r
+  text: Successful completion of an extensive background investigation
+  text: Favorable adjudication of trustworthiness and reliability
+label: This role is an in-person role at the stated office(s) on the job description. Are you willing to relocate and
+  <input:text #question_19320587008 required empty>
+  [button] 
+  <input required empty>
+label: Tell us about your proudest accomplishment*
+  <textarea #question_19320589008 required empty>
+  [button] Submit application
+
+=== 2026-11-24 14:50:05  blocked  Coordinator, Supporter Relations @ losangelesfootballclub
+url: https://www.lafc.com/careers
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: :History; :Club Sites; :Cookies Settings
+<iframe >
+  [button] 
+  <input:text #q-md required empty>
+  [button] 
+  [button] 
+  [button] 
+<iframe >
+# Careers
+  [button] History
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+<iframe >
+  [button] Club Sites
+  text: Roster Rules & Regulations
+  text: Do Not Sell or Share My Personal Information
+  [button] Cookies Settings
+  text: ©2026 MLS. The Major League Soccer and MLS name and shield are registered trademarks of Major League Soccer, L.L.C. (“MLS”). The names and l
+
+=== 2026-11-24 14:50:34  blocked  Grassroots Marketing Specialist @ losangelesfootballclub
+url: https://www.lafc.com/careers
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: :History; :Club Sites; :Cookies Settings
+<iframe >
+  [button] 
+  <input:text #q-md required empty>
+  [button] 
+  [button] 
+  [button] 
+<iframe >
+# Careers
+  [button] History
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+<iframe >
+  [button] Club Sites
+  text: Roster Rules & Regulations
+  text: Do Not Sell or Share My Personal Information
+  [button] Cookies Settings
+  text: ©2026 MLS. The Major League Soccer and MLS name and shield are registered trademarks of Major League Soccer, L.L.C. (“MLS”). The names and l
+
+=== 2026-11-24 14:51:13  skipped  Santa Monica High School Site Coordinator @ Boys & Girls Club of Santa Monica
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4622053
+stage: page 3
+why: can't truthfully answer required: Years Known (required) *; Years Known (required) *; Years Known (required) *
+  text: Santa Monica High School Site Coordinator
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: Please list 3 professional references, supervisory and leadership-related, that we may contact should SMBGC decide to extend an offer of emp
+label: Name (required)
+  <input:text #references.name.0 {referencesName0} empty>
+label: Email Address (required)
+  <input:text #references.email.0 {referencesEmail0} empty>
+label: Phone Number (required)
+  <input:text #references.phone.0 {referencesPhone0} empty>
+label: Personal or Work Reference? (required)
+label: Years Known (required)
+  <input:text #references.name.1 {referencesName1} empty>
+  <input:text #references.email.1 {referencesEmail1} empty>
+  <input:text #references.phone.1 {referencesPhone1} empty>
+  <input:text #references.name.2 {referencesName2} empty>
+  <input:text #references.email.2 {referencesEmail2} empty>
+  <input:text #references.phone.2 {referencesPhone2} empty>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-11-24 14:55:49  skipped  HIE Specialist @ EGO Inc DBA Brault
+url: https://recruiting.paylocity.com/Recruiting/Jobs/Apply/4651720
+stage: page 2
+why: can't truthfully answer required: How many years of healthcare billing experience do you have?
+  [button] 
+  [button] 
+  [button] 
+  [button] 
+  text: What is the highest level of education you have completed?
+  <input:radio #multiQuestionAnswer976364_0 question-unanswered>
+label: High School or equivalent
+  <input:radio #multiQuestionAnswer976364_1 question-unanswered>
+label: Some College
+  <input:radio #multiQuestionAnswer976364_2 question-unanswered>
+label: Associates Degree
+  <input:radio #multiQuestionAnswer976364_3 question-unanswered>
+label: Bachelors Degree
+  text: How many years of healthcare billing experience do you have?
+  <input:radio #multiQuestionAnswer976370_0 question-unanswered>
+label: 1-2 years
+  <input:radio #multiQuestionAnswer976370_1 question-unanswered>
+label: 3-4 years
+  <input:radio #multiQuestionAnswer976370_2 question-unanswered>
+label: 5+
+  text: Have you worked in a hospital or healthcare environment?
+  <input:radio #multiQuestionAnswer1939985_0 question-unanswered>
+label: Yes
+  <input:radio #multiQuestionAnswer1939985_1 question-unanswered>
+label: No
+label: Which Electronic Medical Record (EMR) systems have you used?
+  <textarea:text #screener-question-3-textarea empty>
+  text: Are you proficient with Microsoft Office, including Excel?
+  <input:radio #multiQuestionAnswer1939986_0 question-unanswered>
+  <input:radio #multiQuestionAnswer1939986_1 question-unanswered>
+  text: I understand this company performs employment verifications, and I will be able to provide documentation confirming my employment history.
+  <input:radio #multiQuestionAnswer1939976_0 question-unanswered>
+  <input:radio #multiQuestionAnswer1939976_1 question-unanswered>
+  text: I have reviewed the salary range, and my pay expectation is within that range.
+  <input:radio #multiQuestionAnswer1939983_0 question-unanswered>
+  <input:radio #multiQuestionAnswer1939983_1 question-unanswered>
+  [button] Previous Step
+  [button] Next Step {btnNext}
+  text: EGO Inc DBA Brault: Privacy Policy
+  text: SMS Terms and Conditions and Privacy Policy
+  [button] 
+
+=== 2026-11-24 14:56:51  blocked  Sales Specialist - New Center Opening (DTLA) @ lucidmotors
+url: https://lucidmotors.com/careers/search/5287579007
+stage: page 1
+why: not a real application form (1 fields, no résumé upload); page shows: :Lucid Air; :Lucid Gravity; :Lucid Sapphire; :Pre-Owned; :Discover; :US; :BACK TO OPEN ROLES; :SUBSCRIBE; :PAUSE ANIMATIONS
+  text: Lucid Gravity Touring: Lease from $749/mo for 36 months* + $1K Demo Drive Credit** + $3.5K Discount for 1st-Time EV Buyers***.
+  [link] Lucid Air
+  [link] Lucid Gravity
+  [link] Lucid Sapphire
+  [link] Pre-Owned
+  [link] Discover
+  [button] US
+  [button] BACK TO OPEN ROLES
+# Sales Specialist - New Center Opening (DTLA)
+  text: At Lucid, we are creating exceptional mobility experiences through innovation to drive the world forward. Built on Lucid’s proprietary techn
+  text: We achieve this through deep vertical integration, with design, engineering, and production happening in-house across our global offices and
+  text: Lucid is excited to announce the grand opening of our brand-new Studio location in downtown Los Angeles, California (1800 S Figueroa St, Los
+  text: Needs Assessment: Effectively gauge customer needs through personalized interactions and insightful questioning.
+  text: Product Expertise: Leverage your in-depth knowledge of Lucid products to offer tailored solutions.
+  text: Competitive landscape: Take initiative to understand competitor models, pricing, and packages in order to educate customer on why Lucid
+  text: Customer Relationships: Build and nurture customer relationships to foster brand loyalty.
+  text: CRM: Utilize Salesforce as CRM tool to track and manage customer interactions with consistent engagement
+  text: Pipeline Management: Maintain and build a robust sales pipeline through disciplined practices.
+  text: Goal-Oriented: Meet and exceed performance targets, linking sales with exceptional customer experiences.
+  text: Conduct test drives and articulate desired selling points ensuring an exceptional experience while driving Lucid vehicles.
+  text: Deliver an exceptional and memorable sales experience that you would personally want to have
+  text: Transaction Facilitation (Desking):
+  text: Manage end to end transitions for Order to Delivery Management: Support customers with financing/leasing application and Monitor application
+  text: Successful Delivery: Guide the customer through the ordering process of Lucid new vehicles, including obtaining documentation, advising on f
+  text: Handle registration and facilitation of payment due at signing
+  text: Coordinate customer support with Lucid Financial Service and Delivery teams as required
+  text: Assist with daily operations as needed
+  text: Communication & Presentation
+  text: Clear Communication: Use exceptional oral and written communication skills to deliver clear and relevant information.
+  text: Maintain communication on a regular basis during waiting period before delivery date is scheduled
+  text: Active Listening: Employ active listening techniques to provide solutions that are genuinely helpful to customers.
+  text: 2+ years of relevant sales professional experience in commission-based environment, including building and managing a customer pipeline.
+  text: Retail automotive sales and desking experience highly desired
+  text: Availability to work flexible hours including weekends, evenings, and holidays in a retail environment
+  text: Microsoft Office, CRM tools (Salesforce preferred), and retail business systems user experience
+  text: Proven track record of achieving individual sales goals.
+  text: Curiosity and passion about electric vehicles and the premium vehicle market and competitive landscape
+  text: Exceptional communication skills, encompassing active listening, clear verbal articulation, and proficient written communication, ensuring e
+  text: Strong commitment to continuous personal and technical learning, with a track record of quickly acquiring new skills and knowledge and adapt
+  text: Demonstrated perseverance, grit, and the ability to prioritize long-term goals over short-term rewards, consistently exhibiting resilience a
+  text: Keen understanding of automotive market dynamics, financial principles, and industry trends, enabling informed decision making for our custo
+  text: Proactive and action-oriented, achieving objectives with a sense of urgency and efficiency.
+  text: Exceptional time management skills and a highly organized approach to tasks and responsibilities, ensuring prioritization and multitasking.
+  text: Exceptional interpersonal skills with a demonstrated ability to build and maintain positive, productive relationships with peers and custome
+  text: Passionate about electric vehicles and the premium vehicle market.
+  text: Bachelor’s degree or equivalent work experience preferred. High school or GED required.
+  text: Ability to coordinate and facilitate customer test-drives.
+  text: Ability to travel as needed for events
+  text: Proficiency in English; knowledge of a secondary language is a plus.
+  text: Physical capacity to stand for extended periods and perform tasks like twisting, bending, squatting, and reaching, with or without reasonabl
+  text: Valid driver’s license with no suspensions within the past year. Drivers under 21 must have maintained a Driver’s License for a minimum of 3
+  text: Ability to obtain appropriate state DMV licensing, where applicable
+  text: Earn a guaranteed base pay of $23/hr USD,
+  text: At Lucid, we don’t just welcome diversity - we celebrate it! Lucid Motors is proud to be an equal opportunity workplace. We are committed to
+  text: Lucid offers a comprehensive and competitive
+  text: At Lucid, we believe diversity strengthens everything we build. Lucid Motors is proud to be an equal opportunity employer and is committed t
+  text: TA-Operations <@> lucidmotors.com
+  text: This email address is designated solely for accommodation requests and is not monitored for job applications or resume submissions. To be co
+  text: By submitting your application, you understand and agree that your personal data will be processed in accordance with our
+  text: To all recruitment agencies:
+  text: Lucid Motors does not accept agency resumes. Please do not forward resumes to Lucid Motors. Lucid Motors is not responsible for any fees rel
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+# Stay up to Speed on the latest at Lucid.
+label: EMAIL*
+  <input:text #email required filled>
+label: FIRST NAME*
+  <input:text #firstName required empty>
+label: LAST NAME*
+  <input:text #lastName required empty>
+label: ZIP CODE*
+  <input:text #zipCode required empty>
+label: COUNTRY*
+label: INTERESTED MODEL
+<iframe https://www.google.com/recaptcha/api2/anchor>
+  [button] SUBSCRIBE
+# Lucid Air
+  text: Compare Lucid Air Competitors
+# Lucid Gravity
+  text: Explore Lucid Gravity GT-S
+  text: Compare Lucid Gravity Trims
+  text: Compare Lucid Gravity Competitors
+  text: Road to Lucid Gravity Videos
+# Lucid Motors
+# More
+  text: Disconnect Remote Vehicle Access
+  [button] PAUSE ANIMATIONS
+  text: ©2026 Lucid. All rights reserved
+  text: U.S. Residents Outside of California:
+
+=== 2026-11-24 14:57:07  blocked  PMX: Publisher Operations Coordinator @ pmc
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (4 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current openings at Penske Media Corp.
+label: Search
+  <input:text #keyword-filter empty>
+label: Office
+  <input:text #office-filter empty>
+  [button] 
+label: Brand Name
+  <input:text #custom-field-<phone> empty>
+  [button] 
+label: Team Department (For Career Page Purposes)
+  <input:text #custom-field-<phone> empty>
+  [button] 
+# 25 jobs
+# Billboard - Content & Editorial
+  text: Billboard: Head of Video Series and Livestreaming
+  text: California - Los Angeles Office; New York - New York City Office
+  text: Billboard: Staff Writer, Latin/Pop
+  text: California - Los Angeles Office; Florida - Miami Office
+# Billboard - Marketing
+  text: Billboard: Marketing Manager, Presale Strategy
+  text: New York - New York City Office
+# DEADLINE - Content & Editorial
+  text: California - Los Angeles Office
+# Dick Clark Productions - Corporate / Administration
+  text: Dick Clark Productions: Procurement Manager
+# Fairchild Media Group - Content & Editorial
+  text: Fairchild Media Group: Social Media Director
+# Fairchild Media Group - Design
+  text: Fairchild Media Group: Graphic Designer
+# Golden Globe Awards - Summits & Events
+  text: Golden Globes: VP, Events Production
+# PMC - Content & Editorial
+# PMC - Corporate / Administration
+  text: PMC: Director, Growth Marketing
+  text: PMC: Manager, Global Partnership Management
+  text: United Kingdom - London Office
+# PMC - Finance
+  text: PMC: Accounts Receivable Manager
+  text: PMC: Financial Systems Analyst
+  text: PMC: Senior Staff Accountant
+# PMC - Sales
+# PMC - Summits & Events
+  text: PMC: Lead TV Programmer, SXSW
+# Robb Report - Marketing
+  text: Robb Report: Senior Marketing Manager, Brand & Integrated Marketing
+# Torch Cay - Corporate / Administration
+  text: Torch Cay Associate Director/Chief of Staff
+  text: Bahamas - Torch Cay - Remote
+# Variety - Content & Editorial
+# WWD - Content & Editorial
+  text: Fairchild Media Group: Senior Video Editor
+# WWD - Sales
+
+=== 2026-11-24 14:58:51  skipped  University Associate, Construction, Disputes & Advisory @ ankura
+url: https://ankura.wd5.myworkdayjobs.com/ankura/job/Los-Angeles-CA/University-Associate--Construction--Disputes---Advisory_R104962/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Employment Contract; Non-Compete Agreement; Non-Solicitation Agreement; Other; Not Applicable
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# University Associate, Construction, Disputes & Advisory
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-db24c57924991001aa48035043920000}
+label: Without sponsorship, are you legally permitted to work in the country where this job is located?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa48035043920000
+ {formField-db24c57924991001aa48051daf260006}
+label: What is your availability to start a new position?*
+  text: current value is MM/DD/YYYY
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionMonth-input} required empty>
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionDay-input} required empty>
+  <input #primaryQuestionnaire--db24c57924991001aa48051daf260006-dateS {dateSectionYear-input} required empty>
+  [button]  {dateIcon}
+ {formField-db24c57924991001aa4805b75d700000}
+label: Are you currently or have you previously worked for the US Government (including US Military)?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4805b75d700000
+ {formField-db24c57924991001aa4805b75d700006}
+label: Are you subject to any restrictive covenants that would preclude you from fully performing your work with anot
+  <input:checkbox #5b979464138c0151bb7f55e0c746d395-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Employment Contract
+  <input:checkbox #5b979464138c0181948655e0c746d495-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Compete Agreement
+  <input:checkbox #5b979464138c01d6038d55e0c746d595-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Disclosure Agreement
+  <input:checkbox #5b979464138c01ea179355e0c746d695-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Non-Solicitation Agreement
+  <input:checkbox #5b979464138c01caae9855e0c746d795-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Other
+  <input:checkbox #5b979464138c0124e7b255e0c746d895-db24c57924991001aa4805b75d7 required question-unanswered>
+label: Not Applicable
+ {formField-db24c57924991001aafbb455c4260000}
+label: Is your graduation date between December 2026 and August 2027?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aafbb455c4260000
+ {formField-db24c57924991001aa4806eabbae0001}
+label: Is your cumulative GPA 3.0 or higher?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0001
+ {formField-db24c57924991001aa4806eabbae0004}
+label: Are you available to be based in the posted location of this role?*
+  [dropdown] nothing chosen #primaryQuestionnaire--db24c57924991001aa4806eabbae0004
+ {formField-db24c57924991001aa480784514c0001}
+label: What type of role (career focus area) do you ideally see yourself in 3-5 years from now?*
+  <textarea #primaryQuestionnaire--db24c57924991001aa480784514c0001 required empty>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+
+=== 2026-11-24 15:01:42  blocked  Field Marketing Specialist @ gtslivingfoods
+url: https://job-boards.greenhouse.io/embed/job_board
+stage: page 1
+why: not a real application form (3 fields, no résumé upload); page shows: 
+  text: The job you are looking for is no longer open.
+# Current openings at GT'S Living Foods
+  text: Level-up your career by having opportunities at GT'S Living Foods sent directly to your inbox.
+label: Search
+  <input:text #keyword-filter empty>
+label: Department
+  <input:text #department-filter empty>
+  [button] 
+label: Office
+  <input:text #office-filter empty>
+  [button] 
+# 24 jobs
+# Social Media
+  text: Associate Social Media Manager
+  text: Los Angeles, CA - Vernon, CA
+# Finance
+  text: Commercial Finance Manager
+# Human Resources
+  text: Temp to Perm (GT's Employee's Only)
+# Business Intelligence
+  text: Business Intelligence Analyst
+# Internal
+# Marketing
+  text: Los Angeles, Ca - Vernon, CA
+  text: Director of Brand Management
+  text: Field Marketing Manager (Portland/Seattle)
+# Brand Ambassador
+  text: Brand Ambassador - 3rd Party
+  text: San Francisco, CA - Bay Area, CA
+  text: Brand Ambassador - 3rd Party - Seattle, WA
+  text: Brand Ambassador (College) - 3rd Party - NYC Metro
+  text: Brand Ambassador - East Bay - 3rd Party
+  text: Collegiate Brand Ambassador - 3rd Party
+  text: Berkeley, SF State, or USF
+# Maintenance
+  text: Commercial HVACR Technician
+  text: Industrial Maintenance Technician (Graveyard)
+  text: Maintenance Mechanic - Canning Operations
+# Risk & Safety
+  text: Operations / Risk & Safety
+# Security
+  text: Security Guard (10pm-6:30am)
+# Sanitation
+  text: Associate Director of Sanitation
+  text: Operations/Manufacturing / Production
+# Kefirs/Yo
+# Warehouse
+  text: Warehouse Forklift (5:00am-1:30pm)
+
+=== 2026-11-24 15:08:56  blocked  Remote Customer Success Specialist @ nogigiddy
+url: https://apply.workable.com/nogigiddy/j/1424876A29/apply
+stage: page 1
+why: not a real application form (5 fields, no résumé upload); page shows: :Import resume from; :Clear; :+1; :Submit application; :Cookie settings
+# Remote Customer Success Specialist
+  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
+  [button] Import resume from opens-true
+# Personal information
+  [link] Clear
+label: * First name
+label: * Last name
+label: * Email
+  [button] +1 opens-dialog
+  <input:tel #input_phone filled>
+  text: The hiring team may use this number to contact you about this job.
+# Profile
+  [link] Clear
+  text: Still job hunting while you wait to hear back? The Daily Drop sends 10 vetted remote jobs straight to your inbox every morning at 9 AM — rea
+label: Yes
+label: No
+  [button] Submit application
+  text: NoGigiddy collects and processes personal data in accordance with applicable data protection laws.
+  [button] Cookie settings
+
+=== 2026-11-24 15:11:20  skipped  Manufacturing Engineer @ flowserve
+url: https://flowserve.wd1.myworkdayjobs.com/applied/job/Vernon-California-US/Manufacturing-Engineer_R-21652-1/apply/applyManually
+stage: Application Questions
+why: can't truthfully answer required: Do you have the minimum number of years of experience for th
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Manufacturing Engineer
+label: completed step 1 of 5
+label: My Information
+label: completed step 2 of 5
+label: My Experience
+{progressBarActiveStep} current step 3 of 5 Application Questions
+label: current step 3 of 5
+label: Application Questions
+label: step 4 of 5
+label: Voluntary Disclosures
+label: step 5 of 5
+label: Review
+# Application Questions
+{applyFlowPrimaryQuestionsPage}
+ {formField-f3b094f95a5d10014a7c56606e650001}
+label: Do you have the minimum number of years of experience for the job to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c56606e650001
+ {formField-f3b094f95a5d10014a7c56606e650004}
+label: Do you have the minimum educational requirement for the job to which you are applying?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c56606e650004
+ {formField-f3b094f95a5d10014a7c56fa3abe0002}
+label: Will you now or in the future require sponsorship for a work visa or residence permit?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c56fa3abe0002
+ {formField-f3b094f95a5d10014a7c56fa3abe0005}
+label: Are you of eligible age in the country to which you are applying to?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c56fa3abe0005
+ {formField-f3b094f95a5d10014a7c5795257e0000}
+label: Are you legally authorized to work in the country to which you are applying to?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c5795257e0000
+ {formField-f3b094f95a5d10014a7c5795257e0003}
+label: What is the notice period with your previous company?
+  <textarea #primaryQuestionnaire--f3b094f95a5d10014a7c5795257e0003 empty>
+ {formField-f3b094f95a5d10014a7c5795257e0004}
+label: Do you have a family member or relative currently employed with Flowserve?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c5795257e0004
+ {formField-f3b094f95a5d10014a7c5795257e0007}
+label: Do you have a family member or relative currently employed with a government entity?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c5795257e0007
+ {formField-f3b094f95a5d10014a7c582fe08b0003}
+label: Are you willing to relocate?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c582fe08b0003
+ {formField-f3b094f95a5d10014a7c58c9dd8e0000}
+label: Please provide your compensation expectations for the role to which you are applying. (Amount / Frequency / Cu
+  <textarea #primaryQuestionnaire--f3b094f95a5d10014a7c58c9dd8e0000 required empty>
+ {formField-f3b094f95a5d10014a7c58c9dd8e0001}
+label: Are you open to business travel?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c58c9dd8e0001
+ {formField-f3b094f95a5d10014a7c596416780000}
+label: Are you interested in working from home?*
+  [dropdown] nothing chosen #primaryQuestionnaire--f3b094f95a5d10014a7c596416780000
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Flowserve Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
+
+=== 2026-11-24 15:20:02  skipped  Operations Admin @ allianceground
+url: https://allianceground.wd1.myworkdayjobs.com/agi_careers/job/Santa-Ana-CA/Operations-Admin_R-112639/apply/applyManually
+stage: Voluntary Disclosures
+why: can't truthfully answer required: I consent to the above terms and conditions.*
+  [link] Skip to main content {accessibilitySkipToMainContent}
+  [link]  {logoLink}
+# AGI Careers
+  [button] English #languageSelectorButton {utilityMenuButton}
+  [button] Settings #settingsSelectorButton {utilityMenuButton}
+  [button] <email> {utilityMenuButton} opens-true
+  [button] Home {navigationItem-Home}
+  [button] Search for Jobs {navigationItem-Search for Jobs}
+  [button] Candidate Home {navigationItem-Candidate Home}
+  [button] Job Alerts {navigationItem-Job Alerts}
+{applyFlowPage}
+  [button] Back to Job Posting {backToJobPosting}
+# Operations Admin
+label: completed step 1 of 7
+label: My Information
+label: completed step 2 of 7
+label: My Experience
+label: completed step 3 of 7
+label: Application Questions
+{progressBarActiveStep} current step 4 of 7 Voluntary Disclosures
+label: current step 4 of 7
+label: Voluntary Disclosures
+label: step 5 of 7
+label: Self Identify
+label: step 6 of 7
+label: Take Assessment
+label: step 7 of 7
+label: Review
+# Voluntary Disclosures
+{applyFlowVoluntaryDisclosuresPage}
+# Personal Data
+ {formField-gender}
+label: Please indicate your gender:*
+  [dropdown] nothing chosen #personalInfoUS--gender
+ {formField-hispanicOrLatino}
+label: Are you Hispanic or Latino?
+  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
+ {formField-ethnicity}
+label: Please indicate your ethnicity:*
+  [dropdown] nothing chosen #personalInfoUS--ethnicity
+ {formField-veteranStatus}
+label: Are you a protected veteran?*
+  [dropdown] nothing chosen #personalInfoUS--veteranStatus
+# Terms and Conditions
+  text: By submitting this application for employment with AGI, and as a material condition of applying for and, if offered, accepting employment wi
+ {formField-acceptTermsAndAgreements}
+label: I consent to the above terms and conditions.*
+  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
+  [button] Back {pageFooterBackButton}
+  [button] Save and Continue {pageFooterNextButton}
+# Follow Us
+  [link]  {socialIcon}
+  [link]  {socialIcon}
+  [link] Privacy Policy {privacyLink}
+  text: © 2026 Workday, Inc. All rights reserved.
 
