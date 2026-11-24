@@ -1,5 +1,11 @@
 # Pushing a change to this file on the 'probe' branch starts a probe run (fills real forms, never submits).
-id: osm1
-fetch:
-  - "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3Bnwr%5B%22office%22%3D%22employment_agency%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3Bout%20center%20tags%3B"
-  - "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3B%28nwr%5B%22office%22%3D%22company%22%5D%5B%22website%22%5D%2833.85%2C-118.50%2C34.20%2C-118.10%29%3Bnwr%5B%22office%22%3D%22property_management%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3Bnwr%5B%22office%22%3D%22construction_company%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3B%29%3Bout%20center%20tags%20400%3B"
+id: wdf1
+wd_facets:
+  - warnerbros/wd5/global
+  - disney/wd5/disneycareer
+  - usc/wd5/ExternalUSCCareers
+  - spe/wd1/SonypicturesEntertainment
+  - fox/wd1/Domestic
+  - umusic/wd5/UMGUS
+  - edwards/wd5/edwardscareers
+  - amgen/wd1/Careers

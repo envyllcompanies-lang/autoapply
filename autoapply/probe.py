@@ -146,6 +146,59 @@ def main():
         (od / "llm.json").write_text(_j.dumps(rep, indent=1))
         print(_j.dumps(rep, indent=1)[:6000])
         return
+    if req.get("wd_facets"):                          # Workday test: a board's location filters, and what the LA ones hold
+        import requests as _rq, json as _j, time as _tm
+        od = base / "probe" / "out" / f"wdf-{req.get('id', 'x')}"
+        od.mkdir(parents=True, exist_ok=True)
+        la = re.compile(r"los angeles|burbank|glendale|santa monica|culver city|el segundo|pasadena|long beach|irvine|torrance|"
+                        r"thousand oaks|santa clarita|hawthorne|universal city|playa vista|redondo beach|manhattan beach|"
+                        r"west hollywood|beverly hills|costa mesa|newport beach|huntington beach|anaheim|santa ana|carson|"
+                        r"inglewood|calabasas|woodland hills|van nuys|north hollywood|sherman oaks|marina del rey|westlake village|"
+                        r"\bca\b.{0,20}(la|l\.a\.)|\bla\b", re.I)
+        hdr = {"User-Agent": "Mozilla/5.0", "Content-Type": "application/json", "Accept": "application/json"}
+        rep = {}
+
+        def walk(facets, path=""):
+            out = []
+            for f in facets or []:
+                param = f.get("facetParameter") or ""
+                vals = f.get("values") or []
+                if vals and isinstance(vals[0], dict) and "values" in vals[0]:
+                    out += walk(vals, param)
+                else:
+                    out += [(param, v.get("id"), v.get("descriptor"), v.get("count")) for v in vals if isinstance(v, dict)]
+            return out
+        for spec in req["wd_facets"]:
+            tenant, wd, site = spec.split("/")[:3]
+            api = f"https://{tenant}.{wd}.myworkdayjobs.com/wday/cxs/{tenant}/{site}/jobs"
+            one = {}
+            try:
+                r = _rq.post(api, json={"appliedFacets": {}, "limit": 20, "offset": 0, "searchText": ""}, headers=hdr, timeout=30)
+                one["status"] = r.status_code
+                d = r.json() if r.ok else {}
+                one["total"] = d.get("total")
+                vals = walk(d.get("facets"))
+                one["facet_params"] = sorted({v[0] for v in vals})
+                locs = [v for v in vals if re.search(r"location", v[0], re.I)]
+                one["n_location_values"] = len(locs)
+                pick = [v for v in locs if v[2] and la.search(v[2])]
+                one["la_values"] = [v[2] + f" ({v[3]})" for v in pick][:60]
+                _tm.sleep(2)
+                if pick:
+                    by: dict = {}
+                    for v in pick:
+                        by.setdefault(v[0], []).append(v[1])
+                    r2 = _rq.post(api, json={"appliedFacets": by, "limit": 20, "offset": 0, "searchText": ""}, headers=hdr, timeout=30)
+                    d2 = r2.json() if r2.ok else {}
+                    one["la_query"] = {"status": r2.status_code, "applied": {k: len(v) for k, v in by.items()}, "total": d2.get("total"),
+                                       "sample": [[p.get("title"), p.get("locationsText")] for p in (d2.get("jobPostings") or [])[:12]]}
+                    _tm.sleep(2)
+            except Exception as e:
+                one["error"] = str(e)[:300]
+            rep[spec] = one
+        (od / "facets.json").write_text(_j.dumps(rep, indent=1))
+        print(_j.dumps(rep, indent=1)[:8000])
+        return
     if req.get("fetch"):                              # raw page test: what a plain request and a browser each get back
         import requests as _rq
         od = base / "probe" / "out" / f"fetch-{req.get('id', 'x')}"
