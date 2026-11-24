@@ -465,4 +465,20 @@ _ok = len(_got) == 1 and _got[0]["message_id"] == "<m1@acme.com>" and _raised
 print("OK " if _ok else "BAD", "inbox search: Gmail search used, a missing Spam folder is fine, a refused search is an error ->", len(_got), _raised)
 bad += not _ok
 
+# ---- Workday: the Los Angeles-area location filters of a big board (nested under a group, or flat)
+_first = {"facets": [
+    {"facetParameter": "jobFamilyGroup", "values": [{"descriptor": "Operations", "id": "f1", "count": 9}]},
+    {"facetParameter": "locationMainGroup", "values": [
+        {"facetParameter": "locations", "descriptor": "Locations", "values": [
+            {"descriptor": "CA - Burbank", "id": "L1", "count": 40}, {"descriptor": "New York, NY", "id": "L2", "count": 30},
+            {"descriptor": "Santa Monica, California, United States", "id": "L3", "count": 5}, {"descriptor": "Walnut Creek, CA", "id": "L4", "count": 2}]},
+        {"facetParameter": "locationCountry", "descriptor": "Country", "values": [{"descriptor": "United States of America", "id": "C1", "count": 99}]}]},
+    {"facetParameter": "Location_Region", "values": [{"descriptor": "Los Angeles Region", "id": "R1", "count": 7}]}]}
+_flat = {"facets": [{"facetParameter": "locations", "values": [{"descriptor": "Irvine, CA", "id": "I1", "count": 3},
+                                                              {"descriptor": "Denver, CO", "id": "D1", "count": 3}]}]}
+_got = (_S.wd_la_facets(_first), _S.wd_la_facets(_flat), _S.wd_la_facets({}))
+_ok = _got == ({"locations": ["L1", "L3"]}, {"locations": ["I1"]}, {})
+print("OK " if _ok else "BAD", "Workday: a big board's Los Angeles-area location filters ->", _got)
+bad += not _ok
+
 sys.exit(bad + bad_mail)

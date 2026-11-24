@@ -223,9 +223,30 @@ def _wd_request(method: str, url: str, **kw) -> requests.Response:
     return r
 
 
-def _wd_post(api: str, offset: int, text: str):
-    return _wd_request("POST", f"{api}/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": text},
+def _wd_post(api: str, offset: int, text: str, facets: dict | None = None):
+    return _wd_request("POST", f"{api}/jobs", json={"appliedFacets": facets or {}, "limit": 20, "offset": offset, "searchText": text},
                        headers={**UA, "Content-Type": "application/json"}).json()
+
+
+def wd_la_facets(first: dict) -> dict:
+    """{filter name: [ids]} of a Workday board's location filters that are in the Los Angeles area ('Burbank, CA',
+    'CA - Santa Monica', 'Los Angeles, California, United States'), from the filters its first page lists."""
+    out: dict = {}
+
+    def walk(facets):
+        for f in facets or []:
+            if not isinstance(f, dict):
+                continue
+            param = str(f.get("facetParameter") or "")
+            vals = f.get("values") or []
+            if vals and isinstance(vals[0], dict) and "values" in vals[0]:
+                walk(vals)                                    # a group of filters (locationMainGroup -> locations, ...)
+            elif re.search(r"location", param, re.I) and not re.search(r"country|region|type|remote", param, re.I):
+                for v in vals:
+                    if isinstance(v, dict) and v.get("id") and la_area(str(v.get("descriptor") or "")):
+                        out.setdefault(param, []).append(v["id"])
+    walk(first.get("facets"))
+    return out
 
 
 def workday_search(spec: str, text: str, limit_pages: int = 1) -> list[Job]:
@@ -288,6 +309,17 @@ def workday(spec: str) -> list[Job]:
                     break
                 offset += 20
         else:
+            la = wd_la_facets(first) if s.get("la_area") else {}
+            if la:
+                # every posting this big board lists anywhere in the Los Angeles area (Burbank, Santa Monica, El Segundo...),
+                # whatever its title: a search for 'operations Los Angeles' only found the ones that say 'Los Angeles'
+                for page in range(int(s.get("workday_la_pages", 10))):
+                    if WD_DEADLINE and time.monotonic() > WD_DEADLINE + 120:
+                        raise requests.RequestException("time for Workday is up")
+                    data = _wd_post(api, page * 20, "", la)
+                    take(data)
+                    if len(data.get("jobPostings") or []) < 20:
+                        break
             roles = s.get("workday_queries") or WD_ROLES
             places = s.get("workday_places") or WD_PLACES
             pages = int(s.get("workday_pages", 2))
