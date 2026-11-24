@@ -428,7 +428,8 @@ _days = [{"id": f"d{i}", "kind": "checkbox_single", "label": d, "question": "Whi
           "options": [], "key": "formField-days"} for i, d in enumerate(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])]
 _ans, _miss = {}, [x["id"] for x in _days]
 _b._pick_in_groups(_days, _ans, _miss)
-_ok = _got == ["LinkedIn", "Personal Primary"] and sorted(k for k, v in _ans.items() if v is True) == ["d0", "d1", "d2", "d3", "d4"] and not _miss
+_ok = str(_got[0]).startswith("@any:LinkedIn|") and _got[1] == "Personal Primary" and \
+    sorted(k for k, v in _ans.items() if v is True) == ["d0", "d1", "d2", "d3", "d4"] and not _miss     # (LinkedIn first, else any choice)
 print("OK " if _ok else "BAD", "scrolling 'how did you hear' list, phone type, weekday availability ->", _got, sorted(_ans))
 bad += not _ok
 
@@ -505,6 +506,48 @@ finally:
     _S.WD_HELD, _S._WD_CHECKS = False, 0
 _ok = _n == 3 and _held and _deferred and len(_cf_calls) == 3
 print("OK " if _ok else "BAD", "Workday bot check: one request each, no retry; after three the rest wait for the next search ->", _n, _held, _deferred)
+bad += not _ok
+
+# ---- everyday questions you said to just answer (2026-11-24): any 'how did you hear', a mobile / iPhone, full-time (and
+#      temp-to-hire), the day shift, 40 hours, transportation, background check, references the right way round, a
+#      negated commute question answered No; never an arbitration agreement
+from autoapply import level as _lv2, submit as _sub
+_old_ac = _lv2.ALLOW_CONTRACT
+_lv2.ALLOW_CONTRACT = True
+try:
+    _b = _Br({"facts": {"email": "a@b.org", "full_name": "Pat Doe", "graduation_date": "May 2025"}, "consent": {"sign_attestations": True}},
+             {"name": "Pat Doe"}, ".", lambda *a: None)
+    _q = [("How did you hear about this job?", "select", ["Select", "Employee Referral", "Career Fair", "Radio Ad"]),
+          ("How Did You Hear About Us?*", "combobox", ["Select One", "Agency: Staffing Firm", "Diversity: Networking Event"]),
+          ("Phone Type*", "select", ["Home", "Work", "Mobile"]),
+          ("What kind of smartphone do you use?", "text", []),
+          ("What type of employment are you seeking?", "checkbox_group", ["Full-time", "Part-time", "Seasonal", "Temp-to-Hire"]),
+          ("Which shift do you prefer?", "select", ["1st Shift", "2nd Shift", "3rd Shift"]),
+          ("How many hours per week are you available to work?", "text", []),
+          ("Do you have reliable transportation?", "radio", ["Yes", "No"]),
+          ("Are you willing to undergo a background check and drug screen?", "radio", ["Yes", "No"]),
+          ("Is there any reason you would be unable to provide two professional references?", "radio", ["Yes", "No"]),
+          ("Is there any reason you cannot commute to our office?", "radio", ["Yes", "No"]),
+          ("Are you currently enrolled as a student?", "radio", ["Yes", "No"]),
+          ("Do you agree to resolve disputes through binding arbitration?", "radio", ["Yes", "No"])]
+    _got = [_b._answer(_F(lab, kind, opts), "", {}) for lab, kind, opts in _q]
+finally:
+    _lv2.ALLOW_CONTRACT = _old_ac
+_want = ["Radio Ad", _sub.ANY, "Mobile", "iPhone", ["Full-time", "Temp-to-Hire"], "1st Shift", "40", "Yes", "Yes", "No", "No", "No", None]
+_ok = all((str(g).startswith(w) if w == _sub.ANY else g == w) for g, w in zip(_got, _want))
+_ok = _ok and _sub._pick(["Select One", "Employee Referral", "Billboard"], _sub.ANY + "LinkedIn|Other") == 2 \
+    and _sub._pick(["Select", "Indeed", "LinkedIn Jobs"], _sub.ANY + "LinkedIn|Indeed") == 2 \
+    and _sub._pick(["Yes", "No"], "No") == 1
+print("OK " if _ok else "BAD", "everyday questions answered as you said (any 'how did you hear', mobile, full-time, references...) ->",
+      [str(x)[:14] for x in _got])
+bad += not _ok
+# ...but a question about your past is never answered from a willingness fact or by inference
+_past = [_b._answer(_F(q, "radio", ["Yes", "No"]), "", {}) for q in (
+    "Have you ever failed a drug test?", "Have you ever had a positive drug test result?",
+    "Do you have anything in your background check we should know about?")]
+_will = [_b._answer(_F(q, "radio", ["Yes", "No"]), "", {}) for q in ("Will you consent to a background check?", "Are you willing to take a drug test?")]
+_ok = _past == [None, None, None] and _will == ["Yes", "Yes"]
+print("OK " if _ok else "BAD", "questions about your past stay unanswered; willingness to be checked is Yes ->", _past, _will)
 bad += not _ok
 
 sys.exit(bad + bad_mail)

@@ -907,8 +907,102 @@ def _match_option(texts: list[str], want) -> int | None:
     return None
 
 
+ANY = "@any:"          # an answer where any sensible choice will do: '@any:LinkedIn|Job Board|Other' (brain.ANY_OK)
+# choices that open questions of their own ('Referral' -> 'Who referred you?'), avoided when any choice will do
+_ANY_AVOID = re.compile(r"referr|employee|recruiter|agency|staffing|career fair|job fair|event|campus|universit|college|school|"
+                        r"military|veteran|diversity|association|alumni|club|conference|other \(please|please specify", re.I)
+
+
+def _any_choice(texts: list[str]) -> int | None:
+    """The list's first real choice that opens no question of its own, else its first real choice."""
+    real = [i for i, t in enumerate(texts) if t and not PLACEHOLDER.match(t)]
+    return next((i for i in real if not _ANY_AVOID.search(texts[i])), real[0] if real else None)
+
+
 def _pick(options: list[str], want) -> int | None:
+    if isinstance(want, str) and want.startswith(ANY):
+        for p in want[len(ANY):].split("|"):          # the first wanted choice the list has...
+            j = _match_option(options, p)
+            if j is not None:
+                return j
+        return _any_choice(options)                   # ...else any choice
     return _match_option(options, want)
+
+
+def _set_dropdown_any(page, f: dict, el, prefs: list[str], log) -> bool:
+    """A dropdown where any sensible answer will do ('How did you hear about us?', 'Phone type'): the first of prefs the
+    list has, typed when the list loads as you scroll; else its first real choice. Nothing more is guessed: the brain only
+    sends such an answer for questions you said may get any answer."""
+    def shown() -> str:
+        try:
+            return str(_loc(page, f).evaluate(_SHOWN_JS, timeout=1500) or "").strip()
+        except Exception:
+            return ""
+
+    def done() -> bool:
+        s1 = shown()
+        return bool(s1) and not PLACEHOLDER.match(s1) and not re.match(r"^\s*select an? ", s1, re.I)
+
+    def open_list():
+        if _list_open(page):
+            _close_list(page)
+        try:
+            _loc(page, f).click(timeout=4000)
+        except Exception:
+            _loc(page, f).click(force=True, timeout=4000)
+        page.wait_for_timeout(600)
+        return _options(page, _loc(page, f))
+
+    try:
+        is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
+    except Exception:
+        is_btn = bool(f.get("button"))
+    if done() and any(_match_option([shown()], p) is not None for p in prefs):
+        return True
+    opts = open_list()
+    texts = [o["text"] for o in opts]
+    i = next((j for p in prefs if (j := _best_option(texts, p)) is not None), None)
+    if i is None:                                     # not among the loaded choices: type each until the list shows one
+        for p in prefs[:5]:
+            try:
+                if is_btn:
+                    page.wait_for_timeout(1200)       # (a pause first, so the list's type-ahead starts afresh)
+                    page.keyboard.type(p, delay=40)
+                else:
+                    _loc(page, f).fill("", timeout=3000)
+                    _loc(page, f).press_sequentially(p, delay=40)
+            except Exception:
+                continue
+            page.wait_for_timeout(900)
+            opts = _options(page, _loc(page, f))
+            texts = [o["text"] for o in opts]
+            w = _norm(p)
+            i = _match_option(texts, p)
+            if i is None:
+                i = next((j for j, t in enumerate(texts) if w and w in _norm(t) and not PLACEHOLDER.match(t)), None)
+            if i is not None:
+                break
+    if i is None:                                     # none of them: the list's first real choice
+        try:
+            if not is_btn:
+                _loc(page, f).fill("", timeout=3000)
+                page.wait_for_timeout(600)
+            opts = _options(page, _loc(page, f)) or open_list()
+        except Exception:
+            opts = open_list()
+        texts = [o["text"] for o in opts]
+        i = _any_choice(texts)
+    if i is not None:
+        _click_option(page, opts[i])
+        page.wait_for_timeout(300)
+    if _list_open(page):
+        _close_list(page)
+    if not is_btn or done():
+        if i is not None:
+            log(f"      ('{f.get('label', '')[:40]}': any answer will do, picked {texts[i][:40]!r})")
+        return i is not None
+    log(f"      ! nothing was picked in '{f.get('label', '')[:50]}' (any answer would do; choices: {texts[:6]})")
+    return False
 
 
 def _autocomplete(el, f) -> bool:
@@ -1066,6 +1160,26 @@ def _wd_prompt(page, f: dict, el, val: str, log) -> bool:
                     if picked():
                         ok = True
                         break
+        if not ok and hear:       # (2026-11-24) any answer will do here: the list's first choice, into its sub-list if it has one
+            try:
+                _close_list(page)
+                _loc(page, f).click(timeout=2000)
+                _loc(page, f).fill("", timeout=2000)
+            except Exception:
+                pass
+            open_list()
+            for _ in range(3):
+                opts = _options(page)
+                texts = [o["text"] for o in opts]
+                pick = _any_choice(texts)
+                if pick is None:
+                    break
+                _click_option(page, opts[pick])
+                page.wait_for_timeout(700)
+                if picked():
+                    ok = True
+                    log(f"      ('{label[:40]}': any answer will do, picked {texts[pick][:40]!r})")
+                    break
     finally:
         _close_list(page)
     if not ok and picked():
@@ -1327,6 +1441,8 @@ def _value_variants(val: str) -> list[str]:
 def _set_dropdown(page, f: dict, el, val, log) -> bool:
     """Pick a value in a dropdown: a Workday button that opens a list, a search-as-you-type box, or a styled select."""
     val = str(val)
+    if val.startswith(ANY):
+        return _set_dropdown_any(page, f, el, [p for p in val[len(ANY):].split("|") if p], log)
     try:
         is_btn = bool(el.evaluate("e => !['INPUT', 'SELECT', 'TEXTAREA'].includes(e.tagName)", timeout=1500))
     except Exception:
@@ -1469,6 +1585,8 @@ def _fill_one(page, f: dict, val, files: dict, log):
         _set_date(page, f, el, val)
     elif kind == "wdprompt":
         for v in (val if isinstance(val, list) else [val]):       # several answers (your skills): the first the site's list has
+            if str(v).startswith(ANY):
+                v = str(v)[len(ANY):].split("|")[0]                # (Workday's own search tries the rest, then any choice)
             if _wd_prompt(page, f, el, str(v), log):
                 break
     elif kind in ("text", "textarea", "email", "tel", "url", "number", "date") and val == "__CLEAR__":

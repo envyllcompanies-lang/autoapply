@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import os
 import re
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 from .sources import norm_location, level_title, remote_in_text, la_area
@@ -112,6 +112,16 @@ _UNSET = object()
 #   mode: None = normal | "choice" = only for option fields (select/radio/checkbox group) | "demo" = voluntary self-ID
 _AI_Q = (r"\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b.{0,60}\b(use[ds]?|using|assist\w*|generat\w*|tools?|help\w*)\b|"
          r"\b(use[ds]?|using|assist\w*|help\w*)\b.{0,60}\b(ai|a\.i\.|chatgpt|generative|artificial intelligence|llm)\b")
+# (2026-11-24: 'any option for how did you hear about is okay ... just infer a lot of these answers') an answer where any
+# sensible choice will do: the choices in order of preference, then any real choice (submit.ANY). Only for questions where
+# every choice is harmless: how you heard of the job, the kind of phone.
+ANY_OK = "@any:"
+# a question about your past ('Have you ever failed a drug test?', 'anything in your background we should know?'), as
+# opposed to whether you would take a check or a test: never answered from a willingness fact or by inference
+PAST_RX = re.compile(r"\bever\b|\bfail|refus|positive|result|reveal|conviction|criminal|anything|should know|\brecord|history|"
+                     r"\bpast\b|previous|disclose", re.I)
+HEAR_ANY = ANY_OK + "LinkedIn|Job Board|Indeed|Company Website|Website|Internet|Online|Glassdoor|Social Media|Search Engine|Google|Other"
+PHONE_ANY = ANY_OK + "Mobile|Cell|iPhone|Smartphone|Personal|Home|Other"
 PLACEHOLDER_OPT = re.compile(r"\W*(select( one| an option|\.\.\.)?|choose( one)?|please select.*|none selected|--+)\W*$", re.I)      # the unanswered state of a list
 
 FIELD_RULES = [
@@ -326,6 +336,14 @@ class Brain:
             f["location_text"] = ", ".join(x for x in (f.get("city"), f.get("state")) if x)
         if not f.get("county") and county_of(f.get("city"), f.get("state")):
             f["county"] = county_of(f.get("city"), f.get("state"))
+        # (2026-11-24) everyday answers you said to just infer, used only where your private facts say nothing
+        for k, v in (("how_did_you_hear", "LinkedIn"), ("phone_type", "Mobile"), ("phone_device", "iPhone"), ("can_lift_lbs", 50),
+                     ("reliable_transportation", "Yes"), ("background_check_consent", "Yes"), ("drug_test_consent", "Yes")):
+            if f.get(k) in (None, ""):
+                f[k] = v
+        gy = re.search(r"(19|20)\d\d", str(f.get("graduation_date") or ""))
+        if f.get("currently_student") in (None, "") and gy and int(gy.group(0)) < date.today().year:
+            f["currently_student"] = "No"                  # you graduated (May 2025): not a student now
         # an address copied from the LinkedIn app can carry an invisible direction mark (U+200E) that forms reject as
         # 'not a valid LinkedIn profile URL' (Jane Street, 8 applications): invisible characters are removed
         raw_li = re.sub(r"[\u200b-\u200f\u202a-\u202e\u2060\ufeff]|%E2%80%8[B-F]|%E2%80%A[A-E]|%E2%81%A0|%EF%BB%BF", "",
@@ -1186,8 +1204,11 @@ class Brain:
                     return [got] if kind == "checkbox_group" else got
         if has_opts and opts and re.search(r"commut", low[:240]):
             real_c = [o for o in opts if not re.match(r"\W*(select|choose|--)", o, re.I)]
+            qpart_c = low.split("?")[0] if "?" in low[:400] else low[:240]
             if real_c and {_norm(o) for o in real_c} <= {"yes", "no"}:
-                got = pick_option(real_c, "Yes")
+                # 'Is there any reason you cannot commute?' is the same question turned round: its answer is No
+                negated = bool(NEG_Q_RX.search(_benign(qpart_c)) or re.search(r"\b(any reason|unable|not able)\b", qpart_c))
+                got = pick_option(real_c, "No" if negated else "Yes")
             else:                          # you said every commute question is answered Yes
                 got = next((o for pat in (r"within .{0,50}commut", r"live within|commut", r"^\W*yes\b", r"willing")
                             for o in real_c if re.search(pat, o, re.I) and not re.match(r"\W*no\b", o, re.I)), None)
@@ -1335,6 +1356,8 @@ class Brain:
                     continue
                 if mode == "salary" and re.search(r"\bveterans?\b", low):
                     continue         # a veteran self-ID whose definitions mention 'compensation' is not a pay question
+                if keys[0] in ("background_check_consent", "drug_test_consent") and PAST_RX.search(low):
+                    continue         # a question about your past ('ever failed a drug test?'), not whether you would take one
                 if mode == "loc" and not self._location_ok(low):
                     return None      # relocation / in-office answers are only given for places you said yes to
                 if keys[0] == "gpa" and not f.get("required"):
@@ -1420,6 +1443,9 @@ class Brain:
                 return pick_option(real, "Yes")      # ordinary willingness / ability questions ('are you' alone is not one:
                                                      # 'Are you married / a government official / on an F-1 visa?' must
                                                      # get its truthful answer from your facts, never a guessed Yes)
+        inf = self._infer(f, low, kind, opts, has_opts)
+        if inf is not _UNSET:
+            return inf                                # an everyday question you said to just answer
         if has_opts and kind in ("select", "radio", "combobox") and f.get("required"):
             got = next((o for o in opts if re.search(r"decline|prefer not|choose not|do not wish|don'?t wish|not (to )?(say|answer|disclose|specify)|n/?a\b|not applicable", o, re.I)), None)
             if got:
@@ -1427,6 +1453,87 @@ class Brain:
 
         # 3) open-ended prompt -> free LLM writer (required questions only, unless answer_optional)
         return self._write(f, low, kind)
+
+    def _infer(self, f, low, kind, opts, has_opts):
+        """Everyday questions you said to just answer instead of losing the job ('just infer a lot of these answers',
+        2026-11-24): the kind of job you want, shifts and hours, how you work, getting to work, background checks and
+        references. Never: legal waivers, certifications, demographic questions, or claims about experience and skills
+        (those keep their own rules and their truthful answers)."""
+        q = low[:400]
+        if LEGAL_RX.search(q) or HUMAN_CHECK_RX.search(q) or AI_WORDS.search(q) or QUALIFY_CERT_RX.search(q) or NEVER_GIVE_RX.search(q):
+            return _UNSET
+        real = [o for o in opts if not PLACEHOLDER_OPT.search(str(o))]
+        yn = bool(has_opts and real and {_norm(o) for o in real} <= {"yes", "no"})
+
+        def choose(*pats, avoid=None):
+            for p in pats:
+                got = [o for o in real if re.search(p, o, re.I) and not (avoid and re.search(avoid, o, re.I))]
+                if got:
+                    return got if kind == "checkbox_group" else got[0]
+            return None
+
+        def yes_no(ans):
+            got = pick_option(real, ans)
+            return ([got] if kind == "checkbox_group" else got) if got else _UNSET
+
+        from . import level
+        # the kind of job you want: full-time (and contract-to-hire / temp-to-hire, which you take too)
+        if has_opts and real and not yn and re.search(r"(type|kind) of (employment|position|job|work|role)|employment (type|status) "
+                                                      r"(desired|sought|preferred|you are seeking)|(seeking|looking for|interested in|desired?)\W+"
+                                                      r"(\w+\W+){0,3}(employment|position type|job type)|full[- ]time or part[- ]time", q):
+            if kind == "checkbox_group":
+                got = [o for o in real if re.search(r"full[- ]?time|permanent|regular", o, re.I)
+                       or (level.ALLOW_CONTRACT and re.search(r"contract[- ]to[- ](hire|perm)|temp(orary)?[- ]to[- ](hire|perm)", o, re.I))]
+                if got:
+                    return got
+            got = choose(r"full[- ]?time", r"permanent|regular", r"contract[- ]to[- ](hire|perm)|temp(orary)?[- ]to[- ](hire|perm)",
+                         avoid=r"part[- ]?time|seasonal|intern")
+            if got:
+                return got
+        # shifts and schedule: whatever they have, else the day shift
+        if has_opts and real and not yn and re.search(r"\bshifts?\b|schedule (preference|availability)|preferred (schedule|hours)|"
+                                                      r"(work|working) schedule|hours (are you|can you|do you prefer)", q):
+            got = choose(r"no preference|\bany\b|flexible|open to (all|any)|either|all of the above",
+                         r"\bday\b|\bdays\b|daytime|\bfirst\b|\b1st\b|morning|9 ?(am)? ?(-|to) ?5|standard|business hours|"
+                         r"monday ?(-|–|to|through) ?friday|weekdays?")
+            if got:
+                return got
+        if kind in ("text", "number") and re.search(r"how many hours\W+(\w+\W+){0,4}(week|weekly)|hours (per|a|each) week|weekly hours", q):
+            return "40"
+        # where you would work: no preference, else hybrid, else on-site, else remote
+        if has_opts and real and not yn and re.search(r"(work|working) (arrangement|environment|model|setting|style) ?(preference|preferred|do you prefer)?|"
+                                                      r"(prefer|preference)\W+(\w+\W+){0,4}(remote|hybrid|on-?site|in[- ]office)", q):
+            got = choose(r"no preference|\bany\b|flexible|open to (all|any|either)|either|all of the above", r"hybrid",
+                         r"on-?site|in[- ](office|person)", r"remote")
+            if got:
+                return got
+        # getting to work, a place to work from
+        if yn and re.search(r"reliable (transportation|vehicle|car|means)|(own|have) (a |an |your own )?(reliable )?(car|vehicle|"
+                            r"transportation)|means of (transportation|getting)", q):
+            return yes_no("Yes")
+        if yn and re.search(r"internet (speed|connection|access|service)|high[- ]speed internet|\bmbps\b|home office|quiet (work ?space|"
+                            r"place|area|environment)|dedicated (work ?space|office|space)|computer (and|with) (internet|webcam|camera)", q):
+            return yes_no("Yes")
+        # background check and drug screen: yes, you would go through them
+        if yn and re.search(r"background (check|screen|investigation)|drug (test|screen)|pre-?employment (test|screen)|e-?verify", q) \
+                and not PAST_RX.search(q):
+            return yes_no("Yes")
+        # references: yes they may be contacted; no reason you could not give them
+        if yn and re.search(r"\breferences?\b", q):
+            if re.search(r"(any reason|unable|not able|reason (you|why you) (would|could) not).{0,60}(provide|give|supply)", q):
+                return yes_no("No")
+            if re.search(r"provide|contact|may we|can we|willing|available|upon request|reach out", q):
+                return yes_no("Yes")
+        # not a student any more (you graduated in May 2025)
+        if yn and re.search(r"(currently|presently) (enrolled|a student|attending|in school)|are you (a )?(current )?student", q):
+            grad = self._grad_date()          # MM/DD/YYYY of your graduation, from facts.graduation_date
+            try:
+                done = bool(grad) and datetime.strptime(grad, "%m/%d/%Y").date() <= date.today()
+            except ValueError:
+                done = False
+            if done:
+                return yes_no("No")
+        return _UNSET
 
     _MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
 
@@ -1600,6 +1707,21 @@ class Brain:
             got = next((o for o in real if re.match(r"\W*no\b", o, re.I)), None)
             if got:
                 return one(got)
+        if re.search(r"phone (device |number )?type|(type|kind|make|model|brand) of (smart ?|cell ?|mobile )?(phone|device|number)|"
+                     r"device type|phone (kind|category)|which (smart ?)?phone", q) and \
+                not re.search(r"country|code|extension", q):
+            # your phone is a mobile (an iPhone): 'Mobile' / 'Cell' / 'Personal Primary', never a work or home line
+            if has_opts and real:
+                got = next((o for pat in (r"mobile|cell|iphone|smart ?phone|wireless", r"personal (primary|mobile|cell)", r"^\W*personal\b")
+                            for o in real if re.search(pat, o, re.I) and not re.search(r"business|work|office|fax|pager|landline", o, re.I)), None)
+                if got:
+                    return one(got)
+                if kind in ("combobox", "select"):
+                    return PHONE_ANY
+            elif kind in ("text", "textarea"):
+                if re.search(r"(make|model|brand|kind of (smart)?phone|iphone|android|ios)", q):
+                    return str(self.facts.get("phone_device") or "iPhone")
+                return str(self.facts.get("phone_type") or "Mobile")
         if kind in ("number", "tel", "text") and re.fullmatch(r"\W*(contact|phone|mobile|cell)( phone)? (number|no\.?)\W*\*?\W*", lab):
             digits = re.sub(r"\D", "", str(self.facts.get("phone") or ""))[-10:]
             if digits:
@@ -1842,8 +1964,9 @@ class Brain:
             if got:
                 return [got] if kind == "checkbox_group" else got
         qpart = low.split("?")[0] if "?" in low[:400] else low
-        if has_opts and NEG_Q_RX.search(_benign(qpart)) and NEG_TOPIC_RX.search(low):
+        if has_opts and NEG_Q_RX.search(_benign(qpart)) and NEG_TOPIC_RX.search(low) and not re.search(r"\breferences?\b", low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
+                                             # (references: read the right way round in _infer)
         if optionish and re.search(r"investigative consumer report|consumer report|background (check|screening|investigation)|"
                                    r"criminal (background|history) check|employment verification", low) and \
                 re.search(r"understand|agree|authori[sz]e|consent|acknowledge", low) and not LEGAL_RX.search(low):
@@ -2098,11 +2221,17 @@ class Brain:
             return None
         if key == "how_did_you_hear":
             for pat in (r"^linkedin", r"^indeed", r"glassdoor", r"job board|job site|job posting|jobs? website", r"company (career|web)|careers? (site|page)",
-                        r"internet|online|search|website", r"^other"):
+                        r"internet|online|search|website", r"social|linkedin|indeed", r"^other"):
                 got = next((o for o in opts if re.search(pat, o, re.I)), None)
                 if got:
                     return out(got)
-            return None
+            if kind == "combobox":
+                return HEAR_ANY           # a list that loads as you scroll: searched for these, else any choice (you said any is fine)
+            real = [o for o in opts if not PLACEHOLDER_OPT.search(str(o))]
+            avoid = re.compile(r"referr|employee|recruiter|agency|staffing|career fair|job fair|event|campus|universit|military|"
+                               r"veteran|diversity|association|alumni|please specify", re.I)
+            got = next((o for o in real if not avoid.search(o)), real[0] if real else None)
+            return out(got)
         return None
 
     def _by_options(self, opts):
