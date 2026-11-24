@@ -481,4 +481,30 @@ _ok = _got == ({"locations": ["L1", "L3"]}, {"locations": ["I1"]}, {})
 print("OK " if _ok else "BAD", "Workday: a big board's Los Angeles-area location filters ->", _got)
 bad += not _ok
 
+# ---- Workday behind a Cloudflare bot check: never retried or worked around; after three in a row the other boards wait
+#      for the next search (no network: requests.post is faked)
+_cf_calls = []
+_old = (_S.requests.post, _S.WD_GAP, _S._WD_HELD_UNTIL)
+_S.requests.post, _S.WD_GAP = (lambda url, **kw: (_cf_calls.append(url), _WR(429, {"Cf-Mitigated": "challenge"}))[1]), 0.0
+_S.WD_HELD, _S._WD_CHECKS = False, 0
+try:
+    for _i in range(3):
+        _S._WD_HELD_UNTIL = 0.0                     # (the one-minute pause after each check is skipped in the test)
+        try:
+            _S._wd_request("POST", f"https://t{_i}.wd77.myworkdayjobs.com/wday/cxs/t/S/jobs", json={})
+        except _S.requests.HTTPError:
+            pass
+    _held, _n = _S.WD_HELD, len(_cf_calls)
+    try:
+        _S.workday("t9/wd77/S")
+        _deferred = False
+    except _S.Deferred:
+        _deferred = True
+finally:
+    _S.requests.post, _S.WD_GAP, _S._WD_HELD_UNTIL = _old
+    _S.WD_HELD, _S._WD_CHECKS = False, 0
+_ok = _n == 3 and _held and _deferred and len(_cf_calls) == 3
+print("OK " if _ok else "BAD", "Workday bot check: one request each, no retry; after three the rest wait for the next search ->", _n, _held, _deferred)
+bad += not _ok
+
 sys.exit(bad + bad_mail)

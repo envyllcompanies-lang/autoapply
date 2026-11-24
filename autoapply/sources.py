@@ -169,6 +169,13 @@ _WD_NEXT: dict = {}        # data centre -> earliest moment (time.monotonic) the
 WD_GAP = 0.5               # seconds between the starts of two requests to one Workday data centre
 WD_DEADLINE = 0.0          # set by discover(): after this moment (time.monotonic) no new Workday board is started
                            # (the rest are read first at the next search), and a big board's searches stop early
+# Workday's career sites sit behind Cloudflare, which at times answers cloud machines with a bot check ('429' with
+# 'Cf-Mitigated: challenge') instead of the page. That is a human check: it is never worked around and never retried.
+# After one, Workday is left alone for a minute; after WD_MAX_CHECKS in a row, until the next search.
+WD_MAX_CHECKS = 3
+_WD_CHECKS = 0             # Cloudflare checks in a row (a normal answer resets it)
+_WD_HELD_UNTIL = 0.0       # time.monotonic() before which no Workday request starts (after a Cloudflare check)
+WD_HELD = False            # Workday kept checking: no more Workday requests in this search
 
 
 class Deferred(Exception):
@@ -188,9 +195,11 @@ def _wd_gate(url: str) -> threading.BoundedSemaphore:
 
 def _wd_turn(key: str):
     """Requests to one data centre start at least WD_GAP seconds apart, and none during a pause after a 429."""
+    if WD_HELD:
+        raise Deferred("Workday keeps answering with a bot check")
     with _WD_LOCK:
         now = time.monotonic()
-        start = max(now, _WD_NEXT.get(key, 0.0))
+        start = max(now, _WD_NEXT.get(key, 0.0), _WD_HELD_UNTIL)
         _WD_NEXT[key] = start + WD_GAP
     if start > now:
         time.sleep(start - now)
@@ -203,10 +212,20 @@ def _wd_request(method: str, url: str, **kw) -> requests.Response:
     kw.setdefault("timeout", TIMEOUT)
     key = _wd_key(url)
     r = None
+    global _WD_CHECKS, _WD_HELD_UNTIL, WD_HELD
     for attempt in range(4):
         _wd_turn(key)
         with _wd_gate(url):
             r = (requests.post if method == "POST" else requests.get)(url, **kw)
+        if str((getattr(r, "headers", None) or {}).get("Cf-Mitigated", "")).lower() == "challenge":
+            with _WD_LOCK:                    # a bot check, not a rate limit: no retry, and Workday is left alone a while
+                _WD_CHECKS += 1
+                _WD_HELD_UNTIL = max(_WD_HELD_UNTIL, time.monotonic() + 60)
+                if _WD_CHECKS >= WD_MAX_CHECKS:
+                    WD_HELD = True
+            break
+        if r.status_code < 400:
+            _WD_CHECKS = 0
         if r.status_code not in (429, 502, 503, 504) or attempt == 3:
             break
         try:
@@ -332,8 +351,8 @@ def workday(spec: str) -> list[Job]:
                         take(data)
                         if len(data.get("jobPostings") or []) < 20:
                             break
-    except requests.RequestException:
-        pass
+    except (requests.RequestException, Deferred):
+        pass                                  # what was found before the board stopped answering is kept
 
     out, details = [], 0
     for p in posts:
@@ -521,7 +540,8 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
     """Fetch every company board in parallel. Boards that 404 twice in a row are skipped for a few weeks (boards_state.json).
     Workday boards go least recently read first, within workday_minutes (search.workday_minutes, default 15): the ones not
     reached in time are read first at the next search."""
-    global WD_DEADLINE
+    global WD_DEADLINE, WD_HELD, _WD_CHECKS, _WD_HELD_UNTIL
+    WD_HELD, _WD_CHECKS, _WD_HELD_UNTIL = False, 0, 0.0           # each search gives Workday a fresh chance
     state = _load_state(base) if base else {}
     now = time.time()
     mins = float(workday_minutes if workday_minutes is not None else (SEARCH or {}).get("workday_minutes", 15))
@@ -587,11 +607,13 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
     for source, names in missing.items():
         log(f"  {source}: {len(names)} board names not found (skipped from now on): {', '.join(names[:30])}{' …' if len(names) > 30 else ''}")
     if deferred:
-        log(f"  workday: {deferred} career sites left for the next search (this search's {mins:.0f} min for Workday ran out); "
-            "they are read first then")
+        why = (f"Workday answered {WD_MAX_CHECKS} times in a row with a Cloudflare bot check, which the bot never works "
+               "around" if WD_HELD else f"this search's {mins:.0f} min for Workday ran out")
+        log(f"  workday: {deferred} career sites left for the next search ({why}); they are read first then")
     n429 = sum(1 for e in errors if " 429 " in e)
     if n429:
-        log(f"  workday: {n429} career sites answered 'too many requests' even after waiting; they are read first at the next search")
+        log(f"  workday: {n429} career sites answered with a bot check or 'too many requests' (nothing is done to get around "
+            "a check); they are read first at the next search")
     for e in errors[:12]:
         log(f"  ! {e}")
     if len(errors) > 12:
