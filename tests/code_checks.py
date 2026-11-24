@@ -342,7 +342,14 @@ _cases = [("Thank you for applying to Acme", "If selected, we will contact you t
           ("Re: Project Coordinator role", "Are you free for a quick intro call on Thursday? Sam, Acme recruiting", "interview"),
           ("Complete your assessment for Acme", "Please complete the following assessment within 3 days.", "assessment"),
           ("Offer Letter - Acme", "We are pleased to extend you an offer for the position.", "offer"),
-          ("Job alert: 25 new jobs for you", "interview tips", None)]
+          ("Job alert: 25 new jobs for you", "interview tips", None),
+          # confirmation emails the first live pass misread (fraud warning, hiring steps, 'we cannot reply to everyone')
+          ("Thank you for applying to Wells Fargo", "Wells Fargo will never charge a fee as part of a job offer. Any offer of "
+           "employment is contingent upon a background check.", None),
+          ("Thank you for your application", "What happens next? 1. Application review 2. Phone screen with a recruiter 3. Interviews", None),
+          ("Your application at GitLab", "Here's what to expect from our interview process: screening call, team interviews.", None),
+          ("We received your application", "Unfortunately, due to the high volume of applications, we are unable to respond to everyone.", None),
+          ("Acme Application Update", "We'd like to invite you to a phone screen. Please choose a time: https://acme.goodtime.io/x", "interview")]
 _got = [_oc.classify(s_, b_) for s_, b_, _e in _cases]
 _ok = _got == [e for _s, _b, e in _cases]
 print("OK " if _ok else "BAD", "employer answers are read right ->", _got)

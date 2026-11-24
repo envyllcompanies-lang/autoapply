@@ -1498,7 +1498,8 @@ class Brain:
                          r"monday ?(-|–|to|through) ?friday|weekdays?")
             if got:
                 return got
-        if kind in ("text", "number") and re.search(r"how many hours\W+(\w+\W+){0,4}(week|weekly)|hours (per|a|each) week|weekly hours", q):
+        if kind in ("text", "number") and re.search(r"how many hours\W+(\w+\W+){0,4}(week|weekly)|hours\W{1,3}(per|a|each)\W+week|"
+                                                    r"weekly hours|(desired|preferred|available) (work )?hours", q):
             return "40"
         # where you would work: no preference, else hybrid, else on-site, else remote
         if has_opts and real and not yn and re.search(r"(work|working) (arrangement|environment|model|setting|style) ?(preference|preferred|do you prefer)?|"
