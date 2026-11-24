@@ -1,10 +1,5 @@
 # Pushing a change to this file on the 'probe' branch starts a probe run (fills real forms, never submits).
-id: cc2
+id: osm1
 fetch:
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=job-boards.greenhouse.io/&matchType=prefix&showNumPages=true
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=boards.greenhouse.io/&matchType=prefix&showNumPages=true
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.lever.co/&matchType=prefix&showNumPages=true
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.ashbyhq.com/&matchType=prefix&showNumPages=true
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=job-boards.greenhouse.io/&matchType=prefix&output=json&fl=url&page=0
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.lever.co/&matchType=prefix&output=json&fl=url&page=0
-  - https://index.commoncrawl.org/CC-MAIN-2026-43-index?url=jobs.ashbyhq.com/&matchType=prefix&output=json&fl=url&page=0
+  - "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3Bnwr%5B%22office%22%3D%22employment_agency%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3Bout%20center%20tags%3B"
+  - "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3B%28nwr%5B%22office%22%3D%22company%22%5D%5B%22website%22%5D%2833.85%2C-118.50%2C34.20%2C-118.10%29%3Bnwr%5B%22office%22%3D%22property_management%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3Bnwr%5B%22office%22%3D%22construction_company%22%5D%2833.70%2C-118.70%2C34.35%2C-117.70%29%3B%29%3Bout%20center%20tags%20400%3B"
