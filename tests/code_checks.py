@@ -432,4 +432,37 @@ _ok = _got == ["LinkedIn", "Personal Primary"] and sorted(k for k, v in _ans.ite
 print("OK " if _ok else "BAD", "scrolling 'how did you hear' list, phone type, weekday availability ->", _got, sorted(_ans))
 bad += not _ok
 
+# ---- inbox search (Gmail's own search narrows a month of mail; a refused search is an error, never an empty inbox)
+from autoapply import mailbox as _MB
+_raw = (b"From: Sam <sam@acme.com>\r\nSubject: Interview request\r\nMessage-ID: <m1@acme.com>\r\nDate: "
+        + _t.strftime("%a, %d %b %Y %H:%M:%S +0000", _t.gmtime()).encode() + b"\r\n\r\nWe would like to invite you to an interview.\r\n")
+class _FakeIMAP:
+    mode = "OK"
+    def __init__(s, host, timeout=30): s.capabilities = ("IMAP4REV1", "X-GM-EXT-1")
+    def login(s, u, p): return ("OK", [b"ok"])
+    def select(s, folder, readonly=True): return ("OK", [b"1"]) if folder == "INBOX" else ("NO", [b"no such folder"])
+    def uid(s, cmd, *args): return (s.mode, [b"7"]) if cmd == "search" else ("OK", [(b"7 (UID 7 BODY[] {100}", _raw), b")"])
+    def logout(s): pass
+_old = (_MB.imaplib.IMAP4_SSL, os.environ.get("IMAP_USER"), os.environ.get("IMAP_PASS"))
+_MB.imaplib.IMAP4_SSL = _FakeIMAP
+os.environ["IMAP_USER"], os.environ["IMAP_PASS"] = "u@x.org", "p"
+try:
+    _got = _MB.search(_t.time() - 86400, "interview", ("INBOX", "[Gmail]/Spam"))
+    _FakeIMAP.mode = "NO"
+    try:
+        _MB.search(_t.time() - 86400, "interview", ("INBOX",))
+        _raised = False
+    except RuntimeError:
+        _raised = True
+finally:
+    _MB.imaplib.IMAP4_SSL = _old[0]
+    for _k, _v in (("IMAP_USER", _old[1]), ("IMAP_PASS", _old[2])):
+        if _v is None:
+            os.environ.pop(_k, None)
+        else:
+            os.environ[_k] = _v
+_ok = len(_got) == 1 and _got[0]["message_id"] == "<m1@acme.com>" and _raised
+print("OK " if _ok else "BAD", "inbox search: Gmail search used, a missing Spam folder is fine, a refused search is an error ->", len(_got), _raised)
+bad += not _ok
+
 sys.exit(bad + bad_mail)

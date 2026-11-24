@@ -246,16 +246,18 @@ def search(since_ts: float, gmail_query: str = "", folders=("INBOX",), max_n: in
         for folder in folders:
             try:
                 typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
-                if typ != "OK":
-                    continue
-                if gmail and gmail_query:
-                    q = f"after:{int(since_ts) - 3600} ({gmail_query})"
-                    typ, data = imap.uid("search", None, "X-GM-RAW", '"' + q.replace('"', '\\"') + '"')
-                else:
-                    typ, data = imap.uid("search", None, "SINCE", day)
-                uids = (data[0] or b"").split()[-max_n:] if typ == "OK" else []
             except Exception:
                 continue
+            if typ != "OK":
+                continue                      # no such folder (a Spam folder under another name): nothing to read there
+            if gmail and gmail_query:
+                q = f"after:{int(since_ts) - 3600} ({gmail_query})"
+                typ, data = imap.uid("search", None, "X-GM-RAW", '"' + q.replace('"', '\\"') + '"')
+            else:
+                typ, data = imap.uid("search", None, "SINCE", day)
+            if typ != "OK":                   # a refused search is not an empty inbox: the caller tries again later
+                raise RuntimeError(f"the inbox search was refused in {folder}: {str(data)[:80]}")
+            uids = (data[0] or b"").split()[-max_n:]
             for u in reversed(uids):
                 try:
                     _, d = imap.uid("fetch", u, "(BODY.PEEK[])")
