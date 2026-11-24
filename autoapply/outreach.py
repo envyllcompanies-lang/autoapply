@@ -629,12 +629,23 @@ def run(cfg: dict, db, company_name, base: Path, log=print, notes: list | None =
     ready = db.conn.execute(f"SELECT * FROM outreach WHERE status = 'ready' ORDER BY {order}").fetchall()
     resume = _resume(cfg, base)
     done_now = 0
+    try:                                  # employers that answered an application since: no cold email, no follow-up
+        answered = {norm_co(c): k for c, k in db.conn.execute("SELECT company, outcome FROM jobs WHERE outcome IS NOT NULL "
+                                                                "AND outcome != ''")}
+    except Exception:
+        answered = {}
     if send_on and _la_business_hours() and resume:
         due = db.conn.execute("SELECT * FROM outreach WHERE status = 'sent' AND sent_at <= ?",
                               ((datetime.now() - timedelta(days=int(o.get("followup_days", 7)))).isoformat(timespec="seconds"),)).fetchall()
         for r in list(due) + list(ready):
             if done_now >= per_run or sent_today + done_now >= per_day:
                 break
+            if r["co"] and r["co"] in answered:
+                why = {"rejection": "they turned down your application", "interview": "they invited you to interview",
+                       "offer": "they made you an offer"}.get(answered[r["co"]], "they answered your application")
+                db.conn.execute("UPDATE outreach SET status = 'skipped', reason = ?, updated = ? WHERE domain = ?", (why, _now(), r["domain"]))
+                db.conn.commit()
+                continue
             try:
                 if r["status"] == "sent":
                     subj0, text0 = compose(r, cfg)

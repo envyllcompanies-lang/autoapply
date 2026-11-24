@@ -15,6 +15,7 @@ hand (tick "dry run" to fill forms without submitting anything).
 | Nothing to do most days | While enabled it runs by itself, four times a day. Don't cancel runs: a cancelled run still uses free minutes. |
 | Changing your private answers | Edit `config.yaml` / `profile.yaml` in your own folder, then `bash update_github.sh`: it refreshes your secrets and never touches the bot's memory of what it already applied to. It refuses to put an older copy of the code over a newer one on GitHub. |
 | Jobs the bot can't finish | They arrive in the email under **EXCEPTIONS**, best fit first, with a link, the reason, and how far the bot got. **NEEDS YOU** lists employers that emailed asking for something more (an assessment, an "incomplete application"). |
+| An employer answers | Interview invitations, offers and assessments are read from the inbox and put at the very top of the email (the subject starts with **INTERVIEW/OFFER**). Reply to them yourself. Rejections are only counted. |
 
 ## How you know it's working
 - **Emails to delgado@alumni.usc.edu** from the run: one whenever it applied, has something to finish by hand or could not
@@ -29,6 +30,24 @@ hand (tick "dry run" to fill forms without submitting anything).
   (headings, questions, which boxes were empty or marked wrong, the site's error messages). Nothing you typed is in it, and
   your name, email, phone and address are blanked out. It is what makes a failure fixable without guessing.
 - A run that cannot start (a mistake in the bot's own code) stops before touching any job and emails you what is wrong.
+- **What came of the applications**: once a day the email counts the last 30 days' applications, interviews, assessments,
+  offers and rejections, overall and by place (Los Angeles, remote, elsewhere), read from the employers' emails
+  (`autoapply/outcomes.py`). Each answer is kept on its application (`outcome`, `outcome_at` in `applications.db`).
+
+## Cold outreach to Los Angeles employers (`autoapply/outreach.py`)
+A short, personal email with your résumé to employers hiring in the Los Angeles area, on top of the applications:
+- **Who**: employers with an LA-area posting in your field in the last 45 days, from the bot's own searches. First those you
+  applied to (the email follows up on that application), then those whose site stopped the bot at a human check, then the
+  others hiring for roles like yours. Never government employers, staffing marketplaces or employers that turned you down.
+  One email per company, one follow-up after a week of silence, and nothing after a reply, a bounce or a "no thanks".
+- **Which address**: only one the company publishes on its own website for this: careers@, jobs@, recruiting@, hr@,
+  people@ first, then info@ / contact@. The website comes from the company's job page, or from an exact name lookup
+  checked against the site's own title. Never a guessed address, never a person's, never one the site hides from address
+  collectors, and robots.txt is respected. Many companies only have a contact form; those are skipped.
+- **Sending is off until you turn it on** (`outreach.send: true` in `settings.yaml`). Until then the daily email shows the
+  drafts word for word, exactly what would be sent. Once on: at most 15 a day (`outreach.per_day`), weekdays 8:30am-4:30pm
+  Los Angeles time, from the applications inbox. Replies go to the top of the email. The middle paragraph is
+  `outreach.pitch` (from your résumé), so you can edit it.
 
 ## Where the jobs come from
 1. **Company career sites** in `boards.yaml` (public list, no secrets): Greenhouse, Workday (the big employers, searched by role and city),
@@ -156,7 +175,12 @@ If you change how often it runs, edit the `cron:` line in `.github/workflows/aut
 - `search.workday_places` and `search.workday_queries` control how the big Workday employers are searched ("<role> <city>").
 
 ## `settings.yaml` (public tuning, in the repository)
-Merged over your private `config.yaml` on every run: sections merge, lists replace. Holds the match bar (`search.min_fit`, 55),
+Merged over your private `config.yaml` on every run: sections merge, lists replace (except `search.titles_include_add` and
+`search.titles_exclude_add`, which add to your private lists). Since 2026-11-24 it puts Los Angeles first: every LA-area city
+counts as Los Angeles (`search.la_area`), the match bar is set by place (`search.min_fit_by_place`: 50% in LA, 65% remote, 60%
+elsewhere), the pay floor is $35 an hour (`scoring.salary_floor`, 72,800), at most 3 applications go to one employer in 120 days
+(`search.max_per_company`, `search.company_window_days`), contract and temp-to-hire roles are in (`search.allow_contract`),
+and LA-area jobs get a cover letter wherever the form has a box (`cover_letters_local`). It also holds the match bar (`search.min_fit`, 55),
 the candidate bar (`search.min_score`, 10), the day's ceiling while running non-stop (`search.daily_cap_unlimited`, 500), the
 entry-level setting (`search.max_level`: 0 entry only, 1 entry + early career), the senior-pay cutoff, the daily snapshot's
 settings and the writer's model list, so they can be tuned without re-sending secrets.
