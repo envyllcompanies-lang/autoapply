@@ -697,7 +697,10 @@ class Brain:
             nones = [i for i, t in lab.items() if self._NONE_OPT.fullmatch(t)]
             if re.search(r"shift|schedule|hours|availab|days?\b|times? (of|you)|work (on|during)", low):
                 pick = [i for i, t in lab.items() if re.fullmatch(r"(days?|day shift|daytime|mornings?|first( shift)?|weekdays?|"
-                                                                 r"full[- ]?time|monday ?- ?friday)", t, re.I)]
+                                                                 r"full[- ]?time|monday ?- ?friday|mon(day)?|tue(s(day)?)?|wed(nesday)?|"
+                                                                 r"thu(rs(day)?)?|fri(day)?)", t.strip(" *"), re.I)]
+                if pick and ((self.cfg.get("confirmed") or {}).get("weekends")):      # weekends too, where you said so
+                    pick += [i for i, t in lab.items() if re.fullmatch(r"(sat(urday)?|sun(day)?|weekends?)", t.strip(" *"), re.I)]
             elif re.search(r"contact|reach you|communicat|prefer.{0,20}(email|phone|text)", low):
                 sms = re.match(r"y", str(self.facts.get("sms_consent", "")), re.I)
                 pick = [i for i, t in lab.items() if re.search(r"e-?mail", t, re.I) or (sms and re.search(r"\btext|\bsms", t, re.I))]

@@ -417,4 +417,19 @@ _ok = _st == {"acme.com": "replied", "beta.com": "bounced", "gamma.com": "sent",
 print("OK " if _ok else "BAD", "outreach replies: a reply goes to your email, a bounce or a 'no thanks' ends it, an auto-reply does not ->", _st)
 bad += not _ok
 
+# ---- forms that dropped applications: a 'how did you hear' list that loads as you scroll gets the answer typed; phone
+#      type 'Personal Primary'; a required Monday..Sunday group gets the five weekdays (weekends only where you said so)
+_b = _Br({"facts": {"email": "a@b.org", "full_name": "Pat Doe", "how_did_you_hear": "LinkedIn"}, "confirmed": {"phone_type": "mobile"}},
+         {"name": "Pat Doe"}, ".", lambda *a: None)
+_got = [_b._answer(_F("How Did You Hear About Us?*", "combobox", ["Select One", "Agency: Staffing Firm", "Association: Diversity Associa",
+                                                                 "Association: Professional Asso", "Diversity: Networking Event"]), "", {}),
+        _b._answer(_F("Phone Device Type*", "combobox", ["Select One", "Business Primary", "Personal Primary", "Personal Secondary"]), "", {})]
+_days = [{"id": f"d{i}", "kind": "checkbox_single", "label": d, "question": "Which days are you available to work?*", "required": True,
+          "options": [], "key": "formField-days"} for i, d in enumerate(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])]
+_ans, _miss = {}, [x["id"] for x in _days]
+_b._pick_in_groups(_days, _ans, _miss)
+_ok = _got == ["LinkedIn", "Personal Primary"] and sorted(k for k, v in _ans.items() if v is True) == ["d0", "d1", "d2", "d3", "d4"] and not _miss
+print("OK " if _ok else "BAD", "scrolling 'how did you hear' list, phone type, weekday availability ->", _got, sorted(_ans))
+bad += not _ok
+
 sys.exit(bad + bad_mail)
