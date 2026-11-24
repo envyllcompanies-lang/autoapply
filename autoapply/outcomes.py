@@ -148,6 +148,7 @@ def track(db, company_name, log=print, notes: list | None = None, every_minutes:
     # the longest word of each employer's name: a quick test before the careful one (names_employer)
     key_word = {name: max(re.findall(r"[a-z0-9]{3,}", name.lower()) or [""], key=len) for name in by_co if name}
     found: dict = {}
+    noted: dict = {}                      # application -> index of its line in notes (one line each, the latest answer)
     for m in sorted(msgs, key=lambda m: m["ts"]):
         kind = classify(m.get("subject", ""), m.get("body", ""))
         if not kind:
@@ -171,7 +172,12 @@ def track(db, company_name, log=print, notes: list | None = None, every_minutes:
                     "offer": "OFFER: read it and decide",
                     "assessment": "ASSESSMENT: they sent a test or a recorded interview to complete"}[kind]
             when = datetime.fromtimestamp(m["ts"]).strftime("%b %d")
-            notes.append(f"{what} — {r['title']} @ {company_name(r)} (email of {when}: \"{(m.get('subject') or '')[:90]}\")")
+            line = f"{what} — {r['title']} @ {company_name(r)} (email of {when}: \"{(m.get('subject') or '')[:90]}\")"
+            if r["key"] in noted:
+                notes[noted[r["key"]]] = line     # a reminder or a later step about the same application
+            else:
+                noted[r["key"]] = len(notes)
+                notes.append(line)
     db.conn.commit()
     db.meta_set("outcomes_scanned_at", datetime.fromtimestamp(now).isoformat(timespec="seconds"))
     if found:
