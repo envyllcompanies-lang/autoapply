@@ -332,4 +332,89 @@ print("OK " if _ok else "BAD", "Workday pacing: a 429 pauses the data centre; bo
       len(_calls), round(_waited, 1), _logs[:1])
 bad += not _ok
 
+# ---- employer answers: interview / assessment / offer / rejection read from emails, kept on the application, and an
+#      interview put at the top of your email (no network: the inbox search is faked)
+from autoapply import outcomes as _oc
+from autoapply.db import DB as _DB
+_cases = [("Thank you for applying to Acme", "If selected, we will contact you to schedule an interview.", None),
+          ("Your application to Acme", "Unfortunately, we have decided to move forward with other candidates.", "rejection"),
+          ("Interview Invitation - Project Coordinator", "Please pick a time: https://calendly.com/acme/30min", "interview"),
+          ("Re: Project Coordinator role", "Are you free for a quick intro call on Thursday? Sam, Acme recruiting", "interview"),
+          ("Complete your assessment for Acme", "Please complete the following assessment within 3 days.", "assessment"),
+          ("Offer Letter - Acme", "We are pleased to extend you an offer for the position.", "offer"),
+          ("Job alert: 25 new jobs for you", "interview tips", None)]
+_got = [_oc.classify(s_, b_) for s_, b_, _e in _cases]
+_ok = _got == [e for _s, _b, e in _cases]
+print("OK " if _ok else "BAD", "employer answers are read right ->", _got)
+bad += not _ok
+_d = _DB(":memory:")
+_d.conn.execute("INSERT INTO jobs (key, company, title, location, status, updated, submitted_at) VALUES "
+                "('k1', 'acme', 'Project Coordinator', 'Torrance, CA', 'applied', '2026-11-20T10:00:00', '2026-11-20T10:00:00')")
+_t0 = _t.time()
+_mail = [{"subject": "Interview request: Project Coordinator", "from": "Sam <sam@acme.com>", "ts": _t0 - 3600,
+          "body": "Hi, we would like to invite you to a phone interview for the Project Coordinator role at Acme."}]
+_notes = []
+_f1 = _oc.track(_d, lambda r: "Acme", lambda *a: None, _notes, search=lambda since, q, folders: _mail, now=_t0)
+_row = _d.conn.execute("SELECT outcome FROM jobs WHERE key='k1'").fetchone()
+_mail2 = [{"subject": "Update on your application", "from": "Acme Careers <careers@acme.com>", "ts": _t0 + 7200,
+           "body": "Unfortunately the Project Coordinator position has been filled."}]
+_f2 = _oc.track(_d, lambda r: "Acme", lambda *a: None, _notes, search=lambda since, q, folders: _mail2, now=_t0 + 3 * 3600)
+_row2 = _d.conn.execute("SELECT outcome FROM jobs WHERE key='k1'").fetchone()
+_ok = _f1 == {"interview": 1} and _row["outcome"] == "interview" and len(_notes) == 1 and _notes[0].startswith("INTERVIEW") \
+    and _f2 == {"rejection": 1} and _row2["outcome"] == "rejection" and len(_notes) == 1
+print("OK " if _ok else "BAD", "employer answers kept on the application; an interview goes to the top of your email ->", _f1, _f2, _notes[:1])
+bad += not _ok
+
+# ---- cold outreach: only published role addresses on the company's own site, never a person's or a hidden one; the
+#      company's site from its job page; a one-word name never looked up by name; the email itself; replies and bounces
+from autoapply import outreach as _or
+_found = {"jane.doe@acme.com": 3, "careers@acme.com": 1, "info@acme.com": 2, "sales@acme.com": 5, "jobs@other.com": 4}
+_ok = _or.best_address(_found, "acme.com") == "careers@acme.com" and _or.best_address({"jane@acme.com": 1}, "acme.com") == "" \
+    and _or.best_address({"info@acme.com": 1, "privacy@acme.com": 3}, "acme.com") == "info@acme.com"
+_hidden = '<a href="/cdn-cgi/l/email-protection#1a7b">[email&#160;protected]</a> <a href="mailto:jobs@acme.com">Jobs</a>'
+_ok = _ok and _or.emails_on(_hidden) == ["jobs@acme.com"]
+_ok = _ok and [_or._where(x) for x in ("US-CA-Torrance", "CA - Arcadia", "Rockville, MD or Hawthorne, CA", "Remote")] == \
+    [" in Torrance, CA", " in Arcadia, CA", " in Hawthorne, CA", ""]
+print("OK " if _ok else "BAD", "outreach picks a published hiring address, never a person's or a hidden one")
+bad += not _ok
+class _Resp:
+    def __init__(s, text, code=200, url=""): s.text, s.status_code, s.url, s.headers = text, code, url, {"Content-Type": "text/html"}
+_site = {"https://job-boards.greenhouse.io/relativity/jobs/1": '<a href="https://www.relativityspace.com/careers">Careers</a>',
+         "https://relativityspace.com/": "<title>Relativity Space</title><a href='/contact'>Contact</a>",
+         "https://relativityspace.com/contact": "<p>Recruiting: <a href='mailto:recruiting@relativityspace.com'>email</a></p>",
+         "https://relativity.com/": "<title>Relativity</title>"}
+_fake = _or.Fetcher(get=lambda u: _Resp(_site[u], 200, u) if u in _site else _Resp("", 404, u))
+_d1 = _or.domain_from_posting("https://job-boards.greenhouse.io/relativity/jobs/1", "Relativity", "relativity", _fake)
+_d2 = _or.domain_from_name("Relativity", "relativity", _fake, suggest=lambda q: [{"name": "Relativity", "domain": "relativity.com"}])
+_addr = _or.find_address("relativityspace.com", _fake)
+_ok = _d1[0] == "relativityspace.com" and _d2[0] == "" and _addr[0] == "recruiting@relativityspace.com"
+print("OK " if _ok else "BAD", "outreach finds the right company site and its hiring address ->", _d1[0], _d2[1][:40], _addr[0])
+bad += not _ok
+_ocfg = {"facts": {"full_name": "Pat Doe", "phone": "555-0100", "city": "New Castle", "state": "CO"}, "outreach": {}}
+_orow = {"company": "Relativity Space", "role": "Procurement Specialist (Req #123)", "city": "Long Beach, CA", "kind": "applied",
+         "sent_at": "2026-11-24T10:00:00", "subject": ""}
+_s1, _b1 = _or.compose(_orow, _ocfg)
+_s2, _b2 = _or.compose(_orow, _ocfg)
+_ok = (_s1, _b1) == (_s2, _b2) and _s1 == "Following up on my application: Procurement Specialist" and "in Long Beach, CA" in _b1 \
+    and "Pat Doe" in _b1 and "{" not in _b1 and "won't follow up" in _b1 and "based in the Los Angeles" not in _b1
+print("OK " if _ok else "BAD", "outreach email: the same text every time, no placeholders, no claim to live in LA ->", _s1)
+bad += not _ok
+_d = _DB(":memory:")
+_or.ensure(_d)
+for _dom, _mid in (("acme.com", "<a1@x>"), ("beta.com", "<b1@x>"), ("gamma.com", "<c1@x>"), ("delta.com", "<d1@x>")):
+    _d.conn.execute("INSERT INTO outreach (domain, company, email, status, sent_at, msg_id, subject) VALUES (?, ?, ?, 'sent', ?, ?, 'Hi')",
+                    (_dom, _dom.split(".")[0].title(), "careers@" + _dom, "2026-11-20T10:00:00", _mid))
+_ts = _t.time()
+_rmail = [{"subject": "Re: Hi", "from": "Lee <lee@acme.com>", "ts": _ts, "body": "Thanks Pat, can you talk Tuesday?", "in_reply_to": "<a1@x>"},
+          {"subject": "Delivery Status Notification (Failure)", "from": "Mail Delivery Subsystem <mailer-daemon@googlemail.com>",
+           "ts": _ts, "body": "Address not found: careers@beta.com"},
+          {"subject": "Automatic reply: Hi", "from": "careers@gamma.com", "ts": _ts, "body": "I'm out of office", "in_reply_to": "<c1@x>"},
+          {"subject": "Re: Hi", "from": "hr@delta.com", "ts": _ts, "body": "No thanks, please remove me from your list.", "in_reply_to": "<d1@x>"}]
+_rn = []
+_rc = _or.check_replies(_d, lambda *a: None, _rn, search=lambda since, q, folders: _rmail)
+_st = dict(_d.conn.execute("SELECT domain, status FROM outreach").fetchall())
+_ok = _st == {"acme.com": "replied", "beta.com": "bounced", "gamma.com": "sent", "delta.com": "opted_out"} and len(_rn) == 1
+print("OK " if _ok else "BAD", "outreach replies: a reply goes to your email, a bounce or a 'no thanks' ends it, an auto-reply does not ->", _st)
+bad += not _ok
+
 sys.exit(bad + bad_mail)

@@ -192,3 +192,19 @@ consent:                    # sign-offs the bot may give for you on application 
   sign_attestations: true   # 'my answers are true and complete', e-signature boxes and their date, privacy / EEO notices
   ai_screening_consent: true   # an employer's own AI screening tool (HiredScore and similar): consent, never opt out
   # arbitration, jury / class-action waivers and dispute-resolution agreements are never agreed to
+
+outreach:                   # (2026-11-24) cold emails to Los Angeles employers hiring for roles like yours (autoapply/outreach.py):
+                            # first those you applied to (a follow-up on that application), then those whose site stopped the
+                            # bot at a human check, then others hiring for your kind of role. Only addresses a company publishes
+                            # on its own website for this (careers@, jobs@, recruiting@, hr@... then info@ / contact@).
+  send: false               # OFF: nothing is sent until this is true. Until then your daily email shows exactly what would go out.
+  per_day: 15               # at most this many emails a day (first emails and follow-ups together), weekdays 8:30am-4:30pm LA time
+  per_run: 3
+  followup_days: 7          # one follow-up after a week without an answer; never again after a reply, a bounce or a 'no thanks'
+  lookups_per_run: 8        # companies whose website is looked up per run (about 90 seconds)
+  preview: 3                # drafts shown in your daily email while sending is off
+  pitch: >-                 # the middle paragraph of every email, taken from your résumé (edit freely)
+    I'm a USC Industrial and Systems Engineering graduate (B.S., 2025) with hands-on operations experience. At Roaring
+    Fork Property Group I wrote the standard operating procedures and coordinated vendors and inspection schedules across
+    70+ properties, and for a construction company I built the QuickBooks and Excel tracking for invoicing and payroll.
+    I work comfortably in Excel, SQL and Python, and I'm bilingual in English and Spanish.

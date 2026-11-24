@@ -179,7 +179,10 @@ def parse_message(raw: bytes) -> dict:
         link = links[0]
     code = find_code(subj, body)
     return {"subject": subj, "from": msg.get("From", ""), "to": msg.get("To", ""), "ts": ts, "link": link, "code": code,
-            "hint": bool(HINT.search(subj)) or bool(link) or bool(code), "body": body[:6000]}
+            "hint": bool(HINT.search(subj)) or bool(link) or bool(code), "body": body[:6000],
+            "message_id": (msg.get("Message-ID") or "").strip(), "in_reply_to": (msg.get("In-Reply-To") or "").strip(),
+            "references": (msg.get("References") or "").strip(), "auto": bool(msg.get("Auto-Submitted", "no").lower() != "no"
+                                                                                 or msg.get("X-Autoreply") or msg.get("X-Autorespond"))}
 
 
 _SEEN: dict = {}      # (folder, uidvalidity, uid) -> parsed email: a poll every few seconds downloads only the new ones
@@ -227,6 +230,46 @@ def _recent(since_ts: float, n: int = 25, folders=("INBOX",)):
             imap.logout()
         except Exception:
             pass
+
+
+def search(since_ts: float, gmail_query: str = "", folders=("INBOX",), max_n: int = 400) -> list[dict]:
+    """Parsed emails (newest first, at most max_n per folder) that arrived after since_ts. On Gmail, gmail_query (Gmail's
+    own search words, e.g. 'interview OR unfortunately') narrows the list on the server first, so a month of mail costs a
+    few dozen downloads instead of thousands; elsewhere every email since that day is read."""
+    user, pw = os.environ["IMAP_USER"], os.environ["IMAP_PASS"]
+    imap = imaplib.IMAP4_SSL(os.environ.get("IMAP_HOST", "imap.gmail.com"), timeout=30)
+    out: list[dict] = []
+    try:
+        imap.login(user, pw)
+        gmail = b"X-GM-EXT-1" in b" ".join(x if isinstance(x, bytes) else str(x).encode() for x in (imap.capabilities or ()))
+        day = time.strftime("%d-%b-%Y", time.gmtime(max(since_ts - 86400, 0)))
+        for folder in folders:
+            try:
+                typ, _ = imap.select(f'"{folder}"' if " " in folder or "[" in folder else folder, readonly=True)
+                if typ != "OK":
+                    continue
+                if gmail and gmail_query:
+                    q = f"after:{int(since_ts) - 3600} ({gmail_query})"
+                    typ, data = imap.uid("search", None, "X-GM-RAW", '"' + q.replace('"', '\\"') + '"')
+                else:
+                    typ, data = imap.uid("search", None, "SINCE", day)
+                uids = (data[0] or b"").split()[-max_n:] if typ == "OK" else []
+            except Exception:
+                continue
+            for u in reversed(uids):
+                try:
+                    _, d = imap.uid("fetch", u, "(BODY.PEEK[])")
+                    info = parse_message(next(part[1] for part in d if isinstance(part, tuple)))
+                except Exception:
+                    continue
+                if info["ts"] >= since_ts - 60:
+                    out.append(dict(info, folder=folder))
+    finally:
+        try:
+            imap.logout()
+        except Exception:
+            pass
+    return out
 
 
 def recent_subjects(since_ts: float, n: int = 150, folders=("INBOX", "[Gmail]/Spam")) -> list[str]:

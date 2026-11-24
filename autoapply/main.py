@@ -23,6 +23,7 @@ from . import brain as brain_mod
 from .sources import discover, prefilter, Job, la_area
 from .aggregators import account_gated, direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
+from . import outcomes, outreach
 from . import writer as writer_mod
 from .ats import detect as detect_ats
 
@@ -67,6 +68,9 @@ FOLLOWUPS: list = []        # employers that emailed asking for something more (
 WRITER_WAIT = "waiting for the free writer"      # start of the reason of a job that only lacks an answer from the writer
 ACCOUNT_NOTES: list = []    # career sites that keep refusing the bot's sign-in (told to you so you can reset that password once)
 RUN_STATS: dict = {}        # match checks done in this run, how many passed, and today's use of the free allowance (for the log)
+OUTCOME_NOTES: list = []    # new interview invitations, offers and assessments from employers (top of your email)
+OUTREACH_NOTES: list = []   # replies to the cold outreach emails (top of your email)
+OUTREACH: dict = {}         # this run's outreach report and drafts (outreach.run)
 REPORT_ROWS = 40            # rows listed per section of the daily report (the queue can hold thousands of candidates)
 
 
@@ -493,6 +497,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     _resolve_hand_applied(db, brain, log)
     _prune_hand_list(db, log)
     _note_followups(db, brain, log)
+
+    def co_name(r):
+        return brain._company_name(type("J", (), {"company": r["company"], "extra": {}})())
+    if mailbox.configured() and not dry_run:
+        try:              # what employers answered: interviews, assessments, offers, rejections (kept on each application)
+            outcomes.track(db, co_name, log, OUTCOME_NOTES)
+        except Exception as e:
+            log(f"  employer replies: skipped this run ({str(e)[:100]})")
+    try:                  # cold outreach to Los Angeles employers (sends only when outreach.send is true)
+        OUTREACH.update(outreach.run(cfg, db, co_name, base, log, OUTREACH_NOTES, dry_run=dry_run) or {})
+    except Exception as e:
+        log(f"  outreach: skipped this run ({str(e)[:100]})")
     n_up = 0
     for r in db.conn.execute("SELECT key, title FROM jobs WHERE status='queued'").fetchall():
         lv = level.classify(r["title"] or "")
@@ -1543,21 +1559,40 @@ def finish(cfg, db, run_start, log, base, today, t_start=None, dry_run=False):
     if os.environ.get("GITHUB_ACTIONS"):
         footer += f" · {month_used(base):.0f} of {s.get('actions_minutes_budget', 1850)} free Actions minutes used this month (before this run)"
     by_site = site_summary(rows)
+    daily_check_in = db.meta_get("last_email_day") != today
+    extra = []
+    if OUTREACH.get("report") and (daily_check_in or OUTREACH.get("sent") or OUTREACH_NOTES):
+        extra += ["COLD OUTREACH TO LOS ANGELES EMPLOYERS"] + [f"  {x}" for x in OUTREACH["report"]]
+        for to, subj, body in (OUTREACH.get("drafts") or []) if daily_check_in else []:
+            extra += ["", f"  DRAFT to {to}", f"  Subject: {subj}"] + [f"    {ln}" for ln in body.splitlines()]
+        extra.append("")
+    if daily_check_in:
+        try:
+            board = outcomes.scoreboard(db, 30, prescreen.place_of)
+        except Exception:
+            board = []
+        if board:
+            extra += ["WHAT CAME OF YOUR APPLICATIONS (last 30 days, from the employers' emails)"] + [f"  {x}" for x in board] + [""]
+    if extra:
+        footer = "\n".join(extra) + "\n" + footer
     if TOP_MATCHES:
         top = [line for _fit, line in sorted(TOP_MATCHES, key=lambda x: -x[0])[:6]]
         footer = "BEST MATCHES CHECKED THIS RUN\n" + "\n".join("- " + x for x in top) + "\n\n" + footer
+    replies = list(OUTCOME_NOTES) + list(OUTREACH_NOTES)          # employers answering you: first in the email
     text = notify.build_text(today, counts, groups, manual, run_url, footer, health_lines(site_health(db)), by_site,
-                             needs=list(FOLLOWUPS) + list(ACCOUNT_NOTES) + key_notes, hand_new=hand_new, hand_open=hand_open)
+                             needs=replies + list(FOLLOWUPS) + list(ACCOUNT_NOTES) + key_notes, hand_new=hand_new, hand_open=hand_open)
     applied_n = len(groups.get("applied", []))
     n = cfg.get("notify") or {}
     # An email whenever something happened, and at least one a day even when nothing did, so silence never means "broken".
-    daily_check_in = db.meta_get("last_email_day") != today
-    if not dry_run and (applied_n or manual or hand_new or FOLLOWUPS or groups.get("unconfirmed") or daily_check_in
+    n_iv = sum(1 for x in OUTCOME_NOTES if x.startswith(("INTERVIEW", "OFFER")))
+    if not dry_run and (applied_n or manual or hand_new or FOLLOWUPS or replies or groups.get("unconfirmed") or daily_check_in
                         or not n.get("only_if_activity", True)):
-        subject = (f"autoapply: {applied_n} applied" + (f", {len(hand_new)} to apply by hand" if hand_new else "")
+        subject = ((f"INTERVIEW/OFFER ({n_iv}) · " if n_iv else "") + (f"{len(OUTREACH_NOTES)} outreach repl{'ies' if len(OUTREACH_NOTES) > 1 else 'y'} · "
+                                                                      if OUTREACH_NOTES else "")
+                   + f"autoapply: {applied_n} applied" + (f", {len(hand_new)} to apply by hand" if hand_new else "")
                    + (f", {len(FOLLOWUPS)} need you" if FOLLOWUPS else "")
                    + (f", {len(manual)} not sent" if manual else "")
-                   + ("" if applied_n or manual or hand_new or FOLLOWUPS else " (running, nothing new to send)"))
+                   + ("" if applied_n or manual or hand_new or FOLLOWUPS or replies else " (running, nothing new to send)"))
         if notify.send_email(cfg, subject, text, log):
             db.meta_set("last_email_day", today)
             if hand_open:
