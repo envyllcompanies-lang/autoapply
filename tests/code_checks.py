@@ -256,4 +256,80 @@ _ok = _got == [None, True, "No", "Email", "I agree to receive texts"]     # mand
 print("OK " if _ok else "BAD", "no SMS contact ->", _got)
 bad_mail += not _ok
 
+# ---- Los Angeles area: every LA-area city counts, look-alikes elsewhere never do
+from autoapply.sources import la_area as _la
+_yes = ["Los Angeles, CA", "Irvine", "Huntington Beach, California, United States", "CA - Arcadia", "Walnut, CA",
+        "Rockville, MD or Hawthorne, CA", "US-CA-Los Angeles", "Greater Los Angeles Area", "Glendale, CA", "LA"]
+_no = ["Walnut Creek, CA", "Orange Cove, CA", "San Diego, CA", "Santa Clara, CA", "Glendale, AZ", "Lakewood, CO", "Irvine, KY",
+       "Long Beach, NY", "Pasadena, TX", "Venice, Italy", "Remote", "New York, NY", "Riverside, CA"]
+_bad_la = [x for x in _yes if not _la(x)] + [x for x in _no if _la(x)]
+print("OK " if not _bad_la else "BAD", "Los Angeles area matcher ->", _bad_la or f"{len(_yes)} in, {len(_no)} out")
+bad += bool(_bad_la)
+
+# ---- $35-an-hour floor: hourly questions get an hourly answer, 'minimum' gets the floor, a range list the right bracket;
+#      the county comes from the city
+_b = _Br({"facts": {"email": "a@b.org", "full_name": "Pat Doe", "salary_expectation": "$75,000 to $85,000", "salary_number": 78000,
+                    "city": "New Castle", "state": "CO"}, "scoring": {"salary_floor": 72800}},
+         {"name": "Pat Doe"}, ".", lambda *a: None)
+_got = [_b._answer(_F("What is your desired hourly rate?", "text"), "", {}),
+        _b._answer(_F("What is the minimum hourly rate you'd accept?", "text"), "", {}),
+        _b._answer(_F("What is the minimum acceptable hourly wage you would accept?", "select",
+                      ["$25.00-30.00", "$31.00-35.00", "$36.00-40.00", "$41.00+"]), "", {}),
+        _b._answer(_F("Desired hourly rate", "select", ["$20-25", "$26-30", "$31-35", "$36-40"]), "", {}),
+        _b._answer(_F("County", "text"), "", {})]
+_ok = _got == ["$38/hour", "$35/hour", "$36.00-40.00", "$36-40", "Garfield County"]
+print("OK " if _ok else "BAD", "hourly pay answers and county ->", _got)
+bad += not _ok
+from autoapply.brain import county_of as _co
+_got = [_co("Torrance", "California"), _co("Irvine", "CA"), _co("Brooklyn", "NY"), _co("Denver", "CO"), _co("Springfield", "IL")]
+_ok = _got == ["Los Angeles County", "Orange County", "Kings County", "Denver County", ""]
+print("OK " if _ok else "BAD", "county from city ->", _got)
+bad += not _ok
+
+# ---- match bar by place, and contract / temp-to-hire roles allowed only with search.allow_contract
+from autoapply import prescreen as _ps, level as _lv
+_s = {"min_fit": 55, "min_fit_by_place": {"la": 50, "remote": 65, "other": 60}}
+_got = [_ps.bar(_s, "Torrance, CA"), _ps.bar(_s, "Remote - US"), _ps.bar(_s, "Denver, CO"), _ps.bar({"min_fit": 55}, "Torrance, CA")]
+_ok = _got == [50, 65, 60, 55]
+print("OK " if _ok else "BAD", "match bar by place ->", _got)
+bad += not _ok
+_old_ac = _lv.ALLOW_CONTRACT
+try:
+    _lv.ALLOW_CONTRACT = True
+    _on = [_lv.classify(t).eligible for t in ("Project Coordinator (Contract)", "Temp-to-Hire Office Coordinator",
+                                             "Freelance Writer", "Temporary Office Assistant")]
+    _lv.ALLOW_CONTRACT = False
+    _off = _lv.classify("Project Coordinator (Contract)").eligible
+finally:
+    _lv.ALLOW_CONTRACT = _old_ac
+_ok = _on == [True, True, False, False] and _off is False
+print("OK " if _ok else "BAD", "contract / temp-to-hire roles only with allow_contract ->", _on, _off)
+bad += not _ok
+
+# ---- Workday: a 429 pauses the whole data centre (then the request goes through); past the search's time a board is
+#      left for the next search, not counted as an error (no network: requests.post is faked)
+import time as _t
+from autoapply import sources as _S
+class _WR:
+    def __init__(s, code, hdr=None): s.status_code, s.headers = code, hdr or {}
+    def raise_for_status(s):
+        if s.status_code >= 400: raise _S.requests.HTTPError(f"{s.status_code} err", response=s)
+_seq, _calls = [_WR(429, {"Retry-After": "1"}), _WR(200)], []
+_old = (_S.requests.post, _S.WD_GAP)
+_S.requests.post, _S.WD_GAP = (lambda url, **kw: (_calls.append(url), _seq.pop(0))[1]), 0.0
+try:
+    _t0 = _t.monotonic()
+    _r = _S._wd_request("POST", "https://acme.wd77.myworkdayjobs.com/wday/cxs/acme/Site/jobs", json={})
+    _waited = _t.monotonic() - _t0
+    _logs = []
+    _S.requests.post = lambda *a, **k: (_ for _ in ()).throw(AssertionError("no request after the deadline"))
+    _S.discover({"workday": ["acme/wd77/Site"]}, _logs.append, base=None, workday_minutes=1e-9)
+finally:
+    _S.requests.post, _S.WD_GAP = _old
+    _S.WD_DEADLINE = 0.0
+_ok = _r.status_code == 200 and len(_calls) == 2 and _waited >= 0.9 and any("left for the next search" in x for x in _logs)
+print("OK " if _ok else "BAD", "Workday pacing: a 429 pauses the data centre; boards past the time limit wait for the next search ->",
+      len(_calls), round(_waited, 1), _logs[:1])
+bad += not _ok
+
 sys.exit(bad + bad_mail)

@@ -165,21 +165,46 @@ def unresolved_location(loc: str) -> bool:
 
 _WD_GATES: dict = {}
 _WD_LOCK = threading.Lock()
+_WD_NEXT: dict = {}        # data centre -> earliest moment (time.monotonic) the next request to it may start
+WD_GAP = 0.5               # seconds between the starts of two requests to one Workday data centre
+WD_DEADLINE = 0.0          # set by discover(): after this moment (time.monotonic) no new Workday board is started
+                           # (the rest are read first at the next search), and a big board's searches stop early
+
+
+class Deferred(Exception):
+    """This board was not read: the search's time for Workday ran out. It is read first at the next search."""
+
+
+def _wd_key(url: str) -> str:
+    m = re.search(r"\.(wd\d+)\.myworkdayjobs\.com", url)
+    return m.group(1) if m else "wd"
 
 
 def _wd_gate(url: str) -> threading.BoundedSemaphore:
-    """Workday rate-limits per data centre (wd1, wd5, ...): at most 3 requests at a time to each one."""
-    m = re.search(r"\.(wd\d+)\.myworkdayjobs\.com", url)
-    key = m.group(1) if m else "wd"
+    """Workday rate-limits per data centre (wd1, wd5, ...): at most 2 requests at a time to each one."""
     with _WD_LOCK:
-        return _WD_GATES.setdefault(key, threading.BoundedSemaphore(3))
+        return _WD_GATES.setdefault(_wd_key(url), threading.BoundedSemaphore(2))
+
+
+def _wd_turn(key: str):
+    """Requests to one data centre start at least WD_GAP seconds apart, and none during a pause after a 429."""
+    with _WD_LOCK:
+        now = time.monotonic()
+        start = max(now, _WD_NEXT.get(key, 0.0))
+        _WD_NEXT[key] = start + WD_GAP
+    if start > now:
+        time.sleep(start - now)
 
 
 def _wd_request(method: str, url: str, **kw) -> requests.Response:
-    """GET/POST with polite retries on 'Too Many Requests' (429) and temporary errors, honouring Retry-After."""
+    """GET/POST with polite retries on 'Too Many Requests' (429) and temporary errors, honouring Retry-After. Requests to
+    one data centre are spaced out, and a 429 pauses every board on that data centre, not just the one that got it (the
+    limit is Workday's, per data centre: hammering it with the other boards only made them fail too)."""
     kw.setdefault("timeout", TIMEOUT)
+    key = _wd_key(url)
     r = None
     for attempt in range(4):
+        _wd_turn(key)
         with _wd_gate(url):
             r = (requests.post if method == "POST" else requests.get)(url, **kw)
         if r.status_code not in (429, 502, 503, 504) or attempt == 3:
@@ -188,7 +213,12 @@ def _wd_request(method: str, url: str, **kw) -> requests.Response:
             wait = float((getattr(r, "headers", None) or {}).get("Retry-After") or 0)
         except (TypeError, ValueError):
             wait = 0
-        time.sleep(min(wait or 3 * 2 ** attempt, 20) + random.uniform(0, 1.5))
+        wait = min(wait or 5 * 2 ** attempt, 60) + random.uniform(0, 1.5)
+        if r.status_code == 429:          # the whole data centre waits (the next _wd_turn sleeps until then)
+            with _WD_LOCK:
+                _WD_NEXT[key] = max(_WD_NEXT.get(key, 0.0), time.monotonic() + wait)
+        else:
+            time.sleep(wait)
     r.raise_for_status()
     return r
 
@@ -244,6 +274,8 @@ def workday(spec: str) -> list[Job]:
                 n += 1
         return n
 
+    if WD_DEADLINE and time.monotonic() > WD_DEADLINE:
+        raise Deferred(spec)
     first = _wd_post(api, 0, "")              # a failure here is the board's error; later failures only cost coverage
     take(first)
     total = int(first.get("total") or 0)      # Workday reports the total on the first page only
@@ -262,6 +294,8 @@ def workday(spec: str) -> list[Job]:
             for role in roles:
                 for place in places:
                     for page in range(pages):
+                        if WD_DEADLINE and time.monotonic() > WD_DEADLINE + 120:
+                            raise requests.RequestException("time for Workday is up")   # keep what was found
                         data = _wd_post(api, page * 20, f"{role} {place}".strip())
                         take(data)
                         if len(data.get("jobPostings") or []) < 20:
@@ -451,10 +485,15 @@ def _load_state(base) -> dict:
         return {}
 
 
-def discover(companies: dict[str, list[str]], log=print, base=None, workers: int = 16) -> list[Job]:
-    """Fetch every company board in parallel. Boards that 404 twice in a row are skipped for a few weeks (boards_state.json)."""
+def discover(companies: dict[str, list[str]], log=print, base=None, workers: int = 16, workday_minutes: float | None = None) -> list[Job]:
+    """Fetch every company board in parallel. Boards that 404 twice in a row are skipped for a few weeks (boards_state.json).
+    Workday boards go least recently read first, within workday_minutes (search.workday_minutes, default 15): the ones not
+    reached in time are read first at the next search."""
+    global WD_DEADLINE
     state = _load_state(base) if base else {}
     now = time.time()
+    mins = float(workday_minutes if workday_minutes is not None else (SEARCH or {}).get("workday_minutes", 15))
+    WD_DEADLINE = time.monotonic() + mins * 60 if mins > 0 else 0.0
     tasks = []
     for source, names in (companies or {}).items():
         if source not in FETCHERS:
@@ -465,16 +504,21 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
             if st.get("dead", 0) >= DEAD_AFTER and now - st.get("last", 0) < RETRY_DEAD_DAYS * 86400:
                 continue
             tasks.append((source, name))
+    # Workday last, least recently read first: the other boards are quick, and the Workday ones the last search did not
+    # reach (or that Workday refused) come first this time
+    tasks.sort(key=lambda t: (t[0] == "workday", ((state.get(t[0]) or {}).get(t[1]) or {}).get("last", 0) if t[0] == "workday" else 0))
 
     def one(t):
         source, name = t
         for attempt in (1, 2):
             try:
                 return t, FETCHERS[source](name), None
+            except Deferred as e:
+                return t, None, e
             except requests.HTTPError as e:
                 code = e.response.status_code if e.response is not None else 0
-                if code in NO_SUCH_BOARD or attempt == 2 or code in (400, 401, 403):
-                    return t, None, e
+                if code in NO_SUCH_BOARD or attempt == 2 or code in (400, 401, 403, 429):
+                    return t, None, e     # (a 429 was already waited out and retried inside the request itself)
             except Exception as e:  # timeouts etc.: one retry
                 if attempt == 2:
                     return t, None, e
@@ -487,7 +531,11 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
     per_ats: dict[str, list[int]] = {}
     missing: dict[str, list[str]] = {}
     errors: list[str] = []
+    deferred = 0
     for (source, name), found, err in results:
+        if isinstance(err, Deferred):
+            deferred += 1
+            continue
         st = state.setdefault(source, {}).setdefault(name, {})
         if err is None:
             st.update(dead=0, last=now, roles=len(found))
@@ -506,6 +554,12 @@ def discover(companies: dict[str, list[str]], log=print, base=None, workers: int
         log(f"  {source}: {sum(1 for c in counts if c)} of {len(counts)} boards have openings ({sum(counts)} roles)")
     for source, names in missing.items():
         log(f"  {source}: {len(names)} board names not found (skipped from now on): {', '.join(names[:30])}{' …' if len(names) > 30 else ''}")
+    if deferred:
+        log(f"  workday: {deferred} career sites left for the next search (this search's {mins:.0f} min for Workday ran out); "
+            "they are read first then")
+    n429 = sum(1 for e in errors if " 429 " in e)
+    if n429:
+        log(f"  workday: {n429} career sites answered 'too many requests' even after waiting; they are read first at the next search")
     for e in errors[:12]:
         log(f"  ! {e}")
     if len(errors) > 12:
@@ -661,6 +715,63 @@ def norm_location(loc: str) -> str:
     return low + (" " + " ".join(extra) if extra else "")
 
 
+# The Los Angeles area (LA County, Orange County and the Conejo Valley): one place for your location rules, so a job in
+# Hawthorne, Encino or Irvine counts as Los Angeles. Names that are also towns elsewhere ('Glendale', 'Hollywood',
+# 'Wilmington', 'Westminster') only count with California beside them.
+LA_UNIQUE = (
+    "los angeles", "greater los angeles", "dtla", "downtown la", "santa monica", "culver city", "el segundo", "west hollywood",
+    "beverly hills", "playa vista", "playa del rey", "marina del rey", "century city", "studio city", "sherman oaks",
+    "north hollywood", "van nuys", "woodland hills", "canoga park", "chatsworth", "northridge", "calabasas", "agoura hills",
+    "westlake village", "thousand oaks", "newbury park", "simi valley", "santa clarita", "manhattan beach", "hermosa beach",
+    "redondo beach", "torrance", "el monte", "south el monte", "west covina", "city of industry", "santa fe springs",
+    "la mirada", "pico rivera", "huntington park", "rancho palos verdes", "palos verdes", "universal city", "toluca lake",
+    "irvine", "costa mesa", "newport beach", "huntington beach", "santa ana", "anaheim", "fullerton", "garden grove", "tustin",
+    "buena park", "fountain valley", "yorba linda", "lake forest", "mission viejo", "aliso viejo", "laguna hills",
+    "laguna niguel", "rancho santa margarita", "foothill ranch", "seal beach", "los alamitos", "la habra", "cerritos",
+    "bellflower", "downey", "whittier", "monterey park", "rosemead", "san gabriel", "south pasadena", "la canada flintridge",
+    "la cañada flintridge", "altadena", "sylmar", "reseda", "tarzana", "encino", "granada hills", "porter ranch",
+    "panorama city", "sun valley", "west los angeles", "hawaiian gardens", "rolling hills estates", "marina del rey")
+LA_WITH_CA = (
+    "glendale", "burbank", "pasadena", "long beach", "inglewood", "hawthorne", "gardena", "carson", "compton", "commerce",
+    "vernon", "industry", "norwalk", "lakewood", "lynwood", "paramount", "bell", "bell gardens", "maywood", "cudahy",
+    "south gate", "montebello", "alhambra", "arcadia", "monrovia", "duarte", "azusa", "covina", "glendora", "san dimas",
+    "la verne", "pomona", "diamond bar", "walnut", "la puente", "artesia", "lawndale", "lomita", "signal hill", "wilmington",
+    "harbor city", "venice", "hollywood", "malibu", "westwood", "orange", "brea", "cypress", "placentia", "westminster",
+    "san clemente", "dana point", "san fernando", "temple city", "sierra madre", "san marino", "la crescenta", "eagle rock",
+    "valencia", "newhall", "canyon country", "pacoima", "highland park", "silver lake", "echo park", "koreatown", "los feliz",
+    "boyle heights", "san pedro", "baldwin park", "rowland heights", "hacienda heights", "la palma", "stanton", "laguna beach")
+_LA_UNIQUE_RX = re.compile(r"(?<![a-z])(" + "|".join(sorted(map(re.escape, LA_UNIQUE), key=len, reverse=True)) + r")(?![a-z])")
+_LA_CA_RX = re.compile(r"(?<![a-z])(" + "|".join(sorted(map(re.escape, LA_WITH_CA), key=len, reverse=True)) + r")(?![a-z])")
+_LA_ALONE = re.compile(r"^\W*(la|l\.a\.)(\s+(area|metro|county|region|basin))?\W*$|(?<![a-z])l\.?a\.? (area|metro|county|region)(?![a-z])|"
+                       r"(?<![a-z])la county(?![a-z])|^\W*la\W*[-,(]\s*(remote|hybrid|on-?site)", re.I)
+_OTHER_STATE = re.compile(r",\s*(al|ak|az|ar|co|ct|de|fl|ga|hi|id|il|in|ia|ks|ky|me|md|ma|mi|mn|ms|mo|mt|ne|nv|nh|nj|nm|ny|nc|nd|oh|ok|or|"
+                          r"pa|ri|sc|sd|tn|tx|ut|vt|va|wa|wv|wi|wy|dc|pr)(?![a-z])|(?<![a-z])(alabama|alaska|arizona|arkansas|colorado|"
+                          r"connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|"
+                          r"maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|new hampshire|"
+                          r"new jersey|new mexico|new york|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|"
+                          r"south carolina|south dakota|tennessee|texas|utah|vermont|virginia|washington|west virginia|wisconsin|wyoming|"
+                          r"district of columbia|puerto rico|italy|spain|venezuela|mexico|canada|united kingdom|philippines)(?![a-z])", re.I)
+_CA_HERE = re.compile(r"california|(?<![a-z])ca(?![a-z])|us-ca-|\bcalif\b", re.I)
+# California places elsewhere in the state whose names contain an LA-area one (Walnut Creek is in the Bay Area)
+_NOT_LA = re.compile(r"walnut (creek|grove)|orange cove|bell canyon road", re.I)
+
+
+def la_area(loc: str) -> bool:
+    """True when this location (or one of the several a posting lists) is in the Los Angeles area."""
+    for part in re.split(r"\s*(?:;|\||/|\n|\bor\b|\band\b)\s*", str(loc or "").lower()):
+        part = _NOT_LA.sub(" ", part)
+        if not part.strip():
+            continue
+        if _LA_ALONE.search(part):
+            return True
+        other = _OTHER_STATE.search(part)
+        if _LA_UNIQUE_RX.search(part) and not other:
+            return True
+        if _LA_CA_RX.search(part) and _CA_HERE.search(part) and not other:
+            return True
+    return False
+
+
 def level_title(title: str) -> str:
     """'Operations Associate / Senior Associate' is a multi-level posting that includes the junior role: judge the junior part."""
     return _ALT_SENIOR.sub("", title or "")
@@ -716,12 +827,13 @@ def prefilter(job: Job, search: dict) -> str | None:
         return "role is tied to another country"
     if remote_in_text(job.description) and not foreign_place(job.location):
         return None          # the posting says it is remote in the US: where its location field puts it does not matter
-    if locs and not any(k in loc for k in locs) and not US_WIDE.fullmatch(loc.strip()):
+    in_la = bool(search.get("la_area")) and la_area(job.location)       # anywhere in the Los Angeles area counts as Los Angeles
+    if locs and not in_la and not any(k in loc for k in locs) and not US_WIDE.fullmatch(loc.strip()):
         return f"location '{job.location}' not allowed"
     # On-site / hybrid roles only in the places you said you'd live (facts.relocation_ok_locations, passed in by main);
     # remote and US-wide roles are always fine.
     onsite_ok = [str(x).lower() for x in (search.get("_onsite_ok") or [])]
-    if onsite_ok and "*" not in onsite_ok and loc.strip() and not _remote_ish(loc) and not US_WIDE.fullmatch(loc.strip()):
+    if onsite_ok and "*" not in onsite_ok and not in_la and loc.strip() and not _remote_ish(loc) and not US_WIDE.fullmatch(loc.strip()):
         if not any(re.search(r"(?<![a-z])" + re.escape(x) + r"(?![a-z])", loc) for x in onsite_ok):
             return f"on-site in '{job.location[:60]}', outside the cities you'd move to"
     return None

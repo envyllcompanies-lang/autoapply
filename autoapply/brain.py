@@ -12,7 +12,7 @@ import re
 from datetime import date, timedelta
 from pathlib import Path
 
-from .sources import norm_location, level_title, remote_in_text
+from .sources import norm_location, level_title, remote_in_text, la_area
 from .writer import Writer, WriterUnavailable, limits_from_question
 
 STOP = set("""a an and are as at be but by for from has have in into is it its of on or our that the their this to
@@ -31,6 +31,8 @@ DECLINE = re.compile(r"decline|prefer not|prefer to not|do not wish|don'?t wish|
                      r"not to (say|answer|disclose|self)|choose not|rather not", re.I)
 CONSENT = re.compile(r"agree|acknowledge|consent|certify|confirm|accept|privacy|terms|policy|true and (correct|accurate)|\bunderstand\b|\battest\b|\baffirm\b|\bdeclare\b", re.I)
 OPTIONAL_CHECK = re.compile(r"marketing|newsletter|updates|receive|sms|text message|future (roles|opportunities)|talent (pool|community)", re.I)
+# a pay question asked by the hour ('desired hourly rate', 'minimum acceptable hourly wage', '$ per hour')
+HOURLY_Q = re.compile(r"hourly|per hour|an hour\b|/\s*h(ou)?r\b|hour(ly)? (rate|wage|pay)|rate per hour", re.I)
 # a question about texting you (SMS consent, 'may we text you', text-message updates)
 SMS_RX = re.compile(r"\bsms\b|\bmms\b|text[- ]?messag|texts? (to )?(you|me)\b|(via|by) text\b|\btexting\b|"
                     r"text (alerts?|updates?|notifications?|reminders?)|receive (recurring |automated )?texts?\b|mobile messag", re.I)
@@ -61,6 +63,42 @@ ACK_NEG_RX = re.compile(r"\b(do not|don't|dont|decline|disagree|withhold|refuse|
 RESIDE_RX = re.compile(r"\b(reside|resident|residing|live in|living in|located in|located within|based in|currently (live|located|based)|"
                        r"are you (a )?local|commuting distance|do you live|metro area)\b", re.I)
 HOME_TERMS = ("new castle", "garfield county", "glenwood", "carbondale", "rifle", "silt", "aspen", "roaring fork", "western slope")
+# County of residence from your city, for 'County *' boxes (they were getting 'N/A'). facts.county wins when it is set; a
+# city of the Los Angeles area missing from the table is Los Angeles County.
+_COUNTIES = {
+    "co": {"Garfield County": "new castle|glenwood springs|glenwood|rifle|silt|parachute|battlement mesa|carbondale",
+           "Eagle County": "el jebel|eagle|gypsum|vail|avon|edwards", "Pitkin County": "aspen|snowmass|snowmass village",
+           "Mesa County": "grand junction|fruita|palisade", "Denver County": "denver", "Boulder County": "boulder|longmont|louisville|lafayette",
+           "Arapahoe County": "aurora|englewood|littleton|centennial|greenwood village|cherry hills village",
+           "Jefferson County": "lakewood|golden|arvada|wheat ridge", "Adams County": "westminster|thornton|commerce city|brighton|northglenn",
+           "Broomfield County": "broomfield", "Douglas County": "castle rock|parker|highlands ranch|lone tree"},
+    "ca": {"Orange County": "irvine|costa mesa|huntington beach|newport beach|anaheim|santa ana|orange|tustin|fullerton|garden grove|"
+                            "westminster|fountain valley|laguna beach|laguna niguel|laguna hills|lake forest|mission viejo|aliso viejo|"
+                            "san clemente|yorba linda|buena park|cypress|la habra|brea|placentia|seal beach|los alamitos|"
+                            "rancho santa margarita|dana point|san juan capistrano",
+           "Ventura County": "thousand oaks|simi valley|oxnard|ventura|camarillo|moorpark|newbury park",
+           "Riverside County": "riverside|corona|moreno valley|temecula|murrieta|eastvale",
+           "San Bernardino County": "ontario|rancho cucamonga|san bernardino|fontana|chino|chino hills|upland|redlands"},
+    "ny": {"New York County": "new york|new york city|nyc|manhattan", "Kings County": "brooklyn",
+           "Queens County": "queens|long island city|astoria|flushing|jamaica", "Bronx County": "bronx|the bronx",
+           "Richmond County": "staten island"},
+}
+_STATE_ABBR = {"colorado": "co", "california": "ca", "new york": "ny"}
+
+
+def county_of(city, state) -> str:
+    """'Garfield County' for New Castle, CO; '' when the city is not in the table."""
+    c = re.sub(r"[^a-z ]", "", str(city or "").lower()).strip()
+    st = str(state or "").strip().lower().rstrip(".")
+    st = _STATE_ABBR.get(st, st)
+    if not c:
+        return ""
+    for county, towns in (_COUNTIES.get(st) or {}).items():
+        if c in towns.split("|"):
+            return county
+    return "Los Angeles County" if st == "ca" and la_area(f"{c}, CA") else ""
+
+
 OTHER_CO = re.compile(r"denver|boulder|front range|metro|colorado springs|fort collins|aurora|lakewood|littleton|golden|broomfield|"
                       r"longmont|westminster|arvada|centennial|castle rock|englewood", re.I)
 FAMILY_RX = re.compile(r"(family|relatives?|spouse|partner|related).{0,40}(work|employ|at\b|with\b)|family members?|relatives?\b|"
@@ -97,6 +135,7 @@ FIELD_RULES = [
     (r"zip|postal", ("zip",), None),
     (r"country of birth|birth country|place of birth|where (were you|are you) born", ("country_of_birth",), None),
     (r"country of (citizenship|origin)|nationality|citizen of which", ("country_of_citizenship",), None),
+    (r"^\W*county\W*(of residence)?\W*\*?\W*$|\bcounty of residence\b|\b(what|which) county\b", ("county",), None),
     (r"^\W*(city|town|city ?/ ?town|city or town)\W*$", ("city",), None),
     (r"\bcity\b|where are you (located|based)|current location|\blocation\b|where do you (live|reside)", ("location_text", "city"), None),
     (r"\bstate\b|province|region", ("state",), None),
@@ -118,7 +157,8 @@ FIELD_RULES = [
     (r"remote", ("open_to_remote",), "choice"),
     (r"start date|earliest.*start|available to start|notice period|when (can|could) you start|availability|next career move|when are you looking", ("earliest_start_date",), None),
     (r"salary|compensation|pay expectation|(desired|expected|target) (annual |yearly |base |hourly )?(pay|wage)|pay range|pay requirement|"
-     r"annual pay|rate of pay|wage expectation", ("salary_expectation",), "salary"),
+     r"annual pay|rate of pay|wage expectation|hourly (rate|wage|pay)|(desired|expected|target|minimum|acceptable|requested)\W+(\w+\W+){0,2}"
+     r"(rate|wage)\b|pay rate(?! type)|rate expectation|rate per hour|per hour", ("salary_expectation",), "salary"),
     (r"(related|relative|friend|family).{0,60}(work|employ)|family members?|\brelatives?\b|know (anyone|someone|any)|current(ly)? employees?.{0,40}(know|refer)|have you been referred|were you referred", ("know_employee",), "choice"),
     (r"\bsms\b|text messag|text you|contact (you )?(by|via) text|consent to (receive )?texts?\b|\btexts? from", ("sms_consent",), "choice"),
     (r"referred by|referrer|referral (name|employee|code|email)|employee referral|name of (the )?(employee|person)", ("referral_name",), None),
@@ -284,6 +324,8 @@ class Brain:
         f.setdefault("last_name", " ".join(parts[1:]))
         if not f.get("location_text") and f.get("city"):
             f["location_text"] = ", ".join(x for x in (f.get("city"), f.get("state")) if x)
+        if not f.get("county") and county_of(f.get("city"), f.get("state")):
+            f["county"] = county_of(f.get("city"), f.get("state"))
         # an address copied from the LinkedIn app can carry an invisible direction mark (U+200E) that forms reject as
         # 'not a valid LinkedIn profile URL' (Jane Street, 8 applications): invisible characters are removed
         raw_li = re.sub(r"[\u200b-\u200f\u202a-\u202e\u2060\ufeff]|%E2%80%8[B-F]|%E2%80%A[A-E]|%E2%81%A0|%EF%BB%BF", "",
@@ -350,7 +392,7 @@ class Brain:
         tiers = sc.get("location_tiers") or {}
         if tiers:                                      # places in order of preference (settings.yaml scoring.location_tiers)
             hits = [(int(v), k) for k, v in tiers.items()
-                    if (remote_job if k.lower() == "remote" else k.lower() in loc)]
+                    if (remote_job if k.lower() == "remote" else la_area(job.location) if k.lower() == "la area" else k.lower() in loc)]
             if hits:
                 bonus, where = max(hits)
                 parts.append(f"location '{where}' +{bonus}")
@@ -1023,6 +1065,8 @@ class Brain:
             return True
         ok = [str(x).lower() for x in self.facts.get("relocation_ok_locations", []) or []]
         lab = norm_location(label)
+        if (self.cfg.get("search") or {}).get("la_area") and (la_area(self._job.location if self._job else "") or la_area(label)):
+            return True                                # the Los Angeles area, all of it
         return "*" in ok or any(x in loc for x in ok) or bool(lab and any(re.search(r"(?<![\w-])" + re.escape(x) + r"(?![\w-])", lab) for x in ok))
 
     @staticmethod
@@ -1047,17 +1091,36 @@ class Brain:
         best = best or pick_option(opts, "Yes")
         return ([best] if kind == "checkbox_group" else best) if best else None
 
-    def _salary_option(self, opts, kind):
-        """Range choice containing your target salary (or the nearest one)."""
-        target = float(self.facts.get("salary_number") or 0)
+    def _hourly_target(self, minimum: bool = False) -> float:
+        """Your hourly rate: facts.hourly_expectation, else your yearly target / 2,080 hours; never under your pay floor
+        (scoring.salary_floor / 2,080). With minimum=True, the floor itself (the least you would take)."""
+        floor_h = float((self.cfg.get("scoring") or {}).get("salary_floor") or 0) / 2080
+        if minimum and floor_h:
+            return round(floor_h)
+        nums = self._nums(str(self.facts.get("hourly_expectation") or ""))
+        hr = nums[0] if nums and nums[0] < 400 else float(self.facts.get("salary_number") or 0) / 2080
+        return round(max(hr, floor_h)) if (hr or floor_h) else 0
+
+    def _salary_option(self, opts, kind, hourly: float = 0, at_least: bool = False):
+        """Range choice containing your target salary (or the nearest one); with hourly, the one holding that hourly rate.
+        at_least ('the minimum you would accept'): the lowest range that starts at the target or above, never one that
+        reaches below it."""
+        target = hourly or float(self.facts.get("salary_number") or 0)
         if not target:
             return None
         best, gap = None, 1e12
         for o in opts:
-            nums = [n for n in self._nums(o) if n >= 1000] or [n * 1000 for n in self._nums(o) if 20 <= n <= 400]
+            if hourly:
+                nums = [n for n in self._nums(o) if 5 <= n <= 400]
+            else:
+                nums = [n for n in self._nums(o) if n >= 1000] or [n * 1000 for n in self._nums(o) if 20 <= n <= 400]
             if not nums:
                 continue
             lo, hi = min(nums), max(nums)
+            if at_least:
+                if lo >= target - 0.5 and lo - target < gap:
+                    best, gap = o, lo - target
+                continue
             d = 0 if lo <= target <= hi else min(abs(target - lo), abs(target - hi))
             if d < gap:
                 best, gap = o, d
@@ -1276,6 +1339,13 @@ class Brain:
                 val = self._fact(keys)
                 if mode == "travel" and has_opts:
                     return self._travel_option(opts, kind)
+                if mode == "salary" and HOURLY_Q.search(low):
+                    least = bool(re.search(r"\b(minimum|lowest|least)\b", low))
+                    hr = self._hourly_target(minimum=least)
+                    if hr:                    # an hourly-rate question gets an hourly answer, not your yearly range
+                        if has_opts:
+                            return self._salary_option(opts, kind, hourly=hr, at_least=least)
+                        return f"{hr:.0f}" if kind == "number" else f"${hr:.0f}/hour"
                 if mode == "salary" and has_opts:
                     return self._salary_option(opts, kind)
                 if mode == "demo":
@@ -1646,6 +1716,8 @@ class Brain:
         """Is a cover letter written for this box? cover_letters: true = every cover-letter box, 'required' = only a box
         the form requires (an application is no longer dropped for want of one), false = never."""
         cl = self.cfg.get("cover_letters", False)
+        if self.cfg.get("cover_letters_local") and self._job is not None and la_area(getattr(self._job, "location", "") or ""):
+            return True              # a local Los Angeles job: a letter wherever the form has a box for one
         if isinstance(cl, str):
             return cl.strip().lower() in ("true", "yes", "all") or (cl.strip().lower() == "required" and bool(f.get("required")))
         return bool(cl)

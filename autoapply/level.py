@@ -43,6 +43,7 @@ T_ENTRY = re.compile(r"\b(junior|jr\.?|entry[- ]level|entry|new grad(uate)?|grad
 T_MID = re.compile(r"\b(intermediate|experienced|mid[- ]level|specialist iii|consultant|advisor|expert)\b", re.I)
 
 # -------------------------------------------------------------------------------------------------------- eligibility
+ALLOW_CONTRACT = False      # main sets it from search.allow_contract: contract and contract-to-hire office roles are applied to
 NOT_ELIGIBLE = [
     (re.compile(r"\bpart[- ]time\b(?!\s*(or|/)\s*full)", re.I), "part-time"),
     (re.compile(r"\b(intern|internship|co-?op|summer (associate|analyst|program))\b", re.I), "internship / summer program"),
@@ -55,12 +56,13 @@ NOT_ELIGIBLE = [
 ]
 TITLE_NOT_ELIGIBLE = [
     (re.compile(r"\bpart[- ]time\b", re.I), "part-time"),
-    (re.compile(r"\b(seasonal|temporary|temp)\b|\bper diem\b", re.I), "seasonal / temporary"),
+    (re.compile(r"\b(seasonal|temporary|temp)\b(?![- ]to[- ](hire|perm))|\bper diem\b", re.I), "seasonal / temporary"),
     (re.compile(r"\b(intern|internship|co-?op|summer associate|summer analyst)\b", re.I), "internship / summer program"),
     (re.compile(r"\bveterans?\b|\bmilitary\b|skillbridge", re.I), "veterans / military program"),
     (re.compile(r"\b(mba|phd|ph\.d|doctoral)\b", re.I), "MBA / PhD program"),
-    (re.compile(r"\bfreelance\b|\bgig\b|\(contract\)|\bcontract (position|role|assignment)\b|\b1099\b|\bcontractor\b", re.I),
-     "freelance / contract gig"),
+    (re.compile(r"\bfreelance\b|\bgig\b|\b1099\b", re.I), "freelance / gig work"),
+    (re.compile(r"\(contract\)|\bcontract(-to-hire| to hire)?\b(?! (manager|administrator|specialist|analyst|negotiat|management))|"
+                r"\bcontractor\b|\btemp[- ]to[- ](hire|perm)\b", re.I), "contract role"),
     (re.compile(r"\b(retail|store|restaurant|hotel|hospitality|front desk|cashier|crew|barista|server|host(ess)?|"
                 r"warehouse associate|picker|packer|forklift|material handler|call center|customer service representative|"
                 r"stocker|merchandiser|brand ambassador|sales associate|plant operations|custodian|janitor|maintenance technician|"
@@ -162,6 +164,8 @@ def classify(title: str, desc: str = "", pay_low: float | None = None, pay_high:
     for rx, why in TITLE_NOT_ELIGIBLE:
         if why.startswith("hourly retail") and re.search(r"\b(analyst|planner|planning|strategy|buyer)\b", t, re.I):
             continue                                   # corporate retail roles (store operations analyst, retail planner)
+        if why == "contract role" and ALLOW_CONTRACT:
+            continue                                   # contract / contract-to-hire office roles are fine (search.allow_contract)
         if rx.search(t):
             lv.eligible = False
             reasons.append(why)

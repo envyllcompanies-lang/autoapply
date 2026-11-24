@@ -396,13 +396,28 @@ def _fallback(row, s: dict) -> str:
     return "go" if score >= int(s.get("min_score_without_match", 80)) else "later"
 
 
+def place_of(location: str) -> str:
+    """'la' (anywhere in the Los Angeles area), 'remote', or 'other'."""
+    from .sources import la_area, _remote_ish, norm_location
+    if la_area(location):
+        return "la"
+    return "remote" if _remote_ish(norm_location(location)) else "other"
+
+
+def bar(s: dict, location: str) -> int:
+    """The résumé-match bar for a job in this place: search.min_fit_by_place ('la', 'remote', 'other'), else search.min_fit.
+    A local Los Angeles job gets a lower bar than a remote one, which every applicant in the country competes for."""
+    by = s.get("min_fit_by_place") or {}
+    return int(by.get(place_of(location), s.get("min_fit", 70)))
+
+
 def gate_pre(db, brain, job: Job, row, s: dict, have_page: bool = False) -> tuple[str, int | None, str]:
     """Everything about the match of one job that needs no model: a result stored earlier, the same role checked before,
     a posting whose text is not known yet, no allowance left. Returns a verdict as gate() does, or ('check', None, '') when
     the model has to be asked now (alone with screen(), or together with other postings with screen_many())."""
     if not s.get("prescreen", True):
         return "go", None, ""
-    min_fit = int(s.get("min_fit", 70))
+    min_fit = bar(s, job.location)
     try:
         fit = row["fit"]
     except (IndexError, KeyError):
@@ -433,7 +448,7 @@ def gate_store(db, job: Job, row, s: dict, fit: int | None, why: str) -> tuple[s
     worked out (fit None), the fallback of a job that cannot be checked now."""
     if fit is None:
         return _fallback(row, s), None, ""
-    min_fit = int(s.get("min_fit", 70))
+    min_fit = bar(s, job.location)
     old = str((row["reason"] if row is not None else "") or "")
     old = re.sub(r"^match \d+%:.*? \| ", "", old)
     if fit < min_fit:
@@ -445,7 +460,7 @@ def gate_store(db, job: Job, row, s: dict, fit: int | None, why: str) -> tuple[s
 
 def gate(db, brain, job: Job, row, s: dict, log=print, have_page: bool = False) -> tuple[str, int | None, str]:
     """The match check for one job, right before it would be applied to. Returns (verdict, fit, why):
-      'go'    apply (the match is at or above search.min_fit, or the check is switched off)
+      'go'    apply (the match is at or above the bar for its place (bar()), or the check is switched off)
       'low'   set aside: the match is below the bar (the job is marked low_score)
       'page'  the posting text is not known yet: open the page, then ask again with have_page=True
       'later' it cannot be judged now (the free writer is out of allowance): the job stays queued for another run,

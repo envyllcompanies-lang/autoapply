@@ -12,12 +12,23 @@ search:
                               # for them. The résumé check below decides, and the candidates are checked best prospects first.
   prescreen: true             # right before applying, each job is checked against your résumé (like LinkedIn's match score)
   min_fit: 55                 # ...and only jobs with a match of 55% or more are applied to (70 until 2026-10-03, 60 until 2026-10-08)
+  min_fit_by_place:           # (2026-11-24, 'as many jobs in Los Angeles') the bar by place, replacing min_fit:
+    la: 50                    #   anywhere in the Los Angeles area (LA County, Orange County, the Valley, South Bay...)
+    remote: 65                #   remote postings draw hundreds of applicants: only the strongest matches are worth sending
+    other: 60                 #   Denver, New York and the rest
+  la_area: true               # a posting anywhere in the Los Angeles area counts as Los Angeles (Irvine, Torrance, Burbank,
+                              # Long Beach, El Segundo...), in the location filter, the match bar and the queue order
+  allow_contract: true        # (2026-11-24, 'employed asap') contract, contract-to-hire and temp-to-hire roles are applied to;
+                              # freelance / 1099 gig work and plain seasonal or temporary jobs are still left out
   min_score_without_match: 90 # when the free match check has no allowance left: only jobs whose keyword score is this high go
                               # ahead without it, the rest wait for a later run (they are not dropped). Kept high because the
                               # allowance now runs out every day by design, and unchecked jobs should not slip through then.
   daily_cap_unlimited: 500    # most applications in one day while the bot runs non-stop (300 until 2026-10-08): with thousands of candidates
                               # the limit should be the résumé check, not this number
-  max_per_company: 0          # no limit on applications to one employer: every role that passes your résumé match goes
+  max_per_company: 3          # (2026-11-24) at most 3 applications to one employer in company_window_days. With no limit it
+                              # had reached 36 at JLL and 33 at Allstate: a recruiter sees every one, and dozens read as
+                              # unfocused and sink them all. The best 3 matches go (they are checked best prospects first).
+  company_window_days: 120    # the 3 count the last 120 days; after that an employer can get new applications again
   max_checks_per_company_per_run: 6     # résumé checks spent on one employer per run, so one big employer cannot use them all
   max_human_check_tries_per_day: 3      # tries per day on sites where every recent try ended at a human check (CAPTCHA);
                                         # their other good matches go to your apply-by-hand list
@@ -73,6 +84,8 @@ search:
 # A cover letter only where the form requires one (true: on every form that has a cover-letter box; false: never,
 # and a form that requires one is skipped). Overrides config.yaml.
 cover_letters: required
+cover_letters_local: true   # (2026-11-24) ...except Los Angeles-area jobs: there every cover-letter box gets a short letter
+                            # written for that posting, since a local employer reads them and few applicants send one
 
 scoring:
   location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).
@@ -88,20 +101,14 @@ scoring:
     el jebel: 12
     garfield county: 12
     roaring fork: 12
+    la area: 30             # (2026-11-24) anywhere in the Los Angeles area, first in line (it was 6, after everything else)
     remote: 16             # 'remote' includes postings whose description says they are remote in the US
     new york: 12            # (also 'NY' towns: Brooklyn, Rye Brook, Long Island City…)
     nyc: 12
     denver: 12
     colorado: 12            # Denver suburbs (Westminster, Aurora, Lakewood…) read as Colorado
-    los angeles: 6          # considered, but after the three above
-    santa monica: 6
-    culver city: 6
-    el segundo: 6
-    long beach: 6
-    pasadena: 6
-    burbank: 6
-    glendale: 6
-    torrance: 6
+  salary_floor: 72800       # (2026-11-24) $35 an hour x 2,080 hours (was $65,000): a posting whose pay tops out below this
+                            # is left out, and hourly-rate questions are answered from $35-38 an hour
   pay_min_ceiling: 100000   # a posting whose pay STARTS at $100K+ is not entry level
 
 writer:
@@ -174,6 +181,8 @@ facts:                      # answers you gave (2026-10-15), merged into the pri
   restrictive_agreements: "No"   # no non-compete, non-solicit or other restrictive agreement with any current or past employer
   outside_business: "No"         # not involved in other business activities as a proprietor, partner or officer
   certifications: "None"         # no professional certifications or licenses (a driver's license is asked separately)
+  salary_expectation: "$75,000 to $85,000"   # (2026-11-24) $36-41 an hour, just above your $35 floor
+  salary_number: 78000           # a number-only pay box; an hourly box gets this / 2,080 = $38
   sms_consent: "No"              # (2026-10-27) no texts unless the form makes it mandatory: optional SMS boxes stay unticked,
                                  # 'may we text you?' -> No, 'how should we contact you?' -> email; a required consent box
                                  # is ticked so the job is not skipped

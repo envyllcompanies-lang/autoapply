@@ -20,7 +20,7 @@ import yaml
 from .db import DB
 from .brain import Brain
 from . import brain as brain_mod
-from .sources import discover, prefilter, Job
+from .sources import discover, prefilter, Job, la_area
 from .aggregators import account_gated, direct_apply_url, discover_aggregators, load_boards, remember_board, canon_key, board_of
 from . import render, submit as sub, auth, sources, mailbox, notify, level, prescreen, snapshot, selfcheck, rank, __version__
 from . import writer as writer_mod
@@ -389,6 +389,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     # on-site/hybrid roles only where you'd live: the same list that answers relocation questions (remote roles are always fine)
     s["_onsite_ok"] = list((cfg.get("facts") or {}).get("relocation_ok_locations") or [])
     s["_pay_floor"] = (cfg.get("scoring") or {}).get("salary_floor")
+    level.ALLOW_CONTRACT = bool(s.get("allow_contract", False))       # contract / contract-to-hire office roles
     dry_run = dry_run or cfg.get("dry_run", False)
     today = date.today().isoformat()
     log = Logger(base / "logs" / f"{today}.log")
@@ -467,6 +468,18 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         if n_loc or n_con:
             log(f"Looking again at {n_loc} Workday postings listed under several locations (their cities were never read) and "
                 f"{n_con} office roles in construction that an older rule dropped as trades jobs")
+    if db.once("2026-11-24-la-contract"):
+        # Los Angeles-area postings dropped for their place before every LA-area city counted (search.la_area), and
+        # contract / temp-to-hire roles dropped before search.allow_contract: forgotten once, so the next search looks again
+        only_contract = re.compile(r"not open to you: (entry \()?(freelance / contract gig|seasonal / temporary)\)?(; says entry level / new grad)?")
+        gone = [r["key"] for r in db.conn.execute("SELECT key, location, reason FROM jobs WHERE status='filtered' AND attempts = 0")
+                if (s.get("la_area") and re.match(r"on-site in|location ", r["reason"] or "") and la_area(r["location"] or ""))
+                or (s.get("allow_contract") and only_contract.fullmatch(r["reason"] or ""))]
+        db.conn.executemany("DELETE FROM jobs WHERE key=?", [(k,) for k in gone])
+        db.conn.commit()
+        if gone:
+            log(f"Looking again at {len(gone)} postings dropped earlier: Los Angeles-area jobs left out for their place, and "
+                "contract / temp-to-hire roles")
     profile = yaml.safe_load((base / cfg.get("profile_file", "profile.yaml")).read_text())
     brain = Brain(cfg, profile, base, log)
     mailbox.preflight(log)
@@ -628,8 +641,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     min_fit = int(s.get("min_fit", 70))
     no_match_bar = int(s.get("min_score_without_match", 80))
     if match_on:      # the bar may have moved since these were checked: set aside what is now under it, bring back what is now over it
-        db.conn.execute("UPDATE jobs SET status='low_score' WHERE status='queued' AND fit > 0 AND fit < ?", (min_fit,))
-        db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND fit >= ? AND reason LIKE 'match %'", (min_fit,))
+        for r in db.conn.execute("SELECT key, location, fit, status FROM jobs WHERE fit > 0 AND (status = 'queued' OR "
+                                 "(status = 'low_score' AND reason LIKE 'match %'))").fetchall():
+            b = prescreen.bar(s, r["location"] or "")           # (each place has its own bar: Los Angeles, remote, elsewhere)
+            if r["status"] == "queued" and r["fit"] < b:
+                db.conn.execute("UPDATE jobs SET status='low_score' WHERE key=?", (r["key"],))
+            elif r["status"] == "low_score" and r["fit"] >= b:
+                db.conn.execute("UPDATE jobs SET status='queued' WHERE key=?", (r["key"],))
         # the keyword bar is only a first sieve (the résumé match decides): when it is lowered, jobs that were under the old
         # one and were never match-checked come back to be checked
         db.conn.execute("UPDATE jobs SET status='queued' WHERE status='low_score' AND (fit IS NULL OR fit <= 0) AND attempts = 0"
@@ -675,8 +693,8 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
         sr = site_rank(r, health)
         if str(r["reason"] or "").startswith("retry: "):
             return (2 if sr < 3 else 3, sr, -fit)      # failed before and brought back by a new build: after fresh jobs
-        if fit > 0:
-            return (0 if sr < 3 else 2, sr, -(fit + rank.location_boost(r, tiers)))
+        if fit > 0:      # best match first, Los Angeles ahead, and new postings (read in their first days) ahead of old ones
+            return (0 if sr < 3 else 2, sr, -(fit + rank.location_boost(r, tiers) + rank.freshness(r, now_dt)))
         return (1 if sr < 3 else 3, 0, -(rank.value(prior, r, now_dt, tiers) - 8 * sr))
     queue = sorted(db.retryable(s.get("max_attempts", 2)), key=_rank)
     skip_sites = [x.lower() for x in s.get("skip_sites", []) or []]
@@ -686,7 +704,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
     n_matched = sum(1 for r in queue if _fit(r) > 0)
     if match_on and brain.writer:
         log(f"{len(queue)} jobs queued: {n_matched} already matched to your résumé, {len(queue) - n_matched} waiting for that check "
-            f"(best prospects first; the bar is a {min_fit}% match). Applying to up to {max(cap, 0)} now")
+            f"(best prospects first; the bar is a {_bars(s)}). Applying to up to {max(cap, 0)} now")
     else:
         log(f"{len(queue)} jobs queued; applying to up to {max(cap, 0)} now")
     if cap <= 0 or not queue:
@@ -813,10 +831,13 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
 
         match_out = [False]     # the free allowance for match checks is used up (for now): unchecked jobs wait, untouched
         failed_checks = [0]     # match checks in a row that could not be done although allowance was shown as left
-        applied_n: dict = {}    # employer -> applications already sent there (all time), kept current during the run
+        applied_n: dict = {}    # employer -> applications sent there in the last company_window_days, kept current during the run
         applied_roles: set = set()     # (employer, title) already applied to
-        for r in db.conn.execute("SELECT company, title FROM jobs WHERE status IN ('applied','unconfirmed')"):
-            applied_n[norm_co(r["company"])] = applied_n.get(norm_co(r["company"]), 0) + 1
+        co_cutoff = (datetime.now() - timedelta(days=int(s.get("company_window_days", 120)))).isoformat(timespec="seconds")
+        for r in db.conn.execute("SELECT company, title, COALESCE(NULLIF(submitted_at, ''), updated) AS t FROM jobs "
+                                 "WHERE status IN ('applied','unconfirmed')"):
+            if str(r["t"] or "") >= co_cutoff:            # the per-employer cap counts the last company_window_days
+                applied_n[norm_co(r["company"])] = applied_n.get(norm_co(r["company"]), 0) + 1
             applied_roles.add((norm_co(r["company"]), (r["title"] or "").strip().lower()))
 
         def capped(row) -> bool:
@@ -966,15 +987,17 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
             if ck in dead:
                 set_aside("same role at same company already skipped this run")
                 continue
-            hist = [r for r in db.conn.execute("SELECT key, company, title FROM jobs WHERE status IN ('applied','unconfirmed') AND key != ?",
-                                               (row["key"],)) if norm_co(r["company"]) == co_n]
+            hist = [r for r in db.conn.execute("SELECT key, company, title, COALESCE(NULLIF(submitted_at, ''), updated) AS t FROM jobs "
+                                               "WHERE status IN ('applied','unconfirmed') AND key != ?", (row["key"],))
+                    if norm_co(r["company"]) == co_n]
             if any(r["title"].strip().lower() == ck[1] for r in hist):
                 set_aside("already applied to this role at this company")
                 continue
-            n_co = len(hist)
+            n_co = sum(1 for r in hist if str(r["t"] or "") >= co_cutoff)
             applied_n[co_n] = n_co
             if per_company and n_co >= per_company:
-                set_aside(f"already applied to {n_co} roles at this company")
+                # a recruiter sees every application: dozens to one employer read as unfocused and sink them all
+                set_aside(f"already applied to {n_co} roles at this company in the last {int(s.get('company_window_days', 120))} days")
                 continue
             if str(row["reason"] or "").startswith("recheck-inbox"):
                 # an earlier submit that never reached the employer's server: one more try, but only after looking in the
@@ -1101,7 +1124,7 @@ def _run(cfg_path: str, dry_run: bool, limit: int | None, t_start: float):
                         log(f"    match {fit2}% — {why2[:110]}")
                         TOP_MATCHES.append((fit2, f"{fit2}% {job.title} @ {job.company}: {why2}"))
                     if v2 == "low":
-                        log(f"    ✗ set aside: under the {min_fit}% match bar")
+                        log(f"    ✗ set aside: under the {prescreen.bar(s, job.location)}% match bar")
                         continue
                     if v2 == "later":
                         log(f"    … waits for a later run (no match check available now and its keyword score is under {no_match_bar})")
@@ -1297,6 +1320,15 @@ def _resolve_old_unconfirmed(db: DB, brain: Brain, log):
     for key, subj in found.items():
         db.update(key, status="applied", reason=f"confirmed by email: {subj[:100]}")
         log(f"  ✓ earlier unconfirmed submit is confirmed by the company's email: {subj[:70]!r}")
+
+
+def _bars(s: dict) -> str:
+    """'55% match' or, with search.min_fit_by_place, '50% match in Los Angeles, 65% remote, 60% elsewhere'."""
+    by = s.get("min_fit_by_place") or {}
+    if not by:
+        return f"{int(s.get('min_fit', 70))}% match"
+    names = {"la": "in Los Angeles", "remote": "remote", "other": "elsewhere"}
+    return "match of " + ", ".join(f"{int(by.get(k, s.get('min_fit', 70)))}% {names[k]}" for k in ("la", "remote", "other"))
 
 
 def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:

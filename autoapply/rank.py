@@ -143,8 +143,8 @@ def freshness(row, now: datetime | None = None) -> float:
 
 
 def location_boost(row, tiers: dict | None) -> float:
-    """A few points for the places you want most (settings.yaml scoring.location_tiers: remote, New York and Denver ahead of
-    Los Angeles). A posting the score found remote from its description says so in its reason ("location 'remote'")."""
+    """A few points for the places you want most (settings.yaml scoring.location_tiers; the key 'la area' means anywhere in
+    the Los Angeles area). A posting the score found remote from its description says so in its reason ("location 'remote'")."""
     if not tiers:
         return 0.0
     try:
@@ -152,7 +152,9 @@ def location_boost(row, tiers: dict | None) -> float:
     except (KeyError, IndexError):
         return 0.0
     remote = "remote" in loc or "location 'remote'" in why
-    hits = [float(v) for k, v in tiers.items() if (remote if k.lower() == "remote" else k.lower() in loc)]
+    from .sources import la_area
+    hits = [float(v) for k, v in tiers.items()
+            if (remote if k.lower() == "remote" else la_area(loc) if k.lower() == "la area" else k.lower() in loc)]
     return max(hits) / 2 if hits else 0.0
 
 
