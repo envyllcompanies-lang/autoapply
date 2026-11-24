@@ -258,9 +258,12 @@ def proper_name(domain: str, fallback: str, fetch: Fetcher, suggest=None) -> str
                 return got
     _f, home = fetch.page(f"https://{domain}/")
     m = re.search(r"(?is)<meta[^>]+property=[\"']og:site_name[\"'][^>]+content=[\"']([^\"']{2,60})", home or "")
-    if m:
-        got = _html.unescape(m.group(1)).strip()
-        if _squash(got) and (_squash(got) in _squash(fallback) or _squash(fallback) in _squash(got)):
+    names = [_html.unescape(m.group(1)).strip()] if m else []
+    t = re.search(r"(?is)<title[^>]*>(.*?)</title>", home or "")
+    if t:                  # the site's own title, its part naming the company: 'K2 Space | Satellites...' -> 'K2 Space'
+        names += [x.strip() for x in re.split(r"\s+[|\u2013\u2014\u2022\u00b7-]\s+|:\s", _html.unescape(t.group(1)).strip()) if x.strip()][:3]
+    for got in names:
+        if 2 <= len(got) <= 60 and _squash(got) and (_squash(got) in _squash(fallback) or _squash(fallback) in _squash(got)):
             return got
     return fallback
 
@@ -618,6 +621,13 @@ def run(cfg: dict, db, company_name, base: Path, log=print, notes: list | None =
         if n:
             log(f"Outreach: {n} Los Angeles employers added to look up")
     resolve(db, log, int(o.get("lookups_per_run", 8)), float(o.get("lookup_seconds", 90)), fetch)
+    # names still written the way a job-board address spells them ('K2spacecorporation'): the company's own spelling
+    for r in db.conn.execute("SELECT domain, company FROM outreach WHERE status = 'ready' AND company NOT LIKE '% %' "
+                             "AND length(company) > 9").fetchall()[:5]:
+        better = proper_name(r["domain"], r["company"], fetch or Fetcher())
+        if better != r["company"]:
+            db.conn.execute("UPDATE outreach SET company = ? WHERE domain = ?", (better, r["domain"]))
+    db.conn.commit()
     from . import mailbox
     if mailbox.configured():
         check_replies(db, log, notes)
