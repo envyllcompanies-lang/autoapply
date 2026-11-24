@@ -1146,3 +1146,672 @@
 [10:44:39] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 1.5 min)
 [10:44:40] 0 jobs queued: 0 already matched to your résumé, 0 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 493 now
 [10:44:40] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-24.md
+[11:07:52] === autoapply run (LIVE) build 2026-10-18-b ===
+[11:07:53] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[11:07:54] mail: logged in to delgado@alumni.usc.edu OK
+[11:08:47] Discovering jobs…
+[11:15:37]   greenhouse/airbnb: 199 open roles
+[11:15:37]   greenhouse/figma: 148 open roles
+[11:15:37]   greenhouse/robinhood: 159 open roles
+[11:15:37]   greenhouse/databricks: 888 open roles
+[11:15:37]   greenhouse/anthropic: 630 open roles
+[11:15:37]   greenhouse/coinbase: 249 open roles
+[11:15:37]   greenhouse/lyft: 144 open roles
+[11:15:37]   greenhouse/pinterest: 169 open roles
+[11:15:37]   greenhouse/reddit: 147 open roles
+[11:15:37]   greenhouse/twilio: 115 open roles
+[11:15:37]   greenhouse/cloudflare: 503 open roles
+[11:15:37]   greenhouse/datadog: 383 open roles
+[11:15:37]   greenhouse/mongodb: 420 open roles
+[11:15:37]   greenhouse/elastic: 384 open roles
+[11:15:37]   greenhouse/gitlab: 251 open roles
+[11:15:37]   greenhouse/asana: 109 open roles
+[11:15:37]   greenhouse/okta: 372 open roles
+[11:15:37]   greenhouse/samsara: 292 open roles
+[11:15:37]   greenhouse/affirm: 220 open roles
+[11:15:37]   greenhouse/brex: 263 open roles
+[11:15:37]   greenhouse/flexport: 207 open roles
+[11:15:37]   greenhouse/oscar: 178 open roles
+[11:15:37]   greenhouse/spacex: 2863 open roles
+[11:15:37]   greenhouse/toast: 313 open roles
+[11:15:37]   greenhouse/verkada: 349 open roles
+[11:15:37]   greenhouse/nuro: 108 open roles
+[11:15:37]   greenhouse/scaleai: 159 open roles
+[11:15:37]   greenhouse/lucidmotors: 494 open roles
+[11:15:37]   greenhouse/holderconstruction: 305 open roles
+[11:15:37]   greenhouse/rocketlab: 554 open roles
+[11:15:37]   greenhouse/carvana: 1607 open roles
+[11:15:37]   greenhouse/roblox: 255 open roles
+[11:15:37]   greenhouse/stripe: 767 open roles
+[11:15:37]   greenhouse/doordashusa: 407 open roles
+[11:15:37]   greenhouse/aloyoga: 726 open roles
+[11:15:37]   greenhouse/thenewyorktimes: 118 open roles
+[11:15:37]   greenhouse/janestreet: 217 open roles
+[11:15:37]   greenhouse/onemedical: 356 open roles
+[11:15:37]   greenhouse/gomotive: 191 open roles
+[11:15:37]   greenhouse/reformation: 147 open roles
+[11:15:37]   greenhouse/justworks: 101 open roles
+[11:15:37]   greenhouse/riotgames: 201 open roles
+[11:15:37]   greenhouse/scopely: 169 open roles
+[11:15:37]   greenhouse/fanaticsfbg: 103 open roles
+[11:15:37]   greenhouse/voyagertechnologiesinc: 185 open roles
+[11:15:37]   greenhouse/trueanomalyinc: 213 open roles
+[11:15:37]   greenhouse/charliehealth: 278 open roles
+[11:15:37]   greenhouse/grafanalabs: 139 open roles
+[11:15:37]   greenhouse/vailclinicincdbavailhealthhospital: 105 open roles
+[11:15:37]   greenhouse/fivetran: 206 open roles
+[11:15:37]   greenhouse/olsson: 344 open roles
+[11:15:37]   greenhouse/relativity: 396 open roles
+[11:15:37]   greenhouse/blankstreet: 102 open roles
+[11:15:37]   greenhouse/icapitalnetwork: 235 open roles
+[11:15:37]   greenhouse/lpc: 112 open roles
+[11:15:37]   greenhouse/braze: 350 open roles
+[11:15:37]   greenhouse/addepar1: 118 open roles
+[11:15:37]   greenhouse/divergent: 146 open roles
+[11:15:37]   greenhouse/vardaspace: 141 open roles
+[11:15:37]   greenhouse/vast: 204 open roles
+[11:15:37]   greenhouse/cookunity: 136 open roles
+[11:15:37]   greenhouse/fanaticscollectibles: 224 open roles
+[11:15:37]   greenhouse/sonymusicentertainment: 128 open roles
+[11:15:37]   greenhouse/canonical: 317 open roles
+[11:15:37]   greenhouse/betterhelp: 101 open roles
+[11:15:37]   greenhouse/adyen: 241 open roles
+[11:15:37]   greenhouse/thetradedesk: 122 open roles
+[11:15:37]   greenhouse/agency: 827 open roles
+[11:15:37]   greenhouse/innodatainc: 106 open roles
+[11:15:37]   greenhouse/prolificacademicltd: 4265 open roles
+[11:15:37]   greenhouse/sumup: 320 open roles
+[11:15:37]   greenhouse/skdse: 150 open roles
+[11:15:37]   greenhouse/nerostechnologies: 113 open roles
+[11:15:37]   greenhouse/bakerhicks: 144 open roles
+[11:15:37]   greenhouse/precisionmedicinegroup: 143 open roles
+[11:15:37]   greenhouse/hellofresh: 368 open roles
+[11:15:37]   greenhouse/asm: 540 open roles
+[11:15:37]   greenhouse/ripple: 108 open roles
+[11:15:37]   greenhouse/altentechnologyusa: 230 open roles
+[11:15:37]   greenhouse/natera: 201 open roles
+[11:15:37]   greenhouse/woolpert: 118 open roles
+[11:15:37]   greenhouse/quince: 143 open roles
+[11:15:37]   greenhouse/dhpace: 406 open roles
+[11:15:37]   greenhouse/block: 184 open roles
+[11:15:37]   greenhouse/celonis: 261 open roles
+[11:15:37]   greenhouse/nebius: 358 open roles
+[11:15:37]   greenhouse/alixpartners: 135 open roles
+[11:15:37]   greenhouse/apexcompanies: 167 open roles
+[11:15:37]   greenhouse/alphasense: 165 open roles
+[11:15:37]   greenhouse/alfredbeneschco: 145 open roles
+[11:15:37]   greenhouse/anthromededucation: 143 open roles
+[11:15:37]   greenhouse/axiomtalentplatform: 205 open roles
+[11:15:37]   greenhouse/bybit: 163 open roles
+[11:15:37]   greenhouse/cannondesign: 126 open roles
+[11:15:37]   greenhouse/comprehensivemobilecare: 266 open roles
+[11:15:37]   greenhouse/coreweave: 320 open roles
+[11:15:37]   greenhouse/datavant2: 171 open roles
+[11:15:37]   greenhouse/epicgames: 134 open roles
+[11:15:37]   greenhouse/equipmentsharecom: 1031 open roles
+[11:15:37]   greenhouse/erc8585757pathlight53t353: 105 open roles
+[11:15:37]   greenhouse/esri: 478 open roles
+[11:15:37]   greenhouse/fanduel: 106 open roles
+[11:15:37]   greenhouse/flyzipline: 317 open roles
+[11:15:37]   greenhouse/formlabs: 271 open roles
+[11:15:37]   greenhouse/hubspotjobs: 140 open roles
+[11:15:37]   greenhouse/ixllearning: 111 open roles
+[11:15:37]   greenhouse/justmarkets: 137 open roles
+[11:15:37]   greenhouse/klaviyo: 123 open roles
+[11:15:37]   greenhouse/langanengineeringandenvironmentalservicesllc: 576 open roles
+[11:15:37]   greenhouse/luxinfusion: 117 open roles
+[11:15:37]   greenhouse/missionhealthcare: 117 open roles
+[11:15:37]   greenhouse/modernanimal: 118 open roles
+[11:15:37]   greenhouse/monks: 315 open roles
+[11:15:37]   greenhouse/monsterenergy: 169 open roles
+[11:15:37]   greenhouse/netskope: 122 open roles
+[11:15:37]   greenhouse/nscaleoperationsukltd: 212 open roles
+[11:15:37]   greenhouse/astspacemobile: 280 open roles
+[11:15:37]   greenhouse/cssmerge: 352 open roles
+[11:15:37]   greenhouse/drayerpt: 142 open roles
+[11:15:37]   greenhouse/ecpcareers: 450 open roles
+[11:15:37]   greenhouse/eosfitness: 2930 open roles
+[11:15:37]   greenhouse/fanaticscommerce: 208 open roles
+[11:15:37]   greenhouse/flix: 182 open roles
+[11:15:37]   greenhouse/helsing: 177 open roles
+[11:15:37]   greenhouse/psiquantum: 108 open roles
+[11:15:37]   greenhouse/revolutionmedicines: 354 open roles
+[11:15:37]   greenhouse/sentinellabs: 258 open roles
+[11:15:37]   greenhouse/ursamajor: 136 open roles
+[11:15:37]   greenhouse/capco: 689 open roles
+[11:15:37]   greenhouse/guidepoint: 105 open roles
+[11:15:37]   greenhouse/zscaler: 388 open roles
+[11:15:37]   greenhouse/via: 171 open roles
+[11:15:37]   greenhouse/42northdental: 138 open roles
+[11:15:37]   greenhouse/abclegalservices: 114 open roles
+[11:15:37]   greenhouse/amn: 123 open roles
+[11:15:37]   greenhouse/arco: 395 open roles
+[11:15:37]   greenhouse/ascendtogether: 100 open roles
+[11:15:37]   greenhouse/atoms: 164 open roles
+[11:15:37]   greenhouse/bayada: 2581 open roles
+[11:15:37]   greenhouse/betatechnologiesinc: 134 open roles
+[11:15:37]   greenhouse/bibibopcareers: 263 open roles
+[11:15:37]   greenhouse/biermanautismcenters: 142 open roles
+[11:15:37]   greenhouse/binance: 219 open roles
+[11:15:37]   greenhouse/btgpactual: 219 open roles
+[11:15:37]   greenhouse/captiveaire: 102 open roles
+[11:15:37]   greenhouse/catonetworks: 119 open roles
+[11:15:37]   greenhouse/connectionshealthsolutions: 163 open roles
+[11:15:37]   greenhouse/coupang: 678 open roles
+[11:15:37]   greenhouse/hearst: 396 open roles
+[11:15:37]   greenhouse/ionq: 109 open roles
+[11:15:37]   greenhouse/jjsnackfoods: 103 open roles
+[11:15:37]   greenhouse/kyopositions: 155 open roles
+[11:15:37]   greenhouse/machindustries: 193 open roles
+[11:15:37]   greenhouse/nix: 112 open roles
+[11:15:37]   greenhouse/ogilvy: 103 open roles
+[11:15:37]   greenhouse/oosmanagementcorp: 1653 open roles
+[11:15:37]   greenhouse/payoneer: 100 open roles
+[11:15:37]   greenhouse/powerx: 115 open roles
+[11:15:37]   greenhouse/qualtrics: 174 open roles
+[11:15:37]   greenhouse/reolink: 100 open roles
+[11:15:37]   greenhouse/resultspt: 250 open roles
+[11:15:37]   lever/palantir: 306 open roles
+[11:15:37]   lever/veeva: 864 open roles
+[11:15:37]   lever/jobgether: 3988 open roles
+[11:15:37]   lever/flynncompanies: 147 open roles
+[11:15:37]   lever/gopuff: 755 open roles
+[11:15:37]   lever/buckmason: 253 open roles
+[11:15:37]   lever/arcteryx.com: 224 open roles
+[11:15:37]   lever/thinkahead: 124 open roles
+[11:15:37]   lever/solidcore: 261 open roles
+[11:15:37]   lever/zoox: 243 open roles
+[11:15:37]   lever/insomniacookies: 1152 open roles
+[11:15:37]   lever/Aprio: 182 open roles
+[11:15:37]   lever/amityfdn: 109 open roles
+[11:15:37]   lever/boxlunch: 4667 open roles
+[11:15:37]   lever/rws: 147 open roles
+[11:15:37]   lever/weloglobal: 453 open roles
+[11:15:37]   workday/livenation/wd503/LNExternalSite/Live Nation: 136 open roles
+[11:15:37]   ashby/ramp: 180 open roles
+[11:15:37]   ashby/notion: 172 open roles
+[11:15:37]   ashby/openai: 863 open roles
+[11:15:37]   ashby/perplexity: 151 open roles
+[11:15:37]   ashby/plaid: 144 open roles
+[11:15:37]   ashby/zip: 112 open roles
+[11:15:37]   ashby/cohere: 124 open roles
+[11:15:37]   ashby/elevenlabs: 120 open roles
+[11:15:37]   ashby/EliseAI: 105 open roles
+[11:15:37]   ashby/neko-health: 120 open roles
+[11:15:37]   workable/nogigiddy: 1822 open roles
+[11:15:37]   workable/suppliedtalent: 196 open roles
+[11:15:37]   workable/serenity-mental-health-centers: 374 open roles
+[11:15:37]   workable/pacific-health-group: 190 open roles
+[11:15:37]   workable/pm2cm: 125 open roles
+[11:15:37]   workable/obran: 100 open roles
+[11:15:37]   workable/behavior-frontiers: 124 open roles
+[11:15:37]   workable/pavago: 2603 open roles
+[11:15:37]   workable/rimkus: 169 open roles
+[11:15:37]   workable/continuum-resource-network: 112 open roles
+[11:15:37]   workable/intertek: 239 open roles
+[11:15:37]   workable/yugo: 111 open roles
+[11:15:37]   workable/weekday-1: 1024 open roles
+[11:15:37]   workable/raydar: 992 open roles
+[11:15:37]   workable/keller-executive-search: 155 open roles
+[11:15:37]   workable/bask-health-1: 351 open roles
+[11:15:37]   workable/kurtgeiger: 188 open roles
+[11:15:37]   workable/g-mass: 147 open roles
+[11:15:37]   workable/dln-consulting-group: 215 open roles
+[11:15:37]   workable/elitecaremanagement: 106 open roles
+[11:15:37]   workable/turing-enterprise-inc: 264 open roles
+[11:15:37]   breezy/american-logistics-authority: 2760 open roles
+[11:15:37]   smartrecruiters/equinox: 229 open roles
+[11:15:37]   smartrecruiters/boschgroup: 208 open roles
+[11:15:37]   smartrecruiters/sgs: 156 open roles
+[11:15:37]   smartrecruiters/redbull: 324 open roles
+[11:15:37]   smartrecruiters/AIRCommunities: 141 open roles
+[11:15:37]   smartrecruiters/uniteklearning: 168 open roles
+[11:15:37]   smartrecruiters/thewonderfulcompany: 139 open roles
+[11:15:37]   smartrecruiters/lewisassociates: 113 open roles
+[11:15:37]   greenhouse: 1184 of 1217 boards have openings (74986 roles)
+[11:15:37]   lever: 129 of 138 boards have openings (16515 roles)
+[11:15:37]   workday: 48 of 48 boards have openings (1514 roles)
+[11:15:37]   ashby: 89 of 96 boards have openings (3989 roles)
+[11:15:37]   workable: 157 of 168 boards have openings (12545 roles)
+[11:15:37]   bamboohr: 4 of 4 boards have openings (186 roles)
+[11:15:37]   recruitee: 2 of 2 boards have openings (59 roles)
+[11:15:37]   breezy: 6 of 6 boards have openings (2817 roles)
+[11:15:37]   smartrecruiters: 51 of 60 boards have openings (1922 roles)
+[11:15:37]   ! workday/target/wd5/targetcareers/Target: 429 Client Error: Too Many Requests for url: https://target.wd5.myworkdayjobs.com/wday/cxs
+[11:15:37]   ! workday/pnc/wd5/External/PNC: 429 Client Error: Too Many Requests for url: https://pnc.wd5.myworkdayjobs.com/wday/cxs/pn
+[11:15:37]   ! workday/xcelenergy/wd1/External/Xcel Energy: 429 Client Error: Too Many Requests for url: https://xcelenergy.wd1.myworkdayjobs.com/wday
+[11:15:37]   ! workday/usc/wd5/ExternalUSCCareers/University of Southern California: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[11:15:37]   ! workday/usc/wd5/externalkeckusccareers/Keck Medicine of USC: 429 Client Error: Too Many Requests for url: https://usc.wd5.myworkdayjobs.com/wday/cxs/us
+[11:15:37]   ! workday/citjpl/wd5/Jobs/NASA JPL: 429 Client Error: Too Many Requests for url: https://citjpl.wd5.myworkdayjobs.com/wday/cxs
+[11:15:37]   ! workday/huntingtonhospital/wd5/HuntingtonHospitalCareers/Huntington Health: 429 Client Error: Too Many Requests for url: https://huntingtonhospital.wd5.myworkdayjobs.
+[11:15:37]   ! workday/foundationccc/wd1/fccc-careers/Foundation for California Community Colleges: 429 Client Error: Too Many Requests for url: https://foundationccc.wd1.myworkdayjobs.com/w
+[11:15:37]   ! workday/warnerbros/wd5/global/Warner Bros. Discovery: 429 Client Error: Too Many Requests for url: https://warnerbros.wd5.myworkdayjobs.com/wday
+[11:15:37]   ! workday/spe/wd1/SonypicturesEntertainment/Sony Pictures Entertainment: 429 Client Error: Too Many Requests for url: https://spe.wd1.myworkdayjobs.com/wday/cxs/sp
+[11:15:37]   ! workday/fox/wd1/Domestic/Fox Corporation: 429 Client Error: Too Many Requests for url: https://fox.wd1.myworkdayjobs.com/wday/cxs/fo
+[11:15:37]   ! workday/umusic/wd5/UMGUS/Universal Music Group: 429 Client Error: Too Many Requests for url: https://umusic.wd5.myworkdayjobs.com/wday/cxs
+[11:15:37]   ! …and 54 more board errors
+[11:15:37]   agg/linkedin: 0 roles (cached)
+[11:15:37]   agg/remoteok: 16 roles (cached)
+[11:15:37]   agg/remotive: 0 roles (cached)
+[11:15:37]   agg/jicy: 13 roles (cached)
+[11:15:37]   agg/himalayas: 1 roles (cached)
+[11:15:37]   agg/wwr: 16 roles (cached)
+[11:15:37]   agg/themuse: 203 roles (cached)
+[11:15:37]   agg/adzuna: 0 roles (cached)
+[11:15:37]   agg/jooble: 0 roles (cached)
+[11:15:47]   agg/workablejobs: 267 fetched, 127 pass the title/location filter
+[11:15:48]   agg/arbeitnow: 900 fetched, 2 pass the title/location filter
+[11:15:48]   agg/workingnomads: 37 fetched, 2 pass the title/location filter
+[11:15:48]   agg/githublists: 328 fetched, 61 pass the title/location filter
+[11:15:59]   agg/builtin: 118 fetched, 87 pass the title/location filter
+[11:15:59]   agg/careerjet: 0 fetched, 0 pass the title/location filter
+[11:15:59]   agg/localfeed: 0 fetched, 0 pass the title/location filter
+[11:16:00]   agg/hnhiring: 6 fetched, 1 pass the title/location filter
+[11:16:04]   agg/jobboard: today's snapshot was already read (it changes once a day)
+[11:16:05] 109778 open roles, 15506 new
+[11:16:19]   ✓  82  Construction Project Coordinator @ arco (New York, NY, US) — title 'project coordinator' +50; keywords [construction, vendor, draw, excel] +15; location 'new york' +12; pay up to $75,000 +5
+[11:16:19]   ✓  79  Operations Coordinator @ hearst (New York, NY, United States) — title 'operations coordinator' +50; keywords [workflow, lean, stakeholder, excel] +17; location 'new york' +12
+[11:16:19]   ✓  74  Client Data Operations Analyst @ datavant2 (Remote - United States) — title 'operations analyst' +50; keywords [workflow, data analysis, inventory, stakeholder] +18; location 'remote' +16; 'healthcare' -15; pay up to $10
+[11:16:19]   ✓  74  Supply Chain Buyer @ amca (El Segundo) — title 'supply chain' +43; keywords [vendor, supply chain, draw, procurement] +20; location 'el segundo' +6; pay up to $120,000 +5
+[11:16:19]   ✓  73  Investor Relations Operations Analyst @ audaxprivatedebt (New York) — title 'operations analyst' +50; keywords [excel, documentation] +6; location 'new york' +12; pay up to $90,000 +5
+[11:16:19]   ✓  73  Supply Chain Specialist @ catonetworks (USA) — title 'supply chain' +38; keywords [industrial engineering, workflow, vendor, supply chain] +30; pay up to $85,000 +5
+[11:16:19]   ✓  73  Project Coordinator @ ogilvy (New York, New York) — title 'project coordinator' +50; keywords [workflow, project management, lean, stakeholder] +21; location 'new york' +12; 'healthcare' -15; pay up to 
+[11:16:19]   ✓  69  Advertising Operations Associate @ applecart (New York, New York, United Sta) — title 'operations associate' +50; keywords [optimization, workflow, stakeholder] +12; location 'new york' +12; 'hris' -10; pay up to $70,000 +5
+[11:16:19]   ✓  67  Operations Specialist - FF Academy @ alxcryptoholdingsinc (Los Angeles) — title 'operations' +25; keywords [workflow, cross-functional, data analysis, systems engineering] +31; location 'los angeles' +6; pay up to $75,000 +5
+[11:16:19]   ✓  67  Don't see what you're looking for in Asset Management - Business Operations? @ nycedctalentcommunity (New York, New York, United Sta) — title 'business operations' +50; keywords [construction] +5; location 'new york' +12
+[11:16:19]   ✓  67  Don't see what you're looking for in Asset Management - Property Operations? @ nycedctalentcommunity (New York, New York, United Sta) — title 'property operations' +50; keywords [construction] +5; location 'new york' +12
+[11:16:19]   ✓  64  Finance & Operation Analyst @ reallygreatreading (Remote: USA) — title 'analyst' +22; keywords [process improvement, workflow, cross-functional, stakeholder] +26; location 'remote' +16
+[11:16:19]   ✓  62  Data Analyst (Slovak)  @ aspenviewtech (Remote) — title 'analyst' +22; keywords [workflow, data analysis, lean, excel] +24; location 'remote' +16
+[11:16:19]   ✓  62  Branch Operations Coordinator Borough Park DeNovo @ wells-fargo (New York, NY (Hybrid)) — title 'operations coordinator' +50; location 'new york' +12
+[11:16:19]   ✓  60  Open Application, Business Operations @ amca (El Segundo, CA) — title 'business operations' +50; keywords [supply chain] +4; location 'el segundo' +6
+[11:16:19]   ✓  60  Inventory Analyst @ podean (United States ) — title 'inventory' +39; keywords [optimization, inventory, stakeholder, excel] +21
+[11:16:19]   ✓  57  Project Management Analyst-Construction Project Coordination @ jobgether (US) — title 'analyst' +22; keywords [construction, project management, project coordination, stakeholder] +19; location 'remote' +16
+[11:16:19]   ✓  56  Consulting Analyst @ ogilvy (New York, New York) — title 'analyst' +22; keywords [project management, data analysis, draw, excel] +17; location 'new york' +12; pay up to $75,000 +5
+[11:16:19]   ✓  56  Branch Operations Coordinator West Hollywood @ wells-fargo (Los Angeles, CA (Hybrid)) — title 'operations coordinator' +50; location 'los angeles' +6
+[11:16:19]   ✓  54  Wholesale Real Estate Transaction Coordinator @ rebuilt (Remote) — title 'coordinator' +22; keywords [project management, stakeholder, excel, ownership] +16; location 'remote' +16
+[11:16:19]   ✓  51  Analyst/Associate, Pan-Alts @ aksia (New York) — title 'analyst' +22; keywords [sop, project management, excel] +12; location 'new york' +12; pay up to $80,000 +5
+[11:16:19]   ✓  49  Field Marketing Event Coordinator @ aircallioinc (New York Office; San Francisco) — title 'coordinator' +22; keywords [vendor, excel, startup] +10; location 'new york' +12; pay up to $110,000 +5
+[11:16:19]   ✓  48  Junior FP&A Analyst - FF Academy @ alxcryptoholdingsinc (Los Angeles, CA) — title 'analyst' +22; keywords [optimization, workflow, cross-functional, vendor] +30; location 'los angeles' +6; 'healthcare' -15; pay up to $75,000 +
+[11:16:19]   ✓  48  Contract Due Diligence Compliance Analyst @ place (Remote) — title 'analyst' +22; keywords [cross-functional, ownership, documentation] +10; location 'remote' +16
+[11:16:19]   ✓  48  Field Service Technician - Development Program @ powerx (Denver, Colorado ) — title 'program' +22; keywords [construction, draw, excel, documentation] +14; location 'denver' +12
+[11:16:19]   ✓  47  Don't see what you're looking for in Asset Management -Portfolio Management? @ nycedctalentcommunity (New York, New York, United Sta) — title 'asset manag' +30; keywords [construction] +5; location 'new york' +12
+[11:16:19]   ✓  46  Trading Operations Specialist (Americas) @ eqvilentjobs (Remote) — title 'operations' +25; keywords [continuous improvement] +5; location 'remote' +16
+[11:16:19]   ✓  45  Technical Product Owner, Service of Process (SAFe) @ abclegalservices (Longmont, CO) — keywords [workflow, cross-functional, inventory, lean] +28; location 'colorado' +12; pay up to $110,000 +5
+[11:16:19]   ✓  45  Analyst, Operational Due Diligence @ aksia (New York) — title 'analyst' +22; keywords [excel, documentation] +6; location 'new york' +12; pay up to $90,000 +5
+[11:16:19]   ✓  44  Administrative Assistant (supporting Human Capital Management & Information Technology) @ friedfrankharrisshriverjacobsonllp (New York, New York, United Sta) — keywords [cross-functional, vendor, inventory, stakeholder] +27; location 'new york' +12; pay up to $75,000 +5
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) @ oosmanagementcorp (Georgia (Remote)) — title 'analyst' +22; keywords [scheduling, documentation] +6; location 'remote' +16
+[11:16:19]   ✓  44  Board Certified Behavior Analyst (BCBA) – Spanish Speaking Required @ oosmanagementcorp (New York) — title 'analyst' +22; keywords [spanish, excel, scheduling] +10; location 'new york' +12
+[11:16:19]   ✓ … and 108 more new candidates (the 40 with the highest keyword score are listed)
+[11:16:19] Scored 187 new roles: 148 candidates for the résumé check, 39 with nothing going for them, 15308 filtered out by title/location (finding and scoring took 8.4 min)
+[11:16:19] 148 jobs queued: 0 already matched to your résumé, 148 waiting for that check (best prospects first; the bar is a 55% match). Applying to up to 493 now
+[11:16:19] Time for this run: 50 min in all (8038 of 1850 free Actions minutes used this month)
+[11:16:20] Accounts: ON (delgado@alumni.usc.edu)
+[11:16:29]   match  80%  Accounts Payable Clerk @ monroetractor — Candidate has strong accounting and bookkeeping experience from construction roles, though slightly 
+[11:16:29]   match  85%  Construction Project Coordinator @ arco — Strong match for a construction project coordinator role given candidate's background in constructio
+[11:16:29]   match  75%  Operations Coordinator @ hearst — Good fit for an operations coordinator role with strong organizational skills, though requiring some
+[11:16:29]   match  60%  Finance & Operation Analyst @ reallygreatreading — Candidate is an entry-level grad, whereas this finance and operations analyst role asks for 5+ years
+[11:16:29]   match  70%  Investor Relations Operations Analyst @ audaxprivatedebt — Strong analytical and operational background, but private debt investor relations is a slight pivot 
+[11:16:29] → Accounts Payable Clerk @ monroetractor (score 34, match 80%)
+[11:16:46]       step 1: 35 fields (19 required)
+[11:17:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:17:45]       mail: found 'Security code for your application to Monroe Tractor'
+[11:17:55]     ✓ applied (1.4 min)
+[11:17:59] → Construction Project Coordinator @ arco (score 82, match 85%)
+[11:18:10]       step 1: 21 fields (12 required)
+[11:18:25]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:18:33]       mail: found 'Security code for your application to ARCO Companies'
+[11:18:39]     ✓ applied (0.7 min)
+[11:18:46] → Operations Coordinator @ hearst (score 79, match 75%)
+[11:18:58]       step 1: 24 fields (14 required)
+[11:19:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:19:26]       mail: found 'Security code for your application to Hearst'
+[11:19:31]     ✓ applied (0.7 min)
+[11:19:34] → Finance & Operation Analyst @ reallygreatreading (score 64, match 60%)
+[11:19:46]       step 1: 19 fields (14 required)
+[11:19:46]       (writer answered 'Have you analyzed operational data from teams outside Financ' -> 'No')
+[11:19:47]       (writer answered 'Have you independently managed an analytical or process impr' -> 'Yes')
+[11:19:47]       (writer answered 'Which statement best describes your Microsoft Excel proficie' -> 'Advanced: pivot tables, lookup functions, complex ')
+[11:20:01]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:20:05]       mail: found 'Security code for your application to Really Great Reading'
+[11:20:10]     ✓ applied (0.6 min)
+[11:20:12]   match  15%  Data Analyst (Slovak)  @ aspenviewtech — Requires native fluency in Slovak, which the candidate lacks.
+[11:20:12]   match  50%  Consolidation & Reporting Accountant @ wmeimg — Requires a dedicated accounting degree and external consolidation experience, though the candidate h
+[11:20:12]   match  40%  Advertising Operations Associate @ applecart — Requires 2+ years of specific media trafficking and advertising operations experience across multipl
+[11:20:12]   match  88%  Supply Chain Buyer @ amca — Strong match for procurement and supply chain role, leveraging candidate's industrial engineering ba
+[11:20:12]   match  85%  Client Data Operations Analyst @ datavant2 — Strong match requiring SQL, Python, and operational data analysis, fitting the candidate's analytics
+[11:20:18] → Investor Relations Operations Analyst @ audaxprivatedebt (score 73, match 70%)
+[11:20:33]       step 1: 27 fields (16 required)
+[11:20:33]       (writer answered 'What are your expectations on bonus?*' -> 'N/A')
+[11:20:50]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:21:00]       mail: found 'Security code for your application to Audax Private Debt'
+[11:21:06]     ✓ applied (0.8 min)
+[11:21:13] → Supply Chain Buyer @ amca (score 74, match 88%)
+[11:21:21]       step 1: 17 fields (13 required)
+[11:21:30]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:21:35]       mail: found 'Security code for your application to Amca'
+[11:21:41]     ✓ applied (0.5 min)
+[11:21:42]   match  30%  Analyst (Exchanges) @ eqvilentjobs — same role at this employer, checked before: Poor match as the posting is vague, messy, and appears t
+[11:21:44]   match  88%  Wholesale Real Estate Transaction Coordinator @ rebuilt — Strong match for real estate transaction coordination due to direct property operations and project 
+[11:21:44]   match  72%  Administrative Assistant (supporting Human Capital Management & Information Technology) @ friedfrankharrisshriverjacobsonllp — Good fit for administrative and operational support leveraging strong organizational skills and prof
+[11:21:44]   match  85%  Junior FP&A Analyst - FF Academy @ alxcryptoholdingsinc — Strong match for an entry-level FP&A role given engineering background, advanced Excel, and financia
+[11:21:44]   match  88%  Inventory Analyst @ podean — Strong match for an inventory analyst role combining supply chain coursework, analytical skills, and
+[11:21:44]   match  78%  Analyst, Operational Due Diligence @ aksia — Good fit for an operational due diligence analyst utilizing analytical, process, and financial track
+[11:21:46] → Client Data Operations Analyst @ datavant2 (score 74, match 85%)
+[11:21:51]       step 1: 24 fields (24 required)
+[11:21:51]       (writer answered 'Will you be able to work in the location listed in the job d' -> 'Yes, I can work in the location listed or will sel')
+[11:21:51]       (writer answered 'Do you have a High School Diploma or Equivalent (GED)?*' -> 'Yes')
+[11:21:52]       (writer answered 'Do you currently work for Datavant, CVS or any affiliates of' -> 'No')
+[11:22:01]     ✗ blocked: no Next or Submit button found on this step; page shows: :Discover Datavant; :Resources; :Company; :Submit Application
+Submit Appl
+[11:22:10] → Wholesale Real Estate Transaction Coordinator @ rebuilt (score 54, match 88%)
+[11:22:16]       step 1: 10 fields (9 required)
+[11:22:35]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:22:48]       mail: found 'Security code for your application to Rebuilt'
+[11:22:53]     ✓ applied (0.7 min)
+[11:22:59] → Administrative Assistant (supporting Human Capital Management & Information Technology) @ friedfrankharrisshriverjacobsonllp (score 44, match 72%)
+[11:23:08]       step 1: 0 fields (0 required)
+[11:23:08]     ✗ blocked: not a real application form (0 fields, no résumé upload); page shows: 
+[11:23:13] → Junior FP&A Analyst - FF Academy @ alxcryptoholdingsinc (score 48, match 85%)
+[11:23:20]       step 1: 13 fields (9 required)
+[11:23:27]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:23:38]       mail: found 'Security code for your application to AlxCrypto Holdings Inc'
+[11:23:45]     ✓ applied (0.5 min)
+[11:23:55] → Branch Operations Coordinator West Hollywood @ wells-fargo (score 56)
+[11:24:40]     ✗ skipped: the listing's apply link needs a site account and the employer's own posting was not found
+[11:24:40] → Inventory Analyst @ podean (score 60, match 88%)
+[11:24:48]       step 1: 12 fields (11 required)
+[11:24:58]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:25:18]       mail: found 'Security code for your application to Podean'
+[11:25:26]     ✓ applied (0.8 min)
+[11:25:26]   match  25%  Project Coordinator @ ogilvy — same role at this employer, checked before: The posting text is essentially a web page template/navi
+[11:25:26]   match  40%  Consulting Analyst @ ogilvy — same role at this employer, checked before: The posting text is incomplete and lacks specific job du
+[11:25:29]   match  75%  Analyst, Credit Operations @ obracapitalinc — Good match for a recent engineering graduate with strong Excel skills and financial tracking experie
+[11:25:29]   match  50%  Field Marketing Event Coordinator @ aircallioinc — Weak match because the role requires 3 to 5+ years of specific event coordination and event marketin
+[11:25:29]   match  80%  Open Application, Business Operations @ amca — Strong match for an ISE graduate looking for business operations and manufacturing/hardware system r
+[11:25:29]   match  55%  Analyst/Associate, Pan-Alts @ aksia — Weak match since the role requires 2-6 years of experience in private markets or alternative investm
+[11:25:29]   match  85%  Associate TikTok Strategist @ podean — Strong match for an operations-focused graduate with skills in process improvement, workflow design,
+[11:25:29] → Analyst, Operational Due Diligence @ aksia (score 45, match 78%)
+[11:25:39]       step 1: 16 fields (11 required)
+[11:25:53]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:26:36]       mail: found 'Security code for your application to Aksia'
+[11:26:44]     ✓ applied (1.3 min)
+[11:26:53] → Analyst, Credit Operations @ obracapitalinc (score 35, match 75%)
+[11:27:02]       step 1: 15 fields (8 required)
+[11:27:14]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:27:23]       mail: found 'Security code for your application to Obra Capital, Inc'
+[11:27:28]     ✓ applied (0.6 min)
+[11:27:35] → Open Application, Business Operations @ amca (score 60, match 80%)
+[11:27:43]       step 1: 17 fields (12 required)
+[11:27:52]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:28:28]       mail: found 'Security code for your application to Amca'
+[11:28:38]     ✓ applied (1.0 min)
+[11:28:48] → Analyst/Associate, Pan-Alts @ aksia (score 51, match 55%)
+[11:28:58]       step 1: 15 fields (11 required)
+[11:29:13]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:29:18]       mail: found 'Security code for your application to Aksia'
+[11:29:23]     ✓ applied (0.6 min)
+[11:29:23]   match  30%  Customer Success Associate  @ ghost — same role at this employer, checked before: The posting text is incomplete and does not provide enou
+[11:29:24]   match  40%  IT & Security Support Analyst @ openzeppelin — same role at this employer, checked before: Job posting lacks sufficient details on role requirement
+[11:29:24]   match  30%  Implementation Engineer, Digital Diagnostics (DDx) @ pathai — same role at this employer, checked before: same role at this employer, checked before: The posting 
+[11:29:24]   match  40%  Trading Operations Specialist (Americas) @ eqvilentjobs — same role at this employer, checked before: The job description is truncated and lacks specific requ
+[11:29:44]   match  50%  Product Specialist @ monroetractor — The role requires hands-on heavy equipment mechanical repair and technical service, which is too far
+[11:29:44]   match  65%  Production Coordinator (Campaigns) @ saylor — The candidate has strong project coordination and organizational skills, but lacks the specific 2+ y
+[11:29:44]   match  90%  Operations Specialist - FF Academy @ alxcryptoholdingsinc — An ideal match combining an Industrial and Systems Engineering background with Python, SQL, and auto
+[11:29:44]   match  60%  Junior Accountant - FF Academy @ alxcryptoholdingsinc — The candidate has financial tracking and Excel skills, but lacks a dedicated accounting degree and c
+[11:29:44]   match  88%  Real Estate Development Analyst @ atoms — Strong fit for a real estate development analyst role given the candidate's construction background,
+[11:29:44] → Associate TikTok Strategist @ podean (score 38, match 85%)
+[11:29:50]       step 1: 17 fields (14 required)
+[11:30:25]       ? unanswered: 'Do you have previous experience working with TikTok Shop? If so, briefly describe your exp' kind=textarea options=[]
+[11:30:25]     ✗ skipped: can't truthfully answer required: Do you have previous experience working with TikTok Shop? If
+[11:30:29] → Production Coordinator (Campaigns) @ saylor (score 44, match 65%)
+[11:30:40]       step 1: 22 fields (8 required)
+[11:31:14]       writer: gemini-lite: still failing after retries
+[11:31:55]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:32:11]       mail: found 'Security code for your application to Saylor Agency'
+[11:32:17]     ✓ applied (1.8 min)
+[11:32:20] → Operations Specialist - FF Academy @ alxcryptoholdingsinc (score 67, match 90%)
+[11:32:27]       step 1: 10 fields (3 required)
+[11:32:32]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:32:38]       mail: found 'Security code for your application to AlxCrypto Holdings Inc'
+[11:32:44]     ✓ applied (0.4 min)
+[11:32:51] → Junior Accountant - FF Academy @ alxcryptoholdingsinc (score 28, match 60%)
+[11:32:58]       step 1: 13 fields (9 required)
+[11:33:05]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:33:14]       mail: found 'Security code for your application to AlxCrypto Holdings Inc'
+[11:33:19]     ✓ applied (0.5 min)
+[11:33:28]   match  88%  Don't see what you're looking for in Asset Management - Business Operations? @ nycedctalentcommunity — Strong match for real estate asset management and business operations given candidate's ISE degree a
+[11:33:28]   match  75%  Account Specialist, Ahold @ pltfrm — Good fit for supply chain and account operations, but candidate does not live in the required Northe
+[11:33:28]   match  75%  Account Specialist, HEB @ pltfrm — Good fit for supply chain and account operations, but candidate does not live within commuting dista
+[11:33:28]   match  75%  Account Specialist, Meijer & HyVee @ pltfrm — Good fit for supply chain and account operations, but candidate does not live in the state of Michig
+[11:33:28]   match  78%  Field Engineer @ odinlabs — Relevant construction technology and field engineering background, but requires physical presence in
+[11:33:28] → Real Estate Development Analyst @ atoms (score 42, match 88%)
+[11:33:38]       step 1: 16 fields (7 required)
+[11:33:48]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:33:57]       mail: found 'Security code for your application to Atoms'
+[11:34:03]     ✓ applied (0.6 min)
+[11:34:09] → Don't see what you're looking for in Asset Management - Business Operations? @ nycedctalentcommunity (score 67, match 88%)
+[11:34:17]       step 1: 12 fields (9 required)
+[11:34:25]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:34:38]       mail: found 'Security code for your application to NYCEDC Talent Communit'
+[11:34:43]     ✓ applied (0.6 min)
+[11:34:51] → Account Specialist, Ahold @ pltfrm (score 27, match 75%)
+[11:34:57]       step 1: 11 fields (11 required)
+[11:35:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:35:11]       mail: found 'Security code for your application to PLTFRM'
+[11:35:17]     ✓ applied (0.4 min)
+[11:35:22] → Account Specialist, HEB @ pltfrm (score 27, match 75%)
+[11:35:28]       step 1: 11 fields (11 required)
+[11:35:41]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:35:49]       mail: found 'Security code for your application to PLTFRM'
+[11:35:54]     ✓ applied (0.5 min)
+[11:36:02] → Account Specialist, Meijer & HyVee @ pltfrm (score 27, match 75%)
+[11:36:08]       step 1: 11 fields (11 required)
+[11:36:22]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:36:31]       mail: found 'Security code for your application to PLTFRM'
+[11:36:36]     ✓ applied (0.6 min)
+[11:36:37]   ✗ Billing Coordinator/Senior Billing Coordinator @ friedfrankharrisshriverjacobsonllp: above entry level: mid (requires 5+ yrs)
+[11:36:39]   match  55%  Portfolio Analyst, Private Credit @ aksia — Requires 2-8 years of private markets or investment experience, which is a stretch for a recent grad
+[11:36:39]   match  78%  Account Specialist, Sprouts & Whole Foods @ pltfrm — Good match for operations and supply chain background, though location requirement (Phoenix/Austin) 
+[11:36:39]   match  78%  Account Specialist, Albertsons Companies  @ pltfrm — Strong fit for supply chain and account operations skills, though requires living near specific hubs
+[11:36:39]   match  52%  Client Operations Associate, Private Markets @ aksia — Requires 3 to 5 years of dedicated fund accounting and operations experience.
+[11:36:39]   match  70%  AP Associate (Marketing Department) @ atticor — Matches financial tracking and Excel skills, though prefers direct accounts payable experience.
+[11:36:40] → Field Engineer @ odinlabs (score 29, match 78%)
+[11:36:48]       step 1: 14 fields (6 required)
+[11:36:58]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:37:07]       mail: found 'Security code for your application to ODIN Labs'
+[11:37:12]     ✓ applied (0.5 min)
+[11:37:17] → Portfolio Analyst, Private Credit @ aksia (score 20, match 55%)
+[11:37:27]       step 1: 16 fields (10 required)
+[11:37:41]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:37:50]       mail: found 'Security code for your application to Aksia'
+[11:37:55]     ✓ applied (0.6 min)
+[11:38:04] → Account Specialist, Sprouts & Whole Foods @ pltfrm (score 27, match 78%)
+[11:38:10]       step 1: 11 fields (11 required)
+[11:38:23]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:38:32]       mail: found 'Security code for your application to PLTFRM'
+[11:38:37]     ✓ applied (0.5 min)
+[11:38:41] → Account Specialist, Albertsons Companies  @ pltfrm (score 27, match 78%)
+[11:38:46]       step 1: 11 fields (11 required)
+[11:38:59]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:39:12]       mail: found 'Security code for your application to PLTFRM'
+[11:39:17]     ✓ applied (0.6 min)
+[11:39:25]   match  50%  Technical Customer Support Specialist @ captiveaire — Call center customer support is a poor match for an industrial engineering graduate.
+[11:39:25]   match  75%  Business Development Assistant @ friedfrankharrisshriverjacobsonllp — Good match for a business graduate with strong analytical, MS Suite, and communication skills.
+[11:39:25]   match  60%  Product Support - Wirtgen/Mining Specialist @ monroetractor — Requires prior heavy highway construction sales experience which is a stretch for a recent grad.
+[11:39:25]   match  55%  Heavy Highway & Material Processing Technician @ monroetractor — Heavy equipment technical support and road construction experience required are outside candidate's 
+[11:39:25]   match  40%  Field Service Technician - Development Program @ powerx — Hands-on electrical field service and technician trade work are a poor fit for an ISE graduate.
+[11:39:25] → AP Associate (Marketing Department) @ atticor (score 28, match 70%)
+[11:39:34]       step 1: 15 fields (9 required)
+[11:39:46]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:40:24]       mail: found 'Security code for your application to Atticor'
+[11:40:32]     ✓ applied (1.1 min)
+[11:40:38] → Business Development Assistant @ friedfrankharrisshriverjacobsonllp (score 29, match 75%)
+[11:40:46]       step 1: 0 fields (0 required)
+[11:40:46]     ✗ blocked: not a real application form (0 fields, no résumé upload); page shows: 
+[11:40:52] → Product Support - Wirtgen/Mining Specialist @ monroetractor (score 20, match 60%)
+[11:41:09]       step 1: 33 fields (11 required)
+[11:41:31]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:41:41]       mail: found 'Security code for your application to Monroe Tractor'
+[11:41:46]     ✓ applied (0.9 min)
+[11:41:46]   match  55%  Heavy Highway & Material Processing Technician @ monroetractor — same role at this employer, checked before: Heavy equipment technical support and road construction 
+[11:41:52] → Heavy Highway & Material Processing Technician @ monroetractor (score 26, match 55%)
+[11:42:08]       step 1: 33 fields (14 required)
+[11:42:31]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:42:39]       mail: found 'Security code for your application to Monroe Tractor'
+[11:42:44]     ✓ applied (0.9 min)
+[11:42:45]   match  20%  Contract Due Diligence Compliance Analyst @ place — same role at this employer, checked before: Posting text is mostly a website template/navigation dum
+[11:42:54]   match  88%  Don't see what you're looking for in Asset Management - Property Operations? @ nycedctalentcommunity — Strong match for property operations and real estate asset management coordination.
+[11:42:54]   match  72%  Solutions Reliability Specialist @ canopyworks — Good technical support background, though hardware troubleshooting experience is limited.
+[11:42:54]   match  85%  Don't see what you're looking for in Asset Management -Portfolio Management? @ nycedctalentcommunity — Strong fit for portfolio management and strategic real estate asset coordination.
+[11:42:54]   match  40%  Construction Equipment Sales Representative @ monroetractor — Commission-based heavy equipment sales role requiring direct industry sales experience.
+[11:42:54]   match  68%  AI Product Specialist @ onestream — Good analytical and technical skills, though product specialist roles usually prefer software experi
+[11:42:54] → Don't see what you're looking for in Asset Management - Property Operations? @ nycedctalentcommunity (score 67, match 88%)
+[11:43:02]       step 1: 12 fields (9 required)
+[11:43:11]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:43:20]       mail: found 'Security code for your application to NYCEDC Talent Communit'
+[11:43:25]     ✓ applied (0.5 min)
+[11:43:30] → Solutions Reliability Specialist @ canopyworks (score 20, match 72%)
+[11:43:35]       step 1: 10 fields (7 required)
+[11:43:40]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:43:55]       mail: found 'Security code for your application to Canopy Works'
+[11:44:01]     ✓ applied (0.5 min)
+[11:44:10] → Don't see what you're looking for in Asset Management -Portfolio Management? @ nycedctalentcommunity (score 47, match 85%)
+[11:44:17]       step 1: 12 fields (9 required)
+[11:44:26]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:44:36]       mail: found 'Security code for your application to NYCEDC Talent Communit'
+[11:44:41]     ✓ applied (0.5 min)
+[11:44:47]   match  88%  AI Corporate Strategy Associate - FF Academy @ alxcryptoholdingsinc — Strong alignment with the ISE background, analytical skills, and startup/strategy project execution.
+[11:44:47]   match  72%  Workplace Associate @ atoms — Good fit for operational coordination and vendor management, though leaning more facilities-focused 
+[11:44:47]   match  45%  HR Coordinator @ oosmanagementcorp — Weak fit due to lack of direct HR or dedicated recruiting experience, despite general organizational
+[11:44:47]   match  75%  Marketplace Sales & Business Development Associate @ podean — Good fit leveraging business development, e-commerce operations, and client-facing project backgroun
+[11:44:47]   match  50%  Customer Support Specialist @ aircallioinc — Weak fit as the role focuses purely on customer support rather than operations, supply chain, or eng
+[11:44:48] → AI Product Specialist @ onestream (score 29, match 68%)
+[11:45:03]       step 1: 32 fields (19 required)
+[11:45:03]       (writer answered 'Are you currently or have you within the last five years ser' -> 'No')
+[11:45:27]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:45:33]       mail: found 'Security code for your application to OneStream'
+[11:45:39]     ✓ applied (0.9 min)
+[11:45:48] → AI Corporate Strategy Associate - FF Academy @ alxcryptoholdingsinc (score 28, match 88%)
+[11:45:53]       step 1: 10 fields (3 required)
+[11:45:58]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:46:06]       mail: found 'Security code for your application to AlxCrypto Holdings Inc'
+[11:46:12]     ✓ applied (0.4 min)
+[11:46:19] → Compliance Analyst, Regulatory Requests @ mojorank (score 22)
+[11:46:23]     match 20% — The job posting is essentially a test or placeholder with no details, making it impossible to evaluate against
+[11:46:23]     ✗ set aside: under the 55% match bar
+[11:46:23] → Workplace Associate @ atoms (score 10, match 72%)
+[11:46:32]       step 1: 17 fields (8 required)
+[11:46:33]       (writer answered 'Are you fluent in English?*' -> 'Yes')
+[11:46:43]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:47:17]       mail: found 'Security code for your application to Atoms'
+[11:47:32]     ✓ applied (1.2 min)
+[11:47:42]   match  68%  Business Development Associate @ atoms — Good analytical and business background, though the role asks for 1-4 years of specific corporate de
+[11:47:42]   match  40%  Billing Support Specialist @ aircallioinc — The candidate is an engineering graduate overqualified in analytical skills but lacking the specific
+[11:47:42]   match  88%  Don't see what you're looking for in Asset Management - Development? @ nycedctalentcommunity — Strong match for real estate development and asset management operations given the candidate's const
+[11:47:42]   match  30%  Executive Assistant to the CEO @ saltsecurity — An executive assistant role does not align with the candidate's industrial engineering and business 
+[11:47:42]   match  82%  Trade Promotion Services Specialist  @ pltfrm — Strong fit leveraging the candidate's e-commerce operations, financial tracking, and advanced Excel 
+[11:47:42] → Marketplace Sales & Business Development Associate @ podean (score 11, match 75%)
+[11:47:50]       step 1: 13 fields (12 required)
+[11:48:01]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:48:17]       mail: found 'Security code for your application to Podean'
+[11:48:24]     ✓ applied (0.7 min)
+[11:48:29] → Business Development Associate @ atoms (score 14, match 68%)
+[11:48:39]       step 1: 14 fields (10 required)
+[11:48:49]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:48:57]       mail: found 'Security code for your application to Atoms'
+[11:49:03]     ✓ applied (0.6 min)
+[11:49:05]   match  35%  Digital Production Designer @ applecart — The candidate lacks the 3+ years of professional digital design and ad production experience require
+[11:49:05]   match  40%  Field Operations Manager In Training  @ 1800gotjunk — This is a hands-on junk removal and physical labor field role requiring heavy lifting, which falls b
+[11:49:05]   match  75%  Campaign Specialist @ applecart — The candidate has strong analytical and project management skills fitting for an entry-level digital
+[11:49:05]   match  85%  Don’t see what you’re looking for in Asset Management - Ports, Waterfront, and Transportation? @ nycedctalentcommunity — The asset management and infrastructure operations focus aligns exceptionally well with the candidat
+[11:49:05]   match  60%  Build Engineering Specialist @ amca — While the candidate has an engineering degree and operations background, the specific requirement is
+[11:49:11] → Don't see what you're looking for in Asset Management - Development? @ nycedctalentcommunity (score 42, match 88%)
+[11:49:19]       step 1: 12 fields (9 required)
+[11:49:27]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:49:37]       mail: found 'Security code for your application to NYCEDC Talent Communit'
+[11:49:42]     ✓ applied (0.5 min)
+[11:49:46] → Trade Promotion Services Specialist  @ pltfrm (score 16, match 82%)
+[11:49:51]       step 1: 11 fields (11 required)
+[11:50:00]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:50:09]       mail: found 'Security code for your application to PLTFRM'
+[11:50:14]     ✓ applied (0.5 min)
+[11:50:19] → Campaign Specialist @ applecart (score 29, match 75%)
+[11:50:29]       step 1: 11 fields (9 required)
+[11:50:36]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:50:45]       mail: found 'Security code for your application to Applecart'
+[11:50:51]     ✓ applied (0.5 min)
+[11:50:58] → Don’t see what you’re looking for in Asset Management - Ports, Waterfront, and Transportation? @ nycedctalentcommunity (score 42, match 85%)
+[11:51:01]     ✗ skipped: above entry level: senior (manages people)
+[11:51:01] → Build Engineering Specialist @ amca (score 26, match 60%)
+[11:51:09]       step 1: 17 fields (8 required)
+[11:51:17]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:51:27]       mail: found 'Security code for your application to Amca'
+[11:51:32]     ✓ applied (0.5 min)
+[11:51:33]   match  20%  Junior Copywriter @ ogilvy — same role at this employer, checked before: The posting text is incomplete and relates to creative c
+[11:51:35]   match  80%  Data Entry Analyst @ amca — Engineering background and Excel/document skills match well, though it's hourly technical data entry
+[11:51:35]   match  75%  Resident Services Specialist @ redpeak — Candidate has strong property management and operations experience, making this a good operational f
+[11:51:35]   match  35%  Medical Scheduling Coordinator (Outbound Calls) @ optimamedical — Role is a medical call center scheduling position, below the professional office threshold and lacks
+[11:51:35]   match  10%  BCBA (Board Certified Behavior Analyst) | Rollins Fork, VA 22544 | 15 hrs/wk @ oosmanagementcorp — Requires an active BCBA certification which the candidate does not possess.
+[11:51:35]   match  88%  Don't see what you're looking for in Capital Program? @ nycedctalentcommunity — Strong alignment with construction processes, workflow improvement, and capital project coordination
+[11:51:36] → Data Entry Analyst @ amca (score 41, match 80%)
+[11:51:45]       step 1: 17 fields (13 required)
+[11:51:54]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:51:57]       mail: found 'Security code for your application to Amca'
+[11:52:02]     ✓ applied (0.4 min)
+[11:52:03]   match  15%  Technical Product Owner, Service of Process (SAFe) @ abclegalservices — same role at this employer, checked before: The posting text is mostly a truncated webpage navigatio
+[11:52:05]   match  75%  Mechanical Field Engineer @ aksengineeringforestryllc — Good match due to construction and engineering background, though degree is Industrial and Systems E
+[11:52:05]   match  75%  Mechanical Field Engineer @ energyprojectsolutionsllc — Good match due to project oversight and construction experience, though degree is Industrial Systems
+[11:52:05]   match  75%  Civil Field Engineer  @ aksengineeringforestryllc — Good match leveraging construction and project coordination experience, though degree is Industrial 
+[11:52:05]   match  75%  Civil Field Engineer  @ energyprojectsolutionsllc — Good match given construction and site operations background, though degree is Industrial Engineerin
+[11:52:05]   match  65%  Electrical Field Engineer  @ aksengineeringforestryllc — Decent fit based on general construction and operations background, though candidate lacks an Electr
+[11:52:09] → Resident Services Specialist @ redpeak (score 19, match 75%)
+[11:52:24]       step 1: 25 fields (11 required)
+[11:52:43]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:52:47]       mail: found 'Security code for your application to RedPeak'
+[11:52:53]     ✓ applied (0.7 min)
+[11:53:03] → Don't see what you're looking for in Capital Program? @ nycedctalentcommunity (score 43, match 88%)
+[11:53:10]       step 1: 12 fields (9 required)
+[11:53:19]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:53:27]       mail: found 'Security code for your application to NYCEDC Talent Communit'
+[11:53:33]     ✓ applied (0.5 min)
+[11:53:42] → Mechanical Field Engineer @ aksengineeringforestryllc (score 26, match 75%)
+[11:53:54]       step 1: 24 fields (15 required)
+[11:53:54]       (writer answered 'Do you have a bachelor’s degree in Mechanical Engineering?*' -> 'No')
+[11:54:22]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:54:36]       mail: found 'Security code for your application to AKS Engineering & Fore'
+[11:54:42]     ✓ applied (1.0 min)
+[11:54:47] → Mechanical Field Engineer @ energyprojectsolutionsllc (score 26, match 75%)
+[11:54:59]       step 1: 24 fields (15 required)
+[11:54:59]       (writer answered 'Do you have a bachelor’s degree in Mechanical Engineering?*' -> 'No')
+[11:55:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:55:48]       mail: found 'Security code for your application to Energy Project Solutio'
+[11:55:57]     ✓ applied (1.2 min)
+[11:56:02] → Civil Field Engineer  @ aksengineeringforestryllc (score 23, match 75%)
+[11:56:13]       step 1: 24 fields (15 required)
+[11:56:14]       (writer answered 'Do you have a bachelor’s degree in Civil Engineering?*' -> 'No')
+[11:56:31]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:56:34]       mail: found 'Security code for your application to AKS Engineering & Fore'
+[11:56:39]     ✓ applied (0.6 min)
+[11:56:48] → Civil Field Engineer  @ energyprojectsolutionsllc (score 23, match 75%)
+[11:56:59]       step 1: 24 fields (15 required)
+[11:56:59]       (writer answered 'Do you have a bachelor’s degree in Civil Engineering?*' -> 'No')
+[11:57:28]       writer: gemini-lite: still failing after retries
+[11:57:44]       email: the site asked for a security code after Submit; reading it from the application inbox
+[11:57:53]       mail: found 'Security code for your application to Energy Project Solutio'
+[11:57:58]     ✓ applied (1.2 min)
+[11:57:58]   match  72%  Electrical Field Engineer  @ energyprojectsolutionsllc — Strong construction and project coordination background, but lacks a specific Electrical Engineering
+[11:58:01] Run time limit reached (50 min): the rest waits for the next run
+[11:58:01] Résumé checks this run: 82 (55 passed) in 15 calls. Free writer allowance used today: groq 68k/195k tokens (+10k served from its cache, not counted); groq-20b 42k/195k tokens (+9k served from its cache, not counted); groq-qwen 31k/195k tokens (+6k served from its cache, not counted); gemini-lite 35/480 requests (+14k served from its cache, not counted); gemini-flash 0/18 requests
+[11:58:01] Summary: 47 applied, 3 blocked, 8 skipped, 60 queued, 67 low_score, 15310 filtered. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-24.md
+[11:58:01]   by site  greenhouse: 47 applied, 6 skipped, 3 blocked
+[11:58:01]   by site  www.builtinnyc.com: 1 skipped
+[11:58:01]   by site  www.builtinla.com: 1 skipped
+[11:58:04] Summary emailed to delgado@alumni.usc.edu

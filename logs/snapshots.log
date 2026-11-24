@@ -1,292 +1,3 @@
-=== 2026-11-20 17:39:09  skipped  Category Buyer @ h3x-technologies
-url: https://jobs.ashbyhq.com/h3x-technologies/f08e2cd4-f65b-4655-a7eb-91d60e111449/application
-stage: page 1
-why: can't truthfully answer required: How frequently have you worked with engineering drawings in 
-# Category Buyer
-# Location
-# Employment Type
-# Location Type
-# Department
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] UPLOAD FILE
-# Standard H3X Application Form
-label: Name
-  <input:text #_systemfield_name required empty>
-label: Resume
-  <input:file #_systemfield_resume required no-file>
-  [button] Upload File
-label: Email
-  <input:email #_systemfield_email required empty>
-label: Phone Number
-  <input:tel #12db1d7d-3b85-4521-bcd2-6cd1eeb039db required empty>
-label: Are you legally authorized to work in the Unites States for H3X?
-  [button] Yes
-  [button] No
-  <input:checkbox name=4b0b670c-3a91-464c-af74-308a583dc002 question-unanswered>
-label: Will you now or in the future require sponsorship for employment with H3X?
-  [button] Yes
-  [button] No
-  <input:checkbox name=2d7634b0-0070-4e75-9fe2-f80a5a5fd5df question-unanswered>
-label: Why are you interested in working for H3X Technologies?
-  <textarea #7db356e4-fa32-4c03-87be-c812a94853dc required empty>
-label: How frequently have you worked with engineering drawings in a professional setting?
-  <input:radio #0e800506-8da1-4865-bf9b-e768edcee6bc_1474d872-3a3c-4ac8-8f23 question-unanswered>
-label: Often
-  <input:radio #0e800506-8da1-4865-bf9b-e768edcee6bc_1474d872-3a3c-4ac8-8f23 question-unanswered>
-label: Sometimes
-  <input:radio #0e800506-8da1-4865-bf9b-e768edcee6bc_1474d872-3a3c-4ac8-8f23 question-unanswered>
-label: Never
-label: What are your salary expectations?
-  <input:text #836ab75f-98cd-49f1-8d2f-909f384886c7 required empty>
-label: Are you able to work in person at our Louisville, CO HQ?
-  [button] Yes
-  [button] No
-  <input:checkbox name=408c76c0-cf8c-473f-88b2-6877197ab5c1 question-unanswered>
-  [button] SUBMIT APPLICATION
-
-=== 2026-11-20 17:41:34  unconfirmed  Recruiting Coordinator (NYC) @ valon
-url: https://jobs.ashbyhq.com/valon/96739e7c-e409-4584-ad4a-91f2190ff7e3/application
-stage: page 1
-why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'e of the classifications of protected veteran listed above I am not a protected veteran I decline to self-identify for protected veteran status Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
-# Recruiting Coordinator (NYC)
-# Location
-# Employment Type
-# Location Type
-# Department
-# Compensation
-  <input:file no-file>
-# Autofill from resume
-  text: Upload your resume here to autofill key application fields.
-  [button] Upload file
-label: Name
-  <input:text #_systemfield_name required filled>
-label: Email
-  <input:email #_systemfield_email required filled>
-label: Resume
-  <input:file #_systemfield_resume required has-file>
-  text: <file>
-  [button] 
-  [button] Replace disabled
-label: Phone
-  <input:text #phone filled>
-label: Cover Letter
-  <input:file #cover_letter no-file>
-  [button] Upload File disabled
-label: LinkedIn Profile
-  <input:text #question_7616535006 filled>
-label: Website
-  <input:text #question_7616536006 filled>
-label: Who is your current direct manager?
-  <input:text #question_7616537006 required filled>
-# Diversity Survey
-  text: This optional survey helps us evaluate our diversity and inclusion efforts. Participation is voluntary and refusal to submit the survey will
-label: What is your current age?
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: Under 30
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 30-39
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 40-49
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 50-59
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: 60 or older
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_cf0f1bc7-7ce6-4eb3-aebc question-unanswered>
-label: I prefer not to answer
-label: What is your gender identity?
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Man
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Woman
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Non-Binary
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Another Gender Identity
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_8d7dcc65-3a0b-476a-b679 question-answered>
-label: Do you identify as transgender?
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_0a90dc7e-908c-449f-9151 question-answered>
-label: Yes
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_0a90dc7e-908c-449f-9151 question-answered>
-label: No
-  <input:radio #ead422ea-6670-4047-ad0f-183e186c7eb2_0a90dc7e-908c-449f-9151 question-answered>
-label: How do you identify your sexual orientation? Please select all that apply.
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Bisexual
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Lesbian
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Gay
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Queer
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Heterosexual / straight
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Other
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a63b6f87-d090-40f0-a462 question-answered>
-label: Which ethnicity(ies) do you identify with? Please select all that apply.
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Asian or Asian American
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Black or African American
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Hispanic or Latine
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Indigenous or Native American
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Native Hawaiian or Other Pacific Islander
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: White
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_1e21d43f-548e-481a-aa5f question-unanswered>
-label: Which of the following communities do you belong to? Please select all that apply.
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Person with disability
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Neurodiverse
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Veteran
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Parent
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: Refugee or immigrant
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-label: None of the above
-  <input:checkbox #ead422ea-6670-4047-ad0f-183e186c7eb2_a76e67f9-eeb8-4d06-a9a5 question-unanswered>
-  text: U.S. EQUAL EMPLOYMENT OPPORTUNITY INFORMATION
-  text: Valon Tech provides equal employment opportunities to applicants and employees without regard to race, color, religion, sex, sexual orientat
-  text: We invite all applicants to voluntarily self-identify their race, ethnicity, and gender. Submission of the information on this form is stric
-label: Gender
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_gende question-answered>
-label: Male
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_gende question-answered>
-label: Female
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_gende question-answered>
-label: Decline to self-identify
-label: Race
-  text: American Indian or Alaska Native
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_race- question-answered>
-label: Hispanic or Latino
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_race- question-answered>
-label: White (Not Hispanic or Latino)
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_race- question-answered>
-label: Black or African American (Not Hispanic or Latino)
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_race- question-answered>
-label: Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
-  <input:radio #f8ffacc4-b779-436c-89a2-d6556632482c__systemfield_eeoc_race- question-answered>
-label:
-
-=== 2026-11-20 17:44:33  skipped  Project Specialist @ clearesult
-url: https://clearesult.wd1.myworkdayjobs.com/clearesult_external_careers/job/Remote---Oregon/Project-Specialist_R0018464/apply/applyManually
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-  [button] Job Alerts {navigationItem-Job Alerts}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Project Specialist
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Voluntary Personal Information
-# EEO Statement:
-  text: CLEAResult is dedicated to the goal of providing equal opportunity for all persons without regard to age, race, creed, color, religion, disa
-  text: In an effort to implement our voluntary government affirmative action program recordkeeping and reporting requirements, we ask that you comp
-# Self-Identify Protected Veteran Status:
-  text: A ‘‘recently separated veteran’’ means any veteran during the three-year period beginning on the date of such veteran’s discharge or release
-  text: An ‘‘active duty wartime or campaign badge veteran’’ means a veteran who served on active duty in the U.S. military, ground, naval or air se
-  text: An ‘‘Armed forces service medal veteran’’ means a veteran who, while serving on active duty in the U.S. military, ground, naval or air servi
-  text: *If you believe you belong to any of the categories of protected veterans listed above, please indicate by checking the appropriate box belo
- {formField-veteranStatus}
-label: Please select your veterans status. See above for classification definitions:
-  [dropdown] nothing chosen #personalInfoUS--veteranStatus
- {formField-gender}
-label: Please select your gender:
-  [dropdown] nothing chosen #personalInfoUS--gender
- {formField-hispanicOrLatino}
-label: Are you Hispanic or Latino?
-  [dropdown] nothing chosen #personalInfoUS--hispanicOrLatino
- {formField-ethnicity}
-label: Please select the ethnicity which most accurately describes how you identify yourself:
-  [dropdown] nothing chosen #personalInfoUS--ethnicity
-# Terms and Conditions
-  text: WE ARE AN EQUAL OPPORTUNITY EMPLOYER. Applicants and employees are considered for positions and are evaluated without regard to mental or ph
-  text: Please answer all questions completely. Please do not provide any information not specifically requested on this Employment Application form
-  text: I understand that the organization will rely, in part, on the information I provide in this Employment Application in considering whether to
-  text: The organization is committed to compliance with the provisions of this nation's immigration laws regarding verification of employment eligi
-  text: I authorize the organization to contact anyone that it deems appropriate to verify the information I have provided or to further investigate
-  text: I understand that this Employment Application is not an offer of employment. I understand that nothing contained in this Employment Applicat
-  text: I understand that if I am hired, I will be an employee "at will," meaning I am not hired for any definite length of time and either I or the
-  text: If employed, I understand and agree that the organization retains the sole right in its business judgment to modify, suspend, interpret, or 
-  text: If employed, I understand that I may be required to comply with federal and/or state Drug Free Workplace Laws and regulations. I understand 
-  text: If employed, I understand that as a condition of employment that I may be required to agree to and sign the organization’s confidentiality, 
-  text: It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employ
-  text: We are committed to keeping you informed throughout your candidate journey. By applying, you agree to receive SMS/text messages from CLEARes
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-# Follow Us
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  [link]  {socialIcon}
-  text: © 2026 Workday, Inc. All rights reserved.
-
-=== 2026-11-20 17:52:48  skipped  Digital Media Analyst @ strayer
-url: https://strayer.wd1.myworkdayjobs.com/sei/job/Remote/Digital-Media-Analyst_R31518/apply/applyManually
-stage: Voluntary Disclosures
-why: can't truthfully answer required: Yes, I have read and consent to the terms and conditions.*
-  [link] Skip to main content {accessibilitySkipToMainContent}
-  [link]  {logoLink}
-  [button] Settings #settingsSelectorButton {utilityMenuButton}
-  [button] <email> {utilityMenuButton} opens-true
-  [button] Search for Jobs {navigationItem-Search for Jobs}
-  [button] Candidate Home {navigationItem-Candidate Home}
-{applyFlowPage}
-  [button] Back to Job Posting {backToJobPosting}
-# Digital Media Analyst
-label: completed step 1 of 5
-label: My Information
-label: completed step 2 of 5
-label: My Experience
-label: completed step 3 of 5
-label: Application Questions
-{progressBarActiveStep} current step 4 of 5 Voluntary Disclosures
-label: current step 4 of 5
-label: Voluntary Disclosures
-label: step 5 of 5
-label: Review
-# Voluntary Disclosures
-{applyFlowVoluntaryDisclosuresPage}
-# Terms and Conditions
-  text: Pursuant to federal law, any applicant who is offered employment with Strategic Education, Inc. and who is, or becomes, employed by the U.S.
-  text: We comply with the CA privacy policy for employees. Please click
-  text: to view your rights as you go through the recruitment process.
-  text: I understand that false or misleading information given in my application or during interviews may result in refusal to hire, or discharge i
- {formField-acceptTermsAndAgreements}
-label: Yes, I have read and consent to the terms and conditions.*
-  <input:checkbox #termsAndConditions--acceptTermsAndAgreements required question-unanswered>
-  [button] Back {pageFooterBackButton}
-  [button] Save and Continue {pageFooterNextButton}
-  text: © 2026 Workday, Inc. All rights reserved.
-
 === 2026-11-20 17:55:08  unconfirmed  Talent Coordinator @ inbeat-agency
 url: https://jobs.ashbyhq.com/inbeat-agency/a60d0257-22e1-403d-ad37-95a8b2f48b71/application
 stage: page 1
@@ -5498,4 +5209,230 @@ label: What is your Veteran status?
   text: NOTICE TO RESIDENTS OF CERTAIN US STATES
   text: NOTICE TO EU AND UK DATA SUBJECTS
   text: This section of the Privacy Statement includes additional pro
+
+=== 2026-11-24 11:22:01  blocked  Client Data Operations Analyst @ datavant2
+url: https://www.datavant.com/about/careers/open-roles/job
+stage: page 1
+why: no Next or Submit button found on this step; page shows: :Discover Datavant; :Resources; :Company; :Submit Application
+Submit Appl
+  [button] Discover Datavant
+  <input:submit filled>
+  <input:checkbox #toggle question-unanswered>
+  [button] Resources
+  [button] Company
+# Client Data Operations Analyst
+  text: The Client Data Operations Analyst will work closely with our Client Success and Operations teams to locate and retrieve the medical records
+  text: This is a highly analytical role. You’ll be working directly with large, complex operational datasets, writing production-quality SQL and Py
+  text: Write SQL and Python to analyze large-scale retrieval and inventory data, identifying patterns in chart location, retrieval likelihood, and 
+  text: Coordinate with the Client Success team (including joining client calls as needed) to communicate project status and performance drivers, us
+  text: Analyze large-scale retrieval and inventory data with SQL and Python to identify patterns in chart location, retrieval likelihood, and opera
+  text: Build and maintain Sigma dashboards and recurring reports tracking project pacing, performance against goals, and emerging trends.
+  text: Develop analytical models and logic that help Operations prioritize chart-retrieval efforts.
+  text: Partner with Client Success to communicate project status and performance drivers, including joining client calls as needed.
+  text: Identify what additional client information would improve retrieval results.
+  text: Monitor KPIs, conduct ad hoc analyses, and recommend improvements based on findings.
+  text: Evaluate business initiatives by measuring their impact on customer and operational outcomes.
+  text: Create presentations and visual stories that explain complex findings clearly.
+  text: Gather requirements from stakeholders and define reporting needs.
+  text: Validate data accuracy and consistency across dashboards, reports, and analyses.
+  text: Document metric definitions, methodologies, and key findings.
+  text: Support scalable reporting and customer insights capabilities for the business.
+  text: Experience working in the healthcare insurance/risk adjustment industry, or healthcare/health IT more broadly
+  text: Experience with data pipeline or workflow automation (e.g., scheduled Python jobs, API integrations)
+  text: Familiarity with Power BI or similar BI tools — helpful context as we complete our transition to Sigma
+  text: How success is measured in this role:
+  text: Delivering accurate, reliable reporting the team can trust — but accuracy and on-time delivery are only part of the picture, not the whole m
+  text: Investigating and confirming the root cause behind performance changes, not just flagging that something changed
+  text: Recommending clear, actionable next steps that lead to real action or improved results, not just surfacing data
+  text: Identifying risks early, before they become bigger issues
+  text: As we complete our transition to Sigma, expect reporting benchmarks to be reset based on performance under the new platform rather than carr
+  text: The estimated total cash compensation range for this role is:
+# Apply for this job
+label: First Name*
+  <input:text name=first_name required filled>
+label: Last Name*
+  <input:text name=last_name required filled>
+label: Preferred First Name
+  <input:text name=preferred_name required filled>
+label: Email*
+  <input:email name=email required filled>
+label: Phone*
+  <input:text name=phone required filled>
+label: Location (City) *
+  <input:text #location_autocomplete required filled>
+  text: Accepts .pdf, .doc, .docx, .txt and .rtf
+  text: <file>
+label: Upload file Upload file
+  text: <file>
+label: Have you ever worked for Datavant or one of our affiliates? (Ciox Health, ArroHealth, IOD, ECS, Healthport, Me
+label: Yes
+label: No
+label: Are you at least 18 years of age?*
+label: Do you have a High School Diploma or Equivalent (GED)?*
+label: Are you authorized to work lawfully in the United States?*
+label: Will you now or in the future require Datavant to sponsor your employment authorization (for example, through 
+label: Will you be able to work in the location listed in the job description upon day one of your employment?*
+  <select name=question_19324023008 required filled options=4>
+label: How did you hear about this job?*
+  <select name=question_19324024008 required filled options=30>
+label: If you selected "Employee Referral", please list the referring employee's full name.
+  <input:text name=question_19324025008 required filled>
+label: LinkedIn Profile
+  <input:text name=question_19324026008 required filled>
+label: I consent to receive text messages regarding my job application status, interview updates, and future job oppo
+  <select name=question_19324027008 required filled options=3>
+label: By submitting your application you confirm that the information you provide is accurate and complete to the be
+  <select name=question_19324028008 required filled options=2>
+label: Will you now or in the future require Datavant to participate in a government program to maintain your work au
+label: Do you currently work for Datavant, CVS or any affiliates of either company?*
+# Voluntary Self-Identification
+  text: For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely 
+  text: As set forth in Datavant’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any 
+label: Race*
+  <select name=race required filled options=9>
+label: Gender*
+  <select name=gender required filled options=4>
+  text: If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. 
+  text: A "disabled veteran" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (
+  text: A "recently separated veteran" means any veteran during the three-year period beginning on the date of such veteran's discharge or release f
+  text: An "active duty wartime or campaign badge veteran" means a veteran who served on active duty in the U.S. military, ground, naval or air serv
+  text: An "Armed forces service medal veteran" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service
+label: Veteran Status*
+  <select name=veteran_status required filled options=4>
+  [button] Submit Application Submit Application
+  text: Datavant recognizes the importance of information security and data privacy, including in its hiring processes and recruitment. Datavant enc
+  text: https://www.datavant.com/about/careers
+  text: https://www.linkedin.com/company/datavant/
+  text: https://www.indeed.com/cmp/Datavant-1
+  text: Any phishing or scams in which individuals purport to represent Datavant are without the permission of Datavant and are not conducted by, re
+  text: https://consumer.ftc.gov/articles/job-scams
+  text: Datavant is the data collaboration platform trusted for healthcare. With a mission to make the wo
+
+=== 2026-11-24 11:23:08  blocked  Administrative Assistant (supporting Human Capital Management & Information Technology) @ friedfrankharrisshriverjacobsonllp
+url: https://www.friedfrank.com/careers/businessprofessionaljobopportunities
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: 
+  [button] 
+  text: Business Services Professionals Job Opportunities
+# Business Services Professionals Job Opportunities
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+  text: Fried, Frank, Harris, Shriver & Jacobson LLP
+  text: Subscribe to the latest updates from Fried Frank
+
+=== 2026-11-24 11:30:25  skipped  Associate TikTok Strategist @ podean
+url: https://job-boards.greenhouse.io/podean/jobs/4381142009
+stage: page 1
+why: can't truthfully answer required: Do you have previous experience working with TikTok Shop? If
+# Associate TikTok Strategist
+  text: Canada - Remote, United States - Remote
+  [button] Apply
+  text: Podean is a leading marketplace agency helping brands accelerate growth across Amazon, Walmart, Target, TikTok Shop, and other digital comme
+# About Social Commerce Club
+  text: Our job is not just to make great content or run profitable ads—it’s to merge the two into a powerful, scalable system that grows brands. Th
+# Mission
+  text: Be the strategist’s operating system. Keep work moving, close gaps, and document how we win so the pod can scale.
+  text: Your work ensures clarity, momentum, and quality in every campaign — freeing strategists to think and lead while the pod executes with preci
+  text: Within a 90–120 day ramp, you’ll be ready to take partial ownership of campaigns and client communications with confidence.
+# The Role
+  text: As an Associate Strategist, you’re the connective tissue of the pod where clarity meets action. You turn strategy into motion, help maintain
+  text: You’ll be deeply embedded in the rhythm of the work: running daily operations, anticipating needs before they’re spoken, and documenting the
+  text: Your craft is flow — the ability to keep people, systems, and priorities aligned so that every campaign lands cleanly and every win is repea
+  text: This is a hands-on role for someone who thrives in structure, loves creating order, and takes pride in making teams look and feel more capab
+# What You’ll Own
+# 1. Program Management & Pod Operations
+  text: Maintain the Command Center daily — updating task status, owners, and next steps.
+  text: Prioritize and sequence deliverables so campaigns move forward without friction.
+  text: Run a daily Hot List of blockers and ensure each one has an owner and ETA.
+  text: Proactively identify process bottlenecks and suggest improvements.
+# 2. Meeting Operations & Communication
+  text: Prep meeting agendas, capture structured notes, and summarize decisions + follow-ups.
+  text: Publish clear daily EOD summaries (3 wins, 3 risks, 3 next actions).
+  text: Support client standups and internal calls when strategist coverage is needed.
+# 3. Documentation & SOPs
+  text: Translate strategist frameworks and workflows into clear, reusable SOPs.
+  text: Maintain a monthly SOP change log and archive outdated versions.
+  text: Identify repeatable processes and document them to support scale.
+# 4. Creator & Campaign Support
+  text: Maintain the creator pipeline — track stages, sampling status, Spark Code progress, and GMV.
+  text: Prepare creator briefs, message drafts, and campaign one-pagers.
+  text: Coordinate listings, PIDs, and sample logistics with virtual admins and ops.
+  text: Step into short-term strategist coverage during spikes or absences, maintaining the integrity of approved strategy and budget.
+# 5. Reporting & Scorecards
+  text: Update weekly dashboards (Shop, Ads, Creator).
+  text: Report key performance notes — wins, risks, and next actions.
+  text: Surface insights that help the pod and strategist make smarter decisions.
+# Your Rhythm
+  text: snapshot (spend, ROAS, top creatives).
+  text: Monthly: SOP reviews and documentation updates.
+# Decision Rights
+  text: Prioritize pod sprints and task sequencing within approved strategy.
+  text: Adjust timelines by up to 3 business days to maintain flow (escalate if strategic).
+  text: Communicate directly with clients for recaps or updates; escalate anything tied to scope, budget, or strategy.
+  text: We thank all applicants for applying, but only successful candidates will be contacted.
+  text: Digiday’s Best Employers for Remote Employees
+  text: You’ll join a globally connected, award-winning team that values:
+  text: Competitive compensation -
+  text: Career growth and development
+# Apply for this job
+  text: indicates a required field
+label: First Name*
+  <input:text #first_name required empty>
+label: Last Name*
+  <input:text #last_name required empty>
+label: Preferred First Name
+  <input:text #preferred_name empty>
+label: Email*
+  <input:text #email required empty>
+label: Phone
+label: Country*
+  <input:text #country required empty>
+  [button] 
+  <input required empty>
+  <input:tel #phone required empty>
+label: Location (City)*
+  <input:text #candidate-location required empty>
+  <input required empty>
+  [button] Locate me
+  [button] Attach
+label: Attach
+  <input:file #resume no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: Enter manually
+  text: Accepted file types: pdf, doc, docx, txt, rtf
+  [button] Attach
+  <input:file #cover_letter no-file>
+  [button] Dropbox
+  [button] Google Drive
+  [button] Enter manually
+label: LinkedIn URL*
+  <input:text #question_7331614009 required empty>
+label: Why are you interested in working in this role at Social Commerce Club within Podean?*
+  <textarea #question_7331617009 required empty>
+label: Do you have previous experience working with TikTok Shop? If so, briefly describe your experience.*
+  <textarea #question_7331618009 required empty>
+label: Do you have previous experience working at an agency?*
+  <input:text #question_7331619009 required empty>
+label: Where are you currently located?*
+  <input:text #question_7331620009 required empty>
+label: What is your salary expectation for this role? *
+  <input:text #question_7331621009 required empty>
+label: When is your available start date?*
+  <input:text #question_7331622009 required empty>
+label: Is there anything else we should know about you?
+  <textarea #question_7331623009 empty>
+  [button] Submit application
+<iframe https://www.recaptcha.net/recaptcha/enterprise/anchor>
+
+=== 2026-11-24 11:40:46  blocked  Business Development Assistant @ friedfrankharrisshriverjacobsonllp
+url: https://www.friedfrank.com/careers/businessprofessionaljobopportunities
+stage: page 1
+why: not a real application form (0 fields, no résumé upload); page shows: 
+  [button] 
+  text: Business Services Professionals Job Opportunities
+# Business Services Professionals Job Opportunities
+<iframe https://job-boards.greenhouse.io/embed/job_app>
+  text: Fried, Frank, Harris, Shriver & Jacobson LLP
+  text: Subscribe to the latest updates from Fried Frank
 
