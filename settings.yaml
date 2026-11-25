@@ -14,7 +14,8 @@ search:
   min_fit: 55                 # ...and only jobs with a match of 55% or more are applied to (70 until 2026-10-03, 60 until 2026-10-08)
   min_fit_by_place:           # (2026-11-24, 'as many jobs in Los Angeles') the bar by place, replacing min_fit:
     la: 50                    #   anywhere in the Los Angeles area (LA County, Orange County, the Valley, South Bay...)
-    remote: 65                #   remote postings draw hundreds of applicants: only the strongest matches are worth sending
+    home: 50                  #   (2026-11-25) near home: Glenwood Springs to Aspen / Vail (you live in New Castle, CO)
+    remote: 60                #   (65 until 2026-11-25: you want remote work too) remote postings draw hundreds of applicants
     other: 60                 #   Denver, New York and the rest
   la_area: true               # a posting anywhere in the Los Angeles area counts as Los Angeles (Irvine, Torrance, Burbank,
                               # Long Beach, El Segundo...), in the location filter, the match bar and the queue order
@@ -101,18 +102,18 @@ cover_letters_local: true   # (2026-11-24) ...except Los Angeles-area jobs: ther
 
 scoring:
   location_tiers:           # keyword-score points by place, highest that applies (they also move a job up the queue).
-    glenwood springs: 12    # home area, Rifle to Carbondale (I-70 / Highway 82): same as New York / Denver
-    glenwood spgs: 12
-    rifle: 12
-    silt, co: 12            # 'silt, co' / 'new castle, co' / 'carbondale, co' also match '…, Colorado' but not New Castle, DE or Carbondale, IL
-    new castle, co: 12
-    carbondale, co: 12
-    parachute, co: 12
-    battlement mesa: 12
-    basalt: 12
-    el jebel: 12
-    garfield county: 12
-    roaring fork: 12
+    glenwood springs: 20    # home area, Rifle to Carbondale (I-70 / Highway 82): after LA, ahead of remote (2026-11-25)
+    glenwood spgs: 20
+    rifle: 20
+    silt, co: 20            # 'silt, co' / 'new castle, co' / 'carbondale, co' also match '…, Colorado' but not New Castle, DE or Carbondale, IL
+    new castle, co: 20
+    carbondale, co: 20
+    parachute, co: 20
+    battlement mesa: 20
+    basalt: 20
+    el jebel: 20
+    garfield county: 20
+    roaring fork: 20
     la area: 30             # (2026-11-24) anywhere in the Los Angeles area, first in line (it was 6, after everything else)
     remote: 16             # 'remote' includes postings whose description says they are remote in the US
     new york: 12            # (also 'NY' towns: Brooklyn, Rye Brook, Long Island City…)

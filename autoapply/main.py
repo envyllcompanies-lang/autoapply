@@ -1347,8 +1347,8 @@ def _bars(s: dict) -> str:
     by = s.get("min_fit_by_place") or {}
     if not by:
         return f"{int(s.get('min_fit', 70))}% match"
-    names = {"la": "in Los Angeles", "remote": "remote", "other": "elsewhere"}
-    return "match of " + ", ".join(f"{int(by.get(k, s.get('min_fit', 70)))}% {names[k]}" for k in ("la", "remote", "other"))
+    names = {"la": "in Los Angeles", "home": "near home", "remote": "remote", "other": "elsewhere"}
+    return "match of " + ", ".join(f"{int(by.get(k, s.get('min_fit', 70)))}% {names[k]}" for k in ("la", "home", "remote", "other") if k in by or k != "home")
 
 
 def _handoff_past(db: DB, min_fit: int, days: int = 14) -> int:

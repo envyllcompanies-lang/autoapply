@@ -375,7 +375,7 @@ def compose(row, cfg: dict) -> tuple[str, str]:
         opener = f"I'm reaching out to ask whether {company} has openings in operations, project coordination or analysis."
     home_la = la_area(f"{f.get('city', '')}, {f.get('state', '')}")
     available = o.get("availability") or ("I'm based in the Los Angeles area and can start right away, full-time or contract-to-hire."
-                                          if home_la else "I'm focused on roles in Los Angeles and can start right away, "
+                                          if home_la else "I'm relocating to Los Angeles and can start right away, "
                                                           "full-time or contract-to-hire.")
     name = str(f.get("full_name") or "").strip()
     contact = " | ".join(x for x in (str(f.get("phone") or "").strip(), str(o.get("from_email") or os.environ.get("IMAP_USER") or

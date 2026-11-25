@@ -396,11 +396,19 @@ def _fallback(row, s: dict) -> str:
     return "go" if score >= int(s.get("min_score_without_match", 80)) else "later"
 
 
+# your home area (New Castle, CO 81647): the Roaring Fork and Colorado River valleys, Glenwood Springs to Aspen and Vail
+HOME_RX = re.compile(r"new castle,?\s*(co\b|colorado)|glenwood|rifle|\bsilt\b|parachute|battlement mesa|carbondale|basalt|el jebel|"
+                     r"aspen|snowmass|garfield county|pitkin county|eagle county|roaring fork|\beagle,?\s*(co\b|colorado)|gypsum|"
+                     r"\bvail\b|avon,?\s*(co\b|colorado)|edwards,?\s*(co\b|colorado)", re.I)
+
+
 def place_of(location: str) -> str:
-    """'la' (anywhere in the Los Angeles area), 'remote', or 'other'."""
+    """'la' (anywhere in the Los Angeles area), 'home' (near New Castle, CO), 'remote', or 'other'."""
     from .sources import la_area, _remote_ish, norm_location
     if la_area(location):
         return "la"
+    if HOME_RX.search(location or ""):
+        return "home"
     return "remote" if _remote_ish(norm_location(location)) else "other"
 
 
