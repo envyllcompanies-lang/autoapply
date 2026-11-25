@@ -600,4 +600,23 @@ _ok = _ok and _grp("What type of employment are you seeking?*", ["Full-Time", "P
 print("OK " if _ok else "BAD", "your Nov 25 answers (drug test, background check, license, full-time) and everyday lists ->", _got)
 bad += not _ok
 
+# ---- a statement before the question ('This role is not eligible for sponsorship, are you eligible...?') does not make
+#      it a negated question; sanctions / exclusions and 'employed by our auditor last year' are No; '1st Shift' boxes
+_b = _Br({"facts": {"email": "a@b.org", "full_name": "Pat Doe", "state": "CO", "city": "New Castle", "authorized_to_work_in_us": "Yes",
+                    "requires_sponsorship_now_or_future": "No"}}, {"name": "Pat Doe"}, ".", lambda *a: None)
+_qs = [("This role is not eligible for Visa Sponsorship, are you eligible to work in the United States without sponsorship?", "Yes"),
+       ("iSpot cannot support visa sponsorships or transfers for this role. Are you authorized to work in the U.S. for any employer?", "Yes"),
+       ("Are you not authorized to work in the US?", None),
+       ("Have you ever been excluded from participation in Medicare, Medicaid or any federal health care program?", "No"),
+       ("During the preceding year, were you employed in a managerial, accounting, auditing, or similar financial reporting "
+        "position by Ernst & Young?", "No")]
+_got = [_b._answer(_F(q, "combobox", ["Select One", "Yes", "No"]), "", {}) for q, _w in _qs]
+_fs = [{"id": f"g{i}", "kind": "checkbox_single", "label": l, "question": "Shift(s) you are willing to work*", "required": True,
+        "options": [], "key": "formField-g"} for i, l in enumerate(["1st Shift", "2nd Shift", "3rd Shift"])]
+_a, _m = {}, [x["id"] for x in _fs]
+_b._pick_in_groups(_fs, _a, _m)
+_ok = _got == [w for _q, w in _qs] and [k for k, v in _a.items() if v is True] == ["g0"]
+print("OK " if _ok else "BAD", "preamble before the question, sanctions, auditor question, 1st shift ->", _got, sorted(_a))
+bad += not _ok
+
 sys.exit(bad + bad_mail)

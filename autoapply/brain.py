@@ -756,7 +756,7 @@ class Brain:
             if re.search(r"shift|schedule|hours|availab|days?\b|times? (of|you)|work (on|during)", low):
                 pick = [i for i, t in lab.items() if re.fullmatch(r"(days?|day shift|daytime|mornings?|first( shift)?|weekdays?|"
                                                                  r"full[- ]?time|monday ?- ?friday|mon(day)?|tue(s(day)?)?|wed(nesday)?|"
-                                                                 r"thu(rs(day)?)?|fri(day)?)", t.strip(" *"), re.I)]
+                                                                 r"thu(rs(day)?)?|fri(day)?|1st( shift)?|first shift|day shift)", t.strip(" *"), re.I)]
                 if pick and (((getattr(self, "cfg", None) or {}).get("confirmed") or {}).get("weekends")):   # weekends too, where you said so
                     pick += [i for i, t in lab.items() if re.fullmatch(r"(sat(urday)?|sun(day)?|weekends?)", t.strip(" *"), re.I)]
             elif re.search(r"contact|reach you|communicat|prefer.{0,20}(email|phone|text)", low):
@@ -773,7 +773,7 @@ class Brain:
             elif nones and re.search(r"citizen|national|countr|employed by|served|military|government|relative|apply to you|"
                                      r"any of the following|following (apply|statements)|affiliat|sanction|embargo|export|clearance", low):
                 pick = nones[:1]                           # (a security clearance list: you hold none)
-            elif any(re.search(r"full[- ]?time", t, re.I) for t in lab.values()) and \
+            elif any(re.search(r"full[- ]?time|^\W*(regular|permanent)\b", t, re.I) for t in lab.values()) and \
                     (re.search(r"(type|kind) of (employment|position|job|work)|employment type|seeking|looking for|interested in|desired", low)
                      or sum(bool(re.search(r"full[- ]?time|part[- ]?time|temporary|seasonal|contract|per diem|intern", t, re.I))
                             for t in lab.values()) >= 2):
@@ -1603,6 +1603,14 @@ class Brain:
                 return yes_no("No")
             if re.search(r"provide|contact|may we|can we|willing|available|upon request|reach out", q):
                 return yes_no("Yes")
+        # no sanctions, exclusions or investigations (your background checks have always come back clean)
+        if yn and re.search(r"sanction|exclu(ded|sion)|debar|suspended from|under investigation|ineligible (to|for) participat|\boig\b", q) and \
+                re.search(r"\b(have you|are you|were you|has an?y?)\b", q) and not re.search(r"\b(will|would) you\b", q):
+            return yes_no("No")
+        # 'in the past year, were you employed in a managerial / accounting / auditing role with our auditor?': you were not
+        if yn and re.search(r"(preceding|past|last|prior) (year|twelve months|12 months|two years|2 years)", q) and \
+                re.search(r"managerial|accounting|auditing|financial reporting|oversight", q) and re.search(r"employ|work", q):
+            return yes_no("No")
         # not a student any more (you graduated in May 2025)
         if yn and re.search(r"(currently|presently) (enrolled|a student|attending|in school)|are you (a )?(current )?student", q):
             grad = self._grad_date()          # MM/DD/YYYY of your graduation, from facts.graduation_date
@@ -2043,7 +2051,11 @@ class Brain:
             if got:
                 return [got] if kind == "checkbox_group" else got
         qpart = low.split("?")[0] if "?" in low[:400] else low
-        if has_opts and NEG_Q_RX.search(_benign(qpart)) and NEG_TOPIC_RX.search(low) and not re.search(r"\breferences?\b", low):
+        # the clause that asks ('This role is not eligible for sponsorship, are you eligible...?' asks 'are you eligible'): a
+        # 'not' or 'cannot' in a statement before it does not make the question a negated one
+        ask_c = re.split(r"[.,;:]\s+(?=(?:are|do|does|did|will|would|can|could|have|has|is|were|was)\b)", asked_sentence(low))[-1]
+        if has_opts and NEG_Q_RX.search(_benign(ask_c if "?" in ask_c else qpart)) and NEG_TOPIC_RX.search(low) and \
+                not re.search(r"\breferences?\b", low):
             return None                      # negated yes/no question about authorization / location: too easy to answer backwards
                                              # (references: read the right way round in _infer)
         if optionish and re.search(r"investigative consumer report|consumer report|background (check|screening|investigation)|"
