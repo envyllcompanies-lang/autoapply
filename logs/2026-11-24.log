@@ -5675,3 +5675,465 @@ Submit Appl
 [22:58:58]    so jobs not checked yet wait, untouched, for a later run; only a keyword score of 90+ goes ahead without it)
 [22:58:58] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 195k/195k tokens (+56k served from its cache, not counted); groq-20b 195k/195k tokens (+16k served from its cache, not counted); groq-qwen 196k/195k tokens (+12k served from its cache, not counted); gemini-lite 480/480 requests (+38k served from its cache, not counted); gemini-flash 18/18 requests
 [22:58:58] Summary: nothing new. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-24.md
+[23:23:29] === autoapply run (LIVE) build 2026-10-18-b ===
+[23:23:30] Trying 423 jobs again that were set aside by faults fixed in this build: 304 × set aside by the per-employer cap of 3, 119 × an everyday question the bot answers now (Nov 25)
+[23:23:30] Writer: essays, cover letters and unusual multiple-choice questions use groq, groq-20b, groq-qwen, gemini-lite (free tiers, in that order); résumé-match checks use gemini-flash, gemini-lite, groq-20b, groq-qwen (at most this part of a shared model's day: gemini-lite 60%, groq-20b 25%, groq-qwen 25%); not used: cerebras (no CEREBRAS_API_KEY), mistral (no MISTRAL_API_KEY)
+[23:23:31] mail: logged in to delgado@alumni.usc.edu OK
+[23:25:15] Employer replies: 14 assessments, 75 rejections, 5 interviews (details in your email)
+[23:25:20]   outreach: Anastasia Beverly Hills LLC (anastasiabeverlyhills.com): no hiring or general address on its site (it may use a contact form)
+[23:25:22]   outreach: Divergent (divergent.us): a hiring address found
+[23:25:26]   outreach: Warner Music Group (wmg.com): no hiring or general address on its site (it may use a contact form)
+[23:25:27] Discovering jobs…
+[23:25:28] Job search already ran at 21:20 (searches run every 3 h): this run only applies
+[23:27:08]   agg/jobboard: 1,364,500 jobs in today's snapshot, 735,242 at your level on sites the bot can fill, 0 new ones pass your title/location filters; 83 of them marked remote by their site, to be confirmed from the posting itself
+[23:27:08] 0 open roles, 0 new
+[23:27:08] Scored 0 new roles: 0 candidates for the résumé check, 0 with nothing going for them, 0 filtered out by title/location (finding and scoring took 3.7 min)
+[23:27:09] 729 jobs queued: 120 already matched to your résumé, 609 waiting for that check (best prospects first; the bar is a match of 50% in Los Angeles, 65% remote, 60% elsewhere). Applying to up to 341 now
+[23:27:09] Time for this run: 50 min in all (8486 of 1850 free Actions minutes used this month)
+[23:27:10] Accounts: ON (delgado@alumni.usc.edu)
+[23:27:10] → Project Engineer @ jjsnackfoods (score 20, match 90%)
+[23:27:26]       step 1: 34 fields (21 required)
+[23:27:26]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:27:45]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:27:49]       mail: found 'Security code for your application to J&J Snack Foods'
+[23:27:54]     ✓ applied (0.7 min)
+[23:28:01] → Airport Services -Work Order Coordinator - LAX BHS @ oshkoshcorporation (score 28, match 88%)
+[23:28:04]     ✗ skipped: the posting is closed
+[23:28:04] → Assistant Store Planner @ jcrew (score 18, match 88%)
+[23:28:07]       (opening Workday's application form directly)
+[23:28:10]       (account page: creating the account / signing in)
+[23:28:12]       account: signing in on jcrew.wd1.myworkdayjobs.com
+[23:28:16]       1/5 My Information: 15 fields (12 required)
+[23:28:24]       2/5 My Experience: 1 fields (1 required)
+[23:28:35]       3/5 Application Questions: 6 fields (4 required)
+[23:28:44]       ? unanswered: 'I understand and agree that this checkbox is as legally binding as an ink signature.*' kind=checkbox_single options=[]
+[23:28:44]     ✗ skipped: can't truthfully answer required: I understand and agree that this checkbox is as legally bind
+[23:28:48] → Associate Product Manager @ jcrew (score 12, match 88%)
+[23:28:51]     ✗ skipped: the posting is closed
+[23:28:51] → Addegrad - Client Solutions Analyst (NYC) - 2027 @ addepar1 (score 57, match 90%)
+[23:29:02]       step 1: 20 fields (12 required)
+[23:29:02]       ? unanswered: 'Applicants must be currently authorized to work in the United States without the need for ' kind=combobox options=['Yes', 'No']
+[23:29:02]       ? unanswered: 'Are you interested in a technical track role involving Python and large data sets? *' kind=checkbox_group options=['Yes', 'No', 'Unsure']
+[23:29:02]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:29:02]   ✗ Business Management/Operations Development Program (3 Months - Path to Hire) @ spacekinetic: the posting is closed (no time spent on it)
+[23:29:02] → Production Coordinator  @ machindustries (score 72, match 85%)
+[23:29:20]       step 1: 33 fields (16 required)
+[23:29:20]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:29:44]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:30:04]       mail: found 'Security code for your application to Mach Industries'
+[23:30:11]     ✓ applied (1.1 min)
+[23:30:20] → Program Delivery Coordinator (Contract) @ wikimedia (score 76, match 75%)
+[23:30:35]       step 1: 26 fields (21 required)
+[23:30:35]       ? unanswered: 'Please note that sponsorship is not allowed for this role. Also, if you are an internation' kind=combobox options=['Yes', 'No']
+[23:30:35]       ? unanswered: 'Please note this role is a contract position. Contract roles are not eligible for benefits' kind=combobox options=['Yes', 'No']
+[23:30:35]       ? unanswered: 'Are you considered a business entity? *' kind=combobox options=['Yes', 'No']
+[23:30:35]       ? unanswered: 'I understand that the following questions below are intended for U.S.-based applicants onl' kind=combobox options=['Yes', 'No']
+[23:30:35]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:30:35] → Parts Coordinator - LAX Delta BHS @ oshkoshcorporation (score 28, match 78%)
+[23:30:37]     ✗ skipped: the posting is closed
+[23:30:37] → Associate Data Analyst @ ispottv (score 44, match 88%)
+[23:30:48]       step 1: 25 fields (13 required)
+[23:30:48]       ? unanswered: 'iSpot cannot support visa sponsorships or transfers for this role. Please confirm you do n' kind=combobox options=['I do not require visa sponsors']
+[23:30:49]     ✗ skipped: can't truthfully answer required: iSpot cannot support visa sponsorships or transfers for this
+[23:30:54] → Sales Readiness Coordinator @ lambweston (score 38, match 88%)
+[23:30:56]     ✗ skipped: the posting is closed
+[23:30:56] → Manufacturing Engineer (New Grad December 2026) @ freeformfuturecorp (score 64, match 80%)
+[23:31:12]       step 1: 29 fields (17 required)
+[23:31:12]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:31:31]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:32:00]       mail: found 'Security code for your application to Freeform'
+[23:32:06]     ✓ applied (1.2 min)
+[23:32:07]   ✗ Associate, Global Event Operations @ nflcareers: the posting is closed (no time spent on it)
+[23:32:10] → Associate, Equity Derivatives Trade Desk Support @ bmo (score 18, match 85%)
+[23:32:15]       (opening Workday's application form directly)
+[23:32:18]       (account page: creating the account / signing in)
+[23:32:20]       account: signing in on bmo.wd3.myworkdayjobs.com
+[23:32:28]       1/5 My Information: 16 fields (12 required)
+[23:32:34]       2/5 My Experience: 16 fields (7 required)
+[23:32:57]       3/5 Application Questions: 9 fields (9 required)
+[23:33:07]       4/5 Voluntary Disclosures: 1 fields (1 required)
+[23:33:13]       Review: submitting
+[23:33:16]     ✓ applied (1.1 min)
+[23:33:22] → Assistant Property Manager - Schenectady B'nai B'rith @ nationalchurchresidences (score 12, match 88%)
+[23:33:25]     ✗ skipped: the posting is closed
+[23:33:25] → Pricing & Revenue Management Analyst @ anaheimducks (score 52, match 78%)
+[23:33:28]       (opening Workday's application form directly)
+[23:33:31]       (account page: creating the account / signing in)
+[23:33:33]       account: signing in on anaheimducks.wd5.myworkdayjobs.com
+[23:33:37]       1/4 My Information: 13 fields (7 required)
+[23:33:42]       2/4 My Experience: 2 fields (0 required)
+[23:33:50]       ? unanswered: 'Temporary/Seasonal' kind=checkbox_single options=[]
+[23:33:50]     ✗ skipped: can't truthfully answer required: Temporary/Seasonal
+[23:33:57] → Sales Trainee - Access Equipment - Texas @ oshkoshcorporation (score 16, match 85%)
+[23:34:00]       (opening Workday's application form directly)
+[23:34:06]       (account page: creating the account / signing in)
+[23:34:08]       account: signing in on oshkoshcorporation.wd5.myworkdayjobs.com
+[23:34:13]       1/5 My Information: 16 fields (12 required)
+[23:34:18]       2/5 My Experience: 5 fields (3 required)
+[23:34:28]       ? unanswered: '1st Shift' kind=checkbox_single options=[]
+[23:34:28]       ? unanswered: '2nd Shift' kind=checkbox_single options=[]
+[23:34:28]       ? unanswered: '3rd Shift' kind=checkbox_single options=[]
+[23:34:28]       ? unanswered: '4th Shift/Weekend' kind=checkbox_single options=[]
+[23:34:28]     ✗ skipped: can't truthfully answer required: 1st Shift; 2nd Shift; 3rd Shift; 4th Shift/Weekend
+[23:34:36] → Blackstone Charitable Foundation, Analyst @ blackstone (score 34, match 78%)
+[23:34:40]       (opening Workday's application form directly)
+[23:34:43]       (account page: creating the account / signing in)
+[23:34:45]       account: signing in on blackstone.wd1.myworkdayjobs.com
+[23:34:51]       1/5 My Information: 14 fields (12 required)
+[23:35:04]       ('How Did You Hear About Us?*': any answer will do, picked 'Internal')
+[23:35:11]       2/5 My Experience: 8 fields (6 required)
+[23:35:45]       ? unanswered: 'Why do you want to apply for this role at Blackstone?*' kind=textarea options=[]
+[23:35:45]       ? unanswered: 'Public Affairs & Marketing' kind=checkbox_single options=[]
+[23:35:45]       ? unanswered: 'Political Contributions: The following questions are for legal compliance purposes only. R' kind=combobox options=['Select One', 'Yes', 'No']
+[23:35:45]       ? unanswered: 'In the past two years, have you donated to, or engaged in volunteer work for a candidate f' kind=combobox options=['Select One', 'Yes', 'No']
+[23:35:45]       ? unanswered: 'In the past two years, have you donated to, or engaged in volunteer work for any political' kind=combobox options=['Select One', 'Yes', 'No']
+[23:35:45]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:35:45] → Commercial Analyst Development Program - Los Angeles, CA (New Grad 2027) @ bmo (score 39, match 72%)
+[23:35:47]     ✗ skipped: the posting is closed
+[23:35:48] → Commercial Analyst Development Program - Los Angeles, CA (New Grad 2027) @ bmo (score 39, match 72%)
+[23:35:50]     ✗ skipped: the posting is closed
+[23:35:50] → Distribution Planner @ jcrew (score 12, match 85%)
+[23:35:59]       (opening Workday's application form directly)
+[23:36:05]       1/5 My Information: 15 fields (12 required)
+[23:36:13]       2/5 My Experience: 1 fields (1 required)
+[23:36:24]       3/5 Application Questions: 6 fields (4 required)
+[23:36:33]       ? unanswered: 'I understand and agree that this checkbox is as legally binding as an ink signature.*' kind=checkbox_single options=[]
+[23:36:33]     ✗ skipped: can't truthfully answer required: I understand and agree that this checkbox is as legally bind
+[23:36:40] → Manufacturing Engineer, CNC Machining (New Grad December 2026) @ freeformfuturecorp (score 62, match 75%)
+[23:36:56]       step 1: 29 fields (17 required)
+[23:36:56]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:37:15]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:37:24]       mail: found 'Security code for your application to Freeform'
+[23:37:29]     ✓ applied (0.8 min)
+[23:37:33] → Accounts Payable Specialist @ machindustries (score 37, match 75%)
+[23:37:50]       step 1: 33 fields (16 required)
+[23:37:50]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:38:14]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:38:25]       mail: found 'Security code for your application to Mach Industries'
+[23:38:30]     ✓ applied (1.0 min)
+[23:38:30]   ✗ Deal Desk Coordinator @ Transwest: the posting is closed (no time spent on it)
+[23:38:39] → Associate Territory Manager - OTS - Fracture -  Los Angeles @ orthofix (score 16, match 78%)
+[23:38:43]       (opening Workday's application form directly)
+[23:38:47]       (account page: creating the account / signing in)
+[23:38:49]       account: signing in on orthofix.wd1.myworkdayjobs.com
+[23:38:52]       1/6 My Information: 13 fields (11 required)
+[23:39:00]       2/6 My Experience: 3 fields (0 required)
+[23:39:08]       ? unanswered: 'Summer/Internship' kind=checkbox_single options=[]
+[23:39:08]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[23:39:08]     ✗ skipped: can't truthfully answer required: Summer/Internship; Temporary
+[23:39:14] → Facility - Administrative Assistant @ albanymed (score 18, match 88%)
+[23:39:16]     ✗ skipped: the posting is closed
+[23:39:16] → Sales Trainee - Access Equipment - Southeast @ oshkoshcorporation (score 16, match 80%)
+[23:39:19]       (opening Workday's application form directly)
+[23:39:24]       1/5 My Information: 0 fields (0 required)
+[23:39:27]       1/5 My Information: 15 fields (12 required)
+[23:39:36]       2/5 My Experience: 5 fields (3 required)
+[23:39:52]       ? unanswered: '1st Shift' kind=checkbox_single options=[]
+[23:39:52]       ? unanswered: '2nd Shift' kind=checkbox_single options=[]
+[23:39:52]       ? unanswered: '3rd Shift' kind=checkbox_single options=[]
+[23:39:52]       ? unanswered: '4th Shift/Weekend' kind=checkbox_single options=[]
+[23:39:52]     ✗ skipped: can't truthfully answer required: 1st Shift; 2nd Shift; 3rd Shift; 4th Shift/Weekend
+[23:39:58] → Production Coordinator - 2nd Shift @ machindustries (score 72, match 68%)
+[23:40:16]       step 1: 33 fields (16 required)
+[23:40:16]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:40:39]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:40:54]       mail: found 'Security code for your application to Mach Industries'
+[23:40:59]     ✓ applied (1.0 min)
+[23:41:08] → Investment Operations Analyst @ sanmanuel (score 50, match 72%)
+[23:41:11]       (opening Workday's application form directly)
+[23:41:14]       (account page: creating the account / signing in)
+[23:41:16]       account: signing in on sanmanuel.wd1.myworkdayjobs.com
+[23:41:20]       1/5 My Information: 13 fields (8 required)
+[23:41:26]       2/5 My Experience: 3 fields (1 required)
+[23:41:40]       ? unanswered: 'Please describe, if applicable, why you left your three most recent jobs? (Company – Posit' kind=textarea options=[]
+[23:41:40]       ? unanswered: 'Day' kind=checkbox_single options=[]
+[23:41:40]       ? unanswered: 'Swing' kind=checkbox_single options=[]
+[23:41:40]       ? unanswered: 'Graveyard' kind=checkbox_single options=[]
+[23:41:40]       ? unanswered: 'All shifts listed above' kind=checkbox_single options=[]
+[23:41:40]       ? unanswered: 'Are you at least 21 years of age?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:41:40]       ? unanswered: 'Are you a Yuhaaviatam of San Manuel Nation Tribal Citizen?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:41:40]       ? unanswered: 'Are you an eligible Yuhaaviatam of San Manuel Nation Tribal Community Member?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:41:40]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:41:40] → xLab Fabrication and Test Lab Coordinator @ aero (score 28, match 60%)
+[23:41:43]       (opening Workday's application form directly)
+[23:41:47]       (account page: creating the account / signing in)
+[23:41:49]       account: signing in on aero.wd5.myworkdayjobs.com
+[23:41:53]       1/5 My Information: 15 fields (8 required)
+[23:41:59]       2/5 My Experience: 12 fields (8 required)
+[23:42:07]       (ticked NA for 'Please indicate your active clearance type. \u200b*')
+[23:42:07]       ? unanswered: 'Do you meet all of the minimum qualifications listed on the requisition for years of exper' kind=combobox options=['Select One', 'Yes', 'No']
+[23:42:07]     ✗ skipped: can't truthfully answer required: Do you meet all of the minimum qualifications listed on the 
+[23:42:11] → Project Specialist - Insurance @ albanymed (score 12, match 86%)
+[23:42:13]       (opening Workday's application form directly)
+[23:42:17]       (account page: creating the account / signing in)
+[23:42:19]       account: signing in on albanymed.wd5.myworkdayjobs.com
+[23:42:22]       1/6 My Information: 14 fields (12 required)
+[23:42:30]       2/6 My Experience: 17 fields (7 required)
+[23:42:48]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:42:58]       (ticked Day, Weekend for 'Please select the shift you are willing to work:*')
+[23:42:58]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[23:42:58]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[23:42:58]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[23:42:58]       ? unanswered: 'Are you currently under investigation or have you been sanctioned, excluded or have had an' kind=combobox options=['Select One', 'Yes', 'No']
+[23:42:58]       ? unanswered: 'During the preceding year, were you employed in a managerial, accounting, auditing, or sim' kind=combobox options=['Select One', 'Yes', 'No']
+[23:42:58]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:42:58] → Maintenance Parts & CMMS Specialist [Full Time] @ Bread Alone Bakery (score 12, match 72%)
+[23:43:28]       step 1: 51 fields (30 required)
+[23:43:28]       ? unanswered: 'Responsibilities (required)' kind=textarea options=[]
+[23:43:28]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:43:28] → Recruiting Coordinator @ machindustries (score 58, match 70%)
+[23:43:46]       step 1: 33 fields (16 required)
+[23:43:46]       (no cover letter could be written; it is optional, applying with the résumé only)
+[23:44:09]       email: the site asked for a security code after Submit; reading it from the application inbox
+[23:44:19]       mail: found 'Security code for your application to Mach Industries'
+[23:44:24]     ✓ applied (0.9 min)
+[23:44:30] → Strategic Finance Analyst @ asmglobal (score 24, match 75%)
+[23:44:32]     ✗ skipped: the posting is closed
+[23:44:32] → Payroll & People Operations Generalist @ PARTNERSHIP PROJECT INC (score 59, match 72%)
+[23:44:44]       (résumé given to the site's 'apply with resume' box first)
+[23:45:30]       step 1: 102 fields (70 required)
+[23:46:30]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[23:46:30]       (filled again: 1 box(es) the page had emptied)
+[23:47:13]       step 2: 114 fields (82 required)
+[23:47:13]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:47:13]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:47:13]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:47:13]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:47:13]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:47:13] → Purchasing Technician, Hospital Dept. @ corrohealth (score 48, match 68%)
+[23:47:17]       (opening Workday's application form directly)
+[23:47:21]       (account page: creating the account / signing in)
+[23:47:23]       account: signing in on corrohealth.wd1.myworkdayjobs.com
+[23:47:29]       1/6 My Information: 18 fields (8 required)
+[23:47:34]       2/6 My Experience: 2 fields (0 required)
+[23:47:43]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[23:47:52]       ? unanswered: 'Full time or Part time' kind=checkbox_single options=[]
+[23:47:52]       ? unanswered: 'Are there certain hours that you are unable to work?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:47:52]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:47:52]   ✗ HR Coordinator @ Denbright Dental Labs: the posting is closed (no time spent on it)
+[23:47:52]   ✗ Accounting Analyst @ Corelation Inc: the posting is closed (no time spent on it)
+[23:47:53] → Corporate Giving and In-Kind Coordinator @ FSAP and PETA (score 38, match 75%)
+[23:48:04]       (résumé given to the site's 'apply with resume' box first)
+[23:48:50]       step 1: 102 fields (62 required)
+[23:50:33]       step 2: 118 fields (78 required)
+[23:50:33]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:50:33]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:50:33]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:50:33]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[23:50:33]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:50:34] → Human Resources Assistant @ Center For Family Life in Sunset Park Inc (score 18, match 75%)
+[23:50:45]       (résumé given to the site's 'apply with resume' box first)
+[23:51:31]       step 1: 98 fields (43 required)
+[23:52:32]       step 2: 6 fields (5 required)
+[23:52:32]       ? unanswered: "Do you have an Associate's Degree or higher? (required)" kind=radio options=['Yes', 'No']
+[23:52:32]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:52:32] → Roadshow Closing Specialist (East Coast) @ mymvw (score 16, match 75%)
+[23:52:35]     ✗ skipped: the posting is closed
+[23:52:35] → Roadshow Closing Specialist (West Coast) @ mymvw (score 16, match 75%)
+[23:52:37]     ✗ skipped: the posting is closed
+[23:52:37]   ✗ Inventory Control Analyst @ Dimar Manufacturing: the posting is closed (no time spent on it)
+[23:52:38]   ✗ Inventory Control Analyst @ Dimar Manufacturing: the posting is closed (no time spent on it)
+[23:52:38] → Junior IT Finance Analyst @ endurance (score 40, match 72%)
+[23:52:42]       (opening Workday's application form directly)
+[23:52:45]       (account page: creating the account / signing in)
+[23:52:45]       account: creating one on endurance.wd103.myworkdayjobs.com with delgado@alumni.usc.edu
+[23:52:50]       account: Workday answered with its sign-in form and no message: signing in
+[23:52:50]       account: signing in on endurance.wd103.myworkdayjobs.com
+[23:52:57]       1/5 My Information: 14 fields (8 required)
+[23:53:08]       2/5 My Experience: 1 fields (1 required)
+[23:53:21]       ? unanswered: 'Full-Time, standard working hours' kind=checkbox_single options=[]
+[23:53:21]       ? unanswered: 'Part-Time, standard working hours' kind=checkbox_single options=[]
+[23:53:21]       ? unanswered: 'Do you currently have a contractual or statutory notice period with your prior employer?*' kind=combobox options=['Select One', 'Yes', 'No']
+[23:53:21]       ? unanswered: 'Are you legally able to work in the location of the role you applied for, and if hired, ab' kind=combobox options=['Select One', 'Yes', 'No']
+[23:53:21]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:53:21] → Fleet Coordinator @ Black Label Services Careers (score 34, match 82%)
+[23:53:38]       step 1: 24 fields (10 required)
+[23:54:23]       step 2: 7 fields (7 required)
+[23:54:23]       ? unanswered: 'What fleet management software (FMS) or telematics systems have you used in the past, and ' kind=textarea options=[]
+[23:54:23]       ? unanswered: 'What is your experience with DOT compliance, Hours of Service (HOS) rules, and electronic ' kind=textarea options=[]
+[23:54:23]       ? unanswered: 'How many vehicles and drivers have you personally been responsible for simultaneously coor' kind=checkbox_group options=['1 - 50 Vehicle & Drivers', '50 - 100 Vehicles & Drivers', '100 - 150 Vehicles & Drivers', '200+ Vehicles & Drivers']
+[23:54:23]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:54:23] → Associate Spine Specialist (Rochester, NY) @ globusmedical (score 18, match 75%)
+[23:54:26]     ✗ skipped: the posting is closed
+[23:54:27] → Audit and Compliance Specialist @ Lowers Risk Group LLC (score 12, match 75%)
+[23:54:38]       (résumé given to the site's 'apply with resume' box first)
+[23:54:49]       step 1: 24 fields (15 required)
+[23:55:09]       step 2: 4 fields (4 required)
+[23:55:09]       ? unanswered: 'This role is not eligible for Visa Sponsorship, are you eligible to work in the US without' kind=radio options=['Yes', 'No']
+[23:55:09]     ✗ skipped: can't truthfully answer required: This role is not eligible for Visa Sponsorship, are you elig
+[23:55:16] → Sales Specialist @ Westfield Egg Farm (score 12, match 75%)
+[23:55:34]       step 1: 31 fields (13 required)
+[23:56:19]       step 2: 4 fields (3 required)
+[23:56:19]       ? unanswered: 'Why are you interested in joining the NHT team?' kind=textarea options=[]
+[23:56:19]       ? unanswered: 'What matters most to you in life?' kind=textarea options=[]
+[23:56:19]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:56:19] → Assistant Property Manager-Shenendehowa Village @ nationalchurchresidences (score 10, match 75%)
+[23:56:21]     ✗ skipped: the posting is closed
+[23:56:21] → EDW AI Analyst @ essc (score 22, match 60%)
+[23:56:24]     ✗ skipped: the posting is closed
+[23:56:24] → Administrative Coord @ albanymed (score 12, match 75%)
+[23:56:33]       (opening Workday's application form directly)
+[23:56:38]       1/6 My Information: 14 fields (12 required)
+[23:56:46]       2/6 My Experience: 17 fields (7 required)
+[23:57:03]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[23:57:14]       (ticked Day, Weekend for 'Please select the shift you are willing to work:*')
+[23:57:14]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[23:57:14]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[23:57:14]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[23:57:14]       ? unanswered: 'Are you currently under investigation or have you been sanctioned, excluded or have had an' kind=combobox options=['Select One', 'Yes', 'No']
+[23:57:14]       ? unanswered: 'During the preceding year, were you employed in a managerial, accounting, auditing, or sim' kind=combobox options=['Select One', 'Yes', 'No']
+[23:57:14]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:57:15] → Project Coordinator – Community Engagement to Reduce Victimization (CERV) @ Coordinated Care Services, Inc. (CCSI) (score 62, match 70%)
+[23:57:26]       (résumé given to the site's 'apply with resume' box first)
+[23:58:13]       step 1: 105 fields (60 required)
+[23:59:14]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[23:59:14]       (filled again: 1 box(es) the page had emptied)
+[23:59:17]       step 2: 8 fields (7 required)
+[23:59:17]       ? unanswered: 'What interests you most about this position?' kind=textarea options=[]
+[23:59:17]       ? unanswered: "Please describe how your actions and behaviors demonstrate alignment with CCSI's Values: E" kind=textarea options=[]
+[23:59:17]       ? unanswered: 'Do you currently have any relatives or close personal relationships employed by CCSI? If y' kind=textarea options=[]
+[23:59:17]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[23:59:18] → Human Resource Administrator @ SONANCE (score 30, match 55%)
+[23:59:29]       (résumé given to the site's 'apply with resume' box first)
+[00:00:16]       step 1: 106 fields (69 required)
+[00:00:16]       (no cover letter could be written; it is optional, applying with the résumé only)
+[00:01:02]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[00:01:02]       (filled again: 1 box(es) the page had emptied)
+[00:01:45]       step 2: 122 fields (85 required)
+[00:01:45]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:01:45]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:01:45]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:01:45]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:01:45]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:01:46] → Investment Analyst @ sanmanuel (score 32, match 62%)
+[00:01:55]       (opening Workday's application form directly)
+[00:01:59]       1/6 My Information: 1 fields (1 required)
+[00:02:03]       2/6 My Experience: 3 fields (1 required)
+[00:02:18]       ? unanswered: 'Please describe, if applicable, why you left your three most recent jobs? (Company – Posit' kind=textarea options=[]
+[00:02:18]       ? unanswered: 'Day' kind=checkbox_single options=[]
+[00:02:18]       ? unanswered: 'Swing' kind=checkbox_single options=[]
+[00:02:18]       ? unanswered: 'Graveyard' kind=checkbox_single options=[]
+[00:02:18]       ? unanswered: 'All shifts listed above' kind=checkbox_single options=[]
+[00:02:18]       ? unanswered: 'Are you at least 21 years of age?*' kind=combobox options=['Select One', 'Yes', 'No']
+[00:02:18]       ? unanswered: 'Are you a Yuhaaviatam of San Manuel Nation Tribal Citizen?*' kind=combobox options=['Select One', 'Yes', 'No']
+[00:02:18]       ? unanswered: 'Are you an eligible Yuhaaviatam of San Manuel Nation Tribal Community Member?*' kind=combobox options=['Select One', 'Yes', 'No']
+[00:02:18]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:02:18] → I&E Operations Technician I @ williams (score 44, match 72%)
+[00:02:22]       (opening Workday's application form directly)
+[00:02:26]       (account page: creating the account / signing in)
+[00:02:26]       account: creating one on williams.wd5.myworkdayjobs.com with delgado@alumni.usc.edu
+[00:02:31]       account: Workday answered with its sign-in form and no message: signing in
+[00:02:31]       account: signing in on williams.wd5.myworkdayjobs.com
+[00:02:38]       1/7 My Information: 13 fields (12 required)
+[00:02:44]       2/7 My Experience: 15 fields (7 required)
+[00:03:03]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[00:03:15]       ? unanswered: 'If this position is not eligible for sponsorship, are you still interested?*' kind=combobox options=['Select One', 'Yes', 'No']
+[00:03:15]       ? unanswered: 'Are you a current or previous contract or contingent worker to Williams?*' kind=combobox options=['Select One', 'Yes', 'No']
+[00:03:15]       ? unanswered: 'If the role you are applying to requires you to work primarily in a Williams office or fie' kind=combobox options=['Select One', 'Yes', 'No']
+[00:03:15]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:03:15]   ✗ HR Generalist & Benefits Coordinator @ Transwest: the posting is closed (no time spent on it)
+[00:03:15] → Benefits Specialist (Hybrid in CA) @ firstam (score 30, match 60%)
+[00:03:18]       (opening Workday's application form directly)
+[00:03:22]       (account page: creating the account / signing in)
+[00:03:24]       account: signing in on firstam.wd1.myworkdayjobs.com
+[00:03:29]       1/6 My Information: 17 fields (12 required)
+[00:03:34]       2/6 My Experience: 3 fields (0 required)
+[00:03:42]       ! could not pick an option in 'Type to Add Skills' (wanted 'Excel'): left as it was
+[00:03:50]       ! could not pick an option in 'Type to Add Skills' (wanted 'PowerPoint'): left as it was
+[00:03:53]       3/6 Application Questions 1 of 2: 8 fields (3 required)
+[00:04:01]       ? unanswered: 'How soon can you start?*' kind=combobox options=['Select One', 'Immediately', '1 week', '2 weeks', '3 weeks', '4 weeks']
+[00:04:01]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:04:01] → Safety Specialist - Nassau/Suffolk County @ Premier Infrastructure & Energy (score 12, match 75%)
+[00:04:13]       (résumé given to the site's 'apply with resume' box first)
+[00:05:00]       step 1: 103 fields (70 required)
+[00:06:44]       step 2: 119 fields (86 required)
+[00:06:44]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:06:44]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:06:44]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:06:44]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:06:44]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:06:44] → Project Engineer @ TPI Arcade (score 12, match 75%)
+[00:07:11]       step 1: 43 fields (34 required)
+[00:07:11]       ? unanswered: 'Responsibilities (required)' kind=textarea options=[]
+[00:07:11]       ? unanswered: 'Area of Study (required)' kind=text options=[]
+[00:07:11]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:07:11] → Human Resources Coordinator @ loewshotels (score 28, match 55%)
+[00:07:14]     ✗ skipped: the posting is closed
+[00:07:14]   ✗ Payroll and Labor Allocation Administrator @ Center For Family Life in Sunset Park Inc: the posting is closed (no time spent on it)
+[00:07:14]   ✗ Self-Direction Payroll Data Specialist @ AIM Services Inc: the posting is closed (no time spent on it)
+[00:07:14]   ✗ Administrative Assistant @ Pencco, Inc: the posting is closed (no time spent on it)
+[00:07:15]   ✗ Coordinator, Communications @ nflcareers: the posting is closed (no time spent on it)
+[00:07:15] → Media Technology Specialist @ anaheimducks (score 30, match 55%)
+[00:07:18]       (opening Workday's application form directly)
+[00:07:21]       (account page: creating the account / signing in)
+[00:07:23]       account: signing in on anaheimducks.wd5.myworkdayjobs.com
+[00:07:27]       1/5 My Information: 14 fields (8 required)
+[00:07:35]       2/5 My Experience: 2 fields (0 required)
+[00:07:43]       ? unanswered: 'Temporary/Seasonal' kind=checkbox_single options=[]
+[00:07:43]     ✗ skipped: can't truthfully answer required: Temporary/Seasonal
+[00:07:43]   ✗ Administrative Assistant - HUNT Commercial @ HUNT Real Estate Corporation: the posting is closed (no time spent on it)
+[00:07:43]   ✗ Executive Administrative Assistant @ Beach Front Property Management, Inc.: the posting is closed (no time spent on it)
+[00:07:43]   ✗ Executive Administrative Assistant @ Beach Front Property Management, Inc.: the posting is closed (no time spent on it)
+[00:07:50] → Digital Marketing Specialist - Hybrid @ 9dot (score 10, match 55%)
+[00:07:52]     ✗ skipped: the posting is closed
+[00:07:52] → Residency Coordinator - Orthopedic Surgery @ albanymed (score 34, match 65%)
+[00:08:01]       (opening Workday's application form directly)
+[00:08:07]       1/6 My Information: 14 fields (12 required)
+[00:08:15]       2/6 My Experience: 17 fields (7 required)
+[00:08:32]       ! could not pick an option in 'Field of Study' (wanted 'Industrial and Systems Engineering'): left as it was
+[00:08:43]       (ticked Day, Weekend for 'Please select the shift you are willing to work:*')
+[00:08:43]       (ticked N/A Not Applicable for 'Have you been employed or are currently employed at any of the Albany ')
+[00:08:43]       ? unanswered: 'Per Diem' kind=checkbox_single options=[]
+[00:08:43]       ? unanswered: 'Temporary' kind=checkbox_single options=[]
+[00:08:43]       ? unanswered: 'Are you currently under investigation or have you been sanctioned, excluded or have had an' kind=combobox options=['Select One', 'Yes', 'No']
+[00:08:43]       ? unanswered: 'During the preceding year, were you employed in a managerial, accounting, auditing, or sim' kind=combobox options=['Select One', 'Yes', 'No']
+[00:08:43]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:08:44] → Associate Placement Specialist @ mmc (score 23, match 50%)
+[00:08:46]       (opening Workday's application form directly)
+[00:08:49]       (account page: creating the account / signing in)
+[00:08:51]       account: signing in on mmc.wd1.myworkdayjobs.com
+[00:08:57]       1/6 My Information: 14 fields (8 required)
+[00:09:03]       2/6 My Experience: 5 fields (3 required)
+[00:09:23]       ? unanswered: 'Are you aware of any ongoing negotiations, tenders, RFPs, or other procurements involving ' kind=combobox options=['Select One', 'Yes', 'No']
+[00:09:23]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:09:23] → Tax Associate (Irvine, CA) @ merceradvisors (score 12, match 50%)
+[00:09:33]       step 1: 18 fields (12 required)
+[00:09:33]       (no cover letter could be written; it is optional, applying with the résumé only)
+[00:09:45]       email: the site asked for a security code after Submit; reading it from the application inbox
+[00:09:55]       mail: found 'Security code for your application to Mercer Advisors'
+[00:10:00]     ✓ applied (0.6 min)
+[00:10:09] → Process Engineer (Advanced R&D) @ freeformfuturecorp (score 69, match 50%)
+[00:10:21]       step 1: 20 fields (10 required)
+[00:10:21]       (no cover letter could be written; it is optional, applying with the résumé only)
+[00:10:36]       email: the site asked for a security code after Submit; reading it from the application inbox
+[00:10:38]       mail: found 'Security code for your application to Freeform'
+[00:10:43]     ✓ applied (0.6 min)
+[00:10:52] → Patient Care Coordinator @ BMR Partners Inc. (score 52, match 50%)
+[00:11:03]       (résumé given to the site's 'apply with resume' box first)
+[00:11:42]       step 1: 97 fields (62 required)
+[00:11:42]       (no cover letter could be written; it is optional, applying with the résumé only)
+[00:12:32]       ! NOT FILLED: 'Certifications & Awards Earned' (wanted 'None')
+[00:12:32]       (filled again: 1 box(es) the page had emptied)
+[00:13:07]       step 2: 113 fields (78 required)
+[00:13:07]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:13:07]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:13:07]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:13:07]       ? unanswered: 'Supervisor Position (required)' kind=text options=[]
+[00:13:07]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:13:08] → CRM Operations Specialist @ fabletics (score 35, match 50%)
+[00:13:10]       (opening Workday's application form directly)
+[00:13:16]       (account page: creating the account / signing in)
+[00:13:18]       account: creating one on fabletics.wd1.myworkdayjobs.com with delgado@alumni.usc.edu
+[00:13:22]       account: created
+[00:13:24]       account: signing in on fabletics.wd1.myworkdayjobs.com
+[00:13:32]       1/6 My Information: 12 fields (9 required)
+[00:13:37]       2/6 My Experience: 2 fields (1 required)
+[00:13:48]       ? unanswered: 'Have you at any time worked for TechStyle Fashion Group, TechStyle OS, JustFab Inc., or an' kind=combobox options=['Select One', 'Yes', 'No']
+[00:13:48]     … waits: a question on this form needs the free writer, whose allowance for today is used up. The job stays queued
+[00:13:48] Run time limit reached (50 min): the rest waits for the next run
+[00:13:48] Résumé checks this run: 0 (0 passed) in 0 calls. Free writer allowance used today: groq 195k/195k tokens (+56k served from its cache, not counted); groq-20b 195k/195k tokens (+16k served from its cache, not counted); groq-qwen 196k/195k tokens (+12k served from its cache, not counted); gemini-lite 480/480 requests (+38k served from its cache, not counted); gemini-flash 18/18 requests
+[00:13:48] Summary: 10 applied, 46 skipped, 25 queued. Report: /home/runner/work/autoapply/autoapply/reports/2026-11-24.md
+[00:13:48]   by site  workday: 28 skipped, 1 applied
+[00:13:48]   by site  paylocity: 14 skipped
+[00:13:48]   by site  greenhouse: 9 applied, 4 skipped
+[00:13:50] Summary emailed to delgado@alumni.usc.edu
