@@ -1,37 +1,3 @@
-=== 2026-11-24 18:58:17  unconfirmed  Project Finance, Analyst (Remote) @ solamerica-energy
-url: https://apply.workable.com/solamerica-energy/j/837721786F/apply/
-stage: page 1
-why: no confirmation after submit; server said: POST eTj7SPQwtEDjPN9e__PidmKdIKn-w4WA2jwHLWMVIfoKd4dWeXJaYBGvssQQz2rWdFNb6kD3kOeAjS15Wt3q597WlA -> 200; POST eTj7SPQwtEDjPN9e__PidmKdIKn-w4WA2jwHLWMVIfoKd4dWeXJaYBGvssQQz2rWdFNb6kD3kOeAjS15Wt3q597WlA -> 200; page ends: 'formation, sexual orientation, gender identity or any other reason prohibited by law in provision of employment opportunities and benefit
-# Project Finance, Analyst (Remote)
-  text: Save time by importing your resume in one of the following formats: .pdf, .doc, .docx, .odt, or .rtf.
-  [button] Import resume from opens-true
-# Personal information
-  [link] Clear
-label: * First name
-label: * Last name
-label: * Email
-  [button] +1 opens-dialog
-  <input:tel #input_phone required filled>
-  text: The hiring team may use this number to contact you about this job.
-label: Address (Optional)
-  text: Include your city, region, and country, so that employers can easily manage your application.
-# Profile
-  [link] Clear
-  text: <first>_<middle>_delgado_ortega_
-  [button] SVGs not supported by this browser.
-label: Replace file
-  <input:file #input_files_input_ftaZamNMcOG8SjWI has-file>
-# Details
-  [link] Clear
-label: Cover letter (Optional)
-  text: Will you now or in the future require visa sponsorship?
-label: YES
-label: NO
-label: * Please describe the number of deals you have been involved in and the process?
-  [button] Submitting… disabled
-  text: SolAmerica Energy does not discriminate on the basis of race, sex, color, religion, age, national origin, marital status, disability, vetera
-  [button] Cookie settings
-
 === 2026-11-24 19:00:10  skipped  Production Coordinator - 2nd Shift @ machindustries
 url: https://job-boards.greenhouse.io/machindustries/jobs/4488980009
 stage: page 1
@@ -5517,4 +5483,62 @@ label: Replace file
 label: Cover letter (Optional)
   [button] Submitting… disabled
   [button] Cookie settings
+
+=== 2026-11-26 10:09:11  unconfirmed  Operations Analyst @ meow
+url: https://jobs.ashbyhq.com/meow/ac27f895-82e6-4f30-af9b-a5d3ce8b3822/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: ' application fields. Upload file Name Email Resume <file> Replace or drag and drop here LinkedIn profile URL Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Operations Analyst
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Resume
+  <input:file #_systemfield_resume required has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+label: LinkedIn profile URL
+  <input:text #62bc26b7-fdcb-43a1-97bf-85aa15c69a4e required filled>
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
+
+=== 2026-11-26 10:11:14  unconfirmed  Founding PM/GTM | EverWorker @ hirehire
+url: https://jobs.ashbyhq.com/hirehire/5ead0032-727b-4480-89b1-d2404c104a4b/application
+stage: page 1
+why: no confirmation after submit; server said: POST https://www.recaptcha.net/recaptcha/enterprise/reload -> 200; page ends: 'ds. Upload file Name Email Your location LinkedIn Portfolio link Resume <file> Replace or drag and drop here Submit Application Powered by Privacy PolicySecurityVulnerability Disclosure'
+# Founding PM/GTM | EverWorker
+# Location
+# Employment Type
+# Location Type
+# Department
+  <input:file no-file>
+# Autofill from resume
+  text: Upload your resume here to autofill key application fields.
+  [button] Upload file
+label: Name
+  <input:text #_systemfield_name required filled>
+label: Email
+  <input:email #_systemfield_email required filled>
+label: Your location
+  <input:text #63e12ee7-d95a-4431-b433-4ce0b8715364 required filled>
+label: LinkedIn
+  <input:url #63174c5a-d4c9-4aaf-b592-37c2574a24d8 required filled>
+label: Portfolio link
+  <input:text #240f98ee-5306-4bbc-ad30-c632268fa8db filled>
+label: Resume
+  <input:file #_systemfield_resume has-file>
+  text: <file>
+  [button] 
+  [button] Replace disabled
+  [button] Submit Application disabled
+<iframe https://www.recaptcha.net/recaptcha/enterprise/bframe>
 
